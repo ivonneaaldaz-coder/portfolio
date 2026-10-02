@@ -14,7 +14,8 @@ export default function Sidebar() {
     <aside className="sidebar">
       <div>
         <Link className="brand" href="/">IVONNE ALDAZ</Link>
-        <p className="brand-sub">Founder / Strategist / Creative Technologist</p>
+        <p className="brand-sub">Strategist / Artist / Builder</p>
+
         <nav className="sidebar-nav" aria-label="Primary">
           {links.map((link, index) =>
             link.external ? (

@@ -1,18 +1,28 @@
 const studies = [
   ["01", "Relationship Operating System", "AI + Systems", "A centralized system for turning a fragmented network into an actionable relationship pipeline."],
-  ["02", "AI-Assisted Lead Engine", "Automation + Operations", "An intake and prioritization workflow designed to reduce manual sorting and surface next actions."],
-  ["03", "Brand + Digital Repositioning", "Strategy + Brand", "A repositioning system spanning messaging, digital experience, campaigns, and sales enablement."],
-  ["04", "Personal Operating System", "Product + Experiment", "An experimental interface for work, notes, music, identity, and digital play."],
+  ["02", "Brand + Digital Repositioning", "Strategy + Brand", "A clearer positioning and digital system designed to connect message, experience, and conversion."],
+  ["03", "Creative Practice + Studio", "Strategy + Direction", "A multidisciplinary studio model spanning brand strategy, creative direction, systems, and execution."],
+  ["04", "Tender Things Have Edges", "Art + Installation", "An installation exploring softness, structure, light, and the tension between protection and vulnerability."],
+  ["05", "Painting + Material Studies", "Art Practice", "A growing body of work across acrylic, raw canvas, watercolor, ceramics, and mixed media."],
+  ["06", "Personal Operating System", "Product + Experiment", "An experimental interface for work, notes, music, identity, and digital play."],
 ];
 
 export default function WorkPage() {
   return (
     <section className="page section-pad">
-      <p className="eyebrow">WORK / CASE STUDIES</p>
+      <p className="eyebrow">WORK / SELECTED PRACTICE</p>
       <div className="page-intro">
-        <h1>Selected problems I’ve helped solve.</h1>
-        <p>Strategy, systems, brand, product, and creative work — framed around the problem, approach, and outcome rather than the client logo.</p>
+        <h1>Selected work across strategy, systems, and art.</h1>
+        <p>
+          Commercial work, independent experiments, and creative practice — organized around
+          the ideas, problems, and forms that shaped them.
+        </p>
       </div>
+
+      <div className="work-filters">
+        <span>All</span><span>Strategy</span><span>Systems</span><span>Art</span><span>Experiments</span>
+      </div>
+
       <div className="case-list">
         {studies.map(([n, title, tag, desc]) => (
           <article className="case-row" key={n}>
