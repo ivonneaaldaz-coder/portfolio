@@ -20,6 +20,7 @@ const SELECTORS = [
   ".art-shop-item",
   ".travel-photo",
   ".note-row",
+  ".writing-row",
   ".reference-card",
   ".archive-row",
   ".about-grid > div"

@@ -474,3 +474,30 @@ html{scroll-behavior:smooth}
   }
   .page-enter,.reveal-target{opacity:1!important;transform:none!important}
 }
+
+
+/* Notes + navigation cleanup */
+.practice-row:hover{opacity:1}
+.sidebar-nav a:before{display:none!important}
+.note-row-rich h2{margin-top:0}
+.writing-list{border-top:1px solid var(--ink)}
+.writing-row{
+  display:grid;
+  grid-template-columns:48px minmax(280px,1.4fr) minmax(180px,.55fr) 24px;
+  gap:24px;
+  align-items:baseline;
+  padding:21px 0 23px;
+  border-bottom:1px solid var(--line);
+  transition:transform .28s cubic-bezier(.22,.61,.36,1);
+}
+.writing-row:hover{transform:translateX(4px)}
+.writing-row>span:first-child{font-size:9px;color:var(--muted)}
+.writing-row>span:last-child{justify-self:end;transition:transform .28s ease}
+.writing-row:hover>span:last-child{transform:translateX(4px)}
+.writing-row h3{margin:0;font-size:21px;font-weight:500;letter-spacing:-.04em;line-height:1.1}
+.writing-row p{margin:0;color:var(--muted);font-size:10px;text-transform:uppercase;letter-spacing:.09em}
+@media(max-width:900px){
+  .writing-row{grid-template-columns:34px 1fr;gap:8px 14px}
+  .writing-row p,.writing-row>span:last-child{grid-column:2}
+  .writing-row>span:last-child{justify-self:start}
+}

@@ -2,14 +2,12 @@ import Link from "next/link";
 
 const notes = [
   {
-    type: "Writing",
     title: "Portfolio careers",
     desc: "Notes on building a career across teaching, strategy, art, and independent work.",
     href: "/notes/portfolio-careers",
     destination: "Read",
   },
   {
-    type: "Learning",
     title: "AI implementation",
     desc: "Patterns I keep noticing when AI moves from demo to actual operating system.",
     href: "https://www.bywhitespace.com/",
@@ -17,25 +15,55 @@ const notes = [
     external: true,
   },
   {
-    type: "Ideas",
     title: "Audacity",
     desc: "A running note on asking, making, applying, and moving before certainty arrives.",
     href: "/notes/audacity",
     destination: "Read",
   },
   {
-    type: "Places",
     title: "Places worth returning to",
     desc: "Travel notes, visual references, and small details I want to keep.",
     href: "/travel",
     destination: "Travel",
   },
   {
-    type: "Practice",
     title: "Making across mediums",
     desc: "What changes when an idea moves between painting, ceramics, systems, and words.",
     href: "/notes/making-across-mediums",
     destination: "Read",
+  },
+];
+
+const writing = [
+  {
+    title: "When the Universe Hands You a Yes",
+    source: "Good World Living",
+    year: "2025",
+    href: "https://www.goodworldliving.com/articles/when-the-universe-hands-you-a-yes",
+  },
+  {
+    title: "From Brand to Atmosphere: Designing Experiences That Feel Like Worlds",
+    source: "Whitespace",
+    year: "2026",
+    href: "https://www.bywhitespace.com/blog/designing-experiences-that-feel-like-worlds",
+  },
+  {
+    title: "How an Art Residency in Provence Transformed My Creative Path",
+    source: "Good World Living",
+    year: "2024",
+    href: "https://www.goodworldliving.com/articles/how-an-art-residency-in-provence-transformed-my-creative-path",
+  },
+  {
+    title: "The Shift Toward Intentional Branding: Designing with Meaning in a Noisy World",
+    source: "Whitespace",
+    year: "2025",
+    href: "https://www.bywhitespace.com/blog/intentional-branding-designing-with-meaning-in-a-noisy-world",
+  },
+  {
+    title: "Art Retreat in France: Unveiling Creative Wonders in St. Antonin-Noble Val",
+    source: "Good World Living",
+    year: "2023",
+    href: "https://www.goodworldliving.com/articles/france-art-retreat",
   },
 ];
 
@@ -65,7 +93,6 @@ export default function NotesPage() {
               <>
                 <span>{String(index + 1).padStart(2, "0")}</span>
                 <div>
-                  <p className="eyebrow">{note.type}</p>
                   <h2>{note.title}</h2>
                 </div>
                 <p>{note.desc}</p>
@@ -83,6 +110,23 @@ export default function NotesPage() {
               </Link>
             );
           })}
+        </div>
+      </section>
+
+      <section className="notes-section writing-section">
+        <div className="section-heading">
+          <h2 className="section-title small-title">Writing</h2>
+        </div>
+
+        <div className="writing-list">
+          {writing.map((item, index) => (
+            <a className="writing-row" href={item.href} target="_blank" rel="noreferrer" key={item.title}>
+              <span>{String(index + 1).padStart(2, "0")}</span>
+              <h3>{item.title}</h3>
+              <p>{item.source} · {item.year}</p>
+              <span>↗</span>
+            </a>
+          ))}
         </div>
       </section>
 
