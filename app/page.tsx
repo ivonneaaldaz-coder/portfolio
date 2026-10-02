@@ -33,10 +33,10 @@ export default function Home() {
       <section className="selected section-pad">
         <div className="section-heading">
           <div>
-            <p className="eyebrow">SELECTED WORK</p>
-            <h2 className="section-title">Projects</h2>
+            <p className="eyebrow">SELECTED PRACTICES</p>
+            <h2 className="section-title">Practices</h2>
           </div>
-          <Link href="/work">View all work ↗</Link>
+          <Link href="/work">Explore all ↗</Link>
         </div>
 
         <div className="feature-grid">
@@ -71,6 +71,49 @@ export default function Home() {
               </div>
             </article>
           ))}
+        </div>
+      </section>
+
+
+      <section className="home-cases section-pad">
+        <div className="section-heading">
+          <div>
+            <p className="eyebrow">CASE STUDIES</p>
+            <h2 className="section-title small-title">Selected problems, considered closely.</h2>
+          </div>
+          <Link href="/work">View all case studies ↗</Link>
+        </div>
+
+        <div className="home-case-list">
+          <Link className="home-case" href="/work">
+            <span className="home-case-num">01</span>
+            <div>
+              <p className="eyebrow">AI + SYSTEMS</p>
+              <h3>Relationship Operating System</h3>
+            </div>
+            <p>Turning scattered relationships, introductions, and follow-ups into a system people can actually use.</p>
+            <span>↗</span>
+          </Link>
+
+          <Link className="home-case" href="/work">
+            <span className="home-case-num">02</span>
+            <div>
+              <p className="eyebrow">STRATEGY + BRAND</p>
+              <h3>Brand + Digital Repositioning</h3>
+            </div>
+            <p>Connecting positioning, messaging, digital experience, and execution into a clearer growth system.</p>
+            <span>↗</span>
+          </Link>
+
+          <Link className="home-case" href="/work">
+            <span className="home-case-num">03</span>
+            <div>
+              <p className="eyebrow">AUTOMATION + OPERATIONS</p>
+              <h3>AI-Assisted Lead Engine</h3>
+            </div>
+            <p>Reducing manual sorting and turning fragmented inbound information into priorities and next actions.</p>
+            <span>↗</span>
+          </Link>
         </div>
       </section>
 
