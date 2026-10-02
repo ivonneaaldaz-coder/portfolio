@@ -3,6 +3,7 @@ import "./globals.css";
 import Sidebar from "@/components/Sidebar";
 import MobileNav from "@/components/MobileNav";
 import MotionSystem from "@/components/MotionSystem";
+import ThemeToggle from "@/components/ThemeToggle";
 
 export const metadata: Metadata = {
   title: "Ivonne Aldaz — Portfolio",
@@ -27,6 +28,9 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
       <body>
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
         <MotionSystem />
+        <div className="global-theme-control">
+          <ThemeToggle />
+        </div>
         <div className="site-shell">
           <Sidebar />
           <MobileNav />

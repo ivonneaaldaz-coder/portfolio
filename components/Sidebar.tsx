@@ -2,7 +2,6 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import ThemeToggle from "@/components/ThemeToggle";
 import SidebarSubscribe from "@/components/SidebarSubscribe";
 
 const links = [
@@ -43,10 +42,6 @@ export default function Sidebar() {
       <div className="sidebar-bottom">
         <div className="sidebar-status">
           <p><span className="status-dot" /> Available for select projects</p>
-        </div>
-
-        <div className="sidebar-theme">
-          <ThemeToggle />
         </div>
 
         <div className="sidebar-footer">
