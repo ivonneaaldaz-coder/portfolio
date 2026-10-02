@@ -69,8 +69,8 @@ const writing = [
 
 const references = [
   { title: "Books / essays", desc: "Writing worth returning to." },
-  { title: "Visual references", desc: "Moodboards, typography, imagery, color, interiors, and visual things I want to keep." },
-  { title: "Places", desc: "Travel, architecture, landscapes, and spaces.", href: "/travel" },
+  { title: "Visual references", desc: "Moodboards, type, imagery, color, and visual references." },
+  { title: "Places", desc: "Travel, architecture, landscapes, and memorable spaces.", href: "/travel" },
   { title: "Quotes", desc: "Lines worth keeping." },
 ];
 

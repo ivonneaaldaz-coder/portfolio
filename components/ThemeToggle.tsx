@@ -36,9 +36,12 @@ export default function ThemeToggle({ compact = false }: { compact?: boolean }) 
       onClick={toggle}
       aria-label={"Switch to " + (theme === "dark" ? "light" : "dark") + " mode"}
       title={"Switch to " + (theme === "dark" ? "light" : "dark") + " mode"}
+      aria-pressed={theme === "dark"}
     >
-      <span className="theme-toggle-dot" aria-hidden="true" />
-      <span>{ready ? (theme === "dark" ? "Light" : "Dark") : "Theme"}</span>
+      <span className="theme-switch" aria-hidden="true">
+        <span className="theme-switch-thumb" />
+      </span>
+      <span className="theme-label">{ready ? (theme === "dark" ? "Dark" : "Light") : "Theme"}</span>
     </button>
   );
 }

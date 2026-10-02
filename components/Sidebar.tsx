@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import ThemeToggle from "@/components/ThemeToggle";
+import SidebarSubscribe from "@/components/SidebarSubscribe";
 
 const links = [
   { label: "Overview", href: "/" },
@@ -39,22 +40,30 @@ export default function Sidebar() {
         </nav>
       </div>
 
-      <div className="sidebar-footer">
-        <ThemeToggle />
-        <p><span className="status-dot" /> Available for select projects</p>
-        <p>San Antonio, TX</p>
-
-        <div className="sidebar-socials" aria-label="Social links">
-          <a href="mailto:hello@ivonnealdaz.com">Email ↗</a>
-          <a href="https://www.linkedin.com/in/ivonnealdaz/" target="_blank" rel="noreferrer">LinkedIn ↗</a>
-          <a href="https://x.com/ivonnealdazz" target="_blank" rel="noreferrer">X ↗</a>
-          <a href="https://github.com/ivonneaaldaz-coder" target="_blank" rel="noreferrer">GitHub ↗</a>
-          <a href="https://www.pinterest.com/ivonnealdaz/" target="_blank" rel="noreferrer">Pinterest ↗</a>
+      <div className="sidebar-bottom">
+        <div className="sidebar-status">
+          <p><span className="status-dot" /> Available for select projects</p>
         </div>
 
-        <a className="listen-link" href="https://open.spotify.com/user/ivonnealdaz" target="_blank" rel="noreferrer">
-          Listen on Spotify ↗
-        </a>
+        <div className="sidebar-theme">
+          <ThemeToggle />
+        </div>
+
+        <div className="sidebar-footer">
+          <SidebarSubscribe />
+
+          <div className="sidebar-socials" aria-label="Social links">
+            <a href="mailto:hello@ivonnealdaz.com">Email ↗</a>
+            <a href="https://www.linkedin.com/in/ivonnealdaz/" target="_blank" rel="noreferrer">LinkedIn ↗</a>
+            <a href="https://www.pinterest.com/ivonnealdaz/" target="_blank" rel="noreferrer">Pinterest ↗</a>
+            <a href="https://github.com/ivonneaaldaz-coder" target="_blank" rel="noreferrer">GitHub ↗</a>
+            <a className="social-x" href="https://x.com/ivonnealdazz" target="_blank" rel="noreferrer">X ↗</a>
+          </div>
+
+          <a className="listen-link" href="https://open.spotify.com/user/ivonnealdaz" target="_blank" rel="noreferrer">
+            Listen on Spotify ↗
+          </a>
+        </div>
       </div>
     </aside>
   );
