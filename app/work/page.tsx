@@ -33,6 +33,13 @@ const projects = [
   ["Travel", "Photography / places", "/travel", false],
 ];
 
+const experiments = [
+  ["Ask Eve", "Conversational CV", "/experiments/ask-eve"],
+  ["Personal OS", "Digital playground", "/experiments/personal-os"],
+  ["Chatroom", "Public internet experiment", "/experiments/chatroom"],
+  ["Notes", "Ideas / references / places", "/notes"],
+];
+
 export default function WorkPage() {
   return (
     <section className="page section-pad work-index">
@@ -84,6 +91,23 @@ export default function WorkPage() {
               </Link>
             )
           )}
+        </div>
+      </section>
+
+      <section className="work-section" id="experiments">
+        <div className="section-heading">
+          <h2 className="section-title small-title">Experiments</h2>
+        </div>
+
+        <div className="practice-index">
+          {experiments.map(([title, meta, href], index) => (
+            <Link className="practice-row" href={href} key={title}>
+              <span>{String(index + 1).padStart(2, "0")}</span>
+              <h3>{title}</h3>
+              <p>{meta}</p>
+              <span>→</span>
+            </Link>
+          ))}
         </div>
       </section>
     </section>

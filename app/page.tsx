@@ -17,7 +17,7 @@ const studies = [
 const experiments = [
   ["01", "Ask Eve", "Conversational CV", "/experiments/ask-eve"],
   ["02", "Personal OS", "Digital playground", "/experiments/personal-os"],
-  ["03", "Visual Systems", "Interface studies", "/experiments/visual-systems"],
+  ["03", "Chatroom", "Public experiment", "/experiments/chatroom"],
   ["04", "Notes", "Ideas / References / Places", "/notes"],
 ];
 
@@ -104,7 +104,7 @@ export default function Home() {
       <section className="experiments section-pad">
         <div className="section-heading">
           <h2 className="section-title small-title">Experiments</h2>
-          <a href="https://lab.ivonnealdaz.com" target="_blank" rel="noreferrer">View the Lab ↗</a>
+          <Link href="/work#experiments">View all experiments ↗</Link>
         </div>
 
         <div className="experiment-grid">
@@ -113,7 +113,7 @@ export default function Home() {
               <div className={"experiment-thumb exp-" + index}>
                 {index === 0 && <span>ask eve</span>}
                 {index === 1 && <span className="os-mini">IVONNE_OS<br/>LAB / NOTES / PLAY</span>}
-                {index === 2 && <span className="system-mini">Aa<br/>01 02 03</span>}
+                {index === 2 && <span className="system-mini">CHAT<br/>ROOM.exe</span>}
                 {index === 3 && <span>NOTES<br/>• Ideas<br/>• Places<br/>• Quotes</span>}
               </div>
               <div className="experiment-meta">
