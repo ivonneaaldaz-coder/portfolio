@@ -60,6 +60,30 @@ export default function AboutPage() {
         </div>
       </section>
 
+
+      <section className="about-section">
+        <div className="section-heading">
+          <h2 className="section-title small-title">Kind words</h2>
+        </div>
+        <div className="quote-grid">
+          <figure className="quote-card">
+            <span>01</span>
+            <blockquote>“A rare find. Deeply data-driven, deeply human.”</blockquote>
+            <figcaption>— Senior executive</figcaption>
+          </figure>
+          <figure className="quote-card">
+            <span>02</span>
+            <blockquote>“Everyone keeps saying what a great job you’re doing and how happy the clients are.”</blockquote>
+            <figcaption>— Former manager</figcaption>
+          </figure>
+          <figure className="quote-card">
+            <span>03</span>
+            <blockquote>“Why are we even talking about it? Just hire her.”</blockquote>
+            <figcaption>— Former colleague</figcaption>
+          </figure>
+        </div>
+      </section>
+
       <section className="about-section">
         <details className="long-story">
           <summary><span>Read the longer story</span><span aria-hidden="true">＋</span></summary>
