@@ -8,10 +8,29 @@ const elsewhere = [
 ];
 
 const brands = [
-  "McDonald’s", "Nestlé", "Frito-Lay", "Purina", "ARM & HAMMER",
-  "Unilever", "GitLab", "Clorox", "Hero Cosmetics", "TOMS",
-  "Gaia Herbs", "Halo Top", "Consumer Reports", "Nielsen", "Skillshare",
-  "Clinique", "Pepsi", "Foursquare", "Sir Kensington’s", "Veggies Made Great",
+  "ARM & HAMMER",
+  "Batiste",
+  "Clio Snacks",
+  "CVS Health",
+  "First Response",
+  "Flexitol",
+  "Fur Buddies",
+  "Gaia Herbs",
+  "Gerber",
+  "H-E-B",
+  "Hero Cosmetics",
+  "Kellanova",
+  "Maggi Noodles",
+  "Maison Perrier",
+  "Nestlé",
+  "Nescafe",
+  "Pacific Coast Producers",
+  "Purina",
+  "Sir Kensington's (Unilever)",
+  "Stouffer's",
+  "TrueLoyal (formerly TINT)",
+  "Veggies Made Great",
+  "viemaa",
 ];
 
 export default function AboutPage() {
