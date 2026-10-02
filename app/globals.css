@@ -619,3 +619,38 @@ html{scroll-behavior:smooth}
   .global-theme-control .theme-label{display:none}
   .global-theme-control .theme-toggle{padding:6px}
 }
+
+
+/* About expansion */
+.about-section{padding-top:clamp(62px,8vw,110px)}
+.elsewhere-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));border-top:1px solid var(--ink)}
+.elsewhere-item{min-height:170px;padding:18px 26px 24px 0;border-bottom:1px solid var(--line);border-right:1px solid var(--line)}
+.elsewhere-item:nth-child(even){padding-left:26px;border-right:0}
+.elsewhere-item>span,.brand-name>span,.quote-card>span{font-size:9px;color:var(--muted)}
+.elsewhere-item h3{margin:42px 0 8px;font-size:22px;font-weight:500;letter-spacing:-.04em}
+.elsewhere-item p{margin:0;color:var(--muted);font-size:12px;line-height:1.55;max-width:54ch}
+.brand-wall{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border-top:1px solid var(--ink);border-left:1px solid var(--line)}
+.brand-name{min-height:108px;padding:15px 16px;display:flex;flex-direction:column;justify-content:space-between;border-right:1px solid var(--line);border-bottom:1px solid var(--line)}
+.brand-name:hover{background:var(--surface-soft);transform:translateY(-2px)}
+.brand-name strong{font-size:18px;font-weight:500;letter-spacing:-.035em;line-height:1.05}
+
+.long-story{border-top:1px solid var(--ink);border-bottom:1px solid var(--line)}
+.long-story summary{list-style:none;cursor:pointer;display:flex;align-items:center;justify-content:space-between;padding:20px 0;font-size:13px;text-transform:uppercase;letter-spacing:.09em}
+.long-story summary::-webkit-details-marker{display:none}
+.long-story summary span:last-child{font-size:18px;font-weight:300;transition:transform .25s ease}
+.long-story[open] summary span:last-child{transform:rotate(45deg)}
+.long-story-copy{max-width:760px;margin:0 0 clamp(50px,7vw,90px) clamp(110px,13vw,210px);padding-top:34px;font-size:17px;line-height:1.7}
+.long-story-copy p{margin:0 0 1.45em}
+.long-story-lede{font-size:clamp(28px,3.3vw,46px);line-height:1.05;letter-spacing:-.05em;margin-bottom:1.1em!important}
+
+@media(max-width:900px){
+  .brand-wall{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .long-story-copy{margin-left:0}
+}
+@media(max-width:560px){
+  .elsewhere-grid{grid-template-columns:1fr}
+  .elsewhere-item,.elsewhere-item:nth-child(even){padding:16px 0 22px;border-right:0}
+  .brand-wall{grid-template-columns:1fr 1fr}
+  .brand-name{min-height:92px;padding:12px}
+  .brand-name strong{font-size:15px}
+}
