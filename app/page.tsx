@@ -33,7 +33,6 @@ export default function Home() {
       <section className="selected section-pad">
         <div className="section-heading">
           <div>
-            <p className="eyebrow">SELECTED WORK</p>
             <h2 className="section-title">Projects</h2>
           </div>
           <Link href="/work">Explore all ↗</Link>
@@ -78,7 +77,6 @@ export default function Home() {
       <section className="home-cases section-pad">
         <div className="section-heading">
           <div>
-            <p className="eyebrow">CASE STUDIES</p>
             <h2 className="section-title small-title">Selected Case Studies</h2>
           </div>
           <Link href="/work">View all case studies ↗</Link>
@@ -120,7 +118,6 @@ export default function Home() {
       <section className="experiments section-pad">
         <div className="section-heading">
           <div>
-            <p className="eyebrow">EXPERIMENTS</p>
             <h2 className="section-title small-title">Small things, big curiosity.</h2>
           </div>
           <a href="https://lab.ivonnealdaz.com" target="_blank" rel="noreferrer">View all experiments ↗</a>
