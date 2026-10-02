@@ -207,3 +207,45 @@
 .travel-photo-button{display:block;width:100%;padding:0;border:0;background:transparent;cursor:zoom-in}
 .travel-photo-button img{display:block;width:100%;height:auto}
 .travel-lightbox .art-lightbox-stage img{max-height:calc(100vh - 110px)}
+
+
+/* Notes routing + quieter homepage hierarchy */
+.selected .section-title{font-size:clamp(38px,3.4vw,50px)}
+.home-cases .section-title,.experiments .section-title{font-size:clamp(32px,2.9vw,42px)}
+.selected .section-heading,.home-cases .section-heading,.experiments .section-heading{margin-bottom:16px}
+.note-row-rich{grid-template-columns:48px minmax(220px,.8fr) 1fr 90px}
+.note-link{transition:opacity .2s ease}
+.note-link:hover{opacity:.55}
+.note-destination{justify-self:end;font-size:9px!important;text-transform:uppercase;letter-spacing:.1em;color:var(--muted)!important}
+.reference-grid{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--ink)}
+.reference-card{position:relative;min-height:160px;padding:18px 20px 22px 0;border-bottom:1px solid var(--line);border-right:1px solid var(--line);display:flex;flex-direction:column;justify-content:space-between}
+.reference-card:nth-child(3n+2),.reference-card:nth-child(3n+3){padding-left:20px}
+.reference-card:nth-child(3n){border-right:0}
+.reference-card>span:first-child{font-size:9px;color:var(--muted)}
+.reference-card h3{font-size:20px;font-weight:500;letter-spacing:-.035em;margin:42px 0 6px}
+.reference-card p{margin:0;color:var(--muted);font-size:10px;max-width:32ch}
+.reference-card-link{transition:background .2s ease}
+.reference-card-link:hover{background:rgba(17,17,15,.025)}
+.reference-arrow{position:absolute;right:18px;top:18px;font-size:11px!important}
+.native-note{max-width:1180px}
+.native-note header{padding:clamp(70px,9vw,130px) 0 clamp(46px,6vw,80px);border-bottom:1px solid var(--ink)}
+.native-note h1{font-family:var(--display);font-weight:500;font-size:clamp(54px,7vw,100px);line-height:.9;letter-spacing:-.07em;margin:16px 0 24px}
+.native-note-dek{max-width:700px;margin:0;color:var(--muted);font-size:clamp(18px,2vw,26px);line-height:1.25;letter-spacing:-.03em}
+.native-note-body{max-width:720px;margin:clamp(52px,7vw,90px) 0 80px clamp(120px,14vw,220px);font-size:18px;line-height:1.65}
+.native-note-body p{margin:0 0 1.5em}
+@media(max-width:900px){
+.note-row-rich{grid-template-columns:36px 1fr}
+.note-row-rich>p,.note-destination{grid-column:2}
+.note-destination{justify-self:start}
+.reference-grid{grid-template-columns:1fr 1fr}
+.reference-card,.reference-card:nth-child(3n+2),.reference-card:nth-child(3n+3){padding:18px 16px 22px 0;border-right:1px solid var(--line)}
+.reference-card:nth-child(even){padding-left:16px;border-right:0}
+.native-note-body{margin-left:0}
+}
+@media(max-width:560px){
+.selected .section-title{font-size:38px}
+.home-cases .section-title,.experiments .section-title{font-size:34px}
+.reference-grid{grid-template-columns:1fr}
+.reference-card,.reference-card:nth-child(even){padding:16px 0 20px!important;border-right:0}
+.native-note-body{font-size:16px}
+}
