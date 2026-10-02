@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import ThemeToggle from "@/components/ThemeToggle";
 
 const links = [
   { label: "Overview", href: "/" },
@@ -39,6 +40,7 @@ export default function Sidebar() {
       </div>
 
       <div className="sidebar-footer">
+        <ThemeToggle />
         <p><span className="status-dot" /> Available for select projects</p>
         <p>San Antonio, TX</p>
 
