@@ -41,11 +41,9 @@ const notes = [
 
 const references = [
   { title: "Books / essays", desc: "Writing worth returning to." },
-  { title: "Interfaces", desc: "Websites, apps, systems, and interaction details." },
+  { title: "Visual references", desc: "Moodboards, typography, imagery, color, interiors, and visual things I want to keep." },
   { title: "Places", desc: "Travel, architecture, landscapes, and spaces.", href: "/travel" },
-  { title: "Objects", desc: "Furniture, ceramics, lighting, packaging, and materials." },
   { title: "Quotes", desc: "Lines worth keeping." },
-  { title: "Artists / studios", desc: "Artists, designers, architects, and creative practices." },
 ];
 
 export default function NotesPage() {
@@ -53,9 +51,7 @@ export default function NotesPage() {
     <section className="page section-pad notes-page">
       <div className="page-intro notes-intro">
         <h1>Notes</h1>
-        <p>
-          An evolving index of ideas, references, learnings, places, and things I want to remember.
-        </p>
+        <p>An evolving index of ideas, references, learnings, places, and things I want to remember.</p>
       </div>
 
       <section className="notes-section">
@@ -95,7 +91,7 @@ export default function NotesPage() {
           <h2 className="section-title small-title">References</h2>
         </div>
 
-        <div className="reference-grid">
+        <div className="reference-grid reference-grid-four">
           {references.map((item, index) =>
             item.href ? (
               <Link className="reference-card reference-card-link" href={item.href} key={item.title}>

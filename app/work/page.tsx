@@ -24,12 +24,13 @@ const studies = [
   },
 ];
 
-const practice = [
+const projects = [
   ["Whitespace", "Strategy studio", "https://www.bywhitespace.com/", true],
   ["The Lab", "Digital experiments", "https://lab.ivonnealdaz.com", true],
+  ["Make Space", "Creative workshops + experiences", "/work/make-space", false],
+  ["Good World Living", "Experiences / places / living", "https://www.goodworldliving.com/", true],
   ["Art Practice", "Painting / ceramics / installation", "/art", false],
   ["Travel", "Photography / places", "/travel", false],
-  ["Good World Living", "Experiences / places / living", "https://www.goodworldliving.com/", true],
 ];
 
 export default function WorkPage() {
@@ -37,9 +38,7 @@ export default function WorkPage() {
     <section className="page section-pad work-index">
       <div className="page-intro">
         <h1>Work across strategy, systems, brand, and creative practice.</h1>
-        <p>
-          Selected case studies, independent projects, and ongoing bodies of work.
-        </p>
+        <p>Selected case studies, independent projects, and ongoing bodies of work.</p>
       </div>
 
       <section className="work-section">
@@ -68,7 +67,7 @@ export default function WorkPage() {
         </div>
 
         <div className="practice-index">
-          {practice.map(([title, meta, href, external], index) =>
+          {projects.map(([title, meta, href, external], index) =>
             external ? (
               <a className="practice-row" href={href as string} target="_blank" rel="noreferrer" key={title as string}>
                 <span>{String(index + 1).padStart(2, "0")}</span>
@@ -81,7 +80,7 @@ export default function WorkPage() {
                 <span>{String(index + 1).padStart(2, "0")}</span>
                 <h3>{title}</h3>
                 <p>{meta}</p>
-                <span>↗</span>
+                <span>→</span>
               </Link>
             )
           )}

@@ -15,10 +15,10 @@ const studies = [
 ];
 
 const experiments = [
-  ["01", "Ask Eve", "Conversational CV"],
-  ["02", "Personal OS", "Digital playground"],
-  ["03", "Visual Systems", "Interface studies"],
-  ["04", "Notes", "Ideas / References / Places"],
+  ["01", "Ask Eve", "Conversational CV", "/experiments/ask-eve"],
+  ["02", "Personal OS", "Digital playground", "/experiments/personal-os"],
+  ["03", "Visual Systems", "Interface studies", "/experiments/visual-systems"],
+  ["04", "Notes", "Ideas / References / Places", "/notes"],
 ];
 
 export default function Home() {
@@ -104,12 +104,12 @@ export default function Home() {
       <section className="experiments section-pad">
         <div className="section-heading">
           <h2 className="section-title small-title">Experiments</h2>
-          <a href="https://lab.ivonnealdaz.com" target="_blank" rel="noreferrer">View all experiments ↗</a>
+          <a href="https://lab.ivonnealdaz.com" target="_blank" rel="noreferrer">View the Lab ↗</a>
         </div>
 
         <div className="experiment-grid">
-          {experiments.map(([n, title, meta], index) => (
-            <article className="experiment-card" key={title}>
+          {experiments.map(([n, title, meta, href], index) => (
+            <Link className="experiment-card experiment-link" href={href} key={title}>
               <div className={"experiment-thumb exp-" + index}>
                 {index === 0 && <span>ask eve</span>}
                 {index === 1 && <span className="os-mini">IVONNE_OS<br/>LAB / NOTES / PLAY</span>}
@@ -120,7 +120,7 @@ export default function Home() {
                 <span>{n}</span>
                 <div><h3>{title}</h3><p>{meta}</p></div>
               </div>
-            </article>
+            </Link>
           ))}
         </div>
       </section>
