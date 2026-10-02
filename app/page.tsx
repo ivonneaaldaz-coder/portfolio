@@ -33,8 +33,8 @@ export default function Home() {
       <section className="selected section-pad">
         <div className="section-heading">
           <div>
-            <p className="eyebrow">SELECTED PRACTICES</p>
-            <h2 className="section-title">Practices</h2>
+            <p className="eyebrow">SELECTED WORK</p>
+            <h2 className="section-title">Projects</h2>
           </div>
           <Link href="/work">Explore all ↗</Link>
         </div>
@@ -79,7 +79,7 @@ export default function Home() {
         <div className="section-heading">
           <div>
             <p className="eyebrow">CASE STUDIES</p>
-            <h2 className="section-title small-title">Selected problems, considered closely.</h2>
+            <h2 className="section-title small-title">Selected Case Studies</h2>
           </div>
           <Link href="/work">View all case studies ↗</Link>
         </div>
@@ -145,7 +145,7 @@ export default function Home() {
       <section className="footer-grid section-pad">
         <div className="footer-about">
           <p className="eyebrow">ABOUT</p>
-          <h2>I move between strategy, technology, and art — and I like the space where they overlap.</h2>
+          <h2>I move between strategy, technology, and art.</h2>
           <Link href="/about">More about me ↗</Link>
         </div>
 
