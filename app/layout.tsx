@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import Sidebar from "@/components/Sidebar";
 import MobileNav from "@/components/MobileNav";
+import MotionSystem from "@/components/MotionSystem";
 
 export const metadata: Metadata = {
   title: "Ivonne Aldaz — Portfolio",
@@ -25,6 +26,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
     <html lang="en" suppressHydrationWarning>
       <body>
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
+        <MotionSystem />
         <div className="site-shell">
           <Sidebar />
           <MobileNav />

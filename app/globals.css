@@ -359,3 +359,118 @@ body,.sidebar,.mobile-nav,.feature,.art-lightbox,.reference-card,.experiment-lau
 @media(max-width:900px){
   .theme-toggle-compact span:last-child{display:none}
 }
+
+
+/* Motion system */
+html{scroll-behavior:smooth}
+.page-enter{
+  opacity:0;
+  transform:translateY(14px);
+  transition:
+    opacity .7s cubic-bezier(.22,.61,.36,1) var(--enter-delay,0ms),
+    transform .7s cubic-bezier(.22,.61,.36,1) var(--enter-delay,0ms);
+}
+.page-enter.is-visible{opacity:1;transform:none}
+.reveal-target{
+  opacity:0;
+  transform:translateY(16px);
+  transition:
+    opacity .65s cubic-bezier(.22,.61,.36,1) var(--reveal-delay,0ms),
+    transform .65s cubic-bezier(.22,.61,.36,1) var(--reveal-delay,0ms),
+    border-color .2s ease,
+    background-color .2s ease;
+}
+.reveal-target.is-visible{opacity:1;transform:none}
+
+.feature,.experiment-card,.art-shop-item,.travel-photo{will-change:transform}
+.feature-media,.experiment-thumb,.art-shop-image img,.travel-photo-button img{transition:transform .7s cubic-bezier(.22,.61,.36,1),filter .7s ease}
+.feature:hover .feature-media{transform:scale(1.015)}
+.feature:hover .circle-arrow{transform:translateX(3px)}
+.circle-arrow{transition:transform .28s ease,background-color .28s ease}
+.experiment-card:hover .experiment-thumb{transform:scale(1.012)}
+.experiment-card:hover .experiment-meta h3{transform:translateX(3px)}
+.experiment-meta h3{transition:transform .28s ease}
+.home-case,.case-row,.practice-row,.note-row{transition:opacity .22s ease,transform .28s cubic-bezier(.22,.61,.36,1)}
+.home-case:hover,.case-row:hover,.practice-row:hover,.note-row:hover{transform:translateX(4px)}
+.home-case>span:last-child,.case-arrow,.practice-row>span:last-child,.note-destination{transition:transform .28s ease}
+.home-case:hover>span:last-child,.case-row:hover .case-arrow,.practice-row:hover>span:last-child,.note-row:hover .note-destination{transform:translateX(4px)}
+
+.art-shop-image:hover img,.travel-photo-button:hover img{transform:scale(1.018)}
+.art-shop-image:active img,.travel-photo-button:active img{transform:scale(1.006)}
+.reference-card{transition:transform .28s ease,background-color .2s ease}
+.reference-card-link:hover{transform:translateY(-3px)}
+
+.status-dot{animation:statusPulse 2.8s ease-in-out infinite}
+@keyframes statusPulse{
+  0%,100%{opacity:.55;box-shadow:0 0 0 0 rgba(120,135,104,0)}
+  50%{opacity:1;box-shadow:0 0 0 5px rgba(120,135,104,.09)}
+}
+
+.retro-desktop:after{
+  content:"";
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  background:repeating-linear-gradient(
+    to bottom,
+    rgba(255,255,255,.018) 0,
+    rgba(255,255,255,.018) 1px,
+    rgba(0,0,0,.018) 2px,
+    rgba(0,0,0,.018) 3px
+  );
+  mix-blend-mode:soft-light;
+  opacity:.45;
+  animation:crtDrift 7s linear infinite;
+}
+.retro-window{animation:labFloat 5.5s ease-in-out infinite}
+.retro-window-head:after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.14),transparent);
+  transform:translateX(-120%);
+  animation:labSheen 6.5s ease-in-out infinite;
+}
+.retro-window-head{position:relative;overflow:hidden}
+@keyframes labFloat{
+  0%,100%{translate:0 0}
+  50%{translate:0 -2px}
+}
+@keyframes labSheen{
+  0%,72%,100%{transform:translateX(-120%)}
+  84%{transform:translateX(120%)}
+}
+@keyframes crtDrift{
+  from{transform:translateY(0)}
+  to{transform:translateY(6px)}
+}
+
+.sidebar-nav a{position:relative}
+.sidebar-nav a:before{
+  content:"";
+  position:absolute;
+  left:2px;
+  top:50%;
+  width:3px;
+  height:3px;
+  border-radius:50%;
+  background:var(--ink);
+  opacity:0;
+  transform:translateY(-50%) scale(.4);
+  transition:opacity .25s ease,transform .25s ease;
+}
+.sidebar-nav a.active:before{opacity:.9;transform:translateY(-50%) scale(1)}
+
+.pill-link,.experiment-launch{transition:transform .28s ease,background-color .28s ease,color .28s ease}
+.pill-link:hover,.experiment-launch:hover{transform:translateY(-2px)}
+
+@media(prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{
+    animation-duration:.001ms!important;
+    animation-iteration-count:1!important;
+    transition-duration:.001ms!important;
+    scroll-behavior:auto!important;
+  }
+  .page-enter,.reveal-target{opacity:1!important;transform:none!important}
+}
