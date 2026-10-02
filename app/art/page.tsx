@@ -1,3 +1,5 @@
+import ArtGallery from "@/components/ArtGallery";
+
 const works = [
   {
     title: "What I Didn’t Say",
@@ -52,19 +54,7 @@ export default function ArtPage() {
         </div>
       </header>
 
-      <div className="art-grid section-pad">
-        {works.map((work, index) => (
-          <figure className={"art-work art-work-" + index} key={work.title}>
-            <div className="art-image-wrap">
-              <img src={work.image} alt={work.title} loading={index < 2 ? "eager" : "lazy"} />
-            </div>
-            <figcaption>
-              <span>{String(index + 1).padStart(2, "0")}</span>
-              <div><h2>{work.title}</h2><p>{work.meta}</p></div>
-            </figcaption>
-          </figure>
-        ))}
-      </div>
+      <ArtGallery works={works} />
 
       <footer className="art-footer section-pad">
         <p>Selected works. Full archive in progress.</p>
