@@ -1,31 +1,29 @@
 import Link from "next/link";
 
 const features = [
-  { n: "01", title: "The Lab", meta: "Ideas / Systems / Experiments", className: "feature feature-lab" },
-  { n: "02", title: "Whitespace", meta: "Strategy / Brand / AI", className: "feature" },
-  { n: "03", title: "Good World Living", meta: "Experiences / Places / Living", className: "feature" },
-  { n: "04", title: "Art Practice", meta: "Painting / Ceramics / Installation", className: "feature" },
-  { n: "05", title: "Travel", meta: "Photography / Notes / Places", className: "feature" },
+  { n: "01", title: "The Lab", meta: "Ideas / Systems / Experiments", className: "feature feature-lab", href: "https://lab.ivonnealdaz.com", external: true },
+  { n: "02", title: "Whitespace", meta: "Strategy / Brand / AI", className: "feature", href: "https://www.bywhitespace.com/", external: true },
+  { n: "03", title: "Good World Living", meta: "Experiences / Places / Living", className: "feature", href: "https://www.goodworldliving.com/", external: true },
+  { n: "04", title: "Art Practice", meta: "Painting / Ceramics / Installation", className: "feature", href: "/work" },
+  { n: "05", title: "Travel", meta: "Photography / Notes / Places", className: "feature", href: "/archive" },
 ];
 
 const experiments = [
-  ["01", "Ask Eve", "CV chatbot"],
-  ["02", "Visual Systems", "UI studies"],
-  ["03", "Motion Studies", "Interaction"],
-  ["04", "Desktop", "Personal OS"],
-  ["05", "Notes", "Ideas / References"],
+  ["01", "Ask Eve", "Conversational CV"],
+  ["02", "Personal OS", "Digital playground"],
+  ["03", "Visual Systems", "Interface studies"],
+  ["04", "Notes", "Ideas / References / Places"],
 ];
 
 export default function Home() {
   return (
     <>
       <section className="hero-compact section-pad">
-        <div className="hero-kicker">A creative practice across strategy, technology, and art</div>
         <div className="hero-row">
-          <h1>Strategy, creative direction, systems, and art.</h1>
+          <h1>Strategy, technology, art.</h1>
           <p>
-            I work across brand, technology, and creative practice — building thoughtful
-            systems, visual worlds, and experiences with a point of view.
+            I work across brand, systems, and creative practice — building digital tools,
+            visual worlds, and experiences.
           </p>
         </div>
       </section>
@@ -39,40 +37,69 @@ export default function Home() {
         </div>
 
         <div className="feature-grid">
-          {features.map((item, index) => (
-            <article className={item.className} key={item.n}>
-              <div className="feature-media">
-                {index === 0 ? (
-                  <div className="retro-shell">
-                    <div className="retro-bar">LAB.exe <span>— □ ×</span></div>
-                    <div className="retro-desktop">
-                      <div className="retro-icon">LAB</div>
-                      <div className="retro-icon">NOTES</div>
-                      <div className="retro-icon">ASK EVE</div>
-                      <div className="retro-window">
-                        <div className="retro-window-head">IVONNE_OS</div>
-                        <p>A more interesting internet.</p>
+          {features.map((item, index) => {
+            const content = (
+              <>
+                <div className="feature-media">
+                  {index === 0 && (
+                    <div className="retro-shell">
+                      <div className="retro-bar">LAB.exe <span>— □ ×</span></div>
+                      <div className="retro-desktop">
+                        <div className="retro-icon">LAB</div>
+                        <div className="retro-icon">NOTES</div>
+                        <div className="retro-icon">ASK EVE</div>
+                        <div className="retro-window">
+                          <div className="retro-window-head">IVONNE_OS</div>
+                          <p>A more interesting internet.</p>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                ) : (
-                  <div className={"image-placeholder image-" + index} />
-                )}
-              </div>
+                  )}
 
-              <div className="feature-copy">
-                <div>
-                  <span className="feature-num">{item.n}</span>
-                  <h3>{item.title}</h3>
-                  <p>{item.meta}</p>
+                  {index === 1 && (
+                    <div className="whitespace-visual">
+                      <div className="ws-index">01 / 04</div>
+                      <div className="ws-wordmark">WHITESPACE</div>
+                      <div className="ws-statement">CLARITY IS A<br/>COMPETITIVE<br/>ADVANTAGE.</div>
+                    </div>
+                  )}
+
+                  {index === 2 && (
+                    <div className="gwl-visual">
+                      <div className="gwl-horizon" />
+                      <div className="gwl-copy">
+                        <span>GOOD WORLD LIVING</span>
+                        <strong>ART. TRAVEL.<br/>THE LIFE IN BETWEEN.</strong>
+                      </div>
+                    </div>
+                  )}
+
+                  {index > 2 && <div className={"image-placeholder image-" + index} />}
                 </div>
-                <span className="circle-arrow">→</span>
-              </div>
-            </article>
-          ))}
+
+                <div className="feature-copy">
+                  <div>
+                    <span className="feature-num">{item.n}</span>
+                    <h3>{item.title}</h3>
+                    <p>{item.meta}</p>
+                  </div>
+                  <span className="circle-arrow">→</span>
+                </div>
+              </>
+            );
+
+            return item.external ? (
+              <a className={item.className} key={item.n} href={item.href} target="_blank" rel="noreferrer">
+                {content}
+              </a>
+            ) : (
+              <Link className={item.className} key={item.n} href={item.href}>
+                {content}
+              </Link>
+            );
+          })}
         </div>
       </section>
-
 
       <section className="home-cases section-pad">
         <div className="section-heading">
@@ -118,7 +145,7 @@ export default function Home() {
       <section className="experiments section-pad">
         <div className="section-heading">
           <div>
-            <h2 className="section-title small-title">Small things, big curiosity.</h2>
+            <h2 className="section-title small-title">Experiments</h2>
           </div>
           <a href="https://lab.ivonnealdaz.com" target="_blank" rel="noreferrer">View all experiments ↗</a>
         </div>
@@ -128,7 +155,9 @@ export default function Home() {
             <article className="experiment-card" key={title}>
               <div className={"experiment-thumb exp-" + index}>
                 {index === 0 && <span>ask eve</span>}
-                {index === 4 && <span>NOTES<br/>• Ideas<br/>• Places<br/>• Quotes</span>}
+                {index === 1 && <span className="os-mini">IVONNE_OS<br/>LAB / NOTES / PLAY</span>}
+                {index === 2 && <span className="system-mini">Aa<br/>01 02 03</span>}
+                {index === 3 && <span>NOTES<br/>• Ideas<br/>• Places<br/>• Quotes</span>}
               </div>
               <div className="experiment-meta">
                 <span>{n}</span>
@@ -150,9 +179,9 @@ export default function Home() {
           <p className="eyebrow">CURRENTLY</p>
           <ul>
             <li>Building digital systems</li>
-            <li>Teaching marketing</li>
+            <li>Teaching marketing + entrepreneurship</li>
             <li>Making and exhibiting art</li>
-            <li>Exploring what’s next</li>
+            <li>Developing Good World Living</li>
           </ul>
         </div>
 

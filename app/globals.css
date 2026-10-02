@@ -30,3 +30,28 @@
   .home-case>p{grid-column:2}
   .home-case>span:last-child{grid-column:2;justify-self:start}
 }
+
+
+/* Homepage polish batch */
+.sidebar-nav a:hover,.sidebar-nav a.active{background:rgba(17,17,15,.055);transform:translateX(2px)}
+.sidebar-socials{display:grid;grid-template-columns:1fr 1fr;gap:5px 12px;margin-top:14px}
+.sidebar-socials a,.listen-link{font-size:9px;letter-spacing:.03em}
+.listen-link{display:inline-block;margin-top:14px;padding-top:12px;border-top:1px solid var(--line)}
+.hero-compact{padding-top:46px;padding-bottom:34px}
+.whitespace-visual{position:relative;width:100%;height:100%;min-height:100%;overflow:hidden;padding:18px;background:radial-gradient(circle at 82% 18%,rgba(255,255,255,.72),transparent 24%),linear-gradient(145deg,#efdfbf 0%,#d9b6e5 38%,#8498ff 68%,#263455 100%);color:#111}
+.ws-index{font-size:9px;letter-spacing:.12em}
+.ws-wordmark{position:absolute;top:18px;right:18px;font-size:9px;letter-spacing:.2em;font-weight:600}
+.ws-statement{position:absolute;left:18px;bottom:18px;font-size:clamp(20px,2vw,31px);font-weight:600;letter-spacing:-.05em;line-height:.9}
+.gwl-visual{position:relative;width:100%;height:100%;min-height:100%;overflow:hidden;background:linear-gradient(180deg,#bfcbd0 0%,#d7d4c9 48%,#9c8068 49%,#6d5d50 100%);color:#f6f2ea}
+.gwl-visual:after{content:"";position:absolute;inset:auto -10% 22% -10%;height:25%;background:rgba(70,59,49,.55);transform:rotate(-3deg)}
+.gwl-horizon{position:absolute;inset:auto 0 0 0;height:38%;background:linear-gradient(180deg,rgba(57,66,54,.2),#334034)}
+.gwl-copy{position:absolute;inset:16px 16px 18px;display:flex;flex-direction:column;justify-content:space-between;z-index:2}
+.gwl-copy span{font-size:8px;letter-spacing:.18em}
+.gwl-copy strong{font-size:clamp(18px,1.8vw,28px);line-height:.94;letter-spacing:-.045em;font-weight:500}
+.experiment-grid{grid-template-columns:repeat(4,1fr)}
+.exp-0,.exp-2,.exp-3{background:#171717;color:#f3f1eb}
+.exp-1{background:linear-gradient(150deg,#d7e3e6,#b9c5bf,#e7dcc6)}
+.exp-3{justify-content:flex-start;align-items:flex-start;padding:16px;font:11px/1.7 "Courier New",monospace}
+.os-mini{font:10px/1.5 "Courier New",monospace}
+.system-mini{font-size:20px;line-height:1.1;letter-spacing:-.06em}
+@media(max-width:1000px){.experiment-grid{grid-template-columns:repeat(2,1fr)}}

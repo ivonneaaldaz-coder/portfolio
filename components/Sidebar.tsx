@@ -1,4 +1,7 @@
+"use client";
+
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 const links = [
   { label: "Overview", href: "/" },
@@ -10,6 +13,8 @@ const links = [
 ];
 
 export default function Sidebar() {
+  const pathname = usePathname();
+
   return (
     <aside className="sidebar">
       <div>
@@ -17,27 +22,37 @@ export default function Sidebar() {
         <p className="brand-sub">Strategist / Artist / Builder</p>
 
         <nav className="sidebar-nav" aria-label="Primary">
-          {links.map((link, index) =>
-            link.external ? (
+          {links.map((link, index) => {
+            const active = !link.external && (link.href === "/" ? pathname === "/" : pathname.startsWith(link.href));
+
+            return link.external ? (
               <a key={link.label} href={link.href} target="_blank" rel="noreferrer">
                 <span>{String(index + 1).padStart(2, "0")}</span>{link.label}
               </a>
             ) : (
-              <Link key={link.label} href={link.href}>
+              <Link key={link.label} href={link.href} className={active ? "active" : ""}>
                 <span>{String(index + 1).padStart(2, "0")}</span>{link.label}
               </Link>
-            )
-          )}
+            );
+          })}
         </nav>
       </div>
 
       <div className="sidebar-footer">
         <p><span className="status-dot" /> Available for select projects</p>
         <p>San Antonio, TX</p>
-        <div className="social-row">
+
+        <div className="sidebar-socials" aria-label="Social links">
           <a href="mailto:hello@ivonnealdaz.com">Email ↗</a>
-          <a href="https://www.linkedin.com" target="_blank" rel="noreferrer">LinkedIn ↗</a>
+          <a href="https://www.linkedin.com/in/ivonnealdaz/" target="_blank" rel="noreferrer">LinkedIn ↗</a>
+          <a href="https://x.com/ivonnealdazz" target="_blank" rel="noreferrer">X ↗</a>
+          <a href="https://github.com/ivonneaaldaz-coder" target="_blank" rel="noreferrer">GitHub ↗</a>
+          <a href="https://www.pinterest.com/ivonnealdaz/" target="_blank" rel="noreferrer">Pinterest ↗</a>
         </div>
+
+        <a className="listen-link" href="https://open.spotify.com/user/ivonnealdaz" target="_blank" rel="noreferrer">
+          Listen on Spotify ↗
+        </a>
       </div>
     </aside>
   );
