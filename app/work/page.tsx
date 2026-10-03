@@ -61,10 +61,17 @@ export default function WorkPage() {
         <a className="lab-intro-row" href="https://lab.ivonnealdaz.com" target="_blank" rel="noreferrer">
           <div><h3>The Lab</h3><p>A digital playground for things I build, test, and put on the internet.</p></div><span>Enter the Lab ↗︎</span>
         </a>
-        <div className="practice-index">
-          {experiments.map(([title,meta,href]) => (
-            <Link className="practice-row" href={href} key={title}>
-              <div><h3>{title}</h3><p>{meta}</p></div><span>→</span>
+        <div className="experiment-grid experiment-grid-three work-experiment-grid">
+          {experiments.map(([title,meta,href], index) => (
+            <Link className="experiment-card experiment-link" href={href} key={title}>
+              <div className={"experiment-thumb exp-" + index}>
+                {index === 0 && <span>ask eve</span>}
+                {index === 1 && <span className="system-mini">CHAT<br/>ROOM.exe</span>}
+                {index === 2 && <span className="snake-mini">SNAKE.exe<br/>↑ ↓ ← →</span>}
+              </div>
+              <div className="experiment-meta">
+                <div><h3>{title}</h3><p>{meta}</p></div>
+              </div>
             </Link>
           ))}
         </div>
