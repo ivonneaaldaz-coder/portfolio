@@ -44,7 +44,7 @@ export default function MobileNav() {
             <a href="https://lab.ivonnealdaz.com" target="_blank" rel="noreferrer" onClick={closeExternal}>
               Lab <span className="text-arrow" aria-hidden="true" />
             </a>
-            <Link href="/notes" onClick={(event) => go(event, "/notes")}>Notes</Link>
+            <Link href="/notes" onClick={(event) => go(event, "/notes")}>Index</Link>
             <Link href="/archive" onClick={(event) => go(event, "/archive")}>Archive</Link>
             <Link href="/about" onClick={(event) => go(event, "/about")}>About</Link>
           </nav>

@@ -35,7 +35,7 @@ export default function WorkPage() {
           {studies.map((study) => (
             <Link className="case-row" href={study.href} key={study.n}>
               <span>{study.n}</span>
-              <div><p className="eyebrow">{study.tag}</p><h2>{study.title}</h2></div>
+              <div><h2>{study.title}</h2></div>
               <p>{study.desc}</p><span className="case-arrow">↗︎</span>
             </Link>
           ))}

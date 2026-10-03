@@ -2,57 +2,78 @@
 
 import { useState } from "react";
 
-const shelves = [
-  { label:"Art", note:"Artists, exhibition books, monographs, and books about making." },
-  { label:"Design", note:"Graphic design, typography, architecture, interiors, and visual culture." },
-  { label:"Essays", note:"Writing I return to for ideas, language, and perspective." },
-  { label:"Place", note:"Travel, cities, landscapes, food, and books rooted in somewhere specific." },
-  { label:"Ideas", note:"Business, technology, philosophy, behavior, and useful ways of thinking." },
-  { label:"Fiction", note:"Stories worth disappearing into for a while." },
+const books = [
+  { n:"01", category:"Art", className:"cover-a" },
+  { n:"02", category:"Design", className:"cover-b" },
+  { n:"03", category:"Essays", className:"cover-c" },
+  { n:"04", category:"Place", className:"cover-d" },
+  { n:"05", category:"Ideas", className:"cover-e" },
+  { n:"06", category:"Fiction", className:"cover-f" },
+  { n:"07", category:"Art", className:"cover-g" },
+  { n:"08", category:"Design", className:"cover-h" },
+];
+
+const commonplace = [
+  { n:"01", label:"Decision making", className:"common-card-a" },
+  { n:"02", label:"Making", className:"common-card-b" },
+  { n:"03", label:"Attention", className:"common-card-c" },
+  { n:"04", label:"Place", className:"common-card-d" },
+  { n:"05", label:"Learning", className:"common-card-e" },
 ];
 
 export default function LibraryWorld() {
-  const [active,setActive] = useState(0);
-  const shelf=shelves[active];
+  const [view,setView] = useState<"books"|"commonplace">("books");
+  const [selected,setSelected] = useState(0);
 
   return (
-    <div className="library-world">
-      <div className="bookshelf" aria-label="Library shelves">
-        <div className="shelf shelf-top">
-          {shelves.slice(0,3).map((item,index) => (
-            <button
-              className={"book-spine spine-" + index + (active===index ? " active" : "")}
-              key={item.label}
-              onClick={() => setActive(index)}
-              type="button"
-            >
-              <span>{item.label}</span>
-            </button>
-          ))}
-        </div>
-        <div className="shelf">
-          {shelves.slice(3).map((item,index) => {
-            const real=index+3;
-            return (
-              <button
-                className={"book-spine spine-" + real + (active===real ? " active" : "")}
-                key={item.label}
-                onClick={() => setActive(real)}
-                type="button"
-              >
-                <span>{item.label}</span>
-              </button>
-            );
-          })}
-        </div>
+    <div className="library-experience">
+      <div className="library-tabs" role="tablist" aria-label="Library view">
+        <button type="button" className={view==="books" ? "active" : ""} onClick={()=>setView("books")}>Books</button>
+        <button type="button" className={view==="commonplace" ? "active" : ""} onClick={()=>setView("commonplace")}>Commonplace</button>
       </div>
 
-      <aside className="library-note">
-        <span>{String(active+1).padStart(2,"0")} / 06</span>
-        <h2>{shelf.label}</h2>
-        <p>{shelf.note}</p>
-        <p className="muted">Individual books, short notes, and purchase links will live here as the shelf is cataloged.</p>
-      </aside>
+      {view === "books" ? (
+        <div className="book-browser">
+          <div className="book-cover-grid">
+            {books.map((book,index)=>(
+              <button
+                type="button"
+                className={"book-cover-tile " + book.className + (selected===index ? " active" : "")}
+                key={book.n}
+                onClick={()=>setSelected(index)}
+                aria-label={"Open collection slot " + book.n}
+              >
+                <span>{book.n}</span>
+                <div className="book-cover-mark" aria-hidden="true" />
+                <small>{book.category}</small>
+              </button>
+            ))}
+          </div>
+
+          <aside className="book-detail">
+            <span>{books[selected].n} / {String(books.length).padStart(2,"0")}</span>
+            <h2>{books[selected].category}</h2>
+            <p>Book cover, title, author, your note, and a purchase link will live here once the collection is cataloged.</p>
+            <div className="book-detail-lines" aria-hidden="true"><i/><i/><i/></div>
+          </aside>
+        </div>
+      ) : (
+        <div className="commonplace-world">
+          <div className="commonplace-stack" aria-label="Commonplace card preview">
+            {commonplace.map((item,index)=>(
+              <article className={"common-card " + item.className} key={item.n} style={{"--card-i":index} as React.CSSProperties}>
+                <span>{item.n} / {item.label}</span>
+                <p>Saved passage, quote, or fragment.</p>
+              </article>
+            ))}
+          </div>
+          <aside className="commonplace-note">
+            <span>COMMONPLACE</span>
+            <h2>Things worth keeping.</h2>
+            <p>Quotes, passages, marginalia, and fragments collected slowly over time.</p>
+          </aside>
+        </div>
+      )}
     </div>
   );
 }

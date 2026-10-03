@@ -81,7 +81,7 @@ export default function Home() {
           {studies.map(([n,title,tag,desc,href]) => (
             <Link className="home-case" href={href} key={n}>
               <span className="home-case-num">{n}</span>
-              <div><p className="eyebrow">{tag}</p><h3>{title}</h3></div>
+              <div><h3>{title}</h3></div>
               <p>{desc}</p><span>↗︎</span>
             </Link>
           ))}

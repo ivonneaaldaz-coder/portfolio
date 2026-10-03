@@ -9,18 +9,18 @@ const writing = [
 ];
 
 const references = [
-  { title:"Library", desc:"Books, essays, passages, and a growing commonplace.", href:"/library", meta:"Books + commonplace" },
-  { title:"Visual Index", desc:"Moodboards, type, imagery, color, interiors, and saved references.", href:"/visual-index", meta:"A visual collection" },
-  { title:"Places", desc:"Travel, architecture, landscapes, and memorable spaces.", href:"/travel", meta:"Photography + notes" },
-  { title:"Music", desc:"Playlists, records, and things worth listening to closely.", href:"/music", meta:"Playlists + records" },
+  { title:"Library", desc:"Books, essays, passages, and a growing commonplace.", href:"/library" },
+  { title:"Visual Index", desc:"Moodboards, type, imagery, color, interiors, and saved references.", href:"/visual-index" },
+  { title:"Places", desc:"Travel, architecture, landscapes, and memorable spaces.", href:"/travel" },
+  { title:"Music", desc:"Playlists, records, and things worth listening to closely.", href:"/music" },
 ];
 
 export default function NotesPage() {
   return (
     <section className="page section-pad notes-page">
       <div className="page-intro notes-intro">
-        <h1>Notes</h1>
-        <p>Published writing and a small library of things worth keeping.</p>
+        <h1>Index</h1>
+        <p>Writing and collections of things worth keeping.</p>
       </div>
 
       <section className="notes-section writing-section notes-first-section">
@@ -44,7 +44,6 @@ export default function NotesPage() {
             <Link className="reference-portal" href={item.href} key={item.title}>
               <span>{String(index+1).padStart(2,"0")}</span>
               <div>
-                <p>{item.meta}</p>
                 <h3>{item.title}</h3>
                 <p>{item.desc}</p>
               </div>
