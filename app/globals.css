@@ -1358,3 +1358,35 @@ a.public-row:hover{transform:translateX(4px)}
     margin-top:0;
   }
 }
+
+
+/* Education credential grouping */
+.education-list>div{
+  display:block;
+  padding:22px 0 24px;
+}
+.education-list h3{
+  margin:0 0 6px;
+}
+.education-list p{
+  margin:0;
+  color:var(--muted);
+}
+.education-list>div::before{
+  content:none!important;
+}
+.education-list>div>span{
+  display:none!important;
+}
+@media(max-width:560px){
+  .education-list>div{
+    display:block;
+    padding:20px 0 22px;
+  }
+  .education-list h3{
+    margin:0 0 6px;
+  }
+  .education-list p{
+    margin:0;
+  }
+}

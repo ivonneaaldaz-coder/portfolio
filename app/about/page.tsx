@@ -74,7 +74,7 @@ export default function AboutPage() {
         <div className="education-list">
           <div><h3>MBA</h3><p>St. Mary’s University</p></div>
           <div><h3>MA, International Business + Economics</h3><p>FH Schmalkalden University of Applied Sciences · thesis pending</p></div>
-          <div><h3>BA, Forensic Science</h3><p>St. Mary’s University</p></div>
+          <div><h3>Bachelor of Arts</h3><p>St. Mary’s University</p></div>
         </div>
       </section>
 
