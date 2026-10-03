@@ -13,7 +13,7 @@ const books = [
   { n:"08", category:"Design", className:"cover-h" },
 ];
 
-const commonplace = [
+const quotes = [
   { n:"01", label:"Decision making", className:"common-card-a" },
   { n:"02", label:"Making", className:"common-card-b" },
   { n:"03", label:"Attention", className:"common-card-c" },
@@ -22,14 +22,14 @@ const commonplace = [
 ];
 
 export default function LibraryWorld() {
-  const [view,setView] = useState<"books"|"commonplace">("books");
+  const [view,setView] = useState<"books"|"quotes">("books");
   const [selected,setSelected] = useState(0);
 
   return (
     <div className="library-experience">
-      <div className="library-tabs" role="tablist" aria-label="Library view">
+      <div className="library-tabs" role="tablist" aria-label="Books and quotes">
         <button type="button" className={view==="books" ? "active" : ""} onClick={()=>setView("books")}>Books</button>
-        <button type="button" className={view==="commonplace" ? "active" : ""} onClick={()=>setView("commonplace")}>Commonplace</button>
+        <button type="button" className={view==="quotes" ? "active" : ""} onClick={()=>setView("quotes")}>Quotes</button>
       </div>
 
       {view === "books" ? (
@@ -49,7 +49,6 @@ export default function LibraryWorld() {
               </button>
             ))}
           </div>
-
           <aside className="book-detail">
             <span>{books[selected].n} / {String(books.length).padStart(2,"0")}</span>
             <h2>{books[selected].category}</h2>
@@ -59,18 +58,18 @@ export default function LibraryWorld() {
         </div>
       ) : (
         <div className="commonplace-world">
-          <div className="commonplace-stack" aria-label="Commonplace card preview">
-            {commonplace.map((item,index)=>(
+          <div className="commonplace-stack" aria-label="Quote card preview">
+            {quotes.map((item,index)=>(
               <article className={"common-card " + item.className} key={item.n} style={{"--card-i":index} as React.CSSProperties}>
                 <span>{item.n} / {item.label}</span>
-                <p>Saved passage, quote, or fragment.</p>
+                <p>Saved quote or passage.</p>
               </article>
             ))}
           </div>
           <aside className="commonplace-note">
-            <span>COMMONPLACE</span>
-            <h2>Things worth keeping.</h2>
-            <p>Quotes, passages, marginalia, and fragments collected slowly over time.</p>
+            <span>QUOTES</span>
+            <h2>Lines worth keeping.</h2>
+            <p>Passages, fragments, and sentences collected slowly over time.</p>
           </aside>
         </div>
       )}

@@ -12,11 +12,7 @@ export default function MobileNav() {
 
   const animateClose = (after?: () => void) => {
     const details = detailsRef.current;
-    if (!details?.open) {
-      after?.();
-      return;
-    }
-
+    if (!details?.open) { after?.(); return; }
     setClosing(true);
     window.setTimeout(() => {
       details.open = false;
@@ -44,7 +40,7 @@ export default function MobileNav() {
             <a href="https://lab.ivonnealdaz.com" target="_blank" rel="noreferrer" onClick={closeExternal}>
               Lab <span className="text-arrow" aria-hidden="true" />
             </a>
-            <Link href="/notes" onClick={(event) => go(event, "/notes")}>Index</Link>
+            <Link href="/library" onClick={(event) => go(event, "/library")}>Library</Link>
             <Link href="/archive" onClick={(event) => go(event, "/archive")}>Archive</Link>
             <Link href="/about" onClick={(event) => go(event, "/about")}>About</Link>
           </nav>

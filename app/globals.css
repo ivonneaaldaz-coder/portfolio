@@ -1065,3 +1065,27 @@ a.public-row:hover{transform:translateX(4px)}
   .common-card{width:82%;min-height:190px;padding:16px 18px}
   .common-card p{font-size:20px}
 }
+
+
+/* Architecture cleanup */
+.related-paths{display:flex;justify-content:flex-end;gap:22px;padding-top:34px;padding-bottom:34px;border-top:1px solid var(--line);font-size:10px;text-transform:uppercase;letter-spacing:.08em}
+.lab-intro-row{display:flex;align-items:flex-end;justify-content:space-between;gap:30px;padding:24px 0 30px;border-top:1px solid var(--ink);border-bottom:1px solid var(--line)}
+.lab-intro-row h3{margin:0 0 5px;font-size:28px;letter-spacing:-.04em}
+.lab-intro-row p{margin:0;color:var(--muted)}
+.lab-intro-row>span{font-size:10px;text-transform:uppercase;letter-spacing:.08em;white-space:nowrap}
+
+.visual-filter-row button{appearance:none;background:transparent;border:1px solid var(--line);border-radius:999px;padding:7px 12px;color:var(--ink);font:inherit;font-size:9px;text-transform:uppercase;letter-spacing:.08em;cursor:pointer}
+.visual-filter-row button.active,.visual-filter-row button:hover{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+
+.brand-more{margin-top:14px;border-bottom:1px solid var(--line)}
+.brand-more summary{cursor:pointer;list-style:none;padding:14px 0;font-size:10px;text-transform:uppercase;letter-spacing:.09em}
+.brand-more summary::-webkit-details-marker{display:none}
+.brand-wall-more{margin-top:0;border-top:1px solid var(--line)}
+
+.speaking-topics{display:flex;flex-wrap:wrap;gap:8px;padding:24px 0 0}
+.speaking-topics span{border:1px solid var(--line);border-radius:999px;padding:7px 10px;font-size:9px;text-transform:uppercase;letter-spacing:.08em}
+
+@media(max-width:560px){
+  .related-paths{justify-content:flex-start;flex-wrap:wrap}
+  .lab-intro-row{align-items:flex-start;flex-direction:column}
+}

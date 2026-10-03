@@ -3,8 +3,8 @@ import Link from "next/link";
 const features = [
   { n: "01", title: "The Lab", meta: "Ideas / Systems / Experiments", className: "feature feature-lab", href: "https://lab.ivonnealdaz.com", external: true },
   { n: "02", title: "Whitespace", meta: "Strategy / Brand / AI", className: "feature", href: "https://www.bywhitespace.com/", external: true },
-  { n: "03", title: "Good World Living", meta: "Experiences / Places / Living", className: "feature", href: "https://www.goodworldliving.com/", external: true },
-  { n: "04", title: "Art Practice", meta: "Painting / Ceramics / Installation", className: "feature", href: "/art" },
+  { n: "03", title: "Art Practice", meta: "Painting / Ceramics / Installation", className: "feature", href: "/art" },
+  { n: "04", title: "Good World Living", meta: "Experiences / Places / Living", className: "feature", href: "https://www.goodworldliving.com/", external: true },
   { n: "05", title: "Travel", meta: "Photography / Notes / Places", className: "feature", href: "/travel" },
 ];
 

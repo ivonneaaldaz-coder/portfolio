@@ -13,7 +13,7 @@ export default function MusicPage() {
           <h1>Music</h1>
           <p>Playlists, records, and a running soundtrack for everything else.</p>
         </div>
-        <Link href="/notes">Back to Notes ←</Link>
+        <Link href="/library">Back to Library ←</Link>
       </header>
 
       <section className="music-section">
@@ -48,6 +48,7 @@ export default function MusicPage() {
           <div className="record-note"><p>Records I love, short notes, and vinyl links will live here as the shelf grows.</p></div>
         </div>
       </section>
+      <nav className="related-paths" aria-label="Explore next"><Link href="/books">Books + Quotes →</Link><Link href="/library">Library →</Link></nav>
     </section>
   );
 }

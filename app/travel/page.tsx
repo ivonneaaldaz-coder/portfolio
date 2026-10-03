@@ -1,3 +1,4 @@
+import Link from "next/link";
 import TravelGallery from "@/components/TravelGallery";
 
 const photographs = [
@@ -25,6 +26,7 @@ export default function TravelPage() {
       </header>
 
       <TravelGallery photographs={photographs} />
+      <nav className="related-paths section-pad" aria-label="Explore next"><Link href="/visual-references">Visual References →</Link><Link href="/art">Art Practice →</Link></nav>
     </section>
   );
 }

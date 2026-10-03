@@ -1,3 +1,4 @@
+import Link from "next/link";
 import ArtGallery from "@/components/ArtGallery";
 
 const works = [
@@ -49,6 +50,8 @@ export default function ArtPage() {
           ))}
         </div>
       </section>
+
+      <nav className="related-paths section-pad" aria-label="Explore next"><Link href="/travel">Travel →</Link><Link href="/about">About →</Link></nav>
 
       <footer className="art-footer section-pad">
         <p>Selected works. Full archive in progress.</p>

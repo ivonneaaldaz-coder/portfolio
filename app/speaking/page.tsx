@@ -23,9 +23,11 @@ export default function SpeakingPage() {
         <h1>Speaking + Press</h1>
         <div>
           <p>Talks, classrooms, panels, podcasts, and conversations about brand, marketing, technology, creativity, and building things.</p>
-          <a href="mailto:hello@ivonnealdaz.com?subject=Speaking%20or%20collaboration%20inquiry">Invite me ↗︎</a>
+          <a href="mailto:hello@ivonnealdaz.com?subject=Speaking%20or%20collaboration%20inquiry">Speaking inquiries ↗︎</a>
         </div>
       </header>
+
+      <div className="speaking-topics"><span>Brand</span><span>AI + marketing</span><span>Creativity</span><span>Portfolio careers</span><span>Community</span><span>Entrepreneurship</span></div>
 
       <section className="public-section">
         <div className="section-heading"><h2 className="section-title small-title">Selected talks</h2></div>
@@ -47,6 +49,8 @@ export default function SpeakingPage() {
           ))}
         </div>
       </section>
+
+      <nav className="related-paths" aria-label="Explore next"><Link href="/about">About →</Link><Link href="/work">Selected Work →</Link></nav>
 
       <section className="speaking-cta">
         <p>Speaking, teaching, panels, podcasts, guest lectures, and thoughtful collaborations.</p>

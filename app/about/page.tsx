@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-const elsewhere = [
+const extras = [
   { n: "01", title: "Ventures", copy: "Whitespace · Make Space · Good World Living" },
   { n: "02", title: "Civic + cultural", copy: "San Antonio Arts Commission — Centro de Artes Committee · Witte Museum · San Antonio Art League Museum" },
   { n: "03", title: "Languages", copy: "English · Spanish · some French" },
@@ -8,30 +8,13 @@ const elsewhere = [
 ];
 
 const brands = [
-  "ARM & HAMMER",
-  "Batiste",
-  "Clio Snacks",
-  "CVS Health",
-  "First Response",
-  "Flexitol",
-  "Fur Buddies",
-  "Gaia Herbs",
-  "Gerber",
-  "H-E-B",
-  "Hero Cosmetics",
-  "Kellanova",
-  "Maggi Noodles",
-  "Maison Perrier",
-  "Nestlé",
-  "Nescafe",
-  "Pacific Coast Producers",
-  "Purina",
-  "Sir Kensington's (Unilever)",
-  "Stouffer's",
-  "TrueLoyal (formerly TINT)",
-  "Veggies Made Great",
-  "viemaa",
+  "ARM & HAMMER","Batiste","Clio Snacks","CVS Health","First Response","Flexitol","Fur Buddies","Gaia Herbs",
+  "Gerber","H-E-B","Hero Cosmetics","Kellanova","Maggi Noodles","Maison Perrier","Nestlé","Nescafe",
+  "Pacific Coast Producers","Purina","Sir Kensington's (Unilever)","Stouffer's","TrueLoyal (formerly TINT)","Veggies Made Great","viemaa",
 ];
+
+const visibleBrands = brands.slice(0,16);
+const moreBrands = brands.slice(16);
 
 export default function AboutPage() {
   return (
@@ -45,7 +28,8 @@ export default function AboutPage() {
           <div className="about-links">
             <Link href="/work">Selected work ↗︎</Link>
             <Link href="/art">Art practice ↗︎</Link>
-            <a href="https://lab.ivonnealdaz.com" target="_blank" rel="noreferrer">The Lab ↗︎</a>\n            <Link href="/speaking">Speaking + press ↗︎</Link>
+            <a href="https://lab.ivonnealdaz.com" target="_blank" rel="noreferrer">The Lab ↗︎</a>
+            <Link href="/speaking">Speaking + press ↗︎</Link>
           </div>
         </div>
       </div>
@@ -58,48 +42,40 @@ export default function AboutPage() {
       </div>
 
       <section className="about-section">
+        <div className="section-heading"><h2 className="section-title small-title">Selected brands</h2></div>
+        <div className="brand-wall">
+          {visibleBrands.map((brand,index)=><div className="brand-name" key={brand}><span>{String(index+1).padStart(2,"0")}</span><strong>{brand}</strong></div>)}
+        </div>
+        <details className="brand-more">
+          <summary>More brands + collaborations</summary>
+          <div className="brand-wall brand-wall-more">
+            {moreBrands.map((brand,index)=><div className="brand-name" key={brand}><span>{String(index+17).padStart(2,"0")}</span><strong>{brand}</strong></div>)}
+          </div>
+        </details>
+      </section>
+
+      <section className="about-section">
+        <div className="section-heading"><h2 className="section-title small-title">Kind words</h2></div>
+        <div className="quote-grid">
+          <figure className="quote-card"><span>01</span><blockquote>“A rare find. Deeply data-driven, deeply human.”</blockquote><figcaption>— Senior executive</figcaption></figure>
+          <figure className="quote-card"><span>02</span><blockquote>“Everyone keeps saying what a great job you’re doing and how happy the clients are.”</blockquote><figcaption>— Former manager</figcaption></figure>
+          <figure className="quote-card"><span>03</span><blockquote>“Why are we even talking about it? Just hire her.”</blockquote><figcaption>— Former colleague</figcaption></figure>
+        </div>
+      </section>
+
+      <section className="about-section">
         <div className="section-heading"><h2 className="section-title small-title">A few more things</h2></div>
         <div className="elsewhere-grid">
-          {elsewhere.map((item) => (
-            <div className="elsewhere-item" key={item.n}>
-              <span>{item.n}</span><h3>{item.title}</h3><p>{item.copy}</p>
-            </div>
-          ))}
+          {extras.map(item=><div className="elsewhere-item" key={item.n}><span>{item.n}</span><h3>{item.title}</h3><p>{item.copy}</p></div>)}
         </div>
       </section>
 
-      <section className="about-section">
-        <div className="section-heading"><h2 className="section-title small-title">Selected brands I’ve worked with + impacted</h2></div>
-        <div className="brand-wall">
-          {brands.map((brand, index) => (
-            <div className="brand-name" key={brand}>
-              <span>{String(index + 1).padStart(2, "0")}</span><strong>{brand}</strong>
-            </div>
-          ))}
-        </div>
-      </section>
-
-
-      <section className="about-section">
-        <div className="section-heading">
-          <h2 className="section-title small-title">Kind words</h2>
-        </div>
-        <div className="quote-grid">
-          <figure className="quote-card">
-            <span>01</span>
-            <blockquote>“A rare find. Deeply data-driven, deeply human.”</blockquote>
-            <figcaption>— Senior executive</figcaption>
-          </figure>
-          <figure className="quote-card">
-            <span>02</span>
-            <blockquote>“Everyone keeps saying what a great job you’re doing and how happy the clients are.”</blockquote>
-            <figcaption>— Former manager</figcaption>
-          </figure>
-          <figure className="quote-card">
-            <span>03</span>
-            <blockquote>“Why are we even talking about it? Just hire her.”</blockquote>
-            <figcaption>— Former colleague</figcaption>
-          </figure>
+      <section className="about-section education-section">
+        <div className="section-heading"><h2 className="section-title small-title">Education</h2></div>
+        <div className="education-list">
+          <div><span>01</span><h3>MBA</h3><p>St. Mary’s University</p></div>
+          <div><span>02</span><h3>MA, International Business + Economics</h3><p>FH Schmalkalden University of Applied Sciences · thesis pending</p></div>
+          <div><span>03</span><h3>BA, Forensic Science</h3><p>St. Mary’s University</p></div>
         </div>
       </section>
 
