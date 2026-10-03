@@ -2462,3 +2462,201 @@ body{
   .gen-travel-grid{columns:1!important}
   body{font-size:14.5px!important}
 }
+
+
+/* 2026-10-03 final readability system */
+:root{
+  --copy-size:15px;
+  --copy-line:1.55;
+  --meta-size:12.5px;
+  --meta-line:1.4;
+}
+
+/* Sidebar identity: keep subtitle clear of surrounding rules/navigation */
+.brand{
+  display:block;
+  font-size:14px!important;
+  line-height:1.2!important;
+}
+.brand-sub{
+  display:block!important;
+  margin:9px 0 50px!important;
+  max-width:190px!important;
+  font-size:11.5px!important;
+  line-height:1.45!important;
+  letter-spacing:.12em!important;
+  white-space:normal!important;
+}
+
+/* Primary descriptive copy — intentionally readable, not micro type */
+.hero-row p,
+.page-intro>p,
+.about-copy>p,
+.art-intro p,
+.travel-intro p,
+.collection-intro p,
+.reference-portal p,
+.reference-card p,
+.about-grid p,
+.case-row>p,
+.case-row-desc,
+.home-case>p,
+.practice-row p,
+.case-copy>p:last-child,
+.case-facts p,
+.footer-grid li,
+.footer-grid .muted,
+.quotes-intro p,
+.book-detail p,
+.note-row-rich>p,
+.native-note-body p,
+.experiment-detail-dek,
+.experiment-detail-grid>div>p:last-child,
+.project-detail-grid>div>p:last-child,
+.project-detail-band p,
+.elsewhere-item p,
+.education-list p,
+.long-story-copy,
+.long-story-copy p,
+.quote-card figcaption,
+.vinyl-card p,
+.playlist-copy p,
+.music-intro p,
+.speaking-hero p,
+.public-row p,
+.archive-row p,
+.note-row p{
+  font-size:var(--copy-size)!important;
+  line-height:var(--copy-line)!important;
+}
+
+/* Secondary metadata is still secondary, but no longer microscopic */
+.feature-copy p,
+.experiment-meta p,
+.case-meta dt,
+.case-meta dd,
+.reference-portal>div>p:first-child,
+.reference-card>span:first-child,
+.note-destination,
+.about-grid span,
+.case-facts span,
+.book-author,
+.book-detail>a,
+.quote-attribution,
+.quote-expand summary,
+.section-heading>a,
+.collection-intro>a,
+.related-paths,
+.back-link,
+.sidebar-footer,
+.sidebar-status,
+.sidebar-socials a,
+.listen-link,
+.project-detail-band span,
+.archive-row>span,
+.note-row>span,
+.practice-row>span,
+.travel-photo figcaption,
+.travel-lightbox .art-lightbox-meta h2{
+  font-size:var(--meta-size)!important;
+  line-height:var(--meta-line)!important;
+}
+
+/* Section labels */
+.eyebrow,
+.hero-kicker,
+.quotes-intro>span{
+  font-size:12px!important;
+  line-height:1.3!important;
+  letter-spacing:.14em!important;
+}
+
+/* Buttons and CTAs should read as interactive controls, not annotations */
+.experiment-launch,
+.pill-link,
+.back-link,
+.subscribe-trigger,
+.subscribe-modal form button{
+  font-size:13px!important;
+  line-height:1.2!important;
+}
+.experiment-launch,
+.pill-link{
+  padding:13px 18px!important;
+  min-height:42px!important;
+  align-items:center!important;
+}
+
+/* Filter/category controls stay consistent everywhere */
+.library-tabs button,
+.work-filters span,
+.archive-filters button{
+  min-height:40px!important;
+  padding:11px 18px!important;
+  font-size:12.5px!important;
+  line-height:1!important;
+}
+
+/* About: attributions and supporting copy */
+.quote-card figcaption{
+  margin-top:18px!important;
+  color:var(--muted)!important;
+}
+.about-grid p,
+.elsewhere-item p,
+.education-list p{
+  font-size:14.5px!important;
+}
+.about-copy>p{
+  font-size:16px!important;
+  line-height:1.55!important;
+}
+
+/* Experiment detail: stronger explanatory hierarchy */
+.experiment-detail-grid>div>p:last-child{
+  margin-top:16px!important;
+  max-width:42ch!important;
+}
+.experiment-detail-grid .eyebrow{
+  font-size:12px!important;
+}
+.experiment-detail-dek{
+  font-size:clamp(19px,1.65vw,25px)!important;
+  line-height:1.35!important;
+}
+
+/* Homepage/cards */
+.feature-copy p,
+.experiment-meta p{
+  font-size:12px!important;
+  line-height:1.4!important;
+}
+.feature-copy h3{
+  margin-bottom:11px!important;
+}
+.home-case>p{
+  font-size:14px!important;
+}
+
+/* Sidebar footer legibility */
+.sidebar-status,
+.sidebar-socials a,
+.listen-link{
+  font-size:12px!important;
+}
+.subscribe-trigger{
+  min-height:42px!important;
+}
+
+/* Mobile: keep readable rather than shrinking back down */
+@media(max-width:900px){
+  .brand-sub{margin-bottom:34px!important}
+  .case-row-desc,
+  .home-case>p,
+  .experiment-detail-grid>div>p:last-child,
+  .about-grid p,
+  .elsewhere-item p,
+  .education-list p{
+    font-size:14px!important;
+  }
+}
