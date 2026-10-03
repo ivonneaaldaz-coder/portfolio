@@ -3,14 +3,12 @@
 import { useState } from "react";
 
 const books = [
-  { category:"Art", className:"cover-a" },
-  { category:"Design", className:"cover-b" },
-  { category:"Essays", className:"cover-c" },
-  { category:"Place", className:"cover-d" },
-  { category:"Ideas", className:"cover-e" },
-  { category:"Fiction", className:"cover-f" },
-  { category:"Art", className:"cover-g" },
-  { category:"Design", className:"cover-h" },
+  { title:"The Alchemist", author:"Paulo Coelho", cover:"https://covers.openlibrary.org/isbn/9780061122415-L.jpg", href:"https://amzn.to/4sULp9V" },
+  { title:"The Four Agreements", author:"Don Miguel Ruiz", cover:"https://covers.openlibrary.org/isbn/9781878424310-L.jpg", href:"https://amzn.to/4s24lmx" },
+  { title:"The 48 Laws of Power", author:"Robert Greene", cover:"https://covers.openlibrary.org/isbn/9780140280197-L.jpg", href:"https://amzn.to/4sRdlLS" },
+  { title:"A New Earth", author:"Eckhart Tolle", cover:"https://covers.openlibrary.org/isbn/9780452289963-L.jpg", href:"https://amzn.to/4soqFHT" },
+  { title:"Atomic Habits", author:"James Clear", cover:"https://covers.openlibrary.org/isbn/9780735211292-L.jpg", href:"https://amzn.to/4bmYovk" },
+  { title:"The Daily Stoic", author:"Ryan Holiday", cover:"https://covers.openlibrary.org/isbn/9780735211735-L.jpg", href:"https://amzn.to/4t1TolQ" },
 ];
 
 const quotes = [
@@ -24,6 +22,7 @@ const quotes = [
 export default function LibraryWorld() {
   const [view,setView] = useState<"books"|"quotes">("books");
   const [selected,setSelected] = useState(0);
+  const activeBook = books[selected];
 
   return (
     <div className="library-experience">
@@ -38,20 +37,19 @@ export default function LibraryWorld() {
             {books.map((book,index)=>(
               <button
                 type="button"
-                className={"book-cover-tile " + book.className + (selected===index ? " active" : "")}
-                key={book.category + index}
+                className={"book-cover-tile real-cover" + (selected===index ? " active" : "")}
+                key={book.title}
                 onClick={()=>setSelected(index)}
-                aria-label={"Open " + book.category + " collection slot"}
+                aria-label={"Open " + book.title}
               >
-                <div className="book-cover-mark" aria-hidden="true" />
-                <small>{book.category}</small>
+                <img src={book.cover} alt="" />
               </button>
             ))}
           </div>
           <aside className="book-detail">
-            <h2>{books[selected].category}</h2>
-            <p>Book cover, title, author, your note, and a purchase link will live here once the collection is cataloged.</p>
-            <div className="book-detail-lines" aria-hidden="true"><i/><i/><i/></div>
+            <p className="book-author">{activeBook.author}</p>
+            <h2>{activeBook.title}</h2>
+            <a href={activeBook.href} target="_blank" rel="noreferrer">View book ↗︎</a>
           </aside>
         </div>
       ) : (
