@@ -1140,3 +1140,57 @@ a.public-row:hover{transform:translateX(4px)}
     margin-bottom:24px;
   }
 }
+
+
+/* Library + About final refinement */
+.library-collections .reference-portals{
+  margin-top:0;
+}
+.library-collections .reference-portal{
+  min-height:188px;
+  padding-top:14px;
+  padding-bottom:18px;
+  grid-template-columns:1fr 24px;
+  gap:18px;
+}
+.library-collections .reference-portal:nth-child(even){
+  padding-left:20px;
+}
+.library-collections .reference-portal>div{
+  align-self:end;
+}
+.library-writing-section{
+  padding-top:clamp(72px,7vw,104px);
+}
+.library-writing-section .section-heading{
+  margin-bottom:20px;
+}
+
+.about-hero{
+  align-items:center;
+}
+.about-copy h1{
+  font-size:clamp(40px,4.15vw,62px);
+  line-height:.96;
+  max-width:760px;
+  margin-bottom:22px;
+}
+.about-copy>p{
+  max-width:610px;
+  margin-bottom:26px;
+}
+.about-links{
+  margin-top:4px;
+}
+
+@media(max-width:900px){
+  .about-hero{align-items:start}
+  .library-collections .reference-portal,
+  .library-collections .reference-portal:nth-child(even){
+    min-height:165px;
+    padding:18px 0;
+  }
+  .library-writing-section{
+    padding-top:56px;
+  }
+}

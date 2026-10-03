@@ -10,7 +10,7 @@ const writing = [
 
 const references = [
   { title:"Books + Quotes", desc:"Books, essays, passages, and lines worth keeping.", href:"/books" },
-  { title:"Visual References", desc:"Moodboards, type, imagery, color, interiors, and saved references.", href:"/visual-references" },
+  { title:"Visual References", desc:"Moodboards, type, imagery, color, and saved references.", href:"/visual-references" },
   { title:"Places", desc:"Travel, architecture, landscapes, and memorable spaces.", href:"/travel" },
   { title:"Music", desc:"Playlists, records, and things worth listening to closely.", href:"/music" },
 ];
@@ -23,12 +23,10 @@ export default function LibraryPage() {
         <p>Writing, references, and collections of things worth keeping.</p>
       </div>
 
-      <section className="notes-section">
-        <div className="section-heading"><h2 className="section-title small-title">Collections</h2></div>
+      <section className="notes-section library-collections">
         <div className="reference-portals">
-          {references.map((item,index) => (
+          {references.map((item) => (
             <Link className="reference-portal" href={item.href} key={item.title}>
-              <span>{String(index+1).padStart(2,"0")}</span>
               <div><h3>{item.title}</h3><p>{item.desc}</p></div>
               <span>→</span>
             </Link>
@@ -37,7 +35,7 @@ export default function LibraryPage() {
       </section>
 
 
-      <section className="notes-section writing-section notes-first-section">
+      <section className="notes-section writing-section library-writing-section">
         <div className="section-heading"><h2 className="section-title small-title">Writing</h2></div>
         <div className="writing-list">
           {writing.map((item,index) => (

@@ -2,7 +2,7 @@ import Link from "next/link";
 
 const extras = [
   { n: "01", title: "Ventures", copy: "Whitespace · Make Space · Good World Living" },
-  { n: "02", title: "Civic + cultural", copy: "San Antonio Arts Commission — Centro de Artes Committee · Witte Museum · San Antonio Art League Museum" },
+  { n: "02", title: "Community", copy: "San Antonio Arts Commission — Centro de Artes Committee · Witte Museum · San Antonio Art League Museum" },
   { n: "03", title: "Languages", copy: "English · Spanish · some French" },
   { n: "04", title: "Practice", copy: "Certified yoga + meditation teacher · guitar · learning piano" },
 ];
@@ -22,9 +22,8 @@ export default function AboutPage() {
       <div className="about-hero">
         <div className="portrait-placeholder"><span>PORTRAIT</span></div>
         <div className="about-copy">
-          <h1>I’m a strategist, artist, builder, and educator.</h1>
-          <p>My work moves between brand strategy, technology, systems, and visual art. I’m interested in how ideas become useful systems, compelling identities, experiences, and physical objects.</p>
-          <p>I work with companies through Whitespace, build independent digital experiments, teach marketing and entrepreneurship, and maintain an active art practice.</p>
+          <h1>Strategist, artist, builder, educator.</h1>
+          <p>My work moves between brand strategy, technology, systems, and visual art — from building digital tools and brand worlds to teaching, making, and independent experiments.</p>
           <div className="about-links">
             <Link href="/work">Selected work ↗︎</Link>
             <Link href="/art">Art practice ↗︎</Link>
@@ -37,7 +36,7 @@ export default function AboutPage() {
       <div className="about-grid">
         <div><span>01</span><h2>Strategy</h2><p>Positioning, insight, brand, growth.</p></div>
         <div><span>02</span><h2>Systems</h2><p>AI, automation, tools, digital products.</p></div>
-        <div><span>03</span><h2>Art</h2><p>Painting, ceramics, photography, installation.</p></div>
+        <div><span>03</span><h2>Art</h2><p>Painting, ceramics, photography, design.</p></div>
         <div><span>04</span><h2>Teaching</h2><p>Marketing, entrepreneurship, workshops.</p></div>
       </div>
 
