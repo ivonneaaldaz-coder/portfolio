@@ -38,9 +38,8 @@ export default function LibraryPage() {
       <section className="notes-section writing-section library-writing-section">
         <div className="section-heading"><h2 className="section-title small-title">Writing</h2></div>
         <div className="writing-list">
-          {writing.map((item,index) => (
+          {writing.map((item) => (
             <a className="writing-row" href={item.href} target="_blank" rel="noreferrer" key={item.title}>
-              <span>{String(index+1).padStart(2,"0")}</span>
               <h3>{item.title}</h3>
               <p>{item.source} · {item.year}</p>
               <span>↗︎</span>

@@ -22,15 +22,15 @@ export default function Sidebar() {
         <p className="brand-sub">Strategist / Artist / Builder</p>
 
         <nav className="sidebar-nav" aria-label="Primary">
-          {links.map((link, index) => {
+          {links.map((link) => {
             const active = !link.external && (link.href === "/" ? pathname === "/" : pathname.startsWith(link.href));
             return link.external ? (
               <a key={link.label} href={link.href} target="_blank" rel="noreferrer">
-                <span>{String(index + 1).padStart(2, "0")}</span>{link.label}
+                {link.label}
               </a>
             ) : (
               <Link key={link.label} href={link.href} className={active ? "active" : ""}>
-                <span>{String(index + 1).padStart(2, "0")}</span>{link.label}
+                {link.label}
               </Link>
             );
           })}

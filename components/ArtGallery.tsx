@@ -47,7 +47,6 @@ export default function ArtGallery({ works }: { works: ArtWork[] }) {
               <img src={work.image} alt={work.title} loading={index < 3 ? "eager" : "lazy"} />
             </button>
             <figcaption>
-              <span>{String(index + 1).padStart(2, "0")}</span>
               <div>
                 <h2>{work.title}</h2>
                 <p>{work.meta}</p>
@@ -65,7 +64,6 @@ export default function ArtGallery({ works }: { works: ArtWork[] }) {
           <div className="art-lightbox-stage">
             <img src={works[active].image} alt={works[active].title} />
             <div className="art-lightbox-meta">
-              <span>{String(active + 1).padStart(2, "0")} / {String(works.length).padStart(2, "0")}</span>
               <div>
                 <h2>{works[active].title}</h2>
                 <p>{works[active].meta}</p>

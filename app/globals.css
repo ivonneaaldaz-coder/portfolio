@@ -1194,3 +1194,116 @@ a.public-row:hover{transform:translateX(4px)}
     padding-top:56px;
   }
 }
+
+
+/* Numberless editorial system */
+.sidebar-nav a{display:block;padding:9px 12px}
+.sidebar-nav span{display:none}
+
+.home-case{
+  grid-template-columns:minmax(0,1fr) minmax(240px,.8fr) 24px;
+}
+.practice-row{
+  grid-template-columns:minmax(0,1fr) minmax(180px,.85fr) 24px;
+}
+.practice-row>div{min-width:0}
+.practice-row>span:last-child,
+.home-case>span:last-child,
+.case-arrow{justify-self:end;align-self:start}
+
+.case-row{
+  grid-template-columns:minmax(0,1fr) 24px;
+  align-items:start;
+}
+.case-row>div{min-width:0}
+.case-row>div>p{
+  color:var(--muted);
+  margin:8px 0 0;
+  max-width:50ch;
+}
+
+.experiment-meta{
+  grid-template-columns:1fr;
+}
+
+.about-grid>div,
+.elsewhere-item,
+.education-list>div{
+  position:relative;
+}
+.about-grid span,
+.elsewhere-item>span,
+.education-list span,
+.brand-name>span,
+.quote-card>span,
+.feature-num,
+.home-case-num{
+  display:none!important;
+}
+
+.education-list>div{
+  grid-template-columns:minmax(180px,.75fr) 1fr;
+}
+.brand-name{
+  padding-left:0!important;
+}
+
+.public-row{
+  grid-template-columns:70px minmax(160px,.5fr) minmax(280px,1.2fr) 24px;
+}
+.visual-tile>span{display:none}
+.art-shop-item figcaption{grid-template-columns:1fr}
+.travel-photo figcaption{padding-left:0}
+
+@media(max-width:900px){
+  .home-case,
+  .practice-row,
+  .case-row{
+    grid-template-columns:minmax(0,1fr) 24px;
+    gap:14px;
+    align-items:start;
+  }
+  .home-case>div,
+  .practice-row>div,
+  .case-row>div{
+    grid-column:1;
+  }
+  .home-case>p,
+  .practice-row>p,
+  .case-row>p{
+    grid-column:1;
+    margin-top:8px;
+  }
+  .home-case>span:last-child,
+  .practice-row>span:last-child,
+  .case-row>span:last-child,
+  .case-arrow{
+    grid-column:2;
+    grid-row:1;
+    justify-self:end;
+    align-self:start;
+  }
+  .practice-row{padding-left:0}
+  .public-row{grid-template-columns:52px 1fr 24px}
+  .public-row p{grid-column:2}
+  .public-row h3{grid-column:2}
+}
+
+@media(max-width:560px){
+  .home-case,
+  .practice-row,
+  .case-row{
+    padding-left:0;
+    padding-right:0;
+  }
+  .home-case h3,
+  .practice-row h3,
+  .case-row h2{
+    margin-top:0;
+  }
+  .education-list>div{
+    grid-template-columns:1fr;
+  }
+  .education-list p{grid-column:1}
+  .public-row{grid-template-columns:42px 1fr 20px}
+}

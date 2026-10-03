@@ -38,7 +38,6 @@ export default function VisualReferencesPage() {
       <div className="visual-masonry">
         {visible.map((item,index) => (
           <article className={"visual-tile " + item.size + " visual-tone-" + (index%6)} key={item.title}>
-            <span>{String(index+1).padStart(2,"0")}</span>
             <div><h2>{item.title}</h2><p>{item.desc}</p></div>
           </article>
         ))}

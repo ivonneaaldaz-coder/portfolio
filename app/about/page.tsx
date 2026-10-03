@@ -1,10 +1,10 @@
 import Link from "next/link";
 
 const extras = [
-  { n: "01", title: "Ventures", copy: "Whitespace · Make Space · Good World Living" },
-  { n: "02", title: "Community", copy: "San Antonio Arts Commission — Centro de Artes Committee · Witte Museum · San Antonio Art League Museum" },
-  { n: "03", title: "Languages", copy: "English · Spanish · some French" },
-  { n: "04", title: "Practice", copy: "Certified yoga + meditation teacher · guitar · learning piano" },
+  { title: "Ventures", copy: "Whitespace · Make Space · Good World Living" },
+  { title: "Community", copy: "San Antonio Arts Commission — Centro de Artes Committee · Witte Museum · San Antonio Art League Museum" },
+  { title: "Languages", copy: "English · Spanish · some French" },
+  { title: "Practice", copy: "Certified yoga + meditation teacher · guitar · learning piano" },
 ];
 
 const brands = [
@@ -34,21 +34,21 @@ export default function AboutPage() {
       </div>
 
       <div className="about-grid">
-        <div><span>01</span><h2>Strategy</h2><p>Positioning, insight, brand, growth.</p></div>
-        <div><span>02</span><h2>Systems</h2><p>AI, automation, tools, digital products.</p></div>
-        <div><span>03</span><h2>Art</h2><p>Painting, ceramics, photography, design.</p></div>
-        <div><span>04</span><h2>Teaching</h2><p>Marketing, entrepreneurship, workshops.</p></div>
+        <div><h2>Strategy</h2><p>Positioning, insight, brand, growth.</p></div>
+        <div><h2>Systems</h2><p>AI, automation, tools, digital products.</p></div>
+        <div><h2>Art</h2><p>Painting, ceramics, photography, design.</p></div>
+        <div><h2>Teaching</h2><p>Marketing, entrepreneurship, workshops.</p></div>
       </div>
 
       <section className="about-section">
         <div className="section-heading"><h2 className="section-title small-title">Selected brands</h2></div>
         <div className="brand-wall">
-          {visibleBrands.map((brand,index)=><div className="brand-name" key={brand}><span>{String(index+1).padStart(2,"0")}</span><strong>{brand}</strong></div>)}
+          {visibleBrands.map((brand)=><div className="brand-name" key={brand}><strong>{brand}</strong></div>)}
         </div>
         <details className="brand-more">
           <summary>More brands + collaborations</summary>
           <div className="brand-wall brand-wall-more">
-            {moreBrands.map((brand,index)=><div className="brand-name" key={brand}><span>{String(index+17).padStart(2,"0")}</span><strong>{brand}</strong></div>)}
+            {moreBrands.map((brand)=><div className="brand-name" key={brand}><strong>{brand}</strong></div>)}
           </div>
         </details>
       </section>
@@ -56,25 +56,25 @@ export default function AboutPage() {
       <section className="about-section">
         <div className="section-heading"><h2 className="section-title small-title">Kind words</h2></div>
         <div className="quote-grid">
-          <figure className="quote-card"><span>01</span><blockquote>“A rare find. Deeply data-driven, deeply human.”</blockquote><figcaption>— Senior executive</figcaption></figure>
-          <figure className="quote-card"><span>02</span><blockquote>“Everyone keeps saying what a great job you’re doing and how happy the clients are.”</blockquote><figcaption>— Former manager</figcaption></figure>
-          <figure className="quote-card"><span>03</span><blockquote>“Why are we even talking about it? Just hire her.”</blockquote><figcaption>— Former colleague</figcaption></figure>
+          <figure className="quote-card"><blockquote>“A rare find. Deeply data-driven, deeply human.”</blockquote><figcaption>— Senior executive</figcaption></figure>
+          <figure className="quote-card"><blockquote>“Everyone keeps saying what a great job you’re doing and how happy the clients are.”</blockquote><figcaption>— Former manager</figcaption></figure>
+          <figure className="quote-card"><blockquote>“Why are we even talking about it? Just hire her.”</blockquote><figcaption>— Former colleague</figcaption></figure>
         </div>
       </section>
 
       <section className="about-section">
         <div className="section-heading"><h2 className="section-title small-title">A few more things</h2></div>
         <div className="elsewhere-grid">
-          {extras.map(item=><div className="elsewhere-item" key={item.n}><span>{item.n}</span><h3>{item.title}</h3><p>{item.copy}</p></div>)}
+          {extras.map(item=><div className="elsewhere-item" key={item.title}><h3>{item.title}</h3><p>{item.copy}</p></div>)}
         </div>
       </section>
 
       <section className="about-section education-section">
         <div className="section-heading"><h2 className="section-title small-title">Education</h2></div>
         <div className="education-list">
-          <div><span>01</span><h3>MBA</h3><p>St. Mary’s University</p></div>
-          <div><span>02</span><h3>MA, International Business + Economics</h3><p>FH Schmalkalden University of Applied Sciences · thesis pending</p></div>
-          <div><span>03</span><h3>BA, Forensic Science</h3><p>St. Mary’s University</p></div>
+          <div><h3>MBA</h3><p>St. Mary’s University</p></div>
+          <div><h3>MA, International Business + Economics</h3><p>FH Schmalkalden University of Applied Sciences · thesis pending</p></div>
+          <div><h3>BA, Forensic Science</h3><p>St. Mary’s University</p></div>
         </div>
       </section>
 

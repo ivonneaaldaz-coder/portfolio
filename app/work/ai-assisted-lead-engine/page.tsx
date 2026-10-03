@@ -41,9 +41,9 @@ export default function AIAssistedLeadEnginePage() {
         </div>
 
         <div className="case-facts">
-          <div><span>01</span><h3>Low-friction intake</h3><p>The workflow works with existing email behavior instead of demanding a new tool first.</p></div>
-          <div><span>02</span><h3>Structured automatically</h3><p>Unstructured information becomes consistent fields that can be filtered and acted on.</p></div>
-          <div><span>03</span><h3>Human review retained</h3><p>AI supports extraction and prioritization while final judgment stays with the team.</p></div>
+          <div><h3>Low-friction intake</h3><p>The workflow works with existing email behavior instead of demanding a new tool first.</p></div>
+          <div><h3>Structured automatically</h3><p>Unstructured information becomes consistent fields that can be filtered and acted on.</p></div>
+          <div><h3>Human review retained</h3><p>AI supports extraction and prioritization while final judgment stays with the team.</p></div>
         </div>
 
         <div className="case-copy">

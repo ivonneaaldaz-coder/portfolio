@@ -45,7 +45,7 @@ export default function TravelGallery({ photographs }: { photographs: TravelPhot
             <button className="travel-photo-button" type="button" onClick={() => setActive(index)} aria-label={"Open photo from " + photo.place}>
               <img src={photo.image} alt={photo.place} loading={index < 3 ? "eager" : "lazy"} />
             </button>
-            <figcaption><span>{String(index + 1).padStart(2, "0")}</span>{photo.place}</figcaption>
+            <figcaption>{photo.place}</figcaption>
           </figure>
         ))}
       </div>
@@ -58,7 +58,6 @@ export default function TravelGallery({ photographs }: { photographs: TravelPhot
           <div className="art-lightbox-stage">
             <img src={photographs[active].image} alt={photographs[active].place} />
             <div className="art-lightbox-meta">
-              <span>{String(active + 1).padStart(2, "0")} / {String(photographs.length).padStart(2, "0")}</span>
               <div>
                 <h2>{photographs[active].place}</h2>
               </div>

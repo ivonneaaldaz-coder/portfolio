@@ -41,9 +41,9 @@ export default function BrandDigitalRepositioningPage() {
         </div>
 
         <div className="case-facts">
-          <div><span>01</span><h3>Sharper hierarchy</h3><p>Clarified what mattered most and reduced competing messages.</p></div>
-          <div><span>02</span><h3>Connected assets</h3><p>Website, sales collateral, and campaigns worked as one system rather than isolated deliverables.</p></div>
-          <div><span>03</span><h3>Execution included</h3><p>Strategy moved directly into copy, campaign structure, and launch-ready materials.</p></div>
+          <div><h3>Sharper hierarchy</h3><p>Clarified what mattered most and reduced competing messages.</p></div>
+          <div><h3>Connected assets</h3><p>Website, sales collateral, and campaigns worked as one system rather than isolated deliverables.</p></div>
+          <div><h3>Execution included</h3><p>Strategy moved directly into copy, campaign structure, and launch-ready materials.</p></div>
         </div>
 
         <div className="case-copy">

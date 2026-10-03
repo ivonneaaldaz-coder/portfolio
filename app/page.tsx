@@ -1,23 +1,23 @@
 import Link from "next/link";
 
 const features = [
-  { n: "01", title: "The Lab", meta: "Ideas / Systems / Experiments", className: "feature feature-lab", href: "https://lab.ivonnealdaz.com", external: true },
-  { n: "02", title: "Whitespace", meta: "Strategy / Brand / AI", className: "feature", href: "https://www.bywhitespace.com/", external: true },
-  { n: "03", title: "Art Practice", meta: "Painting / Ceramics / Installation", className: "feature", href: "/art" },
-  { n: "04", title: "Good World Living", meta: "Experiences / Places / Living", className: "feature", href: "https://www.goodworldliving.com/", external: true },
-  { n: "05", title: "Travel", meta: "Photography / Notes / Places", className: "feature", href: "/travel" },
+  { title: "The Lab", meta: "Ideas / Systems / Experiments", className: "feature feature-lab", href: "https://lab.ivonnealdaz.com", external: true },
+  { title: "Whitespace", meta: "Strategy / Brand / AI", className: "feature", href: "https://www.bywhitespace.com/", external: true },
+  { title: "Art Practice", meta: "Painting / Ceramics / Installation", className: "feature", href: "/art" },
+  { title: "Good World Living", meta: "Experiences / Places / Living", className: "feature", href: "https://www.goodworldliving.com/", external: true },
+  { title: "Travel", meta: "Photography / Notes / Places", className: "feature", href: "/travel" },
 ];
 
 const studies = [
-  ["01", "Relationship Operating System", "Systems + CRM", "A system for turning fragmented contacts and follow-ups into an actionable relationship pipeline.", "/work/relationship-operating-system"],
-  ["02", "Brand + Digital Repositioning", "Brand + Digital", "Connecting positioning, message, experience, and execution into one clearer system.", "/work/brand-digital-repositioning"],
-  ["03", "AI-Assisted Lead Engine", "AI + Automation", "Turning messy inbound information into structured records, priorities, and next actions.", "/work/ai-assisted-lead-engine"],
+  ["Relationship Operating System", "Systems + CRM", "A system for turning fragmented contacts and follow-ups into an actionable relationship pipeline.", "/work/relationship-operating-system"],
+  ["Brand + Digital Repositioning", "Brand + Digital", "Connecting positioning, message, experience, and execution into one clearer system.", "/work/brand-digital-repositioning"],
+  ["AI-Assisted Lead Engine", "AI + Automation", "Turning messy inbound information into structured records, priorities, and next actions.", "/work/ai-assisted-lead-engine"],
 ];
 
 const experiments = [
-  ["01", "Ask Eve", "Conversational CV", "/experiments/ask-eve"],
-  ["02", "Chatroom", "Public internet experiment", "/experiments/chatroom"],
-  ["03", "Snake", "Game + global leaderboard", "/experiments/snake"],
+  ["Ask Eve", "Conversational CV", "/experiments/ask-eve"],
+  ["Chatroom", "Public internet experiment", "/experiments/chatroom"],
+  ["Snake", "Game + global leaderboard", "/experiments/snake"],
 ];
 
 export default function Home() {
@@ -57,14 +57,14 @@ export default function Home() {
                   ) : <div className={"image-placeholder image-" + index} />}
                 </div>
                 <div className="feature-copy">
-                  <div><span className="feature-num">{item.n}</span><h3>{item.title}</h3><p>{item.meta}</p></div>
+                  <div><h3>{item.title}</h3><p>{item.meta}</p></div>
                   <span className="circle-arrow">→</span>
                 </div>
               </>
             );
 
             return item.external ? (
-              <a className={item.className} key={item.n} href={item.href} target="_blank" rel="noreferrer">{content}</a>
+              <a className={item.className} key={item.title} href={item.href} target="_blank" rel="noreferrer">{content}</a>
             ) : (
               <Link className={item.className} key={item.n} href={item.href}>{content}</Link>
             );
@@ -75,12 +75,11 @@ export default function Home() {
       <section className="home-cases section-pad">
         <div className="section-heading">
           <h2 className="section-title small-title">Selected Case Studies</h2>
-          <Link href="/work">View all case studies ↗︎</Link>
+          <Link href="/work">View all ↗︎</Link>
         </div>
         <div className="home-case-list">
-          {studies.map(([n,title,tag,desc,href]) => (
-            <Link className="home-case" href={href} key={n}>
-              <span className="home-case-num">{n}</span>
+          {studies.map(([title,tag,desc,href]) => (
+            <Link className="home-case" href={href} key={title}>
               <div><h3>{title}</h3></div>
               <p>{desc}</p><span>↗︎</span>
             </Link>
@@ -91,10 +90,10 @@ export default function Home() {
       <section className="experiments section-pad">
         <div className="section-heading">
           <h2 className="section-title small-title">Experiments</h2>
-          <Link href="/work#experiments">View all experiments ↗︎</Link>
+          <Link href="/work#experiments">View all ↗︎</Link>
         </div>
         <div className="experiment-grid experiment-grid-three">
-          {experiments.map(([n,title,meta,href], index) => (
+          {experiments.map(([title,meta,href], index) => (
             <Link className="experiment-card experiment-link" href={href} key={title}>
               <div className={"experiment-thumb exp-" + index}>
                 {index === 0 && <span>ask eve</span>}
@@ -102,7 +101,7 @@ export default function Home() {
                 {index === 2 && <span className="snake-mini">SNAKE.exe<br/>↑ ↓ ← →</span>}
               </div>
               <div className="experiment-meta">
-                <span>{n}</span><div><h3>{title}</h3><p>{meta}</p></div>
+                <div><h3>{title}</h3><p>{meta}</p></div>
               </div>
             </Link>
           ))}

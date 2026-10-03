@@ -41,9 +41,9 @@ export default function RelationshipOperatingSystemPage() {
         </div>
 
         <div className="case-facts">
-          <div><span>01</span><h3>One source of truth</h3><p>Contacts, categories, status, last touch, and next steps in a shared system.</p></div>
-          <div><span>02</span><h3>Action over storage</h3><p>Views and summaries were designed around what the team should do next.</p></div>
-          <div><span>03</span><h3>AI where useful</h3><p>Automation supported triage and summaries instead of becoming the product itself.</p></div>
+          <div><h3>One source of truth</h3><p>Contacts, categories, status, last touch, and next steps in a shared system.</p></div>
+          <div><h3>Action over storage</h3><p>Views and summaries were designed around what the team should do next.</p></div>
+          <div><h3>AI where useful</h3><p>Automation supported triage and summaries instead of becoming the product itself.</p></div>
         </div>
 
         <div className="case-copy">

@@ -32,8 +32,8 @@ export default function SpeakingPage() {
       <section className="public-section">
         <div className="section-heading"><h2 className="section-title small-title">Selected talks</h2></div>
         <div className="public-list">
-          {talks.map((item,index) => {
-            const body=<><span>{String(index+1).padStart(2,"0")}</span><span>{item.year}</span><p>{item.org}</p><h3>{item.title}</h3><span>{item.href ? "↗︎" : "—"}</span></>;
+          {talks.map((item) => {
+            const body=<><span>{item.year}</span><p>{item.org}</p><h3>{item.title}</h3><span>{item.href ? "↗︎" : "—"}</span></>;
             return item.href ? <a className="public-row" href={item.href} target="_blank" rel="noreferrer" key={item.org+item.title}>{body}</a> : <div className="public-row" key={item.org+item.title}>{body}</div>;
           })}
         </div>
@@ -42,9 +42,9 @@ export default function SpeakingPage() {
       <section className="public-section">
         <div className="section-heading"><h2 className="section-title small-title">Press + podcasts</h2></div>
         <div className="public-list">
-          {press.map((item,index) => (
+          {press.map((item) => (
             <a className="public-row" href={item.href} target="_blank" rel="noreferrer" key={item.org+item.title}>
-              <span>{String(index+1).padStart(2,"0")}</span><span>{item.year}</span><p>{item.org}</p><h3>{item.title}</h3><span>↗︎</span>
+              <span>{item.year}</span><p>{item.org}</p><h3>{item.title}</h3><span>↗︎</span>
             </a>
           ))}
         </div>

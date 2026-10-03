@@ -1,9 +1,9 @@
 import Link from "next/link";
 
 const studies = [
-  { n:"01", title:"Relationship Operating System", desc:"A centralized relationship system that turns scattered contacts, introductions, and follow-ups into an actionable pipeline.", href:"/work/relationship-operating-system" },
-  { n:"02", title:"Brand + Digital Repositioning", desc:"A clearer positioning and digital experience designed to connect message, customer journey, and conversion.", href:"/work/brand-digital-repositioning" },
-  { n:"03", title:"AI-Assisted Lead Engine", desc:"A lightweight automation system for capturing inbound leads, structuring information, and surfacing next actions.", href:"/work/ai-assisted-lead-engine" },
+  { title:"Relationship Operating System", desc:"A centralized relationship system that turns scattered contacts, introductions, and follow-ups into an actionable pipeline.", href:"/work/relationship-operating-system" },
+  { title:"Brand + Digital Repositioning", desc:"A clearer positioning and digital experience designed to connect message, customer journey, and conversion.", href:"/work/brand-digital-repositioning" },
+  { title:"AI-Assisted Lead Engine", desc:"A lightweight automation system for capturing inbound leads, structuring information, and surfacing next actions.", href:"/work/ai-assisted-lead-engine" },
 ];
 
 const projects = [
@@ -32,9 +32,8 @@ export default function WorkPage() {
         <div className="section-heading"><h2 className="section-title small-title">Case Studies</h2></div>
         <div className="case-list">
           {studies.map((study) => (
-            <Link className="case-row" href={study.href} key={study.n}>
-              <span>{study.n}</span><div><h2>{study.title}</h2></div>
-              <p>{study.desc}</p><span className="case-arrow">↗︎</span>
+            <Link className="case-row" href={study.href} key={study.title}>
+              <div><h2>{study.title}</h2><p>{study.desc}</p></div><span className="case-arrow">↗︎</span>
             </Link>
           ))}
         </div>
@@ -43,14 +42,14 @@ export default function WorkPage() {
       <section className="work-section work-practice">
         <div className="section-heading"><h2 className="section-title small-title">Projects</h2></div>
         <div className="practice-index">
-          {projects.map(([title,meta,href,external],index) =>
+          {projects.map(([title,meta,href,external]) =>
             external ? (
               <a className="practice-row" href={(href as string).trim()} target="_blank" rel="noreferrer" key={title as string}>
-                <span>{String(index+1).padStart(2,"0")}</span><h3>{title}</h3><p>{meta}</p><span>↗︎</span>
+                <div><h3>{title}</h3><p>{meta}</p></div><span>↗︎</span>
               </a>
             ) : (
               <Link className="practice-row" href={href as string} key={title as string}>
-                <span>{String(index+1).padStart(2,"0")}</span><h3>{title}</h3><p>{meta}</p><span>→</span>
+                <div><h3>{title}</h3><p>{meta}</p></div><span>→</span>
               </Link>
             )
           )}
@@ -63,9 +62,9 @@ export default function WorkPage() {
           <div><h3>The Lab</h3><p>A digital playground for things I build, test, and put on the internet.</p></div><span>Enter the Lab ↗︎</span>
         </a>
         <div className="practice-index">
-          {experiments.map(([title,meta,href],index) => (
+          {experiments.map(([title,meta,href]) => (
             <Link className="practice-row" href={href} key={title}>
-              <span>{String(index+1).padStart(2,"0")}</span><h3>{title}</h3><p>{meta}</p><span>→</span>
+              <div><h3>{title}</h3><p>{meta}</p></div><span>→</span>
             </Link>
           ))}
         </div>

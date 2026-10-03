@@ -22,9 +22,9 @@ export default function MusicPage() {
           <a href="https://open.spotify.com/user/ivonnealdaz" target="_blank" rel="noreferrer">Spotify profile ↗︎</a>
         </div>
         <div className="playlist-grid">
-          {playlists.map((item,index) => (
+          {playlists.map((item) => (
             <a className="playlist-card" href="https://open.spotify.com/user/ivonnealdaz" target="_blank" rel="noreferrer" key={item.title}>
-              <div className={"playlist-cover " + item.className}><span>{String(index+1).padStart(2,"0")}</span></div>
+              <div className={"playlist-cover " + item.className}></div>
               <h3>{item.title}</h3>
               <p>{item.note}</p>
             </a>
@@ -42,9 +42,9 @@ export default function MusicPage() {
           <h2 className="section-title small-title">Record shelf</h2>
         </div>
         <div className="record-shelf">
-          <div className="record record-1"><span>01</span></div>
-          <div className="record record-2"><span>02</span></div>
-          <div className="record record-3"><span>03</span></div>
+          <div className="record record-1"></div>
+          <div className="record record-2"></div>
+          <div className="record record-3"></div>
           <div className="record-note"><p>Records I love, short notes, and vinyl links will live here as the shelf grows.</p></div>
         </div>
       </section>
