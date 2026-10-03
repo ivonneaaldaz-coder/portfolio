@@ -1325,3 +1325,36 @@ a.public-row:hover{transform:translateX(4px)}
     margin-bottom:2px;
   }
 }
+
+
+/* About: fully numberless spacing */
+.about-grid h2{
+  margin-top:4px;
+}
+.quote-card blockquote,
+.quote-card:first-child blockquote,
+.quote-card:nth-child(n+2) blockquote{
+  margin-top:18px;
+}
+.elsewhere-item h3{
+  margin-top:8px;
+}
+.education-list>div{
+  align-items:start;
+}
+.education-list h3{
+  margin-top:0;
+}
+.brand-name{
+  justify-content:center;
+}
+@media(max-width:900px){
+  .quote-card blockquote,
+  .quote-card:first-child blockquote,
+  .quote-card:nth-child(n+2) blockquote{
+    margin-top:10px;
+  }
+  .elsewhere-item h3{
+    margin-top:0;
+  }
+}
