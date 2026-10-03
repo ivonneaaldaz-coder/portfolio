@@ -1307,3 +1307,21 @@ a.public-row:hover{transform:translateX(4px)}
   .education-list p{grid-column:1}
   .public-row{grid-template-columns:42px 1fr 20px}
 }
+
+
+/* Collection card arrow alignment */
+.reference-portal>span:last-child{
+  justify-self:end;
+  align-self:end;
+  margin-bottom:2px;
+}
+@media(max-width:900px){
+  .reference-portal{
+    align-items:stretch;
+  }
+  .reference-portal>span:last-child{
+    align-self:end;
+    justify-self:end;
+    margin-bottom:2px;
+  }
+}
