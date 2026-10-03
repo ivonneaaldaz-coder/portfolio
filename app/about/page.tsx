@@ -45,7 +45,7 @@ export default function AboutPage() {
           <div className="about-links">
             <Link href="/work">Selected work ↗︎</Link>
             <Link href="/art">Art practice ↗︎</Link>
-            <a href="https://lab.ivonnealdaz.com" target="_blank" rel="noreferrer">The Lab ↗︎</a>
+            <a href="https://lab.ivonnealdaz.com" target="_blank" rel="noreferrer">The Lab ↗︎</a>\n            <Link href="/speaking">Speaking + press ↗︎</Link>
           </div>
         </div>
       </div>

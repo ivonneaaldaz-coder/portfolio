@@ -9,10 +9,10 @@ const writing = [
 ];
 
 const references = [
-  { title:"Books / essays", desc:"Writing worth returning to." },
-  { title:"Visual references", desc:"Moodboards, type, imagery, color, and visual references." },
-  { title:"Places", desc:"Travel, architecture, landscapes, and memorable spaces.", href:"/travel" },
-  { title:"Quotes", desc:"Lines worth keeping." },
+  { title:"Library", desc:"Books, essays, passages, and a growing commonplace.", href:"/library", meta:"Books + commonplace" },
+  { title:"Visual Index", desc:"Moodboards, type, imagery, color, interiors, and saved references.", href:"/visual-index", meta:"A visual collection" },
+  { title:"Places", desc:"Travel, architecture, landscapes, and memorable spaces.", href:"/travel", meta:"Photography + notes" },
+  { title:"Music", desc:"Playlists, records, and things worth listening to closely.", href:"/music", meta:"Playlists + records" },
 ];
 
 export default function NotesPage() {
@@ -39,19 +39,18 @@ export default function NotesPage() {
 
       <section className="notes-section">
         <div className="section-heading"><h2 className="section-title small-title">References</h2></div>
-        <div className="reference-grid reference-grid-four">
-          {references.map((item,index) =>
-            item.href ? (
-              <Link className="reference-card reference-card-link" href={item.href} key={item.title}>
-                <span>{String(index+1).padStart(2,"0")}</span>
-                <div><h3>{item.title}</h3><p>{item.desc}</p></div><span className="reference-arrow">→</span>
-              </Link>
-            ) : (
-              <div className="reference-card" key={item.title}>
-                <span>{String(index+1).padStart(2,"0")}</span><div><h3>{item.title}</h3><p>{item.desc}</p></div>
+        <div className="reference-portals">
+          {references.map((item,index) => (
+            <Link className="reference-portal" href={item.href} key={item.title}>
+              <span>{String(index+1).padStart(2,"0")}</span>
+              <div>
+                <p>{item.meta}</p>
+                <h3>{item.title}</h3>
+                <p>{item.desc}</p>
               </div>
-            )
-          )}
+              <span>→</span>
+            </Link>
+          ))}
         </div>
       </section>
     </section>
