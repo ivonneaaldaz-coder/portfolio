@@ -3,9 +3,10 @@
 import { useEffect, useState } from "react";
 
 export type GenerativeItem = {
+  id: string;
   name: string;
   type: "image" | "video";
-  src: string;
+  image: string;
 };
 
 export default function GenerativeGallery({ items }: { items: GenerativeItem[] }) {
@@ -26,32 +27,52 @@ export default function GenerativeGallery({ items }: { items: GenerativeItem[] }
     };
   },[active,items.length]);
 
+  const previous = () => {
+    if (active === null) return;
+    setActive((active - 1 + items.length) % items.length);
+  };
+
+  const next = () => {
+    if (active === null) return;
+    setActive((active + 1) % items.length);
+  };
+
   return (
     <>
-      <div className="gen-gallery section-pad">
+      <div className="travel-grid section-pad gen-travel-grid">
         {items.map((item,index) => (
-          <button className="gen-card" type="button" key={item.name} onClick={()=>setActive(index)} aria-label={"Open " + item.name}>
-            {item.type === "video" ? (
-              <video src={item.src} autoPlay muted loop playsInline preload="metadata" />
-            ) : (
-              <img src={item.src} alt="" loading={index < 4 ? "eager" : "lazy"} />
-            )}
-          </button>
+          <figure className="travel-photo gen-photo" key={item.id}>
+            <button
+              className="travel-photo-button gen-photo-button"
+              type="button"
+              onClick={() => setActive(index)}
+              aria-label={"Open " + item.name}
+            >
+              <img src={item.image} alt="" loading={index < 3 ? "eager" : "lazy"} />
+              {item.type === "video" ? <span className="motion-badge">Motion</span> : null}
+            </button>
+          </figure>
         ))}
       </div>
 
       {active !== null && items[active] ? (
         <div className="art-lightbox gen-lightbox" role="dialog" aria-modal="true" aria-label={items[active].name}>
-          <button className="art-lightbox-close" type="button" onClick={()=>setActive(null)} aria-label="Close viewer">×</button>
-          <button className="art-lightbox-prev" type="button" onClick={()=>setActive((active - 1 + items.length) % items.length)} aria-label="Previous">←</button>
+          <button className="art-lightbox-close" type="button" onClick={() => setActive(null)} aria-label="Close viewer">×</button>
+          <button className="art-lightbox-prev" type="button" onClick={previous} aria-label="Previous">←</button>
           <div className="art-lightbox-stage">
             {items[active].type === "video" ? (
-              <video src={items[active].src} autoPlay muted loop playsInline controls />
+              <iframe
+                className="gen-drive-player"
+                src={"https://drive.google.com/file/d/" + items[active].id + "/preview"}
+                allow="autoplay; fullscreen"
+                allowFullScreen
+                title={items[active].name}
+              />
             ) : (
-              <img src={items[active].src} alt="" />
+              <img src={items[active].image} alt="" />
             )}
           </div>
-          <button className="art-lightbox-next" type="button" onClick={()=>setActive((active + 1) % items.length)} aria-label="Next">→</button>
+          <button className="art-lightbox-next" type="button" onClick={next} aria-label="Next">→</button>
         </div>
       ) : null}
     </>

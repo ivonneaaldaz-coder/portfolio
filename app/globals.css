@@ -2312,3 +2312,153 @@ a.public-row:hover{transform:translateX(4px)}
 @media(max-width:560px){
   .gen-gallery{columns:1!important}
 }
+
+
+/* Definitive readability + generative gallery pass */
+body{
+  font-size:15px!important;
+  line-height:1.5!important;
+}
+
+/* Preserve hierarchy while removing unreadably-small body/meta copy */
+.hero-row p,
+.page-intro>p,
+.about-copy>p,
+.art-intro p,
+.travel-intro p,
+.collection-intro p,
+.reference-portal p,
+.reference-card p,
+.about-grid p,
+.case-row>p,
+.case-row-desc,
+.home-case>p,
+.practice-row p,
+.case-copy>p:last-child,
+.case-facts p,
+.footer-grid li,
+.footer-grid .muted,
+.quotes-intro p,
+.book-detail p,
+.note-row-rich>p,
+.native-note-body p{
+  font-size:14px!important;
+  line-height:1.5!important;
+}
+
+.feature-copy p,
+.experiment-meta p,
+.brand-sub,
+.case-meta dt,
+.case-meta dd,
+.reference-portal>div>p:first-child,
+.reference-card>span:first-child,
+.note-destination,
+.about-grid span,
+.case-facts span,
+.book-author,
+.book-detail>a,
+.quote-attribution,
+.quote-expand summary,
+.section-heading>a,
+.collection-intro>a,
+.related-paths,
+.back-link,
+.sidebar-footer,
+.sidebar-status,
+.sidebar-socials a,
+.listen-link{
+  font-size:11.5px!important;
+  line-height:1.4!important;
+}
+
+.eyebrow,
+.hero-kicker{
+  font-size:11px!important;
+  line-height:1.2!important;
+}
+
+.library-tabs button,
+.work-filters span,
+.archive-filters button{
+  min-height:38px!important;
+  padding:10px 17px!important;
+  font-size:12px!important;
+  line-height:1!important;
+}
+
+/* Slightly more air between card title + descriptor */
+.feature-copy h3{
+  margin:0 0 10px!important;
+}
+.experiment-meta h3{
+  margin:0 0 7px!important;
+}
+
+/* Generative Visuals now literally uses Travel's masonry structure */
+.gen-travel-grid{
+  columns:3!important;
+  column-gap:14px!important;
+}
+.gen-photo{
+  break-inside:avoid!important;
+  margin:0 0 14px!important;
+}
+.gen-photo-button{
+  position:relative!important;
+  display:block!important;
+  width:100%!important;
+  height:auto!important;
+  padding:0!important;
+  border:0!important;
+  background:transparent!important;
+  overflow:hidden!important;
+}
+.gen-photo-button img{
+  display:block!important;
+  width:100%!important;
+  height:auto!important;
+  max-height:none!important;
+  object-fit:contain!important;
+  object-position:center!important;
+}
+.motion-badge{
+  position:absolute;
+  right:10px;
+  bottom:10px;
+  z-index:2;
+  padding:6px 8px;
+  border:1px solid rgba(255,255,255,.55);
+  background:rgba(0,0,0,.55);
+  color:#fff;
+  font-size:10px;
+  line-height:1;
+  text-transform:uppercase;
+  letter-spacing:.09em;
+  backdrop-filter:blur(6px);
+}
+.gen-drive-player{
+  width:min(86vw,1400px);
+  height:min(80vh,900px);
+  border:0;
+  background:#000;
+}
+.gen-lightbox .art-lightbox-stage{
+  display:grid!important;
+  place-items:center!important;
+}
+.gen-lightbox .art-lightbox-stage img{
+  width:auto!important;
+  height:auto!important;
+  max-width:min(86vw,1400px)!important;
+  max-height:82vh!important;
+  object-fit:contain!important;
+}
+
+@media(max-width:900px){
+  .gen-travel-grid{columns:2!important}
+}
+@media(max-width:560px){
+  .gen-travel-grid{columns:1!important}
+  body{font-size:14.5px!important}
+}

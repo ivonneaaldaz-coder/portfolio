@@ -1,6 +1,6 @@
 import Link from "next/link";
 import GenerativeGallery from "@/components/GenerativeGallery";
-import { driveImageUrl, driveVideoUrl, listDriveFolder } from "@/lib/googleDrive";
+import { driveImageUrl, listDriveFolder } from "@/lib/googleDrive";
 
 const GENERATIVE_FOLDER = "1ftwuGg6MmnOKXcuet2J8G7x_piUipwh5";
 
@@ -9,9 +9,10 @@ export default async function GenerativeVisualsPage() {
   const items = files
     .filter(file => file.mimeType.startsWith("image/") || file.mimeType.startsWith("video/"))
     .map(file => ({
+      id:file.id,
       name:file.name,
       type:(file.mimeType.startsWith("video/") ? "video" : "image") as "video"|"image",
-      src:file.mimeType.startsWith("video/") ? driveVideoUrl(file.id) : driveImageUrl(file.id),
+      image:driveImageUrl(file.id),
     }));
 
   return (
