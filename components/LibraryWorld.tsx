@@ -3,12 +3,15 @@
 import { useState } from "react";
 
 const books = [
-  { title:"The Alchemist", author:"Paulo Coelho", cover:"https://assets2.panuval.com/image/cache/catalog/1117/the-alchemist-10000209-550x550h.png", href:"https://amzn.to/4sULp9V" },
-  { title:"The Four Agreements", author:"Don Miguel Ruiz", cover:"https://images2.medimops.eu/product/c5b1fb/M01934408654-source.jpg", href:"https://amzn.to/4s24lmx" },
-  { title:"The 48 Laws of Power", author:"Robert Greene", cover:"https://www.bordersstore.com/cdn/shop/files/9781861972781_The48LawsOfPower_1_019a0d86-8653-49c6-bdd7-0dccbe410c37.jpg?v=1765878985&width=720", href:"https://amzn.to/4sRdlLS" },
-  { title:"A New Earth", author:"Eckhart Tolle", cover:"https://http2.mlstatic.com/D_NQ_NP_810961-MLM45641522648_042021-O.webp", href:"https://amzn.to/4soqFHT" },
-  { title:"Atomic Habits", author:"James Clear", cover:"https://cdn.media.amplience.net/s/mardel/3967338-3967338-IMGSET", href:"https://amzn.to/4bmYovk" },
-  { title:"The Daily Stoic", author:"Ryan Holiday", cover:"https://miro.medium.com/v2/0%2ARE7Zi7HNFLZVq_4d.jpg", href:"https://amzn.to/4t1TolQ" },
+  { title:"The Alchemist", author:"Paulo Coelho", tile:"book-sprite-1", href:"https://amzn.to/4sULp9V" },
+  { title:"The Four Agreements", author:"Don Miguel Ruiz", tile:"book-sprite-2", href:"https://amzn.to/4s24lmx" },
+  { title:"The Artist’s Way", author:"Julia Cameron", tile:"book-sprite-3", href:null },
+  { title:"The 48 Laws of Power", author:"Robert Greene", tile:"book-sprite-4", href:"https://amzn.to/4sRdlLS" },
+  { title:"The Creative Act: A Way of Being", author:"Rick Rubin", tile:"book-sprite-5", href:null },
+  { title:"Atomic Habits", author:"James Clear", tile:"book-sprite-6", href:"https://amzn.to/4bmYovk" },
+  { title:"A New Earth", author:"Eckhart Tolle", tile:"book-sprite-7", href:"https://amzn.to/4soqFHT" },
+  { title:"The Daily Stoic", author:"Ryan Holiday", tile:"book-sprite-8", href:"https://amzn.to/4t1TolQ" },
+  { title:"Stillness Is the Key", author:"Ryan Holiday", tile:"book-sprite-9", href:null },
 ];
 
 const quotes = [
@@ -42,14 +45,14 @@ export default function LibraryWorld() {
                 onClick={()=>setSelected(index)}
                 aria-label={"Open " + book.title}
               >
-                <img src={book.cover} alt="" />
+                <div className={`book-cover-art ${book.tile}`} aria-hidden="true" />
               </button>
             ))}
           </div>
           <aside className="book-detail">
             <p className="book-author">{activeBook.author}</p>
             <h2>{activeBook.title}</h2>
-            <a href={activeBook.href} target="_blank" rel="noreferrer">View book ↗︎</a>
+            {activeBook.href ? <a href={activeBook.href} target="_blank" rel="noreferrer">View book ↗︎</a> : null}
           </aside>
         </div>
       ) : (

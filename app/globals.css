@@ -1814,3 +1814,59 @@ a.public-row:hover{transform:translateX(4px)}
     justify-self:center;
   }
 }
+
+
+/* User-supplied finished artwork: display without additional art direction */
+.feature-media{
+  padding:0!important;
+  overflow:hidden!important;
+}
+.project-sprite{
+  width:100%!important;
+  height:100%!important;
+  display:block!important;
+  background-image:url('/project-cards/projects-sprite.webp')!important;
+  background-repeat:no-repeat!important;
+  background-size:200% 200%!important;
+  background-color:transparent!important;
+  filter:none!important;
+  transform:none!important;
+  margin:0!important;
+  padding:0!important;
+}
+.project-sprite-1{background-position:0 0!important}
+.project-sprite-2{background-position:100% 0!important}
+.project-sprite-3{background-position:0 100%!important}
+.project-sprite-4{background-position:100% 100%!important}
+
+.book-cover-tile.real-cover{
+  aspect-ratio:3/4!important;
+  padding:0!important;
+  margin:0!important;
+  background:transparent!important;
+  border:0!important;
+  box-shadow:none!important;
+  overflow:hidden!important;
+}
+.book-cover-art{
+  width:100%;
+  height:100%;
+  display:block;
+  background-image:url('/books/books-sprite.webp');
+  background-repeat:no-repeat;
+  background-size:300% 300%;
+}
+.book-sprite-1{background-position:0 0}
+.book-sprite-2{background-position:50% 0}
+.book-sprite-3{background-position:100% 0}
+.book-sprite-4{background-position:0 50%}
+.book-sprite-5{background-position:50% 50%}
+.book-sprite-6{background-position:100% 50%}
+.book-sprite-7{background-position:0 100%}
+.book-sprite-8{background-position:50% 100%}
+.book-sprite-9{background-position:100% 100%}
+.book-cover-tile.real-cover:hover,
+.book-cover-tile.real-cover.active{
+  transform:translateY(-3px)!important;
+  box-shadow:none!important;
+}

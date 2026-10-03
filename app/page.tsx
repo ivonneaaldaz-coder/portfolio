@@ -55,13 +55,13 @@ export default function Home() {
                       </div>
                     </div>
                   ) : index === 1 ? (
-    <img className="project-photo project-whitespace-photo" src="/project-cards/whitespace.webp" alt="" />
+    <div className="project-photo project-sprite project-sprite-1" aria-hidden="true" />
   ) : index === 2 ? (
-    <img className="project-photo project-art" src="/project-cards/art-practice.webp" alt="What I Didn’t Say" />
+    <div className="project-photo project-sprite project-sprite-2" aria-hidden="true" />
   ) : index === 3 ? (
-    <img className="project-photo project-gwl" src="https://cdn.prod.website-files.com/5fc29a3f3f9d357d704a8951/6743dcb1fa628ec9c79e5002_Ivonne-Aldaz_La-Roane.png" alt="La Roane in St. Antonin-Noble-Val, France" />
+    <div className="project-photo project-sprite project-sprite-3" aria-hidden="true" />
   ) : (
-    <img className="project-photo project-travel" src="https://drive.google.com/thumbnail?id=1O4kpRXNiIwgR8KqSCwDqD53o664Ku4Ee&sz=w1800" alt="Lago di Braies, Italy" />
+    <div className="project-photo project-sprite project-sprite-4" aria-hidden="true" />
   )}
                 </div>
                 <div className="feature-copy">
