@@ -727,3 +727,137 @@ html{scroll-behavior:smooth}
   .mobile-nav details[open] .mobile-menu,
   .mobile-nav details.is-closing .mobile-menu{animation:none!important}
 }
+
+
+/* Final polish batch */
+html,body,a,button{font-variant-emoji:text}
+
+@media(min-width:1100px){
+  .hero-row{
+    grid-template-columns:minmax(0,1.65fr) minmax(300px,.55fr);
+    gap:42px;
+  }
+  .hero-row h1{
+    max-width:none;
+    white-space:nowrap;
+    font-size:clamp(52px,4vw,66px);
+  }
+}
+
+.case-copy>p:last-child{padding-top:4px}
+
+/* Optical compensation for light-on-dark type. */
+:root[data-theme="dark"] .hero-row h1,
+:root[data-theme="dark"] .section-title,
+:root[data-theme="dark"] .page-intro h1,
+:root[data-theme="dark"] .about-copy h1,
+:root[data-theme="dark"] .footer-about h2,
+:root[data-theme="dark"] .feature-copy h3,
+:root[data-theme="dark"] .experiment-meta h3,
+:root[data-theme="dark"] .case-row h2,
+:root[data-theme="dark"] .archive-row h2,
+:root[data-theme="dark"] .about-grid h2,
+:root[data-theme="dark"] .case-hero h1,
+:root[data-theme="dark"] .case-copy h2{
+  font-weight:400;
+  letter-spacing:-.045em;
+}
+
+/* Kind words: quiet, symmetrical three-column display. */
+.quote-grid{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  grid-template-rows:auto;
+  border-top:1px solid var(--ink);
+  border-bottom:1px solid var(--line);
+}
+.quote-card,
+.quote-card:first-child,
+.quote-card:nth-child(2),
+.quote-card:nth-child(3){
+  grid-row:auto;
+  min-height:300px;
+  padding:22px 26px;
+  border-right:1px solid var(--line);
+  border-bottom:0;
+}
+.quote-card:first-child{padding-left:0}
+.quote-card:last-child{border-right:0}
+.quote-card blockquote,
+.quote-card:first-child blockquote,
+.quote-card:nth-child(n+2) blockquote{
+  margin:44px 0 30px;
+  max-width:none;
+  font-size:clamp(26px,2.35vw,40px);
+  line-height:1.02;
+  letter-spacing:-.045em;
+  font-weight:500;
+}
+
+/* Mobile menu motion: softer close + staggered content. */
+@media(max-width:900px){
+  .mobile-nav details[open] .mobile-menu{
+    animation:mobileMenuInSoft .32s cubic-bezier(.22,.61,.36,1) both;
+  }
+  .mobile-nav details[open] .mobile-menu-links a,
+  .mobile-nav details[open] .mobile-menu-footer{
+    animation:mobileMenuItemIn .38s cubic-bezier(.22,.61,.36,1) both;
+  }
+  .mobile-nav details[open] .mobile-menu-links a:nth-child(1){animation-delay:.02s}
+  .mobile-nav details[open] .mobile-menu-links a:nth-child(2){animation-delay:.04s}
+  .mobile-nav details[open] .mobile-menu-links a:nth-child(3){animation-delay:.06s}
+  .mobile-nav details[open] .mobile-menu-links a:nth-child(4){animation-delay:.08s}
+  .mobile-nav details[open] .mobile-menu-links a:nth-child(5){animation-delay:.10s}
+  .mobile-nav details[open] .mobile-menu-links a:nth-child(6){animation-delay:.12s}
+  .mobile-nav details[open] .mobile-menu-footer{animation-delay:.10s}
+
+  .mobile-nav details.is-closing .mobile-menu{
+    animation:mobileMenuOutSoft .30s cubic-bezier(.4,0,.2,1) both;
+    pointer-events:none;
+  }
+  .mobile-nav details.is-closing .mobile-menu-links a,
+  .mobile-nav details.is-closing .mobile-menu-footer{
+    opacity:0;
+    transform:translateY(-6px);
+    transition:opacity .18s ease,transform .24s cubic-bezier(.4,0,.2,1);
+  }
+
+  .quote-grid{grid-template-columns:1fr}
+  .quote-card,
+  .quote-card:first-child,
+  .quote-card:nth-child(2),
+  .quote-card:nth-child(3){
+    min-height:210px;
+    padding:22px 0;
+    border-right:0;
+    border-bottom:1px solid var(--line);
+  }
+  .quote-card:last-child{border-bottom:0}
+  .quote-card blockquote,
+  .quote-card:first-child blockquote,
+  .quote-card:nth-child(n+2) blockquote{
+    font-size:clamp(28px,7vw,36px);
+    line-height:1.03;
+    max-width:none;
+  }
+}
+@keyframes mobileMenuInSoft{
+  from{opacity:0;transform:translateY(-10px) scaleY(.985);filter:blur(3px)}
+  to{opacity:1;transform:translateY(0) scaleY(1);filter:blur(0)}
+}
+@keyframes mobileMenuItemIn{
+  from{opacity:0;transform:translateY(-5px)}
+  to{opacity:1;transform:translateY(0)}
+}
+@keyframes mobileMenuOutSoft{
+  from{opacity:1;transform:translateY(0) scaleY(1);filter:blur(0)}
+  to{opacity:0;transform:translateY(-10px) scaleY(.985);filter:blur(2px)}
+}
+@media(prefers-reduced-motion:reduce){
+  .mobile-nav details[open] .mobile-menu,
+  .mobile-nav details[open] .mobile-menu-links a,
+  .mobile-nav details[open] .mobile-menu-footer,
+  .mobile-nav details.is-closing .mobile-menu{
+    animation:none!important;
+  }
+}

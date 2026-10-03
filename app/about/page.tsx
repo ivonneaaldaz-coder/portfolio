@@ -43,9 +43,9 @@ export default function AboutPage() {
           <p>My work moves between brand strategy, technology, systems, and visual art. I’m interested in how ideas become useful systems, compelling identities, experiences, and physical objects.</p>
           <p>I work with companies through Whitespace, build independent digital experiments, teach marketing and entrepreneurship, and maintain an active art practice.</p>
           <div className="about-links">
-            <Link href="/work">Selected work ↗</Link>
-            <Link href="/art">Art practice ↗</Link>
-            <a href="https://lab.ivonnealdaz.com" target="_blank" rel="noreferrer">The Lab ↗</a>
+            <Link href="/work">Selected work ↗︎</Link>
+            <Link href="/art">Art practice ↗︎</Link>
+            <a href="https://lab.ivonnealdaz.com" target="_blank" rel="noreferrer">The Lab ↗︎</a>
           </div>
         </div>
       </div>

@@ -22,7 +22,7 @@ export default function MobileNav() {
       details.open = false;
       setClosing(false);
       after?.();
-    }, 180);
+    }, 300);
   };
 
   const go = (event: MouseEvent<HTMLAnchorElement>, href: string) => {

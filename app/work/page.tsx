@@ -36,7 +36,7 @@ export default function WorkPage() {
             <Link className="case-row" href={study.href} key={study.n}>
               <span>{study.n}</span>
               <div><p className="eyebrow">{study.tag}</p><h2>{study.title}</h2></div>
-              <p>{study.desc}</p><span className="case-arrow">↗</span>
+              <p>{study.desc}</p><span className="case-arrow">↗︎</span>
             </Link>
           ))}
         </div>
@@ -48,7 +48,7 @@ export default function WorkPage() {
           {projects.map(([title,meta,href,external],index) =>
             external ? (
               <a className="practice-row" href={href as string} target="_blank" rel="noreferrer" key={title as string}>
-                <span>{String(index+1).padStart(2,"0")}</span><h3>{title}</h3><p>{meta}</p><span>↗</span>
+                <span>{String(index+1).padStart(2,"0")}</span><h3>{title}</h3><p>{meta}</p><span>↗︎</span>
               </a>
             ) : (
               <Link className="practice-row" href={href as string} key={title as string}>

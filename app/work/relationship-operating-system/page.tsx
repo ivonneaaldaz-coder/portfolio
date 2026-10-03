@@ -6,7 +6,7 @@ export default function RelationshipOperatingSystemPage() {
       <Link className="back-link" href="/work">← Work</Link>
 
       <header className="case-hero">
-        <p className="eyebrow">AI + SYSTEMS / 2026</p>
+        <p className="eyebrow">SYSTEMS + CRM / 2026</p>
         <h1>Relationship Operating System</h1>
         <p className="case-dek">
           Turning a fragmented network of contacts, introductions, and follow-ups into a system a small team could actually use every day.

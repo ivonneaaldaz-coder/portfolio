@@ -6,7 +6,7 @@ export default function AIAssistedLeadEnginePage() {
       <Link className="back-link" href="/work">← Work</Link>
 
       <header className="case-hero">
-        <p className="eyebrow">AUTOMATION + OPERATIONS / 2026</p>
+        <p className="eyebrow">AI + AUTOMATION / 2026</p>
         <h1>AI-Assisted Lead Engine</h1>
         <p className="case-dek">
           A lightweight pipeline for turning messy inbound information into structured records, priorities, and next steps.

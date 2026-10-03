@@ -33,7 +33,7 @@ export default function Home() {
       <section className="selected section-pad">
         <div className="section-heading">
           <h2 className="section-title">Projects</h2>
-          <Link href="/work">Explore all ↗</Link>
+          <Link href="/work">Explore all ↗︎</Link>
         </div>
 
         <div className="feature-grid">
@@ -75,14 +75,14 @@ export default function Home() {
       <section className="home-cases section-pad">
         <div className="section-heading">
           <h2 className="section-title small-title">Selected Case Studies</h2>
-          <Link href="/work">View all case studies ↗</Link>
+          <Link href="/work">View all case studies ↗︎</Link>
         </div>
         <div className="home-case-list">
           {studies.map(([n,title,tag,desc,href]) => (
             <Link className="home-case" href={href} key={n}>
               <span className="home-case-num">{n}</span>
               <div><p className="eyebrow">{tag}</p><h3>{title}</h3></div>
-              <p>{desc}</p><span>↗</span>
+              <p>{desc}</p><span>↗︎</span>
             </Link>
           ))}
         </div>
@@ -91,7 +91,7 @@ export default function Home() {
       <section className="experiments section-pad">
         <div className="section-heading">
           <h2 className="section-title small-title">Experiments</h2>
-          <Link href="/work#experiments">View all experiments ↗</Link>
+          <Link href="/work#experiments">View all experiments ↗︎</Link>
         </div>
         <div className="experiment-grid experiment-grid-three">
           {experiments.map(([n,title,meta,href], index) => (
@@ -113,7 +113,7 @@ export default function Home() {
         <div className="footer-about">
           <p className="eyebrow">ABOUT</p>
           <h2>I move between strategy, technology, and art.</h2>
-          <Link href="/about">More about me ↗</Link>
+          <Link href="/about">More about me ↗︎</Link>
         </div>
         <div>
           <p className="eyebrow">CURRENTLY</p>

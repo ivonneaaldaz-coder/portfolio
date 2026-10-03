@@ -12,7 +12,7 @@ export default function SnakeExperiment() {
           and a leaderboard shared across visitors.
         </p>
         <a className="experiment-launch" href="https://lab.ivonnealdaz.com/#snake" target="_blank" rel="noreferrer">
-          Play Snake ↗
+          Play Snake ↗︎
         </a>
       </header>
       <section className="experiment-detail-grid">

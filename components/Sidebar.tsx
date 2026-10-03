@@ -7,7 +7,7 @@ import SidebarSubscribe from "@/components/SidebarSubscribe";
 const links = [
   { label: "Overview", href: "/" },
   { label: "Work", href: "/work" },
-  { label: "Lab ↗", href: "https://lab.ivonnealdaz.com", external: true },
+  { label: "Lab ↗︎", href: "https://lab.ivonnealdaz.com", external: true },
   { label: "Notes", href: "/notes" },
   { label: "Archive", href: "/archive" },
   { label: "About", href: "/about" },
@@ -48,15 +48,15 @@ export default function Sidebar() {
           <SidebarSubscribe />
 
           <div className="sidebar-socials" aria-label="Social links">
-            <a href="mailto:hello@ivonnealdaz.com">Email ↗</a>
-            <a href="https://www.linkedin.com/in/ivonnealdaz/" target="_blank" rel="noreferrer">LinkedIn ↗</a>
-            <a href="https://www.pinterest.com/ivonnealdaz/" target="_blank" rel="noreferrer">Pinterest ↗</a>
-            <a href="https://github.com/ivonneaaldaz-coder" target="_blank" rel="noreferrer">GitHub ↗</a>
-            <a className="social-x" href="https://x.com/ivonnealdazz" target="_blank" rel="noreferrer">X ↗</a>
+            <a href="mailto:hello@ivonnealdaz.com">Email ↗︎</a>
+            <a href="https://www.linkedin.com/in/ivonnealdaz/" target="_blank" rel="noreferrer">LinkedIn ↗︎</a>
+            <a href="https://www.pinterest.com/ivonnealdaz/" target="_blank" rel="noreferrer">Pinterest ↗︎</a>
+            <a href="https://github.com/ivonneaaldaz-coder" target="_blank" rel="noreferrer">GitHub ↗︎</a>
+            <a className="social-x" href="https://x.com/ivonnealdazz" target="_blank" rel="noreferrer">X ↗︎</a>
           </div>
 
           <a className="listen-link" href="https://open.spotify.com/user/ivonnealdaz" target="_blank" rel="noreferrer">
-            Listen on Spotify ↗
+            Listen on Spotify ↗︎
           </a>
         </div>
       </div>

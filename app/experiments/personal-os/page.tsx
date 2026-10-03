@@ -12,7 +12,7 @@ export default function PersonalOSExperiment() {
           and the odd thing that does not belong neatly anywhere else.
         </p>
         <a className="experiment-launch" href="https://lab.ivonnealdaz.com" target="_blank" rel="noreferrer">
-          Open the Lab ↗
+          Open the Lab ↗︎
         </a>
       </header>
 

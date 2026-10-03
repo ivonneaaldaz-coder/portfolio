@@ -31,7 +31,7 @@ export default function NotesPage() {
               <span>{String(index+1).padStart(2,"0")}</span>
               <h3>{item.title}</h3>
               <p>{item.source} · {item.year}</p>
-              <span>↗</span>
+              <span>↗︎</span>
             </a>
           ))}
         </div>

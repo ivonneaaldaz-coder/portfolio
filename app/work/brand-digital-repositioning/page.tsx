@@ -6,7 +6,7 @@ export default function BrandDigitalRepositioningPage() {
       <Link className="back-link" href="/work">← Work</Link>
 
       <header className="case-hero">
-        <p className="eyebrow">STRATEGY + BRAND / 2026</p>
+        <p className="eyebrow">BRAND + DIGITAL / 2026</p>
         <h1>Brand + Digital Repositioning</h1>
         <p className="case-dek">
           Reworking a lending brand so its positioning, website, sales materials, and ongoing marketing told one clearer story.

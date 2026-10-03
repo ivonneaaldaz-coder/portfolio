@@ -12,7 +12,7 @@ export default function ChatroomExperiment() {
           more digital room people can wander into.
         </p>
         <a className="experiment-launch" href="https://chat.ivonnealdaz.com" target="_blank" rel="noreferrer">
-          Enter the Chatroom ↗
+          Enter the Chatroom ↗︎
         </a>
       </header>
 

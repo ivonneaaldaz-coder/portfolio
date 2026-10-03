@@ -16,7 +16,7 @@ export default function VisualSystemsExperiment() {
       <section className="experiment-detail-grid">
         <div><p className="eyebrow">WHAT LIVES HERE</p><p>Navigation experiments, type systems, component studies, motion ideas, and little interactions worth testing.</p></div>
         <div><p className="eyebrow">STATUS</p><p>Ongoing collection. This page will grow as individual studies are documented.</p></div>
-        <div><p className="eyebrow">RELATED</p><p><a href="https://lab.ivonnealdaz.com" target="_blank" rel="noreferrer">Explore the Lab ↗</a></p></div>
+        <div><p className="eyebrow">RELATED</p><p><a href="https://lab.ivonnealdaz.com" target="_blank" rel="noreferrer">Explore the Lab ↗︎</a></p></div>
       </section>
     </article>
   );

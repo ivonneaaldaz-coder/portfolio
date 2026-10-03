@@ -12,7 +12,7 @@ export default function AskEveExperiment() {
           projects, background, art, and what I’m building.
         </p>
         <a className="experiment-launch" href="https://lab.ivonnealdaz.com/#ask-eve" target="_blank" rel="noreferrer">
-          Launch Ask Eve ↗
+          Launch Ask Eve ↗︎
         </a>
       </header>
 
