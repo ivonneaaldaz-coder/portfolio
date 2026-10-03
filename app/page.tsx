@@ -55,9 +55,9 @@ export default function Home() {
                       </div>
                     </div>
                   ) : index === 1 ? (
-    <img className="project-photo project-whitespace-photo" src="/project-cards/whitespace.jpg" alt="" />
+    <img className="project-photo project-whitespace-photo" src="/project-cards/whitespace.webp" alt="" />
   ) : index === 2 ? (
-    <img className="project-photo project-art" src="https://drive.google.com/thumbnail?id=1eCnQkPPWiHQwzHHUeLwlDTgSJECXh1sk&sz=w1800" alt="What I Didn’t Say" />
+    <img className="project-photo project-art" src="/project-cards/art-practice.webp" alt="What I Didn’t Say" />
   ) : index === 3 ? (
     <img className="project-photo project-gwl" src="https://cdn.prod.website-files.com/5fc29a3f3f9d357d704a8951/6743dcb1fa628ec9c79e5002_Ivonne-Aldaz_La-Roane.png" alt="La Roane in St. Antonin-Noble-Val, France" />
   ) : (
@@ -98,7 +98,7 @@ export default function Home() {
       <section className="experiments section-pad">
         <div className="section-heading">
           <h2 className="section-title small-title">Experiments</h2>
-          <Link href="/work#experiments">View all ↗︎</Link>
+          <Link href="/work#experiments">View all →</Link>
         </div>
         <div className="experiment-grid experiment-grid-three">
           {experiments.map(([title,meta,href], index) => (
@@ -120,7 +120,7 @@ export default function Home() {
         <div className="footer-about">
           <p className="eyebrow">ABOUT</p>
           <h2>I move between strategy, technology, and art.</h2>
-          <Link href="/about">More about me ↗︎</Link>
+          <Link href="/about">More about me →</Link>
         </div>
         <div>
           <p className="eyebrow">CURRENTLY</p>
