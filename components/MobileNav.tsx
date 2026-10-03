@@ -41,7 +41,6 @@ export default function MobileNav() {
               Lab <span className="text-arrow" aria-hidden="true" />
             </a>
             <Link href="/library" onClick={(event) => go(event, "/library")}>Library</Link>
-            <Link href="/archive" onClick={(event) => go(event, "/archive")}>Archive</Link>
             <Link href="/about" onClick={(event) => go(event, "/about")}>About</Link>
           </nav>
 

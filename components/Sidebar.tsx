@@ -9,7 +9,6 @@ const links = [
   { label: "Work", href: "/work" },
   { label: "Lab ↗︎", href: "https://lab.ivonnealdaz.com", external: true },
   { label: "Library", href: "/library" },
-  { label: "Archive", href: "/archive" },
   { label: "About", href: "/about" },
 ];
 
