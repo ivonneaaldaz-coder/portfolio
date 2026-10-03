@@ -1,15 +1,15 @@
 import Link from "next/link";
 
 const studies = [
-  { n:"01", title:"Relationship Operating System", tag:"AI + Systems", desc:"A centralized relationship system that turns scattered contacts, introductions, and follow-ups into an actionable pipeline.", href:"/work/relationship-operating-system" },
-  { n:"02", title:"Brand + Digital Repositioning", tag:"Strategy + Brand", desc:"A clearer positioning and digital experience designed to connect message, customer journey, and conversion.", href:"/work/brand-digital-repositioning" },
-  { n:"03", title:"AI-Assisted Lead Engine", tag:"Automation + Operations", desc:"A lightweight automation system for capturing inbound leads, structuring information, and surfacing next actions.", href:"/work/ai-assisted-lead-engine" },
+  { n:"01", title:"Relationship Operating System", tag:"Systems + CRM", desc:"A centralized relationship system that turns scattered contacts, introductions, and follow-ups into an actionable pipeline.", href:"/work/relationship-operating-system" },
+  { n:"02", title:"Brand + Digital Repositioning", tag:"Brand + Digital", desc:"A clearer positioning and digital experience designed to connect message, customer journey, and conversion.", href:"/work/brand-digital-repositioning" },
+  { n:"03", title:"AI-Assisted Lead Engine", tag:"AI + Automation", desc:"A lightweight automation system for capturing inbound leads, structuring information, and surfacing next actions.", href:"/work/ai-assisted-lead-engine" },
 ];
 
 const projects = [
   ["Whitespace","Strategy studio","https://www.bywhitespace.com/",true],
   ["The Lab","Digital experiments","https://lab.ivonnealdaz.com",true],
-  ["Make Space","Creative workshops + experiences","https://www.instagram.com/makespace_____/",true],
+  ["Make Space","Creative workshops + experiences","https://www.instagram.com/makespace______/",true],
   ["Good World Living","Experiences / places / living","https://www.goodworldliving.com/",true],
   ["Art Practice","Painting / ceramics / installation","/art",false],
   ["Travel","Photography / places","/travel",false],

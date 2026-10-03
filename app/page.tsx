@@ -9,9 +9,9 @@ const features = [
 ];
 
 const studies = [
-  ["01", "Relationship Operating System", "AI + Systems", "A system for turning fragmented contacts and follow-ups into an actionable relationship pipeline.", "/work/relationship-operating-system"],
-  ["02", "Brand + Digital Repositioning", "Strategy + Brand", "Connecting positioning, message, experience, and execution into one clearer system.", "/work/brand-digital-repositioning"],
-  ["03", "AI-Assisted Lead Engine", "Automation + Operations", "Turning messy inbound information into structured records, priorities, and next actions.", "/work/ai-assisted-lead-engine"],
+  ["01", "Relationship Operating System", "Systems + CRM", "A system for turning fragmented contacts and follow-ups into an actionable relationship pipeline.", "/work/relationship-operating-system"],
+  ["02", "Brand + Digital Repositioning", "Brand + Digital", "Connecting positioning, message, experience, and execution into one clearer system.", "/work/brand-digital-repositioning"],
+  ["03", "AI-Assisted Lead Engine", "AI + Automation", "Turning messy inbound information into structured records, priorities, and next actions.", "/work/ai-assisted-lead-engine"],
 ];
 
 const experiments = [

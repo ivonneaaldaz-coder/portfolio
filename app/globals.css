@@ -697,3 +697,33 @@ html{scroll-behavior:smooth}
   .archive-row-filterable h2{grid-column:2 / -1;margin-top:4px}
   .archive-category-pill{grid-column:3}
 }
+
+
+/* Case study + mobile menu refinement */
+.text-arrow::before{
+  content:"\2197\FE0E";
+  font-family:Arial,Helvetica,sans-serif;
+  font-style:normal;
+}
+@media(max-width:900px){
+  .mobile-nav details[open] .mobile-menu{
+    animation:mobileMenuIn .22s cubic-bezier(.22,.61,.36,1) both;
+    transform-origin:top;
+  }
+  .mobile-nav details.is-closing .mobile-menu{
+    animation:mobileMenuOut .18s cubic-bezier(.4,0,1,1) both;
+    pointer-events:none;
+  }
+}
+@keyframes mobileMenuIn{
+  from{opacity:0;transform:translateY(-8px)}
+  to{opacity:1;transform:translateY(0)}
+}
+@keyframes mobileMenuOut{
+  from{opacity:1;transform:translateY(0)}
+  to{opacity:0;transform:translateY(-8px)}
+}
+@media(prefers-reduced-motion:reduce){
+  .mobile-nav details[open] .mobile-menu,
+  .mobile-nav details.is-closing .mobile-menu{animation:none!important}
+}
