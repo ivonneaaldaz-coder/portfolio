@@ -66,7 +66,7 @@ export default function Home() {
             return item.external ? (
               <a className={item.className} key={item.title} href={item.href} target="_blank" rel="noreferrer">{content}</a>
             ) : (
-              <Link className={item.className} key={item.n} href={item.href}>{content}</Link>
+              <Link className={item.className} key={item.title} href={item.href}>{content}</Link>
             );
           })}
         </div>
