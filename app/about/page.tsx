@@ -58,7 +58,7 @@ export default function AboutPage() {
       </div>
 
       <section className="about-section">
-        <div className="section-heading"><h2 className="section-title small-title">Elsewhere</h2></div>
+        <div className="section-heading"><h2 className="section-title small-title">A few more things</h2></div>
         <div className="elsewhere-grid">
           {elsewhere.map((item) => (
             <div className="elsewhere-item" key={item.n}>

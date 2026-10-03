@@ -16,9 +16,8 @@ const studies = [
 
 const experiments = [
   ["01", "Ask Eve", "Conversational CV", "/experiments/ask-eve"],
-  ["02", "Personal OS", "Digital playground", "/experiments/personal-os"],
-  ["03", "Chatroom", "Public experiment", "/experiments/chatroom"],
-  ["04", "Notes", "Ideas / References / Places", "/notes"],
+  ["02", "Chatroom", "Public internet experiment", "/experiments/chatroom"],
+  ["03", "Snake", "Game + global leaderboard", "/experiments/snake"],
 ];
 
 export default function Home() {
@@ -27,10 +26,7 @@ export default function Home() {
       <section className="hero-compact section-pad">
         <div className="hero-row">
           <h1>Strategy, technology, art.</h1>
-          <p>
-            I work across brand, systems, and creative practice — building digital tools,
-            visual worlds, and experiences.
-          </p>
+          <p>I work across brand, systems, and creative practice — building digital tools, visual worlds, and experiences.</p>
         </div>
       </section>
 
@@ -58,17 +54,10 @@ export default function Home() {
                         </div>
                       </div>
                     </div>
-                  ) : (
-                    <div className={"image-placeholder image-" + index} />
-                  )}
+                  ) : <div className={"image-placeholder image-" + index} />}
                 </div>
-
                 <div className="feature-copy">
-                  <div>
-                    <span className="feature-num">{item.n}</span>
-                    <h3>{item.title}</h3>
-                    <p>{item.meta}</p>
-                  </div>
+                  <div><span className="feature-num">{item.n}</span><h3>{item.title}</h3><p>{item.meta}</p></div>
                   <span className="circle-arrow">→</span>
                 </div>
               </>
@@ -88,14 +77,12 @@ export default function Home() {
           <h2 className="section-title small-title">Selected Case Studies</h2>
           <Link href="/work">View all case studies ↗</Link>
         </div>
-
         <div className="home-case-list">
           {studies.map(([n,title,tag,desc,href]) => (
             <Link className="home-case" href={href} key={n}>
               <span className="home-case-num">{n}</span>
               <div><p className="eyebrow">{tag}</p><h3>{title}</h3></div>
-              <p>{desc}</p>
-              <span>↗</span>
+              <p>{desc}</p><span>↗</span>
             </Link>
           ))}
         </div>
@@ -106,19 +93,16 @@ export default function Home() {
           <h2 className="section-title small-title">Experiments</h2>
           <Link href="/work#experiments">View all experiments ↗</Link>
         </div>
-
-        <div className="experiment-grid">
-          {experiments.map(([n, title, meta, href], index) => (
+        <div className="experiment-grid experiment-grid-three">
+          {experiments.map(([n,title,meta,href], index) => (
             <Link className="experiment-card experiment-link" href={href} key={title}>
               <div className={"experiment-thumb exp-" + index}>
                 {index === 0 && <span>ask eve</span>}
-                {index === 1 && <span className="os-mini">IVONNE_OS<br/>LAB / NOTES / PLAY</span>}
-                {index === 2 && <span className="system-mini">CHAT<br/>ROOM.exe</span>}
-                {index === 3 && <span>NOTES<br/>• Ideas<br/>• Places<br/>• Quotes</span>}
+                {index === 1 && <span className="system-mini">CHAT<br/>ROOM.exe</span>}
+                {index === 2 && <span className="snake-mini">SNAKE.exe<br/>↑ ↓ ← →</span>}
               </div>
               <div className="experiment-meta">
-                <span>{n}</span>
-                <div><h3>{title}</h3><p>{meta}</p></div>
+                <span>{n}</span><div><h3>{title}</h3><p>{meta}</p></div>
               </div>
             </Link>
           ))}
@@ -131,17 +115,10 @@ export default function Home() {
           <h2>I move between strategy, technology, and art.</h2>
           <Link href="/about">More about me ↗</Link>
         </div>
-
         <div>
           <p className="eyebrow">CURRENTLY</p>
-          <ul>
-            <li>Building digital systems</li>
-            <li>Teaching marketing + entrepreneurship</li>
-            <li>Making and exhibiting art</li>
-            <li>Developing Good World Living</li>
-          </ul>
+          <ul><li>Building digital systems</li><li>Teaching marketing + entrepreneurship</li><li>Making and exhibiting art</li><li>Developing Good World Living</li></ul>
         </div>
-
         <div>
           <p className="eyebrow">LET’S CONNECT</p>
           <p className="muted">For work, exhibitions, collaborations, or conversation.</p>
