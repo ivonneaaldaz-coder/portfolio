@@ -3,12 +3,12 @@
 import { useState } from "react";
 
 const books = [
-  { title:"The Alchemist", author:"Paulo Coelho", cover:"https://covers.openlibrary.org/isbn/9780061122415-L.jpg", href:"https://amzn.to/4sULp9V" },
-  { title:"The Four Agreements", author:"Don Miguel Ruiz", cover:"https://covers.openlibrary.org/isbn/9781878424310-L.jpg", href:"https://amzn.to/4s24lmx" },
-  { title:"The 48 Laws of Power", author:"Robert Greene", cover:"https://covers.openlibrary.org/isbn/9780140280197-L.jpg", href:"https://amzn.to/4sRdlLS" },
-  { title:"A New Earth", author:"Eckhart Tolle", cover:"https://covers.openlibrary.org/isbn/9780452289963-L.jpg", href:"https://amzn.to/4soqFHT" },
-  { title:"Atomic Habits", author:"James Clear", cover:"https://covers.openlibrary.org/isbn/9780735211292-L.jpg", href:"https://amzn.to/4bmYovk" },
-  { title:"The Daily Stoic", author:"Ryan Holiday", cover:"https://covers.openlibrary.org/isbn/9780735211735-L.jpg", href:"https://amzn.to/4t1TolQ" },
+  { title:"The Alchemist", author:"Paulo Coelho", cover:"https://assets2.panuval.com/image/cache/catalog/1117/the-alchemist-10000209-550x550h.png", href:"https://amzn.to/4sULp9V" },
+  { title:"The Four Agreements", author:"Don Miguel Ruiz", cover:"https://images2.medimops.eu/product/c5b1fb/M01934408654-source.jpg", href:"https://amzn.to/4s24lmx" },
+  { title:"The 48 Laws of Power", author:"Robert Greene", cover:"https://www.bordersstore.com/cdn/shop/files/9781861972781_The48LawsOfPower_1_019a0d86-8653-49c6-bdd7-0dccbe410c37.jpg?v=1765878985&width=720", href:"https://amzn.to/4sRdlLS" },
+  { title:"A New Earth", author:"Eckhart Tolle", cover:"https://cloudfront.bukinist.al/29048-thickbox_default/a-new-earth.jpg", href:"https://amzn.to/4soqFHT" },
+  { title:"Atomic Habits", author:"James Clear", cover:"https://cdn.media.amplience.net/s/mardel/3967338-3967338-IMGSET", href:"https://amzn.to/4bmYovk" },
+  { title:"The Daily Stoic", author:"Ryan Holiday", cover:"https://miro.medium.com/v2/0%2ARE7Zi7HNFLZVq_4d.jpg", href:"https://amzn.to/4t1TolQ" },
 ];
 
 const quotes = [

@@ -25,10 +25,10 @@ export default function AboutPage() {
           <h1>Strategist, artist, builder, educator.</h1>
           <p>My work moves between brand strategy, technology, systems, and visual art — from building digital tools and brand worlds to teaching, making, and independent experiments.</p>
           <div className="about-links">
-            <Link href="/work">Selected work ↗︎</Link>
-            <Link href="/art">Art practice ↗︎</Link>
+            <Link href="/work">Selected work →</Link>
+            <Link href="/art">Art practice →</Link>
             <a href="https://lab.ivonnealdaz.com" target="_blank" rel="noreferrer">The Lab ↗︎</a>
-            <Link href="/speaking">Speaking + press ↗︎</Link>
+            <Link href="/speaking">Speaking + press →</Link>
           </div>
         </div>
       </div>

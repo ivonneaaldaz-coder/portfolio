@@ -33,7 +33,7 @@ export default function WorkPage() {
         <div className="case-list">
           {studies.map((study) => (
             <Link className="case-row" href={study.href} key={study.title}>
-              <div><h2>{study.title}</h2><p>{study.desc}</p></div><span className="case-arrow">↗︎</span>
+              <div className="case-row-title"><h2>{study.title}</h2></div><p className="case-row-desc">{study.desc}</p><span className="case-arrow">→</span>
             </Link>
           ))}
         </div>
