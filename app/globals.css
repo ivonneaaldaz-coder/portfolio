@@ -2660,3 +2660,157 @@ body{
     font-size:14px!important;
   }
 }
+
+
+/* Global microtype floor — no unreadably-small text anywhere */
+body{
+  font-size:16px!important;
+}
+
+/* Every supporting / metadata / caption style gets a readable floor */
+.brand-sub,
+.sidebar-nav a,
+.sidebar-nav span,
+.sidebar-footer,
+.sidebar-footer p,
+.sidebar-status,
+.sidebar-socials a,
+.listen-link,
+.eyebrow,
+.hero-kicker,
+.section-heading>a,
+.collection-intro>a,
+.related-paths,
+.back-link,
+.feature-copy p,
+.experiment-meta p,
+.case-row-desc,
+.home-case>p,
+.case-meta dt,
+.case-meta dd,
+.reference-portal p,
+.reference-card p,
+.reference-portal>div>p:first-child,
+.reference-card>span:first-child,
+.note-destination,
+.note-row p,
+.note-row>span,
+.archive-row p,
+.archive-row>span,
+.about-grid p,
+.about-grid span,
+.case-facts p,
+.case-facts span,
+.footer-grid li,
+.footer-grid .muted,
+.book-author,
+.book-detail p,
+.book-detail>a,
+.quote-attribution,
+.quote-expand summary,
+.quote-card figcaption,
+.elsewhere-item p,
+.education-list p,
+.project-detail-band span,
+.project-detail-band p,
+.project-detail-grid>div>p:last-child,
+.experiment-detail-grid>div>p:last-child,
+.vinyl-card p,
+.playlist-copy p,
+.travel-photo figcaption,
+.travel-lightbox .art-lightbox-meta h2,
+.public-row p,
+.practice-row p,
+.practice-row>span,
+.music-intro p,
+.speaking-hero p,
+.subscribe-trigger,
+.subscribe-modal form button,
+.subscribe-note,
+.motion-badge{
+  font-size:13.5px!important;
+  line-height:1.5!important;
+}
+
+/* Descriptions/subtitles should read like body copy, not captions */
+.hero-row p,
+.page-intro>p,
+.about-copy>p,
+.art-intro p,
+.travel-intro p,
+.collection-intro p,
+.quotes-intro p,
+.native-note-body p,
+.long-story-copy,
+.long-story-copy p,
+.experiment-detail-dek,
+.case-copy>p:last-child{
+  font-size:16px!important;
+  line-height:1.55!important;
+}
+
+/* About microcopy gets an extra bump */
+.about-grid p,
+.elsewhere-item p,
+.education-list p,
+.quote-card figcaption{
+  font-size:14px!important;
+}
+
+/* Case study rows specifically: readable at a glance */
+.home-case>p,
+.case-row-desc{
+  font-size:15px!important;
+  line-height:1.5!important;
+}
+
+/* Card subtitles */
+.feature-copy p,
+.experiment-meta p{
+  font-size:13px!important;
+  line-height:1.45!important;
+  letter-spacing:.08em!important;
+}
+
+/* Interactive pills / category controls */
+.library-tabs button,
+.work-filters span,
+.archive-filters button{
+  font-size:13px!important;
+  min-height:42px!important;
+  padding:11px 18px!important;
+}
+
+/* Experiment/detail CTAs */
+.experiment-launch,
+.pill-link,
+.back-link{
+  font-size:14px!important;
+}
+
+/* Keep utility labels readable but still secondary */
+.eyebrow,
+.hero-kicker,
+.quotes-intro>span{
+  font-size:12.5px!important;
+  line-height:1.35!important;
+}
+
+@media(max-width:900px){
+  body{font-size:15.5px!important}
+  .brand-sub,
+  .sidebar-footer,
+  .sidebar-status,
+  .sidebar-socials a,
+  .listen-link,
+  .feature-copy p,
+  .experiment-meta p,
+  .case-row-desc,
+  .home-case>p,
+  .about-grid p,
+  .elsewhere-item p,
+  .education-list p,
+  .quote-card figcaption{
+    font-size:13.5px!important;
+  }
+}
