@@ -23,6 +23,18 @@ const FALLBACK: Record<string, DriveFile[]> = {
     { id:"1xLB_UJu64dcncS9KZBEk6ISlmxGfIen4", name:"travel.jpg", mimeType:"image/jpeg" },
     { id:"1mXWQUKcb_t9BDWgJIb94OFsjd8d3y_IP", name:"whitespace.jpg", mimeType:"image/jpeg" },
   ],
+  "1ftwuGg6MmnOKXcuet2J8G7x_piUipwh5": [
+    { id:"1m2guNKM7t99L-Iuw7PM77zIajzUtvLrL", name:"Ivonne-Aldaz_AI-Experiment_Liquid-Concept_001.png", mimeType:"image/png" },
+    { id:"1wMtNYYFBPjZmvkmtDMZEqX7Qq37ZBSAh", name:"Ivonne-Aldaz_AI-Experiment_Liquid-Concept_002.png", mimeType:"image/png" },
+    { id:"15sguWLC9rTSz8wgo3gxKV5vBN_rymwT1", name:"Ivonne-Aldaz_AI-Experiment_Liquid-Concept_003.png", mimeType:"image/png" },
+    { id:"1x1C_3Gk-JTW2gX4jhAG7Q29uZM1xcFdd", name:"Ivonne-Aldaz_AI-Experiment_Cinematic-Mediterranean_001.png", mimeType:"image/png" },
+    { id:"1tHdIp9L4Qz9BBLGfFhm3Cxi91lrJA9aA", name:"Ivonne-Aldaz_AI-Experiment_Cinematic-Mediterranean_002.png", mimeType:"image/png" },
+    { id:"1mkilZfZ6dmLYhe9zvUtTadokFwqdXlOL", name:"Ivonne-Aldaz_AI-Experiment_Cinematic-Mediterranean_003.png", mimeType:"image/png" },
+    { id:"1zWaAd_bkMFfFtYlRtnv61ENyxXRzYrli", name:"Ivonne-Aldaz_AI-Experiment_Cinematic-Mediterranean_004.png", mimeType:"image/png" },
+    { id:"1yNCxrQvDoxulfXqTojUKsfDM1qv-ztc-", name:"Ivonne-Aldaz_AI-Experiment_Liquid-Concept_001.mp4", mimeType:"video/mp4" },
+    { id:"1_QUw7xUrbIl1MfJSEvOgm_gGCpMeOTGn", name:"Ivonne-Aldaz_AI-Experiment_Liquid-Concept_002.mp4", mimeType:"video/mp4" },
+    { id:"1Oj1fibxkBmuWkSmRUkbZIcKDs2cwUrzr", name:"Ivonne-Aldaz_AI-Experiment_Liquid-Concept_003.mp4", mimeType:"video/mp4" },
+  ],
 };
 
 export async function listDriveFolder(folderId: string): Promise<DriveFile[]> {

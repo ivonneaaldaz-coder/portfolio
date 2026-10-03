@@ -17,7 +17,6 @@ export default async function GenerativeVisualsPage() {
   return (
     <section className="gen-page page">
       <header className="travel-intro section-pad">
-        <p className="eyebrow">EXPERIMENTS</p>
         <h1>Generative Visuals</h1>
         <p>Image and motion studies made with generative tools — a running visual notebook rather than a finished portfolio.</p>
       </header>

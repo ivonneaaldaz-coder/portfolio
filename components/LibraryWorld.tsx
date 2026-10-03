@@ -15,11 +15,60 @@ const knownBooks: Record<string,{ title:string; author:string; href:string|null 
 };
 
 const quotes = [
-  { label:"Decision making", className:"common-card-a" },
-  { label:"Making", className:"common-card-b" },
-  { label:"Attention", className:"common-card-c" },
-  { label:"Place", className:"common-card-d" },
-  { label:"Learning", className:"common-card-e" },
+  {
+    quote:"Two roads diverged in a wood, and I—\nI took the one less traveled by,\nAnd that has made all the difference.",
+    author:"Robert Frost",
+    source:"The Road Not Taken",
+    full:`Two roads diverged in a yellow wood,
+And sorry I could not travel both
+And be one traveler, long I stood
+And looked down one as far as I could
+To where it bent in the undergrowth;
+
+Then took the other, as just as fair,
+And having perhaps the better claim,
+Because it was grassy and wanted wear;
+Though as for that the passing there
+Had worn them really about the same,
+
+And both that morning equally lay
+In leaves no step had trodden black.
+Oh, I kept the first for another day!
+Yet knowing how way leads on to way,
+I doubted if I should ever come back.
+
+I shall be telling this with a sigh
+Somewhere ages and ages hence:
+Two roads diverged in a wood, and I—
+I took the one less traveled by,
+And that has made all the difference.`
+  },
+  {
+    quote:"That it will never come again\nIs what makes life so sweet.",
+    author:"Emily Dickinson",
+    source:"Poem 1741",
+    full:`That it will never come again
+Is what makes life so sweet.
+Believing what we don’t believe
+Does not exhilarate.
+
+That if it be, it be at best
+An ablative estate—
+This instigates an appetite
+Precisely opposite.`
+  },
+  {
+    quote:"Let your plans be dark and impenetrable as night, and when you move, fall like a thunderbolt.",
+    author:"Sun Tzu",
+    source:"The Art of War",
+    full:null
+  },
+  {
+    quote:"The meaning of life is just to be alive. It is so plain and so obvious and so simple. And yet, everybody rushes around in a great panic as if it were necessary to achieve something beyond themselves.",
+    author:"Alan Watts",
+    source:null,
+    full:null
+  },
 ];
 
 export default function LibraryWorld({ driveBooks = [] }: { driveBooks?: {name:string; image:string}[] }) {
@@ -68,20 +117,29 @@ export default function LibraryWorld({ driveBooks = [] }: { driveBooks?: {name:s
           ) : null}
         </div>
       ) : (
-        <div className="commonplace-world">
-          <div className="commonplace-stack" aria-label="Quote card preview">
-            {quotes.map((item,index)=>(
-              <article className={"common-card " + item.className} key={item.label} style={{"--card-i":index} as React.CSSProperties}>
-                <span>{item.label}</span>
-                <p>Saved quote or passage.</p>
-              </article>
-            ))}
-          </div>
-          <aside className="commonplace-note">
+        <div className="quotes-world">
+          <div className="quotes-intro">
             <span>QUOTES</span>
             <h2>Lines worth keeping.</h2>
             <p>Passages, fragments, and sentences collected slowly over time.</p>
-          </aside>
+          </div>
+          <div className="quote-list">
+            {quotes.map((item,index)=>(
+              <article className="quote-entry" key={item.author + index}>
+                <blockquote>{item.quote.split("\n").map((line,i)=><span key={i}>{line}</span>)}</blockquote>
+                <div className="quote-attribution">
+                  <strong>{item.author}</strong>
+                  {item.source ? <span>{item.source}</span> : null}
+                </div>
+                {item.full ? (
+                  <details className="quote-expand">
+                    <summary>Read full poem</summary>
+                    <div className="quote-full">{item.full.split("\n").map((line,i)=><span key={i}>{line || "\u00A0"}</span>)}</div>
+                  </details>
+                ) : null}
+              </article>
+            ))}
+          </div>
         </div>
       )}
     </div>
