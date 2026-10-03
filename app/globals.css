@@ -1556,3 +1556,24 @@ a.public-row:hover{transform:translateX(4px)}
     align-self:center!important;
   }
 }
+
+
+/* Sidebar footer legibility */
+.sidebar-status{
+  font-size:12px;
+}
+.sidebar-footer{
+  font-size:11.5px;
+}
+.sidebar-footer input,
+.sidebar-footer button{
+  font-size:11.5px;
+}
+.sidebar-subscribe input,
+.sidebar-subscribe button{
+  min-height:42px;
+}
+.sidebar-socials a,
+.listen-link{
+  font-size:11.5px;
+}
