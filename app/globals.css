@@ -2109,3 +2109,206 @@ a.public-row:hover{transform:translateX(4px)}
   .gen-gallery{columns:1}
   .quote-entry blockquote{font-size:28px}
 }
+
+
+/* Scale + spacing pass */
+.library-tabs button,
+.work-filters span,
+.archive-filters button{
+  min-height:36px!important;
+  padding:9px 16px!important;
+  font-size:11px!important;
+  line-height:1!important;
+  letter-spacing:.09em!important;
+}
+
+.eyebrow,
+.hero-kicker{
+  font-size:10.5px!important;
+}
+.section-heading>a,
+.collection-intro>a,
+.related-paths{
+  font-size:11px!important;
+}
+.feature-copy{
+  padding:16px 16px 17px!important;
+}
+.feature-copy h3{
+  margin:0 0 9px!important;
+}
+.feature-copy p,
+.experiment-meta p{
+  font-size:10.5px!important;
+  line-height:1.35!important;
+}
+.experiment-meta h3{
+  margin-bottom:6px!important;
+}
+.home-case>p,
+.case-row-desc,
+.practice-row p{
+  font-size:13px!important;
+  line-height:1.45!important;
+}
+.reference-portal>div>p:first-child,
+.book-author,
+.book-detail>a,
+.quote-attribution,
+.quote-expand summary{
+  font-size:11px!important;
+}
+.sidebar-status{
+  font-size:11.5px!important;
+}
+.sidebar-socials{
+  grid-template-columns:1fr 1fr!important;
+  gap:8px 18px!important;
+  margin-top:14px!important;
+}
+.sidebar-socials a,
+.listen-link{
+  font-size:11.5px!important;
+  line-height:1.35!important;
+}
+.sidebar-socials .social-x{grid-column:auto!important}
+
+/* Cleaner sidebar subscription: one trigger, modal on demand */
+.sidebar-subscribe{
+  margin-bottom:18px!important;
+}
+.subscribe-trigger{
+  width:100%;
+  min-height:38px;
+  border:1px solid var(--line);
+  background:transparent;
+  color:var(--ink);
+  padding:0 12px;
+  text-align:left;
+  text-transform:uppercase;
+  letter-spacing:.1em;
+  font-size:10.5px!important;
+  cursor:pointer;
+}
+.subscribe-trigger:hover{
+  background:var(--ink);
+  color:var(--bg);
+}
+.subscribe-overlay{
+  position:fixed;
+  inset:0;
+  z-index:100;
+  display:grid;
+  place-items:center;
+  padding:24px;
+}
+.subscribe-backdrop{
+  position:absolute;
+  inset:0;
+  border:0;
+  background:rgba(0,0,0,.42);
+  backdrop-filter:blur(4px);
+}
+.subscribe-modal{
+  position:relative;
+  z-index:1;
+  width:min(520px,calc(100vw - 40px));
+  background:var(--bg);
+  border:1px solid var(--line);
+  padding:clamp(28px,4vw,48px);
+  color:var(--ink);
+}
+.subscribe-close{
+  position:absolute;
+  top:14px;
+  right:16px;
+  border:0;
+  background:transparent;
+  font-size:22px!important;
+  cursor:pointer;
+}
+.subscribe-modal h2{
+  margin:18px 0 10px;
+  font-size:clamp(30px,4vw,48px);
+  line-height:.98;
+  letter-spacing:-.05em;
+  font-weight:500;
+}
+.subscribe-modal>p:not(.eyebrow):not(.subscribe-note){
+  margin:0 0 26px;
+  color:var(--muted);
+  font-size:14px;
+}
+.subscribe-modal form{
+  display:grid!important;
+  grid-template-columns:minmax(0,1fr) auto!important;
+  border:1px solid var(--line)!important;
+}
+.subscribe-modal input{
+  min-height:44px!important;
+  padding:0 12px!important;
+  border:0!important;
+  background:transparent!important;
+  color:var(--ink)!important;
+  font-size:13px!important;
+  outline:0;
+}
+.subscribe-modal form button{
+  min-height:44px!important;
+  border:0!important;
+  border-left:1px solid var(--line)!important;
+  background:transparent!important;
+  padding:0 14px!important;
+  font-size:10.5px!important;
+  text-transform:uppercase;
+  letter-spacing:.09em;
+  cursor:pointer;
+}
+.subscribe-note{
+  font-size:11px!important;
+  margin-top:10px!important;
+}
+
+/* Generative gallery: preserve every source image/video in full */
+.gen-gallery{
+  columns:3!important;
+  column-gap:14px!important;
+  display:block!important;
+}
+.gen-card,
+.gen-card:nth-child(7n+1),
+.gen-card:nth-child(7n+5){
+  display:block!important;
+  width:100%!important;
+  height:auto!important;
+  aspect-ratio:auto!important;
+  grid-column:auto!important;
+  overflow:visible!important;
+  break-inside:avoid!important;
+  margin:0 0 14px!important;
+  background:transparent!important;
+}
+.gen-card img,
+.gen-card video{
+  width:100%!important;
+  height:auto!important;
+  max-height:none!important;
+  object-fit:contain!important;
+  object-position:center!important;
+  display:block!important;
+}
+.gen-lightbox .art-lightbox-stage img,
+.gen-lightbox .art-lightbox-stage video{
+  width:auto!important;
+  height:auto!important;
+  max-width:min(86vw,1400px)!important;
+  max-height:82vh!important;
+  object-fit:contain!important;
+}
+
+@media(max-width:900px){
+  .gen-gallery{columns:2!important}
+}
+@media(max-width:560px){
+  .gen-gallery{columns:1!important}
+}

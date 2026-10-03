@@ -45,11 +45,10 @@ export default function Sidebar() {
         <div className="sidebar-footer">
           <SidebarSubscribe />
           <div className="sidebar-socials" aria-label="Social links">
-            <a href="mailto:hello@ivonnealdaz.com">Email ↗︎</a>
-            <a href="https://www.linkedin.com/in/ivonnealdaz/" target="_blank" rel="noreferrer">LinkedIn ↗︎</a>
             <a href="https://www.pinterest.com/ivonnealdaz/" target="_blank" rel="noreferrer">Pinterest ↗︎</a>
             <a href="https://github.com/ivonneaaldaz-coder" target="_blank" rel="noreferrer">GitHub ↗︎</a>
-            <a className="social-x" href="https://x.com/ivonnealdazz" target="_blank" rel="noreferrer">X ↗︎</a>
+            <a href="https://www.linkedin.com/in/ivonnealdaz/" target="_blank" rel="noreferrer">LinkedIn ↗︎</a>
+            <a href="https://x.com/ivonnealdazz" target="_blank" rel="noreferrer">X ↗︎</a>
           </div>
           <a className="listen-link" href="https://open.spotify.com/user/ivonnealdaz" target="_blank" rel="noreferrer">
             Listen on Spotify ↗︎
