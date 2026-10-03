@@ -1,7 +1,14 @@
 import Link from "next/link";
 import LibraryWorld from "@/components/LibraryWorld";
+import { driveImageUrl, listDriveFolder } from "@/lib/googleDrive";
 
-export default function BooksPage() {
+const BOOKS_FOLDER = "1mp7-HM3jdj_Q0rp4ltW49dUhSIoLbySt";
+
+export default async function BooksPage() {
+  const files = (await listDriveFolder(BOOKS_FOLDER))
+    .filter(file => file.mimeType.startsWith("image/"))
+    .map(file => ({ name:file.name, image:driveImageUrl(file.id) }));
+
   return (
     <section className="page section-pad library-page">
       <header className="collection-intro">
@@ -11,7 +18,7 @@ export default function BooksPage() {
         </div>
         <Link href="/library">Back to Library ←</Link>
       </header>
-      <LibraryWorld />
+      <LibraryWorld driveBooks={files} />
       <nav className="related-paths" aria-label="Explore next">
         <Link href="/visual-references">Visual References →</Link>
         <Link href="/music">Music →</Link>

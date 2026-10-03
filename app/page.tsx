@@ -1,11 +1,14 @@
 import Link from "next/link";
+import { driveImageUrl, listDriveFolder, normalizeDriveName } from "@/lib/googleDrive";
+
+const PROJECT_FOLDER = "1hpdPGeKX8nISrESD0EAzdCeAoVCnnnl7";
 
 const features = [
   { title: "The Lab", meta: "Ideas / Systems / Experiments", className: "feature feature-lab", href: "https://lab.ivonnealdaz.com", external: true },
-  { title: "Whitespace", meta: "Strategy / Brand / AI", className: "feature", href: "https://www.bywhitespace.com/", external: true },
-  { title: "Art Practice", meta: "Painting / Ceramics / Design", className: "feature", href: "/art" },
-  { title: "Good World Living", meta: "Experiences / Places / Objects", className: "feature", href: "https://www.goodworldliving.com/", external: true },
-  { title: "Travel", meta: "Places / Photography / Reflections", className: "feature", href: "/travel" },
+  { title: "Whitespace", meta: "Strategy / Brand / AI", className: "feature", href: "https://www.bywhitespace.com/", external: true, driveKey:"whitespace" },
+  { title: "Art Practice", meta: "Painting / Ceramics / Design", className: "feature", href: "/art", driveKey:"art" },
+  { title: "Good World Living", meta: "Experiences / Places / Objects", className: "feature", href: "https://www.goodworldliving.com/", external: true, driveKey:"good world living" },
+  { title: "Travel", meta: "Places / Photography / Reflections", className: "feature", href: "/travel", driveKey:"travel" },
 ];
 
 const studies = [
@@ -18,9 +21,13 @@ const experiments = [
   ["Ask Eve", "Conversational CV", "/experiments/ask-eve"],
   ["Chatroom", "Public internet experiment", "/experiments/chatroom"],
   ["Snake", "Game + global leaderboard", "/experiments/snake"],
+  ["Generative Visuals", "AI image + motion studies", "/experiments/generative-visuals"],
 ];
 
-export default function Home() {
+export default async function Home() {
+  const projectFiles = await listDriveFolder(PROJECT_FOLDER);
+  const projectImages = new Map(projectFiles.map(file => [normalizeDriveName(file.name), driveImageUrl(file.id)]));
+
   return (
     <>
       <section className="hero-compact section-pad">
@@ -38,6 +45,7 @@ export default function Home() {
 
         <div className="feature-grid">
           {features.map((item, index) => {
+            const image = item.driveKey ? projectImages.get(item.driveKey) : null;
             const content = (
               <>
                 <div className="feature-media">
@@ -54,15 +62,9 @@ export default function Home() {
                         </div>
                       </div>
                     </div>
-                  ) : index === 1 ? (
-    <div className="project-photo project-sprite project-sprite-1" aria-hidden="true" />
-  ) : index === 2 ? (
-    <div className="project-photo project-sprite project-sprite-2" aria-hidden="true" />
-  ) : index === 3 ? (
-    <div className="project-photo project-sprite project-sprite-3" aria-hidden="true" />
-  ) : (
-    <div className="project-photo project-sprite project-sprite-4" aria-hidden="true" />
-  )}
+                  ) : image ? (
+                    <img className="project-photo" src={image} alt="" />
+                  ) : null}
                 </div>
                 <div className="feature-copy">
                   <div><h3>{item.title}</h3><p>{item.meta}</p></div>
@@ -100,13 +102,14 @@ export default function Home() {
           <h2 className="section-title small-title">Experiments</h2>
           <Link href="/work#experiments">View all →</Link>
         </div>
-        <div className="experiment-grid experiment-grid-three">
+        <div className="experiment-grid experiment-grid-four">
           {experiments.map(([title,meta,href], index) => (
             <Link className="experiment-card experiment-link" href={href} key={title}>
               <div className={"experiment-thumb exp-" + index}>
                 {index === 0 && <span>ask eve</span>}
                 {index === 1 && <span className="system-mini">CHAT<br/>ROOM.exe</span>}
                 {index === 2 && <span className="snake-mini">SNAKE.exe<br/>↑ ↓ ← →</span>}
+                {index === 3 && <span className="gen-mini">GEN<br/>VISUALS</span>}
               </div>
               <div className="experiment-meta">
                 <div><h3>{title}</h3><p>{meta}</p></div>
