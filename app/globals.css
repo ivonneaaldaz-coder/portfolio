@@ -1577,3 +1577,21 @@ a.public-row:hover{transform:translateX(4px)}
 .listen-link{
   font-size:11.5px;
 }
+
+/* Editorial project-card direction */
+:root{--editorial-serif:"Iowan Old Style","Palatino Linotype","Book Antiqua",Palatino,Baskerville,"Times New Roman",serif}
+.section-title,.feature-copy h3{font-family:var(--editorial-serif);font-weight:400;letter-spacing:-.045em}
+.section-title{font-size:clamp(46px,5vw,78px)}
+.feature-copy h3{font-size:24px}
+.feature-media{background:#e9e5dc}
+.project-photo,.project-visual{width:100%;height:100%;display:block;object-fit:cover}
+.project-photo{filter:saturate(.72) contrast(.94) brightness(1.02) sepia(.05)}
+.project-art{object-position:center 48%;filter:saturate(.78) contrast(.97) brightness(.96)}
+.project-gwl{object-position:center 58%;filter:saturate(.72) contrast(.92) brightness(1.02) sepia(.08)}
+.project-travel{object-position:center 58%;filter:saturate(.66) contrast(.92) brightness(1.04) sepia(.06)}
+.project-whitespace{position:relative;overflow:hidden;background:#f2efe7}
+.project-whitespace:before{content:"";position:absolute;inset:-28% -12% -30% 43%;background:repeating-radial-gradient(ellipse at 0 52%,#111 0 9px,#ece8df 10px 22px);transform:rotate(-18deg) scale(1.25);transform-origin:center}
+.ws-orb{position:absolute;width:26%;aspect-ratio:1;border-radius:50%;background:#a31f1f;right:26%;top:24%;z-index:1}
+.ws-rib{display:none}
+.about-portrait{aspect-ratio:1/1;overflow:hidden;background:#d8d3c9}
+.about-portrait img{width:100%;height:100%;object-fit:cover;display:block;filter:saturate(.78) contrast(.94) brightness(.97)}

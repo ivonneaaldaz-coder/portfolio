@@ -20,7 +20,7 @@ export default function AboutPage() {
   return (
     <section className="page section-pad about-page">
       <div className="about-hero">
-        <div className="portrait-placeholder"><span>PORTRAIT</span></div>
+        <div className="about-portrait"><img src="/ivonne-headshot.webp" alt="Ivonne Aldaz" /></div>
         <div className="about-copy">
           <h1>Strategist, artist, builder, educator.</h1>
           <p>My work moves between brand strategy, technology, systems, and visual art — from building digital tools and brand worlds to teaching, making, and independent experiments.</p>
