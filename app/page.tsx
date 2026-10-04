@@ -1,140 +1,76 @@
 import Link from "next/link";
-import { driveImageUrl, listDriveFolder, normalizeDriveName } from "@/lib/googleDrive";
 
-const PROJECT_FOLDER = "1hpdPGeKX8nISrESD0EAzdCeAoVCnnnl7";
+export const metadata = {
+  title: "Ivonne A. Aldaz",
+  description: "I make things — brands, art, experiences.",
+};
 
-const features = [
-  { title: "The Lab", meta: "Ideas / Systems / Experiments", className: "feature feature-lab", href: "https://lab.ivonnealdaz.com", external: true },
-  { title: "Whitespace", meta: "Strategy / Brand / AI", className: "feature", href: "https://www.bywhitespace.com/", external: true, driveKey:"whitespace" },
-  { title: "Art Practice", meta: "Painting / Ceramics / Design", className: "feature", href: "/art", driveKey:"art" },
-  { title: "Good World Living", meta: "Experiences / Places / Objects", className: "feature", href: "https://www.goodworldliving.com/", external: true, driveKey:"good world living" },
-  { title: "Travel", meta: "Places / Photography / Reflections", className: "feature", href: "/travel", driveKey:"travel" },
+const menu = [
+  { n:"01.", label:"Start Here", href:"/overview" },
+  { n:"02.", label:"Whitespace", href:"https://www.bywhitespace.com/", external:true },
+  { n:"03.", label:"Good World Living", href:"https://www.goodworldliving.com/", external:true },
+  { n:"04.", label:"The Lab", href:"https://lab.ivonnealdaz.com", external:true },
+  { n:"05.", label:"Art Gallery", href:"/art" },
+  { n:"06.", label:"Playlists", href:"/music" },
 ];
 
-const studies = [
-  ["Relationship Operating System", "Systems + CRM", "A system for turning fragmented contacts and follow-ups into an actionable relationship pipeline.", "/work/relationship-operating-system"],
-  ["Brand + Digital Repositioning", "Brand + Digital", "Connecting positioning, message, experience, and execution into one clearer system.", "/work/brand-digital-repositioning"],
-  ["AI-Assisted Lead Engine", "AI + Automation", "Turning messy inbound information into structured records, priorities, and next actions.", "/work/ai-assisted-lead-engine"],
+const essays = [
+  { label:"Books That Have Transformed My Life →", href:"https://www.goodworldliving.com/articles/reading-recommendations" },
+  { label:"Strategy without execution is just expensive advice →", href:"https://www.bywhitespace.com/blog/strategy-without-execution-expensive-advice" },
+  { label:"Provence — how an art residency shifted my path →", href:"https://www.goodworldliving.com/articles/how-an-art-residency-in-provence-transformed-my-creative-path" },
 ];
 
-const experiments = [
-  ["Ask Eve", "Conversational CV", "/experiments/ask-eve"],
-  ["Chatroom", "Public internet experiment", "/experiments/chatroom"],
-  ["Snake", "Game + global leaderboard", "/experiments/snake"],
-  ["Generative Visuals", "AI image + motion studies", "/experiments/generative-visuals"],
-];
-
-export default async function Home() {
-  const projectFiles = await listDriveFolder(PROJECT_FOLDER);
-  const projectImages = new Map(projectFiles.map(file => [normalizeDriveName(file.name), driveImageUrl(file.id)]));
-
+export default function LandingPage() {
   return (
-    <>
-      <section className="hero-compact section-pad">
-        <div className="hero-row">
-          <h1>Strategy, technology, art.</h1>
-          <p>I work across brand, systems, and creative practice — building digital tools, visual worlds, and experiences.</p>
-        </div>
-      </section>
+    <div className="landing-page">
+      <div className="landing-grain" aria-hidden="true" />
 
-      <section className="selected section-pad">
-        <div className="section-heading">
-          <h2 className="section-title">Projects</h2>
-          <Link href="/work">Explore all →</Link>
-        </div>
+      <header className="landing-header">
+        <h1>Ivonne A. Aldaz</h1>
+        <p>I make things – brands, art, experiences.</p>
+      </header>
 
-        <div className="feature-grid">
-          {features.map((item, index) => {
-            const image = item.driveKey ? projectImages.get(item.driveKey) : null;
-            const content = (
-              <>
-                <div className="feature-media">
-                  {index === 0 ? (
-                    <div className="retro-shell">
-                      <div className="retro-bar">LAB.exe <span>— □ ×</span></div>
-                      <div className="retro-desktop">
-                        <div className="retro-icon">LAB</div>
-                        <div className="retro-icon">NOTES</div>
-                        <div className="retro-icon">ASK EVE</div>
-                        <div className="retro-window">
-                          <div className="retro-window-head">IVONNE_OS</div>
-                          <p>A more interesting internet.</p>
-                        </div>
-                      </div>
-                    </div>
-                  ) : image ? (
-                    <img className="project-photo" src={image} alt="" />
-                  ) : null}
-                </div>
-                <div className="feature-copy">
-                  <div><h3>{item.title}</h3><p>{item.meta}</p></div>
-                  <span className="circle-arrow">→</span>
-                </div>
-              </>
-            );
-
+      <div className="landing-main-grid">
+        <nav className="landing-menu" aria-label="Explore">
+          {menu.map(item => {
+            const content = <><span>{item.n}</span><strong>{item.label}</strong></>;
             return item.external ? (
-              <a className={item.className} key={item.title} href={item.href} target="_blank" rel="noreferrer">{content}</a>
+              <a key={item.label} href={item.href} target="_blank" rel="noreferrer">{content}</a>
             ) : (
-              <Link className={item.className} key={item.title} href={item.href}>{content}</Link>
+              <Link key={item.label} href={item.href}>{content}</Link>
             );
           })}
-        </div>
-      </section>
+        </nav>
 
-      <section className="home-cases section-pad">
-        <div className="section-heading">
-          <h2 className="section-title small-title">Selected Case Studies</h2>
-          <Link href="/work">View all →</Link>
-        </div>
-        <div className="home-case-list">
-          {studies.map(([title,tag,desc,href]) => (
-            <Link className="home-case" href={href} key={title}>
-              <div><h3>{title}</h3></div>
-              <p>{desc}</p><span>→</span>
-            </Link>
-          ))}
-        </div>
-      </section>
+        <aside className="landing-lab-card">
+          <p>I built a retro OS version of this site – draggable windows, a live chatroom, a snake game. Go down the rabbit hole.</p>
+          <a href="https://lab.ivonnealdaz.com" target="_blank" rel="noreferrer">Open the Lab →</a>
+        </aside>
+      </div>
 
-      <section className="experiments section-pad">
-        <div className="section-heading">
-          <h2 className="section-title small-title">Experiments</h2>
-          <Link href="/work#experiments">View all →</Link>
-        </div>
-        <div className="experiment-grid experiment-grid-four">
-          {experiments.map(([title,meta,href], index) => (
-            <Link className="experiment-card experiment-link" href={href} key={title}>
-              <div className={"experiment-thumb exp-" + index}>
-                {index === 0 && <span>ask eve</span>}
-                {index === 1 && <span className="system-mini">CHAT<br/>ROOM.exe</span>}
-                {index === 2 && <span className="snake-mini">SNAKE.exe<br/>↑ ↓ ← →</span>}
-                {index === 3 && <span className="gen-mini">GEN<br/>VISUALS</span>}
-              </div>
-              <div className="experiment-meta">
-                <div><h3>{title}</h3><p>{meta}</p></div>
-              </div>
-            </Link>
-          ))}
-        </div>
-      </section>
+      <div className="landing-essays">
+        {essays.map(item => (
+          <a key={item.label} href={item.href} target="_blank" rel="noreferrer">{item.label}</a>
+        ))}
+      </div>
 
-      <section className="footer-grid section-pad">
-        <div className="footer-about">
-          <p className="eyebrow">ABOUT</p>
-          <h2>I move between strategy, technology, and art.</h2>
-          <Link href="/about">More about me →</Link>
+      <footer className="landing-footer">
+        <p className="landing-studio">The world is my studio.</p>
+        <div className="landing-footer-row">
+          <nav className="landing-socials" aria-label="Social links">
+            <a href="https://www.instagram.com/ivonnealdazz/" target="_blank" rel="noreferrer">Instagram</a>
+            <a href="https://x.com/ivonnealdazz" target="_blank" rel="noreferrer">Twitter/X</a>
+            <a href="https://www.linkedin.com/in/ivonnealdaz/" target="_blank" rel="noreferrer">LinkedIn</a>
+            <a href="https://github.com/ivonneaaldaz-coder" target="_blank" rel="noreferrer">GitHub</a>
+            <a href="https://www.pinterest.com/ivonnealdaz/" target="_blank" rel="noreferrer">Pinterest</a>
+          </nav>
+          <form className="landing-subscribe">
+            <input type="email" name="email" placeholder="Email address" aria-label="Email address" />
+            <button type="button">Subscribe</button>
+          </form>
         </div>
-        <div>
-          <p className="eyebrow">CURRENTLY</p>
-          <ul><li>Building digital systems</li><li>Teaching marketing + entrepreneurship</li><li>Making and exhibiting art</li><li>Developing Good World Living</li></ul>
-        </div>
-        <div>
-          <p className="eyebrow">LET’S CONNECT</p>
-          <p className="muted">For work, exhibitions, collaborations, or conversation.</p>
-          <a className="pill-link" href="mailto:hello@ivonnealdaz.com">Get in touch →</a>
-        </div>
-      </section>
-    </>
+        <p className="landing-copyright">© 2026 IVONNE ALDAZ, ALL RIGHTS RESERVED.</p>
+      </footer>
+    </div>
   );
 }

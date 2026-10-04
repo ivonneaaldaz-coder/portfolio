@@ -5,7 +5,7 @@ import { usePathname } from "next/navigation";
 import SidebarSubscribe from "@/components/SidebarSubscribe";
 
 const links = [
-  { label: "Overview", href: "/" },
+  { label: "Overview", href: "/overview" },
   { label: "Work", href: "/work" },
   { label: "Lab ↗︎", href: "https://lab.ivonnealdaz.com", external: true },
   { label: "Library", href: "/library" },
@@ -23,7 +23,7 @@ export default function Sidebar() {
 
         <nav className="sidebar-nav" aria-label="Primary">
           {links.map((link) => {
-            const active = !link.external && (link.href === "/" ? pathname === "/" : pathname.startsWith(link.href));
+            const active = !link.external && pathname.startsWith(link.href);
             return link.external ? (
               <a key={link.label} href={link.href} target="_blank" rel="noreferrer">
                 {link.label}

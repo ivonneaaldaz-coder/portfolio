@@ -35,7 +35,7 @@ export default function MobileNav() {
         <summary>Menu</summary>
         <div className="mobile-menu">
           <nav className="mobile-menu-links">
-            <Link href="/" onClick={(event) => go(event, "/")}>Overview</Link>
+            <Link href="/overview" onClick={(event) => go(event, "/overview")}>Overview</Link>
             <Link href="/work" onClick={(event) => go(event, "/work")}>Work</Link>
             <a href="https://lab.ivonnealdaz.com" target="_blank" rel="noreferrer" onClick={closeExternal}>
               Lab <span className="text-arrow" aria-hidden="true" />
