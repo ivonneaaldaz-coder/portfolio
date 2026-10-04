@@ -12,9 +12,9 @@ const features = [
 ];
 
 const studies = [
-  ["Relationship Operating System", "Systems + CRM", "A system for turning fragmented contacts and follow-ups into an actionable relationship pipeline.", "/work/relationship-operating-system"],
-  ["Brand + Digital Repositioning", "Brand + Digital", "Connecting positioning, message, experience, and execution into one clearer system.", "/work/brand-digital-repositioning"],
-  ["AI-Assisted Lead Engine", "AI + Automation", "Turning messy inbound information into structured records, priorities, and next actions.", "/work/ai-assisted-lead-engine"],
+  ["Future of Marketing", "7K → 50K+ subscribers", "Built and grew TINT’s owned-media platform across newsletters, webinars, podcasts, events, and industry programming.", "/work/future-of-marketing"],
+  ["Research-Led Content Engine", "Research → year of campaigns", "Turned original research and expert interviews into a report, press, blogs, social, newsletters, nurture, and demand-generation campaigns.", "/work/research-led-content-engine"],
+  ["Relationship Operating System", "Systems + CRM", "Turned fragmented contacts and follow-ups into an actionable relationship pipeline for a small team.", "/work/relationship-operating-system"],
 ];
 
 const experiments = [
@@ -22,6 +22,13 @@ const experiments = [
   ["Chatroom", "Public internet experiment", "/experiments/chatroom"],
   ["Snake", "Game + global leaderboard", "/experiments/snake"],
   ["Generative Visuals", "AI image + motion studies", "/experiments/generative-visuals"],
+];
+
+const elsewhere = [
+  { title:"Books + Quotes", meta:"Reading, passages, and ideas worth returning to.", href:"/books" },
+  { title:"Music", meta:"Playlists, records, and a running soundtrack.", href:"/music" },
+  { title:"Visual References", meta:"Images, type, color, and things worth saving.", href:"/visual-references" },
+  { title:"Travel", meta:"Photographs from places I’ve passed through.", href:"/travel" },
 ];
 
 export default async function OverviewPage() {
@@ -85,12 +92,12 @@ export default async function OverviewPage() {
       <section className="home-cases section-pad">
         <div className="section-heading">
           <h2 className="section-title small-title">Selected Case Studies</h2>
-          <Link href="/work">View all →</Link>
+          <Link href="/work#case-studies">View all →</Link>
         </div>
         <div className="home-case-list">
           {studies.map(([title,tag,desc,href]) => (
             <Link className="home-case" href={href} key={title}>
-              <div><h3>{title}</h3></div>
+              <div><h3>{title}</h3><span className="home-case-tag">{tag}</span></div>
               <p>{desc}</p><span>→</span>
             </Link>
           ))}
@@ -114,6 +121,20 @@ export default async function OverviewPage() {
               <div className="experiment-meta">
                 <div><h3>{title}</h3><p>{meta}</p></div>
               </div>
+            </Link>
+          ))}
+        </div>
+      </section>
+
+      <section className="overview-elsewhere section-pad">
+        <div className="section-heading">
+          <h2 className="section-title small-title">Elsewhere</h2>
+          <Link href="/library">Open the library →</Link>
+        </div>
+        <div className="overview-elsewhere-grid">
+          {elsewhere.map(item => (
+            <Link href={item.href} className="overview-elsewhere-item" key={item.title}>
+              <div><h3>{item.title}</h3><p>{item.meta}</p></div><span>→</span>
             </Link>
           ))}
         </div>

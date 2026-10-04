@@ -28,7 +28,7 @@ export default function AboutPage() {
             <Link href="/work">Selected work →</Link>
             <Link href="/art">Art practice →</Link>
             <a href="https://lab.ivonnealdaz.com" target="_blank" rel="noreferrer">The Lab ↗︎</a>
-            <Link href="/speaking">Speaking + press →</Link>
+            <Link href="/press">Press + speaking →</Link>
           </div>
         </div>
       </div>
