@@ -6,11 +6,11 @@ import SidebarSubscribe from "@/components/SidebarSubscribe";
 
 const links = [
   { label: "Overview", href: "/overview" },
-  { label: "Work", href: "/work" },
+  { label: "Work", href: "/overview#work" },
   { label: "Lab ↗︎", href: "https://lab.ivonnealdaz.com", external: true },
-  { label: "Library", href: "/library" },
-  { label: "Press", href: "/press" },
-  { label: "About", href: "/about" },
+  { label: "Library", href: "/overview#library" },
+  { label: "Press", href: "/overview#press" },
+  { label: "About", href: "/overview#about" },
 ];
 
 export default function Sidebar() {
@@ -24,7 +24,7 @@ export default function Sidebar() {
 
         <nav className="sidebar-nav" aria-label="Primary">
           {links.map((link) => {
-            const active = !link.external && pathname.startsWith(link.href);
+            const active = !link.external && link.href === "/overview" && pathname === "/overview";
             return link.external ? (
               <a key={link.label} href={link.href} target="_blank" rel="noreferrer">
                 {link.label}

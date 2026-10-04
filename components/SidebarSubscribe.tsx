@@ -32,8 +32,8 @@ export default function SidebarSubscribe() {
           <div className="subscribe-modal">
             <button className="subscribe-close" type="button" onClick={() => setOpen(false)} aria-label="Close">×</button>
             <p className="eyebrow">NEWSLETTER</p>
-            <h2>Occasional notes worth keeping.</h2>
-            <p>Writing, projects, places, and things I’m thinking about.</p>
+            <h2>Writing, projects, places, and things I’m thinking about.</h2>
+            <p>No spam. I only send when it’s worth sharing.</p>
             <form onSubmit={submit}>
               <input type="email" name="email" placeholder="Email address" aria-label="Email address" required autoFocus />
               <button type="submit">Subscribe</button>

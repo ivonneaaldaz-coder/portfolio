@@ -13,7 +13,7 @@ const talks = [
   { year:"2025", org:"St. Mary’s University", title:"How to Make the Most of Your MBA", href:"" },
   { year:"2024", org:"University of Portland School of Business", title:"B2B Marketing in SaaS", href:"" },
   { year:"2023", org:"San Antonio Startup Week", title:"Live Podcast — Spurs", href:"https://vimeo.com/876034599" },
-  { year:"", org:"Texas Tech University", title:"Future Digital Marketing Leaders", href:"" },
+  { year:"2024", org:"Texas Tech University", title:"Future Digital Marketing Leaders", href:"" },
 ];
 
 export default function PressPage() {
@@ -26,8 +26,6 @@ export default function PressPage() {
           <a href="mailto:hello@ivonnealdaz.com?subject=Speaking%20or%20collaboration%20inquiry">Speaking inquiries ↗︎</a>
         </div>
       </header>
-
-      <div className="speaking-topics"><span>Brand</span><span>AI + marketing</span><span>Creativity</span><span>Portfolio careers</span><span>Community</span><span>Entrepreneurship</span></div>
 
       <section className="public-section">
         <div className="section-heading"><h2 className="section-title small-title">Selected press + podcasts</h2></div>
@@ -53,7 +51,7 @@ export default function PressPage() {
       <nav className="related-paths" aria-label="Explore next"><Link href="/work">Selected Work →</Link><Link href="/about">About →</Link></nav>
 
       <section className="speaking-cta">
-        <p>Speaking, teaching, panels, podcasts, guest lectures, and thoughtful collaborations.</p>
+        <p>Speaking, teaching, panels, podcasts, and guest lectures.</p>
         <a href="mailto:hello@ivonnealdaz.com?subject=Speaking%20or%20collaboration%20inquiry">Start a conversation ↗︎</a>
       </section>
     </section>

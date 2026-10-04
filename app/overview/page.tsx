@@ -24,11 +24,29 @@ const experiments = [
   ["Generative Visuals", "AI image + motion studies", "/experiments/generative-visuals"],
 ];
 
-const elsewhere = [
+const library = [
   { title:"Books + Quotes", meta:"Reading, passages, and ideas worth returning to.", href:"/books" },
   { title:"Music", meta:"Playlists, records, and a running soundtrack.", href:"/music" },
   { title:"Visual References", meta:"Images, type, color, and things worth saving.", href:"/visual-references" },
   { title:"Travel", meta:"Photographs from places I’ve passed through.", href:"/travel" },
+];
+
+const writing = [
+  { title:"When the Universe Hands You a Yes", source:"Good World Living · 2025", href:"https://www.goodworldliving.com/articles/when-the-universe-hands-you-a-yes" },
+  { title:"From Brand to Atmosphere: Designing Experiences That Feel Like Worlds", source:"Whitespace · 2026", href:"https://www.bywhitespace.com/blog/designing-experiences-that-feel-like-worlds" },
+  { title:"How an Art Residency in Provence Transformed My Creative Path", source:"Good World Living · 2024", href:"https://www.goodworldliving.com/articles/how-an-art-residency-in-provence-transformed-my-creative-path" },
+];
+
+const pressPreview = [
+  ["Forbes", "Why Retailers Should Utilize TikTok to Grow Their Business", "2021"],
+  ["Adweek", "How Micro and Nano Influencers Drive Big Change", "2021"],
+  ["Digiday", "In the Metaverse, Brands’ FOMO Is Competing With Consumers’ Burnout", "2024"],
+];
+
+const talksPreview = [
+  ["Adweek Social Media Week", "The Power of Community-Created Content", "2022"],
+  ["University of Portland", "B2B Marketing in SaaS", "2024"],
+  ["Texas Tech University", "Future Digital Marketing Leaders", "2024"],
 ];
 
 export default async function OverviewPage() {
@@ -37,17 +55,17 @@ export default async function OverviewPage() {
 
   return (
     <div className="overview-page">
-      <section className="hero-compact section-pad">
+      <section className="hero-compact section-pad" id="overview">
         <div className="hero-row">
           <h1>Strategy, technology, art.</h1>
           <p>I work across brand, systems, and creative practice — building digital tools, visual worlds, and experiences.</p>
         </div>
       </section>
 
-      <section className="selected section-pad">
+      <section className="selected section-pad overview-anchor" id="work">
         <div className="section-heading">
-          <h2 className="section-title">Projects</h2>
-          <Link href="/work">Explore all →</Link>
+          <h2 className="section-title">Current Work</h2>
+          <Link href="/work">View all work →</Link>
         </div>
 
         <div className="feature-grid">
@@ -126,21 +144,51 @@ export default async function OverviewPage() {
         </div>
       </section>
 
-      <section className="overview-elsewhere section-pad">
+      <section className="overview-library section-pad overview-anchor" id="library">
         <div className="section-heading">
-          <h2 className="section-title small-title">Elsewhere</h2>
+          <h2 className="section-title small-title">Library</h2>
           <Link href="/library">Open the library →</Link>
         </div>
-        <div className="overview-elsewhere-grid">
-          {elsewhere.map(item => (
-            <Link href={item.href} className="overview-elsewhere-item" key={item.title}>
+        <div className="overview-library-grid">
+          {library.map(item => (
+            <Link href={item.href} className="overview-library-item" key={item.title}>
               <div><h3>{item.title}</h3><p>{item.meta}</p></div><span>→</span>
             </Link>
           ))}
         </div>
+
+        <div className="overview-writing">
+          <div className="overview-writing-head"><h3>Writing</h3><Link href="/library">View all →</Link></div>
+          {writing.map(item => (
+            <a href={item.href} target="_blank" rel="noreferrer" className="overview-writing-row" key={item.title}>
+              <h4>{item.title}</h4><p>{item.source}</p><span>↗︎</span>
+            </a>
+          ))}
+        </div>
       </section>
 
-      <section className="footer-grid section-pad">
+      <section className="overview-press section-pad overview-anchor" id="press">
+        <div className="section-heading">
+          <h2 className="section-title small-title">Press + Speaking</h2>
+          <Link href="/press">View all →</Link>
+        </div>
+        <div className="overview-press-grid">
+          <div>
+            <p className="eyebrow">SELECTED PRESS</p>
+            {pressPreview.map(([org,title,year]) => (
+              <div className="overview-press-row" key={org+title}><span>{year}</span><div><p>{org}</p><h3>{title}</h3></div></div>
+            ))}
+          </div>
+          <div>
+            <p className="eyebrow">SELECTED TALKS</p>
+            {talksPreview.map(([org,title,year]) => (
+              <div className="overview-press-row" key={org+title}><span>{year}</span><div><p>{org}</p><h3>{title}</h3></div></div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="footer-grid section-pad overview-anchor" id="about">
         <div className="footer-about">
           <p className="eyebrow">ABOUT</p>
           <h2>I move between strategy, technology, and art.</h2>
