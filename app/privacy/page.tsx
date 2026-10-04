@@ -13,7 +13,7 @@ export default function PrivacyPage() {
           <h1>Privacy</h1>
           <p>How information is handled on this website.</p>
         </div>
-        <Link href="/">Back to Overview ←</Link>
+        <Link href="/overview">Back to Overview ←</Link>
       </header>
 
       <div className="privacy-content">

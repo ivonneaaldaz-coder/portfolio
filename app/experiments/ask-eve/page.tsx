@@ -3,7 +3,7 @@ import Link from "next/link";
 export default function AskEveExperiment() {
   return (
     <article className="experiment-detail page section-pad">
-      <Link className="back-link" href="/">← Overview</Link>
+      <Link className="back-link" href="/overview">← Overview</Link>
       <header className="experiment-detail-hero">
         <p className="eyebrow">EXPERIMENT / ASK EVE</p>
         <h1>A conversational CV.</h1>
