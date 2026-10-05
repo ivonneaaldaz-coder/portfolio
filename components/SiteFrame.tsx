@@ -4,6 +4,7 @@ import { usePathname } from "next/navigation";
 import Sidebar from "@/components/Sidebar";
 import MobileNav from "@/components/MobileNav";
 import ThemeToggle from "@/components/ThemeToggle";
+import SiteFooter from "@/components/SiteFooter";
 
 export default function SiteFrame({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
@@ -21,7 +22,7 @@ export default function SiteFrame({ children }: { children: React.ReactNode }) {
       <div className="site-shell">
         <Sidebar />
         <MobileNav />
-        <main className="site-main">{children}</main>
+        <main className="site-main">{children}<SiteFooter /></main>
       </div>
     </>
   );
