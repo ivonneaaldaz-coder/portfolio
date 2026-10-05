@@ -1,11 +1,32 @@
 import Link from "next/link";
 import { driveImageUrl } from "@/lib/googleDrive";
 
-const extras = [
-  { title: "Ventures", copy: "Whitespace · Make Space · Good World Living" },
-  { title: "Community", copy: "San Antonio Arts Commission — Centro de Artes Committee · Witte Museum · San Antonio Art League Museum" },
-  { title: "Languages", copy: "English · Spanish · some French" },
-  { title: "Practice", copy: "Certified yoga + meditation teacher · guitar · learning piano" },
+const experience = [
+  { role: "Founder", company: "Whitespace", dates: "2018 — Present" },
+  { role: "Director, Brand Insights", company: "TrueLoyal (formerly TINT)", dates: "2023 — 2025" },
+  { role: "Senior Marketing Manager", company: "TINT", dates: "2022 — 2023" },
+  { role: "Marketing Manager", company: "TINT", dates: "2020 — 2022" },
+  { role: "Vice President of Marketing", company: "Patel Gaines PLLC", dates: "2015 — 2018" },
+];
+
+const capabilities = [
+  "Brand strategy",
+  "Positioning + messaging",
+  "Consumer insights",
+  "Marketing strategy",
+  "AI + automation",
+  "Creative direction",
+  "Content systems",
+  "Digital products",
+  "Research",
+  "Teaching + facilitation",
+];
+
+const community = [
+  "San Antonio Arts Commission — Centro de Artes Committee",
+  "Witte Museum",
+  "San Antonio Art League Museum",
+  "Alliance Française de San Antonio",
 ];
 
 const brands = [
@@ -66,10 +87,47 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <section className="about-section">
-        <div className="section-heading"><h2 className="section-title small-title">A few more things</h2></div>
-        <div className="elsewhere-grid">
-          {extras.map(item=><div className="elsewhere-item" key={item.title}><h3>{item.title}</h3><p>{item.copy}</p></div>)}
+      <section className="about-section about-resume-section">
+        <div className="about-resume-row">
+          <span className="about-resume-number">01</span>
+          <div className="about-resume-content">
+            <p className="about-resume-label">Experience</p>
+            <div className="about-experience-list">
+              {experience.map(item => (
+                <div className="about-experience-item" key={item.role + item.company}>
+                  <div>
+                    <h3>{item.role}</h3>
+                    <p>{item.company}</p>
+                  </div>
+                  <span>{item.dates}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        <div className="about-resume-row">
+          <span className="about-resume-number">02</span>
+          <div className="about-resume-content">
+            <p className="about-resume-label">Capabilities</p>
+            <div className="about-capabilities-grid">
+              {capabilities.map(item => <span key={item}>{item}</span>)}
+            </div>
+            <div className="about-languages">
+              <span>Languages</span>
+              <p>English · Spanish · French</p>
+            </div>
+          </div>
+        </div>
+
+        <div className="about-resume-row">
+          <span className="about-resume-number">03</span>
+          <div className="about-resume-content">
+            <p className="about-resume-label">Community + culture</p>
+            <div className="about-community-list">
+              {community.map(item => <p key={item}>{item}</p>)}
+            </div>
+          </div>
         </div>
       </section>
 

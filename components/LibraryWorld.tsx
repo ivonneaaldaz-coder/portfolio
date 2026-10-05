@@ -61,7 +61,7 @@ Precisely opposite.`
     quote:"I wanted each and every one of them, but choosing one meant losing all the rest, and, as I sat there, unable to decide, the figs began to wrinkle and go black, and, one by one, they plopped to the ground at my feet.",
     author:"Sylvia Plath",
     source:"The Bell Jar",
-    full:"I wanted each and every one of them, but choosing one meant losing all the rest, and, as I sat there, unable to decide, the figs began to wrinkle and go black, and, one by one, they plopped to the ground at my feet.",
+    full:"I wanted each and every one of them, but choosing one meant losing all the rest, and, as I sat there, unable to decide, the figs began to wrinkle and go black, and, one by one, they plopped to the ground at my feet."
   },
   {
     quote:"Let your plans be dark and impenetrable as night, and when you move, fall like a thunderbolt.",
