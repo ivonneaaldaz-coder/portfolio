@@ -4249,7 +4249,7 @@ a.public-row:focus-visible{
 
 
 /* Final deployment fixes */
-html,body{max-width:100%;overflow-x:hidden}
+html,body{max-width:100%}
 .site-shell,.site-main,.landing-page,.page{max-width:100%;min-width:0}
 .overview-library-item p{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:none!important}
 @media(max-width:900px){.site-main{width:100%;max-width:100%;overflow-x:clip}.landing-page{width:100%;max-width:100%;overflow-x:clip}.section-pad{max-width:100%}}
@@ -4378,5 +4378,44 @@ html,body{max-width:100%;overflow-x:hidden}
   .about-experience-item{
     grid-template-columns:1fr;
     gap:8px;
+  }
+}
+
+
+/* Mobile landing scroll + footer correction */
+@media(max-width:900px){
+  .landing-page{
+    width:100%;
+    max-width:100%;
+    overflow-x:clip!important;
+    overflow-y:visible!important;
+    min-height:100svh;
+  }
+  .landing-footer{
+    padding-top:54px!important;
+  }
+  .landing-studio{
+    margin-bottom:44px!important;
+  }
+  .landing-footer-row{
+    gap:48px!important;
+  }
+  .landing-copyright{
+    margin-top:72px!important;
+    padding-bottom:8px;
+  }
+}
+@media(max-width:560px){
+  .landing-page{
+    padding-bottom:34px!important;
+  }
+  .landing-essays{
+    margin-bottom:58px!important;
+  }
+  .landing-footer{
+    padding-top:46px!important;
+  }
+  .landing-copyright{
+    margin-top:58px!important;
   }
 }
