@@ -1,3 +1,7 @@
+import { pageMetadata } from "@/lib/metadata";
+
+export const metadata = pageMetadata("Future of Marketing", "Built and grew TINT’s owned-media platform from roughly 7,000 to more than 50,000 subscribers — using editorial programming to build audience, authority, and recurring demand-generation opportunities.", "/work/future-of-marketing");
+
 import CaseStudyTemplate from "@/components/CaseStudyTemplate";
 
 export default function FutureOfMarketingPage(){

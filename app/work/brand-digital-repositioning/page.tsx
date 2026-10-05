@@ -1,3 +1,7 @@
+import { pageMetadata } from "@/lib/metadata";
+
+export const metadata = pageMetadata("Brand + Digital Repositioning", "Reworking a lending brand so its positioning, website, sales materials, and ongoing marketing told one clearer story.", "/work/brand-digital-repositioning");
+
 import CaseStudyTemplate from "@/components/CaseStudyTemplate";
 
 export default function BrandDigitalRepositioningPage(){

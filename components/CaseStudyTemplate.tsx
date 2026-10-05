@@ -11,7 +11,7 @@ type Props = {
   dek:string;
   meta:MetaItem[];
   sections:[SectionItem, SectionItem, SectionItem];
-  visual:ReactNode;
+  visual?:ReactNode;
   visualClass?:string;
   facts:FactItem[];
   next?:{ href:string; label:string };
@@ -40,7 +40,7 @@ export default function CaseStudyTemplate({
           <p>{sections[0].copy}</p>
         </div>
 
-        <div className={"case-visual "+visualClass}>{visual}</div>
+        {visual ? <div className={"case-visual "+visualClass}>{visual}</div> : null}
 
         <div className="case-copy">
           <p className="eyebrow">{sections[1].eyebrow}</p>

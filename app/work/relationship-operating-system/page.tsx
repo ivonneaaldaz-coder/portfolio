@@ -1,3 +1,7 @@
+import { pageMetadata } from "@/lib/metadata";
+
+export const metadata = pageMetadata("Relationship Operating System", "Turning a fragmented network of contacts, introductions, and follow-ups into a system a small team could actually use every day.", "/work/relationship-operating-system");
+
 import CaseStudyTemplate from "@/components/CaseStudyTemplate";
 
 export default function RelationshipOperatingSystemPage(){

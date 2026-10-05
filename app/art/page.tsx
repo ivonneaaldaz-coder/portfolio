@@ -1,3 +1,7 @@
+import { pageMetadata } from "@/lib/metadata";
+
+export const metadata = pageMetadata("Art Practice", "Selected paintings, watercolors, exhibitions, and residencies by Ivonne Aldaz.", "/art");
+
 import Link from "next/link";
 import ArtGallery from "@/components/ArtGallery";
 

@@ -1,3 +1,7 @@
+import { pageMetadata } from "@/lib/metadata";
+
+export const metadata = pageMetadata("About", "Meet Ivonne Aldaz: strategist, artist, builder, and educator.", "/about");
+
 import Link from "next/link";
 import { driveImageUrl } from "@/lib/googleDrive";
 

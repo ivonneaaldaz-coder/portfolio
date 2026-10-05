@@ -1,6 +1,7 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import Modal from "./Modal";
 
 export type TravelPhoto = {
   place: string;
@@ -9,23 +10,6 @@ export type TravelPhoto = {
 
 export default function TravelGallery({ photographs }: { photographs: TravelPhoto[] }) {
   const [active, setActive] = useState<number | null>(null);
-
-  useEffect(() => {
-    if (active === null) return;
-
-    const onKey = (event: KeyboardEvent) => {
-      if (event.key === "Escape") setActive(null);
-      if (event.key === "ArrowRight") setActive((active + 1) % photographs.length);
-      if (event.key === "ArrowLeft") setActive((active - 1 + photographs.length) % photographs.length);
-    };
-
-    document.body.style.overflow = "hidden";
-    window.addEventListener("keydown", onKey);
-    return () => {
-      document.body.style.overflow = "";
-      window.removeEventListener("keydown", onKey);
-    };
-  }, [active, photographs.length]);
 
   const previous = () => {
     if (active === null) return;
@@ -51,7 +35,10 @@ export default function TravelGallery({ photographs }: { photographs: TravelPhot
       </div>
 
       {active !== null && (
-        <div className="art-lightbox travel-lightbox" role="dialog" aria-modal="true" aria-label={photographs[active].place}>
+        <Modal className="art-lightbox travel-lightbox" label={photographs[active].place} onClose={() => setActive(null)} onKeyDown={(event) => {
+          if (event.key === "ArrowRight") { event.preventDefault(); next(); }
+          if (event.key === "ArrowLeft") { event.preventDefault(); previous(); }
+        }}>
           <button className="art-lightbox-close" type="button" onClick={() => setActive(null)} aria-label="Close photo viewer">×</button>
           <button className="art-lightbox-prev" type="button" onClick={previous} aria-label="Previous photo">←</button>
 
@@ -65,7 +52,7 @@ export default function TravelGallery({ photographs }: { photographs: TravelPhot
           </div>
 
           <button className="art-lightbox-next" type="button" onClick={next} aria-label="Next photo">→</button>
-        </div>
+        </Modal>
       )}
     </>
   );

@@ -1,6 +1,7 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import Modal from "./Modal";
 
 export type ArtWork = {
   title: string;
@@ -10,23 +11,6 @@ export type ArtWork = {
 
 export default function ArtGallery({ works }: { works: ArtWork[] }) {
   const [active, setActive] = useState<number | null>(null);
-
-  useEffect(() => {
-    if (active === null) return;
-
-    const onKey = (event: KeyboardEvent) => {
-      if (event.key === "Escape") setActive(null);
-      if (event.key === "ArrowRight") setActive((active + 1) % works.length);
-      if (event.key === "ArrowLeft") setActive((active - 1 + works.length) % works.length);
-    };
-
-    document.body.style.overflow = "hidden";
-    window.addEventListener("keydown", onKey);
-    return () => {
-      document.body.style.overflow = "";
-      window.removeEventListener("keydown", onKey);
-    };
-  }, [active, works.length]);
 
   const previous = () => {
     if (active === null) return;
@@ -57,7 +41,10 @@ export default function ArtGallery({ works }: { works: ArtWork[] }) {
       </div>
 
       {active !== null && (
-        <div className="art-lightbox" role="dialog" aria-modal="true" aria-label={works[active].title}>
+        <Modal className="art-lightbox" label={works[active].title} onClose={() => setActive(null)} onKeyDown={(event) => {
+          if (event.key === "ArrowRight") { event.preventDefault(); next(); }
+          if (event.key === "ArrowLeft") { event.preventDefault(); previous(); }
+        }}>
           <button className="art-lightbox-close" type="button" onClick={() => setActive(null)} aria-label="Close artwork viewer">×</button>
           <button className="art-lightbox-prev" type="button" onClick={previous} aria-label="Previous artwork">←</button>
 
@@ -72,7 +59,7 @@ export default function ArtGallery({ works }: { works: ArtWork[] }) {
           </div>
 
           <button className="art-lightbox-next" type="button" onClick={next} aria-label="Next artwork">→</button>
-        </div>
+        </Modal>
       )}
     </>
   );

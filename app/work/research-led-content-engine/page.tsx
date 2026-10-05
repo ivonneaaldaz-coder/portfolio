@@ -1,3 +1,7 @@
+import { pageMetadata } from "@/lib/metadata";
+
+export const metadata = pageMetadata("Research-Led Content Engine", "Turned one original research initiative into a report, earned-media story, editorial calendar, social program, newsletter narrative, nurture sequence, and months of campaign material.", "/work/research-led-content-engine");
+
 import CaseStudyTemplate from "@/components/CaseStudyTemplate";
 
 export default function ResearchLedContentEnginePage(){

@@ -1,3 +1,7 @@
+import { pageMetadata } from "@/lib/metadata";
+
+export const metadata = pageMetadata("Overview", "Strategy, technology, art. Explore Ivonne Aldaz’s work, case studies, writing, and experiments.", "/overview");
+
 import Link from "next/link";
 import { driveImageUrl, listDriveFolder, normalizeDriveName } from "@/lib/googleDrive";
 
@@ -19,10 +23,10 @@ const studies = [
 const moreStudies = [
   { title:"Brand + Digital Repositioning", tag:"Brand / Digital / Campaign", desc:"Connected positioning, message, website, sales materials, and campaigns into one clearer customer journey.", href:"/work/brand-digital-repositioning" },
   { title:"AI-Assisted Lead Engine", tag:"AI / Automation / Operations", desc:"Designed a lightweight workflow for turning messy inbound information into structured records, priorities, and next actions.", href:"/work/ai-assisted-lead-engine" },
-  { title:"Veggies Made Great — Omelet Naming + Positioning", tag:"Research / Naming / Consumer Insights", desc:"Consumer research used to evaluate language, product naming, associations, clarity, and purchase appeal." },
-  { title:"Purina — Consumer Insights Research", tag:"Research / Consumer Insights", desc:"Research designed to uncover audience behavior, perceptions, and actionable implications for the brand." },
-  { title:"Gaia Herbs — Brand + Consumer Insights", tag:"Research / Brand Strategy", desc:"Insight work connecting consumer needs, perceptions, and category context to clearer brand decisions." },
-  { title:"ARM & HAMMER — Consumer Insights Research", tag:"Research / Consumer Insights", desc:"Consumer research translated into strategic findings and recommendations for brand and marketing teams." },
+  { title:"Veggies Made Great — Omelette Rounds", tag:"Research / Naming / Positioning", desc:"Consumer research helped support a breakfast product’s transition from Egg Patties to Omelette Rounds, aligning its name with how people understood it.", href:"/work/veggies-made-great" },
+  { title:"Purina — The Role of Video Reviews", tag:"Research / Consumer Insights", desc:"Explored how video reviews influence pet-care purchase decisions, comparing general market consumers with Purina brand fans.", href:"/work/purina-video-reviews" },
+  { title:"Gaia Herbs — Concept Validation", tag:"Research / Concept Validation", desc:"Evaluated multivitamin concepts before further development to help prioritize opportunities and refine messaging, claims, and positioning.", href:"/work/gaia-herbs-concept-validation" },
+  { title:"ARM & HAMMER — Placement + Pricing", tag:"Research / Retail / Pricing", desc:"Consumer research clarified where shoppers expected to find a new product and what they were willing to pay for it.", href:"/work/arm-hammer-retail-strategy" },
 ];
 
 const experiments = [
@@ -104,7 +108,7 @@ export default async function OverviewPage() {
       <section className="hero-compact section-pad" id="overview">
         <div className="hero-row">
           <h1>Strategy, technology, art.</h1>
-          <p>I work across brand, systems, and creative practice — building digital tools, visual worlds, and experiences.</p>
+          <div className="hero-introduction"><p>I work across brand, systems, and creative practice — building digital tools, visual worlds, and experiences.</p><a className="hero-contact" href="mailto:hello@ivonnealdaz.com">Get in touch ↗<span>hello@ivonnealdaz.com</span></a></div>
         </div>
       </section>
 
