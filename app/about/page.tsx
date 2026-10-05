@@ -29,6 +29,34 @@ const community = [
   "Alliance Française de San Antonio",
 ];
 
+const experience = [
+  { role: "Founder", company: "Whitespace", dates: "2018 — Present" },
+  { role: "Director, Brand Insights", company: "TrueLoyal (formerly TINT)", dates: "2023 — 2025" },
+  { role: "Senior Marketing Manager", company: "TINT", dates: "2022 — 2023" },
+  { role: "Marketing Manager", company: "TINT", dates: "2020 — 2022" },
+  { role: "VP of Marketing", company: "Patel Gaines", dates: "2015 — 2018" },
+];
+
+const capabilities = [
+  "Brand strategy",
+  "Positioning + messaging",
+  "Consumer insights",
+  "Marketing strategy",
+  "AI + automation",
+  "Content systems",
+  "Creative direction",
+  "Digital products",
+  "Research",
+  "Teaching + facilitation",
+];
+
+const community = [
+  "San Antonio Arts Commission — Centro de Artes Committee",
+  "Witte Museum",
+  "San Antonio Art League Museum",
+  "Alliance Française de San Antonio",
+];
+
 const brands = [
   "ARM & HAMMER","Batiste","Clio Snacks","CVS Health","First Response","Flexitol","Fur Buddies","Gaia Herbs",
   "Gerber","H-E-B","Hero Cosmetics","Kellanova","Maggi Noodles","Maison Perrier","Nestlé","Nescafe",
