@@ -25,7 +25,7 @@ const capabilities = [
 const community = [
   "San Antonio Arts Commission — Centro de Artes Committee Member",
   "San Antonio Art League Museum — Docent",
-  "Alliance Française de San Antonio — Committee Member",
+  "Alliance Française de San Antonio — Events + Education Committee",
   "University of the Incarnate Word — Startup Challenge Mentor",
   "San Antonio Public Library — Volunteer Yoga Instructor",
 ];
