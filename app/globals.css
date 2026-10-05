@@ -4871,3 +4871,47 @@ dialog::backdrop { background:rgba(0,0,0,.45); }
     margin-bottom:20px!important;
   }
 }
+
+
+/* 2026-10-05 mobile hierarchy alignment */
+@media(max-width:900px){
+  .about-capabilities-grid{
+    grid-template-columns:repeat(2,minmax(0,1fr))!important;
+    column-gap:24px!important;
+    row-gap:10px!important;
+  }
+
+  .home-case h3,
+  .overview-writing-row h4{
+    font-size:15px!important;
+    line-height:1.38!important;
+    font-weight:500!important;
+    letter-spacing:-.015em!important;
+  }
+
+  .home-case-tag,
+  .overview-writing-row p{
+    font-size:13px!important;
+    line-height:1.4!important;
+  }
+
+  .overview-library-item{
+    display:flex!important;
+    align-items:center!important;
+    justify-content:space-between!important;
+    padding:0 54px 0 24px!important;
+  }
+  .overview-library-item>div{
+    display:flex;
+    align-items:center;
+    min-height:118px;
+  }
+  .overview-library-item h3{
+    margin:0!important;
+  }
+  .overview-library-item>span{
+    top:50%!important;
+    bottom:auto!important;
+    transform:translateY(-50%)!important;
+  }
+}
