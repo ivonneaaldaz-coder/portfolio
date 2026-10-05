@@ -4,7 +4,6 @@ import { driveImageUrl, listDriveFolder, normalizeDriveName } from "@/lib/google
 const PROJECT_FOLDER = "1hpdPGeKX8nISrESD0EAzdCeAoVCnnnl7";
 
 const features = [
-  { title: "The Lab", meta: "Ideas / Systems / Experiments", className: "feature feature-lab", href: "https://lab.ivonnealdaz.com", external: true },
   { title: "Whitespace", meta: "Strategy / Brand / AI", className: "feature", href: "https://www.bywhitespace.com/", external: true, driveKey:"whitespace" },
   { title: "Art Practice", meta: "Painting / Ceramics / Design", className: "feature", href: "/art", driveKey:"art practice" },
   { title: "Good World Living", meta: "Experiences / Places / Objects", className: "feature", href: "https://www.goodworldliving.com/", external: true, driveKey:"good world living" },
@@ -18,10 +17,10 @@ const studies = [
 ];
 
 const experiments = [
-  ["Ask Eve", "Conversational CV", "/experiments/ask-eve"],
-  ["Chatroom", "Public internet experiment", "/experiments/chatroom"],
-  ["Snake", "Game + global leaderboard", "/experiments/snake"],
-  ["Generative Visuals", "AI image + motion studies", "/experiments/generative-visuals"],
+  { title:"The Lab", meta:"Ideas / systems / experiments", href:"https://lab.ivonnealdaz.com", external:true },
+  { title:"Ask Eve", meta:"Conversational CV", href:"/experiments/ask-eve" },
+  { title:"Chatroom", meta:"Public internet experiment", href:"/experiments/chatroom" },
+  { title:"Snake", meta:"Game + global leaderboard", href:"/experiments/snake" },
 ];
 
 const library = [
@@ -74,22 +73,7 @@ export default async function OverviewPage() {
             const content = (
               <>
                 <div className="feature-media">
-                  {index === 0 ? (
-                    <div className="retro-shell">
-                      <div className="retro-bar">LAB.exe <span>— □ ×</span></div>
-                      <div className="retro-desktop">
-                        <div className="retro-icon">LAB</div>
-                        <div className="retro-icon">NOTES</div>
-                        <div className="retro-icon">ASK EVE</div>
-                        <div className="retro-window">
-                          <div className="retro-window-head">IVONNE_OS</div>
-                          <p>A more interesting internet.</p>
-                        </div>
-                      </div>
-                    </div>
-                  ) : image ? (
-                    <img className="project-photo" src={image} alt="" />
-                  ) : null}
+                  {image ? <img className="project-photo" src={image} alt="" /> : null}
                 </div>
                 <div className="feature-copy">
                   <div><h3>{item.title}</h3><p>{item.meta}</p></div>
@@ -128,19 +112,27 @@ export default async function OverviewPage() {
           <Link href="/work#experiments">View all →</Link>
         </div>
         <div className="experiment-grid experiment-grid-four">
-          {experiments.map(([title,meta,href], index) => (
-            <Link className="experiment-card experiment-link" href={href} key={title}>
-              <div className={"experiment-thumb exp-" + index}>
-                {index === 0 && <span>ask eve</span>}
-                {index === 1 && <span className="system-mini">CHAT<br/>ROOM.exe</span>}
-                {index === 2 && <span className="snake-mini">SNAKE.exe<br/>↑ ↓ ← →</span>}
-                {index === 3 && <span className="gen-mini">GEN<br/>VISUALS</span>}
-              </div>
-              <div className="experiment-meta">
-                <div><h3>{title}</h3><p>{meta}</p></div>
-              </div>
-            </Link>
-          ))}
+          {experiments.map((item, index) => {
+            const card = (
+              <>
+                <div className={"experiment-thumb exp-" + index}>
+                  {index === 0 && (
+                    <div className="lab-mini">
+                      <div className="lab-mini-bar">LAB.exe</div>
+                      <div className="lab-mini-window"><span>IVONNE_OS</span><p>A more interesting internet.</p></div>
+                    </div>
+                  )}
+                  {index === 1 && <span>ask eve</span>}
+                  {index === 2 && <span className="system-mini">CHAT<br/>ROOM.exe</span>}
+                  {index === 3 && <span className="snake-mini">SNAKE.exe<br/>↑ ↓ ← →</span>}
+                </div>
+                <div className="experiment-meta"><div><h3>{item.title}</h3><p>{item.meta}</p></div></div>
+              </>
+            );
+            return item.external
+              ? <a className="experiment-card experiment-link" href={item.href} target="_blank" rel="noreferrer" key={item.title}>{card}</a>
+              : <Link className="experiment-card experiment-link" href={item.href} key={item.title}>{card}</Link>;
+          })}
         </div>
       </section>
 

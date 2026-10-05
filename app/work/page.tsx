@@ -24,10 +24,10 @@ const projects = [
 ];
 
 const experiments = [
-  ["Ask Eve","Conversational CV","/experiments/ask-eve"],
-  ["Chatroom","Public internet experiment","/experiments/chatroom"],
-  ["Snake","Game + global leaderboard","/experiments/snake"],
-  ["Generative Visuals","AI image + motion studies","/experiments/generative-visuals"],
+  { title:"The Lab", meta:"Ideas / systems / experiments", href:"https://lab.ivonnealdaz.com", external:true },
+  { title:"Ask Eve", meta:"Conversational CV", href:"/experiments/ask-eve" },
+  { title:"Chatroom", meta:"Public internet experiment", href:"/experiments/chatroom" },
+  { title:"Snake", meta:"Game + global leaderboard", href:"/experiments/snake" },
 ];
 
 export default function WorkPage() {
@@ -84,21 +84,28 @@ export default function WorkPage() {
 
       <section className="work-section" id="experiments">
         <div className="section-heading"><h2 className="section-title small-title">Experiments</h2></div>
-        <a className="lab-intro-row" href="https://lab.ivonnealdaz.com" target="_blank" rel="noreferrer">
-          <div><h3>The Lab</h3><p>A digital playground for things I build, test, and put on the internet.</p></div><span>Enter the Lab ↗︎</span>
-        </a>
         <div className="experiment-grid experiment-grid-four work-experiment-grid">
-          {experiments.map(([title,meta,href], index) => (
-            <Link className="experiment-card experiment-link" href={href} key={title}>
-              <div className={"experiment-thumb exp-" + index}>
-                {index === 0 && <span>ask eve</span>}
-                {index === 1 && <span className="system-mini">CHAT<br/>ROOM.exe</span>}
-                {index === 2 && <span className="snake-mini">SNAKE.exe<br/>↑ ↓ ← →</span>}
-                {index === 3 && <span className="gen-mini">GEN<br/>VISUALS</span>}
-              </div>
-              <div className="experiment-meta"><div><h3>{title}</h3><p>{meta}</p></div></div>
-            </Link>
-          ))}
+          {experiments.map((item, index) => {
+            const card = (
+              <>
+                <div className={"experiment-thumb exp-" + index}>
+                  {index === 0 && (
+                    <div className="lab-mini">
+                      <div className="lab-mini-bar">LAB.exe</div>
+                      <div className="lab-mini-window"><span>IVONNE_OS</span><p>A more interesting internet.</p></div>
+                    </div>
+                  )}
+                  {index === 1 && <span>ask eve</span>}
+                  {index === 2 && <span className="system-mini">CHAT<br/>ROOM.exe</span>}
+                  {index === 3 && <span className="snake-mini">SNAKE.exe<br/>↑ ↓ ← →</span>}
+                </div>
+                <div className="experiment-meta"><div><h3>{item.title}</h3><p>{item.meta}</p></div></div>
+              </>
+            );
+            return item.external
+              ? <a className="experiment-card experiment-link" href={item.href} target="_blank" rel="noreferrer" key={item.title}>{card}</a>
+              : <Link className="experiment-card experiment-link" href={item.href} key={item.title}>{card}</Link>;
+          })}
         </div>
       </section>
     </section>
