@@ -4671,3 +4671,44 @@ dialog::backdrop { background:rgba(0,0,0,.45); }
     max-width:470px!important;
   }
 }
+
+
+/* 2026-10-05 spacing + balance polish */
+.overview-press-row{
+  padding:28px 0!important;
+}
+
+.hero-intro-break{
+  display:block;
+}
+
+@media(min-width:901px){
+  .about-hero{
+    width:min(1260px,100%)!important;
+    margin-left:auto!important;
+    margin-right:auto!important;
+  }
+  .about-copy{
+    max-width:570px!important;
+    padding-right:clamp(24px,3vw,52px);
+  }
+  .about-copy h1{
+    max-width:540px!important;
+  }
+  .about-copy>p{
+    max-width:540px!important;
+  }
+}
+
+@media(max-width:900px){
+  .overview-press-row{
+    padding:24px 0!important;
+  }
+  .hero-intro-break{
+    display:inline;
+  }
+  .about-copy{
+    padding-right:0;
+    max-width:none!important;
+  }
+}
