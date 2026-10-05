@@ -108,7 +108,7 @@ export default async function OverviewPage() {
       <section className="hero-compact section-pad" id="overview">
         <div className="hero-row">
           <h1>Strategy, technology, art.</h1>
-          <div className="hero-introduction"><p>I work across brand, systems, and creative practice — building digital tools, visual worlds, and experiences.</p><a className="hero-contact" href="mailto:hello@ivonnealdaz.com">Get in touch →<span>hello@ivonnealdaz.com</span></a></div>
+          <div className="hero-introduction"><p>I work across brand, systems, and creative practice — <span className="hero-intro-break">building digital tools, visual worlds, and experiences.</span></p><a className="hero-contact" href="mailto:hello@ivonnealdaz.com">Get in touch →<span>hello@ivonnealdaz.com</span></a></div>
         </div>
       </section>
 
