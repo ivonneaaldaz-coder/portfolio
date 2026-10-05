@@ -4556,3 +4556,14 @@ html,body{max-width:100%}
     display:block;
   }
 }
+
+
+/* Mobile landing: prevent decorative grain from extending document height */
+@media(max-width:900px){
+  .landing-page{
+    overflow:clip!important;
+  }
+  .landing-grain{
+    inset:0!important;
+  }
+}
