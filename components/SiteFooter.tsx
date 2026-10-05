@@ -5,7 +5,7 @@ export default function SiteFooter() {
     <section className="footer-grid section-pad site-footer">
       <div className="footer-about">
         <p className="eyebrow">ABOUT</p>
-        <h2>I move between strategy, technology, and art.</h2>
+        <h2>I move between strategy,<span className="footer-about-break"> technology, and art.</span></h2>
         <Link href="/about">More about me →</Link>
       </div>
       <div>

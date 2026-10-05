@@ -10,16 +10,15 @@ const experience = [
 ];
 
 const capabilities = [
-  "Brand strategy",
-  "Positioning + messaging",
-  "Consumer insights",
-  "Marketing strategy",
-  "AI + automation",
-  "Creative direction",
-  "Content systems",
-  "Digital products",
-  "Research",
-  "Teaching + facilitation",
+  "Brand + portfolio strategy",
+  "Positioning + go-to-market",
+  "Consumer + market intelligence",
+  "Growth + marketing strategy",
+  "AI transformation + automation",
+  "Operating systems + workflow design",
+  "Creative direction + brand systems",
+  "Thought leadership + content strategy",
+  "Product + experience strategy",
 ];
 
 const community = [
@@ -31,8 +30,8 @@ const community = [
 ];
 
 const brands = [
-  "H-E-B","Nestlé","CVS Health","Kellanova","Purina","ARM & HAMMER","Gerber","Nescafe","Stouffer's","Sir Kensington's (Unilever)",
-  "Batiste","Clio Snacks","First Response","Gaia Herbs","Hero Cosmetics","Maggi Noodles","Maison Perrier","Pacific Coast Producers",
+  "Hero Cosmetics","Nestlé","CVS Health","Batiste","Purina","ARM & HAMMER","Gerber","Nescafe","Stouffer's","Sir Kensington's (Unilever)",
+  "Kellanova","Clio Snacks","First Response","Gaia Herbs","H-E-B","Maggi Noodles","Maison Perrier","Pacific Coast Producers",
   "TrueLoyal (formerly TINT)","Veggies Made Great","Flexitol","Fur Buddies","viemaa",
 ];
 
