@@ -23,20 +23,21 @@ const capabilities = [
 ];
 
 const community = [
-  "San Antonio Arts Commission — Centro de Artes Committee",
-  "Witte Museum",
-  "San Antonio Art League Museum",
-  "Alliance Française de San Antonio",
+  "San Antonio Arts Commission — Centro de Artes Committee Member",
+  "San Antonio Art League Museum — Docent",
+  "Alliance Française de San Antonio — Committee Member",
+  "University of the Incarnate Word — Startup Challenge Mentor",
+  "San Antonio Public Library — Volunteer Yoga Instructor",
 ];
 
 const brands = [
-  "ARM & HAMMER","Batiste","Clio Snacks","CVS Health","First Response","Flexitol","Fur Buddies","Gaia Herbs",
-  "Gerber","H-E-B","Hero Cosmetics","Kellanova","Maggi Noodles","Maison Perrier","Nestlé","Nescafe",
-  "Pacific Coast Producers","Purina","Sir Kensington's (Unilever)","Stouffer's","TrueLoyal (formerly TINT)","Veggies Made Great","viemaa",
+  "H-E-B","Nestlé","CVS Health","Kellanova","Purina","ARM & HAMMER","Gerber","Nescafe","Stouffer's","Sir Kensington's (Unilever)",
+  "Batiste","Clio Snacks","First Response","Gaia Herbs","Hero Cosmetics","Maggi Noodles","Maison Perrier","Pacific Coast Producers",
+  "TrueLoyal (formerly TINT)","Veggies Made Great","Flexitol","Fur Buddies","viemaa",
 ];
 
-const visibleBrands = brands.slice(0,16);
-const moreBrands = brands.slice(16);
+const visibleBrands = brands.slice(0,10);
+const moreBrands = brands.slice(10);
 
 export default function AboutPage() {
   return (
