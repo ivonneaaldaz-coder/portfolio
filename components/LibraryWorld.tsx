@@ -61,7 +61,7 @@ Precisely opposite.`
     quote:"I wanted each and every one of them, but choosing one meant losing all the rest, and, as I sat there, unable to decide, the figs began to wrinkle and go black, and, one by one, they plopped to the ground at my feet.",
     author:"Sylvia Plath",
     source:"The Bell Jar",
-    full:"In The Bell Jar, Esther imagines her possible futures as figs on a tree. Each fig represents a different life she could choose; her fear of choosing one path and losing the others leaves her frozen until the possibilities begin to disappear.",
+    full:"I wanted each and every one of them, but choosing one meant losing all the rest, and, as I sat there, unable to decide, the figs began to wrinkle and go black, and, one by one, they plopped to the ground at my feet.",
   },
   {
     quote:"Let your plans be dark and impenetrable as night, and when you move, fall like a thunderbolt.",
@@ -139,7 +139,7 @@ export default function LibraryWorld({ driveBooks = [] }: { driveBooks?: {name:s
                 </div>
                 {item.full ? (
                   <details className="quote-expand">
-                    <summary>{item.source === "The Bell Jar" ? "Read context" : "Read full poem"}</summary>
+                    <summary>{item.source === "The Bell Jar" ? "Read excerpt" : "Read full poem"}</summary>
                     <div className="quote-full">{item.full.split("\n").map((line,i)=><span key={i}>{line || "\u00A0"}</span>)}</div>
                   </details>
                 ) : null}

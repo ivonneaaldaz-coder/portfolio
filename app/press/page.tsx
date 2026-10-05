@@ -11,9 +11,8 @@ const press = [
 const talks = [
   { year:"2022", org:"Adweek Social Media Week", title:"The Power of Community-Created Content", href:"https://www.linkedin.com/posts/ivonnealdaz_smw-tintlove-activity-6930008317020819456-GIqE" },
   { year:"2025", org:"St. Mary’s University", title:"How to Make the Most of Your MBA", href:"" },
-  { year:"2024", org:"University of Portland School of Business", title:"B2B Marketing in SaaS", href:"" },
-  { year:"2023", org:"San Antonio Startup Week", title:"Live Podcast — Spurs", href:"https://vimeo.com/876034599" },
-  { year:"2024", org:"Texas Tech University", title:"Future Digital Marketing Leaders", href:"" },
+  { year:"2023", org:"San Antonio Startup Week", title:"Future of Marketing Live Podcast — Spurs Director of Content Strategy", href:"https://vimeo.com/876034599" },
+  { year:"2023", org:"Hootsuite", title:"State of UGC — Virtual Panel", href:"" },
 ];
 
 export default function PressPage() {

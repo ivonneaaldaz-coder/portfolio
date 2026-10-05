@@ -45,8 +45,8 @@ const pressPreview = [
 
 const talksPreview = [
   ["Adweek Social Media Week", "The Power of Community-Created Content", "2022"],
-  ["University of Portland", "B2B Marketing in SaaS", "2024"],
-  ["Texas Tech University", "Future Digital Marketing Leaders", "2024"],
+  ["San Antonio Startup Week", "Future of Marketing Live Podcast — Spurs Director of Content Strategy", "2023"],
+  ["Hootsuite", "State of UGC — Virtual Panel", "2023"],
 ];
 
 export default async function OverviewPage() {
@@ -158,7 +158,7 @@ export default async function OverviewPage() {
         </div>
 
         <div className="overview-writing">
-          <div className="overview-writing-head"><h3>Writing</h3><Link href="/library">View all →</Link></div>
+          <div className="overview-writing-head"><h2 className="section-title small-title">Writing</h2><Link href="/library">View all →</Link></div>
           {writing.map(item => (
             <a href={item.href} target="_blank" rel="noreferrer" className="overview-writing-row" key={item.title}>
               <h4>{item.title}</h4><p>{item.source}</p><span>↗︎</span>
