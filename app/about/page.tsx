@@ -58,35 +58,6 @@ export default function AboutPage() {
         </div>
       </div>
 
-      <div className="about-grid">
-        <div><h2>Strategy</h2><p>Positioning, insight, brand, growth.</p></div>
-        <div><h2>Systems</h2><p>AI, automation, tools, digital products.</p></div>
-        <div><h2>Art</h2><p>Painting, ceramics, photography, design.</p></div>
-        <div><h2>Teaching</h2><p>Marketing, entrepreneurship, workshops.</p></div>
-      </div>
-
-      <section className="about-section">
-        <div className="section-heading"><h2 className="section-title small-title">Selected brands</h2></div>
-        <div className="brand-wall">
-          {visibleBrands.map((brand)=><div className="brand-name" key={brand}><strong>{brand}</strong></div>)}
-        </div>
-        <details className="brand-more">
-          <summary>More brands + collaborations</summary>
-          <div className="brand-wall brand-wall-more">
-            {moreBrands.map((brand)=><div className="brand-name" key={brand}><strong>{brand}</strong></div>)}
-          </div>
-        </details>
-      </section>
-
-      <section className="about-section">
-        <div className="section-heading"><h2 className="section-title small-title">Kind words</h2></div>
-        <div className="quote-grid">
-          <figure className="quote-card"><blockquote>“A rare find. Deeply data-driven, deeply human.”</blockquote><figcaption>— Senior executive</figcaption></figure>
-          <figure className="quote-card"><blockquote>“Everyone keeps saying what a great job you’re doing and how happy the clients are.”</blockquote><figcaption>— Former manager</figcaption></figure>
-          <figure className="quote-card"><blockquote>“Why are we even talking about it? Just hire her.”</blockquote><figcaption>— Former colleague</figcaption></figure>
-        </div>
-      </section>
-
       <section className="about-section about-resume-section">
         <div className="about-resume-row">
           <div className="about-resume-content">
@@ -113,7 +84,31 @@ export default function AboutPage() {
             </div>
           </div>
         </div>
+      </section>
 
+      <section className="about-section">
+        <div className="section-heading"><h2 className="section-title small-title">Selected brands</h2></div>
+        <div className="brand-wall">
+          {visibleBrands.map((brand)=><div className="brand-name" key={brand}><strong>{brand}</strong></div>)}
+        </div>
+        <details className="brand-more">
+          <summary>More brands + collaborations</summary>
+          <div className="brand-wall brand-wall-more">
+            {moreBrands.map((brand)=><div className="brand-name" key={brand}><strong>{brand}</strong></div>)}
+          </div>
+        </details>
+      </section>
+
+      <section className="about-section">
+        <div className="section-heading"><h2 className="section-title small-title">Kind words</h2></div>
+        <div className="quote-grid">
+          <figure className="quote-card"><blockquote>“A rare find. Deeply data-driven, deeply human.”</blockquote><figcaption>— CEO, TrueLoyal</figcaption></figure>
+          <figure className="quote-card"><blockquote>“Everyone keeps saying what a great job you’re doing and how happy the clients are.”</blockquote><figcaption>— CMO, TrueLoyal</figcaption></figure>
+          <figure className="quote-card"><blockquote>“Why are we even talking about it? Just hire her.”</blockquote><figcaption>— VP of Sales, TINT</figcaption></figure>
+        </div>
+      </section>
+
+      <section className="about-section about-community-section">
         <div className="about-resume-row">
           <div className="about-resume-content">
             <p className="about-resume-label">Community + Service</p>
