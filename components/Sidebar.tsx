@@ -10,7 +10,7 @@ const links = [
   { label: "Lab ↗︎", href: "https://lab.ivonnealdaz.com", external: true },
   { label: "Library", href: "/overview#library" },
   { label: "Press", href: "/overview#press" },
-  { label: "About", href: "/overview#about" },
+  { label: "About", href: "/about" },
 ];
 
 export default function Sidebar() {

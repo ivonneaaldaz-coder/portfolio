@@ -42,13 +42,12 @@ export default function MobileNav() {
             </a>
             <Link href="/overview#library" onClick={(event) => go(event, "/overview#library")}>Library</Link>
             <Link href="/overview#press" onClick={(event) => go(event, "/overview#press")}>Press</Link>
-            <Link href="/overview#about" onClick={(event) => go(event, "/overview#about")}>About</Link>
+            <Link href="/about" onClick={(event) => go(event, "/about")}>About</Link>
           </nav>
 
           <div className="mobile-menu-footer">
             <SidebarSubscribe />
             <div className="mobile-socials">
-              <a href="mailto:hello@ivonnealdaz.com" onClick={closeExternal}>Email <span className="text-arrow" aria-hidden="true" /></a>
               <a href="https://www.linkedin.com/in/ivonnealdaz/" target="_blank" rel="noreferrer" onClick={closeExternal}>LinkedIn <span className="text-arrow" aria-hidden="true" /></a>
               <a href="https://www.pinterest.com/ivonnealdaz/" target="_blank" rel="noreferrer" onClick={closeExternal}>Pinterest <span className="text-arrow" aria-hidden="true" /></a>
               <a href="https://github.com/ivonneaaldaz-coder" target="_blank" rel="noreferrer" onClick={closeExternal}>GitHub <span className="text-arrow" aria-hidden="true" /></a>

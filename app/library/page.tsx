@@ -1,53 +1,5 @@
-import Link from "next/link";
+import { redirect } from "next/navigation";
 
-const writing = [
-  { title:"When the Universe Hands You a Yes", source:"Good World Living", year:"2025", href:"https://www.goodworldliving.com/articles/when-the-universe-hands-you-a-yes" },
-  { title:"From Brand to Atmosphere: Designing Experiences That Feel Like Worlds", source:"Whitespace", year:"2026", href:"https://www.bywhitespace.com/blog/designing-experiences-that-feel-like-worlds" },
-  { title:"How an Art Residency in Provence Transformed My Creative Path", source:"Good World Living", year:"2024", href:"https://www.goodworldliving.com/articles/how-an-art-residency-in-provence-transformed-my-creative-path" },
-  { title:"The Shift Toward Intentional Branding: Designing with Meaning in a Noisy World", source:"Whitespace", year:"2025", href:"https://www.bywhitespace.com/blog/intentional-branding-designing-with-meaning-in-a-noisy-world" },
-  { title:"Art Retreat in France: Unveiling Creative Wonders in St. Antonin-Noble Val", source:"Good World Living", year:"2023", href:"https://www.goodworldliving.com/articles/france-art-retreat" },
-];
-
-const references = [
-  { title:"Books + Quotes", desc:"Books, essays, passages, and lines worth keeping.", href:"/books" },
-  { title:"Visual References", desc:"Moodboards, type, imagery, color, and saved references.", href:"/visual-references" },
-  { title:"Places", desc:"Travel, architecture, landscapes, and memorable spaces.", href:"/travel" },
-  { title:"Music", desc:"Playlists, records, and things worth listening to closely.", href:"/music" },
-];
-
-export default function LibraryPage() {
-  return (
-    <section className="page section-pad notes-page">
-      <div className="page-intro notes-intro">
-        <h1>Library</h1>
-        <p>Writing, references, and collections of things worth keeping.</p>
-      </div>
-
-      <section className="notes-section library-collections">
-        <div className="reference-portals">
-          {references.map((item) => (
-            <Link className="reference-portal" href={item.href} key={item.title}>
-              <div><h3>{item.title}</h3><p>{item.desc}</p></div>
-              <span>→</span>
-            </Link>
-          ))}
-        </div>
-      </section>
-
-
-      <section className="notes-section writing-section library-writing-section">
-        <div className="section-heading"><h2 className="section-title small-title">Writing</h2></div>
-        <div className="writing-list">
-          {writing.map((item) => (
-            <a className="writing-row" href={item.href} target="_blank" rel="noreferrer" key={item.title}>
-              <h3>{item.title}</h3>
-              <p>{item.source} · {item.year}</p>
-              <span>↗︎</span>
-            </a>
-          ))}
-        </div>
-      </section>
-
-    </section>
-  );
+export default function LibraryIndexPage(){
+  redirect("/overview#library");
 }
