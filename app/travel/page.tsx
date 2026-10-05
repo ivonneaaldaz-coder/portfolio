@@ -1,3 +1,7 @@
+import { pageMetadata } from "@/lib/metadata";
+
+export const metadata = pageMetadata("Travel", "Photographs from places Ivonne Aldaz has passed through, stayed awhile, and wanted to remember.", "/travel");
+
 import Link from "next/link";
 import TravelGallery from "@/components/TravelGallery";
 

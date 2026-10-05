@@ -1,3 +1,7 @@
+import { pageMetadata } from "@/lib/metadata";
+
+export const metadata = pageMetadata("Books + Quotes", "Books, passages, and ideas worth returning to, curated by Ivonne Aldaz.", "/books");
+
 import Link from "next/link";
 import LibraryWorld from "@/components/LibraryWorld";
 import { driveImageUrl, listDriveFolder } from "@/lib/googleDrive";

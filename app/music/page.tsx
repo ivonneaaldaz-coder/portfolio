@@ -1,3 +1,7 @@
+import { pageMetadata } from "@/lib/metadata";
+
+export const metadata = pageMetadata("Music", "Playlists, records, and a running soundtrack curated by Ivonne Aldaz.", "/music");
+
 import Link from "next/link";
 import SpotifyPlaylists from "@/components/SpotifyPlaylists";
 

@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Modal from "./Modal";
 
 const knownBooks: Record<string,{ title:string; author:string; href:string|null }> = {
   "1.png": { title:"The Alchemist", author:"Paulo Coelho", href:"https://amzn.to/4sULp9V" },
@@ -88,15 +89,16 @@ export default function LibraryWorld({ driveBooks = [] }: { driveBooks?: {name:s
   }));
 
   const [view,setView] = useState<"books"|"quotes">("books");
+  const [bookOpen, setBookOpen] = useState(false);
   const [selected,setSelected] = useState(0);
   const safeSelected = Math.min(selected, Math.max(books.length - 1, 0));
   const activeBook = books[safeSelected];
 
   return (
     <div className="library-experience">
-      <div className="library-tabs" role="tablist" aria-label="Books and quotes">
-        <button type="button" className={view==="books" ? "active" : ""} onClick={()=>setView("books")}>Books</button>
-        <button type="button" className={view==="quotes" ? "active" : ""} onClick={()=>setView("quotes")}>Quotes</button>
+      <div className="library-tabs" role="group" aria-label="Books and quotes">
+        <button type="button" aria-pressed={view==="books"} className={view==="books" ? "active" : ""} onClick={()=>setView("books")}>Books</button>
+        <button type="button" aria-pressed={view==="quotes"} className={view==="quotes" ? "active" : ""} onClick={()=>setView("quotes")}>Quotes</button>
       </div>
 
       {view === "books" ? (
@@ -107,7 +109,11 @@ export default function LibraryWorld({ driveBooks = [] }: { driveBooks?: {name:s
                 type="button"
                 className={"book-cover-tile real-cover" + (safeSelected===index ? " active" : "")}
                 key={book.name}
-                onClick={()=>setSelected(index)}
+                onClick={() => {
+                  setSelected(index);
+                  if (window.matchMedia("(max-width: 900px)").matches) setBookOpen(true);
+                }}
+                aria-pressed={safeSelected === index}
                 aria-label={"Open " + book.title}
               >
                 <img src={book.image} alt="" />
@@ -148,6 +154,17 @@ export default function LibraryWorld({ driveBooks = [] }: { driveBooks?: {name:s
           </div>
         </div>
       )}
+      {bookOpen && activeBook ? (
+        <Modal className="book-dialog" label={activeBook.title} onClose={() => setBookOpen(false)}>
+          <button type="button" className="book-dialog-close" onClick={() => setBookOpen(false)} aria-label="Close book details">×</button>
+          <img src={activeBook.image} alt="" />
+          <div className="book-detail">
+            <p className="book-author">{activeBook.author}</p>
+            <h2>{activeBook.title}</h2>
+            {activeBook.href ? <a href={activeBook.href} target="_blank" rel="noreferrer">View book ↗︎</a> : null}
+          </div>
+        </Modal>
+      ) : null}
     </div>
   );
 }

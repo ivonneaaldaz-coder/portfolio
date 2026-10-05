@@ -1,3 +1,7 @@
+import { pageMetadata } from "@/lib/metadata";
+
+export const metadata = pageMetadata("AI-Assisted Lead Engine", "A lightweight pipeline for turning messy inbound information into structured records, priorities, and next steps.", "/work/ai-assisted-lead-engine");
+
 import CaseStudyTemplate from "@/components/CaseStudyTemplate";
 
 export default function AIAssistedLeadEnginePage(){

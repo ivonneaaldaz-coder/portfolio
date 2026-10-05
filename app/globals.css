@@ -4567,3 +4567,29 @@ html,body{max-width:100%}
     inset:0!important;
   }
 }
+
+/* Accessible viewers and immediate book details. */
+dialog.art-lightbox { width:100%; height:100dvh; max-width:none; max-height:none; margin:0; padding:0; border:0; color:var(--ink); }
+dialog::backdrop { background:rgba(0,0,0,.45); }
+.art-lightbox-stage { height:100dvh; min-height:0; grid-template-rows:minmax(0,1fr) auto; gap:20px; padding-top:60px; }
+.art-lightbox-stage img { max-height:100%; }
+.travel-lightbox .art-lightbox-stage img { max-height:100%; }
+.art-lightbox-meta { display:block; }
+.art-lightbox-meta p { font-size:12px; line-height:1.5; }
+.art-lightbox-close { min-width:44px; min-height:44px; }
+.art-lightbox button:focus-visible,.book-dialog button:focus-visible,.book-cover-tile:focus-visible { outline:2px solid currentColor; outline-offset:-4px; }
+.book-cover-tile.real-cover.active { outline:2px solid var(--ink); outline-offset:4px; }
+.book-dialog { width:min(480px,calc(100% - 32px)); max-height:calc(100dvh - 32px); margin:auto; padding:52px 24px 28px; border:1px solid var(--line); background:var(--paper); color:var(--ink); overflow:auto; }
+.book-dialog-close { position:absolute; top:6px; right:6px; width:44px; height:44px; background:none; border:0; color:inherit; font-size:28px; cursor:pointer; }
+.book-dialog>img { display:block; width:auto; max-width:100%; height: min(32dvh,260px); object-fit:contain; margin:0 auto 24px; }
+.book-dialog .book-detail { position:static; }
+.book-dialog .book-detail h2 { font-size:clamp(28px,8vw,40px); line-height:1.1; }
+.book-dialog .book-detail>a { font-size:14px; padding:12px 0; }
+.hero-introduction { min-width:0; }
+.hero-contact { display:inline-flex; flex-direction:column; gap:5px; margin-top:20px; font-size:15px; line-height:1.4; }
+.hero-contact>span { font-size:13px; color:var(--muted); }
+.hero-contact:hover { text-decoration:underline; text-underline-offset:4px; }
+@media(max-width:900px) { .book-browser>.book-detail { display:none; } }
+
+.hero-row { align-items:center; }
+.hero-introduction>p { margin-left:0; padding-top:0; }
