@@ -89,7 +89,6 @@ export default function AboutPage() {
 
       <section className="about-section about-resume-section">
         <div className="about-resume-row">
-          <span className="about-resume-number">01</span>
           <div className="about-resume-content">
             <p className="about-resume-label">Experience</p>
             <div className="about-experience-list">
@@ -107,23 +106,17 @@ export default function AboutPage() {
         </div>
 
         <div className="about-resume-row">
-          <span className="about-resume-number">02</span>
           <div className="about-resume-content">
             <p className="about-resume-label">Capabilities</p>
             <div className="about-capabilities-grid">
               {capabilities.map(item => <span key={item}>{item}</span>)}
             </div>
-            <div className="about-languages">
-              <span>Languages</span>
-              <p>English · Spanish · French</p>
-            </div>
           </div>
         </div>
 
         <div className="about-resume-row">
-          <span className="about-resume-number">03</span>
           <div className="about-resume-content">
-            <p className="about-resume-label">Community + culture</p>
+            <p className="about-resume-label">Community + Service</p>
             <div className="about-community-list">
               {community.map(item => <p key={item}>{item}</p>)}
             </div>
@@ -138,6 +131,7 @@ export default function AboutPage() {
           <div><h3>MA, International Business + Economics</h3><p>FH Schmalkalden University of Applied Sciences · thesis pending</p></div>
           <div><h3>Bachelor of Arts</h3><p>St. Mary’s University</p></div>
         </div>
+        <div className="education-languages"><span>Languages</span><p>English · Spanish · French</p></div>
       </section>
 
       <section className="about-section">
