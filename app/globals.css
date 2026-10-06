@@ -5066,3 +5066,218 @@ dialog::backdrop { background:rgba(0,0,0,.45); }
     font-size:14px!important;
   }
 }
+
+
+/* 2026-10-06 unified typography system */
+:root{
+  --type-body:16px;
+  --type-body-line:1.55;
+  --type-support:15.5px;
+  --type-support-line:1.5;
+  --type-meta:14px;
+  --type-meta-line:1.45;
+  --type-control:14.5px;
+  --type-row-title:18.5px;
+  --type-section-small:30px;
+}
+
+/* Core supporting copy: readable, still secondary */
+.about-copy>p,
+.hero-row p,
+.footer-grid li,
+.footer-grid .muted,
+.education-list p,
+.education-languages p,
+.about-community-list p,
+.quote-card figcaption,
+.home-case-tag,
+.overview-writing-row p,
+.overview-press-row p,
+.overview-press-row>span,
+.public-row p,
+.public-row>span:first-child,
+.feature-copy p,
+.experiment-meta p,
+.reference-portal p,
+.reference-card p,
+.book-author,
+.book-detail p,
+.vinyl-card p,
+.playlist-copy p,
+.travel-photo figcaption{
+  font-size:var(--type-support)!important;
+  line-height:var(--type-support-line)!important;
+}
+
+/* Row/item titles */
+.overview-press-row h3,
+.public-row h3{
+  font-size:var(--type-row-title)!important;
+  line-height:1.32!important;
+  letter-spacing:-.02em!important;
+}
+.overview-writing-row h4,
+.home-case h3{
+  font-size:17.5px!important;
+  line-height:1.35!important;
+}
+
+/* About hierarchy */
+.about-links,
+.about-links a{
+  font-size:var(--type-control)!important;
+  line-height:1.45!important;
+}
+.about-experience-item h3{
+  font-size:19px!important;
+  line-height:1.25!important;
+}
+.about-experience-item p{
+  font-size:var(--type-support)!important;
+  line-height:1.45!important;
+}
+.about-experience-item>span{
+  font-size:var(--type-meta)!important;
+  line-height:var(--type-meta-line)!important;
+}
+.about-capabilities-grid span,
+.about-capabilities-grid span:nth-child(odd),
+.about-capabilities-grid span:nth-child(even){
+  font-size:var(--type-support)!important;
+  line-height:1.55!important;
+}
+.about-community-list p{
+  font-size:var(--type-support)!important;
+}
+.education-list p,
+.education-languages p{
+  font-size:var(--type-support)!important;
+}
+.education-languages span{
+  font-size:13.5px!important;
+  line-height:1.4!important;
+}
+
+/* Overview hero CTA */
+.hero-contact{
+  font-size:16px!important;
+  line-height:1.45!important;
+  gap:6px!important;
+}
+.hero-contact>span{
+  font-size:15.5px!important;
+  line-height:1.45!important;
+  color:var(--muted)!important;
+}
+
+/* One dropdown/control system everywhere in page content */
+.overview-inline-expand summary,
+.brand-more summary,
+.quote-expand summary,
+.long-story summary,
+.about-earlier-experience summary{
+  display:flex!important;
+  align-items:center!important;
+  justify-content:space-between!important;
+  gap:24px!important;
+  padding:20px 0!important;
+  cursor:pointer!important;
+  list-style:none!important;
+  color:var(--ink)!important;
+  font-size:var(--type-control)!important;
+  line-height:1.35!important;
+  font-weight:500!important;
+  text-transform:uppercase!important;
+  letter-spacing:.09em!important;
+}
+.overview-inline-expand summary::-webkit-details-marker,
+.brand-more summary::-webkit-details-marker,
+.quote-expand summary::-webkit-details-marker,
+.long-story summary::-webkit-details-marker,
+.about-earlier-experience summary::-webkit-details-marker{
+  display:none!important;
+}
+.overview-inline-expand summary span:last-child,
+.quote-expand summary span:last-child,
+.long-story summary span:last-child,
+.about-earlier-experience summary span:last-child{
+  font-size:17px!important;
+  line-height:1!important;
+  font-weight:400!important;
+}
+.about-earlier-experience{
+  border-top:1px solid var(--line)!important;
+}
+.brand-more{
+  border-top:1px solid var(--line)!important;
+  border-bottom:1px solid var(--line)!important;
+  margin-top:14px!important;
+}
+
+/* Universal small interactive / metadata floor */
+.section-heading>a,
+.collection-intro>a,
+.related-paths,
+.back-link,
+.sidebar-socials a,
+.listen-link,
+.book-detail>a,
+.experiment-launch,
+.pill-link,
+.subscribe-trigger,
+.case-meta dt,
+.case-meta dd,
+.archive-row>span,
+.note-row>span,
+.practice-row>span,
+.quote-attribution{
+  font-size:var(--type-meta)!important;
+  line-height:var(--type-meta-line)!important;
+}
+
+/* Preserve the tighter mobile system; never shrink below readable */
+@media(max-width:900px){
+  :root{
+    --type-body:15.5px;
+    --type-support:14px;
+    --type-meta:13px;
+    --type-control:13px;
+    --type-row-title:16px;
+  }
+
+  .about-links,
+  .about-links a{
+    font-size:13.5px!important;
+  }
+  .hero-contact{
+    font-size:15px!important;
+  }
+  .hero-contact>span{
+    font-size:14px!important;
+  }
+  .about-experience-item p,
+  .about-community-list p,
+  .education-list p,
+  .education-languages p,
+  .about-capabilities-grid span,
+  .about-capabilities-grid span:nth-child(odd),
+  .about-capabilities-grid span:nth-child(even){
+    font-size:14px!important;
+  }
+  .about-experience-item>span{
+    font-size:13px!important;
+  }
+  .overview-press-row h3,
+  .public-row h3{
+    font-size:16px!important;
+    line-height:1.38!important;
+  }
+  .overview-inline-expand summary,
+  .brand-more summary,
+  .quote-expand summary,
+  .long-story summary,
+  .about-earlier-experience summary{
+    padding:18px 0!important;
+    font-size:13px!important;
+  }
+}
