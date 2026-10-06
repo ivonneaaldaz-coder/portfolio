@@ -13,12 +13,14 @@ type Props = {
   sections:[SectionItem, SectionItem, SectionItem];
   visual:ReactNode;
   visualClass?:string;
+  secondaryVisual?:ReactNode;
+  secondaryVisualClass?:string;
   facts:FactItem[];
   next?:{ href:string; label:string };
 };
 
 export default function CaseStudyTemplate({
-  eyebrow,title,dek,meta,sections,visual,visualClass="",facts,next
+  eyebrow,title,dek,meta,sections,visual,visualClass="",secondaryVisual,secondaryVisualClass="",facts,next
 }:Props){
   return (
     <article className="case-study case-study-template page section-pad">
@@ -51,6 +53,8 @@ export default function CaseStudyTemplate({
         <div className="case-facts">
           {facts.map(item=><div key={item.title}><h3>{item.title}</h3><p>{item.copy}</p></div>)}
         </div>
+
+        {secondaryVisual ? <div className={"case-visual case-visual-secondary "+secondaryVisualClass}>{secondaryVisual}</div> : null}
 
         <div className="case-copy case-copy-final">
           <p className="eyebrow">{sections[2].eyebrow}</p>
