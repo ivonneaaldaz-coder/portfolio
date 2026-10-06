@@ -19,9 +19,9 @@ const studies = [
 const moreStudies = [
   { title:"Brand + Digital Repositioning", tag:"Brand / Digital / Campaign", desc:"Connected positioning, message, website, sales materials, and campaigns into one clearer customer journey.", href:"/work/brand-digital-repositioning" },
   { title:"AI-Assisted Lead Engine", tag:"AI / Automation / Operations", desc:"Designed a lightweight workflow for turning messy inbound information into structured records, priorities, and next actions.", href:"/work/ai-assisted-lead-engine" },
-  { title:"Veggies Made Great — Omelet Naming + Positioning", tag:"Research / Naming / Consumer Insights", desc:"Consumer research used to evaluate language, product naming, associations, clarity, and purchase appeal." },
+  { title:"Veggies Made Great — Omelet Naming + Positioning", tag:"Research / Naming / Consumer Insights", desc:"Consumer research used to evaluate language, product naming, associations, clarity, and purchase appeal.", href:"/work/veggies-made-great" },
   { title:"Purina — Consumer Insights Research", tag:"Research / Consumer Insights", desc:"Research designed to uncover audience behavior, perceptions, and actionable implications for the brand." },
-  { title:"Gaia Herbs — Brand + Consumer Insights", tag:"Research / Brand Strategy", desc:"Insight work connecting consumer needs, perceptions, and category context to clearer brand decisions." },
+  { title:"Gaia Herbs — Brand + Consumer Insights", tag:"Research / Brand Strategy", desc:"Insight work connecting consumer needs, perceptions, and category context to clearer brand decisions.", href:"/work/gaia-herbs" },
   { title:"ARM & HAMMER — Consumer Insights Research", tag:"Research / Consumer Insights", desc:"Consumer research translated into strategic findings and recommendations for brand and marketing teams." },
 ];
 
