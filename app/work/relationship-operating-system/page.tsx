@@ -3,6 +3,7 @@ import { pageMetadata } from "@/lib/metadata";
 export const metadata = pageMetadata("Relationship Operating System", "Turning a fragmented network of contacts, introductions, and follow-ups into a system a small team could actually use every day.", "/work/relationship-operating-system");
 
 import CaseStudyTemplate from "@/components/CaseStudyTemplate";
+import { driveVideoUrl } from "@/lib/googleDrive";
 
 export default function RelationshipOperatingSystemPage(){
   return <CaseStudyTemplate
@@ -19,8 +20,17 @@ export default function RelationshipOperatingSystemPage(){
       {eyebrow:"THE SYSTEM",title:"A lightweight operating layer around the relationship pipeline.",copy:"I designed the database structure, partner categories, pipeline views, follow-up logic, intake flow, and daily action layer. Automations kept records cleaner and surfaced what needed attention without requiring the team to manually scan the base."},
       {eyebrow:"OUTCOME",title:"A relationship database became an operating system.",copy:"The finished system gave the team a clearer view of its network, reduced manual organization, and created a repeatable way to move relationships forward."},
     ]}
-    visualClass="case-visual-system"
-    visual={<><span>CONTACTS</span><span>→</span><span>CRM</span><span>→</span><span>NEXT ACTION</span></>}
+    visualClass="case-visual-video"
+    visual={<video
+      src={driveVideoUrl("1aZaxk-9wxmUnB72PDPP22zHrmj01Y62V")}
+      autoPlay
+      muted
+      loop
+      playsInline
+      controls
+      preload="metadata"
+      aria-label="Relationship Operating System walkthrough"
+    />}
     facts={[
       {title:"One source of truth",copy:"Contacts, categories, status, last touch, and next steps in a shared system."},
       {title:"Action over storage",copy:"Views and summaries were designed around what the team should do next."},
