@@ -5333,3 +5333,92 @@ dialog::backdrop { background:rgba(0,0,0,.45); }
     min-height:0;
   }
 }
+
+
+/* 2026-10-06 case study visual assets */
+.case-study-template .case-visual img{
+  display:block;
+  max-width:100%;
+  max-height:100%;
+  object-fit:contain;
+}
+.case-study-template .case-visual-report-cover{
+  min-height:clamp(420px,58vw,760px)!important;
+  background:var(--surface-soft)!important;
+  padding:clamp(34px,5vw,72px)!important;
+}
+.case-study-template .case-visual-report-cover img{
+  width:min(520px,70%);
+  max-height:650px;
+  box-shadow:0 18px 46px rgba(17,17,15,.10);
+}
+.case-study-template .case-visual-secondary{
+  margin-top:calc(clamp(82px,9vw,132px) * -0.35)!important;
+}
+.case-study-template .case-visual-report-pages{
+  min-height:0!important;
+  padding:0!important;
+  border-top:0!important;
+  background:transparent!important;
+}
+.case-study-template .case-visual-report-pages img{
+  width:100%;
+  height:auto;
+}
+.case-study-template .case-product-lineup{
+  min-height:clamp(390px,48vw,620px)!important;
+  background:var(--surface-soft)!important;
+  padding:clamp(38px,5vw,72px)!important;
+}
+.case-product-lineup-inner{
+  width:100%;
+  display:grid;
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  align-items:end;
+  gap:clamp(18px,3vw,42px);
+}
+.case-product-lineup-inner img{
+  width:100%;
+  height:clamp(250px,28vw,410px);
+  object-fit:contain;
+}
+.case-study-template .case-product-pair{
+  min-height:clamp(390px,48vw,620px)!important;
+  background:var(--surface-soft)!important;
+}
+.case-product-pair-inner{
+  width:min(860px,100%);
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:clamp(28px,6vw,92px);
+  align-items:end;
+}
+.case-product-pair figure{
+  margin:0;
+  text-align:center;
+}
+.case-product-pair img{
+  width:100%;
+  height:clamp(260px,31vw,430px);
+  object-fit:contain;
+}
+.case-product-pair figcaption{
+  margin-top:18px;
+  color:var(--muted);
+  font-size:11px;
+  text-transform:uppercase;
+  letter-spacing:.1em;
+}
+@media(max-width:700px){
+  .case-product-lineup-inner{
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:22px;
+  }
+  .case-product-lineup-inner img{height:220px}
+  .case-product-pair-inner{
+    grid-template-columns:1fr 1fr;
+    gap:20px;
+  }
+  .case-product-pair img{height:230px}
+  .case-study-template .case-visual-report-cover img{width:min(82%,420px)}
+}
