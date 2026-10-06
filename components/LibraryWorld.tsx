@@ -65,14 +65,14 @@ Precisely opposite.`
     full:"The fig-tree passage expands on the fear that choosing one possible life means giving up all the others — until indecision becomes its own kind of loss."
   },
   {
-    quote:"Let your plans be dark and impenetrable as night, and when you move, fall like a thunderbolt.",
-    author:"Sun Tzu",
-    source:"The Art of War",
+    quote:"You will be forgotten either way. So live in such a manner that, while you remain, you belong to yourself.",
+    author:"Marcus Aurelius",
+    source:null,
     full:null
   },
   {
-    quote:"The meaning of life is just to be alive. It is so plain and so obvious and so simple. And yet, everybody rushes around in a great panic as if it were necessary to achieve something beyond themselves.",
-    author:"Alan Watts",
+    quote:"What is to give light, must endure burning.",
+    author:"Victor E. Frankl",
     source:null,
     full:null
   },
