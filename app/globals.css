@@ -5281,3 +5281,29 @@ dialog::backdrop { background:rgba(0,0,0,.45); }
     font-size:13px!important;
   }
 }
+
+
+/* 2026-10-06 type scale preview */
+@media(min-width:901px){
+  :root{
+    --type-body:16.5px;
+    --type-support:16.5px;
+    --type-row-title:18px;
+  }
+
+  .overview-writing-row h4,
+  .home-case h3,
+  .experiment-meta h3,
+  .feature-copy h3{
+    font-size:18px!important;
+    line-height:1.32!important;
+    letter-spacing:-.02em!important;
+    font-weight:500!important;
+  }
+
+  .overview-press-row h3,
+  .public-row h3{
+    font-size:18px!important;
+    line-height:1.32!important;
+  }
+}
