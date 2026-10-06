@@ -5452,3 +5452,27 @@ dialog::backdrop { background:rgba(0,0,0,.45); }
     clip-path:inset(1% 1.2% 1.5% 1%);
   }
 }
+
+
+/* 2026-10-06 overview proof-first hierarchy */
+.overview-page .selected .feature-grid{
+  grid-template-columns:repeat(3,minmax(0,1fr))!important;
+  grid-template-rows:auto!important;
+}
+.overview-page .selected .feature,
+.overview-page .selected .feature-media{
+  min-width:0;
+}
+.overview-page .selected .feature-media{
+  aspect-ratio:1.35!important;
+}
+@media(max-width:1050px){
+  .overview-page .selected .feature-grid{
+    grid-template-columns:repeat(2,minmax(0,1fr))!important;
+  }
+}
+@media(max-width:700px){
+  .overview-page .selected .feature-grid{
+    grid-template-columns:1fr!important;
+  }
+}

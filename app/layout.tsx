@@ -4,7 +4,7 @@ import MotionSystem from "@/components/MotionSystem";
 import SiteFrame from "@/components/SiteFrame";
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://portfolio-blush-mu-62.vercel.app"),
+  metadataBase: new URL("https://ivonnealdaz.com"),
   title: "Ivonne Aldaz — Portfolio",
   description: "Strategy, systems, creative technology, art, teaching, and experiments by Ivonne Aldaz.",
 };
