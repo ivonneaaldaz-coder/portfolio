@@ -6,7 +6,7 @@ export default function SiteFooter() {
       <div className="footer-about">
         <p className="eyebrow">ABOUT</p>
         <h2>The world is my studio.</h2>
-        <Link href="/about">More about me →</Link>
+        <Link href="/about#about-top">More about me →</Link>
       </div>
       <div>
         <p className="eyebrow">CURRENTLY</p>
