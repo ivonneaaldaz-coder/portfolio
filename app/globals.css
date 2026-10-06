@@ -4956,3 +4956,113 @@ dialog::backdrop { background:rgba(0,0,0,.45); }
     font-size:19px!important;
   }
 }
+
+
+/* 2026-10-06 desktop legibility pass — preserve mobile sizing */
+@media(min-width:901px){
+  :root{
+    --copy-size:16px;
+    --meta-size:14px;
+  }
+
+  /* Intro/supporting links */
+  .about-links{
+    font-size:14px!important;
+    gap:12px 22px!important;
+  }
+  .about-links a,
+  .section-heading>a,
+  .collection-intro>a,
+  .related-paths,
+  .back-link,
+  .sidebar-socials a,
+  .listen-link{
+    font-size:14px!important;
+    line-height:1.45!important;
+  }
+
+  /* About experience */
+  .about-experience-item h3{
+    font-size:19px!important;
+  }
+  .about-experience-item p{
+    font-size:15px!important;
+    line-height:1.45!important;
+  }
+  .about-experience-item>span{
+    font-size:13.5px!important;
+    line-height:1.4!important;
+  }
+
+  /* About capabilities */
+  .about-capabilities-grid span,
+  .about-capabilities-grid span:nth-child(odd),
+  .about-capabilities-grid span:nth-child(even){
+    font-size:15.5px!important;
+    line-height:1.55!important;
+  }
+
+  /* About brands / testimonials / community / education */
+  .brand-more summary,
+  .quote-expand summary,
+  .long-story summary{
+    font-size:13.5px!important;
+    line-height:1.45!important;
+  }
+  .about-community-list p{
+    font-size:15px!important;
+    line-height:1.5!important;
+  }
+  .education-list p,
+  .education-languages p{
+    font-size:15px!important;
+    line-height:1.5!important;
+  }
+  .education-languages span{
+    font-size:12.5px!important;
+  }
+  .quote-card figcaption{
+    font-size:13.5px!important;
+  }
+
+  /* Overview + work + writing + press */
+  .home-case>p,
+  .case-row-desc,
+  .practice-row p,
+  .overview-writing-row p,
+  .overview-press-row p,
+  .overview-press-row>span,
+  .public-row p,
+  .public-row>span:first-child{
+    font-size:14.5px!important;
+    line-height:1.5!important;
+  }
+  .overview-inline-expand summary{
+    font-size:13.5px!important;
+  }
+
+  /* Cards, experiments, library, music */
+  .feature-copy p,
+  .experiment-meta p,
+  .reference-portal p,
+  .reference-card p,
+  .book-author,
+  .book-detail>a,
+  .vinyl-card p,
+  .playlist-copy p,
+  .travel-photo figcaption{
+    font-size:13.5px!important;
+    line-height:1.5!important;
+  }
+
+  /* Footer + universal CTAs */
+  .footer-grid li,
+  .footer-grid .muted{
+    font-size:15.5px!important;
+  }
+  .footer-grid .pill-link,
+  .experiment-launch,
+  .subscribe-trigger{
+    font-size:14px!important;
+  }
+}
