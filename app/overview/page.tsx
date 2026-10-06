@@ -29,7 +29,7 @@ const moreStudies = [
 ];
 
 const experiments = [
-  { title:"The Lab", meta:"Ideas / systems / experiments", href:"https://lab.ivonnealdaz.com", external:true },
+  { title:"The Lab", meta:"Portfolio OS / experiments", href:"/experiments/the-lab" },
   { title:"Ask Eve", meta:"Conversational CV", href:"/experiments/ask-eve" },
   { title:"Chatroom", meta:"Public internet experiment", href:"/experiments/chatroom" },
   { title:"Snake", meta:"Game + global leaderboard", href:"/experiments/snake" },
