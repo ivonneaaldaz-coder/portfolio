@@ -79,7 +79,7 @@ const moreTalks = [
 function CaseRow({study}:{study:typeof studies[number] | typeof moreStudies[number]}) {
   const body = <>
     <div><h3>{study.title}</h3><span className="home-case-tag">{study.tag}</span></div>
-    <p>{study.desc}</p><span>{study.href ? "→" : "—"}</span>
+    <span>{study.href ? "→" : "—"}</span>
   </>;
   return study.href
     ? <Link className="home-case" href={study.href} key={study.title}>{body}</Link>
@@ -108,7 +108,7 @@ export default async function OverviewPage() {
       <section className="hero-compact section-pad" id="overview">
         <div className="hero-row">
           <h1>Strategy, technology, art.</h1>
-          <div className="hero-introduction"><p>I work across brand, systems, and creative practice — building digital tools, visual worlds, and experiences.</p><a className="hero-contact" href="mailto:hello@ivonnealdaz.com">Get in touch ↗<span>hello@ivonnealdaz.com</span></a></div>
+          <div className="hero-introduction"><p>I work across brand, systems, and creative practice — <span className="hero-intro-break">building digital tools, visual worlds, and experiences.</span></p><a className="hero-contact" href="mailto:hello@ivonnealdaz.com">Get in touch →<span>hello@ivonnealdaz.com</span></a></div>
         </div>
       </section>
 
@@ -174,7 +174,7 @@ export default async function OverviewPage() {
         <div className="section-heading"><h2 className="section-title small-title">Library</h2></div>
         <div className="overview-library-grid">
           {library.map(item => <Link href={item.href} className="overview-library-item" key={item.title}>
-            <div><h3>{item.title}</h3><p>{item.meta}</p></div><span>→</span>
+            <div><h3>{item.title}</h3></div><span>→</span>
           </Link>)}
         </div>
       </section>

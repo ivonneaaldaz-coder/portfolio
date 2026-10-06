@@ -12,13 +12,14 @@ type Props = {
   meta:MetaItem[];
   sections:[SectionItem, SectionItem, SectionItem];
   visual?:ReactNode;
+  evidence?: { src:string; alt:string; caption:string }[];
   visualClass?:string;
   facts:FactItem[];
   next?:{ href:string; label:string };
 };
 
 export default function CaseStudyTemplate({
-  eyebrow,title,dek,meta,sections,visual,visualClass="",facts,next
+  eyebrow,title,dek,meta,sections,visual,visualClass="",facts,next,evidence
 }:Props){
   return (
     <article className="case-study case-study-template page section-pad">
@@ -41,6 +42,15 @@ export default function CaseStudyTemplate({
         </div>
 
         {visual ? <div className={"case-visual "+visualClass}>{visual}</div> : null}
+
+        {evidence?.length ? <div className="case-evidence">
+          {evidence.map(item => <figure key={item.src}>
+            <a href={item.src} target="_blank" rel="noreferrer" aria-label={"View full-size: " + item.alt}>
+              <img src={item.src} alt={item.alt} loading="lazy" />
+            </a>
+            <figcaption>{item.caption}</figcaption>
+          </figure>)}
+        </div> : null}
 
         <div className="case-copy">
           <p className="eyebrow">{sections[1].eyebrow}</p>

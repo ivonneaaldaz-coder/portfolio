@@ -9,28 +9,32 @@ const experience = [
   { role: "Founder", company: "Whitespace", dates: "2018 — Present" },
   { role: "Director, Brand Insights", company: "TrueLoyal (formerly TINT)", dates: "2023 — 2025" },
   { role: "Senior Marketing Manager", company: "TINT", dates: "2022 — 2023" },
+];
+
+const earlierExperience = [
   { role: "Marketing Manager", company: "TINT", dates: "2020 — 2022" },
   { role: "Vice President of Marketing", company: "Patel Gaines PLLC", dates: "2015 — 2018" },
 ];
 
 const capabilities = [
-  "Brand + portfolio strategy",
-  "Positioning + go-to-market",
-  "Consumer + market intelligence",
-  "Growth + marketing strategy",
-  "AI transformation + automation",
-  "Operating systems + workflow design",
-  "Creative direction + brand systems",
-  "Thought leadership + content strategy",
-  "Product + experience strategy",
+  "Brand strategy",
+  "Positioning",
+  "Consumer insights",
+  "Growth strategy",
+  "AI + automation",
+  "Systems design",
+  "Creative direction",
+  "Thought leadership",
+  "Product strategy",
 ];
 
 const community = [
   "San Antonio Arts Commission — Centro de Artes Committee Member",
   "San Antonio Art League Museum — Docent",
-  "Alliance Française de San Antonio — Events + Education Committee",
+  "Witte Museum — Docent",
+  "Alliance Française de San Antonio — Marketing Committee",
   "University of the Incarnate Word — Startup Challenge Mentor",
-  "San Antonio Public Library — Volunteer Yoga Instructor",
+  "Yoga + Meditation Instructor",
 ];
 
 const brands = [
@@ -76,6 +80,20 @@ export default function AboutPage() {
                   <span>{item.dates}</span>
                 </div>
               ))}
+              <details className="about-earlier-experience">
+                <summary><span>Earlier experience</span><span aria-hidden="true">＋</span></summary>
+                <div>
+                  {earlierExperience.map(item => (
+                    <div className="about-experience-item" key={item.role + item.company}>
+                      <div>
+                        <h3>{item.role}</h3>
+                        <p>{item.company}</p>
+                      </div>
+                      <span>{item.dates}</span>
+                    </div>
+                  ))}
+                </div>
+              </details>
             </div>
           </div>
         </div>
@@ -127,7 +145,7 @@ export default function AboutPage() {
         <div className="section-heading"><h2 className="section-title small-title">Education</h2></div>
         <div className="education-list">
           <div><h3>MBA</h3><p>St. Mary’s University</p></div>
-          <div><h3>MA, International Business + Economics</h3><p>FH Schmalkalden University of Applied Sciences · thesis pending</p></div>
+          <div><h3>MA, International Business + Economics</h3><p>FH Schmalkalden University of Applied Sciences</p></div>
           <div><h3>Bachelor of Arts</h3><p>St. Mary’s University</p></div>
         </div>
         <div className="education-languages"><span>Languages</span><p>English · Spanish · French</p></div>

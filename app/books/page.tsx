@@ -4,14 +4,14 @@ export const metadata = pageMetadata("Books + Quotes", "Books, passages, and ide
 
 import Link from "next/link";
 import LibraryWorld from "@/components/LibraryWorld";
-import { driveImageUrl, listDriveFolder } from "@/lib/googleDrive";
+import { listDriveFolder } from "@/lib/googleDrive";
 
 const BOOKS_FOLDER = "1mp7-HM3jdj_Q0rp4ltW49dUhSIoLbySt";
 
 export default async function BooksPage() {
   const files = (await listDriveFolder(BOOKS_FOLDER))
     .filter(file => file.mimeType.startsWith("image/"))
-    .map(file => ({ name:file.name, image:driveImageUrl(file.id) }));
+    .map(file => ({ name:file.name, image:`/api/drive-image?id=${encodeURIComponent(file.id)}` }));
 
   return (
     <section className="page section-pad library-page">
