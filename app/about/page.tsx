@@ -48,7 +48,7 @@ const moreBrands = brands.slice(10);
 
 export default function AboutPage() {
   return (
-    <section className="page section-pad about-page">
+    <section id="about-top" className="page section-pad about-page">
       <div className="about-hero">
         <div className="about-portrait about-portrait-hover">
           <img className="about-portrait-bw" src={driveImageUrl("1UJ7HG3gZU2zD5Y_kdHwCXLGjm1llx_Xc")} alt="Ivonne Aldaz" />
