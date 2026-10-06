@@ -14,7 +14,7 @@ const vinyl = [
   { title:"Melt", artist:"Not For Radio", image:"https://cdn.prod.website-files.com/5fc29a3f06388f6a1521d589/69bce55e3cccc0a69177d23d_not-for-radio%20vinyl%20cover.jpg", href:"https://amzn.to/41fGlRB" },
   { title:"Submarine", artist:"The Marías", image:"https://cdn.prod.website-files.com/5fc29a3f06388f6a1521d589/68d9b27d159fcd6a75f1f04c_the%20marias%20submarine_ivonne-aldaz.jpg", href:"https://amzn.to/4smQOa5" },
   { title:"Hit Me Hard And Soft", artist:"Billie Eilish", image:"https://cdn.prod.website-files.com/5fc29a3f06388f6a1521d589/69e7b79ccc2b27051dc62f69_billie-eilish-album_Good%20World%20Living.jpg", href:"https://amzn.to/48PeZGf" },
-  { title:"MTV Unplugged — Live", artist:"Zoé", image:"https://cdn.prod.website-files.com/5fc29a3f06388f6a1521d589/69e7b7cb579a4763787f1b77_zoe-good%20world%20living.jpg", href:"https://amzn.to/48PeZGf" },
+  { title:"MTV Unplugged — Live", artist:"Zoé", image:"https://cdn.prod.website-files.com/5fc29a3f06388f6a1521d589/69e7b7cb579a4763787f1b77_zoe-good%20world%20living.jpg", href:"https://amzn.to/3TCy8a9" },
 ];
 
 export default function MusicPage() {

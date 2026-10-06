@@ -21,6 +21,7 @@ export default function ResearchLedContentEnginePage(){
     ]}
     visualClass="case-visual-content-engine"
     visual={<><span>RESEARCH</span><span>→</span><span>REPORT</span><span>→</span><span>PRESS</span><span>·</span><span>BLOG</span><span>·</span><span>SOCIAL</span><span>·</span><span>EMAIL</span></>}
+    evidence={[{src:"/case-studies/research-blog.webp",alt:"TINT blog artwork for UGC-Powered Commerce",caption:"Editorial example: UGC-Powered Commerce — how social commerce brands can repurpose user-generated content."}]}
     facts={[
       {title:"Original insight",copy:"Survey design and analysis created proprietary material the brand could own rather than simply comment on."},
       {title:"Expert layer",copy:"Leader interviews and podcast conversations added outside perspective, credibility, and reusable quotes."},

@@ -21,6 +21,7 @@ export default function FutureOfMarketingPage(){
     ]}
     visualClass="case-visual-fom"
     visual={<><strong>7K</strong><span>NEWSLETTER</span><span>WEBINARS</span><span>PODCAST</span><span>EVENTS</span><strong>50K+</strong></>}
+    evidence={[{src:"/case-studies/future-of-marketing-interview.webp",alt:"Future of Marketing interview graphic featuring Jason Bradwell and Ivonne Aldaz",caption:"Programming example: The reality behind content creation, featuring Jason Bradwell."}]}
     facts={[
       {title:"Audience growth",copy:"Expanded the subscriber base from roughly 7,000 to more than 50,000."},
       {title:"Integrated programming",copy:"Connected editorial, webinars, podcasting, events, and speaking into one recognizable media ecosystem."},
