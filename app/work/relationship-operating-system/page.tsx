@@ -3,7 +3,6 @@ import { pageMetadata } from "@/lib/metadata";
 export const metadata = pageMetadata("Relationship Operating System", "Turning a fragmented network of contacts, introductions, and follow-ups into a system a small team could actually use every day.", "/work/relationship-operating-system");
 
 import CaseStudyTemplate from "@/components/CaseStudyTemplate";
-import { driveVideoUrl } from "@/lib/googleDrive";
 
 export default function RelationshipOperatingSystemPage(){
   return <CaseStudyTemplate
@@ -22,7 +21,7 @@ export default function RelationshipOperatingSystemPage(){
     ]}
     visualClass="case-visual-video"
     visual={<video
-      src={driveVideoUrl("1aZaxk-9wxmUnB72PDPP22zHrmj01Y62V")}
+      src="/case-studies/relationship-operating-system.mp4"
       autoPlay
       muted
       loop
