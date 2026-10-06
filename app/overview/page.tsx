@@ -11,22 +11,21 @@ const features = [
   { title: "Whitespace", meta: "Strategy / Brand / AI", className: "feature", href: "https://www.bywhitespace.com/", external: true, driveKey:"whitespace" },
   { title: "Art Practice", meta: "Painting / Ceramics / Design", className: "feature", href: "/art", driveKey:"art practice" },
   { title: "Good World Living", meta: "Experiences / Places / Objects", className: "feature", href: "https://www.goodworldliving.com/", external: true, driveKey:"good world living" },
-  { title: "Travel", meta: "Places / Photography / Reflections", className: "feature", href: "/travel", driveKey:"travel" },
 ];
 
 const studies = [
-  { title:"Future of Marketing", tag:"7K → 50K+ subscribers", desc:"Built and grew TINT’s owned-media platform across newsletters, webinars, podcasts, events, and industry programming.", href:"/work/future-of-marketing" },
-  { title:"Research-Led Content Engine", tag:"Research → year of campaigns", desc:"Turned original research and expert interviews into a report, press, blogs, social, newsletters, nurture, and demand-generation campaigns.", href:"/work/research-led-content-engine" },
-  { title:"Relationship Operating System", tag:"Systems + CRM", desc:"Turned fragmented contacts and follow-ups into an actionable relationship pipeline for a small team.", href:"/work/relationship-operating-system" },
+  { title:"Future of Marketing", tag:"7K → 50K+ subscribers · at TINT", desc:"Built and grew TINT’s owned-media platform across newsletters, webinars, podcasts, events, and industry programming.", href:"/work/future-of-marketing" },
+  { title:"Purina — The Role of Video Reviews", tag:"Consumer insight → clearer purchase drivers · via TrueLoyal", desc:"Explored how video reviews influence pet-care purchase decisions, comparing general market consumers with Purina brand fans.", href:"/work/purina-video-reviews" },
+  { title:"Relationship Operating System", tag:"Fragmented contacts → actionable pipeline", desc:"Turned fragmented contacts and follow-ups into an actionable relationship pipeline for a small team.", href:"/work/relationship-operating-system" },
 ];
 
 const moreStudies = [
-  { title:"Brand + Digital Repositioning", tag:"Brand / Digital / Campaign", desc:"Connected positioning, message, website, sales materials, and campaigns into one clearer customer journey.", href:"/work/brand-digital-repositioning" },
-  { title:"AI-Assisted Lead Engine", tag:"AI / Automation / Operations", desc:"Designed a lightweight workflow for turning messy inbound information into structured records, priorities, and next actions.", href:"/work/ai-assisted-lead-engine" },
-  { title:"Veggies Made Great — Omelette Rounds", tag:"Research / Naming / Positioning", desc:"Consumer research helped support a breakfast product’s transition from Egg Patties to Omelette Rounds, aligning its name with how people understood it.", href:"/work/veggies-made-great" },
-  { title:"Purina — The Role of Video Reviews", tag:"Research / Consumer Insights", desc:"Explored how video reviews influence pet-care purchase decisions, comparing general market consumers with Purina brand fans.", href:"/work/purina-video-reviews" },
-  { title:"Gaia Herbs — Concept Validation", tag:"Research / Concept Validation", desc:"Evaluated multivitamin concepts before further development to help prioritize opportunities and refine messaging, claims, and positioning.", href:"/work/gaia-herbs-concept-validation" },
-  { title:"ARM & HAMMER — Placement + Pricing", tag:"Research / Retail / Pricing", desc:"Consumer research clarified where shoppers expected to find a new product and what they were willing to pay for it.", href:"/work/arm-hammer-retail-strategy" },
+  { title:"Gaia Herbs — Concept Validation", tag:"Concepts → prioritized opportunities · via TrueLoyal", desc:"Evaluated multivitamin concepts before further development to help prioritize opportunities and refine messaging, claims, and positioning.", href:"/work/gaia-herbs-concept-validation" },
+  { title:"Veggies Made Great — Omelette Rounds", tag:"Research → clearer naming · via TrueLoyal", desc:"Consumer research helped support a breakfast product’s transition from Egg Patties to Omelette Rounds, aligning its name with how people understood it.", href:"/work/veggies-made-great" },
+  { title:"ARM & HAMMER — Placement + Pricing", tag:"Research → retail + pricing clarity · via TrueLoyal", desc:"Consumer research clarified where shoppers expected to find a new product and what they were willing to pay for it.", href:"/work/arm-hammer-retail-strategy" },
+  { title:"Research-Led Content Engine", tag:"Research → year of campaigns · at TINT", desc:"Turned original research and expert interviews into a report, press, blogs, social, newsletters, nurture, and demand-generation campaigns.", href:"/work/research-led-content-engine" },
+  { title:"Brand + Digital Repositioning", tag:"Positioning → launch-ready system", desc:"Connected positioning, message, website, sales materials, and campaigns into one clearer customer journey.", href:"/work/brand-digital-repositioning" },
+  { title:"AI-Assisted Lead Engine", tag:"Messy inbound → structured next actions", desc:"Designed a lightweight workflow for turning messy inbound information into structured records, priorities, and next actions.", href:"/work/ai-assisted-lead-engine" },
 ];
 
 const experiments = [
@@ -52,7 +51,7 @@ const writing = [
 const moreWriting = [
   { title:"The Shift Toward Intentional Branding: Designing with Meaning in a Noisy World", source:"Whitespace · 2025", href:"https://www.bywhitespace.com/blog/intentional-branding-designing-with-meaning-in-a-noisy-world" },
   { title:"Art Retreat in France: Unveiling Creative Wonders in St. Antonin-Noble Val", source:"Good World Living · 2023", href:"https://www.goodworldliving.com/articles/france-art-retreat" },
-  { title:"Strategy Without Execution Is Just Expensive Advice", source:"Whitespace", href:"https://www.bywhitespace.com/blog/strategy-without-execution-expensive-advice" },
+  { title:"Strategy Without Execution Is Just Expensive Advice", source:"Whitespace · 2026", href:"https://www.bywhitespace.com/blog/strategy-without-execution-expensive-advice" },
 ];
 
 const pressPreview = [
@@ -108,8 +107,17 @@ export default async function OverviewPage() {
       <section className="hero-compact section-pad" id="overview">
         <div className="hero-row">
           <h1>Strategy, technology, art.</h1>
-          <div className="hero-introduction"><p>I work across brand, systems, and creative practice — <span className="hero-intro-break">building digital tools, visual worlds, and experiences.</span></p><a className="hero-contact" href="mailto:hello@ivonnealdaz.com">Get in touch →<span>hello@ivonnealdaz.com</span></a></div>
+          <div className="hero-introduction"><p>I grew TINT’s Future of Marketing audience from ~7K to 50K+, led consumer research for brands including Purina and ARM & HAMMER, and now run Whitespace. <span className="hero-intro-break">I also paint, build digital tools, and teach.</span></p><a className="hero-contact" href="mailto:hello@ivonnealdaz.com">Get in touch →<span>hello@ivonnealdaz.com</span></a></div>
         </div>
+      </section>
+
+      <section className="home-cases section-pad">
+        <div className="section-heading"><h2 className="section-title small-title">Selected Case Studies</h2></div>
+        <div className="home-case-list">{studies.map(study => <CaseRow study={study} key={study.title} />)}</div>
+        <details className="overview-inline-expand more-case-studies">
+          <summary><span>More case studies</span><span aria-hidden="true">＋</span></summary>
+          <div className="home-case-list overview-expanded-list">{moreStudies.map(study => <CaseRow study={study} key={study.title} />)}</div>
+        </details>
       </section>
 
       <section className="selected section-pad overview-anchor" id="work">
@@ -130,26 +138,26 @@ export default async function OverviewPage() {
         </div>
       </section>
 
-      <section className="home-cases section-pad">
-        <div className="section-heading"><h2 className="section-title small-title">Selected Case Studies</h2></div>
-        <div className="home-case-list">{studies.map(study => <CaseRow study={study} key={study.title} />)}</div>
-        <details className="overview-inline-expand more-case-studies">
-          <summary><span>More case studies</span><span aria-hidden="true">＋</span></summary>
-          <div className="home-case-list overview-expanded-list">{moreStudies.map(study => <CaseRow study={study} key={study.title} />)}</div>
+      <section className="overview-press section-pad overview-anchor" id="press">
+        <div className="section-heading"><h2 className="section-title small-title">Press + Speaking</h2></div>
+        <div className="overview-press-grid">
+          <div>
+            <p className="eyebrow">SELECTED PRESS</p>
+            {pressPreview.map(item => <PressRow item={item} key={item.org+item.title} />)}
+          </div>
+          <div>
+            <p className="eyebrow">SELECTED TALKS</p>
+            {talksPreview.map(item => <PressRow item={item} key={item.org+item.title} />)}
+          </div>
+        </div>
+        <details className="overview-inline-expand overview-press-expand">
+          <summary><span>More press + speaking</span><span aria-hidden="true">＋</span></summary>
+          <div className="overview-press-grid overview-expanded-list">
+            <div>{morePress.map(item => <PressRow item={item} key={item.org+item.title} />)}</div>
+            <div>{moreTalks.map(item => <PressRow item={item} key={item.org+item.title} />)}</div>
+          </div>
         </details>
       </section>
-
-      <section className="overview-writing-section section-pad">
-        <div className="overview-writing">
-          <div className="overview-writing-head"><h2 className="section-title small-title">Writing</h2></div>
-          {writing.map(item => <WritingRow item={item} key={item.title} />)}
-          <details className="overview-inline-expand">
-            <summary><span>More writing</span><span aria-hidden="true">＋</span></summary>
-            <div className="overview-expanded-list">{moreWriting.map(item => <WritingRow item={item} key={item.title} />)}</div>
-          </details>
-        </div>
-      </section>
-
       <section className="experiments section-pad">
         <div className="section-heading"><h2 className="section-title small-title">Experiments</h2></div>
         <div className="experiment-grid experiment-grid-four">
@@ -179,26 +187,17 @@ export default async function OverviewPage() {
         </div>
       </section>
 
-      <section className="overview-press section-pad overview-anchor" id="press">
-        <div className="section-heading"><h2 className="section-title small-title">Press + Speaking</h2></div>
-        <div className="overview-press-grid">
-          <div>
-            <p className="eyebrow">SELECTED PRESS</p>
-            {pressPreview.map(item => <PressRow item={item} key={item.org+item.title} />)}
-          </div>
-          <div>
-            <p className="eyebrow">SELECTED TALKS</p>
-            {talksPreview.map(item => <PressRow item={item} key={item.org+item.title} />)}
-          </div>
+      <section className="overview-writing-section section-pad">
+        <div className="overview-writing">
+          <div className="overview-writing-head"><h2 className="section-title small-title">Writing</h2></div>
+          {writing.map(item => <WritingRow item={item} key={item.title} />)}
+          <details className="overview-inline-expand">
+            <summary><span>More writing</span><span aria-hidden="true">＋</span></summary>
+            <div className="overview-expanded-list">{moreWriting.map(item => <WritingRow item={item} key={item.title} />)}</div>
+          </details>
         </div>
-        <details className="overview-inline-expand overview-press-expand">
-          <summary><span>More press + speaking</span><span aria-hidden="true">＋</span></summary>
-          <div className="overview-press-grid overview-expanded-list">
-            <div>{morePress.map(item => <PressRow item={item} key={item.org+item.title} />)}</div>
-            <div>{moreTalks.map(item => <PressRow item={item} key={item.org+item.title} />)}</div>
-          </div>
-        </details>
       </section>
+
     </div>
   );
 }
