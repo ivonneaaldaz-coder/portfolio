@@ -24,7 +24,6 @@ export default function FutureOfMarketingPage(){
     visual={<img src={driveImageUrl("1_7nj-IPN0WgbvNsGQ577Hg-ZBHTPugrg")} alt="State of Social and User-Generated Content report cover" />}
     secondaryVisualClass="case-visual-report-pages"
     secondaryVisual={<img src={driveImageUrl("1PTknVIQaRFGuhy7ufNu_8XM5odlyUU5X")} alt="Pages from the State of Social and User-Generated Content report" />}
-    evidence={[{src:"/case-studies/future-of-marketing-interview.webp",alt:"Future of Marketing interview graphic featuring Jason Bradwell and Ivonne Aldaz",caption:"Programming example: The reality behind content creation, featuring Jason Bradwell."}]}
     facts={[
       {title:"Audience growth",copy:"Expanded the subscriber base from roughly 7,000 to more than 50,000."},
       {title:"Integrated programming",copy:"Connected editorial, webinars, podcasting, events, and speaking into one recognizable media ecosystem."},
