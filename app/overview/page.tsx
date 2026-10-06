@@ -29,10 +29,10 @@ const moreStudies = [
 ];
 
 const experiments = [
-  { title:"The Lab", meta:"Portfolio OS / experiments", href:"/experiments/the-lab" },
-  { title:"Ask Eve", meta:"Conversational CV", href:"/experiments/ask-eve" },
-  { title:"Chatroom", meta:"Public internet experiment", href:"/experiments/chatroom" },
-  { title:"Snake", meta:"Game + global leaderboard", href:"/experiments/snake" },
+  { title:"The Lab", meta:"Portfolio OS / experiments", href:"/experiments/the-lab", external:false },
+  { title:"Ask Eve", meta:"Conversational CV", href:"/experiments/ask-eve", external:false },
+  { title:"Chatroom", meta:"Public internet experiment", href:"/experiments/chatroom", external:false },
+  { title:"Snake", meta:"Game + global leaderboard", href:"/experiments/snake", external:false },
 ];
 
 const library = [
