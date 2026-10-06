@@ -107,7 +107,7 @@ export default async function OverviewPage() {
       <section className="hero-compact section-pad" id="overview">
         <div className="hero-row">
           <h1>Strategy, technology, art.</h1>
-          <div className="hero-introduction"><p>I grew TINT’s Future of Marketing audience from ~7K to 50K+, led consumer research for brands including Purina and ARM & HAMMER, and now run Whitespace. <span className="hero-intro-break">I also paint, build digital tools, and teach.</span></p><a className="hero-contact" href="mailto:hello@ivonnealdaz.com">Get in touch →<span>hello@ivonnealdaz.com</span></a></div>
+          <div className="hero-introduction"><p>I grew a B2B audience from 7K to 50K+ and led consumer research for Purina and ARM & HAMMER. <span className="hero-intro-break">Now I run Whitespace and a few creative ventures, and I paint and teach.</span></p><a className="hero-contact" href="mailto:hello@ivonnealdaz.com">Get in touch →<span>hello@ivonnealdaz.com</span></a></div>
         </div>
       </section>
 
@@ -160,20 +160,31 @@ export default async function OverviewPage() {
       </section>
       <section className="experiments section-pad">
         <div className="section-heading"><h2 className="section-title small-title">Experiments</h2></div>
-        <div className="experiment-grid experiment-grid-four">
+        <div className="experiment-grid experiment-grid-four overview-experiment-grid">
           {experiments.map((item, index) => {
-            const card = <>
-              <div className={"experiment-thumb exp-" + index}>
-                {index === 0 && <div className="lab-mini"><div className="lab-mini-bar">LAB.exe</div><div className="lab-mini-window"><span>IVONNE_OS</span><p>A more interesting internet.</p></div></div>}
-                {index === 1 && <span>ask eve</span>}
-                {index === 2 && <span className="system-mini">CHAT<br/>ROOM.exe</span>}
-                {index === 3 && <span className="snake-mini">SNAKE.exe<br/>↑ ↓ ← →</span>}
+            if (index === 0) {
+              return <Link className="experiment-card experiment-link overview-lab-card" href={item.href} key={item.title}>
+                <div className="experiment-thumb exp-0">
+                  <div className="lab-mini"><div className="lab-mini-bar">LAB.exe</div><div className="lab-mini-window"><span>IVONNE_OS</span><p>A more interesting internet.</p></div></div>
+                </div>
+                <div className="experiment-meta"><div><h3>{item.title}</h3><p>{item.meta}</p></div></div>
+              </Link>;
+            }
+
+            const visualIndex = index - 1;
+            return <Link href={item.href} className="lab-experiment-card overview-lab-experiment-card" key={item.title}>
+              <div className={"lab-experiment-visual lab-experiment-visual-"+visualIndex}>
+                <span>{visualIndex === 0 ? "EVE.exe" : visualIndex === 1 ? "CHAT.exe" : "SNAKE.exe"}</span>
+                {visualIndex===0 ? <div className="lab-eve-prompt">ask me about<br/>the work_</div> : null}
+                {visualIndex===1 ? <div className="lab-chat-lines"><i/><i/><i/></div> : null}
+                {visualIndex===2 ? <div className="lab-snake-path">■ ■ ■ ■<br/>　　　■<br/>　　● ■</div> : null}
               </div>
-              <div className="experiment-meta"><div><h3>{item.title}</h3><p>{item.meta}</p></div></div>
-            </>;
-            return item.external
-              ? <a className="experiment-card experiment-link" href={item.href} target="_blank" rel="noreferrer" key={item.title}>{card}</a>
-              : <Link className="experiment-card experiment-link" href={item.href} key={item.title}>{card}</Link>;
+              <div className="lab-experiment-copy overview-lab-experiment-copy">
+                <span>{item.meta}</span>
+                <h3>{item.title}</h3>
+                <strong>View experiment →</strong>
+              </div>
+            </Link>;
           })}
         </div>
       </section>
