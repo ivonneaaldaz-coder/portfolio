@@ -398,11 +398,11 @@ export default function MoodboardBuilder({ demoPins }: { demoPins: PinterestPin[
           </div>
 
           <div className="moodboard-source-panel">
-            <button className={source === "Latest saves" ? "active" : ""} onClick={() => setSource("Latest saves")}>
+            <button className={source === "Latest saves" ? "active" : ""} onClick={() => { setSource("Latest saves"); setOffset(0); }}>
               <span>Latest saves</span><small>{Math.min(80, pins.length)} pins</small>
             </button>
             {boards.map(([board, count]) => (
-              <button key={board} className={source === board ? "active" : ""} onClick={() => setSource(board)}>
+              <button key={board} className={source === board ? "active" : ""} onClick={() => { setSource(board); setOffset(0); }}>
                 <span>{board}</span><small>{count} pins</small>
               </button>
             ))}
@@ -431,6 +431,16 @@ export default function MoodboardBuilder({ demoPins }: { demoPins: PinterestPin[
               <p className="eyebrow">VISUAL EDIT</p>
               <h2>Review the edit.</h2>
             </div>
+            <button
+              type="button"
+              className="moodboard-source-switcher"
+              onClick={() => setStage("source")}
+              aria-label="Change Pinterest source"
+            >
+              <span>Source</span>
+              <strong>{source}</strong>
+              <span aria-hidden="true">↓</span>
+            </button>
           </div>
 
           <div className="moodboard-review-top moodboard-caption-only">
