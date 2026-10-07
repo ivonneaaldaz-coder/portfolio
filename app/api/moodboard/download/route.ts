@@ -6,6 +6,8 @@ import type { PinterestPin } from "@/lib/pinterest";
 type RequestBody = {
   theme?: string;
   caption?: string;
+  coverTitle?: string;
+  coverPinId?: string;
   pins?: PinterestPin[];
 };
 
@@ -36,8 +38,8 @@ function titleSvg(theme: string) {
   return Buffer.from(`
     <svg width="1080" height="450" xmlns="http://www.w3.org/2000/svg">
       <rect width="1080" height="450" fill="#f1eee7"/>
-      <text x="64" y="72" fill="#6d6961" font-family="Arial,Helvetica,sans-serif" font-size="18" font-weight="700" letter-spacing="3">MOODBOARD</text>
-      <text x="64" y="205" fill="#11110f" font-family="Arial,Helvetica,sans-serif" font-size="58" font-weight="500" letter-spacing="-2.5">
+      <text x="64" y="72" fill="#6d6961" font-family="sans-serif" font-size="18" font-weight="700" letter-spacing="3">MOODBOARD</text>
+      <text x="64" y="205" fill="#11110f" font-family="sans-serif" font-size="58" font-weight="500" letter-spacing="-2.5">
         ${lines.map((line,index)=>`<tspan x="64" dy="${index===0?0:68}">${esc(line)}</tspan>`).join("")}
       </text>
     </svg>
@@ -47,8 +49,8 @@ function titleSvg(theme: string) {
 function footerSvg(index: number, board: string) {
   return Buffer.from(`
     <svg width="1080" height="1350" xmlns="http://www.w3.org/2000/svg">
-      <text x="60" y="1300" fill="#77736c" font-family="Arial,Helvetica,sans-serif" font-size="20" letter-spacing="2">${String(index).padStart(2,"0")}</text>
-      <text x="1020" y="1300" text-anchor="end" fill="#77736c" font-family="Arial,Helvetica,sans-serif" font-size="18">${esc(board)}</text>
+      <text x="60" y="1300" fill="#77736c" font-family="sans-serif" font-size="20" letter-spacing="2">${String(index).padStart(2,"0")}</text>
+      <text x="1020" y="1300" text-anchor="end" fill="#77736c" font-family="sans-serif" font-size="18">${esc(board)}</text>
     </svg>
   `);
 }
@@ -57,6 +59,8 @@ export async function POST(request: NextRequest) {
   const body = await request.json() as RequestBody;
   const theme = (body.theme || "Visual Edit").trim().slice(0,120);
   const caption = (body.caption || "").trim();
+  const coverTitle = (body.coverTitle || theme).trim().slice(0,120);
+  const coverPinId = body.coverPinId || "";
   const pins = Array.isArray(body.pins) ? body.pins.slice(0,8) : [];
 
   if (!pins.length) {
@@ -66,7 +70,8 @@ export async function POST(request: NextRequest) {
   try {
     const zip = new JSZip();
 
-    const first = await fetch(pins[0].imageUrl,{cache:"no-store"});
+    const coverPin = pins.find((pin) => pin.id === coverPinId) || pins[0];
+    const first = await fetch(coverPin.imageUrl,{cache:"no-store"});
     if (!first.ok) throw new Error("Could not load cover image");
     const firstBuffer = Buffer.from(await first.arrayBuffer());
     const coverImage = await sharp(firstBuffer)
@@ -79,7 +84,7 @@ export async function POST(request: NextRequest) {
     })
       .composite([
         {input:coverImage,left:0,top:0},
-        {input:titleSvg(theme),left:0,top:900},
+        {input:titleSvg(coverTitle),left:0,top:900},
       ])
       .png()
       .toBuffer();
