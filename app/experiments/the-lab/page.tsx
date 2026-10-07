@@ -1,6 +1,7 @@
 import Link from "next/link";
-import { pageMetadata } from "@/lib/metadata";
+import DemoVideo from "@/components/DemoVideo";
 import ExperimentLoop from "@/components/ExperimentLoop";
+import { pageMetadata } from "@/lib/metadata";
 
 export const metadata = pageMetadata(
   "The Lab",
@@ -14,21 +15,21 @@ const labExperiments = [
     meta:"CONVERSATIONAL CV",
     copy:"A portfolio assistant grounded in my work, projects, writing, and selected context.",
     href:"/experiments/ask-eve",
-    mark:"EVE.exe",
+    loop:"eve",
   },
   {
     title:"Chatroom",
     meta:"PUBLIC CHAT / MESSENGER-ERA WEB",
     copy:"A tiny shared room where visitors can show up, talk, and leave a trace.",
     href:"/experiments/chatroom",
-    mark:"CHAT.exe",
+    loop:"chat",
   },
   {
     title:"Snake",
     meta:"GAME + LEADERBOARD",
     copy:"A deliberately unnecessary retro game with scoring, levels, and a shared leaderboard.",
     href:"/experiments/snake",
-    mark:"SNAKE.exe",
+    loop:"snake",
   },
 ];
 
@@ -65,6 +66,10 @@ export default function LabExperiment() {
         </div>
       </header>
 
+      <section className="experiment-demo">
+        <DemoVideo src="/experiments/demos/the-lab.mp4" poster="/experiments/demos/the-lab.webp" label="The Lab product demo" />
+      </section>
+
       <section className="experiment-detail-grid lab-detail-notes">
         <div><p className="eyebrow">WHY I BUILT IT</p><p>To make a portfolio feel less like a brochure and more like a place you can wander through.</p></div>
         <div><p className="eyebrow">WHAT I WAS TESTING</p><p>Interface nostalgia, playful navigation, conversational UX, public interaction, and personality in digital products.</p></div>
@@ -80,10 +85,10 @@ export default function LabExperiment() {
         </div>
 
         <div className="lab-experiment-grid">
-          {labExperiments.map((item,index)=>(
+          {labExperiments.map(item=>(
             <Link href={item.href} className="lab-experiment-card" key={item.title}>
               <div className="lab-experiment-visual experiment-loop-visual">
-                <ExperimentLoop name={index===0 ? "eve" : index===1 ? "chat" : "snake"} label={item.title + " preview"} />
+                <ExperimentLoop name={item.loop} label={`${item.title} preview`} />
               </div>
               <div className="lab-experiment-copy">
                 <span>{item.meta}</span>

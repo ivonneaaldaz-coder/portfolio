@@ -1,4 +1,5 @@
 import Link from "next/link";
+import DemoVideo from "@/components/DemoVideo";
 
 export default function AskEveExperiment() {
   return (
@@ -15,6 +16,10 @@ export default function AskEveExperiment() {
           Launch Ask Eve ↗︎
         </a>
       </header>
+
+      <section className="experiment-demo">
+        <DemoVideo src="/experiments/demos/ask-eve.mp4" poster="/experiments/demos/ask-eve.webp" label="Ask Eve product walkthrough" />
+      </section>
 
       <section className="experiment-detail-grid">
         <div><p className="eyebrow">WHY I BUILT IT</p><p>Résumés flatten people. I wanted a way to make the same information searchable, conversational, and a little more human.</p></div>

@@ -1,4 +1,5 @@
 import Link from "next/link";
+import DemoVideo from "@/components/DemoVideo";
 
 export default function ChatroomExperiment() {
   return (
@@ -15,6 +16,10 @@ export default function ChatroomExperiment() {
           Enter the Chatroom ↗︎
         </a>
       </header>
+
+      <section className="experiment-demo">
+        <DemoVideo src="/experiments/demos/chatroom.mp4" poster="/experiments/demos/chatroom.webp" label="Chatroom product demo" />
+      </section>
 
       <section className="experiment-detail-grid">
         <div>

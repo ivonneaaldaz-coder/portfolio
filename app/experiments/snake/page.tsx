@@ -1,4 +1,5 @@
 import Link from "next/link";
+import DemoVideo from "@/components/DemoVideo";
 
 export default function SnakeExperiment() {
   return (
@@ -15,6 +16,10 @@ export default function SnakeExperiment() {
           Play Snake ↗︎
         </a>
       </header>
+
+      <section className="experiment-demo">
+        <DemoVideo src="/experiments/demos/snake.mp4" poster="/experiments/demos/snake.webp" label="Snake gameplay" square />
+      </section>
       <section className="experiment-detail-grid">
         <div><p className="eyebrow">THE IDEA</p><p>Give the portfolio something people can actually play instead of only scroll through.</p></div>
         <div><p className="eyebrow">THE FORMAT</p><p>A retro desktop game living inside the Lab, complete with scoring and a shared leaderboard.</p></div>
