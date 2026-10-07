@@ -70,7 +70,7 @@ export async function refreshGoogleAccessToken(refreshToken: string) {
   return data.access_token;
 }
 
-export async function createDriveFolder(accessToken: string, name: string, parentId: string) {
+export async function createDriveFolder(accessToken: string, name: string, parentId?: string) {
   const response = await fetch("https://www.googleapis.com/drive/v3/files?fields=id,name,webViewLink", {
     method: "POST",
     headers: {
@@ -80,7 +80,7 @@ export async function createDriveFolder(accessToken: string, name: string, paren
     body: JSON.stringify({
       name,
       mimeType: "application/vnd.google-apps.folder",
-      parents: [parentId],
+      ...(parentId ? { parents: [parentId] } : {}),
     }),
   });
 
