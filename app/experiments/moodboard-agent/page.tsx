@@ -8,6 +8,7 @@ export const metadata = pageMetadata(
   "/experiments/moodboard-agent"
 );
 
+// Moodboard Agent experiment entrypoint
 export default function MoodboardAgentPage() {
   return (
     <article className="experiment-detail page section-pad moodboard-agent-page">
