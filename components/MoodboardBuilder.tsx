@@ -70,6 +70,9 @@ export default function MoodboardBuilder({ demoPins }: { demoPins: PinterestPin[
   const [selected, setSelected] = useState<PinterestPin[]>([]);
   const [theme, setTheme] = useState("");
   const [caption, setCaption] = useState("");
+  const [coverTitle, setCoverTitle] = useState("");
+  const [coverIndex, setCoverIndex] = useState(0);
+  const [copiedCaption, setCopiedCaption] = useState(false);
   const [loadingPinterest, setLoadingPinterest] = useState(true);
 
   useEffect(() => {
@@ -110,6 +113,8 @@ export default function MoodboardBuilder({ demoPins }: { demoPins: PinterestPin[
         setSelected(draft.selected);
         setTheme(draft.theme || "");
         setCaption(draft.caption || "");
+        setCoverTitle(draft.coverTitle || draft.theme || "");
+        setCoverIndex(Number.isInteger(draft.coverIndex) ? draft.coverIndex : 0);
         setSource(draft.source || "Latest saves");
         setStage("review");
       }
@@ -149,6 +154,8 @@ export default function MoodboardBuilder({ demoPins }: { demoPins: PinterestPin[
       setSelected(edit);
       setTheme(generatedTheme);
       setCaption(editorialCaption(generatedTheme));
+      setCoverTitle(generatedTheme);
+      setCoverIndex(0);
       setStage("review");
     }, 900);
   };
@@ -164,7 +171,7 @@ export default function MoodboardBuilder({ demoPins }: { demoPins: PinterestPin[
     const response = await fetch("/api/moodboard/download", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ theme, caption, pins: selected }),
+      body: JSON.stringify({ theme, caption, coverTitle, coverPinId: selected[coverIndex]?.id, pins: selected }),
     });
 
     if (!response.ok) {
@@ -189,6 +196,17 @@ export default function MoodboardBuilder({ demoPins }: { demoPins: PinterestPin[
     anchor.remove();
 
     setStage("downloaded");
+  };
+
+  const copyCaption = async () => {
+    await navigator.clipboard.writeText(caption);
+    setCopiedCaption(true);
+    window.setTimeout(() => setCopiedCaption(false), 1400);
+  };
+
+  const cycleCoverPhoto = () => {
+    if (!selected.length) return;
+    setCoverIndex((current) => (current + 1) % selected.length);
   };
 
   return (
@@ -286,17 +304,29 @@ export default function MoodboardBuilder({ demoPins }: { demoPins: PinterestPin[
               <input id="moodboard-theme" value={theme} onChange={(e) => setTheme(e.target.value)} />
             </div>
             <div>
-              <label htmlFor="moodboard-caption">Caption draft</label>
-              <textarea id="moodboard-caption" value={caption} onChange={(e) => setCaption(e.target.value)} rows={4} />
+              <div className="moodboard-field-label-row">
+                <label htmlFor="moodboard-caption">Caption draft</label>
+                <button type="button" className="moodboard-copy-button" onClick={copyCaption} aria-label="Copy caption">
+                  {copiedCaption ? "Copied" : "Copy"}
+                </button>
+              </div>
+              <textarea id="moodboard-caption" value={caption} onChange={(e) => setCaption(e.target.value)} rows={1} />
             </div>
           </div>
 
           <div className="moodboard-carousel-preview">
             <div className="moodboard-slide moodboard-cover-slide moodboard-cover-editorial">
-              {selected[0] ? <img className="moodboard-cover-image" src={selected[0].imageUrl} alt="" /> : null}
+              {selected[coverIndex] ? <img className="moodboard-cover-image" src={selected[coverIndex].imageUrl} alt="" /> : null}
+              <button type="button" className="moodboard-cover-photo-action" onClick={cycleCoverPhoto}>Replace photo</button>
               <div className="moodboard-cover-copy">
                 <span>MOODBOARD</span>
-                <h3>{theme}</h3>
+                <textarea
+                  className="moodboard-cover-title-input"
+                  aria-label="Cover title"
+                  value={coverTitle}
+                  onChange={(e) => setCoverTitle(e.target.value)}
+                  rows={3}
+                />
               </div>
             </div>
             {selected.slice(1).map((pin, index) => (
