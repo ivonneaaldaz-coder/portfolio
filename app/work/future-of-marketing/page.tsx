@@ -35,9 +35,9 @@ export default function FutureOfMarketingPage(){
       <p className="case-video-note">Listen: an episode of the Future of Marketing podcast.</p>
     </div>}
     facts={[
-      {title:"Audience growth",copy:"Expanded the subscriber base from roughly 7,000 to more than 50,000."},
-      {title:"Integrated programming",copy:"Connected editorial, webinars, podcasting, events, and speaking into one recognizable media ecosystem."},
-      {title:"Business role",copy:"Created recurring opportunities to engage prospects and support lead generation without turning the platform into product marketing."},
+      {title:"Audience growth",copy:"From ~7,000 to 50,000+ subscribers."},
+      {title:"Integrated programming",copy:"Newsletter, webinars, podcast, events, and speaking under one brand."},
+      {title:"Business role",copy:"Steady reasons to engage prospects — without selling."},
     ]}
     next={{href:"/work/research-led-content-engine",label:"Research-Led Content Engine"}}
   />;

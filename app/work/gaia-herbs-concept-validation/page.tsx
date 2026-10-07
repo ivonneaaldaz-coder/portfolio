@@ -11,7 +11,7 @@ export default function Page() {
     title="Gaia Herbs — Concept Validation"
     dek="Evaluated multivitamin concepts before further development to help prioritize opportunities and refine messaging, claims, and positioning."
     meta={[{"label": "Client", "value": "Gaia Herbs"}, {"label": "Year", "value": "2024"}, {"label": "Focus", "value": "Multivitamin concepts / positioning"}]}
-    sections={[{"eyebrow": "THE QUESTION", "title": "Which concepts best meet consumer needs?", "copy": "Gaia Herbs had several multivitamin concepts and needed to know which ones consumers actually wanted."}, {"eyebrow": "THE APPROACH", "title": "Evaluate relevance and differentiation together.", "copy": "We tested each concept for purchase intent, believability, uniqueness, and price expectations."}, {"eyebrow": "THE OUTCOME", "title": "A stronger basis for prioritizing concepts.", "copy": "A ranked shortlist, sharper messaging, and claims consumers believed."}]}
+    sections={[{"eyebrow": "THE QUESTION", "title": "Which concepts best meet consumer needs?", "copy": "Gaia Herbs had several multivitamin concepts and needed to know which ones consumers actually wanted."}, {"eyebrow": "THE APPROACH", "title": "Evaluate relevance and differentiation together.", "copy": "We tested each concept for purchase intent, believability, uniqueness, and price expectations."}, {"eyebrow": "THE OUTCOME", "title": "Stop funding what people won’t buy.", "copy": "A ranked shortlist and sharper messaging — and Gaia stopped spending on products people weren’t buying."}]}
     visualClass="case-product-lineup"
     visual={<div className="case-product-lineup-inner">
       {[
@@ -21,7 +21,7 @@ export default function Page() {
         "1sSmiyx43xkV3hzP9K86dKsWa7E4XHHRA",
       ].map((id,index)=><img key={id} src={driveImageUrl(id)} alt={"Gaia Herbs product "+(index+1)} />)}
     </div>}
-    facts={[{"title": "Relevance", "copy": "Assessed how well each concept addressed consumer needs."}, {"title": "Differentiation", "copy": "Evaluated uniqueness alongside believability and purchase intent."}, {"title": "Pricing", "copy": "Explored pricing expectations across the concepts."}]}
+    facts={[{"title": "Relevance", "copy": "How well each concept met real needs."}, {"title": "Differentiation", "copy": "Uniqueness, believability, and purchase intent."}, {"title": "Pricing", "copy": "What people expected to pay."}]}
     next={{"href": "/work/arm-hammer-retail-strategy", "label": "ARM & HAMMER — Placement + Pricing"}}
   />;
 }

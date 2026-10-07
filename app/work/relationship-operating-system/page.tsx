@@ -31,9 +31,9 @@ export default function RelationshipOperatingSystemPage(){
       aria-label="Relationship Operating System walkthrough"
     /><p className="case-video-note"><strong>Note:</strong> This video uses mock data and illustrative results created for presentation purposes. No real client or survey data is shown.</p></div>}
     facts={[
-      {title:"One source of truth",copy:"Contacts, categories, status, last touch, and next steps in a shared system."},
-      {title:"Action over storage",copy:"Views and summaries were designed around what the team should do next."},
-      {title:"AI where useful",copy:"Automation supported triage and summaries instead of becoming the product itself."},
+      {title:"One source of truth",copy:"Contacts, status, last touch, and next step in one place."},
+      {title:"Action over storage",copy:"Built around what to do next."},
+      {title:"AI where useful",copy:"Automation for triage and summaries, not for show."},
     ]}
     next={{href:"/work/brand-digital-repositioning",label:"Brand + Digital Repositioning"}}
   />;

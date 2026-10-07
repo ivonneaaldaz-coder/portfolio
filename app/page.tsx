@@ -19,16 +19,16 @@ const features = [
 
 const studies = [
   { title:"Future of Marketing", tag:"7K → 50K+ subscribers", desc:"Built and grew TINT’s owned-media platform across newsletters, webinars, podcasts, events, and industry programming.", href:"/work/future-of-marketing" },
-  { title:"Purina — The Role of Video Reviews", tag:"Consumer insight → clearer purchase drivers", desc:"Explored how video reviews influence pet-care purchase decisions, comparing general market consumers with Purina brand fans.", href:"/work/purina-video-reviews" },
+  { title:"Purina — The Role of Video Reviews", tag:"Findings → an executive’s pitch to leadership", desc:"Explored how video reviews influence pet-care purchase decisions, comparing general market consumers with Purina brand fans.", href:"/work/purina-video-reviews" },
   { title:"Relationship Operating System", tag:"Fragmented contacts → actionable pipeline", desc:"Turned fragmented contacts and follow-ups into an actionable relationship pipeline for a small team.", href:"/work/relationship-operating-system" },
 ];
 
 const moreStudies = [
-  { title:"Gaia Herbs — Concept Validation", tag:"Concepts → prioritized opportunities", desc:"Evaluated multivitamin concepts before further development to help prioritize opportunities and refine messaging, claims, and positioning.", href:"/work/gaia-herbs-concept-validation" },
-  { title:"Veggies Made Great — Omelette Rounds", tag:"Research → clearer naming", desc:"Consumer research helped support a breakfast product’s transition from Egg Patties to Omelette Rounds, aligning its name with how people understood it.", href:"/work/veggies-made-great" },
-  { title:"ARM & HAMMER — Placement + Pricing", tag:"Research → retail + pricing clarity", desc:"Consumer research clarified where shoppers expected to find a new product and what they were willing to pay for it.", href:"/work/arm-hammer-retail-strategy" },
-  { title:"Research-Led Content Engine", tag:"Research → year of campaigns", desc:"Turned original research and expert interviews into a report, press, blogs, social, newsletters, nurture, and demand-generation campaigns.", href:"/work/research-led-content-engine" },
-  { title:"Brand + Digital Repositioning", tag:"Positioning → launch-ready system", desc:"Connected positioning, message, website, sales materials, and campaigns into one clearer customer journey.", href:"/work/brand-digital-repositioning" },
+  { title:"Gaia Herbs — Concept Validation", tag:"Research → stopped spending on what wasn’t selling", desc:"Evaluated multivitamin concepts before further development to help prioritize opportunities and refine messaging, claims, and positioning.", href:"/work/gaia-herbs-concept-validation" },
+  { title:"Veggies Made Great — Omelette Rounds", tag:"Research → relaunched as Omelette Rounds", desc:"Consumer research helped support a breakfast product’s transition from Egg Patties to Omelette Rounds, aligning its name with how people understood it.", href:"/work/veggies-made-great" },
+  { title:"ARM & HAMMER — Placement + Pricing", tag:"Research → launched at Walmart", desc:"Consumer research clarified where shoppers expected to find a new product and what they were willing to pay for it.", href:"/work/arm-hammer-retail-strategy" },
+  { title:"Research-Led Content Engine", tag:"One report → a year of campaigns", desc:"Turned original research and expert interviews into a report, press, blogs, social, newsletters, nurture, and demand-generation campaigns.", href:"/work/research-led-content-engine" },
+  { title:"Brand + Digital Repositioning", tag:"Dead list → inbound calls", desc:"Connected positioning, message, website, sales materials, and campaigns into one clearer customer journey.", href:"/work/brand-digital-repositioning" },
 ];
 
 const experiments = [

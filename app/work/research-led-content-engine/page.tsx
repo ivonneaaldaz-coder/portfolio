@@ -23,9 +23,9 @@ export default function ResearchLedContentEnginePage(){
     visualClass="case-visual-video"
     visual={<DemoVideo src="/case-studies/research-led-content-engine.mp4" poster="/case-studies/research-led-content-engine.webp" label="How one research report became a year of campaigns" />}
     facts={[
-      {title:"Original insight",copy:"Survey design and analysis created proprietary material the brand could own rather than simply comment on."},
-      {title:"Expert layer",copy:"Leader interviews and podcast conversations added outside perspective, credibility, and reusable quotes."},
-      {title:"Compounding distribution",copy:"Findings became press angles, blog posts, social content, newsletter campaigns, drip sequences, and demand-generation assets."},
+      {title:"Original insight",copy:"Proprietary data the brand could own."},
+      {title:"Expert layer",copy:"Interviews and podcast voices for credibility and quotes."},
+      {title:"Compounding distribution",copy:"Press, blog, social, newsletter, nurture, and paid."},
     ]}
     next={{href:"/work/relationship-operating-system",label:"Relationship Operating System"}}
   />;

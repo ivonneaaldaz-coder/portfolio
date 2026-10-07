@@ -11,7 +11,7 @@ export default function Page() {
     title="Veggies Made Great — Omelette Rounds"
     dek="Consumer research helped support a breakfast product’s transition from Egg Patties to Omelette Rounds, aligning its name with how people understood it."
     meta={[{"label": "Client", "value": "Veggies Made Great"}, {"label": "Year", "value": "2024"}, {"label": "Focus", "value": "Product naming / positioning"}]}
-    sections={[{"eyebrow": "THE QUESTION", "title": "Was the name getting in the way?", "copy": "Veggies Made Great suspected its breakfast product’s name — Egg Patties — was holding it back."}, {"eyebrow": "THE APPROACH", "title": "Start with how consumers understand the product.", "copy": "I led research on how consumers understood the product, what the name suggested, and what would make them buy."}, {"eyebrow": "THE OUTCOME", "title": "A name that better reflected consumer understanding.", "copy": "The findings supported the rename to Omelette Rounds — closer to how people actually described it."}]}
+    sections={[{"eyebrow": "THE QUESTION", "title": "Was the name getting in the way?", "copy": "Veggies Made Great suspected its breakfast product’s name — Egg Patties — was holding it back."}, {"eyebrow": "THE APPROACH", "title": "Start with how consumers understand the product.", "copy": "I led research on how consumers understood the product, what the name suggested, and what would make them buy."}, {"eyebrow": "THE OUTCOME", "title": "Relaunched as Omelette Rounds.", "copy": "The findings supported the rename to Omelette Rounds — closer to how people actually described it. It launched with new packaging."}]}
     visualClass="case-product-pair"
     visual={<div className="case-product-pair-inner">
       <figure>
@@ -23,7 +23,7 @@ export default function Page() {
         <figcaption>After</figcaption>
       </figure>
     </div>}
-    facts={[{"title": "Understanding", "copy": "Explored how consumers interpreted the product and its name."}, {"title": "Purchase intent", "copy": "Evaluated purchase intent alongside naming associations and key benefits."}, {"title": "Positioning", "copy": "Identified opportunities to make the product’s language clearer."}]}
+    facts={[{"title": "Understanding", "copy": "How people read the product and its name."}, {"title": "Purchase intent", "copy": "What would make them buy."}, {"title": "Positioning", "copy": "Clearer language for the package."}]}
     next={{"href": "/work/purina-video-reviews", "label": "Purina — The Role of Video Reviews"}}
   />;
 }
