@@ -16,6 +16,19 @@ export default function ChatroomExperiment() {
         </a>
       </header>
 
+      <div className="experiment-demo-video">
+        <video
+          src="/experiments/chatroom-demo.mp4"
+          autoPlay
+          muted
+          loop
+          playsInline
+          controls
+          preload="metadata"
+          aria-label="Chatroom experiment demo"
+        />
+      </div>
+
       <section className="experiment-detail-grid">
         <div>
           <p className="eyebrow">THE IDEA</p>
