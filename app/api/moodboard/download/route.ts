@@ -59,7 +59,6 @@ function footerSvg(index: number, board: string) {
 export async function POST(request: NextRequest) {
   const body = await request.json() as RequestBody;
   const theme = (body.theme || "Visual Edit").trim().slice(0,120);
-  const caption = (body.caption || "").trim();
   const coverTitle = (body.coverTitle || theme).trim().slice(0,120);
   const coverPinId = body.coverPinId || "";
   const coverVisualDataUrl = body.coverVisualDataUrl || "";
@@ -104,10 +103,14 @@ export async function POST(request: NextRequest) {
 
     zip.file("01-cover.png", cover);
 
-    const sources: string[] = [];
+    const sources: string[] = pins.map((pin, index) => {
+      const number = String(index + 1).padStart(2,"0");
+      const label = index === 0 ? "Cover" : (pin.title || pin.boardName || "Pinterest source");
+      return `${number} — ${label}\n${pin.pinUrl}`;
+    });
+
     for (let i=1;i<pins.length;i++) {
       const pin = pins[i];
-      sources.push(`${i+1}. ${pin.title || pin.boardName} — ${pin.pinUrl}`);
 
       const response = await fetch(pin.imageUrl,{cache:"no-store"});
       if (!response.ok) continue;
@@ -130,8 +133,7 @@ export async function POST(request: NextRequest) {
       zip.file(`${String(i+1).padStart(2,"0")}.png`, slide);
     }
 
-    zip.file("caption.txt", caption || `Pinterest finds: ${theme.toLowerCase().replaceAll(" / ",", ")}.`);
-    zip.file("sources.txt", sources.join("\n"));
+    zip.file("sources.txt", sources.join("\n\n"));
 
     const output = await zip.generateAsync({type:"uint8array",compression:"DEFLATE"});
     const body = output.buffer.slice(output.byteOffset, output.byteOffset + output.byteLength) as ArrayBuffer;
