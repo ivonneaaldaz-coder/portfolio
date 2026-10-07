@@ -16,6 +16,19 @@ export default function AskEveExperiment() {
         </a>
       </header>
 
+      <div className="experiment-demo-video">
+        <video
+          src="/experiments/ask-eve-case-study.mp4"
+          autoPlay
+          muted
+          loop
+          playsInline
+          controls
+          preload="metadata"
+          aria-label="Ask Eve conversational CV demo"
+        />
+      </div>
+
       <section className="experiment-detail-grid">
         <div><p className="eyebrow">WHY I BUILT IT</p><p>Résumés flatten people. I wanted a way to make the same information searchable, conversational, and a little more human.</p></div>
         <div><p className="eyebrow">WHAT IT DOES</p><p>Answers questions grounded in my CV, projects, writing, and selected context inside the Lab.</p></div>
