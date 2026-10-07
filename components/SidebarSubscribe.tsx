@@ -1,10 +1,9 @@
 "use client";
 
-import { FormEvent, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function SidebarSubscribe() {
   const [open, setOpen] = useState(false);
-  const [message, setMessage] = useState("");
 
   useEffect(() => {
     if (!open) return;
@@ -14,11 +13,6 @@ export default function SidebarSubscribe() {
     window.addEventListener("keydown", close);
     return () => window.removeEventListener("keydown", close);
   }, [open]);
-
-  const submit = (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    setMessage("Coming soon.");
-  };
 
   return (
     <div className="sidebar-subscribe">
@@ -31,14 +25,16 @@ export default function SidebarSubscribe() {
           <button className="subscribe-backdrop" type="button" onClick={() => setOpen(false)} aria-label="Close subscribe form" />
           <div className="subscribe-modal">
             <button className="subscribe-close" type="button" onClick={() => setOpen(false)} aria-label="Close">×</button>
-            <p className="eyebrow">NEWSLETTER</p>
-            <h2>Writing, projects, places, and things I’m thinking about.</h2>
-            <p>No spam. I only send when it’s worth sharing.</p>
-            <form onSubmit={submit}>
-              <input type="email" name="email" placeholder="Email address" aria-label="Email address" required autoFocus />
-              <button type="submit">Subscribe</button>
-            </form>
-            {message && <p className="subscribe-note" role="status">{message}</p>}
+            <h2>Occasional notes from me.</h2>
+            <p>Writing, projects, places, and whatever else I feel like sharing.</p>
+            <a
+              className="subscribe-substack"
+              href="https://substack.com/@ivonnealdaz"
+              target="_blank"
+              rel="noreferrer"
+            >
+              Subscribe on Substack →
+            </a>
           </div>
         </div>
       ) : null}
