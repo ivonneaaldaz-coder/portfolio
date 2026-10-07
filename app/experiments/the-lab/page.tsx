@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { pageMetadata } from "@/lib/metadata";
+import ExperimentLoop from "@/components/ExperimentLoop";
 
 export const metadata = pageMetadata(
   "The Lab",
@@ -17,7 +18,7 @@ const labExperiments = [
   },
   {
     title:"Chatroom",
-    meta:"PUBLIC INTERNET EXPERIMENT",
+    meta:"PUBLIC CHAT / MESSENGER-ERA WEB",
     copy:"A tiny shared room where visitors can show up, talk, and leave a trace.",
     href:"/experiments/chatroom",
     mark:"CHAT.exe",
@@ -38,7 +39,7 @@ export default function LabExperiment() {
 
       <header className="experiment-detail-hero lab-detail-hero">
         <div>
-          <p className="eyebrow">EXPERIMENT / THE LAB</p>
+          <p className="eyebrow">THE LAB / RETRO WINDOWS-INSPIRED PORTFOLIO</p>
           <h1>An alternate portfolio built like an operating system.</h1>
           <p className="experiment-detail-dek">
             Most portfolios are designed to be browsed. I wanted one that could be explored — draggable windows,
@@ -81,11 +82,8 @@ export default function LabExperiment() {
         <div className="lab-experiment-grid">
           {labExperiments.map((item,index)=>(
             <Link href={item.href} className="lab-experiment-card" key={item.title}>
-              <div className={"lab-experiment-visual lab-experiment-visual-"+index}>
-                <span>{item.mark}</span>
-                {index===0 ? <div className="lab-eve-prompt">ask me about<br/>the work_</div> : null}
-                {index===1 ? <div className="lab-chat-lines"><i/><i/><i/></div> : null}
-                {index===2 ? <div className="lab-snake-path">■ ■ ■ ■<br/>　　　■<br/>　　● ■</div> : null}
+              <div className="lab-experiment-visual experiment-loop-visual">
+                <ExperimentLoop name={index===0 ? "eve" : index===1 ? "chat" : "snake"} label={item.title + " preview"} />
               </div>
               <div className="lab-experiment-copy">
                 <span>{item.meta}</span>
