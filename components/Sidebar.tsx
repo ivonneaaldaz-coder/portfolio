@@ -16,6 +16,12 @@ const links = [
 export default function Sidebar() {
   const pathname = usePathname();
 
+  const handleInternalClick = (href: string) => {
+    if (href === "/about" && pathname === "/about") {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+  };
+
   return (
     <aside className="sidebar">
       <div>
@@ -30,7 +36,12 @@ export default function Sidebar() {
                 {link.label}
               </a>
             ) : (
-              <Link key={link.label} href={link.href} className={active ? "active" : ""}>
+              <Link
+                key={link.label}
+                href={link.href}
+                className={active ? "active" : ""}
+                onClick={() => handleInternalClick(link.href)}
+              >
                 {link.label}
               </Link>
             );
