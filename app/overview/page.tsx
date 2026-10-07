@@ -112,7 +112,7 @@ export default async function OverviewPage() {
         </div>
       </section>
 
-      <section className="home-cases section-pad">
+      <section className="home-cases section-pad" id="case-studies">
         <div className="section-heading"><h2 className="section-title small-title">Selected Case Studies</h2></div>
         <div className="home-case-list">{studies.map(study => <CaseRow study={study} key={study.title} />)}</div>
         <details className="overview-inline-expand more-case-studies">
