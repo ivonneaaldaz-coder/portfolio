@@ -6141,3 +6141,8 @@ html.intro-seen #site-intro{display:none}
 @keyframes intro-in{to{opacity:1;transform:none}}
 @keyframes intro-line{to{transform:scaleX(1)}}
 @keyframes intro-lift{to{transform:translateY(-100%);visibility:hidden}}
+
+/* 2026-10-07 mobile: no scroll-in animation on videos/podcast — they just sit in place */
+@media(max-width:520px){
+  .case-visual.reveal-target,.case-visual-video,.case-visual-podcast,.experiment-demo,.experiment-demo *{opacity:1!important;transform:none!important;transition:none!important}
+}
