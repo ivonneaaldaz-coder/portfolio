@@ -64,6 +64,19 @@ export default function LabExperiment() {
         </div>
       </header>
 
+      <div className="experiment-demo-video">
+        <video
+          src="/experiments/lab-demo.mp4"
+          autoPlay
+          muted
+          loop
+          playsInline
+          controls
+          preload="metadata"
+          aria-label="The Lab portfolio operating system demo"
+        />
+      </div>
+
       <section className="experiment-detail-grid lab-detail-notes">
         <div><p className="eyebrow">WHY I BUILT IT</p><p>To make a portfolio feel less like a brochure and more like a place you can wander through.</p></div>
         <div><p className="eyebrow">WHAT I WAS TESTING</p><p>Interface nostalgia, playful navigation, conversational UX, public interaction, and personality in digital products.</p></div>
