@@ -1,13 +1,13 @@
 import { pageMetadata } from "@/lib/metadata";
 
-export const metadata = pageMetadata("Relationship Operating System", "Turning a fragmented network of contacts, introductions, and follow-ups into a system a small team could actually use every day.", "/work/relationship-operating-system");
+export const metadata = pageMetadata("Partner CRM for a Hospitality Network", "Turning a fragmented network of contacts, introductions, and follow-ups into a system a small team could actually use every day.", "/work/relationship-operating-system");
 
 import CaseStudyTemplate from "@/components/CaseStudyTemplate";
 
 export default function RelationshipOperatingSystemPage(){
   return <CaseStudyTemplate
     eyebrow="SYSTEMS + CRM / 2026"
-    title="Relationship Operating System"
+    title="Partner CRM for a Hospitality Network"
     dek="Turning a fragmented network of contacts, introductions, and follow-ups into a system a small team could actually use every day."
     meta={[
       {label:"Role",value:"Strategy / systems design / implementation"},
@@ -28,7 +28,7 @@ export default function RelationshipOperatingSystemPage(){
       playsInline
       controls
       preload="metadata"
-      aria-label="Relationship Operating System walkthrough"
+      aria-label="Partner CRM for a Hospitality Network walkthrough"
     /><p className="case-video-note"><strong>Note:</strong> This video uses mock data and illustrative results created for presentation purposes. No real client or survey data is shown.</p></div>}
     facts={[
       {title:"One source of truth",copy:"Contacts, status, last touch, and next step in one place."},

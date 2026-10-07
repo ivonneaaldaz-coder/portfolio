@@ -27,6 +27,6 @@ export default function ResearchLedContentEnginePage(){
       {title:"Expert layer",copy:"Interviews and podcast voices for credibility and quotes."},
       {title:"Compounding distribution",copy:"Press, blog, social, newsletter, nurture, and paid."},
     ]}
-    next={{href:"/work/relationship-operating-system",label:"Relationship Operating System"}}
+    next={{href:"/work/relationship-operating-system",label:"Partner CRM for a Hospitality Network"}}
   />;
 }

@@ -20,7 +20,7 @@ const features = [
 const studies = [
   { title:"Future of Marketing", tag:"7K → 50K+ subscribers", desc:"Built and grew TINT’s owned-media platform across newsletters, webinars, podcasts, events, and industry programming.", href:"/work/future-of-marketing" },
   { title:"Purina — The Role of Video Reviews", tag:"Findings → an executive’s pitch to leadership", desc:"Explored how video reviews influence pet-care purchase decisions, comparing general market consumers with Purina brand fans.", href:"/work/purina-video-reviews" },
-  { title:"Relationship Operating System", tag:"Fragmented contacts → actionable pipeline", desc:"Turned fragmented contacts and follow-ups into an actionable relationship pipeline for a small team.", href:"/work/relationship-operating-system" },
+  { title:"Partner CRM for a Hospitality Network", tag:"Scattered contacts → active pipeline", desc:"Turned fragmented contacts and follow-ups into an actionable relationship pipeline for a small team.", href:"/work/relationship-operating-system" },
 ];
 
 const moreStudies = [
