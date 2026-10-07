@@ -116,9 +116,10 @@ export async function POST(request: NextRequest) {
     zip.file("sources.txt", sources.join("\n"));
 
     const output = await zip.generateAsync({type:"uint8array",compression:"DEFLATE"});
+    const body = output.buffer.slice(output.byteOffset, output.byteOffset + output.byteLength) as ArrayBuffer;
     const slug = theme.toLowerCase().replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,"").slice(0,48) || "moodboard";
 
-    return new NextResponse(output, {
+    return new NextResponse(body, {
       status:200,
       headers:{
         "Content-Type":"application/zip",
