@@ -3,6 +3,7 @@ import { pageMetadata } from "@/lib/metadata";
 export const metadata = pageMetadata("Research-Led Content Engine", "Turned one original research initiative into a report, earned-media story, editorial calendar, social program, newsletter narrative, nurture sequence, and months of campaign material.", "/work/research-led-content-engine");
 
 import CaseStudyTemplate from "@/components/CaseStudyTemplate";
+import DemoVideo from "@/components/DemoVideo";
 import { driveImageUrl } from "@/lib/googleDrive";
 
 export default function ResearchLedContentEnginePage(){
@@ -20,8 +21,8 @@ export default function ResearchLedContentEnginePage(){
       {eyebrow:"THE BUILD",title:"Research, editorial, design, and distribution became one system.",copy:"I drafted the survey questions, analyzed the findings, interviewed industry leaders, and repurposed relevant conversations from the Future of Marketing podcast. I then shaped the narrative and designed the final eBook/report so the research could move cleanly across channels."},
       {eyebrow:"THE RETURN",title:"One foundational asset drove a year’s worth of marketing.",copy:"The research generated recurring campaign material and contributed to earned-media mentions in outlets including Forbes and Digiday. It also supported lead-generation activity, though historical attribution does not allow me to report a reliable revenue figure."},
     ]}
-    visualClass="case-visual-report-cover"
-    visual={<img src={driveImageUrl("1_7nj-IPN0WgbvNsGQ577Hg-ZBHTPugrg")} alt="State of Social and User-Generated Content report cover" />}
+    visualClass="case-visual-video"
+    visual={<DemoVideo src="/case-studies/research-led-content-engine.mp4" poster="/case-studies/research-led-content-engine.webp" label="How one research report became a year of campaigns" />}
     secondaryVisualClass="case-visual-report-pages"
     secondaryVisual={<img src={driveImageUrl("1PTknVIQaRFGuhy7ufNu_8XM5odlyUU5X")} alt="Pages from the State of Social and User-Generated Content report" />}
     evidence={[{src:"/case-studies/research-blog.webp",alt:"TINT blog artwork for UGC-Powered Commerce",caption:"Editorial example: UGC-Powered Commerce — how social commerce brands can repurpose user-generated content."}]}
