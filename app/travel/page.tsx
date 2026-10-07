@@ -1,6 +1,6 @@
 import { pageMetadata } from "@/lib/metadata";
 
-export const metadata = pageMetadata("Travel", "Photographs from places Ivonne Aldaz has passed through, stayed awhile, and wanted to remember.", "/travel");
+export const metadata = pageMetadata("Travel", "Photographs from places Ivonne Aldaz has been.", "/travel");
 
 import Link from "next/link";
 import TravelGallery from "@/components/TravelGallery";
@@ -26,7 +26,7 @@ export default function TravelPage() {
     <section className="travel-page page">
       <header className="travel-intro section-pad">
         <h1>Travel</h1>
-        <p>Photographs from places I’ve passed through, stayed awhile, and wanted to remember.</p>
+        <p>Photos from places I’ve been.</p>
       </header>
 
       <TravelGallery photographs={photographs} />
