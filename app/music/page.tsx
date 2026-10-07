@@ -6,15 +6,15 @@ import Link from "next/link";
 import SpotifyPlaylists from "@/components/SpotifyPlaylists";
 
 const vinyl = [
-  { title:"Dark Side of the Moon", artist:"Pink Floyd", image:"https://cdn.prod.website-files.com/5fc29a3f06388f6a1521d589/68d9b114266423148faf6cff_Dark%20side%20of%20the%20moon.jpg", href:"https://amzn.to/47b4A72" },
-  { title:"Wish You Were Here", artist:"Pink Floyd", image:"https://cdn.prod.website-files.com/5fc29a3f06388f6a1521d589/69bce84f9560916bf024c281_wish%20you%20were%20here%20album%20cover.png", href:"https://amzn.to/4bn22W3" },
-  { title:"Swimming", artist:"Mac Miller", image:"https://cdn.prod.website-files.com/5fc29a3f06388f6a1521d589/69be431bfe2e06d5ef282307_swimming%20mac%20miller.jpg", href:"https://amzn.to/4t0XYk9" },
-  { title:"Mac Miller — Tiny Desk", artist:"Mac Miller", image:"https://cdn.prod.website-files.com/5fc29a3f06388f6a1521d589/69e7bc329d83aeacab10307b_mac%20miller%20-%20tiny%20desk%20-%20good%20world%20living.png", href:"https://amzn.to/4279sY5" },
-  { title:"Cigarettes After Sex", artist:"Cigarettes After Sex", image:"https://cdn.prod.website-files.com/5fc29a3f06388f6a1521d589/69bce4f959a8e165062030a3_Cigarettes_After_Sex_%28album%20cover%29.svg", href:"https://www.amazon.com/Cigarettes-After-Sex-Winyl/dp/B07D9PF6V5/" },
-  { title:"Melt", artist:"Not For Radio", image:"https://cdn.prod.website-files.com/5fc29a3f06388f6a1521d589/69bce55e3cccc0a69177d23d_not-for-radio%20vinyl%20cover.jpg", href:"https://amzn.to/41fGlRB" },
-  { title:"Submarine", artist:"The Marías", image:"https://cdn.prod.website-files.com/5fc29a3f06388f6a1521d589/68d9b27d159fcd6a75f1f04c_the%20marias%20submarine_ivonne-aldaz.jpg", href:"https://amzn.to/4smQOa5" },
-  { title:"Hit Me Hard And Soft", artist:"Billie Eilish", image:"https://cdn.prod.website-files.com/5fc29a3f06388f6a1521d589/69e7b79ccc2b27051dc62f69_billie-eilish-album_Good%20World%20Living.jpg", href:"https://amzn.to/48PeZGf" },
-  { title:"MTV Unplugged — Live", artist:"Zoé", image:"https://cdn.prod.website-files.com/5fc29a3f06388f6a1521d589/69e7b7cb579a4763787f1b77_zoe-good%20world%20living.jpg", href:"https://amzn.to/3TCy8a9" },
+  { title:"Dark Side of the Moon", artist:"Pink Floyd", image:"/music/dark-side-of-the-moon.webp", href:"https://amzn.to/47b4A72" },
+  { title:"Wish You Were Here", artist:"Pink Floyd", image:"/music/wish-you-were-here.webp", href:"https://amzn.to/4bn22W3" },
+  { title:"Swimming", artist:"Mac Miller", image:"/music/swimming.webp", href:"https://amzn.to/4t0XYk9" },
+  { title:"Mac Miller — Tiny Desk", artist:"Mac Miller", image:"/music/mac-miller-tiny-desk.webp", href:"https://amzn.to/4279sY5" },
+  { title:"Cigarettes After Sex", artist:"Cigarettes After Sex", image:"/music/cigarettes-after-sex.webp", href:"https://www.amazon.com/Cigarettes-After-Sex-Winyl/dp/B07D9PF6V5/" },
+  { title:"Melt", artist:"Not For Radio", image:"/music/melt.webp", href:"https://amzn.to/41fGlRB" },
+  { title:"Submarine", artist:"The Marías", image:"/music/submarine.webp", href:"https://amzn.to/4smQOa5" },
+  { title:"Hit Me Hard And Soft", artist:"Billie Eilish", image:"/music/hit-me-hard-and-soft.webp", href:"https://amzn.to/48PeZGf" },
+  { title:"MTV Unplugged — Live", artist:"Zoé", image:"/music/zoe-mtv-unplugged.webp", href:"https://amzn.to/3TCy8a9" },
 ];
 
 export default function MusicPage() {
