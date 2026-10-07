@@ -15,6 +15,10 @@ type RequestBody = {
   pins?: PinterestPin[];
 };
 
+function bufferPart(buffer: Buffer): ArrayBuffer {
+  return buffer.buffer.slice(buffer.byteOffset, buffer.byteOffset + buffer.byteLength) as ArrayBuffer;
+}
+
 function esc(value: string) {
   return value.replace(/[&<>"']/g, (char) => ({
     "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&apos;"
@@ -87,7 +91,7 @@ export async function POST(request: NextRequest) {
     const folder = await createDriveFolder(accessToken, `Moodboard — ${date} — ${theme.slice(0,42)}`, rootFolderId);
 
     const cover = await sharp(coverSvg(theme)).png().toBuffer();
-    await uploadDriveFile(accessToken,new Blob([cover],{type:"image/png"}),"01-cover.png","image/png",folder.id);
+    await uploadDriveFile(accessToken,new Blob([bufferPart(cover)],{type:"image/png"}),"01-cover.png","image/png",folder.id);
 
     const sources: string[] = [];
 
@@ -115,7 +119,7 @@ export async function POST(request: NextRequest) {
 
       await uploadDriveFile(
         accessToken,
-        new Blob([slide],{type:"image/png"}),
+        new Blob([bufferPart(slide)],{type:"image/png"}),
         `${String(i+2).padStart(2,"0")}.png`,
         "image/png",
         folder.id
