@@ -5774,3 +5774,70 @@ dialog::backdrop { background:rgba(0,0,0,.45); }
   background:transparent!important;
   object-fit:contain!important;
 }
+
+
+/* 2026-10-06 video + overview refinement */
+.case-video-stack{
+  width:min(100%,1100px);
+  margin:0 auto;
+}
+.case-study-template .case-visual-video .case-video-stack video{
+  width:100%!important;
+  margin:0!important;
+}
+.case-video-note{
+  margin:12px 0 0!important;
+  color:var(--muted);
+  font-size:12.5px!important;
+  line-height:1.5!important;
+  max-width:72ch;
+}
+.case-video-note strong{
+  color:var(--ink);
+  font-weight:500;
+}
+.experiment-demo-video{
+  width:min(1100px,100%);
+  margin:clamp(44px,6vw,82px) auto clamp(58px,7vw,96px);
+}
+.experiment-demo-video video{
+  display:block;
+  width:100%;
+  height:auto;
+  background:#111;
+}
+.overview-page .hero-introduction>p{
+  display:block;
+}
+.overview-page .overview-lab-experiment-copy h3{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  margin-bottom:0!important;
+}
+.overview-page .overview-lab-experiment-copy h3>span{
+  font-size:.8em;
+  transition:transform .2s ease;
+}
+.overview-page .overview-lab-experiment-card:hover .overview-lab-experiment-copy h3>span{
+  transform:translateX(3px);
+}
+.overview-page .overview-lab-visual{
+  background:#171717;
+}
+.overview-page .overview-lab-visual .lab-mini{
+  width:72%;
+  height:58%;
+}
+.overview-page .overview-lab-experiment-card .lab-experiment-copy{
+  min-height:76px;
+}
+@media(max-width:900px){
+  .case-video-note{
+    font-size:12px!important;
+  }
+  .experiment-demo-video{
+    margin-top:38px;
+    margin-bottom:64px;
+  }
+}
