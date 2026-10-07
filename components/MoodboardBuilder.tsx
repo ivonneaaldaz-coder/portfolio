@@ -13,58 +13,43 @@ function editorialTheme(pins: PinterestPin[], source: string) {
   const text = pins.map((pin) => `${pin.title} ${pin.description} ${pin.boardName}`).join(" ").toLowerCase();
   const sourceLower = source.toLowerCase();
 
-  if (sourceLower.includes("home") || includesAny(text, ["interior","room","stair","wall","chair","cabinet","sofa","house"])) {
-    const material = includesAny(text, ["wood","walnut","oak","timber","panel"]) ? "Warm Wood" : "Quiet Materials";
-    const light = includesAny(text, ["lamp","light","amber","glow","moody","dark"]) ? "Low Light" : "Soft Light";
-    return `${material} / ${light} / Collected Rooms`;
-  }
-  if (sourceLower.includes("fashion") || includesAny(text, ["dress","coat","look","outfit","fashion","shoe"])) {
-    return "Soft Structure / Deep Neutrals / Sharp Details";
-  }
-  if (sourceLower.includes("art") || includesAny(text, ["painting","paint","canvas","gallery","artist","drawing"])) {
-    return "Pigment / Gesture / Imperfect Edges";
-  }
-  if (sourceLower.includes("brand") || includesAny(text, ["type","logo","identity","editorial","poster","graphic"])) {
-    return "Type / Restraint / Unexpected Detail";
-  }
-  if (sourceLower.includes("destination") || includesAny(text, ["travel","hotel","coast","stone","villa","sea","city"])) {
-    return "Old Stone / Open Air / Sun-Faded Color";
-  }
-  if (sourceLower.includes("food") || includesAny(text, ["food","table","restaurant","plate","kitchen"])) {
-    return "Texture / Color / Shared Tables";
-  }
-  if (sourceLower.includes("quote") || includesAny(text, ["quote","words","poem","text"])) {
-    return "Words / White Space / Margins";
-  }
+  if (sourceLower.includes("art")) return "Pigment / Gesture / Imperfect Edges";
+  if (sourceLower.includes("fashion")) return "Soft Structure / Deep Neutrals / Sharp Details";
+  if (sourceLower.includes("home")) return "Warm Wood / Low Light / Collected Rooms";
+  if (sourceLower.includes("brand")) return "Type / Restraint / Unexpected Detail";
+  if (sourceLower.includes("destination") || sourceLower.includes("travel")) return "Old Stone / Open Air / Sun-Faded Color";
+  if (sourceLower.includes("food")) return "Texture / Color / Shared Tables";
+  if (sourceLower.includes("quote")) return "Words / White Space / Margins";
 
-  if (includesAny(text, ["wood","brown","amber","warm"])) return "Warm Tones / Texture / Lived-In Details";
-  if (includesAny(text, ["chrome","metal","silver","steel"])) return "Chrome / Hard Edges / Soft Light";
+  const art = ["painting","paint","canvas","gallery","artist","drawing","studio","abstract"];
+  const home = ["interior","room","stair","wall","chair","cabinet","sofa","house","wood","walnut","oak"];
+  const fashion = ["dress","coat","look","outfit","fashion","shoe","bag","jacket"];
+  const brand = ["type","logo","identity","editorial","poster","graphic","packaging"];
+  const travel = ["travel","hotel","coast","stone","villa","sea","city","architecture"];
+
+  const score = (terms: string[]) => terms.reduce((sum, term) => sum + (text.includes(term) ? 1 : 0), 0);
+  const ranked = [
+    { label:"Pigment / Gesture / Imperfect Edges", score:score(art) },
+    { label:"Warm Wood / Low Light / Collected Rooms", score:score(home) },
+    { label:"Soft Structure / Deep Neutrals / Sharp Details", score:score(fashion) },
+    { label:"Type / Restraint / Unexpected Detail", score:score(brand) },
+    { label:"Old Stone / Open Air / Sun-Faded Color", score:score(travel) },
+  ].sort((a,b) => b.score - a.score);
+
+  if (ranked[0].score > 0) return ranked[0].label;
   if (includesAny(text, ["red","burgundy","crimson"])) return "Deep Red / Gloss / Graphic Tension";
   if (includesAny(text, ["blue","sea","sky","cobalt"])) return "Washed Blue / Stone / Open Air";
+  if (includesAny(text, ["chrome","metal","silver","steel"])) return "Chrome / Hard Edges / Soft Light";
   return "Texture / Restraint / Unexpected Detail";
 }
 
-function editorialCaption(theme: string, source: string) {
-  const s = source.toLowerCase();
-  if (s.includes("home")) {
-    return "Warm wood, low light, walls doing more than walls usually do. I keep saving rooms that feel collected instead of styled — a little cinematic, a little lived-in.";
-  }
-  if (s.includes("fashion")) {
-    return "I keep coming back to pieces with structure, but not stiffness — deep neutrals, clean lines, and one detail that makes the whole look feel a little off-center.";
-  }
-  if (s.includes("art")) {
-    return "What caught my eye: visible gesture, imperfect edges, and color that feels physical. Work that still shows the hand behind it.";
-  }
-  if (s.includes("brand")) {
-    return "A study in restraint: confident type, generous space, and one unexpected move. The kind of identity that does less, but lands harder.";
-  }
-  if (s.includes("destination")) {
-    return "Old stone, open air, faded color, and places that look better with a little wear on them. Apparently this is where my head is right now.";
-  }
-  if (s.includes("food")) {
-    return "Texture, saturated color, imperfect plating, crowded tables. The references I keep saving feel less styled and more like somewhere I actually want to be.";
-  }
-  return `This edit keeps circling back to ${theme.toLowerCase().replaceAll(" / ", ", ")}. Enough structure to feel intentional, enough imperfection to feel human.`;
+function editorialCaption(theme: string) {
+  const items = theme
+    .split("/")
+    .map((item) => item.trim().toLowerCase())
+    .filter(Boolean);
+
+  return `Pinterest finds: ${items.join(", ")}.`;
 }
 
 function pickPins(pool: PinterestPin[], offset: number) {
@@ -109,7 +94,7 @@ export default function MoodboardBuilder({ demoPins }: { demoPins: PinterestPin[
   }, []);
 
   useEffect(() => {
-    const saved = window.localStorage.getItem("moodboard-agent-draft");
+    const saved = window.localStorage.getItem("moodboard-agent-draft-v2");
     if (!saved) return;
     try {
       const draft = JSON.parse(saved);
@@ -148,7 +133,7 @@ export default function MoodboardBuilder({ demoPins }: { demoPins: PinterestPin[
       const generatedTheme = editorialTheme(edit, source);
       setSelected(edit);
       setTheme(generatedTheme);
-      setCaption(editorialCaption(generatedTheme, source));
+      setCaption(editorialCaption(generatedTheme));
       setStage("review");
     }, 900);
   };
@@ -161,7 +146,7 @@ export default function MoodboardBuilder({ demoPins }: { demoPins: PinterestPin[
 
   const save = async () => {
     const draft = { selected, theme, caption, source };
-    window.localStorage.setItem("moodboard-agent-draft", JSON.stringify(draft));
+    window.localStorage.setItem("moodboard-agent-draft-v2", JSON.stringify(draft));
 
     if (!driveConnected) {
       window.location.href = "/api/google-drive/connect";
@@ -184,7 +169,7 @@ export default function MoodboardBuilder({ demoPins }: { demoPins: PinterestPin[
 
     setFolderUrl(data.openFolderUrl || "");
     setStage("saved");
-    window.localStorage.removeItem("moodboard-agent-draft");
+    window.localStorage.removeItem("moodboard-agent-draft-v2");
   };
 
   return (
@@ -275,14 +260,11 @@ export default function MoodboardBuilder({ demoPins }: { demoPins: PinterestPin[
           </div>
 
           <div className="moodboard-carousel-preview">
-            <div className="moodboard-slide moodboard-cover-slide moodboard-cover-collage">
-              <div className="moodboard-cover-images">
-                {selected.slice(0, 3).map((pin) => <img key={pin.id} src={pin.imageUrl} alt="" />)}
-              </div>
+            <div className="moodboard-slide moodboard-cover-slide moodboard-cover-editorial">
+              {selected[0] ? <img className="moodboard-cover-image" src={selected[0].imageUrl} alt="" /> : null}
               <div className="moodboard-cover-copy">
                 <span>MOODBOARD</span>
                 <h3>{theme}</h3>
-                <p>A visual edit from saved references</p>
               </div>
             </div>
             {selected.map((pin, index) => (
