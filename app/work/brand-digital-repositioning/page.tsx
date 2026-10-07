@@ -26,6 +26,6 @@ export default function BrandDigitalRepositioningPage(){
       {title:"Connected assets",copy:"Website, sales collateral, and campaigns worked as one system rather than isolated deliverables."},
       {title:"Execution included",copy:"Strategy moved directly into copy, campaign structure, and launch-ready materials."},
     ]}
-    next={{href:"/work/ai-assisted-lead-engine",label:"AI-Assisted Lead Engine"}}
+    next={{href:"/work/veggies-made-great",label:"Veggies Made Great — Omelette Rounds"}}
   />;
 }

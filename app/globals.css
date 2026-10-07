@@ -6044,3 +6044,27 @@ dialog::backdrop { background:rgba(0,0,0,.45); }
     align-items:flex-end!important;
   }
 }
+/* 2026-10-06 custom cursor: ink dot + trailing ring (mouse only) */
+.cursor-dot,.cursor-ring{position:fixed;left:0;top:0;pointer-events:none;z-index:2147483646;opacity:0;transition:opacity .2s ease}
+html.has-custom-cursor.cursor-shown .cursor-dot,
+html.has-custom-cursor.cursor-shown .cursor-ring{opacity:1}
+html.has-custom-cursor,html.has-custom-cursor *{cursor:none!important}
+html.has-custom-cursor input,html.has-custom-cursor textarea,html.has-custom-cursor select,html.has-custom-cursor [contenteditable="true"],html.has-custom-cursor iframe{cursor:auto!important}
+html.has-custom-cursor input,html.has-custom-cursor textarea,html.has-custom-cursor [contenteditable="true"]{cursor:text!important}
+.cursor-dot::before,.cursor-ring::before{content:"";position:absolute;left:0;top:0;border-radius:50%;transform:translate(-50%,-50%)}
+.cursor-dot::before{width:7px;height:7px;background:#fff;mix-blend-mode:difference;transition:width .2s ease,height .2s ease}
+.cursor-dot{mix-blend-mode:difference}
+.cursor-ring::before{width:30px;height:30px;border:1px solid var(--ink);opacity:.45;transition:width .28s cubic-bezier(.22,.61,.36,1),height .28s cubic-bezier(.22,.61,.36,1),opacity .2s ease,background-color .2s ease,border-color .2s ease}
+.cursor-ring::after{content:attr(data-hint);position:absolute;left:0;top:0;transform:translate(-50%,-50%);font-size:13px;line-height:1;color:var(--bg);opacity:0;transition:opacity .15s ease}
+.cursor-ring[data-state="hover"]::before{width:46px;height:46px;opacity:1;background:var(--ink);border-color:var(--ink)}
+.cursor-ring[data-state="hover"]{mix-blend-mode:normal}
+.cursor-ring[data-state="hover"]:not([data-hint=""])::after{opacity:1}
+.cursor-ring[data-state="hover"][data-hint=""]::before{background:transparent;width:44px;height:44px;opacity:.9}
+.cursor-dot[data-state="hover"]::before{width:5px;height:5px}
+.cursor-ring.is-down::before{width:22px;height:22px}
+.cursor-ring[data-state="hover"].is-down::before{width:38px;height:38px}
+.cursor-ring[data-state="text"]::before,.cursor-dot[data-state="text"]::before{opacity:0}
+
+/* 2026-10-06 quotes: calmer scale */
+.quote-entry blockquote{font-size:clamp(22px,2.1vw,32px)!important;line-height:1.18!important;letter-spacing:-.03em!important;max-width:36ch!important}
+@media(max-width:900px){.quote-entry blockquote{font-size:22px!important}}

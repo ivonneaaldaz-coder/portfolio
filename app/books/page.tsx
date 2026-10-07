@@ -20,7 +20,7 @@ export default async function BooksPage() {
           <h1>Books + Quotes</h1>
           <p>Books, passages, and ideas.</p>
         </div>
-        <Link href="/library">Back to Library ←</Link>
+        <Link href="/overview#library">Back to Library ←</Link>
       </header>
       <LibraryWorld driveBooks={files} />
       <nav className="related-paths" aria-label="Explore next">

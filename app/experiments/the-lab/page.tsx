@@ -36,7 +36,7 @@ const labExperiments = [
 export default function LabExperiment() {
   return (
     <article className="experiment-detail lab-detail page section-pad">
-      <Link className="back-link" href="/overview">← Overview</Link>
+      <Link className="back-link" href="/overview#experiments">← Experiments</Link>
 
       <header className="experiment-detail-hero">
         <div>

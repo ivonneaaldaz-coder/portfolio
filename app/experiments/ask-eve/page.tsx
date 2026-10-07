@@ -4,7 +4,7 @@ import DemoVideo from "@/components/DemoVideo";
 export default function AskEveExperiment() {
   return (
     <article className="experiment-detail page section-pad">
-      <Link className="back-link" href="/overview">← Overview</Link>
+      <Link className="back-link" href="/overview#experiments">← Experiments</Link>
       <header className="experiment-detail-hero">
         <p className="eyebrow">EXPERIMENT / ASK EVE</p>
         <h1>A conversational CV.</h1>

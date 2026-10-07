@@ -4,7 +4,7 @@ import DemoVideo from "@/components/DemoVideo";
 export default function ChatroomExperiment() {
   return (
     <article className="experiment-detail page section-pad">
-      <Link className="back-link" href="/overview">← Overview</Link>
+      <Link className="back-link" href="/overview#experiments">← Experiments</Link>
       <header className="experiment-detail-hero">
         <p className="eyebrow">PUBLIC CHAT / MESSENGER-ERA WEB</p>
         <h1>A tiny public room on the internet.</h1>

@@ -4,7 +4,6 @@ export const metadata = pageMetadata("Research-Led Content Engine", "Turned one 
 
 import CaseStudyTemplate from "@/components/CaseStudyTemplate";
 import DemoVideo from "@/components/DemoVideo";
-import { driveImageUrl } from "@/lib/googleDrive";
 
 export default function ResearchLedContentEnginePage(){
   return <CaseStudyTemplate
@@ -23,9 +22,6 @@ export default function ResearchLedContentEnginePage(){
     ]}
     visualClass="case-visual-video"
     visual={<DemoVideo src="/case-studies/research-led-content-engine.mp4" poster="/case-studies/research-led-content-engine.webp" label="How one research report became a year of campaigns" />}
-    secondaryVisualClass="case-visual-report-pages"
-    secondaryVisual={<img src={driveImageUrl("1PTknVIQaRFGuhy7ufNu_8XM5odlyUU5X")} alt="Pages from the State of Social and User-Generated Content report" />}
-    evidence={[{src:"/case-studies/research-blog.webp",alt:"TINT blog artwork for UGC-Powered Commerce",caption:"Editorial example: UGC-Powered Commerce — how social commerce brands can repurpose user-generated content."}]}
     facts={[
       {title:"Original insight",copy:"Survey design and analysis created proprietary material the brand could own rather than simply comment on."},
       {title:"Expert layer",copy:"Leader interviews and podcast conversations added outside perspective, credibility, and reusable quotes."},

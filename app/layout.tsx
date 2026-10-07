@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import MotionSystem from "@/components/MotionSystem";
 import SiteFrame from "@/components/SiteFrame";
+import CustomCursor from "@/components/CustomCursor";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://ivonnealdaz.com"),
@@ -28,6 +29,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
         <MotionSystem />
         <SiteFrame>{children}</SiteFrame>
+        <CustomCursor />
       </body>
     </html>
   );

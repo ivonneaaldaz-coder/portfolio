@@ -25,7 +25,7 @@ export default function MusicPage() {
           <h1>Music</h1>
           <p>Playlists, records, and whatever I’m listening to lately.</p>
         </div>
-        <Link href="/library">Back to Library ←</Link>
+        <Link href="/overview#library">Back to Library ←</Link>
       </header>
 
       <section className="music-section">

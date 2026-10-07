@@ -26,7 +26,6 @@ const moreStudies = [
   { title:"ARM & HAMMER — Placement + Pricing", tag:"Research → retail + pricing clarity", desc:"Consumer research clarified where shoppers expected to find a new product and what they were willing to pay for it.", href:"/work/arm-hammer-retail-strategy" },
   { title:"Research-Led Content Engine", tag:"Research → year of campaigns", desc:"Turned original research and expert interviews into a report, press, blogs, social, newsletters, nurture, and demand-generation campaigns.", href:"/work/research-led-content-engine" },
   { title:"Brand + Digital Repositioning", tag:"Positioning → launch-ready system", desc:"Connected positioning, message, website, sales materials, and campaigns into one clearer customer journey.", href:"/work/brand-digital-repositioning" },
-  { title:"AI-Assisted Lead Engine", tag:"Messy inbound → structured next actions", desc:"Designed a lightweight workflow for turning messy inbound information into structured records, priorities, and next actions.", href:"/work/ai-assisted-lead-engine" },
 ];
 
 const experiments = [
@@ -112,7 +111,7 @@ export default async function OverviewPage() {
         </div>
       </section>
 
-      <section className="home-cases section-pad" id="case-studies">
+      <section className="home-cases section-pad overview-anchor" id="case-studies">
         <div className="section-heading"><h2 className="section-title small-title">Selected Case Studies</h2></div>
         <div className="home-case-list">{studies.map(study => <CaseRow study={study} key={study.title} />)}</div>
         <details className="overview-inline-expand more-case-studies">
@@ -159,7 +158,7 @@ export default async function OverviewPage() {
           </div>
         </details>
       </section>
-      <section className="experiments section-pad">
+      <section className="experiments section-pad overview-anchor" id="experiments">
         <div className="section-heading"><h2 className="section-title small-title">Experiments</h2></div>
         <div className="experiment-grid experiment-grid-four overview-experiment-grid">
           {experiments.map(item => (
