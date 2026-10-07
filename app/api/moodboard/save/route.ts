@@ -87,28 +87,30 @@ export async function POST(request: NextRequest) {
     const rootFolder = await findOrCreateDriveFolder(accessToken, "Moodboard Agent");
     const folder = await createDriveFolder(accessToken, `Moodboard — ${date} — ${theme.slice(0,42)}`, rootFolder.id);
 
-    const coverImages = [];
-    for (const pin of pins.slice(0,3)) {
-      const response = await fetch(pin.imageUrl,{cache:"no-store"});
-      if (!response.ok) continue;
-      const source = Buffer.from(await response.arrayBuffer());
-      coverImages.push(await sharp(source).resize(360,900,{fit:"cover",position:"attention"}).png().toBuffer());
+    let coverImage: Buffer | null = null;
+    const firstPin = pins[0];
+    if (firstPin) {
+      const response = await fetch(firstPin.imageUrl,{cache:"no-store"});
+      if (response.ok) {
+        const source = Buffer.from(await response.arrayBuffer());
+        coverImage = await sharp(source).resize(1080,900,{fit:"cover",position:"attention"}).png().toBuffer();
+      }
     }
 
     const titleLines = wrapTheme(theme || "Visual Edit", 24);
     const titleSvg = Buffer.from(`
       <svg width="1080" height="450" xmlns="http://www.w3.org/2000/svg">
         <rect width="1080" height="450" fill="#f1eee7"/>
-        <text x="64" y="70" fill="#11110f" font-family="Arial,Helvetica,sans-serif" font-size="20" font-weight="700" letter-spacing="3">MOODBOARD</text>
-        <text x="64" y="170" fill="#11110f" font-family="Arial,Helvetica,sans-serif" font-size="66" font-weight="700" letter-spacing="-3">
-          ${titleLines.map((line,index)=>`<tspan x="64" dy="${index===0?0:74}">${esc(line)}</tspan>`).join("")}
+        <text x="64" y="72" fill="#6d6961" font-family="Arial,Helvetica,sans-serif" font-size="18" font-weight="700" letter-spacing="3">MOODBOARD</text>
+        <text x="64" y="220" fill="#11110f" font-family="Arial,Helvetica,sans-serif" font-size="68" font-weight="500" letter-spacing="-3">
+          ${titleLines.map((line,index)=>`<tspan x="64" dy="${index===0?0:76}">${esc(line)}</tspan>`).join("")}
         </text>
-        <text x="64" y="408" fill="#6d6961" font-family="Arial,Helvetica,sans-serif" font-size="20">A visual edit from saved references</text>
       </svg>
     `);
 
-    const coverBase = sharp({create:{width:1080,height:1350,channels:4,background:"#11110f"}});
-    const composites = coverImages.map((image,index)=>({input:image,left:index*360,top:0}));
+    const coverBase = sharp({create:{width:1080,height:1350,channels:4,background:"#f1eee7"}});
+    const composites = [];
+    if (coverImage) composites.push({input:coverImage,left:0,top:0});
     composites.push({input:titleSvg,left:0,top:900});
     const cover = await coverBase.composite(composites).png().toBuffer();
     await uploadDriveFile(accessToken,new Blob([bufferPart(cover)],{type:"image/png"}),"01-cover.png","image/png",folder.id);
