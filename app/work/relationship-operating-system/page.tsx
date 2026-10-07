@@ -20,7 +20,7 @@ export default function RelationshipOperatingSystemPage(){
       {eyebrow:"OUTCOME",title:"A relationship database became an operating system.",copy:"The finished system gave the team a clearer view of its network, reduced manual organization, and created a repeatable way to move relationships forward."},
     ]}
     visualClass="case-visual-video"
-    visual={<video
+    visual={<div className="case-video-stack"><video
       src="/case-studies/relationship-operating-system.mp4"
       autoPlay
       muted
@@ -29,7 +29,7 @@ export default function RelationshipOperatingSystemPage(){
       controls
       preload="metadata"
       aria-label="Relationship Operating System walkthrough"
-    />}
+    /><p className="case-video-note"><strong>Note:</strong> This video uses mock data and illustrative interface states created for presentation purposes. No real customer data is shown or used.</p></div>}
     facts={[
       {title:"One source of truth",copy:"Contacts, categories, status, last touch, and next steps in a shared system."},
       {title:"Action over storage",copy:"Views and summaries were designed around what the team should do next."},
