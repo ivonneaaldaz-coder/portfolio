@@ -356,7 +356,6 @@ export default function MoodboardBuilder({ demoPins }: { demoPins: PinterestPin[
               <p className="eyebrow">BUILD MOODBOARD</p>
               <h2>Start with your saves.</h2>
             </div>
-            <span className="moodboard-step">01 / 04</span>
           </div>
 
           <div className="moodboard-onboarding-grid">
@@ -396,7 +395,6 @@ export default function MoodboardBuilder({ demoPins }: { demoPins: PinterestPin[
               <p className="eyebrow">{isDemo ? "DEMO MODE" : "PINTEREST CONNECTED"}</p>
               <h2>Choose your source.</h2>
             </div>
-            <span className="moodboard-step">02 / 04</span>
           </div>
 
           <div className="moodboard-source-panel">
@@ -433,7 +431,6 @@ export default function MoodboardBuilder({ demoPins }: { demoPins: PinterestPin[
               <p className="eyebrow">VISUAL EDIT</p>
               <h2>Review the edit.</h2>
             </div>
-            <span className="moodboard-step">03 / 04</span>
           </div>
 
           <div className="moodboard-review-top moodboard-caption-only">
@@ -493,7 +490,7 @@ export default function MoodboardBuilder({ demoPins }: { demoPins: PinterestPin[
               {stage === "downloading" ? "Preparing download…" : stage === "downloaded" ? "Download again →" : "Download ZIP →"}
             </button>
           </div>
-          <p className="moodboard-save-note">Includes carousel PNGs, caption, and source links.</p>
+          <p className="moodboard-save-note">Includes carousel PNGs + numbered source links.</p>
         </>
       ) : null}
     </section>
