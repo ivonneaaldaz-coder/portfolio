@@ -61,6 +61,77 @@ function pickPins(pool: PinterestPin[], offset: number) {
   return [...new Map(picks.map((pin) => [pin.id, pin])).values()].slice(0, 8);
 }
 
+function wrapCoverTitle(value: string, max = 22) {
+  const words = value.trim().split(/\s+/).filter(Boolean);
+  const lines: string[] = [];
+  let line = "";
+
+  for (const word of words) {
+    if ((line + " " + word).trim().length > max && line) {
+      lines.push(line);
+      line = word;
+    } else {
+      line = (line + " " + word).trim();
+    }
+  }
+
+  if (line) lines.push(line);
+  return lines.slice(0, 3);
+}
+
+async function renderCoverVisual(imageUrl: string, title: string) {
+  const image = new Image();
+  image.decoding = "async";
+  image.src = `/api/moodboard/image?src=${encodeURIComponent(imageUrl)}`;
+
+  await new Promise<void>((resolve, reject) => {
+    image.onload = () => resolve();
+    image.onerror = () => reject(new Error("Could not load the cover image for export."));
+  });
+
+  const canvas = document.createElement("canvas");
+  canvas.width = 1080;
+  canvas.height = 1350;
+
+  const context = canvas.getContext("2d");
+  if (!context) throw new Error("Could not prepare the cover visual.");
+
+  const targetWidth = 1080;
+  const targetHeight = 900;
+  const scale = Math.max(targetWidth / image.naturalWidth, targetHeight / image.naturalHeight);
+  const sourceWidth = targetWidth / scale;
+  const sourceHeight = targetHeight / scale;
+  const sourceX = Math.max(0, (image.naturalWidth - sourceWidth) / 2);
+  const sourceY = Math.max(0, (image.naturalHeight - sourceHeight) / 2);
+
+  context.drawImage(
+    image,
+    sourceX,
+    sourceY,
+    sourceWidth,
+    sourceHeight,
+    0,
+    0,
+    targetWidth,
+    targetHeight,
+  );
+
+  context.fillStyle = "#f1eee7";
+  context.fillRect(0, 900, 1080, 450);
+
+  context.textBaseline = "alphabetic";
+  context.fillStyle = "#6d6961";
+  context.font = '700 18px "Helvetica Neue", Helvetica, Arial, sans-serif';
+  context.fillText("MOODBOARD", 64, 972);
+
+  context.fillStyle = "#11110f";
+  context.font = '500 58px "Helvetica Neue", Helvetica, Arial, sans-serif';
+  const lines = wrapCoverTitle(title || "Visual Edit");
+  lines.forEach((line, index) => context.fillText(line, 64, 1105 + index * 68));
+
+  return canvas.toDataURL("image/webp", 0.94);
+}
+
 export default function MoodboardBuilder({ demoPins }: { demoPins: PinterestPin[] }) {
   const [stage, setStage] = useState<Stage>("onboarding");
   const [pins, setPins] = useState<PinterestPin[]>([]);
@@ -168,34 +239,54 @@ export default function MoodboardBuilder({ demoPins }: { demoPins: PinterestPin[
 
   const download = async () => {
     setStage("downloading");
-    const response = await fetch("/api/moodboard/download", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ theme, caption, coverTitle, coverPinId: selected[coverIndex]?.id, pins: selected }),
-    });
 
-    if (!response.ok) {
+    try {
+      const coverPin = selected[coverIndex];
+      const coverVisualDataUrl = coverPin
+        ? await renderCoverVisual(coverPin.imageUrl, coverTitle)
+        : "";
+
+      const response = await fetch("/api/moodboard/download", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          theme,
+          caption,
+          coverTitle,
+          coverPinId: coverPin?.id,
+          coverVisualDataUrl,
+          pins: selected,
+        }),
+      });
+
+      if (!response.ok) {
+        setStage("review");
+        const data = await response.json().catch(() => ({}));
+        alert(data.error || "Could not generate the download.");
+        return;
+      }
+
+      const blob = await response.blob();
+      const url = window.URL.createObjectURL(blob);
+
+      const disposition = response.headers.get("Content-Disposition") || "";
+      const match = disposition.match(/filename="([^"]+)"/);
+      const filename = match?.[1] || "moodboard.zip";
+
+      const anchor = document.createElement("a");
+      anchor.href = url;
+      anchor.download = filename;
+      document.body.appendChild(anchor);
+      anchor.click();
+      anchor.remove();
+      window.URL.revokeObjectURL(url);
+
+      setStage("downloaded");
+    } catch (error) {
+      console.error("Moodboard cover export failed:", error);
       setStage("review");
-      const data = await response.json().catch(() => ({}));
-      alert(data.error || "Could not generate the download.");
-      return;
+      alert("Could not prepare the cover visual. Please try again.");
     }
-
-    const blob = await response.blob();
-    const url = window.URL.createObjectURL(blob);
-
-    const disposition = response.headers.get("Content-Disposition") || "";
-    const match = disposition.match(/filename="([^"]+)"/);
-    const filename = match?.[1] || "moodboard.zip";
-
-    const anchor = document.createElement("a");
-    anchor.href = url;
-    anchor.download = filename;
-    document.body.appendChild(anchor);
-    anchor.click();
-    anchor.remove();
-
-    setStage("downloaded");
   };
 
   const copyCaption = async () => {
@@ -313,6 +404,10 @@ export default function MoodboardBuilder({ demoPins }: { demoPins: PinterestPin[
               <textarea id="moodboard-caption" value={caption} onChange={(e) => setCaption(e.target.value)} rows={1} />
             </div>
           </div>
+
+          <p className="moodboard-cover-help">
+            Cover is editable — click the title to rewrite it, or use <strong>Replace photo</strong> to cycle the image. Your download will match this cover.
+          </p>
 
           <div className="moodboard-carousel-preview">
             <div className="moodboard-slide moodboard-cover-slide moodboard-cover-editorial">
