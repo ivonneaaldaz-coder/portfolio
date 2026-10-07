@@ -1,19 +1,11 @@
-"use client";
-
 import Link from "next/link";
-import Script from "next/script";
-import { useEffect } from "react";
+import PinterestGallery from "@/components/PinterestGallery";
+import { getPinterestPins } from "@/lib/pinterest";
 
-declare global {
-  interface Window {
-    PinUtils?: { build?: () => void };
-  }
-}
+export const revalidate = 3600;
 
-export default function VisualReferencesPage() {
-  useEffect(() => {
-    window.PinUtils?.build?.();
-  }, []);
+export default async function VisualReferencesPage() {
+  const pins = await getPinterestPins(40);
 
   return (
     <section className="page section-pad visual-index-page pinterest-reference-page">
@@ -31,29 +23,12 @@ export default function VisualReferencesPage() {
         </a>
       </div>
 
-      <div className="pinterest-profile-wrap">
-        <a
-          className="pinterest-profile-widget"
-          aria-label="Ivonne Aldaz on Pinterest"
-          href="https://www.pinterest.com/ivonnealdaz/"
-          data-pin-do="embedUser"
-          data-pin-board-width="1400"
-          data-pin-scale-height="1100"
-          data-pin-scale-width="180"
-        />
-      </div>
+      <PinterestGallery pins={pins} />
 
       <nav className="related-paths" aria-label="Explore next">
         <Link href="/books">Books + Quotes →</Link>
         <Link href="/travel">Places →</Link>
       </nav>
-
-      <Script
-        id="pinterest-pinit"
-        src="https://assets.pinterest.com/js/pinit.js"
-        strategy="afterInteractive"
-        onLoad={() => window.PinUtils?.build?.()}
-      />
     </section>
   );
 }
