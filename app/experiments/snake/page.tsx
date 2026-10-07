@@ -15,6 +15,20 @@ export default function SnakeExperiment() {
           Play Snake ↗︎
         </a>
       </header>
+
+      <div className="experiment-demo-video">
+        <video
+          src="/experiments/snake-promo.mp4"
+          autoPlay
+          muted
+          loop
+          playsInline
+          controls
+          preload="metadata"
+          aria-label="Snake experiment promo"
+        />
+      </div>
+
       <section className="experiment-detail-grid">
         <div><p className="eyebrow">THE IDEA</p><p>Give the portfolio something people can actually play instead of only scroll through.</p></div>
         <div><p className="eyebrow">THE FORMAT</p><p>A retro desktop game living inside the Lab, complete with scoring and a shared leaderboard.</p></div>
