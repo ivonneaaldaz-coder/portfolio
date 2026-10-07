@@ -1,6 +1,6 @@
 import { pageMetadata } from "@/lib/metadata";
 
-export const metadata = pageMetadata("Books + Quotes", "Books, passages, and ideas worth returning to, curated by Ivonne Aldaz.", "/books");
+export const metadata = pageMetadata("Books + Quotes", "Books, passages, and ideas curated by Ivonne Aldaz.", "/books");
 
 import Link from "next/link";
 import LibraryWorld from "@/components/LibraryWorld";
@@ -18,7 +18,7 @@ export default async function BooksPage() {
       <header className="collection-intro">
         <div>
           <h1>Books + Quotes</h1>
-          <p>Books, passages, and ideas worth returning to.</p>
+          <p>Books, passages, and ideas.</p>
         </div>
         <Link href="/library">Back to Library ←</Link>
       </header>
