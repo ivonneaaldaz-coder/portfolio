@@ -3,6 +3,7 @@ import { pageMetadata } from "@/lib/metadata";
 export const metadata = pageMetadata("Overview", "Strategy, technology, art. Explore Ivonne Aldaz’s work, case studies, writing, and experiments.", "/overview");
 
 import Link from "next/link";
+import ExperimentLoop from "@/components/ExperimentLoop";
 import { driveImageUrl, listDriveFolder, normalizeDriveName } from "@/lib/googleDrive";
 
 const PROJECT_FOLDER = "1hpdPGeKX8nISrESD0EAzdCeAoVCnnnl7";
@@ -29,10 +30,10 @@ const moreStudies = [
 ];
 
 const experiments = [
-  { title:"The Lab", meta:"Portfolio OS / experiments", href:"/experiments/the-lab", external:false },
-  { title:"Ask Eve", meta:"Conversational CV", href:"/experiments/ask-eve", external:false },
-  { title:"Chatroom", meta:"Public internet experiment", href:"/experiments/chatroom", external:false },
-  { title:"Snake", meta:"Game + global leaderboard", href:"/experiments/snake", external:false },
+  { title:"The Lab", meta:"Portfolio OS", mark:"LAB.exe", loop:"lab", href:"/experiments/the-lab" },
+  { title:"Ask Eve", meta:"Conversational CV", mark:"EVE.exe", loop:"eve", href:"/experiments/ask-eve" },
+  { title:"Chatroom", meta:"Public internet experiment", mark:"CHAT.exe", loop:"chat", href:"/experiments/chatroom" },
+  { title:"Snake", meta:"Game + global leaderboard", mark:"SNAKE.exe", loop:"snake", href:"/experiments/snake" },
 ];
 
 const library = [
@@ -161,31 +162,19 @@ export default async function OverviewPage() {
       <section className="experiments section-pad">
         <div className="section-heading"><h2 className="section-title small-title">Experiments</h2></div>
         <div className="experiment-grid experiment-grid-four overview-experiment-grid">
-          {experiments.map((item, index) => {
-            if (index === 0) {
-              return <Link className="experiment-card experiment-link overview-lab-card" href={item.href} key={item.title}>
-                <div className="experiment-thumb exp-0">
-                  <div className="lab-mini"><div className="lab-mini-bar">LAB.exe</div><div className="lab-mini-window"><span>IVONNE_OS</span><p>A more interesting internet.</p></div></div>
-                </div>
-                <div className="experiment-meta"><div><h3>{item.title}</h3><p>{item.meta}</p></div></div>
-              </Link>;
-            }
-
-            const visualIndex = index - 1;
-            return <Link href={item.href} className="lab-experiment-card overview-lab-experiment-card" key={item.title}>
-              <div className={"lab-experiment-visual lab-experiment-visual-"+visualIndex}>
-                <span>{visualIndex === 0 ? "EVE.exe" : visualIndex === 1 ? "CHAT.exe" : "SNAKE.exe"}</span>
-                {visualIndex===0 ? <div className="lab-eve-prompt">ask me about<br/>the work_</div> : null}
-                {visualIndex===1 ? <div className="lab-chat-lines"><i/><i/><i/></div> : null}
-                {visualIndex===2 ? <div className="lab-snake-path">■ ■ ■ ■<br/>　　　■<br/>　　● ■</div> : null}
+          {experiments.map(item => (
+            <Link href={item.href} className="lab-experiment-card overview-lab-experiment-card" key={item.title}>
+              <div className="lab-experiment-visual experiment-loop-visual">
+                <ExperimentLoop name={item.loop} label={`${item.title} preview`} />
+                <span>{item.mark}</span>
               </div>
               <div className="lab-experiment-copy overview-lab-experiment-copy">
                 <span>{item.meta}</span>
                 <h3>{item.title}</h3>
                 <strong>View experiment →</strong>
               </div>
-            </Link>;
-          })}
+            </Link>
+          ))}
         </div>
       </section>
 
