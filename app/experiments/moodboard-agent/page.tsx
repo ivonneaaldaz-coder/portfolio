@@ -1,5 +1,6 @@
 import Link from "next/link";
 import MoodboardBuilder from "@/components/MoodboardBuilder";
+import MoodboardThemeToggle from "@/components/MoodboardThemeToggle";
 import { getPinterestPins } from "@/lib/pinterest";
 import { pageMetadata } from "@/lib/metadata";
 
@@ -21,6 +22,13 @@ export default async function MoodboardAgentPage() {
 
         <div className="moodboard-app-meta">
           <span className="moodboard-app-status"><i /> Pinterest → carousel</span>
+          <MoodboardThemeToggle />
+          <a
+            href="mailto:hello@ivonnealdaz.com?subject=Moodboard%20%E2%80%94%20feedback%20%2F%20ideas&body=Hi%20Ivonne%2C%0A%0AI%20was%20using%20Moodboard%20and%20wanted%20to%20share%3A%0A%0A"
+            className="moodboard-feedback-link"
+          >
+            Feedback / ideas ↗
+          </a>
           <Link href="/overview#experiments">Back to portfolio ↗</Link>
         </div>
       </header>
