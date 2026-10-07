@@ -1,5 +1,7 @@
 import Link from "next/link";
 import MoodboardDriveConnection from "@/components/MoodboardDriveConnection";
+import MoodboardBuilder from "@/components/MoodboardBuilder";
+import { getPinterestPins } from "@/lib/pinterest";
 import { pageMetadata } from "@/lib/metadata";
 
 export const metadata = pageMetadata(
@@ -8,8 +10,9 @@ export const metadata = pageMetadata(
   "/experiments/moodboard-agent"
 );
 
-// Moodboard Agent experiment entrypoint
-export default function MoodboardAgentPage() {
+export default async function MoodboardAgentPage() {
+  const pins = await getPinterestPins(300);
+
   return (
     <article className="experiment-detail page section-pad moodboard-agent-page">
       <Link className="back-link" href="/#experiments">← Experiments</Link>
@@ -25,6 +28,8 @@ export default function MoodboardAgentPage() {
           <MoodboardDriveConnection />
         </div>
       </header>
+
+      <MoodboardBuilder pins={pins} />
 
       <section className="experiment-detail-grid">
         <div>
@@ -45,9 +50,9 @@ export default function MoodboardAgentPage() {
         <p className="eyebrow">MVP FLOW</p>
         <div className="moodboard-agent-steps">
           <div><span>01</span><h2>Select source</h2><p>Choose the Pinterest board or latest saves to work from.</p></div>
-          <div><span>02</span><h2>Choose theme</h2><p>Review a few visual directions and pick the strongest edit.</p></div>
-          <div><span>03</span><h2>Review carousel</h2><p>Approve the layout, caption, and selected references before export.</p></div>
-          <div><span>04</span><h2>Save to Drive</h2><p>Create a dated folder and upload the final publishing assets.</p></div>
+          <div><span>02</span><h2>Generate edit</h2><p>The system builds a visual set and proposes a theme from your saved references.</p></div>
+          <div><span>03</span><h2>Review carousel</h2><p>Edit the theme or caption and regenerate the visual selection if needed.</p></div>
+          <div><span>04</span><h2>Save to Drive</h2><p>Generate the final 1080 × 1350 PNGs and upload the full publishing pack.</p></div>
         </div>
       </section>
     </article>
