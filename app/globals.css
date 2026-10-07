@@ -6583,3 +6583,28 @@ html.intro-seen #site-intro{display:none}
     flex-direction:column;
   }
 }
+
+
+/* 2026-10-07 detail title scale consistency */
+.case-study-template .case-hero h1,
+.project-detail-hero h1,
+.experiment-detail-hero h1{
+  font-size:clamp(40px,4.5vw,68px)!important;
+  line-height:.95!important;
+  letter-spacing:-.055em!important;
+  max-width:920px!important;
+}
+.lab-explore .section-title,
+.experiment-detail .section-heading .section-title{
+  font-size:clamp(40px,4.5vw,68px)!important;
+  line-height:.95!important;
+}
+@media(max-width:560px){
+  .case-study-template .case-hero h1,
+  .project-detail-hero h1,
+  .experiment-detail-hero h1,
+  .lab-explore .section-title,
+  .experiment-detail .section-heading .section-title{
+    font-size:44px!important;
+  }
+}
