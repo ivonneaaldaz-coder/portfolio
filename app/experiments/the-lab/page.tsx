@@ -17,7 +17,7 @@ const labExperiments = [
   },
   {
     title:"Chatroom",
-    meta:"PUBLIC INTERNET EXPERIMENT",
+    meta:"PUBLIC CHAT / AOL-ERA WEB",
     copy:"A tiny shared room where visitors can show up, talk, and leave a trace.",
     href:"/experiments/chatroom",
     mark:"CHAT.exe",
@@ -38,7 +38,7 @@ export default function LabExperiment() {
 
       <header className="experiment-detail-hero lab-detail-hero">
         <div>
-          <p className="eyebrow">EXPERIMENT / THE LAB</p>
+          <p className="eyebrow">THE LAB / RETRO WINDOWS-INSPIRED PORTFOLIO</p>
           <h1>An alternate portfolio built like an operating system.</h1>
           <p className="experiment-detail-dek">
             Most portfolios are designed to be browsed. I wanted one that could be explored — draggable windows,
