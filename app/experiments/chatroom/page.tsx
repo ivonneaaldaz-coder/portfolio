@@ -5,7 +5,7 @@ export default function ChatroomExperiment() {
     <article className="experiment-detail page section-pad">
       <Link className="back-link" href="/overview">← Overview</Link>
       <header className="experiment-detail-hero">
-        <p className="eyebrow">EXPERIMENT / CHATROOM</p>
+        <p className="eyebrow">PUBLIC CHAT / AOL-ERA WEB</p>
         <h1>A tiny public room on the internet.</h1>
         <p className="experiment-detail-dek">
           A lightweight shared chat space built as part of the Lab — less social network,
