@@ -3,7 +3,7 @@
 import { useEffect, useMemo, useState } from "react";
 import type { PinterestPin } from "@/lib/pinterest";
 
-type Stage = "onboarding" | "connecting" | "source" | "generating" | "review" | "saving" | "saved";
+type Stage = "onboarding" | "connecting" | "source" | "generating" | "review" | "downloading" | "downloaded";
 
 function includesAny(text: string, words: string[]) {
   return words.some((word) => text.includes(word));
@@ -70,9 +70,8 @@ export default function MoodboardBuilder({ demoPins }: { demoPins: PinterestPin[
   const [selected, setSelected] = useState<PinterestPin[]>([]);
   const [theme, setTheme] = useState("");
   const [caption, setCaption] = useState("");
-  const [driveConnected, setDriveConnected] = useState(false);
-  const [folderUrl, setFolderUrl] = useState("");
   const [loadingPinterest, setLoadingPinterest] = useState(true);
+  const [downloadUrl, setDownloadUrl] = useState("");
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
@@ -80,26 +79,28 @@ export default function MoodboardBuilder({ demoPins }: { demoPins: PinterestPin[
       setStage("connecting");
     }
 
-    Promise.all([
-      fetch("/api/pinterest/status", { cache: "no-store" }).then((r) => r.json()),
-      fetch("/api/google-drive/status", { cache: "no-store" }).then((r) => r.json()),
-    ]).then(async ([pinterest, drive]) => {
-      setDriveConnected(Boolean(drive.connected));
-      if (pinterest.connected) {
-        const response = await fetch("/api/pinterest/pins", { cache: "no-store" });
-        if (response.ok) {
-          const data = await response.json();
-          setPins(data.pins || []);
-          setIsDemo(false);
-          setStage("source");
+    fetch("/api/pinterest/status", { cache: "no-store" })
+      .then((response) => response.json())
+      .then(async (pinterest) => {
+        if (pinterest.connected) {
+          setStage("connecting");
+          const response = await fetch("/api/pinterest/pins", { cache: "no-store" });
+          if (response.ok) {
+            const data = await response.json();
+            setPins(data.pins || []);
+            setIsDemo(false);
+            setStage("source");
+          } else {
+            setStage("onboarding");
+          }
         }
-      }
-      setLoadingPinterest(false);
-    }).catch(() => {
-      setLoadingPinterest(false);
-      if (params.get("pinterest") === "connected") setStage("onboarding");
-    });
-  }, []);
+        setLoadingPinterest(false);
+      })
+      .catch(() => {
+        setLoadingPinterest(false);
+        setStage("onboarding");
+      });
+  }, []);;
 
   useEffect(() => {
     const saved = window.localStorage.getItem("moodboard-agent-draft-v2");
@@ -127,6 +128,13 @@ export default function MoodboardBuilder({ demoPins }: { demoPins: PinterestPin[
     return pins.filter((pin) => pin.boardName === source);
   }, [pins, source]);
 
+  const connectPinterest = () => {
+    setStage("connecting");
+    window.setTimeout(() => {
+      window.location.href = "/api/pinterest/connect";
+    }, 280);
+  };
+
   const startDemo = () => {
     setPins(demoPins);
     setIsDemo(true);
@@ -152,32 +160,37 @@ export default function MoodboardBuilder({ demoPins }: { demoPins: PinterestPin[
     generate(next);
   };
 
-  const save = async () => {
-    const draft = { selected, theme, caption, source };
-    window.localStorage.setItem("moodboard-agent-draft-v2", JSON.stringify(draft));
-
-    if (!driveConnected) {
-      window.location.href = "/api/google-drive/connect";
-      return;
-    }
-
-    setStage("saving");
-    const response = await fetch("/api/moodboard/save", {
+  const download = async () => {
+    setStage("downloading");
+    const response = await fetch("/api/moodboard/download", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ theme, caption, pins: selected }),
     });
-    const data = await response.json();
 
     if (!response.ok) {
       setStage("review");
-      alert(data.error || "Could not save the moodboard.");
+      const data = await response.json().catch(() => ({}));
+      alert(data.error || "Could not generate the download.");
       return;
     }
 
-    setFolderUrl(data.openFolderUrl || "");
-    setStage("saved");
-    window.localStorage.removeItem("moodboard-agent-draft-v2");
+    const blob = await response.blob();
+    const url = window.URL.createObjectURL(blob);
+    setDownloadUrl(url);
+
+    const disposition = response.headers.get("Content-Disposition") || "";
+    const match = disposition.match(/filename="([^"]+)"/);
+    const filename = match?.[1] || "moodboard.zip";
+
+    const anchor = document.createElement("a");
+    anchor.href = url;
+    anchor.download = filename;
+    document.body.appendChild(anchor);
+    anchor.click();
+    anchor.remove();
+
+    setStage("downloaded");
   };
 
   return (
@@ -193,12 +206,12 @@ export default function MoodboardBuilder({ demoPins }: { demoPins: PinterestPin[
           </div>
 
           <div className="moodboard-onboarding-grid">
-            <a className="moodboard-onboarding-card primary" href="/api/pinterest/connect">
+            <button className="moodboard-onboarding-card primary" type="button" onClick={connectPinterest}>
               <span>01</span>
               <h3>{loadingPinterest ? "Checking Pinterest…" : "Connect Pinterest"}</h3>
               <p>Use your own boards and recent saves to build a visual edit.</p>
               <strong>Continue with Pinterest →</strong>
-            </a>
+            </button>
             <button className="moodboard-onboarding-card" type="button" onClick={startDemo}>
               <span>02</span>
               <h3>Try the demo</h3>
@@ -259,7 +272,7 @@ export default function MoodboardBuilder({ demoPins }: { demoPins: PinterestPin[
         </div>
       ) : null}
 
-      {(stage === "review" || stage === "saving" || stage === "saved") ? (
+      {(stage === "review" || stage === "downloading" || stage === "downloaded") ? (
         <>
           <div className="moodboard-builder-head">
             <div>
@@ -297,13 +310,12 @@ export default function MoodboardBuilder({ demoPins }: { demoPins: PinterestPin[
           </div>
 
           <div className="moodboard-review-actions">
-            <button type="button" onClick={regenerate} disabled={stage === "saving"}>Regenerate edit</button>
-            <button className="experiment-launch" type="button" onClick={save} disabled={stage === "saving" || stage === "saved"}>
-              {stage === "saving" ? "Saving…" : stage === "saved" ? "Saved ✓" : driveConnected ? "Save to Drive →" : "Save to Drive →"}
+            <button type="button" onClick={regenerate} disabled={stage === "downloading"}>Regenerate edit</button>
+            <button className="experiment-launch" type="button" onClick={download} disabled={stage === "downloading"}>
+              {stage === "downloading" ? "Preparing download…" : stage === "downloaded" ? "Download again →" : "Download ZIP →"}
             </button>
-            {stage === "saved" && folderUrl ? <a href={folderUrl} target="_blank" rel="noreferrer">Open Drive folder ↗︎</a> : null}
           </div>
-          {!driveConnected && stage === "review" ? <p className="moodboard-save-note">Google Drive connects only when you save.</p> : null}
+          <p className="moodboard-save-note">Includes carousel PNGs, caption, and source links.</p>
         </>
       ) : null}
     </section>
