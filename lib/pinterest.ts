@@ -66,8 +66,9 @@ async function pinterestFetchAll<T>(path: string, maxItems = 500): Promise<T[]> 
 
   do {
     const joiner = path.includes("?") ? "&" : "?";
-    const pagePath = `${path}${joiner}page_size=250${bookmark ? `&bookmark=${encodeURIComponent(bookmark)}` : ""}`;
-    const page = await pinterestFetch<PinterestPage<T>>(pagePath);
+    const suffix: string = bookmark ? "&bookmark=" + encodeURIComponent(bookmark) : "";
+    const pagePath: string = path + joiner + "page_size=250" + suffix;
+    const page: PinterestPage<T> = await pinterestFetch<PinterestPage<T>>(pagePath);
 
     items.push(...(page.items ?? []));
     bookmark = page.bookmark;
