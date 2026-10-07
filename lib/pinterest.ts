@@ -40,9 +40,9 @@ type PinterestPage<T> = {
 
 const API_BASE = "https://api.pinterest.com/v5";
 
-async function pinterestFetch<T>(path: string): Promise<T> {
-  const token = process.env.PINTEREST_ACCESS_TOKEN;
-  if (!token) throw new Error("Missing PINTEREST_ACCESS_TOKEN");
+async function pinterestFetch<T>(path: string, explicitToken?: string): Promise<T> {
+  const token = explicitToken || process.env.PINTEREST_ACCESS_TOKEN;
+  if (!token) throw new Error("Missing Pinterest access token");
 
   const response = await fetch(`${API_BASE}${path}`, {
     headers: {
@@ -60,7 +60,7 @@ async function pinterestFetch<T>(path: string): Promise<T> {
   return response.json() as Promise<T>;
 }
 
-async function pinterestFetchAll<T>(path: string, maxItems = 500): Promise<T[]> {
+async function pinterestFetchAll<T>(path: string, maxItems = 500, explicitToken?: string): Promise<T[]> {
   const items: T[] = [];
   let bookmark: string | null | undefined = null;
 
@@ -68,7 +68,7 @@ async function pinterestFetchAll<T>(path: string, maxItems = 500): Promise<T[]> 
     const joiner = path.includes("?") ? "&" : "?";
     const suffix: string = bookmark ? "&bookmark=" + encodeURIComponent(bookmark) : "";
     const pagePath: string = path + joiner + "page_size=250" + suffix;
-    const page: PinterestPage<T> = await pinterestFetch<PinterestPage<T>>(pagePath);
+    const page: PinterestPage<T> = await pinterestFetch<PinterestPage<T>>(pagePath, explicitToken);
 
     items.push(...(page.items ?? []));
     bookmark = page.bookmark;
@@ -90,11 +90,11 @@ function bestImage(pin: PinterestApiPin): string {
   return images[0].url;
 }
 
-export async function getPinterestPins(limit = 500): Promise<PinterestPin[]> {
+export async function getPinterestPins(limit = 500, explicitToken?: string): Promise<PinterestPin[]> {
   try {
     const [pins, boardsList] = await Promise.all([
-      pinterestFetchAll<PinterestApiPin>("/pins", limit),
-      pinterestFetchAll<PinterestBoard>("/boards", 250),
+      pinterestFetchAll<PinterestApiPin>("/pins", limit, explicitToken),
+      pinterestFetchAll<PinterestBoard>("/boards", 250, explicitToken),
     ]);
 
     const boards = new Map(
