@@ -1,11 +1,19 @@
 "use client";
 
+import { usePathname } from "next/navigation";
 import Sidebar from "@/components/Sidebar";
 import MobileNav from "@/components/MobileNav";
 import ThemeToggle from "@/components/ThemeToggle";
 import SiteFooter from "@/components/SiteFooter";
 
 export default function SiteFrame({ children }: { children: React.ReactNode }) {
+  const pathname = usePathname();
+  const isStandaloneApp = pathname.startsWith("/experiments/moodboard-agent");
+
+  if (isStandaloneApp) {
+    return <main className="standalone-app-main">{children}</main>;
+  }
+
   return (
     <>
       <div className="global-theme-control">
