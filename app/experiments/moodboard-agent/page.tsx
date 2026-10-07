@@ -10,6 +10,7 @@ export const metadata = pageMetadata(
   "/experiments/moodboard-agent"
 );
 
+// Pinterest OAuth production env ready
 export default async function MoodboardAgentPage() {
   const pins = await getPinterestPins(300);
 
