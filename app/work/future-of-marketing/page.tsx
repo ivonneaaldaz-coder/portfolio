@@ -19,6 +19,21 @@ export default function FutureOfMarketingPage(){
       {eyebrow:"THE SYSTEM",title:"One media brand, many recurring reasons to come back.",copy:"I shaped the editorial direction and built programming across newsletters, webinars, podcast conversations, live and virtual events, public appearances, and expert participation. Each format extended the same audience relationship rather than behaving like an isolated campaign."},
       {eyebrow:"IMPACT",title:"A content program became an audience asset.",copy:"Future of Marketing gave TINT a persistent industry-facing platform instead of relying only on campaign-by-campaign attention. It supported lead-generation and nurture activity as well, although historical attribution was not clean enough to report a reliable sourced-revenue figure."},
     ]}
+    visualClass="case-visual-podcast"
+    visual={<div className="case-podcast">
+      <iframe
+        data-testid="embed-iframe"
+        src="https://open.spotify.com/embed/episode/1WMm5zjxrXPsT0vdNICw2B?utm_source=generator&theme=0&t=30&si=a9b86b8fafde4ddd"
+        width="100%"
+        height="152"
+        frameBorder="0"
+        allowFullScreen
+        allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+        loading="lazy"
+        title="Future of Marketing podcast episode on Spotify"
+      />
+      <p className="case-video-note">Listen: an episode of the Future of Marketing podcast.</p>
+    </div>}
     facts={[
       {title:"Audience growth",copy:"Expanded the subscriber base from roughly 7,000 to more than 50,000."},
       {title:"Integrated programming",copy:"Connected editorial, webinars, podcasting, events, and speaking into one recognizable media ecosystem."},
