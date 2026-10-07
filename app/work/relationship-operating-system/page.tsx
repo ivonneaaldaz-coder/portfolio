@@ -15,9 +15,9 @@ export default function RelationshipOperatingSystemPage(){
       {label:"Context",value:"Hospitality + investment network"},
     ]}
     sections={[
-      {eyebrow:"THE SITUATION",title:"Valuable relationships were living everywhere except in one usable place.",copy:"Contacts arrived through inboxes, business cards, referrals, forms, and individual team members. The challenge was less about collecting more data and more about turning what already existed into something structured, current, and actionable."},
-      {eyebrow:"THE SYSTEM",title:"A lightweight operating layer around the relationship pipeline.",copy:"I designed the database structure, partner categories, pipeline views, follow-up logic, intake flow, and daily action layer. Automations kept records cleaner and surfaced what needed attention without requiring the team to manually scan the base."},
-      {eyebrow:"OUTCOME",title:"A relationship database became an operating system.",copy:"The finished system gave the team a clearer view of its network, reduced manual organization, and created a repeatable way to move relationships forward."},
+      {eyebrow:"THE SITUATION",title:"Valuable relationships were living everywhere except in one usable place.",copy:"Contacts came in through inboxes, business cards, referrals, and forms. The team didn’t need more data — they needed what they had to be usable."},
+      {eyebrow:"THE SYSTEM",title:"A lightweight operating layer around the relationship pipeline.",copy:"I designed the structure, pipeline views, intake, and follow-up logic. Automations keep records clean and surface what needs attention each day."},
+      {eyebrow:"OUTCOME",title:"A relationship database became an operating system.",copy:"The team sees its whole network, spends less time organizing, and knows who to follow up with next."},
     ]}
     visualClass="case-visual-video"
     visual={<div className="case-video-stack"><video

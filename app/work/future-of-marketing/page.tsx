@@ -15,9 +15,9 @@ export default function FutureOfMarketingPage(){
       {label:"Formats",value:"Newsletter / webinars / podcast / events / speaking"},
     ]}
     sections={[
-      {eyebrow:"THE IDEA",title:"Build an audience around the category, not just the product.",copy:"Future of Marketing operated as TINT’s media brand: an owned platform designed to keep marketers engaged with useful ideas, expert perspectives, and emerging industry conversations while strengthening TINT’s position as a thought leader."},
-      {eyebrow:"THE SYSTEM",title:"One media brand, many recurring reasons to come back.",copy:"I shaped the editorial direction and built programming across newsletters, webinars, podcast conversations, live and virtual events, public appearances, and expert participation. Each format extended the same audience relationship rather than behaving like an isolated campaign."},
-      {eyebrow:"IMPACT",title:"A content program became an audience asset.",copy:"Future of Marketing gave TINT a persistent industry-facing platform instead of relying only on campaign-by-campaign attention. It supported lead-generation and nurture activity as well, although historical attribution was not clean enough to report a reliable sourced-revenue figure."},
+      {eyebrow:"THE IDEA",title:"Build an audience around the category, not just the product.",copy:"Future of Marketing was TINT’s media brand — a place for marketers to find useful ideas and expert voices, with TINT as the host."},
+      {eyebrow:"THE SYSTEM",title:"One media brand, many recurring reasons to come back.",copy:"I set the editorial direction and built the programming: newsletter, webinars, podcast, events, and speaking. Each format fed the same audience."},
+      {eyebrow:"IMPACT",title:"A content program became an audience asset.",copy:"TINT gained a platform that kept marketers coming back between campaigns. It also fed lead generation and nurture, though attribution wasn’t clean enough to report revenue."},
     ]}
     visualClass="case-visual-podcast"
     visual={<div className="case-podcast">

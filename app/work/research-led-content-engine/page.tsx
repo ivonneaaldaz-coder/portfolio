@@ -16,9 +16,9 @@ export default function ResearchLedContentEnginePage(){
       {label:"Outputs",value:"Report / PR / blog / social / newsletter / drip campaigns"},
     ]}
     sections={[
-      {eyebrow:"THE OPPORTUNITY",title:"Make the research do more than launch once.",copy:"Instead of treating an eBook or annual report as a single gated asset, I built the work so every insight, interview, quote, and finding could become raw material for additional campaigns and editorial formats."},
-      {eyebrow:"THE BUILD",title:"Research, editorial, design, and distribution became one system.",copy:"I drafted the survey questions, analyzed the findings, interviewed industry leaders, and repurposed relevant conversations from the Future of Marketing podcast. I then shaped the narrative and designed the final eBook/report so the research could move cleanly across channels."},
-      {eyebrow:"THE RETURN",title:"One foundational asset drove a year’s worth of marketing.",copy:"The research generated recurring campaign material and contributed to earned-media mentions in outlets including Forbes and Digiday. It also supported lead-generation activity, though historical attribution does not allow me to report a reliable revenue figure."},
+      {eyebrow:"THE OPPORTUNITY",title:"Make the research do more than launch once.",copy:"An annual report usually launches once and fades. I built this one so every finding, quote, and interview could become its own campaign."},
+      {eyebrow:"THE BUILD",title:"Research, editorial, design, and distribution became one system.",copy:"I wrote the survey, analyzed the results, interviewed industry leaders, and pulled in podcast conversations. Then I wrote and designed the report."},
+      {eyebrow:"THE RETURN",title:"One foundational asset drove a year’s worth of marketing.",copy:"A year of campaign material, plus coverage in Forbes and Digiday. It supported lead generation too, though attribution doesn’t allow a reliable revenue figure."},
     ]}
     visualClass="case-visual-video"
     visual={<DemoVideo src="/case-studies/research-led-content-engine.mp4" poster="/case-studies/research-led-content-engine.webp" label="How one research report became a year of campaigns" />}
