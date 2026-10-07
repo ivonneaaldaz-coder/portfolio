@@ -6,7 +6,7 @@ import { pageMetadata } from "@/lib/metadata";
 
 export const metadata = pageMetadata(
   "Moodboard Agent",
-  "A visual research experiment that turns Pinterest saves into weekly editorial moodboards.",
+  "A visual research experiment that turns Pinterest saves into editorial moodboards.",
   "/experiments/moodboard-agent"
 );
 
@@ -20,7 +20,7 @@ export default async function MoodboardAgentPage() {
       <header className="experiment-detail-hero">
         <div>
           <p className="eyebrow">VISUAL RESEARCH / CREATIVE OPS</p>
-          <h1>Pinterest saves into a weekly editorial moodboard.</h1>
+          <h1>Turn your Pinterest saves into an editorial moodboard.</h1>
           <p className="experiment-detail-dek">
             A small system that pulls visual references, builds a coherent edit, turns it into an Instagram carousel,
             and saves the finished files to Google Drive.
