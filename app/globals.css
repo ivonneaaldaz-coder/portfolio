@@ -7363,3 +7363,132 @@ html.intro-seen #site-intro{display:none}
     opacity:1;
   }
 }
+
+
+/* Moodboard dark mode + header utilities */
+.moodboard-theme-toggle{
+  appearance:none;
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+  border:0;
+  background:transparent;
+  color:var(--mb-muted);
+  padding:0;
+  font:inherit;
+  font-size:11px;
+  cursor:pointer;
+}
+.moodboard-theme-toggle:hover,
+.moodboard-feedback-link:hover{
+  color:var(--mb-black);
+}
+.moodboard-theme-toggle span:first-child{
+  font-size:13px;
+  line-height:1;
+}
+.moodboard-feedback-link{
+  color:var(--mb-muted);
+}
+
+.moodboard-app[data-moodboard-theme="dark"]{
+  --mb-border:rgba(244,241,234,.16);
+  --mb-muted:#a8a39a;
+  --mb-card:#1b1b19;
+  --mb-black:#f4f1ea;
+  --mb-accent:#d9ff58;
+  background:
+    radial-gradient(circle at 14% 0%,rgba(255,255,255,.045),transparent 30%),
+    #121210;
+  color:#f4f1ea;
+}
+.moodboard-app[data-moodboard-theme="dark"] .moodboard-app-bar{
+  background:rgba(18,18,16,.9);
+  border-color:var(--mb-border);
+}
+.moodboard-app[data-moodboard-theme="dark"] .moodboard-app-brand span{
+  color:#777168;
+}
+.moodboard-app[data-moodboard-theme="dark"] .moodboard-app-status i{
+  background:#8bb875;
+  box-shadow:0 0 0 4px rgba(139,184,117,.1);
+}
+.moodboard-app[data-moodboard-theme="dark"] .moodboard-app-note,
+.moodboard-app[data-moodboard-theme="dark"] .moodboard-builder:before{
+  border-color:var(--mb-border);
+}
+.moodboard-app[data-moodboard-theme="dark"] .moodboard-step,
+.moodboard-app[data-moodboard-theme="dark"] .moodboard-onboarding-card,
+.moodboard-app[data-moodboard-theme="dark"] .moodboard-source-panel,
+.moodboard-app[data-moodboard-theme="dark"] .moodboard-connecting,
+.moodboard-app[data-moodboard-theme="dark"] .moodboard-generating,
+.moodboard-app[data-moodboard-theme="dark"] .moodboard-review-top>div{
+  background:rgba(255,255,255,.035);
+  border-color:var(--mb-border)!important;
+  box-shadow:none;
+}
+.moodboard-app[data-moodboard-theme="dark"] .moodboard-onboarding-card.primary{
+  background:#f1eee7;
+  color:#151513;
+}
+.moodboard-app[data-moodboard-theme="dark"] .moodboard-onboarding-card.primary p,
+.moodboard-app[data-moodboard-theme="dark"] .moodboard-onboarding-card.primary>span{
+  color:#6f6b64;
+}
+.moodboard-app[data-moodboard-theme="dark"] .moodboard-onboarding-card:hover,
+.moodboard-app[data-moodboard-theme="dark"] .moodboard-source-panel>button:hover,
+.moodboard-app[data-moodboard-theme="dark"] .moodboard-source-panel>button.active{
+  background:rgba(255,255,255,.075);
+}
+.moodboard-app[data-moodboard-theme="dark"] .moodboard-onboarding-card.primary:hover{
+  background:#fffdf8;
+}
+.moodboard-app[data-moodboard-theme="dark"] .moodboard-builder-footer{
+  background:rgba(255,255,255,.035);
+  border-color:var(--mb-border);
+}
+.moodboard-app[data-moodboard-theme="dark"] .experiment-launch{
+  background:#f1eee7;
+  color:#151513;
+}
+.moodboard-app[data-moodboard-theme="dark"] .experiment-launch:hover{
+  background:#fffdf8;
+}
+.moodboard-app[data-moodboard-theme="dark"] .moodboard-copy-button,
+.moodboard-app[data-moodboard-theme="dark"] .moodboard-caption-regenerate{
+  border-color:var(--mb-border);
+}
+.moodboard-app[data-moodboard-theme="dark"] .moodboard-copy-button:hover,
+.moodboard-app[data-moodboard-theme="dark"] .moodboard-caption-regenerate:hover{
+  background:rgba(255,255,255,.08);
+  color:#f4f1ea;
+}
+.moodboard-app[data-moodboard-theme="dark"] .moodboard-carousel-preview{
+  background:#24231f;
+  border-color:var(--mb-border);
+}
+.moodboard-app[data-moodboard-theme="dark"] .moodboard-slide{
+  background:#1c1b18;
+}
+.moodboard-app[data-moodboard-theme="dark"] .moodboard-cover-help strong{
+  color:#f4f1ea;
+}
+.moodboard-app[data-moodboard-theme="dark"] .moodboard-app-footer{
+  border-color:var(--mb-border);
+}
+@media(max-width:900px){
+  .moodboard-app-meta{
+    gap:10px;
+  }
+  .moodboard-theme-toggle span:last-child{
+    display:none;
+  }
+  .moodboard-feedback-link{
+    font-size:10px;
+  }
+}
+@media(max-width:620px){
+  .moodboard-feedback-link{
+    display:none;
+  }
+}
