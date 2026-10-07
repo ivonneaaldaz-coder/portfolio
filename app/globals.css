@@ -6248,3 +6248,35 @@ html.intro-seen #site-intro{display:none}
   .pinterest-filters::-webkit-scrollbar{display:none}
   .pinterest-filters button{flex:0 0 auto}
 }
+
+
+/* 2026-10-07 Pinterest load-more controls */
+.pinterest-filters button span{
+  margin-left:5px;
+  color:var(--muted);
+  font-size:.9em;
+}
+.pinterest-load-more-wrap{
+  display:flex;
+  justify-content:center;
+  padding-top:30px;
+}
+.pinterest-load-more{
+  appearance:none;
+  border:1px solid var(--line);
+  background:transparent;
+  color:var(--fg);
+  padding:13px 18px;
+  font:inherit;
+  font-size:13px;
+  line-height:1;
+  cursor:pointer;
+  transition:background-color .18s ease,border-color .18s ease;
+}
+.pinterest-load-more:hover{
+  background:var(--hover);
+}
+.pinterest-load-more span{
+  margin-left:4px;
+  color:var(--muted);
+}
