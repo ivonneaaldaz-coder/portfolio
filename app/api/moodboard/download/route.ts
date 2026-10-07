@@ -8,6 +8,7 @@ type RequestBody = {
   caption?: string;
   coverTitle?: string;
   coverPinId?: string;
+  coverVisualDataUrl?: string;
   pins?: PinterestPin[];
 };
 
@@ -61,6 +62,7 @@ export async function POST(request: NextRequest) {
   const caption = (body.caption || "").trim();
   const coverTitle = (body.coverTitle || theme).trim().slice(0,120);
   const coverPinId = body.coverPinId || "";
+  const coverVisualDataUrl = body.coverVisualDataUrl || "";
   const pins = Array.isArray(body.pins) ? body.pins.slice(0,8) : [];
 
   if (!pins.length) {
@@ -70,24 +72,35 @@ export async function POST(request: NextRequest) {
   try {
     const zip = new JSZip();
 
-    const coverPin = pins.find((pin) => pin.id === coverPinId) || pins[0];
-    const first = await fetch(coverPin.imageUrl,{cache:"no-store"});
-    if (!first.ok) throw new Error("Could not load cover image");
-    const firstBuffer = Buffer.from(await first.arrayBuffer());
-    const coverImage = await sharp(firstBuffer)
-      .resize(1080,900,{fit:"cover",position:"attention"})
-      .png()
-      .toBuffer();
+    let cover: Buffer;
 
-    const cover = await sharp({
-      create:{width:1080,height:1350,channels:4,background:"#f1eee7"}
-    })
-      .composite([
-        {input:coverImage,left:0,top:0},
-        {input:titleSvg(coverTitle),left:0,top:900},
-      ])
-      .png()
-      .toBuffer();
+    if (coverVisualDataUrl.startsWith("data:image/")) {
+      const base64 = coverVisualDataUrl.split(",", 2)[1] || "";
+      if (!base64) throw new Error("Invalid cover visual");
+      cover = await sharp(Buffer.from(base64, "base64"))
+        .resize(1080,1350,{fit:"fill"})
+        .png()
+        .toBuffer();
+    } else {
+      const coverPin = pins.find((pin) => pin.id === coverPinId) || pins[0];
+      const first = await fetch(coverPin.imageUrl,{cache:"no-store"});
+      if (!first.ok) throw new Error("Could not load cover image");
+      const firstBuffer = Buffer.from(await first.arrayBuffer());
+      const coverImage = await sharp(firstBuffer)
+        .resize(1080,900,{fit:"cover",position:"attention"})
+        .png()
+        .toBuffer();
+
+      cover = await sharp({
+        create:{width:1080,height:1350,channels:4,background:"#f1eee7"}
+      })
+        .composite([
+          {input:coverImage,left:0,top:0},
+          {input:titleSvg(coverTitle),left:0,top:900},
+        ])
+        .png()
+        .toBuffer();
+    }
 
     zip.file("01-cover.png", cover);
 
