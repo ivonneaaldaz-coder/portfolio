@@ -38,7 +38,7 @@ export default function LabExperiment() {
     <article className="experiment-detail lab-detail page section-pad">
       <Link className="back-link" href="/overview">← Overview</Link>
 
-      <header className="experiment-detail-hero lab-detail-hero">
+      <header className="experiment-detail-hero">
         <div>
           <p className="eyebrow">THE LAB / RETRO WINDOWS-INSPIRED PORTFOLIO</p>
           <h1>An alternate portfolio built like an operating system.</h1>
@@ -49,20 +49,6 @@ export default function LabExperiment() {
           <a className="experiment-launch" href="https://lab.ivonnealdaz.com" target="_blank" rel="noreferrer">
             Launch The Lab ↗︎
           </a>
-        </div>
-
-        <div className="lab-detail-screen" aria-hidden="true">
-          <div className="lab-detail-menubar"><span>IVONNE_OS</span><span>LAB.exe</span></div>
-          <div className="lab-detail-desktop">
-            <span className="lab-detail-icon">ASK_EVE</span>
-            <span className="lab-detail-icon">MUSIC</span>
-            <span className="lab-detail-icon">NOTES</span>
-            <div className="lab-detail-window">
-              <div className="lab-detail-windowbar"><span>WELCOME.txt</span><span>— □ ×</span></div>
-              <p>A more interesting internet.</p>
-              <small>portfolio / playground / archive</small>
-            </div>
-          </div>
         </div>
       </header>
 
