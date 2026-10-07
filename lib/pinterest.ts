@@ -33,6 +33,11 @@ type PinterestBoard = {
   name?: string;
 };
 
+type PinterestPage<T> = {
+  items?: T[];
+  bookmark?: string | null;
+};
+
 const API_BASE = "https://api.pinterest.com/v5";
 
 async function pinterestFetch<T>(path: string): Promise<T> {
@@ -55,6 +60,24 @@ async function pinterestFetch<T>(path: string): Promise<T> {
   return response.json() as Promise<T>;
 }
 
+async function pinterestFetchAll<T>(path: string, maxItems = 500): Promise<T[]> {
+  const items: T[] = [];
+  let bookmark: string | null | undefined = null;
+
+  do {
+    const joiner = path.includes("?") ? "&" : "?";
+    const pagePath = `${path}${joiner}page_size=250${bookmark ? `&bookmark=${encodeURIComponent(bookmark)}` : ""}`;
+    const page = await pinterestFetch<PinterestPage<T>>(pagePath);
+
+    items.push(...(page.items ?? []));
+    bookmark = page.bookmark;
+
+    if (items.length >= maxItems) break;
+  } while (bookmark);
+
+  return items.slice(0, maxItems);
+}
+
 function bestImage(pin: PinterestApiPin): string {
   const images = Object.values(pin.media?.images ?? {}).filter(
     (image): image is PinterestImage & { url: string } => Boolean(image?.url),
@@ -66,20 +89,20 @@ function bestImage(pin: PinterestApiPin): string {
   return images[0].url;
 }
 
-export async function getPinterestPins(limit = 40): Promise<PinterestPin[]> {
+export async function getPinterestPins(limit = 500): Promise<PinterestPin[]> {
   try {
-    const [pinsResponse, boardsResponse] = await Promise.all([
-      pinterestFetch<{ items?: PinterestApiPin[] }>("/pins?page_size=100"),
-      pinterestFetch<{ items?: PinterestBoard[] }>("/boards?page_size=100"),
+    const [pins, boardsList] = await Promise.all([
+      pinterestFetchAll<PinterestApiPin>("/pins", limit),
+      pinterestFetchAll<PinterestBoard>("/boards", 250),
     ]);
 
     const boards = new Map(
-      (boardsResponse.items ?? [])
+      boardsList
         .filter((board) => board.id)
         .map((board) => [board.id as string, board.name || "Saved"]),
     );
 
-    return (pinsResponse.items ?? [])
+    return pins
       .map((pin) => {
         const id = pin.id || "";
         const imageUrl = bestImage(pin);
