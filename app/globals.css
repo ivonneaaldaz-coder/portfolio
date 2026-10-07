@@ -6608,3 +6608,122 @@ html.intro-seen #site-intro{display:none}
     font-size:44px!important;
   }
 }
+
+
+/* 2026-10-07 Moodboard Agent V1 onboarding */
+.moodboard-onboarding-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:14px;
+}
+.moodboard-onboarding-card{
+  appearance:none;
+  min-height:230px;
+  padding:24px;
+  border:1px solid var(--line);
+  background:transparent;
+  color:var(--fg);
+  text-align:left;
+  cursor:pointer;
+  display:flex;
+  flex-direction:column;
+  align-items:flex-start;
+  transition:background-color .18s ease,transform .18s ease;
+}
+.moodboard-onboarding-card:hover{
+  background:var(--hover);
+  transform:translateY(-2px);
+}
+.moodboard-onboarding-card>span{
+  font-size:10px;
+  color:var(--muted);
+  letter-spacing:.08em;
+}
+.moodboard-onboarding-card h3{
+  margin:auto 0 10px;
+  font-size:clamp(26px,3vw,42px);
+  line-height:1;
+  letter-spacing:-.05em;
+  font-weight:500;
+}
+.moodboard-onboarding-card p{
+  margin:0 0 22px;
+  max-width:40ch;
+  color:var(--muted);
+  font-size:14px;
+  line-height:1.5;
+}
+.moodboard-onboarding-card strong{
+  font-size:12px;
+  font-weight:500;
+}
+.moodboard-onboarding-card.primary{
+  background:var(--surface-soft);
+}
+.moodboard-text-action{
+  appearance:none;
+  margin-top:6px;
+  padding:0;
+  border:0;
+  background:transparent;
+  color:var(--muted);
+  font:inherit;
+  font-size:12px;
+  text-decoration:underline;
+  text-underline-offset:3px;
+  cursor:pointer;
+}
+.moodboard-save-note{
+  margin:12px 0 0;
+  color:var(--muted);
+  font-size:12px;
+}
+.moodboard-cover-collage{
+  padding:0;
+  background:#f1eee7;
+  color:#11110f;
+  display:flex;
+  flex-direction:column;
+}
+.moodboard-cover-images{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  height:66.666%;
+}
+.moodboard-cover-images img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  min-width:0;
+}
+.moodboard-cover-copy{
+  flex:1;
+  display:flex;
+  flex-direction:column;
+  padding:16px 18px;
+  background:#f1eee7;
+}
+.moodboard-cover-copy>span{
+  position:static;
+  background:transparent;
+  color:#11110f;
+  padding:0;
+  font-size:9px;
+  letter-spacing:.14em;
+}
+.moodboard-cover-copy h3{
+  margin:auto 0;
+  font-size:clamp(20px,2vw,31px);
+  line-height:.98;
+  letter-spacing:-.045em;
+}
+.moodboard-cover-copy p{
+  margin:0;
+  color:#6d6961;
+  font-size:9px;
+}
+@media(max-width:900px){
+  .moodboard-onboarding-grid{
+    grid-template-columns:1fr;
+  }
+}
