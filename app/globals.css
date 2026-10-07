@@ -6927,3 +6927,380 @@ html.intro-seen #site-intro{display:none}
 .moodboard-cover-photo-action:hover{
   background:rgba(17,17,15,.82);
 }
+
+
+/* 2026-10-07 Moodboard standalone product skin */
+.standalone-app-main{
+  min-height:100vh;
+  margin:0!important;
+  padding:0!important;
+  background:#f4f1ea;
+  color:#141412;
+}
+.moodboard-app{
+  min-height:100vh;
+  background:
+    radial-gradient(circle at 14% 0%,rgba(255,255,255,.9),transparent 30%),
+    #f4f1ea;
+  color:#141412;
+  --mb-border:rgba(20,20,18,.14);
+  --mb-muted:#777168;
+  --mb-card:#faf8f3;
+  --mb-black:#141412;
+  --mb-accent:#d9ff58;
+  font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;
+}
+.moodboard-app-bar{
+  position:sticky;
+  top:0;
+  z-index:40;
+  height:68px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:24px;
+  padding:0 clamp(22px,3vw,44px);
+  border-bottom:1px solid var(--mb-border);
+  background:rgba(244,241,234,.88);
+  backdrop-filter:blur(18px);
+}
+.moodboard-app-brand{
+  font-size:20px;
+  font-weight:600;
+  letter-spacing:-.055em;
+}
+.moodboard-app-brand span{color:#8d877d}
+.moodboard-app-meta{
+  display:flex;
+  align-items:center;
+  gap:22px;
+  color:var(--mb-muted);
+  font-size:11px;
+}
+.moodboard-app-meta>a:hover{color:var(--mb-black)}
+.moodboard-app-status{
+  display:flex;
+  align-items:center;
+  gap:7px;
+}
+.moodboard-app-status i{
+  width:6px;
+  height:6px;
+  border-radius:50%;
+  background:#72a45f;
+  box-shadow:0 0 0 4px rgba(114,164,95,.1);
+}
+.moodboard-app-main{
+  width:min(1480px,calc(100% - 44px));
+  margin:0 auto;
+  padding:clamp(38px,5vw,74px) 0 54px;
+}
+.moodboard-app-intro{
+  display:grid;
+  grid-template-columns:minmax(0,1.35fr) minmax(260px,.65fr);
+  gap:clamp(32px,6vw,110px);
+  align-items:end;
+  padding:clamp(24px,3vw,44px) 0 clamp(44px,6vw,84px);
+}
+.moodboard-app-kicker{
+  margin:0 0 20px;
+  color:var(--mb-muted);
+  font-size:10px;
+  letter-spacing:.16em;
+}
+.moodboard-app-intro h1{
+  max-width:920px;
+  margin:0;
+  font-size:clamp(52px,6.4vw,104px);
+  line-height:.88;
+  letter-spacing:-.075em;
+  font-weight:500;
+}
+.moodboard-app-intro-copy>p:last-child{
+  max-width:620px;
+  margin:28px 0 0;
+  color:var(--mb-muted);
+  font-size:clamp(15px,1.35vw,20px);
+  line-height:1.35;
+  letter-spacing:-.02em;
+}
+.moodboard-app-note{
+  border-top:1px solid var(--mb-black);
+  padding-top:14px;
+}
+.moodboard-app-note span{
+  display:block;
+  color:var(--mb-muted);
+  font-size:9px;
+  letter-spacing:.14em;
+}
+.moodboard-app-note strong{
+  display:block;
+  margin:22px 0 4px;
+  font-size:28px;
+  font-weight:500;
+  letter-spacing:-.05em;
+}
+.moodboard-app-note p{
+  margin:0;
+  color:var(--mb-muted);
+  font-size:12px;
+}
+.moodboard-app .moodboard-builder{
+  margin:0;
+  padding:0;
+  border:0;
+  scroll-margin-top:92px;
+}
+.moodboard-app .moodboard-builder:before{
+  content:"";
+  display:block;
+  width:100%;
+  height:1px;
+  background:var(--mb-border);
+}
+.moodboard-app .moodboard-builder-head{
+  margin:0;
+  padding:30px 0 24px;
+}
+.moodboard-app .moodboard-builder-head .eyebrow{
+  color:var(--mb-muted);
+  font-size:10px!important;
+  letter-spacing:.14em!important;
+}
+.moodboard-app .moodboard-builder-head h2{
+  margin-top:10px;
+  font-size:clamp(34px,4.2vw,66px);
+  font-weight:500;
+  line-height:.93;
+  letter-spacing:-.06em;
+}
+.moodboard-app .moodboard-step{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  min-width:62px;
+  height:30px;
+  padding:0 11px;
+  border:1px solid var(--mb-border);
+  border-radius:999px;
+  color:var(--mb-muted);
+  font-size:10px;
+  background:rgba(255,255,255,.32);
+}
+.moodboard-app .moodboard-onboarding-grid{
+  gap:12px;
+}
+.moodboard-app .moodboard-onboarding-card{
+  min-height:300px;
+  padding:26px;
+  border:1px solid var(--mb-border);
+  border-radius:18px;
+  background:rgba(255,255,255,.36);
+  box-shadow:0 1px 0 rgba(255,255,255,.65) inset;
+}
+.moodboard-app .moodboard-onboarding-card.primary{
+  background:var(--mb-black);
+  color:#f5f2ea;
+}
+.moodboard-app .moodboard-onboarding-card.primary p,
+.moodboard-app .moodboard-onboarding-card.primary>span{
+  color:#a9a59d;
+}
+.moodboard-app .moodboard-onboarding-card:hover{
+  transform:translateY(-3px);
+  background:rgba(255,255,255,.62);
+}
+.moodboard-app .moodboard-onboarding-card.primary:hover{
+  background:#22221f;
+}
+.moodboard-app .moodboard-onboarding-card h3{
+  font-size:clamp(34px,4vw,58px);
+  font-weight:500;
+}
+.moodboard-app .moodboard-onboarding-card strong{
+  margin-top:auto;
+  font-size:11px;
+}
+.moodboard-app .moodboard-source-panel{
+  overflow:hidden;
+  border:1px solid var(--mb-border)!important;
+  border-radius:18px;
+  background:rgba(255,255,255,.2);
+}
+.moodboard-app .moodboard-source-panel>button{
+  min-height:76px;
+  border-color:var(--mb-border);
+  padding:18px 20px;
+}
+.moodboard-app .moodboard-source-panel>button:hover,
+.moodboard-app .moodboard-source-panel>button.active{
+  background:#fffdf8;
+}
+.moodboard-app .moodboard-builder-footer{
+  padding:18px 20px;
+  background:rgba(255,255,255,.42);
+  border-top:1px solid var(--mb-border);
+}
+.moodboard-app .moodboard-builder-footer p{color:var(--mb-muted)}
+.moodboard-app .experiment-launch{
+  margin:0;
+  border:0;
+  background:var(--mb-black);
+  color:#f6f2e8;
+  padding:13px 18px;
+  border-radius:999px;
+  font-size:11px;
+}
+.moodboard-app .experiment-launch:hover{
+  background:#2a2a26;
+  transform:translateY(-1px);
+}
+.moodboard-app .moodboard-connecting,
+.moodboard-app .moodboard-generating{
+  min-height:430px;
+  border:1px solid var(--mb-border);
+  border-radius:18px;
+  background:rgba(255,255,255,.36);
+}
+.moodboard-app .moodboard-review-top{
+  gap:12px;
+}
+.moodboard-app .moodboard-review-top>div{
+  padding:14px 16px 16px;
+  border:1px solid var(--mb-border);
+  border-radius:14px;
+  background:rgba(255,255,255,.38);
+}
+.moodboard-app .moodboard-review-top label{
+  color:var(--mb-muted);
+  font-size:9px;
+  letter-spacing:.13em;
+}
+.moodboard-app .moodboard-review-top input,
+.moodboard-app .moodboard-review-top textarea{
+  border:0;
+  padding:8px 0 0;
+  background:transparent;
+  color:var(--mb-black);
+  height:42px!important;
+  min-height:42px!important;
+  font-size:15px;
+  outline:0;
+}
+.moodboard-app .moodboard-copy-button{
+  width:28px;
+  height:28px;
+  border:1px solid var(--mb-border);
+  border-radius:50%;
+  display:grid;
+  place-items:center;
+  color:var(--mb-muted);
+  font-size:13px;
+}
+.moodboard-app .moodboard-copy-button:hover{
+  background:#fff;
+  color:var(--mb-black);
+}
+.moodboard-app .moodboard-carousel-preview{
+  margin-top:18px;
+  padding:14px;
+  gap:14px;
+  border:1px solid var(--mb-border);
+  border-radius:18px;
+  background:#ded9cf;
+  scrollbar-width:thin;
+}
+.moodboard-app .moodboard-slide{
+  flex-basis:clamp(210px,21vw,305px);
+  border:0;
+  border-radius:10px;
+  box-shadow:0 14px 30px rgba(43,39,32,.08);
+  background:#ece8df;
+}
+.moodboard-app .moodboard-cover-photo-action{
+  top:12px;
+  right:12px;
+  border:0;
+  border-radius:999px;
+  background:rgba(20,20,18,.72);
+  padding:7px 10px;
+  text-transform:none;
+  letter-spacing:0;
+  font-size:10px;
+}
+.moodboard-app .moodboard-cover-copy{
+  border-top:1px solid rgba(20,20,18,.08);
+}
+.moodboard-app .moodboard-review-actions{
+  margin-top:20px;
+  padding-top:4px;
+}
+.moodboard-app .moodboard-review-actions>button:not(.experiment-launch){
+  color:var(--mb-muted);
+  text-decoration:none;
+}
+.moodboard-app .moodboard-review-actions>button:not(.experiment-launch):hover{
+  color:var(--mb-black);
+}
+.moodboard-app .moodboard-save-note{
+  color:var(--mb-muted);
+  font-size:11px;
+}
+.moodboard-app-footer{
+  display:flex;
+  justify-content:space-between;
+  gap:28px;
+  padding:24px clamp(22px,3vw,44px) 28px;
+  border-top:1px solid var(--mb-border);
+  color:var(--mb-muted);
+  font-size:10px;
+}
+:root[data-theme="dark"] .standalone-app-main,
+:root[data-theme="dark"] .moodboard-app{
+  background:#f4f1ea!important;
+  color:#141412!important;
+}
+@media(max-width:900px){
+  .moodboard-app-bar{
+    height:60px;
+    padding:0 18px;
+  }
+  .moodboard-app-status{display:none}
+  .moodboard-app-main{
+    width:min(100% - 28px,1480px);
+    padding-top:20px;
+  }
+  .moodboard-app-intro{
+    grid-template-columns:1fr;
+    gap:32px;
+    padding-bottom:50px;
+  }
+  .moodboard-app-intro h1{
+    font-size:clamp(48px,13vw,76px);
+  }
+  .moodboard-app-note{
+    max-width:420px;
+  }
+  .moodboard-app .moodboard-source-panel{
+    grid-template-columns:1fr;
+  }
+  .moodboard-app .moodboard-review-top{
+    grid-template-columns:1fr;
+  }
+  .moodboard-app-footer{
+    display:grid;
+    gap:7px;
+  }
+}
+@media(max-width:560px){
+  .moodboard-app-meta{gap:12px}
+  .moodboard-app-meta>a{font-size:10px}
+  .moodboard-app-intro h1{font-size:52px}
+  .moodboard-app .moodboard-onboarding-card{
+    min-height:240px;
+  }
+  .moodboard-app .moodboard-builder-head{
+    align-items:flex-start;
+  }
+}
