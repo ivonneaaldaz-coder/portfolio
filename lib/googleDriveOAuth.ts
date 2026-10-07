@@ -136,3 +136,24 @@ export async function uploadDriveFile(
 
   return response.json() as Promise<{ id: string; name: string; webViewLink?: string }>;
 }
+
+
+export async function findOrCreateDriveFolder(accessToken: string, name: string) {
+  const params = new URLSearchParams({
+    q: `name = '${name.replace(/'/g, "\\'")}' and mimeType = 'application/vnd.google-apps.folder' and trashed = false and 'root' in parents`,
+    fields: "files(id,name,webViewLink)",
+    pageSize: "1",
+  });
+
+  const lookup = await fetch("https://www.googleapis.com/drive/v3/files?" + params.toString(), {
+    headers: { Authorization: `Bearer ${accessToken}` },
+    cache: "no-store",
+  });
+
+  if (lookup.ok) {
+    const data = await lookup.json() as { files?: Array<{ id: string; name: string; webViewLink?: string }> };
+    if (data.files?.[0]) return data.files[0];
+  }
+
+  return createDriveFolder(accessToken, name);
+}
