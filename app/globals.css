@@ -7492,3 +7492,88 @@ html.intro-seen #site-intro{display:none}
     display:none;
   }
 }
+
+
+/* Moodboard experiment card */
+.overview-experiments-expand{
+  margin-top:18px;
+}
+.overview-experiments-expand .overview-expanded-list{
+  padding-top:18px;
+}
+.moodboard-card-visual{
+  min-height:100%;
+  display:flex;
+  flex-direction:column;
+  background:#f4f1ea;
+  color:#141412;
+}
+.moodboard-card-chrome{
+  height:30px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  padding:0 10px;
+  border-bottom:1px solid rgba(20,20,18,.12);
+  font-size:8px;
+}
+.moodboard-card-chrome span:first-child{
+  font-size:11px;
+  font-weight:600;
+  letter-spacing:-.04em;
+}
+.moodboard-card-chrome span:last-child{
+  color:#777168;
+  text-transform:uppercase;
+  letter-spacing:.08em;
+}
+.moodboard-card-stage{
+  flex:1;
+  display:grid;
+  grid-template-columns:1.15fr .85fr;
+  gap:12px;
+  padding:16px;
+}
+.moodboard-card-copy{
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+}
+.moodboard-card-copy small{
+  color:#777168;
+  font-size:7px;
+  letter-spacing:.12em;
+}
+.moodboard-card-copy strong{
+  font-size:clamp(20px,2vw,31px);
+  line-height:.9;
+  letter-spacing:-.065em;
+  font-weight:500;
+}
+.moodboard-card-carousel{
+  display:flex;
+  align-items:flex-end;
+  gap:4px;
+}
+.moodboard-card-carousel span{
+  flex:1;
+  aspect-ratio:4/5;
+  border-radius:3px;
+  background:linear-gradient(160deg,#cfc9bf,#ece8df 52%,#7f817d);
+}
+.moodboard-card-carousel span:nth-child(2){
+  transform:translateY(-7px);
+  background:linear-gradient(155deg,#d9d3c9,#98958e 62%,#292925);
+}
+.moodboard-card-carousel span:nth-child(3){
+  background:linear-gradient(180deg,#e8e2d8,#b5c0bc 58%,#6b6f6c);
+}
+@media(max-width:560px){
+  .moodboard-card-stage{
+    grid-template-columns:1fr;
+  }
+  .moodboard-card-carousel{
+    max-width:70%;
+  }
+}
