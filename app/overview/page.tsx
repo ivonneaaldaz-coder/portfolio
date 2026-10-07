@@ -29,10 +29,10 @@ const moreStudies = [
 ];
 
 const experiments = [
-  { title:"The Lab", meta:"Retro Windows-inspired portfolio", href:"/experiments/the-lab", external:false },
-  { title:"Ask Eve", meta:"Conversational CV", href:"/experiments/ask-eve", external:false },
-  { title:"Chatroom", meta:"Public chat / AOL-era web", href:"/experiments/chatroom", external:false },
-  { title:"Snake", meta:"Game + global leaderboard", href:"/experiments/snake", external:false },
+  { title:"The Lab", meta:"Retro Windows-inspired portfolio", href:"/experiments/the-lab", mark:"LAB.exe", video:"/experiments/cards/card-lab.mp4", poster:"/experiments/cards/card-lab.jpg" },
+  { title:"Ask Eve", meta:"Conversational CV", href:"/experiments/ask-eve", mark:"EVE.exe", video:"/experiments/cards/card-eve.mp4", poster:"/experiments/cards/card-eve.jpg", videoClass:"is-eve" },
+  { title:"Chatroom", meta:"Public chat / AOL-era web", href:"/experiments/chatroom", mark:"CHAT.exe", video:"/experiments/cards/card-chat.mp4", poster:"/experiments/cards/card-chat.jpg" },
+  { title:"Snake", meta:"Game + global leaderboard", href:"/experiments/snake", mark:"SNAKE.exe", video:"/experiments/cards/card-snake.mp4", poster:"/experiments/cards/card-snake.jpg" },
 ];
 
 const library = [
@@ -161,28 +161,28 @@ export default async function OverviewPage() {
       <section className="experiments section-pad">
         <div className="section-heading"><h2 className="section-title small-title">Experiments</h2></div>
         <div className="experiment-grid experiment-grid-four overview-experiment-grid">
-          {experiments.map((item, index) => {
-            const visualIndex = index - 1;
-            const isLab = index === 0;
-            return <Link href={item.href} className="lab-experiment-card overview-lab-experiment-card" key={item.title}>
-              {isLab ? (
-                <div className="lab-experiment-visual overview-lab-visual">
-                  <div className="lab-mini"><div className="lab-mini-bar">LAB.exe</div><div className="lab-mini-window"><span>IVONNE_OS</span><p>A more interesting internet.</p></div></div>
-                </div>
-              ) : (
-                <div className={"lab-experiment-visual lab-experiment-visual-"+visualIndex}>
-                  <span>{visualIndex === 0 ? "EVE.exe" : visualIndex === 1 ? "CHAT.exe" : "SNAKE.exe"}</span>
-                  {visualIndex===0 ? <div className="lab-eve-prompt">ask me about<br/>the work_</div> : null}
-                  {visualIndex===1 ? <div className="lab-chat-lines"><i/><i/><i/></div> : null}
-                  {visualIndex===2 ? <div className="lab-snake-path">■ ■ ■ ■<br/>　　　■<br/>　　● ■</div> : null}
-                </div>
-              )}
+          {experiments.map((item) => (
+            <Link href={item.href} className="lab-experiment-card overview-lab-experiment-card" key={item.title}>
+              <div className="lab-experiment-visual overview-experiment-video-tile">
+                <span>{item.mark}</span>
+                <video
+                  className={"overview-experiment-video " + (item.videoClass || "")}
+                  src={item.video}
+                  poster={item.poster}
+                  autoPlay
+                  muted
+                  loop
+                  playsInline
+                  preload="metadata"
+                  aria-label={item.title + " preview"}
+                />
+              </div>
               <div className="lab-experiment-copy overview-lab-experiment-copy">
                 <span>{item.meta}</span>
                 <h3>{item.title} <span aria-hidden="true">→</span></h3>
               </div>
-            </Link>;
-          })}
+            </Link>
+          ))}
         </div>
       </section>
 
