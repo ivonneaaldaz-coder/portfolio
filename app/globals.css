@@ -7304,3 +7304,16 @@ html.intro-seen #site-intro{display:none}
     align-items:flex-start;
   }
 }
+
+
+/* Moodboard cover edit guidance */
+.moodboard-cover-help{
+  margin:16px 2px 0;
+  color:#777168;
+  font-size:11px;
+  line-height:1.45;
+}
+.moodboard-cover-help strong{
+  color:#141412;
+  font-weight:500;
+}
