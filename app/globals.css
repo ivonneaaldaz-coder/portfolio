@@ -6843,3 +6843,87 @@ html.intro-seen #site-intro{display:none}
   -webkit-box-orient:vertical;
   overflow:hidden;
 }
+
+
+/* 2026-10-07 Moodboard cover editing + compact caption */
+.moodboard-review-top>div{
+  min-width:0;
+}
+.moodboard-field-label-row{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+}
+.moodboard-copy-button{
+  appearance:none;
+  border:0;
+  background:transparent;
+  color:var(--muted);
+  padding:0;
+  font:inherit;
+  font-size:15px;
+  line-height:1;
+  cursor:pointer;
+}
+.moodboard-copy-button:hover{
+  color:var(--ink);
+}
+.moodboard-review-top input,
+.moodboard-review-top textarea{
+  height:54px!important;
+  min-height:54px!important;
+}
+.moodboard-review-top textarea{
+  overflow-y:auto!important;
+  resize:none!important;
+  line-height:1.4;
+}
+.moodboard-cover-editorial{
+  overflow:hidden!important;
+}
+.moodboard-cover-editorial .moodboard-cover-image{
+  height:61%!important;
+  flex:0 0 61%;
+}
+.moodboard-cover-editorial .moodboard-cover-copy{
+  height:39%;
+  flex:0 0 39%;
+  justify-content:flex-start!important;
+  gap:12px;
+}
+.moodboard-cover-title-input{
+  width:100%;
+  min-height:0;
+  height:auto;
+  max-height:88px;
+  padding:0;
+  border:0;
+  outline:0;
+  resize:none;
+  overflow-y:auto;
+  background:transparent;
+  color:#11110f;
+  font:500 clamp(18px,1.7vw,24px)/1.02 var(--display);
+  letter-spacing:-.045em;
+}
+.moodboard-cover-photo-action{
+  position:absolute;
+  top:10px;
+  right:10px;
+  z-index:3;
+  appearance:none;
+  border:1px solid rgba(255,255,255,.45);
+  background:rgba(17,17,15,.68);
+  color:#fff;
+  padding:6px 8px;
+  font:inherit;
+  font-size:9px;
+  letter-spacing:.05em;
+  text-transform:uppercase;
+  cursor:pointer;
+  backdrop-filter:blur(6px);
+}
+.moodboard-cover-photo-action:hover{
+  background:rgba(17,17,15,.82);
+}
