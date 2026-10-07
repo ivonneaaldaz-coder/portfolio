@@ -38,6 +38,10 @@ const experiments = [
   { title:"Snake", meta:"Global leaderboard", loop:"snake", href:"/experiments/snake" },
 ];
 
+const moreExperiments = [
+  { title:"Moodboard", meta:"Pinterest → carousel", loop:null, href:"/experiments/moodboard-agent" },
+];
+
 const library = [
   { title:"Books + Quotes", meta:"Books, passages, and ideas.", href:"/books" },
   { title:"Music", meta:"Playlists, records, and whatever I’m listening to lately.", href:"/music" },
@@ -176,6 +180,35 @@ export default async function OverviewPage() {
             </Link>
           ))}
         </div>
+
+        <details className="overview-inline-expand overview-experiments-expand">
+          <summary><span>Show all experiments</span><span aria-hidden="true">＋</span></summary>
+          <div className="experiment-grid experiment-grid-four overview-experiment-grid overview-expanded-list">
+            {moreExperiments.map(item => (
+              <Link href={item.href} className="lab-experiment-card overview-lab-experiment-card" key={item.title}>
+                <div className="lab-experiment-visual moodboard-card-visual" aria-label="Moodboard preview">
+                  <div className="moodboard-card-chrome">
+                    <span>moodboard.</span>
+                    <span>visual editor</span>
+                  </div>
+                  <div className="moodboard-card-stage">
+                    <div className="moodboard-card-copy">
+                      <small>VISUAL EDITOR / 01</small>
+                      <strong>Saved inspiration,<br/>ready to post.</strong>
+                    </div>
+                    <div className="moodboard-card-carousel">
+                      <span/><span/><span/>
+                    </div>
+                  </div>
+                </div>
+                <div className="lab-experiment-copy overview-lab-experiment-copy">
+                  <span>{item.meta}</span>
+                  <h3>{item.title} <span aria-hidden="true">→</span></h3>
+                </div>
+              </Link>
+            ))}
+          </div>
+        </details>
       </section>
 
       <section className="overview-library section-pad overview-anchor" id="library">
