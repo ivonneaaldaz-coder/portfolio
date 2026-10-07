@@ -3,181 +3,304 @@
 import { useEffect, useMemo, useState } from "react";
 import type { PinterestPin } from "@/lib/pinterest";
 
-const STOP = new Set([
-  "about","after","again","against","also","because","before","being","between","could","every","from",
-  "have","into","just","more","most","other","over","pinterest","saved","some","such","than","that","their",
-  "them","there","these","they","this","those","through","very","what","when","where","which","while","with",
-  "would","your","image","images","design","ideas","inspiration","style"
-]);
+type Stage = "onboarding" | "source" | "generating" | "review" | "saving" | "saved";
 
-function themeFromPins(pins: PinterestPin[], fallback: string) {
-  const counts = new Map<string, number>();
-  pins.forEach((pin) => {
-    const text = `${pin.title} ${pin.description}`.toLowerCase();
-    (text.match(/[a-z][a-z-]{3,}/g) || []).forEach((word) => {
-      if (!STOP.has(word)) counts.set(word, (counts.get(word) || 0) + 1);
-    });
-  });
-  const words = [...counts.entries()]
-    .sort((a,b) => b[1] - a[1])
-    .slice(0,3)
-    .map(([word]) => word.replace(/-/g," "));
-  return words.length >= 2 ? words.map(w => w[0].toUpperCase()+w.slice(1)).join(" / ") : fallback;
+function includesAny(text: string, words: string[]) {
+  return words.some((word) => text.includes(word));
+}
+
+function editorialTheme(pins: PinterestPin[], source: string) {
+  const text = pins.map((pin) => `${pin.title} ${pin.description} ${pin.boardName}`).join(" ").toLowerCase();
+  const sourceLower = source.toLowerCase();
+
+  if (sourceLower.includes("home") || includesAny(text, ["interior","room","stair","wall","chair","cabinet","sofa","house"])) {
+    const material = includesAny(text, ["wood","walnut","oak","timber","panel"]) ? "Warm Wood" : "Quiet Materials";
+    const light = includesAny(text, ["lamp","light","amber","glow","moody","dark"]) ? "Low Light" : "Soft Light";
+    return `${material} / ${light} / Collected Rooms`;
+  }
+  if (sourceLower.includes("fashion") || includesAny(text, ["dress","coat","look","outfit","fashion","shoe"])) {
+    return "Soft Structure / Deep Neutrals / Sharp Details";
+  }
+  if (sourceLower.includes("art") || includesAny(text, ["painting","paint","canvas","gallery","artist","drawing"])) {
+    return "Pigment / Gesture / Imperfect Edges";
+  }
+  if (sourceLower.includes("brand") || includesAny(text, ["type","logo","identity","editorial","poster","graphic"])) {
+    return "Type / Restraint / Unexpected Detail";
+  }
+  if (sourceLower.includes("destination") || includesAny(text, ["travel","hotel","coast","stone","villa","sea","city"])) {
+    return "Old Stone / Open Air / Sun-Faded Color";
+  }
+  if (sourceLower.includes("food") || includesAny(text, ["food","table","restaurant","plate","kitchen"])) {
+    return "Texture / Color / Shared Tables";
+  }
+  if (sourceLower.includes("quote") || includesAny(text, ["quote","words","poem","text"])) {
+    return "Words / White Space / Margins";
+  }
+
+  if (includesAny(text, ["wood","brown","amber","warm"])) return "Warm Tones / Texture / Lived-In Details";
+  if (includesAny(text, ["chrome","metal","silver","steel"])) return "Chrome / Hard Edges / Soft Light";
+  if (includesAny(text, ["red","burgundy","crimson"])) return "Deep Red / Gloss / Graphic Tension";
+  if (includesAny(text, ["blue","sea","sky","cobalt"])) return "Washed Blue / Stone / Open Air";
+  return "Texture / Restraint / Unexpected Detail";
+}
+
+function editorialCaption(theme: string, source: string) {
+  const s = source.toLowerCase();
+  if (s.includes("home")) {
+    return "Warm wood, low light, walls doing more than walls usually do. I keep saving rooms that feel collected instead of styled — a little cinematic, a little lived-in.";
+  }
+  if (s.includes("fashion")) {
+    return "I keep coming back to pieces with structure, but not stiffness — deep neutrals, clean lines, and one detail that makes the whole look feel a little off-center.";
+  }
+  if (s.includes("art")) {
+    return "What caught my eye: visible gesture, imperfect edges, and color that feels physical. Work that still shows the hand behind it.";
+  }
+  if (s.includes("brand")) {
+    return "A study in restraint: confident type, generous space, and one unexpected move. The kind of identity that does less, but lands harder.";
+  }
+  if (s.includes("destination")) {
+    return "Old stone, open air, faded color, and places that look better with a little wear on them. Apparently this is where my head is right now.";
+  }
+  if (s.includes("food")) {
+    return "Texture, saturated color, imperfect plating, crowded tables. The references I keep saving feel less styled and more like somewhere I actually want to be.";
+  }
+  return `This edit keeps circling back to ${theme.toLowerCase().replaceAll(" / ", ", ")}. Enough structure to feel intentional, enough imperfection to feel human.`;
 }
 
 function pickPins(pool: PinterestPin[], offset: number) {
   if (pool.length <= 8) return pool;
   const picks: PinterestPin[] = [];
-  for (let i=0; i<8; i++) {
+  for (let i = 0; i < 8; i++) {
     picks.push(pool[(offset + i * Math.max(1, Math.floor(pool.length / 8))) % pool.length]);
   }
-  return [...new Map(picks.map(pin => [pin.id,pin])).values()].slice(0,8);
+  return [...new Map(picks.map((pin) => [pin.id, pin])).values()].slice(0, 8);
 }
 
-export default function MoodboardBuilder({ pins }: { pins: PinterestPin[] }) {
+export default function MoodboardBuilder({ demoPins }: { demoPins: PinterestPin[] }) {
+  const [stage, setStage] = useState<Stage>("onboarding");
+  const [pins, setPins] = useState<PinterestPin[]>([]);
   const [source, setSource] = useState("Latest saves");
-  const [stage, setStage] = useState<"source"|"generating"|"review"|"saving"|"saved">("source");
+  const [isDemo, setIsDemo] = useState(false);
   const [offset, setOffset] = useState(0);
   const [selected, setSelected] = useState<PinterestPin[]>([]);
   const [theme, setTheme] = useState("");
   const [caption, setCaption] = useState("");
   const [driveConnected, setDriveConnected] = useState(false);
   const [folderUrl, setFolderUrl] = useState("");
+  const [loadingPinterest, setLoadingPinterest] = useState(true);
 
   useEffect(() => {
-    fetch("/api/google-drive/status",{cache:"no-store"})
-      .then(r=>r.json())
-      .then(d=>setDriveConnected(Boolean(d.connected)))
-      .catch(()=>setDriveConnected(false));
-  },[]);
+    Promise.all([
+      fetch("/api/pinterest/status", { cache: "no-store" }).then((r) => r.json()),
+      fetch("/api/google-drive/status", { cache: "no-store" }).then((r) => r.json()),
+    ]).then(async ([pinterest, drive]) => {
+      setDriveConnected(Boolean(drive.connected));
+      if (pinterest.connected) {
+        const response = await fetch("/api/pinterest/pins", { cache: "no-store" });
+        if (response.ok) {
+          const data = await response.json();
+          setPins(data.pins || []);
+          setIsDemo(false);
+          setStage("source");
+        }
+      }
+      setLoadingPinterest(false);
+    }).catch(() => setLoadingPinterest(false));
+  }, []);
+
+  useEffect(() => {
+    const saved = window.localStorage.getItem("moodboard-agent-draft");
+    if (!saved) return;
+    try {
+      const draft = JSON.parse(saved);
+      if (draft?.selected?.length) {
+        setSelected(draft.selected);
+        setTheme(draft.theme || "");
+        setCaption(draft.caption || "");
+        setSource(draft.source || "Latest saves");
+        setStage("review");
+      }
+    } catch {}
+  }, []);
 
   const boards = useMemo(() => {
-    const counts = new Map<string,number>();
-    pins.forEach(pin => counts.set(pin.boardName,(counts.get(pin.boardName)||0)+1));
-    return [...counts.entries()].sort((a,b)=>b[1]-a[1]).slice(0,12);
-  },[pins]);
+    const counts = new Map<string, number>();
+    pins.forEach((pin) => counts.set(pin.boardName, (counts.get(pin.boardName) || 0) + 1));
+    return [...counts.entries()].sort((a, b) => b[1] - a[1]).slice(0, 12);
+  }, [pins]);
 
   const pool = useMemo(() => {
-    if (source === "Latest saves") return pins.slice(0,80);
-    return pins.filter(pin=>pin.boardName===source);
-  },[pins,source]);
+    if (source === "Latest saves") return pins.slice(0, 80);
+    return pins.filter((pin) => pin.boardName === source);
+  }, [pins, source]);
 
-  const generate = () => {
+  const startDemo = () => {
+    setPins(demoPins);
+    setIsDemo(true);
+    setSource("Latest saves");
+    setStage("source");
+  };
+
+  const generate = (nextOffset = offset) => {
     setStage("generating");
     window.setTimeout(() => {
-      const edit = pickPins(pool,offset);
-      const fallback = source === "Latest saves" ? "Recent Visual Edit" : source;
-      const generatedTheme = themeFromPins(edit,fallback);
+      const edit = pickPins(pool, nextOffset);
+      const generatedTheme = editorialTheme(edit, source);
       setSelected(edit);
       setTheme(generatedTheme);
-      setCaption(`Visual notes: ${generatedTheme.toLowerCase().replaceAll(" / ",", ")}.`);
+      setCaption(editorialCaption(generatedTheme, source));
       setStage("review");
-    },900);
+    }, 900);
   };
 
   const regenerate = () => {
-    setOffset(v=>v+7);
-    setStage("generating");
-    window.setTimeout(() => {
-      const edit = pickPins(pool,offset+7);
-      const fallback = source === "Latest saves" ? "Recent Visual Edit" : source;
-      const generatedTheme = themeFromPins(edit,fallback);
-      setSelected(edit);
-      setTheme(generatedTheme);
-      setCaption(`Visual notes: ${generatedTheme.toLowerCase().replaceAll(" / ",", ")}.`);
-      setStage("review");
-    },700);
+    const next = offset + 7;
+    setOffset(next);
+    generate(next);
   };
 
   const save = async () => {
+    const draft = { selected, theme, caption, source };
+    window.localStorage.setItem("moodboard-agent-draft", JSON.stringify(draft));
+
     if (!driveConnected) {
       window.location.href = "/api/google-drive/connect";
       return;
     }
+
     setStage("saving");
-    const response = await fetch("/api/moodboard/save",{
-      method:"POST",
-      headers:{"Content-Type":"application/json"},
-      body:JSON.stringify({theme,caption,pins:selected})
+    const response = await fetch("/api/moodboard/save", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ theme, caption, pins: selected }),
     });
     const data = await response.json();
+
     if (!response.ok) {
       setStage("review");
       alert(data.error || "Could not save the moodboard.");
       return;
     }
+
     setFolderUrl(data.openFolderUrl || "");
     setStage("saved");
+    window.localStorage.removeItem("moodboard-agent-draft");
   };
 
   return (
     <section id="moodboard-builder" className="moodboard-builder">
-      <div className="moodboard-builder-head">
-        <div>
-          <p className="eyebrow">BUILD MOODBOARD</p>
-          <h2>{stage==="source" ? "Choose your source." : stage==="generating" ? "Building the edit…" : "Review the edit."}</h2>
-        </div>
-        <span className="moodboard-step">{stage==="source" ? "01 / 03" : stage==="generating" ? "02 / 03" : "03 / 03"}</span>
-      </div>
-
-      {stage==="source" ? (
-        <div className="moodboard-source-panel">
-          <button className={source==="Latest saves"?"active":""} onClick={()=>setSource("Latest saves")}>
-            <span>Latest saves</span><small>{Math.min(80,pins.length)} pins</small>
-          </button>
-          {boards.map(([board,count])=>(
-            <button key={board} className={source===board?"active":""} onClick={()=>setSource(board)}>
-              <span>{board}</span><small>{count} pins</small>
-            </button>
-          ))}
-          <div className="moodboard-builder-footer">
-            <p>{pool.length} references available</p>
-            <button className="experiment-launch" onClick={generate} disabled={!pool.length}>Generate edit →</button>
+      {stage === "onboarding" ? (
+        <>
+          <div className="moodboard-builder-head">
+            <div>
+              <p className="eyebrow">BUILD MOODBOARD</p>
+              <h2>Start with your saves.</h2>
+            </div>
+            <span className="moodboard-step">01 / 04</span>
           </div>
-        </div>
+
+          <div className="moodboard-onboarding-grid">
+            <a className="moodboard-onboarding-card primary" href="/api/pinterest/connect">
+              <span>01</span>
+              <h3>{loadingPinterest ? "Checking Pinterest…" : "Connect Pinterest"}</h3>
+              <p>Use your own boards and recent saves to build a visual edit.</p>
+              <strong>Continue with Pinterest →</strong>
+            </a>
+            <button className="moodboard-onboarding-card" type="button" onClick={startDemo}>
+              <span>02</span>
+              <h3>Try the demo</h3>
+              <p>See how it works with a sample library before connecting anything.</p>
+              <strong>Use demo references →</strong>
+            </button>
+          </div>
+        </>
       ) : null}
 
-      {stage==="generating" ? (
+      {stage === "source" ? (
+        <>
+          <div className="moodboard-builder-head">
+            <div>
+              <p className="eyebrow">{isDemo ? "DEMO MODE" : "PINTEREST CONNECTED"}</p>
+              <h2>Choose your source.</h2>
+            </div>
+            <span className="moodboard-step">02 / 04</span>
+          </div>
+
+          <div className="moodboard-source-panel">
+            <button className={source === "Latest saves" ? "active" : ""} onClick={() => setSource("Latest saves")}>
+              <span>Latest saves</span><small>{Math.min(80, pins.length)} pins</small>
+            </button>
+            {boards.map(([board, count]) => (
+              <button key={board} className={source === board ? "active" : ""} onClick={() => setSource(board)}>
+                <span>{board}</span><small>{count} pins</small>
+              </button>
+            ))}
+            <div className="moodboard-builder-footer">
+              <div>
+                <p>{pool.length} references available</p>
+                {isDemo ? <button type="button" className="moodboard-text-action" onClick={() => setStage("onboarding")}>Connect your Pinterest instead</button> : null}
+              </div>
+              <button className="experiment-launch" onClick={() => generate()} disabled={!pool.length}>Generate edit →</button>
+            </div>
+          </div>
+        </>
+      ) : null}
+
+      {stage === "generating" ? (
         <div className="moodboard-generating" aria-live="polite">
           <div className="moodboard-pulse" />
-          <p>Pulling a coherent set from {source.toLowerCase()}…</p>
+          <p>Finding the visual thread…</p>
         </div>
       ) : null}
 
-      {(stage==="review" || stage==="saving" || stage==="saved") ? (
+      {(stage === "review" || stage === "saving" || stage === "saved") ? (
         <>
+          <div className="moodboard-builder-head">
+            <div>
+              <p className="eyebrow">VISUAL EDIT</p>
+              <h2>Review the edit.</h2>
+            </div>
+            <span className="moodboard-step">03 / 04</span>
+          </div>
+
           <div className="moodboard-review-top">
             <div>
               <label htmlFor="moodboard-theme">Theme</label>
-              <input id="moodboard-theme" value={theme} onChange={e=>setTheme(e.target.value)} />
+              <input id="moodboard-theme" value={theme} onChange={(e) => setTheme(e.target.value)} />
             </div>
             <div>
               <label htmlFor="moodboard-caption">Caption draft</label>
-              <textarea id="moodboard-caption" value={caption} onChange={e=>setCaption(e.target.value)} rows={3} />
+              <textarea id="moodboard-caption" value={caption} onChange={(e) => setCaption(e.target.value)} rows={4} />
             </div>
           </div>
 
           <div className="moodboard-carousel-preview">
-            <div className="moodboard-slide moodboard-cover-slide">
-              <span>MOODBOARD</span>
-              <h3>{theme}</h3>
-              <p>Visual references / Ivonne Aldaz</p>
+            <div className="moodboard-slide moodboard-cover-slide moodboard-cover-collage">
+              <div className="moodboard-cover-images">
+                {selected.slice(0, 3).map((pin) => <img key={pin.id} src={pin.imageUrl} alt="" />)}
+              </div>
+              <div className="moodboard-cover-copy">
+                <span>MOODBOARD</span>
+                <h3>{theme}</h3>
+                <p>A visual edit from saved references</p>
+              </div>
             </div>
-            {selected.map((pin,index)=>(
+            {selected.map((pin, index) => (
               <div className="moodboard-slide" key={pin.id}>
                 <img src={pin.imageUrl} alt={pin.altText} />
-                <span>{String(index+2).padStart(2,"0")}</span>
+                <span>{String(index + 2).padStart(2, "0")}</span>
               </div>
             ))}
           </div>
 
           <div className="moodboard-review-actions">
-            <button type="button" onClick={regenerate} disabled={stage==="saving"}>Regenerate edit</button>
-            <button className="experiment-launch" type="button" onClick={save} disabled={stage==="saving" || stage==="saved"}>
-              {stage==="saving" ? "Saving to Drive…" : stage==="saved" ? "Saved ✓" : driveConnected ? "Save to Drive →" : "Connect Drive + save →"}
+            <button type="button" onClick={regenerate} disabled={stage === "saving"}>Regenerate edit</button>
+            <button className="experiment-launch" type="button" onClick={save} disabled={stage === "saving" || stage === "saved"}>
+              {stage === "saving" ? "Saving…" : stage === "saved" ? "Saved ✓" : driveConnected ? "Save to Drive →" : "Save to Drive →"}
             </button>
-            {stage==="saved" && folderUrl ? <a href={folderUrl} target="_blank" rel="noreferrer">Open Drive folder ↗︎</a> : null}
+            {stage === "saved" && folderUrl ? <a href={folderUrl} target="_blank" rel="noreferrer">Open Drive folder ↗︎</a> : null}
           </div>
+          {!driveConnected && stage === "review" ? <p className="moodboard-save-note">Google Drive connects only when you save.</p> : null}
         </>
       ) : null}
     </section>
