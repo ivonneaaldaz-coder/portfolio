@@ -1,6 +1,6 @@
 import { pageMetadata } from "@/lib/metadata";
 
-export const metadata = pageMetadata("Music", "Playlists, records, and a running soundtrack curated by Ivonne Aldaz.", "/music");
+export const metadata = pageMetadata("Music", "Playlists, records, and current listening from Ivonne Aldaz.", "/music");
 
 import Link from "next/link";
 import SpotifyPlaylists from "@/components/SpotifyPlaylists";
@@ -23,7 +23,7 @@ export default function MusicPage() {
       <header className="collection-intro">
         <div>
           <h1>Music</h1>
-          <p>Playlists, records, and a running soundtrack for everything else.</p>
+          <p>Playlists, records, and whatever I’m listening to lately.</p>
         </div>
         <Link href="/library">Back to Library ←</Link>
       </header>
