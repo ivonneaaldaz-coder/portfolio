@@ -19,14 +19,14 @@ const labExperiments = [
   },
   {
     title:"Chatroom",
-    meta:"PUBLIC CHAT / MESSENGER-ERA WEB",
+    meta:"PUBLIC CHAT",
     copy:"A tiny shared room where visitors can show up, talk, and leave a trace.",
     href:"/experiments/chatroom",
     loop:"chat",
   },
   {
     title:"Snake",
-    meta:"GAME + LEADERBOARD",
+    meta:"GLOBAL LEADERBOARD",
     copy:"A deliberately unnecessary retro game with scoring, levels, and a shared leaderboard.",
     href:"/experiments/snake",
     loop:"snake",
