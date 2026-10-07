@@ -30,17 +30,17 @@ const moreStudies = [
 ];
 
 const experiments = [
-  { title:"The Lab", meta:"Retro Windows-inspired portfolio", loop:"lab", href:"/experiments/the-lab" },
+  { title:"The Lab", meta:"Retro Windows", loop:"lab", href:"/experiments/the-lab" },
   { title:"Ask Eve", meta:"Conversational CV", loop:"eve", href:"/experiments/ask-eve" },
-  { title:"Chatroom", meta:"Public chat / messenger-era web", loop:"chat", href:"/experiments/chatroom" },
-  { title:"Snake", meta:"Game + global leaderboard", loop:"snake", href:"/experiments/snake" },
+  { title:"Chatroom", meta:"Public chat", loop:"chat", href:"/experiments/chatroom" },
+  { title:"Snake", meta:"Global leaderboard", loop:"snake", href:"/experiments/snake" },
 ];
 
 const library = [
-  { title:"Books + Quotes", meta:"Reading, passages, and ideas worth returning to.", href:"/books" },
-  { title:"Music", meta:"Playlists, records, and a running soundtrack.", href:"/music" },
+  { title:"Books + Quotes", meta:"Books, passages, and ideas.", href:"/books" },
+  { title:"Music", meta:"Playlists, records, and whatever I’m listening to lately.", href:"/music" },
   { title:"Visual References", meta:"Images, type, color, and things worth saving.", href:"/visual-references" },
-  { title:"Travel", meta:"Photographs from places I’ve passed through.", href:"/travel" },
+  { title:"Travel", meta:"Photos from places I’ve been.", href:"/travel" },
 ];
 
 const writing = [
