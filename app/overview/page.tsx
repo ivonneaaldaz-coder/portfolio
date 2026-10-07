@@ -29,9 +29,9 @@ const moreStudies = [
 ];
 
 const experiments = [
-  { title:"The Lab", meta:"Portfolio OS / experiments", href:"/experiments/the-lab", external:false },
+  { title:"The Lab", meta:"Retro Windows-inspired portfolio", href:"/experiments/the-lab", external:false },
   { title:"Ask Eve", meta:"Conversational CV", href:"/experiments/ask-eve", external:false },
-  { title:"Chatroom", meta:"Public internet experiment", href:"/experiments/chatroom", external:false },
+  { title:"Chatroom", meta:"Public chat / AOL-era web", href:"/experiments/chatroom", external:false },
   { title:"Snake", meta:"Game + global leaderboard", href:"/experiments/snake", external:false },
 ];
 
