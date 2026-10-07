@@ -46,7 +46,7 @@ export default async function MoodboardAgentPage() {
           <div className="moodboard-app-note">
             <span>OUTPUT</span>
             <strong>1080 × 1350</strong>
-            <p>Carousel PNGs + caption + source links</p>
+            <p>Carousel PNGs + source links</p>
           </div>
         </section>
 
