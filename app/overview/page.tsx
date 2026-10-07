@@ -30,9 +30,9 @@ const moreStudies = [
 ];
 
 const experiments = [
-  { title:"The Lab", meta:"Portfolio OS", loop:"lab", href:"/experiments/the-lab" },
+  { title:"The Lab", meta:"Retro Windows-inspired portfolio", loop:"lab", href:"/experiments/the-lab" },
   { title:"Ask Eve", meta:"Conversational CV", loop:"eve", href:"/experiments/ask-eve" },
-  { title:"Chatroom", meta:"Public internet experiment", loop:"chat", href:"/experiments/chatroom" },
+  { title:"Chatroom", meta:"Public chat / messenger-era web", loop:"chat", href:"/experiments/chatroom" },
   { title:"Snake", meta:"Game + global leaderboard", loop:"snake", href:"/experiments/snake" },
 ];
 
@@ -56,7 +56,7 @@ const moreWriting = [
 ];
 
 const pressPreview = [
-  { org:"Forbes", title:"Why Retailers Should Utilize TikTok to Grow Their Business", year:"2021", href:"https://www.forbes.com/sites/jiawertz/2021/09/24/why-retailers-should-utilize-tiktok-to-grow-their-business/" },
+  { org:"Forbes", title:"Why Retailers Should Utilize TikTok to Grow Their Business", year:"2021" },
   { org:"Adweek", title:"How Micro and Nano Influencers Drive Big Change", year:"2021", href:"https://www.adweek.com/brand-marketing/how-micro-and-nano-influencers-drive-big-change/" },
   { org:"Digiday", title:"In the Metaverse, Brands’ FOMO Is Competing With Consumers’ Burnout", year:"2024", href:"https://digiday.com/marketing/in-the-metaverse-brands-fomo-is-competing-with-consumers-burnout/" },
 ];
@@ -108,7 +108,7 @@ export default async function OverviewPage() {
       <section className="hero-compact section-pad" id="overview">
         <div className="hero-row">
           <h1>Strategy, technology, art.</h1>
-          <div className="hero-introduction"><p>I grew a B2B audience from 7K to 50K+ and led consumer research for Purina and ARM & HAMMER. <span className="hero-intro-break">Now I run Whitespace and a few creative ventures, and I paint and teach.</span></p><a className="hero-contact" href="mailto:hello@ivonnealdaz.com">Get in touch →<span>hello@ivonnealdaz.com</span></a></div>
+          <div className="hero-introduction"><p>I grew a B2B audience from 7K to 50K+ and led consumer research for Purina and ARM & HAMMER. Now I run Whitespace and a few creative ventures, and I paint and teach.</p><a className="hero-contact" href="mailto:hello@ivonnealdaz.com">Get in touch →<span>hello@ivonnealdaz.com</span></a></div>
         </div>
       </section>
 
@@ -169,8 +169,7 @@ export default async function OverviewPage() {
               </div>
               <div className="lab-experiment-copy overview-lab-experiment-copy">
                 <span>{item.meta}</span>
-                <h3>{item.title}</h3>
-                <strong>View experiment →</strong>
+                <h3>{item.title} <span aria-hidden="true">→</span></h3>
               </div>
             </Link>
           ))}
