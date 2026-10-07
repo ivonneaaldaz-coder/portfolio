@@ -30,10 +30,10 @@ const moreStudies = [
 ];
 
 const experiments = [
-  { title:"The Lab", meta:"Portfolio OS", mark:"LAB.exe", loop:"lab", href:"/experiments/the-lab" },
-  { title:"Ask Eve", meta:"Conversational CV", mark:"EVE.exe", loop:"eve", href:"/experiments/ask-eve" },
-  { title:"Chatroom", meta:"Public internet experiment", mark:"CHAT.exe", loop:"chat", href:"/experiments/chatroom" },
-  { title:"Snake", meta:"Game + global leaderboard", mark:"SNAKE.exe", loop:"snake", href:"/experiments/snake" },
+  { title:"The Lab", meta:"Portfolio OS", loop:"lab", href:"/experiments/the-lab" },
+  { title:"Ask Eve", meta:"Conversational CV", loop:"eve", href:"/experiments/ask-eve" },
+  { title:"Chatroom", meta:"Public internet experiment", loop:"chat", href:"/experiments/chatroom" },
+  { title:"Snake", meta:"Game + global leaderboard", loop:"snake", href:"/experiments/snake" },
 ];
 
 const library = [
@@ -166,7 +166,6 @@ export default async function OverviewPage() {
             <Link href={item.href} className="lab-experiment-card overview-lab-experiment-card" key={item.title}>
               <div className="lab-experiment-visual experiment-loop-visual">
                 <ExperimentLoop name={item.loop} label={`${item.title} preview`} />
-                <span>{item.mark}</span>
               </div>
               <div className="lab-experiment-copy overview-lab-experiment-copy">
                 <span>{item.meta}</span>

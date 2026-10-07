@@ -5791,10 +5791,6 @@ dialog::backdrop { background:rgba(0,0,0,.45); }
   object-fit:cover;
   display:block;
 }
-.experiment-loop-visual>span{
-  z-index:1;
-  color:#e6e3dc;
-}
 @media(max-width:900px){
   .overview-lab-experiment-card .experiment-loop-visual{aspect-ratio:848/584;min-height:0}
 }
