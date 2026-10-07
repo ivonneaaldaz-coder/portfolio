@@ -20,16 +20,12 @@ export default function VisualReferencesPage() {
       <header className="collection-intro">
         <div>
           <h1>Visual References</h1>
-          <p>A live collection of things I like enough to save.</p>
+          <p>Images, spaces, colors, and details that have inspired me.</p>
         </div>
         <Link href="/library">Back to Library ←</Link>
       </header>
 
       <div className="pinterest-reference-header">
-        <div>
-          <p className="eyebrow">LIVE FROM PINTEREST</p>
-          <p>Recent visual references, saved as I find them.</p>
-        </div>
         <a href="https://www.pinterest.com/ivonnealdaz/_pins/" target="_blank" rel="noreferrer">
           View on Pinterest ↗︎
         </a>
