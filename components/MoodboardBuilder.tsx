@@ -71,7 +71,6 @@ export default function MoodboardBuilder({ demoPins }: { demoPins: PinterestPin[
   const [theme, setTheme] = useState("");
   const [caption, setCaption] = useState("");
   const [loadingPinterest, setLoadingPinterest] = useState(true);
-  const [downloadUrl, setDownloadUrl] = useState("");
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
@@ -177,7 +176,6 @@ export default function MoodboardBuilder({ demoPins }: { demoPins: PinterestPin[
 
     const blob = await response.blob();
     const url = window.URL.createObjectURL(blob);
-    setDownloadUrl(url);
 
     const disposition = response.headers.get("Content-Disposition") || "";
     const match = disposition.match(/filename="([^"]+)"/);
