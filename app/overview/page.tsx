@@ -31,7 +31,7 @@ const moreStudies = [
 const experiments = [
   { title:"The Lab", meta:"Retro Windows-inspired portfolio", href:"/experiments/the-lab", mark:"LAB.exe", video:"/experiments/cards/card-lab.mp4", poster:"/experiments/cards/card-lab.jpg" },
   { title:"Ask Eve", meta:"Conversational CV", href:"/experiments/ask-eve", mark:"EVE.exe", video:"/experiments/cards/card-eve.mp4", poster:"/experiments/cards/card-eve.jpg", videoClass:"is-eve" },
-  { title:"Chatroom", meta:"Public chat / AOL-era web", href:"/experiments/chatroom", mark:"CHAT.exe", video:"/experiments/cards/card-chat.mp4", poster:"/experiments/cards/card-chat.jpg" },
+  { title:"Chatroom", meta:"Public chat / messenger-era web", href:"/experiments/chatroom", mark:"CHAT.exe", video:"/experiments/cards/card-chat.mp4", poster:"/experiments/cards/card-chat.jpg" },
   { title:"Snake", meta:"Game + global leaderboard", href:"/experiments/snake", mark:"SNAKE.exe", video:"/experiments/cards/card-snake.mp4", poster:"/experiments/cards/card-snake.jpg" },
 ];
 
