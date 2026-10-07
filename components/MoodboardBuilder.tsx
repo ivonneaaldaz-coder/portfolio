@@ -306,8 +306,8 @@ export default function MoodboardBuilder({ demoPins }: { demoPins: PinterestPin[
             <div>
               <div className="moodboard-field-label-row">
                 <label htmlFor="moodboard-caption">Caption draft</label>
-                <button type="button" className="moodboard-copy-button" onClick={copyCaption} aria-label="Copy caption">
-                  {copiedCaption ? "Copied" : "Copy"}
+                <button type="button" className="moodboard-copy-button" onClick={copyCaption} aria-label="Copy caption" title={copiedCaption ? "Copied" : "Copy caption"}>
+                  {copiedCaption ? "✓" : "⧉"}
                 </button>
               </div>
               <textarea id="moodboard-caption" value={caption} onChange={(e) => setCaption(e.target.value)} rows={1} />
