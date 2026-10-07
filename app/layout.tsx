@@ -6,7 +6,7 @@ import CustomCursor from "@/components/CustomCursor";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://ivonnealdaz.com"),
-  title: "Ivonne Aldaz — Portfolio",
+  title: { default: "Ivonne Aldaz — Strategy, technology, art", template: "%s" },
   description: "Strategy, systems, creative technology, art, teaching, and experiments by Ivonne Aldaz.",
 };
 

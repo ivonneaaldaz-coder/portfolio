@@ -1,10 +1,13 @@
 import Link from "next/link";
+import { pageMetadata } from "@/lib/metadata";
+
+export const metadata = pageMetadata("Ask Eve", "A conversational CV: ask questions about Ivonne’s work, projects, art, and what she’s building.", "/experiments/ask-eve");
 import DemoVideo from "@/components/DemoVideo";
 
 export default function AskEveExperiment() {
   return (
     <article className="experiment-detail page section-pad">
-      <Link className="back-link" href="/overview#experiments">← Experiments</Link>
+      <Link className="back-link" href="/#experiments">← Experiments</Link>
       <header className="experiment-detail-hero">
         <p className="eyebrow">EXPERIMENT / ASK EVE</p>
         <h1>A conversational CV.</h1>

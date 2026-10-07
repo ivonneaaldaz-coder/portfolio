@@ -1,10 +1,13 @@
 import Link from "next/link";
+import { pageMetadata } from "@/lib/metadata";
+
+export const metadata = pageMetadata("Snake", "A retro Snake game with a global leaderboard, living inside the Lab.", "/experiments/snake");
 import DemoVideo from "@/components/DemoVideo";
 
 export default function SnakeExperiment() {
   return (
     <article className="experiment-detail page section-pad">
-      <Link className="back-link" href="/overview#experiments">← Experiments</Link>
+      <Link className="back-link" href="/#experiments">← Experiments</Link>
       <header className="experiment-detail-hero">
         <p className="eyebrow">EXPERIMENT / SNAKE</p>
         <h1>A tiny game with a global leaderboard.</h1>

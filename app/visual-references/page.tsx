@@ -22,7 +22,7 @@ export default function VisualReferencesPage() {
           <h1>Visual References</h1>
           <p>Images, spaces, colors, and details that have inspired me.</p>
         </div>
-        <Link href="/overview#library">Back to Library ←</Link>
+        <Link href="/#library">Back to Library ←</Link>
       </header>
 
       <div className="pinterest-reference-header">
@@ -34,6 +34,7 @@ export default function VisualReferencesPage() {
       <div className="pinterest-profile-wrap">
         <a
           className="pinterest-profile-widget"
+          aria-label="Ivonne Aldaz on Pinterest"
           href="https://www.pinterest.com/ivonnealdaz/"
           data-pin-do="embedUser"
           data-pin-board-width="1400"

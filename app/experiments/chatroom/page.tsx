@@ -1,10 +1,13 @@
 import Link from "next/link";
+import { pageMetadata } from "@/lib/metadata";
+
+export const metadata = pageMetadata("Chatroom", "A tiny public chat room inspired by AOL, Yahoo, and MSN — part of the Lab.", "/experiments/chatroom");
 import DemoVideo from "@/components/DemoVideo";
 
 export default function ChatroomExperiment() {
   return (
     <article className="experiment-detail page section-pad">
-      <Link className="back-link" href="/overview#experiments">← Experiments</Link>
+      <Link className="back-link" href="/#experiments">← Experiments</Link>
       <header className="experiment-detail-hero">
         <p className="eyebrow">PUBLIC CHAT / MESSENGER-ERA WEB</p>
         <h1>A tiny public room on the internet.</h1>

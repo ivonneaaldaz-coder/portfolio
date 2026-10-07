@@ -35,13 +35,13 @@ export default function MobileNav() {
         <summary>Menu</summary>
         <div className="mobile-menu">
           <nav className="mobile-menu-links">
-            <Link href="/overview" onClick={(event) => go(event, "/overview")}>Overview</Link>
-            <Link href="/overview#work" onClick={(event) => go(event, "/overview#work")}>Work</Link>
+            <Link href="/" onClick={(event) => go(event, "/")}>Overview</Link>
+            <Link href="/#work" onClick={(event) => go(event, "/#work")}>Work</Link>
             <a href="https://lab.ivonnealdaz.com" target="_blank" rel="noreferrer" onClick={closeExternal}>
               Lab <span className="text-arrow" aria-hidden="true" />
             </a>
-            <Link href="/overview#library" onClick={(event) => go(event, "/overview#library")}>Library</Link>
-            <Link href="/overview#press" onClick={(event) => go(event, "/overview#press")}>Press</Link>
+            <Link href="/#library" onClick={(event) => go(event, "/#library")}>Library</Link>
+            <Link href="/#press" onClick={(event) => go(event, "/#press")}>Press</Link>
             <Link href="/about" onClick={(event) => go(event, "/about")}>About</Link>
           </nav>
 

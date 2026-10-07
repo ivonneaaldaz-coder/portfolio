@@ -25,7 +25,7 @@ export default function CaseStudyTemplate({
 }:Props){
   return (
     <article className="case-study case-study-template page section-pad">
-      <Link className="back-link" href="/overview#case-studies">← Case studies</Link>
+      <Link className="back-link" href="/#case-studies">← Case studies</Link>
 
       <header className="case-hero">
         <p className="eyebrow">{eyebrow}</p>
@@ -74,7 +74,7 @@ export default function CaseStudyTemplate({
       </section>
 
       <nav className="case-next">
-        {next ? <Link href={next.href}>Next case study <span>{next.label} →</span></Link> : <Link href="/overview#case-studies">Back to case studies <span>View all →</span></Link>}
+        {next ? <Link href={next.href}>Next case study <span>{next.label} →</span></Link> : <Link href="/#case-studies">Back to case studies <span>View all →</span></Link>}
       </nav>
     </article>
   );
