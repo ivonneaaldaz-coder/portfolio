@@ -5922,3 +5922,59 @@ dialog::backdrop { background:rgba(0,0,0,.45); }
   height:auto!important;
 }
 .case-study-template .case-visual-video .case-video-stack .demo-video{width:100%!important;margin:0!important}
+
+
+/* 2026-10-06 video breathing room + experiment cleanup */
+
+/* Give demo videos breathing room inside experiment pages. */
+.experiment-demo{
+  padding-left:clamp(24px,5vw,88px)!important;
+  padding-right:clamp(24px,5vw,88px)!important;
+}
+.experiment-demo .demo-video{
+  width:min(100%,1040px)!important;
+}
+.experiment-demo .demo-video-square{
+  width:min(100%,620px)!important;
+}
+
+/* Case-study videos should not run edge-to-edge. */
+.case-study-template .case-visual-video{
+  padding-left:clamp(24px,5vw,88px)!important;
+  padding-right:clamp(24px,5vw,88px)!important;
+}
+.case-study-template .case-visual-video .case-video-stack{
+  width:min(100%,1040px)!important;
+  margin-left:auto!important;
+  margin-right:auto!important;
+}
+.case-study-template .case-visual-video .case-video-stack video,
+.case-study-template .case-visual-video .case-video-stack .demo-video{
+  width:100%!important;
+}
+
+/* Center the disclosure beneath case-study videos. */
+.case-video-note{
+  max-width:82ch!important;
+  margin:14px auto 0!important;
+  text-align:center!important;
+}
+
+/* Keep experiment-card hover clean: motion only, no gray wash. */
+.lab-experiment-card:hover,
+.overview-page .overview-lab-experiment-card:hover{
+  background:transparent!important;
+}
+.overview-page .overview-lab-experiment-copy,
+.lab-experiment-copy{
+  background:transparent!important;
+}
+
+/* The Lab should follow the same vertical rhythm as the other experiment pages. */
+.lab-detail-notes{
+  margin-top:0!important;
+}
+.lab-detail .experiment-demo{
+  padding-top:clamp(36px,4vw,56px)!important;
+  padding-bottom:clamp(36px,4vw,56px)!important;
+}
