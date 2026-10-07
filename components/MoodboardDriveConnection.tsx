@@ -12,20 +12,20 @@ export default function MoodboardDriveConnection() {
       .catch(() => setConnected(false));
   }, []);
 
-  if (connected === null) {
-    return <p className="moodboard-drive-status">Checking Google Drive…</p>;
-  }
-
-  return connected ? (
-    <div className="moodboard-drive-connected">
-      <span>Google Drive connected ✓</span>
-      <a href="https://drive.google.com/drive/folders/1mXH8hxHdEHSaZv4nbN3pqbNNkIU1HXNz" target="_blank" rel="noreferrer">
-        Open folder ↗︎
+  return (
+    <div className="moodboard-drive-actions">
+      <a className="experiment-launch" href="#moodboard-builder">
+        Build moodboard →
       </a>
+
+      {connected ? (
+        <div className="moodboard-drive-connected">
+          <span>Google Drive connected ✓</span>
+          <a href="https://drive.google.com/drive/folders/1mXH8hxHdEHSaZv4nbN3pqbNNkIU1HXNz" target="_blank" rel="noreferrer">
+            Open folder ↗︎
+          </a>
+        </div>
+      ) : null}
     </div>
-  ) : (
-    <a className="experiment-launch" href="/api/google-drive/connect">
-      Connect Google Drive →
-    </a>
   );
 }
