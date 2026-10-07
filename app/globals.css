@@ -7577,3 +7577,60 @@ html.intro-seen #site-intro{display:none}
     max-width:70%;
   }
 }
+
+
+/* Moodboard source switcher */
+.moodboard-source-switcher{
+  appearance:none;
+  display:grid;
+  grid-template-columns:auto auto auto;
+  align-items:center;
+  gap:8px;
+  min-height:34px;
+  padding:7px 10px;
+  border:1px solid var(--mb-border);
+  border-radius:999px;
+  background:rgba(255,255,255,.28);
+  color:var(--mb-muted);
+  font:inherit;
+  cursor:pointer;
+}
+.moodboard-source-switcher span:first-child{
+  font-size:9px;
+  letter-spacing:.1em;
+  text-transform:uppercase;
+}
+.moodboard-source-switcher strong{
+  max-width:180px;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+  color:var(--mb-black);
+  font-size:10px;
+  font-weight:500;
+}
+.moodboard-source-switcher span:last-child{
+  color:var(--mb-muted);
+  font-size:11px;
+}
+.moodboard-source-switcher:hover{
+  background:#fff;
+}
+.moodboard-app[data-moodboard-theme="dark"] .moodboard-source-switcher{
+  background:rgba(255,255,255,.035);
+  border-color:var(--mb-border);
+}
+.moodboard-app[data-moodboard-theme="dark"] .moodboard-source-switcher:hover{
+  background:rgba(255,255,255,.08);
+}
+@media(max-width:700px){
+  .moodboard-source-switcher{
+    grid-template-columns:auto auto;
+  }
+  .moodboard-source-switcher span:first-child{
+    display:none;
+  }
+  .moodboard-source-switcher strong{
+    max-width:120px;
+  }
+}
