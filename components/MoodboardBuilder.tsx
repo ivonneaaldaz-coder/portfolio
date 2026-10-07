@@ -43,13 +43,30 @@ function editorialTheme(pins: PinterestPin[], source: string) {
   return "Texture / Restraint / Unexpected Detail";
 }
 
-function editorialCaption(theme: string) {
+function captionOptions(theme: string, source: string) {
   const items = theme
     .split("/")
     .map((item) => item.trim().toLowerCase())
     .filter(Boolean);
 
-  return `Pinterest finds: ${items.join(", ")}.`;
+  const list = items.length > 1
+    ? `${items.slice(0, -1).join(", ")}, and ${items.at(-1)}`
+    : items[0] || "a few things worth saving";
+
+  const sourceLabel = source === "Latest saves" ? "recent saves" : `${source} saves`;
+
+  return [
+    `A few things catching my eye lately: ${list}.`,
+    `Pulled from my ${sourceLabel} — ${list}. Saving the thread before it disappears.`,
+    `No big thesis. Just a visual thread I keep coming back to: ${list}.`,
+    `An edit from the current Pinterest rabbit hole: ${list}.`,
+    `The references have been quietly agreeing with each other lately. ${list}.`,
+  ];
+}
+
+function editorialCaption(theme: string, source: string, variant = 0) {
+  const options = captionOptions(theme, source);
+  return options[((variant % options.length) + options.length) % options.length];
 }
 
 function pickPins(pool: PinterestPin[], offset: number) {
@@ -61,17 +78,22 @@ function pickPins(pool: PinterestPin[], offset: number) {
   return [...new Map(picks.map((pin) => [pin.id, pin])).values()].slice(0, 8);
 }
 
-function wrapCoverTitle(value: string, max = 22) {
+function wrapCoverTitle(
+  context: CanvasRenderingContext2D,
+  value: string,
+  maxWidth: number,
+) {
   const words = value.trim().split(/\s+/).filter(Boolean);
   const lines: string[] = [];
   let line = "";
 
   for (const word of words) {
-    if ((line + " " + word).trim().length > max && line) {
+    const test = (line + " " + word).trim();
+    if (line && context.measureText(test).width > maxWidth) {
       lines.push(line);
       line = word;
     } else {
-      line = (line + " " + word).trim();
+      line = test;
     }
   }
 
@@ -125,9 +147,9 @@ async function renderCoverVisual(imageUrl: string, title: string) {
   context.fillText("MOODBOARD", 64, 972);
 
   context.fillStyle = "#11110f";
-  context.font = '500 58px "Helvetica Neue", Helvetica, Arial, sans-serif';
-  const lines = wrapCoverTitle(title || "Visual Edit");
-  lines.forEach((line, index) => context.fillText(line, 64, 1105 + index * 68));
+  context.font = '500 78px "Helvetica Neue", Helvetica, Arial, sans-serif';
+  const lines = wrapCoverTitle(context, title || "Visual Edit", 952);
+  lines.forEach((line, index) => context.fillText(line, 64, 1104 + index * 82));
 
   return canvas.toDataURL("image/webp", 0.94);
 }
@@ -142,7 +164,7 @@ export default function MoodboardBuilder({ demoPins }: { demoPins: PinterestPin[
   const [theme, setTheme] = useState("");
   const [caption, setCaption] = useState("");
   const [coverTitle, setCoverTitle] = useState("");
-  const [coverIndex, setCoverIndex] = useState(0);
+  const [captionVariant, setCaptionVariant] = useState(0);
   const [copiedCaption, setCopiedCaption] = useState(false);
   const [loadingPinterest, setLoadingPinterest] = useState(true);
 
@@ -185,7 +207,7 @@ export default function MoodboardBuilder({ demoPins }: { demoPins: PinterestPin[
         setTheme(draft.theme || "");
         setCaption(draft.caption || "");
         setCoverTitle(draft.coverTitle || draft.theme || "");
-        setCoverIndex(Number.isInteger(draft.coverIndex) ? draft.coverIndex : 0);
+        setCaptionVariant(0);
         setSource(draft.source || "Latest saves");
         setStage("review");
       }
@@ -224,9 +246,9 @@ export default function MoodboardBuilder({ demoPins }: { demoPins: PinterestPin[
       const generatedTheme = editorialTheme(edit, source);
       setSelected(edit);
       setTheme(generatedTheme);
-      setCaption(editorialCaption(generatedTheme));
+      setCaptionVariant(0);
+      setCaption(editorialCaption(generatedTheme, source, 0));
       setCoverTitle(generatedTheme);
-      setCoverIndex(0);
       setStage("review");
     }, 900);
   };
@@ -241,7 +263,7 @@ export default function MoodboardBuilder({ demoPins }: { demoPins: PinterestPin[
     setStage("downloading");
 
     try {
-      const coverPin = selected[coverIndex];
+      const coverPin = selected[0];
       const coverVisualDataUrl = coverPin
         ? await renderCoverVisual(coverPin.imageUrl, coverTitle)
         : "";
@@ -295,9 +317,34 @@ export default function MoodboardBuilder({ demoPins }: { demoPins: PinterestPin[
     window.setTimeout(() => setCopiedCaption(false), 1400);
   };
 
-  const cycleCoverPhoto = () => {
-    if (!selected.length) return;
-    setCoverIndex((current) => (current + 1) % selected.length);
+  const replacePhoto = (slideIndex: number) => {
+    const candidates = pool.length ? pool : pins;
+    if (!candidates.length || !selected[slideIndex]) return;
+
+    const usedIds = new Set(selected.map((pin, index) => index === slideIndex ? "" : pin.id));
+    const currentId = selected[slideIndex].id;
+    const start = Math.max(0, candidates.findIndex((pin) => pin.id === currentId));
+
+    let replacement: PinterestPin | undefined;
+    for (let step = 1; step <= candidates.length; step++) {
+      const candidate = candidates[(start + step) % candidates.length];
+      if (!usedIds.has(candidate.id)) {
+        replacement = candidate;
+        break;
+      }
+    }
+
+    if (!replacement || replacement.id === currentId) return;
+
+    setSelected((current) =>
+      current.map((pin, index) => index === slideIndex ? replacement as PinterestPin : pin),
+    );
+  };
+
+  const regenerateCaption = () => {
+    const nextVariant = captionVariant + 1;
+    setCaptionVariant(nextVariant);
+    setCaption(editorialCaption(theme, source, nextVariant));
   };
 
   return (
@@ -309,7 +356,6 @@ export default function MoodboardBuilder({ demoPins }: { demoPins: PinterestPin[
               <p className="eyebrow">BUILD MOODBOARD</p>
               <h2>Start with your saves.</h2>
             </div>
-            <span className="moodboard-step">01 / 04</span>
           </div>
 
           <div className="moodboard-onboarding-grid">
@@ -349,15 +395,14 @@ export default function MoodboardBuilder({ demoPins }: { demoPins: PinterestPin[
               <p className="eyebrow">{isDemo ? "DEMO MODE" : "PINTEREST CONNECTED"}</p>
               <h2>Choose your source.</h2>
             </div>
-            <span className="moodboard-step">02 / 04</span>
           </div>
 
           <div className="moodboard-source-panel">
-            <button className={source === "Latest saves" ? "active" : ""} onClick={() => setSource("Latest saves")}>
+            <button className={source === "Latest saves" ? "active" : ""} onClick={() => { setSource("Latest saves"); setOffset(0); }}>
               <span>Latest saves</span><small>{Math.min(80, pins.length)} pins</small>
             </button>
             {boards.map(([board, count]) => (
-              <button key={board} className={source === board ? "active" : ""} onClick={() => setSource(board)}>
+              <button key={board} className={source === board ? "active" : ""} onClick={() => { setSource(board); setOffset(0); }}>
                 <span>{board}</span><small>{count} pins</small>
               </button>
             ))}
@@ -386,33 +431,43 @@ export default function MoodboardBuilder({ demoPins }: { demoPins: PinterestPin[
               <p className="eyebrow">VISUAL EDIT</p>
               <h2>Review the edit.</h2>
             </div>
-            <span className="moodboard-step">03 / 04</span>
+            <button
+              type="button"
+              className="moodboard-source-switcher"
+              onClick={() => setStage("source")}
+              aria-label="Change Pinterest source"
+            >
+              <span>Source</span>
+              <strong>{source}</strong>
+              <span aria-hidden="true">↓</span>
+            </button>
           </div>
 
-          <div className="moodboard-review-top">
-            <div>
-              <label htmlFor="moodboard-theme">Theme</label>
-              <input id="moodboard-theme" value={theme} onChange={(e) => setTheme(e.target.value)} />
-            </div>
+          <div className="moodboard-review-top moodboard-caption-only">
             <div>
               <div className="moodboard-field-label-row">
                 <label htmlFor="moodboard-caption">Caption draft</label>
-                <button type="button" className="moodboard-copy-button" onClick={copyCaption} aria-label="Copy caption" title={copiedCaption ? "Copied" : "Copy caption"}>
-                  {copiedCaption ? "✓" : "⧉"}
-                </button>
+                <div className="moodboard-caption-tools">
+                  <button type="button" className="moodboard-caption-regenerate" onClick={regenerateCaption}>
+                    Regenerate
+                  </button>
+                  <button type="button" className="moodboard-copy-button" onClick={copyCaption} aria-label="Copy caption" title={copiedCaption ? "Copied" : "Copy caption"}>
+                    {copiedCaption ? "✓" : "⧉"}
+                  </button>
+                </div>
               </div>
-              <textarea id="moodboard-caption" value={caption} onChange={(e) => setCaption(e.target.value)} rows={1} />
+              <textarea id="moodboard-caption" value={caption} onChange={(e) => setCaption(e.target.value)} rows={2} />
             </div>
           </div>
 
           <p className="moodboard-cover-help">
-            Cover is editable — click the title to rewrite it, or use <strong>Replace photo</strong> to cycle the image. Your download will match this cover.
+            Everything here is editable — rewrite the cover title or use <strong>Replace photo</strong> on any slide. Your download will match the edit.
           </p>
 
           <div className="moodboard-carousel-preview">
             <div className="moodboard-slide moodboard-cover-slide moodboard-cover-editorial">
-              {selected[coverIndex] ? <img className="moodboard-cover-image" src={selected[coverIndex].imageUrl} alt="" /> : null}
-              <button type="button" className="moodboard-cover-photo-action" onClick={cycleCoverPhoto}>Replace photo</button>
+              {selected[0] ? <img className="moodboard-cover-image" src={selected[0].imageUrl} alt="" /> : null}
+              <button type="button" className="moodboard-cover-photo-action" onClick={() => replacePhoto(0)}>Replace photo</button>
               <div className="moodboard-cover-copy">
                 <span>MOODBOARD</span>
                 <textarea
@@ -425,8 +480,15 @@ export default function MoodboardBuilder({ demoPins }: { demoPins: PinterestPin[
               </div>
             </div>
             {selected.slice(1).map((pin, index) => (
-              <div className="moodboard-slide" key={pin.id}>
+              <div className="moodboard-slide" key={`${pin.id}-${index}`}>
                 <img src={pin.imageUrl} alt={pin.altText} />
+                <button
+                  type="button"
+                  className="moodboard-cover-photo-action moodboard-slide-photo-action"
+                  onClick={() => replacePhoto(index + 1)}
+                >
+                  Replace photo
+                </button>
                 <span>{String(index + 2).padStart(2, "0")}</span>
               </div>
             ))}
@@ -438,7 +500,7 @@ export default function MoodboardBuilder({ demoPins }: { demoPins: PinterestPin[
               {stage === "downloading" ? "Preparing download…" : stage === "downloaded" ? "Download again →" : "Download ZIP →"}
             </button>
           </div>
-          <p className="moodboard-save-note">Includes carousel PNGs, caption, and source links.</p>
+          <p className="moodboard-save-note">Includes carousel PNGs + numbered source links.</p>
         </>
       ) : null}
     </section>

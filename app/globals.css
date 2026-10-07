@@ -7317,3 +7317,320 @@ html.intro-seen #site-intro{display:none}
   color:#141412;
   font-weight:500;
 }
+
+
+/* Moodboard next-pass controls */
+.moodboard-app .moodboard-review-top.moodboard-caption-only{
+  grid-template-columns:1fr;
+  margin-bottom:0;
+}
+.moodboard-app .moodboard-review-top.moodboard-caption-only textarea{
+  height:70px!important;
+  min-height:70px!important;
+  line-height:1.45;
+}
+.moodboard-caption-tools{
+  display:flex;
+  align-items:center;
+  gap:8px;
+}
+.moodboard-caption-regenerate{
+  appearance:none;
+  border:1px solid var(--mb-border);
+  border-radius:999px;
+  background:transparent;
+  color:var(--mb-muted);
+  padding:7px 10px;
+  font:inherit;
+  font-size:10px;
+  line-height:1;
+  cursor:pointer;
+}
+.moodboard-caption-regenerate:hover{
+  background:#fff;
+  color:var(--mb-black);
+}
+.moodboard-slide-photo-action{
+  opacity:0;
+  transition:opacity .16s ease,background-color .16s ease;
+}
+.moodboard-slide:hover .moodboard-slide-photo-action,
+.moodboard-slide:focus-within .moodboard-slide-photo-action{
+  opacity:1;
+}
+@media(max-width:900px){
+  .moodboard-slide-photo-action{
+    opacity:1;
+  }
+}
+
+
+/* Moodboard dark mode + header utilities */
+.moodboard-theme-toggle{
+  appearance:none;
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+  border:0;
+  background:transparent;
+  color:var(--mb-muted);
+  padding:0;
+  font:inherit;
+  font-size:11px;
+  cursor:pointer;
+}
+.moodboard-theme-toggle:hover,
+.moodboard-feedback-link:hover{
+  color:var(--mb-black);
+}
+.moodboard-theme-toggle span:first-child{
+  font-size:13px;
+  line-height:1;
+}
+.moodboard-feedback-link{
+  color:var(--mb-muted);
+}
+
+.moodboard-app[data-moodboard-theme="dark"]{
+  --mb-border:rgba(244,241,234,.16);
+  --mb-muted:#a8a39a;
+  --mb-card:#1b1b19;
+  --mb-black:#f4f1ea;
+  --mb-accent:#d9ff58;
+  background:
+    radial-gradient(circle at 14% 0%,rgba(255,255,255,.045),transparent 30%),
+    #121210;
+  color:#f4f1ea;
+}
+.moodboard-app[data-moodboard-theme="dark"] .moodboard-app-bar{
+  background:rgba(18,18,16,.9);
+  border-color:var(--mb-border);
+}
+.moodboard-app[data-moodboard-theme="dark"] .moodboard-app-brand span{
+  color:#777168;
+}
+.moodboard-app[data-moodboard-theme="dark"] .moodboard-app-status i{
+  background:#8bb875;
+  box-shadow:0 0 0 4px rgba(139,184,117,.1);
+}
+.moodboard-app[data-moodboard-theme="dark"] .moodboard-app-note,
+.moodboard-app[data-moodboard-theme="dark"] .moodboard-builder:before{
+  border-color:var(--mb-border);
+}
+.moodboard-app[data-moodboard-theme="dark"] .moodboard-step,
+.moodboard-app[data-moodboard-theme="dark"] .moodboard-onboarding-card,
+.moodboard-app[data-moodboard-theme="dark"] .moodboard-source-panel,
+.moodboard-app[data-moodboard-theme="dark"] .moodboard-connecting,
+.moodboard-app[data-moodboard-theme="dark"] .moodboard-generating,
+.moodboard-app[data-moodboard-theme="dark"] .moodboard-review-top>div{
+  background:rgba(255,255,255,.035);
+  border-color:var(--mb-border)!important;
+  box-shadow:none;
+}
+.moodboard-app[data-moodboard-theme="dark"] .moodboard-onboarding-card.primary{
+  background:#f1eee7;
+  color:#151513;
+}
+.moodboard-app[data-moodboard-theme="dark"] .moodboard-onboarding-card.primary p,
+.moodboard-app[data-moodboard-theme="dark"] .moodboard-onboarding-card.primary>span{
+  color:#6f6b64;
+}
+.moodboard-app[data-moodboard-theme="dark"] .moodboard-onboarding-card:hover,
+.moodboard-app[data-moodboard-theme="dark"] .moodboard-source-panel>button:hover,
+.moodboard-app[data-moodboard-theme="dark"] .moodboard-source-panel>button.active{
+  background:rgba(255,255,255,.075);
+}
+.moodboard-app[data-moodboard-theme="dark"] .moodboard-onboarding-card.primary:hover{
+  background:#fffdf8;
+}
+.moodboard-app[data-moodboard-theme="dark"] .moodboard-builder-footer{
+  background:rgba(255,255,255,.035);
+  border-color:var(--mb-border);
+}
+.moodboard-app[data-moodboard-theme="dark"] .experiment-launch{
+  background:#f1eee7;
+  color:#151513;
+}
+.moodboard-app[data-moodboard-theme="dark"] .experiment-launch:hover{
+  background:#fffdf8;
+}
+.moodboard-app[data-moodboard-theme="dark"] .moodboard-copy-button,
+.moodboard-app[data-moodboard-theme="dark"] .moodboard-caption-regenerate{
+  border-color:var(--mb-border);
+}
+.moodboard-app[data-moodboard-theme="dark"] .moodboard-copy-button:hover,
+.moodboard-app[data-moodboard-theme="dark"] .moodboard-caption-regenerate:hover{
+  background:rgba(255,255,255,.08);
+  color:#f4f1ea;
+}
+.moodboard-app[data-moodboard-theme="dark"] .moodboard-carousel-preview{
+  background:#24231f;
+  border-color:var(--mb-border);
+}
+.moodboard-app[data-moodboard-theme="dark"] .moodboard-slide{
+  background:#1c1b18;
+}
+.moodboard-app[data-moodboard-theme="dark"] .moodboard-cover-help strong{
+  color:#f4f1ea;
+}
+.moodboard-app[data-moodboard-theme="dark"] .moodboard-app-footer{
+  border-color:var(--mb-border);
+}
+@media(max-width:900px){
+  .moodboard-app-meta{
+    gap:10px;
+  }
+  .moodboard-theme-toggle span:last-child{
+    display:none;
+  }
+  .moodboard-feedback-link{
+    font-size:10px;
+  }
+}
+@media(max-width:620px){
+  .moodboard-feedback-link{
+    display:none;
+  }
+}
+
+
+/* Moodboard experiment card */
+.overview-experiments-expand{
+  margin-top:18px;
+}
+.overview-experiments-expand .overview-expanded-list{
+  padding-top:18px;
+}
+.moodboard-card-visual{
+  min-height:100%;
+  display:flex;
+  flex-direction:column;
+  background:#f4f1ea;
+  color:#141412;
+}
+.moodboard-card-chrome{
+  height:30px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  padding:0 10px;
+  border-bottom:1px solid rgba(20,20,18,.12);
+  font-size:8px;
+}
+.moodboard-card-chrome span:first-child{
+  font-size:11px;
+  font-weight:600;
+  letter-spacing:-.04em;
+}
+.moodboard-card-chrome span:last-child{
+  color:#777168;
+  text-transform:uppercase;
+  letter-spacing:.08em;
+}
+.moodboard-card-stage{
+  flex:1;
+  display:grid;
+  grid-template-columns:1.15fr .85fr;
+  gap:12px;
+  padding:16px;
+}
+.moodboard-card-copy{
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+}
+.moodboard-card-copy small{
+  color:#777168;
+  font-size:7px;
+  letter-spacing:.12em;
+}
+.moodboard-card-copy strong{
+  font-size:clamp(20px,2vw,31px);
+  line-height:.9;
+  letter-spacing:-.065em;
+  font-weight:500;
+}
+.moodboard-card-carousel{
+  display:flex;
+  align-items:flex-end;
+  gap:4px;
+}
+.moodboard-card-carousel span{
+  flex:1;
+  aspect-ratio:4/5;
+  border-radius:3px;
+  background:linear-gradient(160deg,#cfc9bf,#ece8df 52%,#7f817d);
+}
+.moodboard-card-carousel span:nth-child(2){
+  transform:translateY(-7px);
+  background:linear-gradient(155deg,#d9d3c9,#98958e 62%,#292925);
+}
+.moodboard-card-carousel span:nth-child(3){
+  background:linear-gradient(180deg,#e8e2d8,#b5c0bc 58%,#6b6f6c);
+}
+@media(max-width:560px){
+  .moodboard-card-stage{
+    grid-template-columns:1fr;
+  }
+  .moodboard-card-carousel{
+    max-width:70%;
+  }
+}
+
+
+/* Moodboard source switcher */
+.moodboard-source-switcher{
+  appearance:none;
+  display:grid;
+  grid-template-columns:auto auto auto;
+  align-items:center;
+  gap:8px;
+  min-height:34px;
+  padding:7px 10px;
+  border:1px solid var(--mb-border);
+  border-radius:999px;
+  background:rgba(255,255,255,.28);
+  color:var(--mb-muted);
+  font:inherit;
+  cursor:pointer;
+}
+.moodboard-source-switcher span:first-child{
+  font-size:9px;
+  letter-spacing:.1em;
+  text-transform:uppercase;
+}
+.moodboard-source-switcher strong{
+  max-width:180px;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+  color:var(--mb-black);
+  font-size:10px;
+  font-weight:500;
+}
+.moodboard-source-switcher span:last-child{
+  color:var(--mb-muted);
+  font-size:11px;
+}
+.moodboard-source-switcher:hover{
+  background:#fff;
+}
+.moodboard-app[data-moodboard-theme="dark"] .moodboard-source-switcher{
+  background:rgba(255,255,255,.035);
+  border-color:var(--mb-border);
+}
+.moodboard-app[data-moodboard-theme="dark"] .moodboard-source-switcher:hover{
+  background:rgba(255,255,255,.08);
+}
+@media(max-width:700px){
+  .moodboard-source-switcher{
+    grid-template-columns:auto auto;
+  }
+  .moodboard-source-switcher span:first-child{
+    display:none;
+  }
+  .moodboard-source-switcher strong{
+    max-width:120px;
+  }
+}
