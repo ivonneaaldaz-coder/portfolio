@@ -3,7 +3,7 @@
 import { useEffect, useMemo, useState } from "react";
 import type { PinterestPin } from "@/lib/pinterest";
 
-type Stage = "onboarding" | "source" | "generating" | "review" | "saving" | "saved";
+type Stage = "onboarding" | "connecting" | "source" | "generating" | "review" | "saving" | "saved";
 
 function includesAny(text: string, words: string[]) {
   return words.some((word) => text.includes(word));
@@ -75,6 +75,11 @@ export default function MoodboardBuilder({ demoPins }: { demoPins: PinterestPin[
   const [loadingPinterest, setLoadingPinterest] = useState(true);
 
   useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    if (params.get("pinterest") === "connected") {
+      setStage("connecting");
+    }
+
     Promise.all([
       fetch("/api/pinterest/status", { cache: "no-store" }).then((r) => r.json()),
       fetch("/api/google-drive/status", { cache: "no-store" }).then((r) => r.json()),
@@ -90,7 +95,10 @@ export default function MoodboardBuilder({ demoPins }: { demoPins: PinterestPin[
         }
       }
       setLoadingPinterest(false);
-    }).catch(() => setLoadingPinterest(false));
+    }).catch(() => {
+      setLoadingPinterest(false);
+      if (params.get("pinterest") === "connected") setStage("onboarding");
+    });
   }, []);
 
   useEffect(() => {
@@ -201,6 +209,19 @@ export default function MoodboardBuilder({ demoPins }: { demoPins: PinterestPin[
         </>
       ) : null}
 
+      {stage === "connecting" ? (
+        <div className="moodboard-connecting" aria-live="polite">
+          <div className="moodboard-connecting-orbit" aria-hidden="true">
+            <span />
+            <span />
+            <span />
+          </div>
+          <p className="eyebrow">PINTEREST CONNECTED</p>
+          <h2>Loading your boards.</h2>
+          <p>Pulling your recent saves and organizing your sources…</p>
+        </div>
+      ) : null}
+
       {stage === "source" ? (
         <>
           <div className="moodboard-builder-head">
@@ -267,7 +288,7 @@ export default function MoodboardBuilder({ demoPins }: { demoPins: PinterestPin[
                 <h3>{theme}</h3>
               </div>
             </div>
-            {selected.map((pin, index) => (
+            {selected.slice(1).map((pin, index) => (
               <div className="moodboard-slide" key={pin.id}>
                 <img src={pin.imageUrl} alt={pin.altText} />
                 <span>{String(index + 2).padStart(2, "0")}</span>
