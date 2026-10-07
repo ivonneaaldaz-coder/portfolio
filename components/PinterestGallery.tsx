@@ -1,17 +1,40 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import type { PinterestPin } from "@/lib/pinterest";
+
+const PAGE_SIZE = 48;
 
 export default function PinterestGallery({ pins }: { pins: PinterestPin[] }) {
   const [active, setActive] = useState("All");
+  const [shown, setShown] = useState(PAGE_SIZE);
 
   const boards = useMemo(() => {
-    const unique = Array.from(new Set(pins.map((pin) => pin.boardName))).filter(Boolean);
-    return ["All", ...unique].slice(0, 9);
+    const counts = new Map<string, number>();
+
+    pins.forEach((pin) => {
+      counts.set(pin.boardName, (counts.get(pin.boardName) || 0) + 1);
+    });
+
+    return [
+      "All",
+      ...Array.from(counts.entries())
+        .filter(([name]) => Boolean(name))
+        .sort((a, b) => b[1] - a[1])
+        .map(([name]) => name),
+    ];
   }, [pins]);
 
-  const visible = active === "All" ? pins : pins.filter((pin) => pin.boardName === active);
+  const filtered = useMemo(
+    () => (active === "All" ? pins : pins.filter((pin) => pin.boardName === active)),
+    [active, pins],
+  );
+
+  const visible = filtered.slice(0, shown);
+
+  useEffect(() => {
+    setShown(PAGE_SIZE);
+  }, [active]);
 
   if (!pins.length) {
     return (
@@ -28,16 +51,22 @@ export default function PinterestGallery({ pins }: { pins: PinterestPin[] }) {
     <>
       {boards.length > 2 ? (
         <div className="pinterest-filters" aria-label="Filter visual references">
-          {boards.map((board) => (
-            <button
-              key={board}
-              type="button"
-              className={active === board ? "active" : ""}
-              onClick={() => setActive(board)}
-            >
-              {board}
-            </button>
-          ))}
+          {boards.map((board) => {
+            const count = board === "All"
+              ? pins.length
+              : pins.filter((pin) => pin.boardName === board).length;
+
+            return (
+              <button
+                key={board}
+                type="button"
+                className={active === board ? "active" : ""}
+                onClick={() => setActive(board)}
+              >
+                {board} <span>{count}</span>
+              </button>
+            );
+          })}
         </div>
       ) : null}
 
@@ -59,6 +88,18 @@ export default function PinterestGallery({ pins }: { pins: PinterestPin[] }) {
           </a>
         ))}
       </div>
+
+      {shown < filtered.length ? (
+        <div className="pinterest-load-more-wrap">
+          <button
+            className="pinterest-load-more"
+            type="button"
+            onClick={() => setShown((current) => current + PAGE_SIZE)}
+          >
+            Load more <span>({filtered.length - shown})</span>
+          </button>
+        </div>
+      ) : null}
     </>
   );
 }
