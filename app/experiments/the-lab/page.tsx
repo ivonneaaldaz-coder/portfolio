@@ -20,7 +20,7 @@ const labExperiments = [
   },
   {
     title:"Chatroom",
-    meta:"PUBLIC CHAT / AOL-ERA WEB",
+    meta:"PUBLIC CHAT / MESSENGER-ERA WEB",
     copy:"A tiny shared room where visitors can show up, talk, and leave a trace.",
     href:"/experiments/chatroom",
     mark:"CHAT.exe",
