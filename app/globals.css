@@ -6146,3 +6146,105 @@ html.intro-seen #site-intro{display:none}
 @media(max-width:520px){
   .case-visual.reveal-target,.case-visual-video,.case-visual-podcast,.experiment-demo,.experiment-demo *{opacity:1!important;transform:none!important;transition:none!important}
 }
+
+
+/* 2026-10-07 native Pinterest API gallery */
+.pinterest-filters{
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
+  margin:8px 0 30px;
+}
+.pinterest-filters button{
+  appearance:none;
+  border:1px solid var(--line);
+  background:transparent;
+  color:var(--fg);
+  padding:9px 13px;
+  font:inherit;
+  font-size:12px;
+  line-height:1;
+  cursor:pointer;
+  transition:background-color .18s ease,border-color .18s ease;
+}
+.pinterest-filters button:hover,
+.pinterest-filters button.active{
+  background:var(--hover);
+}
+.pinterest-native-grid{
+  columns:4 220px;
+  column-gap:16px;
+}
+.pinterest-native-card{
+  display:inline-block;
+  width:100%;
+  margin:0 0 16px;
+  break-inside:avoid;
+  text-decoration:none;
+}
+.pinterest-native-card img{
+  display:block;
+  width:100%;
+  height:auto;
+  background:var(--line);
+  transition:transform .28s ease,opacity .2s ease;
+}
+.pinterest-native-card:hover img{
+  transform:translateY(-2px);
+  opacity:.94;
+}
+.pinterest-native-meta{
+  display:flex;
+  justify-content:space-between;
+  gap:18px;
+  padding:9px 1px 2px;
+}
+.pinterest-native-meta span{
+  font-size:10.5px;
+  line-height:1.35;
+  letter-spacing:.09em;
+  text-transform:uppercase;
+  color:var(--muted);
+}
+.pinterest-native-meta p{
+  margin:0;
+  max-width:22ch;
+  font-size:11.5px;
+  line-height:1.35;
+  text-align:right;
+  color:var(--muted);
+}
+.pinterest-empty{
+  padding:56px 0;
+  border-top:1px solid var(--line);
+  border-bottom:1px solid var(--line);
+}
+.pinterest-empty p{
+  margin:0 0 10px;
+  color:var(--muted);
+}
+@media(max-width:900px){
+  .pinterest-native-grid{
+    columns:2 140px;
+    column-gap:10px;
+  }
+  .pinterest-native-card{
+    margin-bottom:10px;
+  }
+  .pinterest-native-meta{
+    display:block;
+    padding-top:7px;
+  }
+  .pinterest-native-meta p{
+    display:none;
+  }
+  .pinterest-filters{
+    margin-bottom:22px;
+    flex-wrap:nowrap;
+    overflow-x:auto;
+    padding-bottom:3px;
+    scrollbar-width:none;
+  }
+  .pinterest-filters::-webkit-scrollbar{display:none}
+  .pinterest-filters button{flex:0 0 auto}
+}
