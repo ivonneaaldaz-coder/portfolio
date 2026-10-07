@@ -3,6 +3,7 @@ import "./globals.css";
 import MotionSystem from "@/components/MotionSystem";
 import SiteFrame from "@/components/SiteFrame";
 import CustomCursor from "@/components/CustomCursor";
+import Analytics from "@/components/Analytics";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://ivonnealdaz.com"),
@@ -30,6 +31,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
         <MotionSystem />
         <SiteFrame>{children}</SiteFrame>
         <CustomCursor />
+        <Analytics />
       </body>
     </html>
   );
