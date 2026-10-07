@@ -14,6 +14,9 @@ const labExperiments = [
     copy:"A portfolio assistant grounded in my work, projects, writing, and selected context.",
     href:"/experiments/ask-eve",
     mark:"EVE.exe",
+    video:"/experiments/cards/card-eve.mp4",
+    poster:"/experiments/cards/card-eve.jpg",
+    videoClass:"is-eve",
   },
   {
     title:"Chatroom",
@@ -21,6 +24,8 @@ const labExperiments = [
     copy:"A tiny shared room where visitors can show up, talk, and leave a trace.",
     href:"/experiments/chatroom",
     mark:"CHAT.exe",
+    video:"/experiments/cards/card-chat.mp4",
+    poster:"/experiments/cards/card-chat.jpg",
   },
   {
     title:"Snake",
@@ -28,6 +33,8 @@ const labExperiments = [
     copy:"A deliberately unnecessary retro game with scoring, levels, and a shared leaderboard.",
     href:"/experiments/snake",
     mark:"SNAKE.exe",
+    video:"/experiments/cards/card-snake.mp4",
+    poster:"/experiments/cards/card-snake.jpg",
   },
 ];
 
@@ -94,11 +101,19 @@ export default function LabExperiment() {
         <div className="lab-experiment-grid">
           {labExperiments.map((item,index)=>(
             <Link href={item.href} className="lab-experiment-card" key={item.title}>
-              <div className={"lab-experiment-visual lab-experiment-visual-"+index}>
+              <div className="lab-experiment-visual overview-experiment-video-tile">
                 <span>{item.mark}</span>
-                {index===0 ? <div className="lab-eve-prompt">ask me about<br/>the work_</div> : null}
-                {index===1 ? <div className="lab-chat-lines"><i/><i/><i/></div> : null}
-                {index===2 ? <div className="lab-snake-path">■ ■ ■ ■<br/>　　　■<br/>　　● ■</div> : null}
+                <video
+                  className={"overview-experiment-video " + (item.videoClass || "")}
+                  src={item.video}
+                  poster={item.poster}
+                  autoPlay
+                  muted
+                  loop
+                  playsInline
+                  preload="metadata"
+                  aria-label={item.title + " preview"}
+                />
               </div>
               <div className="lab-experiment-copy">
                 <span>{item.meta}</span>
