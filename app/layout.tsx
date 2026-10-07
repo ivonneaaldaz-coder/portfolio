@@ -14,6 +14,10 @@ export const metadata: Metadata = {
 const themeScript = `
 (function() {
   try {
+    if (sessionStorage.getItem('intro-seen') || window.matchMedia('(prefers-reduced-motion: reduce)').matches) document.documentElement.classList.add('intro-seen');
+    else { sessionStorage.setItem('intro-seen', '1'); setTimeout(function(){ var el = document.getElementById('site-intro'); if (el) el.remove(); }, 2200); }
+  } catch (e) {}
+  try {
     var saved = localStorage.getItem('portfolio-theme');
     var theme = saved === 'dark' || saved === 'light'
       ? saved
@@ -28,6 +32,13 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
     <html lang="en" suppressHydrationWarning>
       <body>
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
+        <div id="site-intro" aria-hidden="true">
+          <div className="intro-inner">
+            <span className="intro-name">Ivonne Aldaz</span>
+            <span className="intro-line" />
+            <span className="intro-sub">Strategy, technology, art.</span>
+          </div>
+        </div>
         <MotionSystem />
         <SiteFrame>{children}</SiteFrame>
         <CustomCursor />

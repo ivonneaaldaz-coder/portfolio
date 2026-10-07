@@ -6128,3 +6128,16 @@ html.has-custom-cursor input,html.has-custom-cursor textarea,html.has-custom-cur
     max-width:10ch!important;
   }
 }
+
+
+/* 2026-10-07 intro: once per visit, ~1.9s, then lifts away */
+#site-intro{position:fixed;inset:0;z-index:2147483000;background:var(--bg);display:flex;align-items:center;justify-content:center;
+  animation:intro-lift .7s cubic-bezier(.77,0,.18,1) 1.25s forwards;pointer-events:none}
+html.intro-seen #site-intro{display:none}
+.intro-inner{display:flex;flex-direction:column;align-items:center;gap:14px}
+.intro-name{font-size:clamp(28px,3.4vw,44px);letter-spacing:-.04em;color:var(--ink);opacity:0;transform:translateY(10px);animation:intro-in .7s cubic-bezier(.22,.61,.36,1) .1s forwards}
+.intro-line{display:block;height:1px;width:clamp(120px,14vw,200px);background:var(--ink);opacity:.5;transform:scaleX(0);animation:intro-line .8s cubic-bezier(.65,0,.35,1) .35s forwards}
+.intro-sub{font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);opacity:0;animation:intro-in .6s ease .6s forwards}
+@keyframes intro-in{to{opacity:1;transform:none}}
+@keyframes intro-line{to{transform:scaleX(1)}}
+@keyframes intro-lift{to{transform:translateY(-100%);visibility:hidden}}
