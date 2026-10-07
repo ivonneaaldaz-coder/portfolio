@@ -7317,3 +7317,49 @@ html.intro-seen #site-intro{display:none}
   color:#141412;
   font-weight:500;
 }
+
+
+/* Moodboard next-pass controls */
+.moodboard-app .moodboard-review-top.moodboard-caption-only{
+  grid-template-columns:1fr;
+  margin-bottom:0;
+}
+.moodboard-app .moodboard-review-top.moodboard-caption-only textarea{
+  height:70px!important;
+  min-height:70px!important;
+  line-height:1.45;
+}
+.moodboard-caption-tools{
+  display:flex;
+  align-items:center;
+  gap:8px;
+}
+.moodboard-caption-regenerate{
+  appearance:none;
+  border:1px solid var(--mb-border);
+  border-radius:999px;
+  background:transparent;
+  color:var(--mb-muted);
+  padding:7px 10px;
+  font:inherit;
+  font-size:10px;
+  line-height:1;
+  cursor:pointer;
+}
+.moodboard-caption-regenerate:hover{
+  background:#fff;
+  color:var(--mb-black);
+}
+.moodboard-slide-photo-action{
+  opacity:0;
+  transition:opacity .16s ease,background-color .16s ease;
+}
+.moodboard-slide:hover .moodboard-slide-photo-action,
+.moodboard-slide:focus-within .moodboard-slide-photo-action{
+  opacity:1;
+}
+@media(max-width:900px){
+  .moodboard-slide-photo-action{
+    opacity:1;
+  }
+}
