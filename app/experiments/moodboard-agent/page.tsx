@@ -29,7 +29,7 @@ export default async function MoodboardAgentPage() {
         </div>
       </header>
 
-      <MoodboardBuilder pins={pins} />
+      <MoodboardBuilder demoPins={pins} />
 
       <section className="experiment-detail-grid">
         <div>
