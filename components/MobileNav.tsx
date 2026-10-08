@@ -2,13 +2,14 @@
 
 import Link from "next/link";
 import { MouseEvent, useRef, useState } from "react";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import SidebarSubscribe from "@/components/SidebarSubscribe";
 
 export default function MobileNav() {
   const detailsRef = useRef<HTMLDetailsElement>(null);
   const [closing, setClosing] = useState(false);
   const router = useRouter();
+  const pathname = usePathname();
 
   const animateClose = (after?: () => void) => {
     const details = detailsRef.current;
@@ -23,7 +24,13 @@ export default function MobileNav() {
 
   const go = (event: MouseEvent<HTMLAnchorElement>, href: string) => {
     event.preventDefault();
-    animateClose(() => router.push(href));
+    animateClose(() => {
+      if (href === "/about" && pathname === "/about") {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+        return;
+      }
+      router.push(href);
+    });
   };
 
   const closeExternal = () => animateClose();

@@ -28,14 +28,40 @@ const capabilities = [
   "Product strategy",
 ];
 
-const community = [
+const sideQuests = [
   "San Antonio Arts Commission — Centro de Artes Committee Member",
+  "University of the Incarnate Word — Startup Challenge Mentor",
+  "Alliance Française de San Antonio — Marketing Committee",
   "San Antonio Art League Museum — Docent",
   "Witte Museum — Docent",
-  "Alliance Française de San Antonio — Marketing Committee",
-  "University of the Incarnate Word — Startup Challenge Mentor",
   "Yoga + Meditation Instructor",
 ];
+
+const visibleSideQuests = sideQuests.slice(0,3);
+const moreSideQuests = sideQuests.slice(3);
+
+const exhibitions = [
+  { title:"Bellagio, Lake Como", meta:"Artist residency", year:"2025" },
+  { title:"NG Art, Provence", meta:"Artist residency", year:"2024" },
+  { title:"La Roane, France", meta:"Artist residency", year:"2023" },
+  { title:"UTSA Group Exhibition", meta:"San Antonio", year:"2026" },
+  { title:"Dominion Country Club", meta:"Exhibition", year:"2026" },
+];
+
+const publicRepos = [
+  { name:"portfolio", href:"https://github.com/ivonneaaldaz-coder/portfolio" },
+  { name:"ivonne-lab", href:"https://github.com/ivonneaaldaz-coder/ivonne-lab" },
+  { name:"chatroom", href:"https://github.com/ivonneaaldaz-coder/chatroom" },
+];
+
+const githubSquares = Array.from({ length: 98 }, (_, index) => {
+  const value = (index * 7 + index * index * 3 + 11) % 13;
+  if (value < 5) return 0;
+  if (value < 8) return 1;
+  if (value < 10) return 2;
+  if (value < 12) return 3;
+  return 4;
+});
 
 const brands = [
   "Hero Cosmetics","Nestlé","CVS Health","Batiste","Purina","ARM & HAMMER","Gerber","Nescafe","Stouffer's","Sir Kensington's (Unilever)",
@@ -121,6 +147,47 @@ export default function AboutPage() {
         </details>
       </section>
 
+      <section className="about-section about-exhibitions-section">
+        <div className="section-heading"><h2 className="section-title small-title">Exhibitions + Residencies</h2></div>
+        <div className="about-exhibitions-list">
+          {exhibitions.map(item => (
+            <div className="about-exhibition-row" key={item.title + item.year}>
+              <div>
+                <h3>{item.title}</h3>
+                <p>{item.meta}</p>
+              </div>
+              <span>{item.year}</span>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <section className="about-section about-github-section">
+        <div className="about-github-head">
+          <div>
+            <p className="eyebrow">BUILDING LATELY</p>
+            <h2 className="section-title small-title">GitHub, but make it part of the portfolio.</h2>
+            <p>A contribution-inspired view of the small tools, products, and experiments I keep shipping.</p>
+          </div>
+          <a href="https://github.com/ivonneaaldaz-coder" target="_blank" rel="noreferrer">View GitHub ↗︎</a>
+        </div>
+        <div className="about-github-panel">
+          <div className="about-github-grid" aria-hidden="true">
+            {githubSquares.map((level, index) => <span className={`level-${level}`} key={index} />)}
+          </div>
+          <div className="about-public-repos">
+            <span>Recent public repos</span>
+            <div>
+              {publicRepos.map(repo => (
+                <a href={repo.href} target="_blank" rel="noreferrer" key={repo.name}>
+                  <strong>{repo.name}</strong><span>↗︎</span>
+                </a>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
       <section className="about-section">
         <div className="section-heading"><h2 className="section-title small-title">Kind words</h2></div>
         <div className="quote-grid">
@@ -133,10 +200,16 @@ export default function AboutPage() {
       <section className="about-section about-community-section">
         <div className="about-resume-row">
           <div className="about-resume-content">
-            <p className="about-resume-label">Community + Service</p>
+            <p className="about-resume-label">Side Quests</p>
             <div className="about-community-list">
-              {community.map(item => <p key={item}>{item}</p>)}
+              {visibleSideQuests.map(item => <p key={item}>{item}</p>)}
             </div>
+            <details className="about-side-quests-more">
+              <summary><span>More side quests</span><span aria-hidden="true">＋</span></summary>
+              <div className="about-community-list about-community-list-more">
+                {moreSideQuests.map(item => <p key={item}>{item}</p>)}
+              </div>
+            </details>
           </div>
         </div>
       </section>

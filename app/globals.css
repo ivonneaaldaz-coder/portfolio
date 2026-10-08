@@ -7634,3 +7634,198 @@ html.intro-seen #site-intro{display:none}
     max-width:120px;
   }
 }
+
+
+/* About art + building + side quests */
+.about-exhibitions-list{
+  border-top:1px solid var(--ink);
+}
+.about-exhibition-row{
+  display:grid;
+  grid-template-columns:minmax(0,1fr) auto;
+  gap:24px;
+  align-items:center;
+  padding:18px 0 20px;
+  border-bottom:1px solid var(--line);
+}
+.about-exhibition-row h3{
+  margin:0 0 3px;
+  font:500 19px/1.1 var(--display);
+  letter-spacing:-.035em;
+}
+.about-exhibition-row p,
+.about-exhibition-row>span{
+  margin:0;
+  color:var(--muted);
+  font-size:10px;
+  letter-spacing:.06em;
+  text-transform:uppercase;
+}
+
+.about-github-section{
+  overflow:hidden;
+}
+.about-github-head{
+  display:grid;
+  grid-template-columns:minmax(0,1fr) auto;
+  gap:32px;
+  align-items:end;
+  margin-bottom:22px;
+}
+.about-github-head h2{
+  max-width:760px;
+  margin-top:10px;
+}
+.about-github-head>div>p:last-child{
+  max-width:600px;
+  margin:16px 0 0;
+  color:var(--muted);
+  font-size:13px;
+}
+.about-github-head>a{
+  padding-bottom:4px;
+  font-size:10px;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+}
+.about-github-panel{
+  display:grid;
+  grid-template-columns:minmax(0,1.4fr) minmax(220px,.6fr);
+  gap:28px;
+  padding:22px;
+  border:1px solid var(--line);
+  background:rgba(255,255,255,.1);
+}
+.about-github-grid{
+  display:grid;
+  grid-template-columns:repeat(14,minmax(8px,1fr));
+  gap:5px;
+  align-content:start;
+}
+.about-github-grid span{
+  aspect-ratio:1;
+  min-width:0;
+  border:1px solid var(--line);
+  border-radius:2px;
+  background:rgba(17,17,15,.025);
+}
+.about-github-grid .level-1{background:rgba(17,17,15,.12)}
+.about-github-grid .level-2{background:rgba(17,17,15,.28)}
+.about-github-grid .level-3{background:rgba(17,17,15,.52)}
+.about-github-grid .level-4{background:var(--ink)}
+.about-public-repos{
+  border-left:1px solid var(--line);
+  padding-left:28px;
+}
+.about-public-repos>span{
+  display:block;
+  margin-bottom:10px;
+  color:var(--muted);
+  font-size:9px;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+}
+.about-public-repos>div{
+  display:grid;
+}
+.about-public-repos a{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:18px;
+  padding:12px 0;
+  border-bottom:1px solid var(--line);
+}
+.about-public-repos a strong{
+  font-size:13px;
+  font-weight:500;
+}
+.about-public-repos a span{
+  color:var(--muted);
+  font-size:10px;
+}
+.about-public-repos a:hover{
+  opacity:.58;
+}
+
+.about-side-quests-more{
+  margin-top:0;
+  border-top:1px solid var(--line);
+}
+.about-side-quests-more summary{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:18px;
+  padding:15px 0;
+  color:var(--muted);
+  font-size:11px;
+  cursor:pointer;
+  list-style:none;
+}
+.about-side-quests-more summary::-webkit-details-marker{display:none}
+.about-side-quests-more summary span:last-child{
+  transition:transform .2s ease;
+}
+.about-side-quests-more[open] summary span:last-child{
+  transform:rotate(45deg);
+}
+.about-community-list-more{
+  padding-bottom:2px;
+}
+
+:root[data-theme="dark"] .about-github-grid span{
+  background:rgba(248,247,243,.035);
+}
+:root[data-theme="dark"] .about-github-grid .level-1{background:rgba(248,247,243,.13)}
+:root[data-theme="dark"] .about-github-grid .level-2{background:rgba(248,247,243,.3)}
+:root[data-theme="dark"] .about-github-grid .level-3{background:rgba(248,247,243,.58)}
+:root[data-theme="dark"] .about-github-grid .level-4{background:var(--ink)}
+
+@media(max-width:900px){
+  .about-github-head{
+    grid-template-columns:1fr;
+    gap:14px;
+  }
+  .about-github-head>a{
+    justify-self:start;
+  }
+  .about-github-panel{
+    grid-template-columns:1fr;
+  }
+  .about-public-repos{
+    border-left:0;
+    border-top:1px solid var(--line);
+    padding:20px 0 0;
+  }
+  .about-github-grid{
+    grid-template-columns:repeat(14,minmax(6px,1fr));
+    gap:4px;
+  }
+}
+@media(max-width:560px){
+  .about-exhibition-row{
+    gap:14px;
+    padding:15px 0 17px;
+  }
+  .about-exhibition-row h3{
+    font-size:17px;
+  }
+  .about-github-panel{
+    padding:15px;
+    gap:20px;
+  }
+  .about-github-grid{
+    grid-template-columns:repeat(14,minmax(4px,1fr));
+    gap:3px;
+  }
+  .about-github-head>div>p:last-child{
+    font-size:12px;
+  }
+  .about-public-repos a{
+    min-height:44px;
+  }
+  .about-side-quests-more summary{
+    min-height:44px;
+  }
+}
