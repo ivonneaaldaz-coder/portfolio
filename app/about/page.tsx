@@ -41,17 +41,12 @@ const visibleSideQuests = sideQuests.slice(0,3);
 const moreSideQuests = sideQuests.slice(3);
 
 const exhibitions = [
-  { title:"Bellagio, Lake Como", meta:"Artist residency", year:"2025" },
-  { title:"NG Art, Provence", meta:"Artist residency", year:"2024" },
-  { title:"La Roane, France", meta:"Artist residency", year:"2023" },
-  { title:"UTSA Group Exhibition", meta:"San Antonio", year:"2026" },
-  { title:"Dominion Country Club", meta:"Exhibition", year:"2026" },
-];
-
-const publicRepos = [
-  { name:"portfolio", href:"https://github.com/ivonneaaldaz-coder/portfolio" },
-  { name:"ivonne-lab", href:"https://github.com/ivonneaaldaz-coder/ivonne-lab" },
-  { name:"chatroom", href:"https://github.com/ivonneaaldaz-coder/chatroom" },
+  { title:"UTSA Group Exhibition", meta:"Group exhibition", year:"2026" },
+  { title:"Breva Creative", meta:"Group exhibition", year:"2026" },
+  { title:"Bellagio, Lake Como", meta:"Group exhibition", year:"2025" },
+  { title:"Casa d'Arte, Lake Como", meta:"Artist residency", year:"2025" },
+  { title:"NG Art Residency, Provence", meta:"Artist residency", year:"2024" },
+  { title:"La Roane, France", meta:"Watercolor retreat", year:"2023" },
 ];
 
 const githubSquares = Array.from({ length: 98 }, (_, index) => {
@@ -147,6 +142,15 @@ export default function AboutPage() {
         </details>
       </section>
 
+      <section className="about-section">
+        <div className="section-heading"><h2 className="section-title small-title">Kind words</h2></div>
+        <div className="quote-grid">
+          <figure className="quote-card"><blockquote>“A rare find. Deeply data-driven, deeply human.”</blockquote><figcaption>— CEO, TrueLoyal</figcaption></figure>
+          <figure className="quote-card"><blockquote>“Everyone keeps saying what a great job you’re doing and how happy the clients are.”</blockquote><figcaption>— CMO, TrueLoyal</figcaption></figure>
+          <figure className="quote-card"><blockquote>“Why are we even talking about it? Just hire her.”</blockquote><figcaption>— VP of Sales, TINT</figcaption></figure>
+        </div>
+      </section>
+
       <section className="about-section about-exhibitions-section">
         <div className="section-heading"><h2 className="section-title small-title">Exhibitions + Residencies</h2></div>
         <div className="about-exhibitions-list">
@@ -163,11 +167,10 @@ export default function AboutPage() {
       </section>
 
       <section className="about-section about-github-section">
-        <div className="about-github-head">
+        <div className="section-heading about-github-heading">
           <div>
-            <p className="eyebrow">BUILDING LATELY</p>
-            <h2 className="section-title small-title">GitHub, but make it part of the portfolio.</h2>
-            <p>A contribution-inspired view of the small tools, products, and experiments I keep shipping.</p>
+            <h2 className="section-title small-title">Building</h2>
+            <p>Small tools, products, and experiments I keep shipping.</p>
           </div>
           <a href="https://github.com/ivonneaaldaz-coder" target="_blank" rel="noreferrer">View GitHub ↗︎</a>
         </div>
@@ -175,25 +178,6 @@ export default function AboutPage() {
           <div className="about-github-grid" aria-hidden="true">
             {githubSquares.map((level, index) => <span className={`level-${level}`} key={index} />)}
           </div>
-          <div className="about-public-repos">
-            <span>Recent public repos</span>
-            <div>
-              {publicRepos.map(repo => (
-                <a href={repo.href} target="_blank" rel="noreferrer" key={repo.name}>
-                  <strong>{repo.name}</strong><span>↗︎</span>
-                </a>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section className="about-section">
-        <div className="section-heading"><h2 className="section-title small-title">Kind words</h2></div>
-        <div className="quote-grid">
-          <figure className="quote-card"><blockquote>“A rare find. Deeply data-driven, deeply human.”</blockquote><figcaption>— CEO, TrueLoyal</figcaption></figure>
-          <figure className="quote-card"><blockquote>“Everyone keeps saying what a great job you’re doing and how happy the clients are.”</blockquote><figcaption>— CMO, TrueLoyal</figcaption></figure>
-          <figure className="quote-card"><blockquote>“Why are we even talking about it? Just hire her.”</blockquote><figcaption>— VP of Sales, TINT</figcaption></figure>
         </div>
       </section>
 
