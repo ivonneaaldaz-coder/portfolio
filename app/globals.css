@@ -7829,3 +7829,27 @@ html.intro-seen #site-intro{display:none}
     min-height:44px;
   }
 }
+
+
+/* Pinterest visual references fallback */
+.pinterest-profile-fallback{
+  padding:18px 0 8px;
+}
+.pinterest-profile-fallback>p{
+  margin:0 0 16px;
+  color:var(--muted);
+  font-size:12px;
+}
+.pinterest-profile-widget-shell{
+  width:100%;
+  min-height:320px;
+  overflow:auto;
+  border-top:1px solid var(--line);
+  border-bottom:1px solid var(--line);
+  padding:16px 0;
+}
+@media(max-width:700px){
+  .pinterest-profile-widget-shell{
+    min-height:240px;
+  }
+}
