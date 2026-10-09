@@ -49,14 +49,38 @@ const exhibitions = [
   { title:"La Roane, France", meta:"Watercolor retreat", year:"2023" },
 ];
 
-const githubSquares = Array.from({ length: 98 }, (_, index) => {
-  const value = (index * 7 + index * index * 3 + 11) % 13;
-  if (value < 5) return 0;
-  if (value < 8) return 1;
-  if (value < 10) return 2;
-  if (value < 12) return 3;
-  return 4;
-});
+const githubWeeks = Array.from({ length: 53 }, (_, week) =>
+  Array.from({ length: 7 }, (_, day) => {
+    const active =
+      (week >= 21 && week <= 22 && day >= 1 && day <= 5) ||
+      (week === 33 && (day === 1 || day === 4)) ||
+      (week >= 36 && week <= 39 && [0,2,4,5].includes(day)) ||
+      (week === 41 && [0,2,4].includes(day)) ||
+      (week === 47 && day === 0) ||
+      (week === 51 && [2,5,6].includes(day)) ||
+      (week === 52 && day >= 0 && day <= 4);
+
+    if (!active) return 0;
+
+    const intensity = (week * 5 + day * 3) % 4;
+    return intensity + 1;
+  }),
+);
+
+const githubMonths = [
+  { label:"Oct", start:0 },
+  { label:"Nov", start:5 },
+  { label:"Dec", start:9 },
+  { label:"Jan", start:14 },
+  { label:"Feb", start:18 },
+  { label:"Mar", start:22 },
+  { label:"Apr", start:27 },
+  { label:"May", start:31 },
+  { label:"Jun", start:36 },
+  { label:"Jul", start:40 },
+  { label:"Aug", start:44 },
+  { label:"Sep", start:49 },
+];
 
 const brands = [
   "Hero Cosmetics","Nestlé","CVS Health","Batiste","Purina","ARM & HAMMER","Gerber","Nescafe","Stouffer's","Sir Kensington's (Unilever)",
@@ -175,8 +199,39 @@ export default function AboutPage() {
           <a href="https://github.com/ivonneaaldaz-coder" target="_blank" rel="noreferrer">View GitHub ↗︎</a>
         </div>
         <div className="about-github-panel">
-          <div className="about-github-grid" aria-hidden="true">
-            {githubSquares.map((level, index) => <span className={`level-${level}`} key={index} />)}
+          <div className="about-github-calendar" aria-label="GitHub contribution activity">
+            <div className="about-github-months" aria-hidden="true">
+              {githubMonths.map(month => (
+                <span key={month.label} style={{ gridColumn: `${month.start + 1} / span 4` }}>{month.label}</span>
+              ))}
+            </div>
+            <div className="about-github-body">
+              <div className="about-github-days" aria-hidden="true">
+                <span>Mon</span>
+                <span>Wed</span>
+                <span>Fri</span>
+              </div>
+              <div className="about-github-grid" aria-hidden="true">
+                {githubWeeks.flatMap((week, weekIndex) =>
+                  week.map((level, dayIndex) => (
+                    <span
+                      className={`level-${level}`}
+                      key={`${weekIndex}-${dayIndex}`}
+                      style={{ gridColumn: weekIndex + 1, gridRow: dayIndex + 1 }}
+                    />
+                  )),
+                )}
+              </div>
+            </div>
+            <div className="about-github-legend" aria-hidden="true">
+              <span>Less</span>
+              <i className="level-0" />
+              <i className="level-1" />
+              <i className="level-2" />
+              <i className="level-3" />
+              <i className="level-4" />
+              <span>More</span>
+            </div>
           </div>
         </div>
       </section>
