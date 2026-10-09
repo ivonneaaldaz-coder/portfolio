@@ -33,7 +33,7 @@ const moreStudies = [
 ];
 
 const experiments = [
-  { title:"The Lab", meta:"Retro Windows", loop:"lab", href:"/experiments/the-lab" },
+  { title:"The Lab", meta:"Retro Portfolio", loop:"lab", href:"/experiments/the-lab" },
   { title:"Ask Eve", meta:"Conversational CV", loop:"eve", href:"/experiments/ask-eve" },
   { title:"Chatroom", meta:"Public chat", loop:"chat", href:"/experiments/chatroom" },
   { title:"Snake", meta:"Global leaderboard", loop:"snake", href:"/experiments/snake" },
@@ -118,8 +118,8 @@ export default async function OverviewPage() {
     <div className="overview-page">
       <section className="hero-compact section-pad" id="overview">
         <div className="hero-row">
-          <h1>I make things — art, brands, experiences.</h1>
-          <div className="hero-introduction"><p>I grew a B2B audience from 7K to 50K+ and led consumer research for Purina and ARM & HAMMER. Now I run Whitespace and a few creative ventures, and I paint and teach.</p><a className="hero-contact" href="mailto:hello@ivonnealdaz.com">Get in touch →<span>hello@ivonnealdaz.com</span></a></div>
+          <h1><span style={{display:"block"}}>I make things —</span><span style={{display:"block"}}>art, brands, experiences.</span></h1>
+          <div className="hero-introduction"><p>I grew a B2B audience from 7K to 50K+ and led consumer research for Purina and ARM & HAMMER. Now&nbsp;I run Whitespace and a few creative ventures, and I paint and teach.</p><a className="hero-contact" href="mailto:hello@ivonnealdaz.com">Get in touch →<span>hello@ivonnealdaz.com</span></a></div>
         </div>
       </section>
 

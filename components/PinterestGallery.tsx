@@ -46,7 +46,7 @@ export default function PinterestGallery({ pins }: { pins: PinterestPin[] }) {
   }, [active]);
 
   useEffect(() => {
-    const updateColumns = () => setColumnCount(window.innerWidth <= 900 ? 2 : 4);
+    const updateColumns = () => setColumnCount(window.innerWidth <= 900 ? 3 : 4);
     updateColumns();
     window.addEventListener("resize", updateColumns);
     return () => window.removeEventListener("resize", updateColumns);
@@ -86,7 +86,7 @@ export default function PinterestGallery({ pins }: { pins: PinterestPin[] }) {
         </div>
       ) : null}
 
-      <div className="pinterest-native-grid">
+      <div className="pinterest-native-grid" style={{ gridTemplateColumns: `repeat(${columnCount}, minmax(0, 1fr))` }}>
         {columns.map((column, columnIndex) => (
           <div className="pinterest-native-column" key={columnIndex}>
             {column.map((pin) => (
