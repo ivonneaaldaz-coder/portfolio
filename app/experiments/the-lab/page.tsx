@@ -1,4 +1,5 @@
 import Link from "next/link";
+import MoreExperiments from "@/components/MoreExperiments";
 import DemoVideo from "@/components/DemoVideo";
 import ExperimentLoop from "@/components/ExperimentLoop";
 import { pageMetadata } from "@/lib/metadata";
@@ -91,6 +92,8 @@ export default function LabExperiment() {
         <p>The Lab itself is the container. These are a few of the things living inside it.</p>
         <a href="https://lab.ivonnealdaz.com" target="_blank" rel="noreferrer">Open the full Lab ↗︎</a>
       </section>
+
+      <MoreExperiments current="the-lab" />
     </article>
   );
 }
