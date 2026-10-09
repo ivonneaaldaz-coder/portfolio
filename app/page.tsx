@@ -7,6 +7,7 @@ export const metadata = {
 
 import Link from "next/link";
 import ExperimentLoop from "@/components/ExperimentLoop";
+import { getPinterestPins } from "@/lib/pinterest";
 import { driveImageUrl, listDriveFolder, normalizeDriveName } from "@/lib/googleDrive";
 
 const PROJECT_FOLDER = "1hpdPGeKX8nISrESD0EAzdCeAoVCnnnl7";
@@ -106,8 +107,12 @@ function PressRow({item}:{item:{org:string;title:string;year:string;href?:string
 }
 
 export default async function OverviewPage() {
-  const projectFiles = await listDriveFolder(PROJECT_FOLDER);
+  const [projectFiles, pinterestPins] = await Promise.all([
+    listDriveFolder(PROJECT_FOLDER),
+    getPinterestPins(8),
+  ]);
   const projectImages = new Map(projectFiles.map(file => [normalizeDriveName(file.name), driveImageUrl(file.id)]));
+  const visualWorldPins = pinterestPins.slice(0,6);
 
   return (
     <div className="overview-page">
@@ -230,6 +235,37 @@ export default async function OverviewPage() {
           </details>
         </div>
       </section>
+
+      {visualWorldPins.length ? (
+        <section className="overview-visual-world section-pad">
+          <div className="overview-visual-world-head">
+            <div>
+              <p className="eyebrow">VISUAL WORLD</p>
+              <h2 className="section-title small-title">Taste, references, places.</h2>
+              <p>Visual references and fragments I keep coming back to.</p>
+            </div>
+            <div className="overview-visual-world-links">
+              <Link href="/visual-references">Visual references →</Link>
+              <Link href="/travel">Travel →</Link>
+            </div>
+          </div>
+
+          <div className="overview-visual-world-grid">
+            {visualWorldPins.map((pin, index) => (
+              <a
+                className={`overview-visual-world-item item-${index + 1}`}
+                href={pin.pinUrl}
+                target="_blank"
+                rel="noreferrer"
+                key={pin.id}
+                aria-label={pin.title ? `${pin.title} on Pinterest` : "Open visual reference on Pinterest"}
+              >
+                <img src={pin.imageUrl} alt={pin.altText} loading="lazy" decoding="async" />
+              </a>
+            ))}
+          </div>
+        </section>
+      ) : null}
 
     </div>
   );
