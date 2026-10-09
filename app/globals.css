@@ -7866,3 +7866,54 @@ html.intro-seen #site-intro{display:none}
     min-height:240px;
   }
 }
+
+
+/* Building live counter + mobile recent activity */
+.about-github-counter{
+  display:flex;
+  align-items:baseline;
+  gap:8px;
+}
+.about-github-counter strong{
+  font:500 clamp(20px,2vw,28px)/1 var(--display);
+  letter-spacing:-.04em;
+}
+.about-github-counter span{
+  color:var(--muted);
+  font-size:9px;
+  letter-spacing:.06em;
+  text-transform:uppercase;
+}
+@media(max-width:900px){
+  .about-github-meta{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:18px;
+    width:100%;
+  }
+}
+@media(max-width:560px){
+  .about-github-counter{
+    display:grid;
+    gap:3px;
+  }
+  .about-github-counter strong{
+    font-size:26px;
+  }
+  .about-github-counter span{
+    font-size:8px;
+  }
+  .about-github-panel{
+    scroll-behavior:smooth;
+  }
+}
+
+@media(max-width:560px){
+  .about-github-panel{
+    direction:rtl;
+  }
+  .about-github-calendar{
+    direction:ltr;
+  }
+}
