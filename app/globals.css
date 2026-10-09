@@ -8138,3 +8138,32 @@ html.intro-seen #site-intro{display:none}
 .moodboard-app[data-moodboard-theme="dark"] .experiment-more{
   color:#f4f1ea;
 }
+
+
+/* Music vinyl sizing refinement */
+.music-page .vinyl-grid{
+  grid-template-columns:repeat(4,minmax(0,1fr))!important;
+  gap:34px 20px!important;
+}
+.music-page .vinyl-card{
+  max-width:none;
+}
+.music-page .vinyl-card h3{
+  font-size:17px!important;
+  line-height:1.2!important;
+  margin-top:10px!important;
+}
+.music-page .vinyl-card p{
+  font-size:11px!important;
+}
+@media(max-width:1100px){
+  .music-page .vinyl-grid{
+    grid-template-columns:repeat(3,minmax(0,1fr))!important;
+  }
+}
+@media(max-width:700px){
+  .music-page .vinyl-grid{
+    grid-template-columns:repeat(2,minmax(0,1fr))!important;
+    gap:26px 12px!important;
+  }
+}
