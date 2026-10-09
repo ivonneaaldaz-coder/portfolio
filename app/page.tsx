@@ -33,7 +33,7 @@ const moreStudies = [
 ];
 
 const experiments = [
-  { title:"The Lab", meta:"Retro Windows", loop:"lab", href:"/experiments/the-lab" },
+  { title:"The Lab", meta:"Retro Portfolio", loop:"lab", href:"/experiments/the-lab" },
   { title:"Ask Eve", meta:"Conversational CV", loop:"eve", href:"/experiments/ask-eve" },
   { title:"Chatroom", meta:"Public chat", loop:"chat", href:"/experiments/chatroom" },
   { title:"Snake", meta:"Global leaderboard", loop:"snake", href:"/experiments/snake" },
