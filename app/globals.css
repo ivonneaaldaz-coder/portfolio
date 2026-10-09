@@ -6172,14 +6172,20 @@ html.intro-seen #site-intro{display:none}
   background:var(--hover);
 }
 .pinterest-native-grid{
-  columns:4 220px;
-  column-gap:16px;
+  display:grid;
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  gap:16px;
+  align-items:start;
+}
+.pinterest-native-column{
+  display:grid;
+  gap:16px;
+  align-content:start;
 }
 .pinterest-native-card{
-  display:inline-block;
+  display:block;
   width:100%;
-  margin:0 0 16px;
-  break-inside:avoid;
+  margin:0;
   text-decoration:none;
 }
 .pinterest-native-card img{
@@ -6225,11 +6231,11 @@ html.intro-seen #site-intro{display:none}
 }
 @media(max-width:900px){
   .pinterest-native-grid{
-    columns:2 140px;
-    column-gap:10px;
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:10px;
   }
-  .pinterest-native-card{
-    margin-bottom:10px;
+  .pinterest-native-column{
+    gap:10px;
   }
   .pinterest-native-meta{
     display:block;
