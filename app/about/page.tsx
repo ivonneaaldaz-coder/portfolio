@@ -4,6 +4,7 @@ export const metadata = pageMetadata("About", "Meet Ivonne Aldaz: strategist, ar
 
 import Link from "next/link";
 import { driveImageUrl } from "@/lib/googleDrive";
+import { getGitHubContributions } from "@/lib/githubContributions";
 
 const experience = [
   { role: "Founder", company: "Whitespace", dates: "2018 — Present" },
@@ -49,14 +50,52 @@ const exhibitions = [
   { title:"La Roane, France", meta:"Watercolor retreat", year:"2023" },
 ];
 
-const githubSquares = Array.from({ length: 98 }, (_, index) => {
-  const value = (index * 7 + index * index * 3 + 11) % 13;
-  if (value < 5) return 0;
-  if (value < 8) return 1;
-  if (value < 10) return 2;
-  if (value < 12) return 3;
-  return 4;
-});
+function buildGitHubCalendar(days: { date:string; level:number; count:number }[]) {
+  const sorted = [...days].sort((a,b) => a.date.localeCompare(b.date));
+  if (!sorted.length) {
+    return {
+      weeks: [] as { date:string; level:number; count:number }[][],
+      months: [] as { label:string; start:number }[],
+    };
+  }
+
+  const start = new Date(`${sorted[0].date}T12:00:00Z`);
+  const startDay = start.getUTCDay();
+  start.setUTCDate(start.getUTCDate() - startDay);
+
+  const end = new Date(`${sorted[sorted.length - 1].date}T12:00:00Z`);
+  const endDay = end.getUTCDay();
+  end.setUTCDate(end.getUTCDate() + (6 - endDay));
+
+  const byDate = new Map(sorted.map(day => [day.date, day]));
+  const weeks: { date:string; level:number; count:number }[][] = [];
+
+  for (let cursor = new Date(start), weekIndex = 0; cursor <= end; weekIndex++) {
+    const week: { date:string; level:number; count:number }[] = [];
+    for (let dayIndex = 0; dayIndex < 7; dayIndex++) {
+      const date = cursor.toISOString().slice(0,10);
+      week.push(byDate.get(date) || { date, level:0, count:0 });
+      cursor.setUTCDate(cursor.getUTCDate() + 1);
+    }
+    weeks.push(week);
+  }
+
+  const months: { label:string; start:number }[] = [];
+  let lastMonth = -1;
+  weeks.forEach((week, index) => {
+    const anchor = new Date(`${week[0].date}T12:00:00Z`);
+    const month = anchor.getUTCMonth();
+    if (month !== lastMonth) {
+      months.push({
+        label: anchor.toLocaleString("en-US", { month:"short", timeZone:"UTC" }),
+        start:index,
+      });
+      lastMonth = month;
+    }
+  });
+
+  return { weeks, months };
+}
 
 const brands = [
   "Hero Cosmetics","Nestlé","CVS Health","Batiste","Purina","ARM & HAMMER","Gerber","Nescafe","Stouffer's","Sir Kensington's (Unilever)",
@@ -67,7 +106,10 @@ const brands = [
 const visibleBrands = brands.slice(0,10);
 const moreBrands = brands.slice(10);
 
-export default function AboutPage() {
+export default async function AboutPage() {
+  const github = await getGitHubContributions();
+  const githubCalendar = buildGitHubCalendar(github?.days || []);
+
   return (
     <section id="about-top" className="page section-pad about-page">
       <div className="about-hero">
@@ -129,6 +171,26 @@ export default function AboutPage() {
         </div>
       </section>
 
+      <section className="about-section about-teaching-section">
+        <div className="section-heading"><h2 className="section-title small-title">Teaching</h2></div>
+        <div className="about-exhibitions-list about-teaching-list">
+          <div className="about-exhibition-row">
+            <div>
+              <h3>Adjunct Professor of Marketing</h3>
+              <p>St. Mary’s University · Principles of Marketing</p>
+            </div>
+            <span>Spring 2027</span>
+          </div>
+          <div className="about-exhibition-row">
+            <div>
+              <h3>Lecturer in Marketing</h3>
+              <p>University of the Incarnate Word · Consumer Behavior + International Entrepreneurship</p>
+            </div>
+            <span>Spring 2027</span>
+          </div>
+        </div>
+      </section>
+
       <section className="about-section">
         <div className="section-heading"><h2 className="section-title small-title">Selected brands</h2></div>
         <div className="brand-wall">
@@ -170,13 +232,48 @@ export default function AboutPage() {
         <div className="section-heading about-github-heading">
           <div>
             <h2 className="section-title small-title">Building</h2>
-            <p>Small tools, products, and experiments I keep shipping.</p>
+            <p>
+              Small tools, products, and experiments I keep shipping.
+              {github?.total ? <span className="about-github-total"> {github.total.toLocaleString()} contributions · last year</span> : null}
+            </p>
           </div>
           <a href="https://github.com/ivonneaaldaz-coder" target="_blank" rel="noreferrer">View GitHub ↗︎</a>
         </div>
         <div className="about-github-panel">
-          <div className="about-github-grid" aria-hidden="true">
-            {githubSquares.map((level, index) => <span className={`level-${level}`} key={index} />)}
+          <div className="about-github-calendar" aria-label="GitHub contribution activity">
+            <div className="about-github-months" aria-hidden="true">
+              {githubCalendar.months.map((month, index) => (
+                <span key={`${month.label}-${index}`} style={{ gridColumn: `${month.start + 1} / span 4` }}>{month.label}</span>
+              ))}
+            </div>
+            <div className="about-github-body">
+              <div className="about-github-days" aria-hidden="true">
+                <span>Mon</span>
+                <span>Wed</span>
+                <span>Fri</span>
+              </div>
+              <div className="about-github-grid" aria-hidden="true">
+                {githubCalendar.weeks.flatMap((week, weekIndex) =>
+                  week.map((day, dayIndex) => (
+                    <span
+                      className={`level-${day.level}`}
+                      key={day.date}
+                      title={`${day.count} contribution${day.count === 1 ? "" : "s"} on ${day.date}`}
+                      style={{ gridColumn: weekIndex + 1, gridRow: dayIndex + 1 }}
+                    />
+                  )),
+                )}
+              </div>
+            </div>
+            <div className="about-github-legend" aria-hidden="true">
+              <span>Less</span>
+              <i className="level-0" />
+              <i className="level-1" />
+              <i className="level-2" />
+              <i className="level-3" />
+              <i className="level-4" />
+              <span>More</span>
+            </div>
           </div>
         </div>
       </section>
