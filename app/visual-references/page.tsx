@@ -26,7 +26,7 @@ export default async function VisualReferencesPage() {
           <h1>Visual References</h1>
           <p>Images, spaces, colors, and details that have inspired me.</p>
         </div>
-        <Link href="/#library">Back to Library ←</Link>
+        <Link href="/#library">← Back to Library</Link>
       </header>
 
       <div className="pinterest-reference-header">
