@@ -1,4 +1,5 @@
 import Link from "next/link";
+import MoreExperiments from "@/components/MoreExperiments";
 import MoodboardBuilder from "@/components/MoodboardBuilder";
 import MoodboardThemeToggle from "@/components/MoodboardThemeToggle";
 import { getPinterestPins } from "@/lib/pinterest";
@@ -51,6 +52,7 @@ export default async function MoodboardAgentPage() {
         </section>
 
         <MoodboardBuilder demoPins={pins} />
+        <MoreExperiments current="moodboard-agent" />
       </main>
 
       <footer className="moodboard-app-footer">
