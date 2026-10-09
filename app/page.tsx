@@ -119,7 +119,7 @@ export default async function OverviewPage() {
       <section className="hero-compact section-pad" id="overview">
         <div className="hero-row">
           <h1><span style={{display:"block"}}>I make things —</span><span style={{display:"block"}}>art, brands, experiences.</span></h1>
-          <div className="hero-introduction"><p>I grew a B2B audience from 7K to 50K+ and led consumer research for Purina and ARM & HAMMER. Now&nbsp;I run Whitespace and a few creative ventures, and I paint and teach.</p><a className="hero-contact" href="mailto:hello@ivonnealdaz.com">Get in touch →<span>hello@ivonnealdaz.com</span></a></div>
+          <div className="hero-introduction"><p>I grew a B2B audience from 7K to 50K+ and led consumer research for Purina and ARM & HAMMER. Now&nbsp;I run Whitespace and a few creative ventures, <span className="hero-mobile-break">and I paint and teach.</span></p><a className="hero-contact" href="mailto:hello@ivonnealdaz.com">Get in touch →<span>hello@ivonnealdaz.com</span></a></div>
         </div>
       </section>
 

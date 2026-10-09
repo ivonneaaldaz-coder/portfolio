@@ -136,7 +136,130 @@ function bestImage(pin: PinterestApiPin): string {
   return images[0].url;
 }
 
+
+type PinterestPublicPin = {
+  id?: string;
+  title?: string;
+  seo_title?: string;
+  description?: string;
+  grid_description?: string;
+  seo_description?: string;
+  created_at?: string;
+  seo_url?: string;
+  url?: string;
+  board?: { name?: string };
+  board_name?: string;
+  images?: Record<string, PinterestImage>;
+};
+
+type PinterestPublicResource = {
+  resource_response?: {
+    data?: PinterestPublicPin[];
+    bookmark?: string | null;
+    bookmarks?: string[] | null;
+  };
+};
+
+function publicPinImage(pin: PinterestPublicPin): string {
+  const images = Object.values(pin.images ?? {}).filter(
+    (image): image is PinterestImage & { url: string } => Boolean(image?.url),
+  );
+  if (!images.length) return "";
+  images.sort((a, b) => (b.width ?? 0) - (a.width ?? 0));
+  return images[0].url;
+}
+
+async function getPublicPinterestPins(limit = 500): Promise<PinterestPin[]> {
+  const username = "ivonnealdaz";
+  const collected = new Map<string, PinterestPublicPin>();
+  let bookmark: string | null = null;
+
+  for (let page = 0; page < 24 && collected.size < limit; page += 1) {
+    const options: Record<string, unknown> = {
+      add_vase: true,
+      field_set_key: "mobile_grid_item",
+      is_own_profile_pins: false,
+      username,
+    };
+    if (bookmark) options.bookmarks = [bookmark];
+
+    const params = new URLSearchParams({
+      source_url: `/${username}/_pins/`,
+      data: JSON.stringify({ options, context: {} }),
+      _: Date.now().toString(),
+    });
+
+    let payload: PinterestPublicResource | null = null;
+    const handlers = [
+      "www/[username]/_pins.js",
+      "www/[username]/_saved.js",
+      "www/[username]/index.js",
+    ];
+
+    for (const handler of handlers) {
+      const response = await fetch(
+        `https://www.pinterest.com/resource/UserPinsResource/get/?${params.toString()}`,
+        {
+          headers: {
+            "x-pinterest-pws-handler": handler,
+            "user-agent": "Mozilla/5.0 (compatible; IvonneAldazPortfolio/1.0)",
+            accept: "application/json,text/plain,*/*",
+          },
+          next: { revalidate: 900 },
+        },
+      );
+      if (response.ok) {
+        payload = await response.json() as PinterestPublicResource;
+        break;
+      }
+    }
+
+    const resource = payload?.resource_response;
+    const items = resource?.data ?? [];
+    if (!items.length) break;
+
+    for (const item of items) {
+      if (item.id && publicPinImage(item)) collected.set(item.id, item);
+    }
+
+    const nextBookmark =
+      resource?.bookmark ??
+      (Array.isArray(resource?.bookmarks) ? resource?.bookmarks?.[0] : null) ??
+      null;
+
+    if (!nextBookmark || nextBookmark === "-end-" || nextBookmark === bookmark) break;
+    bookmark = nextBookmark;
+  }
+
+  return Array.from(collected.values())
+    .map((pin) => {
+      const id = pin.id || "";
+      const path = pin.seo_url || pin.url || (id ? `/pin/${id}/` : "");
+      return {
+        id,
+        title: pin.title || pin.seo_title || "",
+        description: pin.description || pin.grid_description || pin.seo_description || "",
+        altText: pin.title || pin.seo_title || pin.description || "Pinterest visual reference",
+        imageUrl: publicPinImage(pin),
+        pinUrl: path.startsWith("http") ? path : `https://www.pinterest.com${path}`,
+        boardName: pin.board?.name || pin.board_name || "Saved",
+        createdAt: pin.created_at || "",
+      };
+    })
+    .filter((pin) => pin.id && pin.imageUrl)
+    .slice(0, limit);
+}
+
 export async function getPinterestPins(limit = 500, explicitToken?: string): Promise<PinterestPin[]> {
+  if (!explicitToken) {
+    try {
+      const publicPins = await getPublicPinterestPins(limit);
+      if (publicPins.length) return publicPins;
+    } catch (error) {
+      console.error("Pinterest public feed unavailable:", error);
+    }
+  }
+
   try {
     const [pins, boardsList] = await Promise.all([
       pinterestFetchAll<PinterestApiPin>("/pins", limit, explicitToken),
@@ -170,6 +293,11 @@ export async function getPinterestPins(limit = 500, explicitToken?: string): Pro
       .slice(0, limit);
   } catch (error) {
     console.error("Pinterest feed unavailable:", error);
-    return [];
+    try {
+      return await getPublicPinterestPins(limit);
+    } catch (publicError) {
+      console.error("Pinterest public feed unavailable:", publicError);
+      return [];
+    }
   }
 }
