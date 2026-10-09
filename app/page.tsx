@@ -1,8 +1,8 @@
 import { pageMetadata } from "@/lib/metadata";
 
 export const metadata = {
-  ...pageMetadata("Strategy, technology, art", "Strategy, technology, art. Explore Ivonne Aldaz’s work, case studies, writing, and experiments.", "/"),
-  title: { absolute: "Ivonne Aldaz — Strategy, technology, art" },
+  ...pageMetadata("I make things — art, brands, experiences", "I make things — art, brands, experiences. Explore Ivonne Aldaz’s work, case studies, writing, and experiments.", "/"),
+  title: { absolute: "Ivonne Aldaz — I make things: art, brands, experiences" },
 };
 
 import Link from "next/link";
@@ -118,7 +118,7 @@ export default async function OverviewPage() {
     <div className="overview-page">
       <section className="hero-compact section-pad" id="overview">
         <div className="hero-row">
-          <h1>Strategy, technology, art.</h1>
+          <h1>I make things — art, brands, experiences.</h1>
           <div className="hero-introduction"><p>I grew a B2B audience from 7K to 50K+ and led consumer research for Purina and ARM & HAMMER. Now I run Whitespace and a few creative ventures, and I paint and teach.</p><a className="hero-contact" href="mailto:hello@ivonnealdaz.com">Get in touch →<span>hello@ivonnealdaz.com</span></a></div>
         </div>
       </section>
