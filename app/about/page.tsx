@@ -42,13 +42,16 @@ const visibleSideQuests = sideQuests.slice(0,3);
 const moreSideQuests = sideQuests.slice(3);
 
 const exhibitions = [
+  { title:"NG Art Residency, Provence", meta:"Artist residency", year:"2024" },
+  { title:"Casa d'Arte, Lake Como", meta:"Artist residency", year:"2025" },
+  { title:"Bellagio, Lake Como", meta:"Group exhibition", year:"2025" },
   { title:"UTSA Group Exhibition", meta:"Group exhibition", year:"2026" },
   { title:"Breva Creative", meta:"Group exhibition", year:"2026" },
-  { title:"Bellagio, Lake Como", meta:"Group exhibition", year:"2025" },
-  { title:"Casa d'Arte, Lake Como", meta:"Artist residency", year:"2025" },
-  { title:"NG Art Residency, Provence", meta:"Artist residency", year:"2024" },
   { title:"La Roane, France", meta:"Watercolor retreat", year:"2023" },
 ];
+
+const visibleExhibitions = exhibitions.slice(0,3);
+const moreExhibitions = exhibitions.slice(3);
 
 function buildGitHubCalendar(days: { date:string; level:number; count:number }[]) {
   const sorted = [...days].sort((a,b) => a.date.localeCompare(b.date));
@@ -161,6 +164,19 @@ export default async function AboutPage() {
           </div>
         </div>
 
+      <section className="about-section">
+        <div className="section-heading"><h2 className="section-title small-title">Selected brands</h2></div>
+        <div className="brand-wall">
+          {visibleBrands.map((brand)=><div className="brand-name" key={brand}><strong>{brand}</strong></div>)}
+        </div>
+        <details className="brand-more">
+          <summary>More brands + collaborations</summary>
+          <div className="brand-wall brand-wall-more">
+            {moreBrands.map((brand)=><div className="brand-name" key={brand}><strong>{brand}</strong></div>)}
+          </div>
+        </details>
+      </section>
+
         <div className="about-resume-row">
           <div className="about-resume-content">
             <p className="about-resume-label">Capabilities</p>
@@ -192,19 +208,6 @@ export default async function AboutPage() {
       </section>
 
       <section className="about-section">
-        <div className="section-heading"><h2 className="section-title small-title">Selected brands</h2></div>
-        <div className="brand-wall">
-          {visibleBrands.map((brand)=><div className="brand-name" key={brand}><strong>{brand}</strong></div>)}
-        </div>
-        <details className="brand-more">
-          <summary>More brands + collaborations</summary>
-          <div className="brand-wall brand-wall-more">
-            {moreBrands.map((brand)=><div className="brand-name" key={brand}><strong>{brand}</strong></div>)}
-          </div>
-        </details>
-      </section>
-
-      <section className="about-section">
         <div className="section-heading"><h2 className="section-title small-title">Kind words</h2></div>
         <div className="quote-grid">
           <figure className="quote-card"><blockquote>“A rare find. Deeply data-driven, deeply human.”</blockquote><figcaption>— CEO, TrueLoyal</figcaption></figure>
@@ -216,7 +219,7 @@ export default async function AboutPage() {
       <section className="about-section about-exhibitions-section">
         <div className="section-heading"><h2 className="section-title small-title">Exhibitions + Residencies</h2></div>
         <div className="about-exhibitions-list">
-          {exhibitions.map(item => (
+          {visibleExhibitions.map(item => (
             <div className="about-exhibition-row" key={item.title + item.year}>
               <div>
                 <h3>{item.title}</h3>
@@ -226,18 +229,37 @@ export default async function AboutPage() {
             </div>
           ))}
         </div>
+        <details className="about-side-quests-more about-exhibitions-more">
+          <summary><span>More exhibitions + residencies</span><span aria-hidden="true">＋</span></summary>
+          <div className="about-exhibitions-list about-exhibitions-list-more">
+            {moreExhibitions.map(item => (
+              <div className="about-exhibition-row" key={item.title + item.year}>
+                <div>
+                  <h3>{item.title}</h3>
+                  <p>{item.meta}</p>
+                </div>
+                <span>{item.year}</span>
+              </div>
+            ))}
+          </div>
+        </details>
       </section>
 
       <section className="about-section about-github-section">
         <div className="section-heading about-github-heading">
           <div>
             <h2 className="section-title small-title">Building</h2>
-            <p>
-              Small tools, products, and experiments I keep shipping.
-              {github?.total ? <span className="about-github-total"> {github.total.toLocaleString()} contributions · last year</span> : null}
-            </p>
+            <p>A running record of the tools, products, and experiments I’m building.</p>
           </div>
-          <a href="https://github.com/ivonneaaldaz-coder" target="_blank" rel="noreferrer">View GitHub ↗︎</a>
+          <div className="about-github-meta">
+            {github?.total ? (
+              <div className="about-github-counter" aria-label={`${github.total.toLocaleString()} contributions in the last year`}>
+                <strong>{github.total.toLocaleString()}</strong>
+                <span>contributions · last 12 months</span>
+              </div>
+            ) : null}
+            <a href="https://github.com/ivonneaaldaz-coder" target="_blank" rel="noreferrer">View GitHub ↗︎</a>
+          </div>
         </div>
         <div className="about-github-panel">
           <div className="about-github-calendar" aria-label="GitHub contribution activity">
@@ -302,7 +324,7 @@ export default async function AboutPage() {
           <div><h3>MA, International Business + Economics</h3><p>FH Schmalkalden University of Applied Sciences</p></div>
           <div><h3>Bachelor of Arts</h3><p>St. Mary’s University</p></div>
         </div>
-        <div className="education-languages"><span>Languages</span><p>English · Spanish · French</p></div>
+        <div className="education-languages"><span>Languages</span><p>English · Spanish · Some French</p></div>
       </section>
 
       <section className="about-section">

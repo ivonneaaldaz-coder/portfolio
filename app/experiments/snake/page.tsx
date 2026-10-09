@@ -1,4 +1,5 @@
 import Link from "next/link";
+import MoreExperiments from "@/components/MoreExperiments";
 import { pageMetadata } from "@/lib/metadata";
 
 export const metadata = pageMetadata("Snake", "A retro Snake game with a global leaderboard, living inside the Lab.", "/experiments/snake");
@@ -28,6 +29,8 @@ export default function SnakeExperiment() {
         <div><p className="eyebrow">THE FORMAT</p><p>A retro desktop game living inside the Lab, complete with scoring and a shared leaderboard.</p></div>
         <div><p className="eyebrow">WHY IT EXISTS</p><p>Because useful is good. Memorable is better.</p></div>
       </section>
+
+      <MoreExperiments current="snake" />
     </article>
   );
 }

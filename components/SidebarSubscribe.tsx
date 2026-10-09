@@ -1,9 +1,15 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { createPortal } from "react-dom";
 
 export default function SidebarSubscribe() {
   const [open, setOpen] = useState(false);
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   useEffect(() => {
     if (!open) return;
@@ -20,7 +26,7 @@ export default function SidebarSubscribe() {
         Subscribe →
       </button>
 
-      {open ? (
+      {open && mounted ? createPortal(
         <div className="subscribe-overlay" role="dialog" aria-modal="true" aria-label="Subscribe">
           <button className="subscribe-backdrop" type="button" onClick={() => setOpen(false)} aria-label="Close subscribe form" />
           <div className="subscribe-modal">
@@ -36,7 +42,8 @@ export default function SidebarSubscribe() {
               Subscribe on Substack →
             </a>
           </div>
-        </div>
+        </div>,
+        document.body,
       ) : null}
     </div>
   );

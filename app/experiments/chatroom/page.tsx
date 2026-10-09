@@ -1,4 +1,5 @@
 import Link from "next/link";
+import MoreExperiments from "@/components/MoreExperiments";
 import { pageMetadata } from "@/lib/metadata";
 
 export const metadata = pageMetadata("Chatroom", "A tiny public chat room inspired by AOL, Yahoo, and MSN — part of the Lab.", "/experiments/chatroom");
@@ -27,17 +28,19 @@ export default function ChatroomExperiment() {
       <section className="experiment-detail-grid">
         <div>
           <p className="eyebrow">THE IDEA</p>
-          <p>Make the portfolio feel inhabited — somewhere visitors can leave a trace instead of only consuming pages.</p>
+          <p>Build a real-time public chatroom into the portfolio so visitors can claim a username, talk to whoever is there, and leave messages behind.</p>
         </div>
         <div>
           <p className="eyebrow">THE FORMAT</p>
-          <p>A simple public chat experience that also lives inside the Lab as CHATROOM.exe.</p>
+          <p>Inspired by AOL, Yahoo, and MSN chatrooms: a lightweight public room with persistent messages that also lives inside the Lab as CHATROOM.exe.</p>
         </div>
         <div>
           <p className="eyebrow">WHY IT EXISTS</p>
-          <p>Because the internet is more interesting when a website can behave like a place, not just a brochure.</p>
+          <p>Part guestbook, part chatroom, part nostalgia experiment — a way to turn a portfolio visit into a small social interaction.</p>
         </div>
       </section>
+
+      <MoreExperiments current="chatroom" />
     </article>
   );
 }
