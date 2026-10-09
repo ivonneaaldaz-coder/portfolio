@@ -42,13 +42,16 @@ const visibleSideQuests = sideQuests.slice(0,3);
 const moreSideQuests = sideQuests.slice(3);
 
 const exhibitions = [
+  { title:"NG Art Residency, Provence", meta:"Artist residency", year:"2024" },
+  { title:"Casa d'Arte, Lake Como", meta:"Artist residency", year:"2025" },
+  { title:"Bellagio, Lake Como", meta:"Group exhibition", year:"2025" },
   { title:"UTSA Group Exhibition", meta:"Group exhibition", year:"2026" },
   { title:"Breva Creative", meta:"Group exhibition", year:"2026" },
-  { title:"Bellagio, Lake Como", meta:"Group exhibition", year:"2025" },
-  { title:"Casa d'Arte, Lake Como", meta:"Artist residency", year:"2025" },
-  { title:"NG Art Residency, Provence", meta:"Artist residency", year:"2024" },
   { title:"La Roane, France", meta:"Watercolor retreat", year:"2023" },
 ];
+
+const visibleExhibitions = exhibitions.slice(0,3);
+const moreExhibitions = exhibitions.slice(3);
 
 function buildGitHubCalendar(days: { date:string; level:number; count:number }[]) {
   const sorted = [...days].sort((a,b) => a.date.localeCompare(b.date));
@@ -216,7 +219,7 @@ export default async function AboutPage() {
       <section className="about-section about-exhibitions-section">
         <div className="section-heading"><h2 className="section-title small-title">Exhibitions + Residencies</h2></div>
         <div className="about-exhibitions-list">
-          {exhibitions.map(item => (
+          {visibleExhibitions.map(item => (
             <div className="about-exhibition-row" key={item.title + item.year}>
               <div>
                 <h3>{item.title}</h3>
@@ -226,6 +229,20 @@ export default async function AboutPage() {
             </div>
           ))}
         </div>
+        <details className="about-side-quests-more about-exhibitions-more">
+          <summary><span>More exhibitions + residencies</span><span aria-hidden="true">＋</span></summary>
+          <div className="about-exhibitions-list about-exhibitions-list-more">
+            {moreExhibitions.map(item => (
+              <div className="about-exhibition-row" key={item.title + item.year}>
+                <div>
+                  <h3>{item.title}</h3>
+                  <p>{item.meta}</p>
+                </div>
+                <span>{item.year}</span>
+              </div>
+            ))}
+          </div>
+        </details>
       </section>
 
       <section className="about-section about-github-section">
