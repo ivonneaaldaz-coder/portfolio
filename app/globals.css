@@ -8444,7 +8444,10 @@ html.intro-seen #site-intro{display:none}
     line-height:.98!important;
   }
   .overview-visual-world-grid{
-    grid-template-rows:220px 180px 220px!important;
+    grid-template-rows:220px 180px!important;
+  }
+  .overview-visual-world-item.item-4{
+    display:none!important;
   }
   .overview-visual-world-links{
     gap:28px!important;
