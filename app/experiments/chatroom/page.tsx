@@ -11,10 +11,9 @@ export default function ChatroomExperiment() {
       <Link className="back-link" href="/#experiments">← Experiments</Link>
       <header className="experiment-detail-hero">
         <p className="eyebrow">PUBLIC CHAT / MESSENGER-ERA WEB</p>
-        <h1>A tiny public room on the internet.</h1>
+        <h1>A public chatroom built into the portfolio.</h1>
         <p className="experiment-detail-dek">
-          A lightweight shared chat space built as part of the Lab — less social network,
-          more digital room people can wander into.
+          Visitors can claim a username, chat in real time, and leave messages behind — a shared layer of the Lab that changes depending on who shows up.
         </p>
         <a className="experiment-launch" href="https://chat.ivonnealdaz.com" target="_blank" rel="noreferrer">
           Enter the Chatroom ↗︎
