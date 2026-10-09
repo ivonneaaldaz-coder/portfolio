@@ -7649,17 +7649,29 @@ html.intro-seen #site-intro{display:none}
   border-bottom:1px solid var(--line);
 }
 .about-exhibition-row h3{
-  margin:0 0 3px;
-  font:500 19px/1.1 var(--display);
-  letter-spacing:-.035em;
+  margin:0 0 5px;
+  font-family:var(--display);
+  font-size:18px;
+  line-height:1.2;
+  font-weight:500;
+  letter-spacing:-.025em;
 }
-.about-exhibition-row p,
+.about-exhibition-row p{
+  margin:0;
+  color:var(--muted);
+  font-size:13.5px;
+  line-height:1.4;
+  letter-spacing:normal;
+  text-transform:none;
+}
 .about-exhibition-row>span{
   margin:0;
   color:var(--muted);
-  font-size:10px;
-  letter-spacing:.06em;
-  text-transform:uppercase;
+  font-size:12px;
+  line-height:1.4;
+  letter-spacing:normal;
+  text-transform:none;
+  white-space:nowrap;
 }
 
 .about-github-section{
@@ -7818,7 +7830,7 @@ html.intro-seen #site-intro{display:none}
     padding:15px 0 17px;
   }
   .about-exhibition-row h3{
-    font-size:17px;
+    font-size:18px;
   }
   .about-github-panel{
     width:100%;
