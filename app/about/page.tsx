@@ -161,6 +161,19 @@ export default async function AboutPage() {
           </div>
         </div>
 
+      <section className="about-section">
+        <div className="section-heading"><h2 className="section-title small-title">Selected brands</h2></div>
+        <div className="brand-wall">
+          {visibleBrands.map((brand)=><div className="brand-name" key={brand}><strong>{brand}</strong></div>)}
+        </div>
+        <details className="brand-more">
+          <summary>More brands + collaborations</summary>
+          <div className="brand-wall brand-wall-more">
+            {moreBrands.map((brand)=><div className="brand-name" key={brand}><strong>{brand}</strong></div>)}
+          </div>
+        </details>
+      </section>
+
         <div className="about-resume-row">
           <div className="about-resume-content">
             <p className="about-resume-label">Capabilities</p>
@@ -189,19 +202,6 @@ export default async function AboutPage() {
             <span>Spring 2027</span>
           </div>
         </div>
-      </section>
-
-      <section className="about-section">
-        <div className="section-heading"><h2 className="section-title small-title">Selected brands</h2></div>
-        <div className="brand-wall">
-          {visibleBrands.map((brand)=><div className="brand-name" key={brand}><strong>{brand}</strong></div>)}
-        </div>
-        <details className="brand-more">
-          <summary>More brands + collaborations</summary>
-          <div className="brand-wall brand-wall-more">
-            {moreBrands.map((brand)=><div className="brand-name" key={brand}><strong>{brand}</strong></div>)}
-          </div>
-        </details>
       </section>
 
       <section className="about-section">
