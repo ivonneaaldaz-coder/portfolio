@@ -7990,3 +7990,151 @@ html.intro-seen #site-intro{display:none}
     letter-spacing:.09em;
   }
 }
+
+
+/* About list typography = Selected Case Studies */
+.about-experience-item h3,
+.about-exhibition-row h3,
+.education-list h3{
+  margin:0 0 6px!important;
+  font-family:var(--display)!important;
+  font-size:18px!important;
+  line-height:1.32!important;
+  font-weight:500!important;
+  letter-spacing:-.02em!important;
+}
+.about-experience-item p,
+.about-exhibition-row p,
+.education-list p{
+  margin:0!important;
+  color:var(--muted)!important;
+  font-size:12px!important;
+  line-height:1.35!important;
+  letter-spacing:.08em!important;
+  text-transform:uppercase!important;
+}
+.about-experience-item>span,
+.about-exhibition-row>span{
+  color:var(--muted)!important;
+  font-size:12px!important;
+  line-height:1.35!important;
+  letter-spacing:.06em!important;
+  text-transform:uppercase!important;
+}
+@media(max-width:900px){
+  .about-experience-item h3,
+  .about-exhibition-row h3,
+  .education-list h3{
+    font-size:15px!important;
+    line-height:1.38!important;
+  }
+  .about-experience-item p,
+  .about-exhibition-row p,
+  .education-list p,
+  .about-experience-item>span,
+  .about-exhibition-row>span{
+    font-size:11px!important;
+  }
+}
+
+/* Related experiments footer */
+.experiment-more{
+  margin-top:clamp(72px,9vw,132px);
+  padding-top:clamp(52px,6vw,84px);
+  border-top:1px solid var(--line);
+}
+.experiment-more-grid{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:16px;
+}
+.experiment-more-card{
+  display:block;
+  min-width:0;
+  border:1px solid var(--line);
+  background:rgba(255,255,255,.04);
+  transition:transform .2s ease,opacity .2s ease;
+}
+.experiment-more-card:hover{
+  transform:translateY(-3px);
+}
+.experiment-more-visual{
+  aspect-ratio:1.45;
+  overflow:hidden;
+  border-bottom:1px solid var(--line);
+  background:var(--surface-soft);
+}
+.experiment-more-visual .experiment-loop-visual,
+.experiment-more-visual>div{
+  width:100%;
+  height:100%;
+}
+.experiment-more-copy{
+  padding:16px;
+}
+.experiment-more-copy>span{
+  display:block;
+  margin-bottom:8px;
+  color:var(--muted);
+  font-size:11px;
+  line-height:1.35;
+  letter-spacing:.08em;
+}
+.experiment-more-copy h3{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  margin:0;
+  font-family:var(--display);
+  font-size:18px;
+  line-height:1.32;
+  font-weight:500;
+  letter-spacing:-.02em;
+}
+@media(max-width:900px){
+  .experiment-more-grid{
+    grid-template-columns:1fr;
+  }
+  .experiment-more-card{
+    display:grid;
+    grid-template-columns:minmax(140px,.7fr) 1fr;
+  }
+  .experiment-more-visual{
+    aspect-ratio:auto;
+    min-height:150px;
+    border-bottom:0;
+    border-right:1px solid var(--line);
+  }
+}
+@media(max-width:560px){
+  .experiment-more{
+    margin-top:72px;
+    padding-top:50px;
+  }
+  .experiment-more-card{
+    grid-template-columns:1fr;
+  }
+  .experiment-more-visual{
+    aspect-ratio:1.45;
+    min-height:0;
+    border-right:0;
+    border-bottom:1px solid var(--line);
+  }
+}
+
+/* Keep related experiments native inside Moodboard's standalone shell. */
+.moodboard-app .experiment-more{
+  width:min(100% - 44px,1480px);
+  margin-left:auto;
+  margin-right:auto;
+  color:var(--mb-black);
+  border-color:var(--mb-border);
+}
+.moodboard-app .experiment-more-card,
+.moodboard-app .experiment-more-visual{
+  border-color:var(--mb-border);
+}
+.moodboard-app[data-moodboard-theme="dark"] .experiment-more{
+  color:#f4f1ea;
+}
