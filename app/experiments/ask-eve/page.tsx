@@ -26,9 +26,9 @@ export default function AskEveExperiment() {
       </section>
 
       <section className="experiment-detail-grid">
-        <div><p className="eyebrow">WHY I BUILT IT</p><p>Résumés flatten people. I wanted a way to make the same information searchable, conversational, and a little more human.</p></div>
-        <div><p className="eyebrow">WHAT IT DOES</p><p>Answers questions grounded in my CV, projects, writing, and selected context inside the Lab.</p></div>
-        <div><p className="eyebrow">FORMAT</p><p>A small AI interface living inside a retro desktop environment rather than a standalone chatbot page.</p></div>
+        <div><p className="eyebrow">THE IDEA</p><p>Turn a résumé into something a hiring manager can query — ask about specific roles, projects, industries, skills, or how different parts of my background connect.</p></div>
+        <div><p className="eyebrow">HOW IT WORKS</p><p>Ask Eve answers from a defined set of source material: my résumé, selected projects, writing, and portfolio context, with guardrails that keep it focused on my work.</p></div>
+        <div><p className="eyebrow">THE FORMAT</p><p>A conversational assistant built into the Lab as its own desktop app, so it feels like part of the portfolio rather than a chatbot bolted onto it.</p></div>
       </section>
 
       <MoreExperiments current="ask-eve" />
