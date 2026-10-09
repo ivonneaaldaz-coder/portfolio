@@ -8059,6 +8059,7 @@ html.intro-seen #site-intro{display:none}
   transform:translateY(-3px);
 }
 .experiment-more-visual{
+  position:relative;
   aspect-ratio:1.45;
   overflow:hidden;
   border-bottom:1px solid var(--line);
