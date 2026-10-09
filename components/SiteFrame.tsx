@@ -10,6 +10,8 @@ export default function SiteFrame({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
   const isStandaloneApp = pathname.startsWith("/experiments/moodboard-agent");
 
+  if (pathname === "/") return <>{children}</>;
+
   if (isStandaloneApp) {
     return <main className="standalone-app-main">{children}</main>;
   }
