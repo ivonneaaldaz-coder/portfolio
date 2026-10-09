@@ -132,7 +132,7 @@ export default function LibraryWorld({ driveBooks = [] }: { driveBooks?: {name:s
         <div className="quotes-world">
           <div className="quotes-intro">
             <span>QUOTES</span>
-            <h2>Lines I like.</h2>
+            <h2>Words I’ve kept.</h2>
             <p>Passages, fragments, and sentences from books, poems, and elsewhere.</p>
           </div>
           <div className="quote-list">
@@ -145,7 +145,7 @@ export default function LibraryWorld({ driveBooks = [] }: { driveBooks?: {name:s
                 </div>
                 {item.full ? (
                   <details className="quote-expand">
-                    <summary>{item.source === "The Bell Jar" ? "Read full poem" : "Read full poem"}</summary>
+                    <summary>{item.source === "The Bell Jar" ? "Read full passage" : "Read full poem"}</summary>
                     <div className="quote-full">{item.full.split("\n").map((line,i)=><span key={i}>{line || "\u00A0"}</span>)}</div>
                   </details>
                 ) : null}
