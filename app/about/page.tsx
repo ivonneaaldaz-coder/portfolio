@@ -171,6 +171,26 @@ export default async function AboutPage() {
         </div>
       </section>
 
+      <section className="about-section about-teaching-section">
+        <div className="section-heading"><h2 className="section-title small-title">Teaching</h2></div>
+        <div className="about-exhibitions-list about-teaching-list">
+          <div className="about-exhibition-row">
+            <div>
+              <h3>Adjunct Professor of Marketing</h3>
+              <p>St. Mary’s University · Principles of Marketing</p>
+            </div>
+            <span>Spring 2027</span>
+          </div>
+          <div className="about-exhibition-row">
+            <div>
+              <h3>Lecturer in Marketing</h3>
+              <p>University of the Incarnate Word · Consumer Behavior + International Entrepreneurship</p>
+            </div>
+            <span>Spring 2027</span>
+          </div>
+        </div>
+      </section>
+
       <section className="about-section">
         <div className="section-heading"><h2 className="section-title small-title">Selected brands</h2></div>
         <div className="brand-wall">
