@@ -8,6 +8,7 @@ const PAGE_SIZE = 48;
 export default function PinterestGallery({ pins }: { pins: PinterestPin[] }) {
   const [active, setActive] = useState("All");
   const [shown, setShown] = useState(PAGE_SIZE);
+  const [columnCount, setColumnCount] = useState(4);
 
   const boards = useMemo(() => {
     const counts = new Map<string, number>();
@@ -32,9 +33,24 @@ export default function PinterestGallery({ pins }: { pins: PinterestPin[] }) {
 
   const visible = filtered.slice(0, shown);
 
+  const columns = useMemo(() => {
+    const next = Array.from({ length: columnCount }, () => [] as PinterestPin[]);
+    visible.forEach((pin, index) => {
+      next[index % columnCount].push(pin);
+    });
+    return next;
+  }, [visible, columnCount]);
+
   useEffect(() => {
     setShown(PAGE_SIZE);
   }, [active]);
+
+  useEffect(() => {
+    const updateColumns = () => setColumnCount(window.innerWidth <= 900 ? 2 : 4);
+    updateColumns();
+    window.addEventListener("resize", updateColumns);
+    return () => window.removeEventListener("resize", updateColumns);
+  }, []);
 
   if (!pins.length) {
     return (
@@ -71,21 +87,25 @@ export default function PinterestGallery({ pins }: { pins: PinterestPin[] }) {
       ) : null}
 
       <div className="pinterest-native-grid">
-        {visible.map((pin) => (
-          <a
-            key={pin.id}
-            className="pinterest-native-card"
-            href={pin.pinUrl}
-            target="_blank"
-            rel="noreferrer"
-            aria-label={pin.title ? `${pin.title} on Pinterest` : "Open Pin on Pinterest"}
-          >
-            <img src={pin.imageUrl} alt={pin.altText} loading="lazy" decoding="async" />
-            <div className="pinterest-native-meta">
-              <span>{pin.boardName}</span>
-              {pin.title ? <p>{pin.title}</p> : null}
-            </div>
-          </a>
+        {columns.map((column, columnIndex) => (
+          <div className="pinterest-native-column" key={columnIndex}>
+            {column.map((pin) => (
+              <a
+                key={pin.id}
+                className="pinterest-native-card"
+                href={pin.pinUrl}
+                target="_blank"
+                rel="noreferrer"
+                aria-label={pin.title ? `${pin.title} on Pinterest` : "Open Pin on Pinterest"}
+              >
+                <img src={pin.imageUrl} alt={pin.altText} loading="lazy" decoding="async" />
+                <div className="pinterest-native-meta">
+                  <span>{pin.boardName}</span>
+                  {pin.title ? <p>{pin.title}</p> : null}
+                </div>
+              </a>
+            ))}
+          </div>
         ))}
       </div>
 
