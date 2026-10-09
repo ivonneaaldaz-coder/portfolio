@@ -58,9 +58,9 @@ export default function LabExperiment() {
       </section>
 
       <section className="experiment-detail-grid lab-detail-notes">
-        <div><p className="eyebrow">WHY I BUILT IT</p><p>To make a portfolio feel less like a brochure and more like a place you can wander through.</p></div>
-        <div><p className="eyebrow">WHAT I WAS TESTING</p><p>Interface nostalgia, playful navigation, conversational UX, public interaction, and personality in digital products.</p></div>
-        <div><p className="eyebrow">THE SYSTEM</p><p>A collection of small experiences that share one visual language and live inside the same desktop world.</p></div>
+        <div><p className="eyebrow">WHY I BUILT IT</p><p>I wanted a second portfolio for the parts of my work that do not fit neatly into case studies — tools, games, conversations, music, notes, and small internet experiments.</p></div>
+        <div><p className="eyebrow">WHAT I WAS TESTING</p><p>Whether familiar desktop behaviors — windows, folders, apps, shortcuts — could make a portfolio more interactive without making it harder to use.</p></div>
+        <div><p className="eyebrow">THE SYSTEM</p><p>One retro desktop connects Ask Eve, the public Chatroom, Snake, Music, Notes, Archive, and other experiments as individual apps inside the same interface.</p></div>
       </section>
 
       <section className="lab-explore">
