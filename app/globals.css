@@ -8405,7 +8405,7 @@ html.intro-seen #site-intro{display:none}
 
 /* 2026-10-09 overview visual-world refinement */
 .overview-page .section-title.small-title{
-  font-size:clamp(32px,3.6vw,54px)!important;
+  font-size:clamp(32px,2.9vw,42px)!important;
   line-height:.95!important;
   letter-spacing:-.055em!important;
   font-weight:500!important;
@@ -8440,8 +8440,8 @@ html.intro-seen #site-intro{display:none}
 }
 @media(max-width:900px){
   .overview-page .section-title.small-title{
-    font-size:clamp(38px,10vw,54px)!important;
-    line-height:.98!important;
+    font-size:clamp(32px,2.9vw,42px)!important;
+    line-height:.95!important;
   }
   .overview-visual-world-grid{
     grid-template-rows:220px 180px 220px!important;
@@ -8453,10 +8453,18 @@ html.intro-seen #site-intro{display:none}
 }
 @media(max-width:560px){
   .overview-page .section-title.small-title{
-    font-size:clamp(38px,10vw,48px)!important;
+    font-size:clamp(32px,2.9vw,42px)!important;
   }
   .overview-visual-world-links{
     display:flex!important;
     gap:28px!important;
+  }
+}
+
+
+/* 2026-10-09 Visual World image fill refinement */
+@media(min-width:901px){
+  .overview-visual-world-item img{
+    object-fit:cover!important;
   }
 }
