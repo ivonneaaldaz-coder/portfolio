@@ -232,10 +232,15 @@ export default async function AboutPage() {
         <div className="section-heading about-github-heading">
           <div>
             <h2 className="section-title small-title">Building</h2>
-            <p>Small tools, products, and experiments I keep shipping.</p>
+            <p>A running record of the tools, products, and experiments I’m building.</p>
           </div>
           <div className="about-github-meta">
-            {github?.total ? <span>{github.total.toLocaleString()} contributions · last year</span> : null}
+            {github?.total ? (
+              <div className="about-github-counter" aria-label={`${github.total.toLocaleString()} contributions in the last year`}>
+                <strong>{github.total.toLocaleString()}</strong>
+                <span>contributions · last 12 months</span>
+              </div>
+            ) : null}
             <a href="https://github.com/ivonneaaldaz-coder" target="_blank" rel="noreferrer">View GitHub ↗︎</a>
           </div>
         </div>
