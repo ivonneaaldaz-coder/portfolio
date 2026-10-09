@@ -52,7 +52,12 @@ const exhibitions = [
 
 function buildGitHubCalendar(days: { date:string; level:number; count:number }[]) {
   const sorted = [...days].sort((a,b) => a.date.localeCompare(b.date));
-  if (!sorted.length) return { weeks: [] as typeof sorted[][], months: [] as { label:string; start:number }[] };
+  if (!sorted.length) {
+    return {
+      weeks: [] as { date:string; level:number; count:number }[][],
+      months: [] as { label:string; start:number }[],
+    };
+  }
 
   const start = new Date(`${sorted[0].date}T12:00:00Z`);
   const startDay = start.getUTCDay();
