@@ -120,7 +120,7 @@ export default async function AboutPage() {
           <img className="about-portrait-color" src={driveImageUrl("1AlOciizm_YrgZmFTGCeUZ4ZORuFGjaZA")} alt="" aria-hidden="true" />
         </div>
         <div className="about-copy">
-          <h1>Strategist, artist, builder, educator.</h1>
+          <p className="editorial-kicker">About Ivonne</p><h1>The World Is<br/><em>My Studio.</em></h1><p className="editorial-roles">Strategist, artist, builder, educator.</p>
           <p>My work moves between brand strategy, technology, systems, and visual art — from building digital tools and brand worlds to teaching, making, and independent experiments.</p>
           <div className="about-links">
             <Link href="/work">Selected work →</Link>
@@ -201,7 +201,7 @@ export default async function AboutPage() {
       </section>
 
       <section className="about-section">
-        <div className="section-heading"><h2 className="section-title small-title">Kind words</h2></div>
+        <div className="section-heading"><h2 className="section-title small-title">Testimonials</h2></div>
         <div className="quote-grid">
           <figure className="quote-card"><blockquote>“A rare find. Deeply data-driven, deeply human.”</blockquote><figcaption>— CEO, TrueLoyal</figcaption></figure>
           <figure className="quote-card"><blockquote>“Everyone keeps saying what a great job you’re doing and how happy the clients are.”</blockquote><figcaption>— CMO, TrueLoyal</figcaption></figure>
@@ -241,7 +241,7 @@ export default async function AboutPage() {
       <section className="about-section about-github-section">
         <div className="section-heading about-github-heading">
           <div>
-            <h2 className="section-title small-title">Building</h2>
+            <h2 className="section-title small-title">Tools + experiments</h2>
             <p>A running record of the tools, products, and experiments I’m building.</p>
           </div>
           <div className="about-github-meta">
@@ -296,12 +296,12 @@ export default async function AboutPage() {
       <section className="about-section about-community-section">
         <div className="about-resume-row">
           <div className="about-resume-content">
-            <p className="about-resume-label">Side Quests</p>
+            <p className="about-resume-label">Community</p>
             <div className="about-community-list">
               {visibleSideQuests.map(item => <p key={item}>{item}</p>)}
             </div>
             <details className="about-side-quests-more about-disclosure">
-              <summary><span>More side quests</span><span aria-hidden="true">＋</span></summary>
+              <summary><span>More community work</span><span aria-hidden="true">＋</span></summary>
               <div className="about-community-list about-community-list-more">
                 {moreSideQuests.map(item => <p key={item}>{item}</p>)}
               </div>

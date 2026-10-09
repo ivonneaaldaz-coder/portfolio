@@ -15,7 +15,7 @@ export default function CustomCursor() {
   const ring = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (pathname === "/") return;
+    if (["/", "/about", "/books", "/music"].includes(pathname)) return;
     if (!window.matchMedia("(hover: hover) and (pointer: fine)").matches) return;
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     const d = dot.current!, r = ring.current!;

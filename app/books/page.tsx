@@ -17,8 +17,8 @@ export default async function BooksPage() {
     <section className="page section-pad library-page">
       <header className="collection-intro">
         <div>
-          <h1>Books + Quotes</h1>
-          <p>Books, passages, and ideas.</p>
+          <p className="editorial-kicker">The personal collection / 01</p><h1>Books <em>+ Quotes.</em></h1>
+          <p>Books, passages, and ideas I return to.</p>
         </div>
         <Link href="/#library">← Back to Library</Link>
       </header>

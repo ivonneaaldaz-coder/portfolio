@@ -22,7 +22,7 @@ export default function MusicPage() {
     <section className="page section-pad music-page">
       <header className="collection-intro">
         <div>
-          <h1>Music</h1>
+          <p className="editorial-kicker">The personal collection / 02</p><h1>Music <em>+ Records.</em></h1>
           <p>Playlists, records, and whatever I’m listening to lately.</p>
         </div>
         <Link href="/#library">← Back to Library</Link>
@@ -37,11 +37,11 @@ export default function MusicPage() {
       </section>
 
       <section className="music-section record-section">
-        <div className="section-heading"><h2 className="section-title small-title">Favorite vinyls</h2></div>
+        <div className="section-heading"><h2 className="section-title small-title">Favorite records</h2></div>
         <div className="vinyl-grid">
           {vinyl.map((item) => (
             <a className="vinyl-card" href={item.href} target="_blank" rel="noreferrer" key={item.title}>
-              <div className="vinyl-cover"><img src={item.image} alt="" /></div>
+              <div className="vinyl-cover"><span className="editorial-vinyl-disc" aria-hidden="true"/><img src={item.image} alt="" /></div>
               <h3>{item.title}</h3>
               <p>{item.artist} <span>↗︎</span></p>
             </a>
