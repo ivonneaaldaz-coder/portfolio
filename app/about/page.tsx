@@ -4,6 +4,7 @@ export const metadata = pageMetadata("About", "Meet Ivonne Aldaz: strategist, ar
 
 import Link from "next/link";
 import { driveImageUrl } from "@/lib/googleDrive";
+import { getGitHubContributions } from "@/lib/githubContributions";
 
 const experience = [
   { role: "Founder", company: "Whitespace", dates: "2018 — Present" },
@@ -49,38 +50,47 @@ const exhibitions = [
   { title:"La Roane, France", meta:"Watercolor retreat", year:"2023" },
 ];
 
-const githubWeeks = Array.from({ length: 53 }, (_, week) =>
-  Array.from({ length: 7 }, (_, day) => {
-    const active =
-      (week >= 21 && week <= 22 && day >= 1 && day <= 5) ||
-      (week === 33 && (day === 1 || day === 4)) ||
-      (week >= 36 && week <= 39 && [0,2,4,5].includes(day)) ||
-      (week === 41 && [0,2,4].includes(day)) ||
-      (week === 47 && day === 0) ||
-      (week === 51 && [2,5,6].includes(day)) ||
-      (week === 52 && day >= 0 && day <= 4);
+function buildGitHubCalendar(days: { date:string; level:number; count:number }[]) {
+  const sorted = [...days].sort((a,b) => a.date.localeCompare(b.date));
+  if (!sorted.length) return { weeks: [] as typeof sorted[][], months: [] as { label:string; start:number }[] };
 
-    if (!active) return 0;
+  const start = new Date(`${sorted[0].date}T12:00:00Z`);
+  const startDay = start.getUTCDay();
+  start.setUTCDate(start.getUTCDate() - startDay);
 
-    const intensity = (week * 5 + day * 3) % 4;
-    return intensity + 1;
-  }),
-);
+  const end = new Date(`${sorted[sorted.length - 1].date}T12:00:00Z`);
+  const endDay = end.getUTCDay();
+  end.setUTCDate(end.getUTCDate() + (6 - endDay));
 
-const githubMonths = [
-  { label:"Oct", start:0 },
-  { label:"Nov", start:5 },
-  { label:"Dec", start:9 },
-  { label:"Jan", start:14 },
-  { label:"Feb", start:18 },
-  { label:"Mar", start:22 },
-  { label:"Apr", start:27 },
-  { label:"May", start:31 },
-  { label:"Jun", start:36 },
-  { label:"Jul", start:40 },
-  { label:"Aug", start:44 },
-  { label:"Sep", start:49 },
-];
+  const byDate = new Map(sorted.map(day => [day.date, day]));
+  const weeks: { date:string; level:number; count:number }[][] = [];
+
+  for (let cursor = new Date(start), weekIndex = 0; cursor <= end; weekIndex++) {
+    const week: { date:string; level:number; count:number }[] = [];
+    for (let dayIndex = 0; dayIndex < 7; dayIndex++) {
+      const date = cursor.toISOString().slice(0,10);
+      week.push(byDate.get(date) || { date, level:0, count:0 });
+      cursor.setUTCDate(cursor.getUTCDate() + 1);
+    }
+    weeks.push(week);
+  }
+
+  const months: { label:string; start:number }[] = [];
+  let lastMonth = -1;
+  weeks.forEach((week, index) => {
+    const anchor = new Date(`${week[0].date}T12:00:00Z`);
+    const month = anchor.getUTCMonth();
+    if (month !== lastMonth) {
+      months.push({
+        label: anchor.toLocaleString("en-US", { month:"short", timeZone:"UTC" }),
+        start:index,
+      });
+      lastMonth = month;
+    }
+  });
+
+  return { weeks, months };
+}
 
 const brands = [
   "Hero Cosmetics","Nestlé","CVS Health","Batiste","Purina","ARM & HAMMER","Gerber","Nescafe","Stouffer's","Sir Kensington's (Unilever)",
@@ -91,7 +101,10 @@ const brands = [
 const visibleBrands = brands.slice(0,10);
 const moreBrands = brands.slice(10);
 
-export default function AboutPage() {
+export default async function AboutPage() {
+  const github = await getGitHubContributions();
+  const githubCalendar = buildGitHubCalendar(github?.days || []);
+
   return (
     <section id="about-top" className="page section-pad about-page">
       <div className="about-hero">
@@ -194,15 +207,18 @@ export default function AboutPage() {
         <div className="section-heading about-github-heading">
           <div>
             <h2 className="section-title small-title">Building</h2>
-            <p>Small tools, products, and experiments I keep shipping.</p>
+            <p>
+              Small tools, products, and experiments I keep shipping.
+              {github?.total ? <span className="about-github-total"> {github.total.toLocaleString()} contributions · last year</span> : null}
+            </p>
           </div>
           <a href="https://github.com/ivonneaaldaz-coder" target="_blank" rel="noreferrer">View GitHub ↗︎</a>
         </div>
         <div className="about-github-panel">
           <div className="about-github-calendar" aria-label="GitHub contribution activity">
             <div className="about-github-months" aria-hidden="true">
-              {githubMonths.map(month => (
-                <span key={month.label} style={{ gridColumn: `${month.start + 1} / span 4` }}>{month.label}</span>
+              {githubCalendar.months.map((month, index) => (
+                <span key={`${month.label}-${index}`} style={{ gridColumn: `${month.start + 1} / span 4` }}>{month.label}</span>
               ))}
             </div>
             <div className="about-github-body">
@@ -212,11 +228,12 @@ export default function AboutPage() {
                 <span>Fri</span>
               </div>
               <div className="about-github-grid" aria-hidden="true">
-                {githubWeeks.flatMap((week, weekIndex) =>
-                  week.map((level, dayIndex) => (
+                {githubCalendar.weeks.flatMap((week, weekIndex) =>
+                  week.map((day, dayIndex) => (
                     <span
-                      className={`level-${level}`}
-                      key={`${weekIndex}-${dayIndex}`}
+                      className={`level-${day.level}`}
+                      key={day.date}
+                      title={`${day.count} contribution${day.count === 1 ? "" : "s"} on ${day.date}`}
                       style={{ gridColumn: weekIndex + 1, gridRow: dayIndex + 1 }}
                     />
                   )),
