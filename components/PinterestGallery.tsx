@@ -99,6 +99,10 @@ export default function PinterestGallery({ pins }: { pins: PinterestPin[] }) {
                 aria-label={pin.title ? `${pin.title} on Pinterest` : "Open Pin on Pinterest"}
               >
                 <img src={pin.imageUrl} alt={pin.altText} loading="lazy" decoding="async" />
+                <div className="pinterest-native-meta">
+                  <span>{pin.boardName}</span>
+                  {pin.title ? <p>{pin.title}</p> : null}
+                </div>
               </a>
             ))}
           </div>

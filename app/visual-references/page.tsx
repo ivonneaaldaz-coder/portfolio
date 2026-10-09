@@ -1,12 +1,23 @@
 import Link from "next/link";
+import { cookies } from "next/headers";
 import PinterestGallery from "@/components/PinterestGallery";
 import PinterestProfileFallback from "@/components/PinterestProfileFallback";
 import { getPinterestPins } from "@/lib/pinterest";
+import { PINTEREST_COOKIE_NAME, decryptPinterestSession } from "@/lib/pinterestOAuth";
 
-export const revalidate = 900;
+export const revalidate = 3600;
 
 export default async function VisualReferencesPage() {
-  const pins = await getPinterestPins(144);
+  const cookieStore = await cookies();
+  const session = decryptPinterestSession(cookieStore.get(PINTEREST_COOKIE_NAME)?.value);
+
+  let pins = session?.accessToken
+    ? await getPinterestPins(500, session.accessToken)
+    : [];
+
+  if (!pins.length) {
+    pins = await getPinterestPins(500);
+  }
 
   return (
     <section className="page section-pad visual-index-page pinterest-reference-page">
