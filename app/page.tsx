@@ -123,6 +123,32 @@ export default async function OverviewPage() {
         </div>
       </section>
 
+      {visualWorldPins.length ? (
+        <section className="overview-visual-world section-pad overview-anchor" id="visual-world">
+          <div className="overview-visual-world-head">
+            <h2 className="section-title small-title">Visual World</h2>
+          </div>
+
+          <div className="overview-visual-world-grid">
+            {visualWorldPins.map((pin, index) => (
+              <Link
+                className={`overview-visual-world-item item-${index + 1}`}
+                href="/visual-references"
+                key={pin.id}
+                aria-label="Explore visual references"
+              >
+                <img src={pin.imageUrl} alt={pin.altText} loading="lazy" decoding="async" />
+              </Link>
+            ))}
+          </div>
+
+          <div className="overview-visual-world-links">
+            <Link href="/visual-references">Visual references →</Link>
+            <Link href="/travel">Travel →</Link>
+          </div>
+        </section>
+      ) : null}
+
       <section className="home-cases section-pad overview-anchor" id="case-studies">
         <div className="section-heading"><h2 className="section-title small-title">Selected Case Studies</h2></div>
         <div className="home-case-list">{studies.map(study => <CaseRow study={study} key={study.title} />)}</div>
@@ -134,7 +160,7 @@ export default async function OverviewPage() {
 
       <section className="selected section-pad overview-anchor" id="work">
         <div className="section-heading">
-          <h2 className="section-title">Current Work</h2>
+          <h2 className="section-title small-title">Current Work</h2>
         </div>
         <div className="feature-grid">
           {features.map((item) => {
@@ -236,36 +262,6 @@ export default async function OverviewPage() {
         </div>
       </section>
 
-      {visualWorldPins.length ? (
-        <section className="overview-visual-world section-pad">
-          <div className="overview-visual-world-head">
-            <div>
-              <p className="eyebrow">VISUAL WORLD</p>
-              <h2 className="section-title small-title">Taste, references, places.</h2>
-              <p>Visual references and fragments I keep coming back to.</p>
-            </div>
-            <div className="overview-visual-world-links">
-              <Link href="/visual-references">Visual references →</Link>
-              <Link href="/travel">Travel →</Link>
-            </div>
-          </div>
-
-          <div className="overview-visual-world-grid">
-            {visualWorldPins.map((pin, index) => (
-              <a
-                className={`overview-visual-world-item item-${index + 1}`}
-                href={pin.pinUrl}
-                target="_blank"
-                rel="noreferrer"
-                key={pin.id}
-                aria-label={pin.title ? `${pin.title} on Pinterest` : "Open visual reference on Pinterest"}
-              >
-                <img src={pin.imageUrl} alt={pin.altText} loading="lazy" decoding="async" />
-              </a>
-            ))}
-          </div>
-        </section>
-      ) : null}
 
     </div>
   );

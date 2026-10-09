@@ -186,7 +186,6 @@ async function getPublicPinterestPins(limit = 500): Promise<PinterestPin[]> {
     const params = new URLSearchParams({
       source_url: `/${username}/_pins/`,
       data: JSON.stringify({ options, context: {} }),
-      _: Date.now().toString(),
     });
 
     let payload: PinterestPublicResource | null = null;
