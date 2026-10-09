@@ -307,7 +307,7 @@ export default async function AboutPage() {
           <div><h3>MA, International Business + Economics</h3><p>FH Schmalkalden University of Applied Sciences</p></div>
           <div><h3>Bachelor of Arts</h3><p>St. Mary’s University</p></div>
         </div>
-        <div className="education-languages"><span>Languages</span><p>English · Spanish · French</p></div>
+        <div className="education-languages"><span>Languages</span><p>English · Spanish · Some French</p></div>
       </section>
 
       <section className="about-section">
