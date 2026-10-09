@@ -1,4 +1,5 @@
 import Link from "next/link";
+import MoreExperiments from "@/components/MoreExperiments";
 import { pageMetadata } from "@/lib/metadata";
 
 export const metadata = pageMetadata("Ask Eve", "A conversational CV: ask questions about Ivonne’s work, projects, art, and what she’s building.", "/experiments/ask-eve");
@@ -29,6 +30,8 @@ export default function AskEveExperiment() {
         <div><p className="eyebrow">WHAT IT DOES</p><p>Answers questions grounded in my CV, projects, writing, and selected context inside the Lab.</p></div>
         <div><p className="eyebrow">FORMAT</p><p>A small AI interface living inside a retro desktop environment rather than a standalone chatbot page.</p></div>
       </section>
+
+      <MoreExperiments current="ask-eve" />
     </article>
   );
 }
