@@ -8294,3 +8294,27 @@ html.intro-seen #site-intro{display:none}
     gap:8px;
   }
 }
+
+
+/* Library back-link consistency */
+.travel-intro-with-back{
+  display:flex;
+  align-items:flex-end;
+  justify-content:space-between;
+  gap:32px;
+  border-bottom:1px solid var(--line);
+}
+.travel-intro-with-back>a{
+  flex:0 0 auto;
+  padding-bottom:4px;
+  font-size:11px;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+}
+@media(max-width:700px){
+  .travel-intro-with-back{
+    align-items:flex-start;
+    flex-direction:column;
+    gap:28px;
+  }
+}
