@@ -107,7 +107,6 @@ const brands = [
 ];
 
 const visibleBrands = brands.slice(0,10);
-const moreBrands = brands.slice(10);
 
 export default async function AboutPage() {
   const github = await getGitHubContributions();
@@ -146,7 +145,7 @@ export default async function AboutPage() {
                   <span>{item.dates}</span>
                 </div>
               ))}
-              <details className="about-earlier-experience">
+              <details className="about-earlier-experience about-disclosure">
                 <summary><span>Earlier experience</span><span aria-hidden="true">＋</span></summary>
                 <div>
                   {earlierExperience.map(item => (
@@ -169,12 +168,6 @@ export default async function AboutPage() {
         <div className="brand-wall">
           {visibleBrands.map((brand)=><div className="brand-name" key={brand}><strong>{brand}</strong></div>)}
         </div>
-        <details className="brand-more">
-          <summary>More brands + collaborations</summary>
-          <div className="brand-wall brand-wall-more">
-            {moreBrands.map((brand)=><div className="brand-name" key={brand}><strong>{brand}</strong></div>)}
-          </div>
-        </details>
       </section>
 
         <div className="about-resume-row">
@@ -229,7 +222,7 @@ export default async function AboutPage() {
             </div>
           ))}
         </div>
-        <details className="about-side-quests-more about-exhibitions-more">
+        <details className="about-side-quests-more about-exhibitions-more about-disclosure">
           <summary><span>More exhibitions + residencies</span><span aria-hidden="true">＋</span></summary>
           <div className="about-exhibitions-list about-exhibitions-list-more">
             {moreExhibitions.map(item => (
@@ -307,7 +300,7 @@ export default async function AboutPage() {
             <div className="about-community-list">
               {visibleSideQuests.map(item => <p key={item}>{item}</p>)}
             </div>
-            <details className="about-side-quests-more">
+            <details className="about-side-quests-more about-disclosure">
               <summary><span>More side quests</span><span aria-hidden="true">＋</span></summary>
               <div className="about-community-list about-community-list-more">
                 {moreSideQuests.map(item => <p key={item}>{item}</p>)}
@@ -328,7 +321,7 @@ export default async function AboutPage() {
       </section>
 
       <section className="about-section">
-        <details className="long-story">
+        <details className="long-story about-disclosure">
           <summary><span>Read the longer story</span><span aria-hidden="true">＋</span></summary>
           <div className="long-story-copy">
             <p className="long-story-lede">Life is about saying yes to the things that will make a better story.</p>
