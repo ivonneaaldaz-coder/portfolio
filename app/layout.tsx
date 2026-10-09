@@ -9,12 +9,13 @@ export const metadata: Metadata = {
   metadataBase: new URL("https://ivonnealdaz.com"),
   title: { default: "Ivonne Aldaz — Strategy, technology, art", template: "%s" },
   description: "Strategy, systems, creative technology, art, teaching, and experiments by Ivonne Aldaz.",
+  robots: { index: false, follow: false },
 };
 
 const themeScript = `
 (function() {
   try {
-    if (sessionStorage.getItem('intro-seen') || window.matchMedia('(prefers-reduced-motion: reduce)').matches) document.documentElement.classList.add('intro-seen');
+    if (window.location.pathname === '/' || sessionStorage.getItem('intro-seen') || window.matchMedia('(prefers-reduced-motion: reduce)').matches) document.documentElement.classList.add('intro-seen');
     else { sessionStorage.setItem('intro-seen', '1'); setTimeout(function(){ var el = document.getElementById('site-intro'); if (el) el.remove(); }, 2200); }
   } catch (e) {}
   try {

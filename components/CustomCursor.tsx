@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import { usePathname } from "next/navigation";
 
 /**
  * A small ink dot that tracks the pointer exactly, plus a soft ring that follows
@@ -9,10 +10,12 @@ import { useEffect, useRef } from "react";
  * Mouse/trackpad only — touch devices and text fields keep the native cursor.
  */
 export default function CustomCursor() {
+  const pathname = usePathname();
   const dot = useRef<HTMLDivElement>(null);
   const ring = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    if (pathname === "/") return;
     if (!window.matchMedia("(hover: hover) and (pointer: fine)").matches) return;
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     const d = dot.current!, r = ring.current!;
@@ -70,7 +73,7 @@ export default function CustomCursor() {
       window.removeEventListener("pointerdown", onDown);
       window.removeEventListener("pointerup", onUp);
     };
-  }, []);
+  }, [pathname]);
 
   return (
     <>
