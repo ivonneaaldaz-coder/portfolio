@@ -8386,3 +8386,18 @@ html.intro-seen #site-intro{display:none}
     font-size:13px!important;
   }
 }
+
+
+/* 2026-10-09 mobile overview rhythm hotfix */
+.hero-mobile-break{
+  display:inline;
+}
+@media(max-width:900px){
+  .overview-experiment-grid{
+    row-gap:48px!important;
+    column-gap:18px!important;
+  }
+  .hero-mobile-break{
+    display:block;
+  }
+}
