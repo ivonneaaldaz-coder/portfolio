@@ -9756,3 +9756,38 @@ html.intro-seen #site-intro{display:none}
   background:none!important;
   position:static!important;
 }
+
+
+/* 2026-10-10 Spotify embed hard-hide + three-row track viewport */
+.portfolio-spotify-controller,
+.portfolio-spotify-controller iframe{
+  position:fixed!important;
+  left:-10000px!important;
+  top:-10000px!important;
+  right:auto!important;
+  bottom:auto!important;
+  width:320px!important;
+  height:80px!important;
+  min-width:320px!important;
+  min-height:80px!important;
+  max-width:320px!important;
+  max-height:80px!important;
+  overflow:hidden!important;
+  opacity:0!important;
+  pointer-events:none!important;
+  transform:none!important;
+  clip-path:none!important;
+  contain:strict!important;
+  z-index:-9999!important;
+}
+
+.music-tracklist-body{
+  max-height:120px!important;
+  overflow-y:auto!important;
+  overflow-x:hidden!important;
+}
+@media(max-width:900px){
+  .music-tracklist-body{
+    max-height:120px!important;
+  }
+}
