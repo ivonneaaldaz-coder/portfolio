@@ -9515,31 +9515,6 @@ html.intro-seen #site-intro{display:none}
 }
 
 
-/* 2026-10-10 desktop playlist console + hidden Spotify controller correction */
-.portfolio-spotify-controller{
-  position:fixed!important;
-  left:-10000px!important;
-  top:-10000px!important;
-  right:auto!important;
-  bottom:auto!important;
-  width:320px!important;
-  height:80px!important;
-  max-width:320px!important;
-  max-height:80px!important;
-  overflow:hidden!important;
-  opacity:0!important;
-  pointer-events:none!important;
-  clip-path:inset(100%)!important;
-  z-index:-9999!important;
-}
-.portfolio-spotify-controller iframe{
-  display:block!important;
-  width:320px!important;
-  height:80px!important;
-  border:0!important;
-  opacity:0!important;
-}
-
 .music-console{
   display:grid;
   grid-template-columns:minmax(0,.86fr) minmax(360px,1.14fr);
@@ -9710,36 +9685,6 @@ html.intro-seen #site-intro{display:none}
   }
 }
 
-/* Keep Spotify's iframe controller functional but completely out of layout/paint. */
-.portfolio-spotify-controller{
-  position:fixed!important;
-  left:0!important;
-  top:0!important;
-  right:auto!important;
-  bottom:auto!important;
-  width:0!important;
-  height:0!important;
-  min-width:0!important;
-  min-height:0!important;
-  max-width:0!important;
-  max-height:0!important;
-  overflow:hidden!important;
-  opacity:0!important;
-  pointer-events:none!important;
-  clip-path:inset(100%)!important;
-  contain:strict!important;
-  transform:scale(0)!important;
-  transform-origin:top left!important;
-  z-index:-9999!important;
-}
-.portfolio-spotify-controller iframe{
-  display:block!important;
-  width:320px!important;
-  height:80px!important;
-  border:0!important;
-  opacity:0!important;
-}
-
 /* Text controls: match the site's simple arrow language. */
 .portfolio-music-play,
 .global-music-play{
@@ -9758,29 +9703,6 @@ html.intro-seen #site-intro{display:none}
 }
 
 
-/* 2026-10-10 Spotify embed hard-hide + three-row track viewport */
-.portfolio-spotify-controller,
-.portfolio-spotify-controller iframe{
-  position:fixed!important;
-  left:-10000px!important;
-  top:-10000px!important;
-  right:auto!important;
-  bottom:auto!important;
-  width:320px!important;
-  height:80px!important;
-  min-width:320px!important;
-  min-height:80px!important;
-  max-width:320px!important;
-  max-height:80px!important;
-  overflow:hidden!important;
-  opacity:0!important;
-  pointer-events:none!important;
-  transform:none!important;
-  clip-path:none!important;
-  contain:strict!important;
-  z-index:-9999!important;
-}
-
 .music-tracklist-body{
   max-height:120px!important;
   overflow-y:auto!important;
@@ -9794,35 +9716,30 @@ html.intro-seen #site-intro{display:none}
 
 
 
-/* The Spotify SDK playback iframe must never occupy footer/sidebar space.
-   Keep the SDK iframe mounted so the custom controls can still play audio. */
-#portfolio-spotify-controller {
+
+/* Spotify SDK requires a mounted, renderable iframe for audio playback.
+   Keep a normal-sized player outside the viewport, without display:none,
+   visibility:hidden, clipping, scaling, or zero-sized containers. */
+#portfolio-spotify-controller,
+#portfolio-spotify-controller iframe {
   position:fixed!important;
   left:-10000px!important;
-  top:-10000px!important;
+  top:0!important;
   right:auto!important;
   bottom:auto!important;
+  display:block!important;
   width:320px!important;
   height:80px!important;
-  overflow:hidden!important;
-  opacity:0!important;
-  pointer-events:none!important;
-  z-index:-9999!important;
-  visibility:hidden!important;
-}
-#portfolio-spotify-controller iframe,
-iframe[src*="open.spotify.com/embed/"] {
-  position:fixed!important;
-  left:-10000px!important;
-  top:-10000px!important;
-  right:auto!important;
-  bottom:auto!important;
-  width:320px!important;
-  height:80px!important;
+  min-width:320px!important;
+  min-height:80px!important;
   max-width:320px!important;
   max-height:80px!important;
-  opacity:0!important;
-  visibility:hidden!important;
+  visibility:visible!important;
+  opacity:1!important;
+  overflow:visible!important;
+  clip-path:none!important;
+  contain:none!important;
+  transform:none!important;
   pointer-events:none!important;
-  z-index:-9999!important;
+  z-index:-1!important;
 }
