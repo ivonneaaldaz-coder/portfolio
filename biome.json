@@ -1,0 +1,4 @@
+{
+  "files": { "includes": ["components/MusicProvider.tsx", "components/GlobalMusicControls.tsx", "components/SpotifyPlaylists.tsx", "lib/spotify-iframe.ts"] },
+  "linter": { "enabled": true, "rules": { "recommended": false, "correctness": { "recommended": true }, "suspicious": { "recommended": true } } }
+}

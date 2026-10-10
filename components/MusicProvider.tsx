@@ -1,6 +1,8 @@
 "use client";
 
-import { createContext, useContext, useEffect, useMemo, useRef, useState } from "react";
+import { createContext, useCallback, useContext, useEffect, useRef, useState } from "react";
+
+import { loadSpotifyAPI, type SpotifyController, type SpotifyEvent } from "@/lib/spotify-iframe";
 
 export type MusicTrack = {
   uri: string;
@@ -26,6 +28,7 @@ type MusicContextValue = {
   currentPlaylist: MusicPlaylist | null;
   artworkUrl: string;
   isPaused: boolean;
+  isBuffering: boolean;
   position: number;
   duration: number;
   toggle: () => void;
@@ -44,11 +47,14 @@ const FALLBACK_PLAYLISTS: MusicPlaylist[] = [
 
 const MusicContext = createContext<MusicContextValue | null>(null);
 
-declare global {
-  interface Window {
-    onSpotifyIframeApiReady?: (api:any) => void;
-    __portfolioSpotifyAPI?: any;
+function findTrack(uri:string, source:MusicPlaylist[], preferred = -1) {
+  const preferredTrack = source[preferred]?.tracks.findIndex(track => track.uri === uri) ?? -1;
+  if (preferredTrack >= 0) return { playlistIndex:preferred, trackIndex:preferredTrack, track:source[preferred].tracks[preferredTrack] };
+  for (let p=0;p<source.length;p++) {
+    const t = source[p].tracks.findIndex(track => track.uri === uri);
+    if (t >= 0) return { playlistIndex:p, trackIndex:t, track:source[p].tracks[t] };
   }
+  return null;
 }
 
 function trackUrl(uri:string) {
@@ -65,12 +71,16 @@ export function MusicProvider({ children }:{ children:React.ReactNode }) {
   const [playingPlaylist,setPlayingPlaylist] = useState(-1);
   const [playingTrack,setPlayingTrack] = useState(-1);
   const [isPaused,setIsPaused] = useState(true);
+  const [isBuffering,setIsBuffering] = useState(false);
   const [position,setPosition] = useState(0);
   const [duration,setDuration] = useState(0);
   const [artworkUrl,setArtworkUrl] = useState("");
 
-  const controllerRef = useRef<any>(null);
-  const apiLoadingRef = useRef(false);
+  const hostRef = useRef<HTMLDivElement>(null);
+  const controllerRef = useRef<SpotifyController | null>(null);
+  const readyRef = useRef(false);
+  const initializeRef = useRef<() => void>(() => {});
+  const requestedRef = useRef<{playlistIndex:number;trackIndex:number;uri:string} | null>(null);
   const pendingRef = useRef<{playlistIndex:number;trackIndex:number;uri:string}|null>(null);
 
   useEffect(() => {
@@ -84,7 +94,7 @@ export function MusicProvider({ children }:{ children:React.ReactNode }) {
       .then(data => {
         if (!active || !Array.isArray(data?.playlists)) return;
         setPlaylists((prev) => prev.map((fallback,index) => {
-          const row = data.playlists.find((item:any) => item.id === fallback.id) || data.playlists[index] || {};
+          const row = data.playlists.find((item:MusicPlaylist) => item.id === fallback.id) || data.playlists[index] || {};
           return {
             ...fallback,
             title: row.title?.replace(/\s*\|\s*Spotify.*$/i,"") || fallback.title,
@@ -98,128 +108,106 @@ export function MusicProvider({ children }:{ children:React.ReactNode }) {
     return () => { active = false; };
   }, []);
 
-  const findTrack = (uri:string, source = playlistsRef.current) => {
-    for (let p=0;p<source.length;p++) {
-      const t = source[p].tracks.findIndex(track => track.uri === uri);
-      if (t >= 0) return { playlistIndex:p, trackIndex:t, track:source[p].tracks[t] };
-    }
-    return null;
-  };
-
-  const executePending = () => {
+  const executePending = useCallback(() => {
     const controller = controllerRef.current;
     const pending = pendingRef.current;
-    if (!controller || !pending) return false;
+    if (!controller || !readyRef.current || !pending) return;
     try {
+      // The SDK queues play during entity loading. Do not duplicate that queue
+      // with timers, or mark playback active before the iframe reports it.
       controller.loadEntity(pending.uri);
       controller.play();
-
-      // Mirror the Lab player: optimistically sync immediately so mobile
-      // gestures are not lost while Spotify catches up with playback events.
-      setPlayingUri(pending.uri);
-      setPlayingPlaylist(pending.playlistIndex);
-      setPlayingTrack(pending.trackIndex);
-      setSelectedIndexState(pending.playlistIndex);
-      setSelectedTrackIndex(pending.trackIndex);
-      setIsPaused(false);
+      requestedRef.current = pending;
       pendingRef.current = null;
-      return true;
-    } catch {
-      return false;
+    } catch (error) {
+      console.warn("Spotify playback request failed", error);
     }
-  };
-
-  // The Spotify SDK owns its iframe. Keep it mounted for playback, but
-  // remove it from visual layout without continuously rewriting its styles.
-  const hideNativeSpotifyEmbed = () => {
-    const host = document.getElementById("portfolio-spotify-controller");
-    if (!host) return;
-    host.querySelectorAll("iframe").forEach((iframe) => {
-      iframe.setAttribute("aria-hidden","true");
-      iframe.setAttribute("tabindex","-1");
-    });
-  };
-
-  const createController = (IFrameAPI:any) => {
-    if (controllerRef.current) return;
-    const element = document.getElementById("portfolio-spotify-controller");
-    if (!element) return;
-    hideNativeSpotifyEmbed();
-    IFrameAPI.createController(element,{
-      width:320,
-      height:80,
-      url:FALLBACK_PLAYLISTS[0].url + "?utm_source=generator&theme=0",
-    },(controller:any) => {
-      controllerRef.current = controller;
-      apiLoadingRef.current = false;
-      hideNativeSpotifyEmbed();
-      window.setTimeout(hideNativeSpotifyEmbed,50);
-      window.setTimeout(hideNativeSpotifyEmbed,250);
-
-      controller.addListener("playback_started",(event:any) => {
-        const uri = event?.data?.playingURI || pendingRef.current?.uri || "";
-        if (uri) {
-          setPlayingUri(uri);
-          const found = findTrack(uri);
-          if (found) {
-            setPlayingPlaylist(found.playlistIndex);
-            setPlayingTrack(found.trackIndex);
-            setSelectedIndexState(found.playlistIndex);
-            setSelectedTrackIndex(found.trackIndex);
-          }
-        }
-        setIsPaused(false);
-        pendingRef.current = null;
-      });
-
-      controller.addListener("playback_update",(event:any) => {
-        const data = event?.data || {};
-        const uri = data.playingURI || "";
-        setIsPaused(Boolean(data.isPaused));
-        setPosition(Number(data.position) || 0);
-        setDuration(Number(data.duration) || 0);
-        if (uri) {
-          setPlayingUri(uri);
-          const found = findTrack(uri);
-          if (found) {
-            setPlayingPlaylist(found.playlistIndex);
-            setPlayingTrack(found.trackIndex);
-          }
-        }
-      });
-
-      if (pendingRef.current) executePending();
-    });
-  };
-
-  const ensureController = () => {
-    if (controllerRef.current) return;
-
-    if (window.__portfolioSpotifyAPI) {
-      createController(window.__portfolioSpotifyAPI);
-      return;
-    }
-    if (apiLoadingRef.current) return;
-    apiLoadingRef.current = true;
-
-    window.onSpotifyIframeApiReady = (api:any) => {
-      window.__portfolioSpotifyAPI = api;
-      createController(api);
-    };
-
-    if (!document.querySelector('script[data-portfolio-spotify-api]')) {
-      const script = document.createElement("script");
-      script.src = "https://open.spotify.com/embed/iframe-api/v1";
-      script.async = true;
-      script.dataset.portfolioSpotifyApi = "true";
-      script.onerror = () => { apiLoadingRef.current = false; };
-      document.body.appendChild(script);
-    }
-  };
+  }, []);
 
   useEffect(() => {
-    ensureController();
-  }, []);
+    const host = hostRef.current;
+    if (!host) return;
+    let disposed = false;
+    let creating = false;
+    let ownedController: SpotifyController | null = null;
+
+    const syncTrack = (uri:string) => {
+      if (!uri) return;
+      setPlayingUri(uri);
+      const found = findTrack(uri, playlistsRef.current, requestedRef.current?.playlistIndex);
+      if (found) {
+        setPlayingPlaylist(found.playlistIndex);
+        setPlayingTrack(found.trackIndex);
+      }
+    };
+    const onStarted = (event:SpotifyEvent) => {
+      if (disposed) return;
+      syncTrack(event.data?.playingURI || "");
+      setIsPaused(false);
+      setIsBuffering(false);
+    };
+    const onUpdate = (event:SpotifyEvent) => {
+      if (disposed) return;
+      const data = event.data;
+      if (!data) return;
+      if (typeof data.isPaused === "boolean") setIsPaused(data.isPaused);
+      if (typeof data.isBuffering === "boolean") setIsBuffering(data.isBuffering);
+      if (typeof data.position === "number") setPosition(data.position);
+      if (typeof data.duration === "number") setDuration(data.duration);
+      syncTrack(data.playingURI || "");
+    };
+    const initialize = () => {
+      if (disposed || creating || controllerRef.current) return;
+      creating = true;
+      loadSpotifyAPI().then((api) => {
+        if (disposed) return;
+        // createController REPLACES its argument. The styled outer host must
+        // survive, so give Spotify a disposable child, never the host itself.
+        const mount = document.createElement("div");
+        host.replaceChildren(mount);
+        api.createController(mount, {
+          width:320,
+          height:80,
+          url:FALLBACK_PLAYLISTS[0].url + "?utm_source=generator&theme=0",
+        }, (controller) => {
+          if (disposed) {
+            controller.destroy();
+            return;
+          }
+          ownedController = controller;
+          controllerRef.current = controller;
+          creating = false;
+          host.querySelectorAll("iframe").forEach((iframe) => {
+            // Spotify defaults to lazy loading. An offscreen audio controller
+            // would otherwise never load and never emit ready.
+            iframe.loading = "eager";
+            iframe.setAttribute("tabindex", "-1");
+            iframe.setAttribute("aria-hidden", "true");
+          });
+          controller.addListener("ready", () => {
+            if (disposed) return;
+            readyRef.current = true;
+            executePending();
+          });
+          controller.addListener("playback_started", onStarted);
+          controller.addListener("playback_update", onUpdate);
+        });
+      }).catch((error:unknown) => {
+        creating = false;
+        if (!disposed) console.warn("Spotify controller could not initialize", error);
+      });
+    };
+    initializeRef.current = initialize;
+    initialize();
+    return () => {
+      disposed = true;
+      initializeRef.current = () => {};
+      readyRef.current = false;
+      controllerRef.current = null;
+      ownedController?.destroy();
+      host.replaceChildren();
+    };
+  }, [executePending]);
 
   const playTrack = (playlistIndex:number,trackIndex:number) => {
     const playlist = playlistsRef.current[playlistIndex];
@@ -233,13 +221,13 @@ export function MusicProvider({ children }:{ children:React.ReactNode }) {
     setSelectedTrackIndex(safe);
     pendingRef.current = { playlistIndex,trackIndex:safe,uri:track.uri };
 
-    ensureController();
-    if (!executePending()) window.setTimeout(() => executePending(),250);
+    initializeRef.current();
+    executePending();
   };
 
   const toggle = () => {
     const controller = controllerRef.current;
-    if (controller && playingUri) {
+    if (controller && readyRef.current && requestedRef.current) {
       try {
         controller.togglePlay();
         return;
@@ -250,10 +238,11 @@ export function MusicProvider({ children }:{ children:React.ReactNode }) {
   };
 
   const step = (delta:number) => {
-    const playlistIndex = playingPlaylist >= 0 ? playingPlaylist : selectedIndex;
+    const unconfirmed = requestedRef.current?.uri !== playingUri ? requestedRef.current : null;
+    const playlistIndex = unconfirmed?.playlistIndex ?? (playingPlaylist >= 0 ? playingPlaylist : selectedIndex);
     const playlist = playlistsRef.current[playlistIndex];
     if (!playlist?.tracks.length) return;
-    const base = playingTrack >= 0 ? playingTrack : selectedTrackIndex;
+    const base = unconfirmed?.trackIndex ?? (playingTrack >= 0 ? playingTrack : selectedTrackIndex);
     playTrack(playlistIndex,base + delta);
   };
 
@@ -261,14 +250,9 @@ export function MusicProvider({ children }:{ children:React.ReactNode }) {
     const safe = ((index % playlistsRef.current.length) + playlistsRef.current.length) % playlistsRef.current.length;
     setSelectedIndexState(safe);
     setSelectedTrackIndex(0);
-    setPosition(0);
-    setDuration(0);
   };
 
-  const playingTrackData = useMemo(() => {
-    if (!playingUri) return null;
-    return findTrack(playingUri)?.track || null;
-  }, [playingUri,playlists]);
+  const playingTrackData = playingUri ? findTrack(playingUri, playlists, playingPlaylist)?.track || null : null;
 
   const selectedTrack = playlists[selectedIndex]?.tracks[selectedTrackIndex] || playlists[selectedIndex]?.tracks[0] || null;
   const currentTrack = playingTrackData || selectedTrack;
@@ -304,6 +288,7 @@ export function MusicProvider({ children }:{ children:React.ReactNode }) {
     currentPlaylist,
     artworkUrl,
     isPaused,
+    isBuffering,
     position,
     duration,
     toggle,
@@ -315,7 +300,7 @@ export function MusicProvider({ children }:{ children:React.ReactNode }) {
   return (
     <MusicContext.Provider value={value}>
       {children}
-      <div id="portfolio-spotify-controller" className="portfolio-spotify-controller" aria-hidden="true" />
+      <div ref={hostRef} id="portfolio-spotify-controller" className="portfolio-spotify-controller" aria-hidden="true" />
     </MusicContext.Provider>
   );
 }

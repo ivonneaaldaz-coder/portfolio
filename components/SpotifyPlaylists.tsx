@@ -22,7 +22,7 @@ export default function SpotifyPlaylists() {
           </div>
 
           <div className="portfolio-music-copy">
-            <span>{music.isPaused ? "READY" : "NOW PLAYING"}</span>
+            <span>{music.isBuffering ? "BUFFERING" : music.isPaused ? "READY" : "NOW PLAYING"}</span>
             <h3>{displayTrack?.title || "Choose a playlist"}</h3>
             <p>{displayTrack?.artist || selected?.title || ""}</p>
           </div>
@@ -30,7 +30,7 @@ export default function SpotifyPlaylists() {
           <div className="portfolio-music-controls">
             <button type="button" onClick={music.previous} aria-label="Previous song">←</button>
             <button type="button" className="portfolio-music-play" onClick={music.toggle} aria-label={music.isPaused ? "Play music" : "Pause music"}>
-              <span aria-hidden="true">{music.isPaused ? "▶" : "Ⅱ"}</span>
+              <span aria-hidden="true"><span className="music-desktop-symbol">{music.isPaused ? "▶" : "Ⅱ"}</span><span className="music-mobile-symbol">{music.isPaused ? "\u25B6\uFE0E" : "Ⅱ"}</span></span>
             </button>
             <button type="button" onClick={music.next} aria-label="Next song">→</button>
           </div>

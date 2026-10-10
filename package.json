@@ -5,7 +5,10 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "lint:music": "biome lint components/MusicProvider.tsx components/GlobalMusicControls.tsx components/SpotifyPlaylists.tsx lib/spotify-iframe.ts",
+    "test:music": "TSX_TSCONFIG_PATH=tests/tsconfig.json node --import tsx --test tests/music-provider.test.cjs",
+    "typecheck": "tsc --noEmit"
   },
   "dependencies": {
     "next": "latest",
@@ -18,6 +21,9 @@
     "@types/node": "latest",
     "@types/react": "latest",
     "@types/react-dom": "latest",
-    "typescript": "latest"
+    "typescript": "latest",
+    "jsdom": "^26.1.0",
+    "@biomejs/biome": "^2.5.15",
+    "tsx": "^4.23.15"
   }
 }
