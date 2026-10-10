@@ -20,9 +20,11 @@ export type MusicPlaylist = {
 type MusicContextValue = {
   playlists: MusicPlaylist[];
   selectedIndex: number;
+  selectedTrack: MusicTrack | null;
   setSelectedIndex: (index:number) => void;
   currentTrack: MusicTrack | null;
   currentPlaylist: MusicPlaylist | null;
+  artworkUrl: string;
   isPaused: boolean;
   position: number;
   duration: number;
@@ -49,19 +51,31 @@ declare global {
   }
 }
 
+function trackUrl(uri:string) {
+  const id = uri.replace("spotify:track:","");
+  return id ? "https://open.spotify.com/track/" + id : "";
+}
+
 export function MusicProvider({ children }:{ children:React.ReactNode }) {
   const [playlists,setPlaylists] = useState<MusicPlaylist[]>(FALLBACK_PLAYLISTS);
+  const playlistsRef = useRef<MusicPlaylist[]>(FALLBACK_PLAYLISTS);
   const [selectedIndex,setSelectedIndexState] = useState(0);
+  const [selectedTrackIndex,setSelectedTrackIndex] = useState(0);
   const [playingUri,setPlayingUri] = useState("");
   const [playingPlaylist,setPlayingPlaylist] = useState(-1);
   const [playingTrack,setPlayingTrack] = useState(-1);
   const [isPaused,setIsPaused] = useState(true);
   const [position,setPosition] = useState(0);
   const [duration,setDuration] = useState(0);
+  const [artworkUrl,setArtworkUrl] = useState("");
 
   const controllerRef = useRef<any>(null);
   const apiLoadingRef = useRef(false);
   const pendingRef = useRef<{playlistIndex:number;trackIndex:number;uri:string}|null>(null);
+
+  useEffect(() => {
+    playlistsRef.current = playlists;
+  }, [playlists]);
 
   useEffect(() => {
     let active = true;
@@ -84,7 +98,7 @@ export function MusicProvider({ children }:{ children:React.ReactNode }) {
     return () => { active = false; };
   }, []);
 
-  const findTrack = (uri:string, source = playlists) => {
+  const findTrack = (uri:string, source = playlistsRef.current) => {
     for (let p=0;p<source.length;p++) {
       const t = source[p].tracks.findIndex(track => track.uri === uri);
       if (t >= 0) return { playlistIndex:p, trackIndex:t, track:source[p].tracks[t] };
@@ -99,11 +113,6 @@ export function MusicProvider({ children }:{ children:React.ReactNode }) {
     try {
       controller.loadEntity(pending.uri);
       controller.play();
-      setPlayingUri(pending.uri);
-      setPlayingPlaylist(pending.playlistIndex);
-      setPlayingTrack(pending.trackIndex);
-      setIsPaused(false);
-      pendingRef.current = null;
       return true;
     } catch {
       return false;
@@ -121,19 +130,23 @@ export function MusicProvider({ children }:{ children:React.ReactNode }) {
     },(controller:any) => {
       controllerRef.current = controller;
       apiLoadingRef.current = false;
+
       controller.addListener("playback_started",(event:any) => {
-        const uri = event?.data?.playingURI || "";
+        const uri = event?.data?.playingURI || pendingRef.current?.uri || "";
         if (uri) {
           setPlayingUri(uri);
           const found = findTrack(uri);
           if (found) {
             setPlayingPlaylist(found.playlistIndex);
             setPlayingTrack(found.trackIndex);
+            setSelectedIndexState(found.playlistIndex);
+            setSelectedTrackIndex(found.trackIndex);
           }
         }
         setIsPaused(false);
         pendingRef.current = null;
       });
+
       controller.addListener("playback_update",(event:any) => {
         const data = event?.data || {};
         const uri = data.playingURI || "";
@@ -149,7 +162,8 @@ export function MusicProvider({ children }:{ children:React.ReactNode }) {
           }
         }
       });
-      executePending();
+
+      if (pendingRef.current) executePending();
     });
   };
 
@@ -161,10 +175,12 @@ export function MusicProvider({ children }:{ children:React.ReactNode }) {
     }
     if (apiLoadingRef.current) return;
     apiLoadingRef.current = true;
+
     window.onSpotifyIframeApiReady = (api:any) => {
       window.__portfolioSpotifyAPI = api;
       createController(api);
     };
+
     if (!document.querySelector('script[data-portfolio-spotify-api]')) {
       const script = document.createElement("script");
       script.src = "https://open.spotify.com/embed/iframe-api/v1";
@@ -175,69 +191,92 @@ export function MusicProvider({ children }:{ children:React.ReactNode }) {
     }
   };
 
+  useEffect(() => {
+    ensureController();
+  }, []);
+
   const playTrack = (playlistIndex:number,trackIndex:number) => {
-    const playlist = playlists[playlistIndex];
+    const playlist = playlistsRef.current[playlistIndex];
     if (!playlist) return;
     setSelectedIndexState(playlistIndex);
-    if (!playlist.tracks.length) {
-      ensureController();
-      const tryPlaylist = () => {
-        const controller = controllerRef.current;
-        if (!controller) return;
-        try {
-          controller.loadEntity(playlist.url);
-          controller.play();
-          setPlayingPlaylist(playlistIndex);
-          setPlayingTrack(-1);
-          setIsPaused(false);
-        } catch {}
-      };
-      window.setTimeout(tryPlaylist,120);
-      return;
-    }
+
+    if (!playlist.tracks.length) return;
+
     const safe = ((trackIndex % playlist.tracks.length) + playlist.tracks.length) % playlist.tracks.length;
     const track = playlist.tracks[safe];
+    setSelectedTrackIndex(safe);
     pendingRef.current = { playlistIndex,trackIndex:safe,uri:track.uri };
+
     ensureController();
-    if (!executePending()) window.setTimeout(executePending,220);
+    if (!executePending()) window.setTimeout(() => executePending(),120);
   };
 
   const toggle = () => {
     const controller = controllerRef.current;
     if (controller && playingUri) {
-      try { controller.togglePlay(); return; } catch {}
+      try {
+        controller.togglePlay();
+        return;
+      } catch {}
     }
-    const playlistIndex = playingPlaylist >= 0 ? playingPlaylist : selectedIndex;
-    const trackIndex = playingTrack >= 0 ? playingTrack : 0;
-    playTrack(playlistIndex,trackIndex);
+    const playlistIndex = selectedIndex;
+    playTrack(playlistIndex,selectedTrackIndex);
   };
 
   const step = (delta:number) => {
     const playlistIndex = playingPlaylist >= 0 ? playingPlaylist : selectedIndex;
-    const playlist = playlists[playlistIndex];
+    const playlist = playlistsRef.current[playlistIndex];
     if (!playlist?.tracks.length) return;
-    const base = playingTrack >= 0 ? playingTrack : 0;
+    const base = playingTrack >= 0 ? playingTrack : selectedTrackIndex;
     playTrack(playlistIndex,base + delta);
   };
 
   const setSelectedIndex = (index:number) => {
-    const safe = ((index % playlists.length) + playlists.length) % playlists.length;
+    const safe = ((index % playlistsRef.current.length) + playlistsRef.current.length) % playlistsRef.current.length;
     setSelectedIndexState(safe);
+    setSelectedTrackIndex(0);
+    setPosition(0);
+    setDuration(0);
   };
 
-  const currentTrack = useMemo(() => {
+  const playingTrackData = useMemo(() => {
     if (!playingUri) return null;
     return findTrack(playingUri)?.track || null;
   }, [playingUri,playlists]);
 
-  const currentPlaylist = playingPlaylist >= 0 ? playlists[playingPlaylist] : playlists[selectedIndex] || null;
+  const selectedTrack = playlists[selectedIndex]?.tracks[selectedTrackIndex] || playlists[selectedIndex]?.tracks[0] || null;
+  const currentTrack = playingTrackData || selectedTrack;
+  const currentPlaylist = playingPlaylist >= 0 && playingTrackData
+    ? playlists[playingPlaylist]
+    : playlists[selectedIndex] || null;
+
+  useEffect(() => {
+    let active = true;
+    const fallback = currentPlaylist?.thumbnail_url || "";
+    const url = currentTrack?.uri ? trackUrl(currentTrack.uri) : "";
+    if (!url) {
+      setArtworkUrl(fallback);
+      return;
+    }
+    fetch("https://open.spotify.com/oembed?url=" + encodeURIComponent(url))
+      .then(r => r.ok ? r.json() : Promise.reject())
+      .then(data => {
+        if (active) setArtworkUrl(data.thumbnail_url || fallback);
+      })
+      .catch(() => {
+        if (active) setArtworkUrl(fallback);
+      });
+    return () => { active = false; };
+  }, [currentTrack?.uri,currentPlaylist?.thumbnail_url]);
 
   const value:MusicContextValue = {
     playlists,
     selectedIndex,
+    selectedTrack,
     setSelectedIndex,
     currentTrack,
     currentPlaylist,
+    artworkUrl,
     isPaused,
     position,
     duration,

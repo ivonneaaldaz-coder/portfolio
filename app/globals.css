@@ -9083,3 +9083,156 @@ html.intro-seen #site-intro{display:none}
   .portfolio-music-controls .portfolio-music-play{width:38px;height:38px}
   .portfolio-music-progress{grid-column:1 / -1}
 }
+
+
+/* 2026-10-09 music playback correction + teaching rhythm */
+.about-teaching-list .about-exhibition-row{
+  min-height:84px!important;
+  padding:20px 0 22px!important;
+  align-items:start!important;
+}
+.about-teaching-list .about-exhibition-row h3{
+  margin:0 0 5px!important;
+  font-size:18px!important;
+  line-height:1.2!important;
+  font-weight:500!important;
+}
+.about-teaching-list .teaching-school{
+  margin:0!important;
+  color:var(--muted)!important;
+  font-size:10px!important;
+  line-height:1.35!important;
+  letter-spacing:.08em!important;
+  text-transform:uppercase!important;
+  font-style:normal!important;
+}
+.about-teaching-list .teaching-course{
+  margin:8px 0 0!important;
+  color:var(--muted)!important;
+  font-size:11px!important;
+  line-height:1.4!important;
+  letter-spacing:normal!important;
+  text-transform:none!important;
+  font-style:italic!important;
+}
+.about-teaching-list .about-exhibition-row>span{
+  padding-top:4px!important;
+  color:var(--muted)!important;
+  font-size:10px!important;
+  letter-spacing:.08em!important;
+  text-transform:uppercase!important;
+}
+@media(max-width:900px){
+  .about-teaching-list .about-exhibition-row{
+    min-height:92px!important;
+    padding:20px 0 22px!important;
+  }
+  .about-teaching-list .about-exhibition-row h3{
+    font-size:17px!important;
+  }
+}
+
+.portfolio-spotify-controller{
+  position:fixed!important;
+  width:320px!important;
+  height:80px!important;
+  right:0!important;
+  bottom:-96px!important;
+  opacity:.01!important;
+  pointer-events:none!important;
+  overflow:hidden!important;
+  z-index:1!important;
+}
+.portfolio-spotify-controller iframe{
+  display:block!important;
+  width:320px!important;
+  height:80px!important;
+  border:0!important;
+}
+
+.global-music{
+  gap:3px!important;
+  padding:4px!important;
+}
+.global-music-cover{
+  width:34px;
+  height:34px;
+  overflow:hidden;
+  display:block;
+  flex:0 0 auto;
+  background:var(--surface-soft);
+  border-right:1px solid var(--line);
+  margin-right:2px;
+}
+.global-music-cover img{
+  display:block;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+.global-music-cover span{
+  display:block;
+  width:100%;
+  height:100%;
+  background:var(--surface-soft);
+}
+.global-music-track{
+  max-width:300px!important;
+  font-size:10px!important;
+}
+@media(max-width:900px){
+  .global-music-cover{
+    width:34px;
+    height:34px;
+  }
+}
+
+.portfolio-music-player-wrap{
+  display:flex;
+  justify-content:center;
+  width:100%;
+  margin:2px 0 34px;
+}
+.portfolio-music-player{
+  width:min(760px,100%)!important;
+  grid-template-columns:92px minmax(0,1fr) auto!important;
+  gap:20px!important;
+  padding:22px 0!important;
+  margin:0!important;
+}
+.portfolio-music-cover{
+  width:92px!important;
+}
+.portfolio-music-copy h3{
+  font-size:24px!important;
+  white-space:normal!important;
+}
+.portfolio-music-copy p{
+  font-size:12px!important;
+}
+.portfolio-music-progress{
+  grid-column:2 / -1!important;
+}
+.playlist-card-button .playlist-select p{
+  margin:4px 0 0;
+  color:var(--muted);
+  font-size:10px;
+  line-height:1.35;
+}
+@media(max-width:700px){
+  .portfolio-music-player{
+    width:min(520px,100%)!important;
+    grid-template-columns:64px minmax(0,1fr) auto!important;
+    gap:12px!important;
+    padding:18px 0!important;
+  }
+  .portfolio-music-cover{
+    width:64px!important;
+  }
+  .portfolio-music-copy h3{
+    font-size:18px!important;
+  }
+  .portfolio-music-progress{
+    grid-column:1 / -1!important;
+  }
+}
