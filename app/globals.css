@@ -8727,3 +8727,129 @@ html.intro-seen #site-intro{display:none}
     white-space:normal!important;
   }
 }
+
+
+/* 2026-10-09 unified production title + editorial refinement */
+@media(min-width:901px){
+  .collection-intro h1,
+  .case-study-template .case-hero h1,
+  .case-study-template .case-copy h2,
+  .project-detail-hero h1,
+  .experiment-detail-hero h1,
+  .experiment-detail .section-heading .section-title,
+  .experiment-more .section-title,
+  .lab-explore .section-title,
+  .moodboard-app-intro h1,
+  .art-intro h1,
+  .travel-intro h1,
+  .about-hero h1,
+  .about-copy h1,
+  .page-intro h1{
+    font-family:var(--display)!important;
+    font-size:52px!important;
+    line-height:.95!important;
+    letter-spacing:-.045em!important;
+    font-weight:400!important;
+  }
+}
+
+@media(max-width:900px){
+  .collection-intro h1,
+  .case-study-template .case-hero h1,
+  .case-study-template .case-copy h2,
+  .project-detail-hero h1,
+  .experiment-detail-hero h1,
+  .experiment-detail .section-heading .section-title,
+  .experiment-more .section-title,
+  .lab-explore .section-title,
+  .moodboard-app-intro h1,
+  .art-intro h1,
+  .travel-intro h1,
+  .about-hero h1,
+  .about-copy h1,
+  .page-intro h1{
+    font-family:var(--display)!important;
+    font-size:30px!important;
+    line-height:1!important;
+    letter-spacing:-.04em!important;
+    font-weight:400!important;
+  }
+
+  .overview-page .overview-experiment-grid{
+    row-gap:68px!important;
+  }
+}
+
+/* Visual References mobile composition: tighter angel crop + lower circle */
+@media(max-width:900px){
+  .overview-visual-world-item.item-1 img{
+    object-fit:cover!important;
+    object-position:center bottom!important;
+    transform:scale(1.62)!important;
+    transform-origin:center bottom!important;
+  }
+  .overview-visual-world-item.item-1:hover img{
+    transform:scale(1.64)!important;
+  }
+  .overview-visual-world-item.item-2 img{
+    object-fit:cover!important;
+    object-position:center 64%!important;
+    transform:scale(1.12)!important;
+    transform-origin:center center!important;
+  }
+}
+
+/* About: one editorial portrait, cleaner teaching hierarchy */
+.about-portrait-single{
+  aspect-ratio:4/5!important;
+  overflow:hidden!important;
+}
+.about-portrait-single img{
+  width:100%!important;
+  height:100%!important;
+  object-fit:cover!important;
+  object-position:center 28%!important;
+  display:block!important;
+  opacity:1!important;
+  filter:none!important;
+  transform:none!important;
+}
+.about-teaching-list .about-exhibition-row{
+  align-items:start!important;
+}
+.about-teaching-list .teaching-school{
+  margin:5px 0 0!important;
+  color:var(--ink)!important;
+  font-size:12px!important;
+  line-height:1.35!important;
+  letter-spacing:.02em!important;
+  text-transform:none!important;
+}
+.about-teaching-list .teaching-course{
+  margin:3px 0 0!important;
+  color:var(--muted)!important;
+  font-size:11px!important;
+  line-height:1.4!important;
+  letter-spacing:.01em!important;
+  text-transform:none!important;
+  font-style:italic!important;
+}
+@media(max-width:900px){
+  .about-hero{
+    grid-template-columns:1fr!important;
+    gap:28px!important;
+  }
+  .about-portrait-single{
+    width:min(100%,520px)!important;
+  }
+  .about-teaching-list .about-exhibition-row{
+    grid-template-columns:1fr!important;
+    gap:9px!important;
+  }
+  .about-teaching-list .about-exhibition-row>span{
+    justify-self:start!important;
+    font-size:10px!important;
+    letter-spacing:.06em!important;
+    text-transform:uppercase!important;
+  }
+}

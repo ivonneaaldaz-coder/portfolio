@@ -115,13 +115,12 @@ export default async function AboutPage() {
   return (
     <section id="about-top" className="page section-pad about-page">
       <div className="about-hero">
-        <div className="about-portrait about-portrait-hover">
-          <img className="about-portrait-bw" src={driveImageUrl("1UJ7HG3gZU2zD5Y_kdHwCXLGjm1llx_Xc")} alt="Ivonne Aldaz" />
-          <img className="about-portrait-color" src={driveImageUrl("1AlOciizm_YrgZmFTGCeUZ4ZORuFGjaZA")} alt="" aria-hidden="true" />
+        <div className="about-portrait about-portrait-single">
+          <img src={driveImageUrl("1UJ7HG3gZU2zD5Y_kdHwCXLGjm1llx_Xc")} alt="Ivonne Aldaz" />
         </div>
         <div className="about-copy">
           <h1>Strategist, artist, builder, educator.</h1>
-          <p>My work moves between brand strategy, technology, systems, and visual art — from building digital tools and brand worlds to teaching, making, and independent experiments.</p>
+          <p>I build brands, ventures, systems, and ideas with scale in mind — across reach, impact, and revenue.</p>
           <div className="about-links">
             <Link href="/work">Selected work →</Link>
             <Link href="/art">Art practice →</Link>
@@ -186,14 +185,16 @@ export default async function AboutPage() {
           <div className="about-exhibition-row">
             <div>
               <h3>Adjunct Professor of Marketing</h3>
-              <p>St. Mary’s University · Principles of Marketing</p>
+              <p className="teaching-school">St. Mary’s University</p>
+              <p className="teaching-course">Principles of Marketing</p>
             </div>
             <span>Spring 2027</span>
           </div>
           <div className="about-exhibition-row">
             <div>
               <h3>Lecturer in Marketing</h3>
-              <p>University of the Incarnate Word · Consumer Behavior + International Entrepreneurship</p>
+              <p className="teaching-school">University of the Incarnate Word</p>
+              <p className="teaching-course">Consumer Behavior · International Entrepreneurship</p>
             </div>
             <span>Spring 2027</span>
           </div>

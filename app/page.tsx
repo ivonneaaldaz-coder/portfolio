@@ -119,14 +119,14 @@ export default async function OverviewPage() {
       <section className="hero-compact section-pad" id="overview">
         <div className="hero-row">
           <h1><span style={{display:"block"}}>I make things —</span><span style={{display:"block"}}>art, brands, experiences.</span></h1>
-          <div className="hero-introduction"><p>I grew a B2B audience from 7K to 50K+ and led consumer research for Purina and ARM & HAMMER. Now&nbsp;I run Whitespace and a few creative ventures, <span className="hero-mobile-break">and I paint and teach.</span></p><a className="hero-contact" href="mailto:hello@ivonnealdaz.com">Get in touch →<span>hello@ivonnealdaz.com</span></a></div>
+          <div className="hero-introduction"><p>I’ve built brands and audiences and led insights and strategy for companies including Nestlé, Hero Cosmetics, and ARM &amp; HAMMER. Now I run Whitespace, teach across marketing and entrepreneurship, and make art.</p><a className="hero-contact" href="mailto:hello@ivonnealdaz.com">Get in touch →<span>hello@ivonnealdaz.com</span></a></div>
         </div>
       </section>
 
       {visualWorldPins.length ? (
         <section className="overview-visual-world section-pad overview-anchor" id="visual-world">
           <div className="overview-visual-world-head">
-            <h2 className="section-title small-title">Visual World</h2>
+            <h2 className="section-title small-title">Visual References</h2>
           </div>
 
           <div className="overview-visual-world-grid">
