@@ -113,6 +113,16 @@ export function MusicProvider({ children }:{ children:React.ReactNode }) {
     try {
       controller.loadEntity(pending.uri);
       controller.play();
+
+      // Mirror the Lab player: optimistically sync immediately so mobile
+      // gestures are not lost while Spotify catches up with playback events.
+      setPlayingUri(pending.uri);
+      setPlayingPlaylist(pending.playlistIndex);
+      setPlayingTrack(pending.trackIndex);
+      setSelectedIndexState(pending.playlistIndex);
+      setSelectedTrackIndex(pending.trackIndex);
+      setIsPaused(false);
+      pendingRef.current = null;
       return true;
     } catch {
       return false;
@@ -169,6 +179,21 @@ export function MusicProvider({ children }:{ children:React.ReactNode }) {
 
   const ensureController = () => {
     if (controllerRef.current) return;
+
+    const host = document.getElementById("portfolio-spotify-controller");
+    if (host && !host.dataset.permissionObserver) {
+      const applyPermissions = () => {
+        const iframe = host.querySelector("iframe");
+        if (!iframe) return;
+        iframe.setAttribute("allow","autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture");
+        iframe.setAttribute("allowfullscreen","");
+      };
+      const observer = new MutationObserver(applyPermissions);
+      observer.observe(host,{ childList:true,subtree:true });
+      host.dataset.permissionObserver = "true";
+      applyPermissions();
+    }
+
     if (window.__portfolioSpotifyAPI) {
       createController(window.__portfolioSpotifyAPI);
       return;
@@ -208,7 +233,7 @@ export function MusicProvider({ children }:{ children:React.ReactNode }) {
     pendingRef.current = { playlistIndex,trackIndex:safe,uri:track.uri };
 
     ensureController();
-    if (!executePending()) window.setTimeout(() => executePending(),120);
+    if (!executePending()) window.setTimeout(() => executePending(),250);
   };
 
   const toggle = () => {

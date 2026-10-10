@@ -6,21 +6,23 @@ import { useMusic } from "@/components/MusicProvider";
 export default function GlobalMusicControls() {
   const music = useMusic();
   const track = music.currentTrack;
-  const label = track
+  const trackLabel = track
     ? [track.artist,track.title].filter(Boolean).join(" — ")
-    : "Play music";
+    : "Music";
 
   return (
     <div className="global-music" aria-label="Music controls">
-      <Link href="/music" className="global-music-cover" aria-label="Open music">
-        {music.artworkUrl ? <img src={music.artworkUrl} alt="" /> : <span />}
-      </Link>
-      <button type="button" onClick={music.previous} aria-label="Previous song">←</button>
-      <button type="button" onClick={music.toggle} aria-label={music.isPaused ? "Play music" : "Pause music"}>
-        {music.isPaused ? "▶" : "Ⅱ"}
+      <Link href="/music" className="global-music-label" aria-label="Open music page">Music</Link>
+      <button
+        type="button"
+        className="global-music-toggle"
+        onClick={music.toggle}
+        aria-label={music.isPaused ? "Play music" : "Pause music"}
+        title={music.isPaused ? "Play music" : "Pause music"}
+      >
+        <span aria-hidden="true">{music.isPaused ? "Play" : "Pause"}</span>
       </button>
-      <button type="button" onClick={music.next} aria-label="Next song">→</button>
-      <Link href="/music" className="global-music-track">{label}</Link>
+      <Link href="/music" className="global-music-track" title={trackLabel}>{trackLabel}</Link>
     </div>
   );
 }
