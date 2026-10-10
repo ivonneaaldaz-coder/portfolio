@@ -8434,8 +8434,12 @@ html.intro-seen #site-intro{display:none}
   display:inline-block;
 }
 @media(min-width:901px){
+  .overview-visual-world-grid{
+    grid-template-rows:300px 300px!important;
+  }
   .overview-visual-world-item img{
-    object-fit:contain!important;
+    object-fit:cover!important;
+    object-position:center!important;
   }
 }
 @media(max-width:900px){
