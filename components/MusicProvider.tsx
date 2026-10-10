@@ -217,8 +217,8 @@ export function MusicProvider({ children }:{ children:React.ReactNode }) {
 
     const host = document.getElementById("portfolio-spotify-controller");
     if (host && !host.dataset.permissionObserver) {
-      const observer = new MutationObserver(hideNativeSpotifyEmbed);
-      observer.observe(host,{ childList:true,subtree:true,attributes:true });
+      const observer = new MutationObserver(() => { hideNativeSpotifyEmbed(); });
+      observer.observe(host,{ childList:true,subtree:true });
       host.dataset.permissionObserver = "true";
       hideNativeSpotifyEmbed();
     }
@@ -343,7 +343,7 @@ export function MusicProvider({ children }:{ children:React.ReactNode }) {
   return (
     <MusicContext.Provider value={value}>
       {children}
-      <div id="portfolio-spotify-controller" className="portfolio-spotify-controller" aria-hidden="true" />
+      <div id="portfolio-spotify-controller" className="portfolio-spotify-controller" aria-hidden="true" style={{ position:"fixed", left:"-10000px", top:"-10000px", width:320, height:80, opacity:0, pointerEvents:"none", overflow:"hidden", zIndex:-9999 }} />
     </MusicContext.Provider>
   );
 }
