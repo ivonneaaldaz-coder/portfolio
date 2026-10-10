@@ -8698,3 +8698,45 @@ html.intro-seen #site-intro{display:none}
     font-weight:400!important;
   }
 }
+
+
+/* 2026-10-09 hard override: overview section titles + angel */
+.overview-visual-world-item.item-1{
+  background:transparent!important;
+}
+.overview-visual-world-item.item-1 img{
+  object-fit:cover!important;
+  object-position:center bottom!important;
+  transform:scale(1.38)!important;
+  transform-origin:center bottom!important;
+  mix-blend-mode:screen!important;
+}
+.overview-visual-world-item.item-1:hover img{
+  transform:scale(1.40)!important;
+}
+
+@media(min-width:901px){
+  .overview-page .section-title,
+  .overview-page .section-title.small-title{
+    font-family:var(--display)!important;
+    font-size:52px!important;
+    line-height:.95!important;
+    letter-spacing:-.045em!important;
+    font-weight:400!important;
+  }
+}
+
+@media(max-width:900px){
+  .overview-page .section-title,
+  .overview-page .section-title.small-title,
+  .overview-page .section-heading .section-title,
+  .overview-writing-head .section-title,
+  .overview-visual-world-head .section-title{
+    font-family:var(--display)!important;
+    font-size:30px!important;
+    line-height:1!important;
+    letter-spacing:-.04em!important;
+    font-weight:400!important;
+    white-space:normal!important;
+  }
+}
