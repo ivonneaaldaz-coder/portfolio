@@ -30,7 +30,7 @@ export default function SpotifyPlaylists() {
           <div className="portfolio-music-controls">
             <button type="button" onClick={music.previous} aria-label="Previous song">←</button>
             <button type="button" className="portfolio-music-play" onClick={music.toggle} aria-label={music.isPaused ? "Play" : "Pause"}>
-              <span aria-hidden="true">{music.isPaused ? "▶" : "Ⅱ"}</span>
+              <span aria-hidden="true">{music.isPaused ? "Play" : "Pause"}</span>
             </button>
             <button type="button" onClick={music.next} aria-label="Next song">→</button>
           </div>
