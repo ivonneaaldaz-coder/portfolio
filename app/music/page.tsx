@@ -4,6 +4,7 @@ export const metadata = pageMetadata("Music", "Playlists, records, and current l
 
 import Link from "next/link";
 import SpotifyPlaylists from "@/components/SpotifyPlaylists";
+import styles from "@/components/MusicRoom.module.css";
 
 const vinyl = [
   { title:"Dark Side of the Moon", artist:"Pink Floyd", image:"/music/dark-side-of-the-moon.webp", href:"https://amzn.to/47b4A72" },
@@ -19,37 +20,44 @@ const vinyl = [
 
 export default function MusicPage() {
   return (
-    <section className="page section-pad music-page">
-      <header className="collection-intro">
+    <div className={styles.room}>
+      <header className={styles.intro}>
         <div>
-          <p className="editorial-kicker">The personal collection / 02</p><h1>Music <em>+ Records.</em></h1>
-          <p>Playlists, records, and whatever I’m listening to lately.</p>
+          <p className={styles.mono}>The personal collection / 02</p>
+          <h1>Music for<br /><em>the everyday.</em></h1>
         </div>
-        <Link href="/#library">← Back to Library</Link>
+        <div className={styles.introAside}>
+          <p>Playlists for the background.<br />Records worth turning over.</p>
+          <Link href="/#library">← Back to Library</Link>
+        </div>
       </header>
-
-      <section className="music-section">
-        <div className="section-heading">
-          <h2 className="section-title small-title">Playlists</h2>
-          <a href="https://open.spotify.com/user/ivonnealdaz" target="_blank" rel="noreferrer">Spotify profile ↗︎</a>
-        </div>
+      <nav className={styles.collectionNav} aria-label="Music collections">
+        <a href="#playlists"><span>01</span> Spotify playlists <span aria-hidden="true">↓</span></a>
+        <a href="#vinyl"><span>02</span> Vinyl collection <span aria-hidden="true">↓</span></a>
+        <span className={styles.navNote}>Digital + analog</span>
+      </nav>
+      <section className={styles.playlistsSection} id="playlists" aria-labelledby="playlists-title">
+        <div className={styles.sectionHeading}><div><p className={styles.mono}>01 / Press play</p><h2 id="playlists-title">My playlists.</h2></div><p>Five playlists. Pick your mood.</p></div>
         <SpotifyPlaylists />
       </section>
-
-      <section className="music-section record-section">
-        <div className="section-heading"><h2 className="section-title small-title">Favorite records</h2></div>
-        <div className="vinyl-grid">
-          {vinyl.map((item) => (
-            <a className="vinyl-card" href={item.href} target="_blank" rel="noreferrer" key={item.title}>
-              <div className="vinyl-cover"><span className="editorial-vinyl-disc" aria-hidden="true"/><img src={item.image} alt="" /></div>
-              <h3>{item.title}</h3>
-              <p>{item.artist} <span>↗︎</span></p>
+      <section className={styles.recordsSection} id="vinyl" aria-labelledby="vinyl-title">
+        <div className={styles.sectionHeading}><div><p className={styles.mono}>02 / The record crate</p><h2 id="vinyl-title">On vinyl.</h2></div><p>A collection to come back to.<br />Browse the sleeves. Find your next record.</p></div>
+        <p className={styles.disclosure}>Some record links are affiliate links. I may earn a commission if you buy through them, at no extra cost to you.</p>
+        <div className={styles.recordGrid}>
+          {vinyl.map((item,index) => (
+            <a className={styles.recordCard} href={item.href} target="_blank" rel="sponsored noreferrer" key={item.title} aria-label={`${item.title} by ${item.artist} — view vinyl on Amazon (opens in a new tab)`}>
+              <div className={styles.recordStage}>
+                <span className={styles.recordNumber}>{String(index + 1).padStart(2,"0")} / LP</span>
+                <span className={styles.disc} aria-hidden="true"><span><img src={item.image} alt="" loading="lazy" /></span></span>
+                <div className={styles.sleeve}><img src={item.image} alt="" loading="lazy" /></div>
+              </div>
+              <div className={styles.recordInfo}><p>{item.artist}</p><h3>{item.title}</h3><span className={styles.purchaseLink}>View vinyl on Amazon <span aria-hidden="true">↗</span></span></div>
             </a>
           ))}
         </div>
       </section>
-
-      <nav className="related-paths" aria-label="Explore next"><Link href="/books">Books + Quotes →</Link><Link href="/library">Library →</Link></nav>
-    </section>
+      <aside className={styles.labNote}><span className={styles.mono}>More ways to play</span><p>There’s an experimental side, too.</p><a href="https://lab.ivonnealdaz.com" target="_blank" rel="noreferrer">Explore my Lab ↗</a></aside>
+      <nav className="related-paths" aria-label="Explore next"><Link href="/books">Books + Quotes →</Link><Link href="/#library">Back to Library →</Link></nav>
+    </div>
   );
 }
