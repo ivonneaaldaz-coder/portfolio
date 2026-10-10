@@ -8547,3 +8547,43 @@ html.intro-seen #site-intro{display:none}
     font-weight:500!important;
   }
 }
+
+
+/* 2026-10-09 overview title + experiment spacing correction */
+@media(min-width:901px){
+  .overview-page .section-title{
+    font-size:clamp(52px,4vw,66px)!important;
+    line-height:.95!important;
+    letter-spacing:-.055em!important;
+    font-weight:500!important;
+  }
+}
+
+@media(max-width:900px){
+  .overview-page .section-title{
+    font-size:min(42px,8.6vw)!important;
+    line-height:.95!important;
+    letter-spacing:-.055em!important;
+    font-weight:500!important;
+  }
+
+  .overview-page .section-heading .section-title,
+  .overview-writing-head .section-title,
+  .overview-visual-world-head .section-title{
+    white-space:nowrap!important;
+  }
+
+  .overview-experiment-grid{
+    row-gap:72px!important;
+  }
+}
+
+@media(max-width:560px){
+  .overview-page .section-title{
+    font-size:min(42px,8.6vw)!important;
+  }
+
+  .overview-experiment-grid{
+    row-gap:78px!important;
+  }
+}
