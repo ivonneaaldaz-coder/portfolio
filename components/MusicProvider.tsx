@@ -129,35 +129,15 @@ export function MusicProvider({ children }:{ children:React.ReactNode }) {
     }
   };
 
+  // The Spotify SDK owns its iframe. Keep it mounted for playback, but
+  // remove it from visual layout without continuously rewriting its styles.
   const hideNativeSpotifyEmbed = () => {
     const host = document.getElementById("portfolio-spotify-controller");
     if (!host) return;
-
-    const lockOffscreen = (node:HTMLElement) => {
-      node.style.setProperty("position","fixed","important");
-      node.style.setProperty("left","-10000px","important");
-      node.style.setProperty("top","-10000px","important");
-      node.style.setProperty("right","auto","important");
-      node.style.setProperty("bottom","auto","important");
-      node.style.setProperty("width","320px","important");
-      node.style.setProperty("height","80px","important");
-      node.style.setProperty("max-width","320px","important");
-      node.style.setProperty("max-height","80px","important");
-      node.style.setProperty("opacity","0","important");
-      node.style.setProperty("pointer-events","none","important");
-      node.style.setProperty("overflow","hidden","important");
-      node.style.setProperty("z-index","-9999","important");
-    };
-
-    lockOffscreen(host);
-    const iframe = host.querySelector("iframe");
-    if (iframe) {
-      lockOffscreen(iframe as HTMLElement);
+    host.querySelectorAll("iframe").forEach((iframe) => {
       iframe.setAttribute("aria-hidden","true");
       iframe.setAttribute("tabindex","-1");
-      iframe.setAttribute("allow","autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture");
-      iframe.setAttribute("allowfullscreen","");
-    }
+    });
   };
 
   const createController = (IFrameAPI:any) => {
@@ -214,14 +194,6 @@ export function MusicProvider({ children }:{ children:React.ReactNode }) {
 
   const ensureController = () => {
     if (controllerRef.current) return;
-
-    const host = document.getElementById("portfolio-spotify-controller");
-    if (host && !host.dataset.permissionObserver) {
-      const observer = new MutationObserver(() => { hideNativeSpotifyEmbed(); });
-      observer.observe(host,{ childList:true,subtree:true });
-      host.dataset.permissionObserver = "true";
-      hideNativeSpotifyEmbed();
-    }
 
     if (window.__portfolioSpotifyAPI) {
       createController(window.__portfolioSpotifyAPI);
@@ -343,7 +315,7 @@ export function MusicProvider({ children }:{ children:React.ReactNode }) {
   return (
     <MusicContext.Provider value={value}>
       {children}
-      <div id="portfolio-spotify-controller" className="portfolio-spotify-controller" aria-hidden="true" style={{ position:"fixed", left:"-10000px", top:"-10000px", width:320, height:80, opacity:0, pointerEvents:"none", overflow:"hidden", zIndex:-9999 }} />
+      <div id="portfolio-spotify-controller" className="portfolio-spotify-controller" aria-hidden="true" />
     </MusicContext.Provider>
   );
 }
