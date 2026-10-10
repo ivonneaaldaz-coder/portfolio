@@ -79,6 +79,9 @@ export function MusicProvider({ children }:{ children:React.ReactNode }) {
   const hostRef = useRef<HTMLDivElement>(null);
   const controllerRef = useRef<SpotifyController | null>(null);
   const readyRef = useRef(false);
+  const [controllerReady, setControllerReady] = useState(false);
+  const loadedUriRef = useRef("");
+  const earlyPlayRef = useRef<{playlistIndex:number;trackIndex:number} | null>(null);
   const initializeRef = useRef<() => void>(() => {});
   const requestedRef = useRef<{playlistIndex:number;trackIndex:number;uri:string} | null>(null);
   const pendingRef = useRef<{playlistIndex:number;trackIndex:number;uri:string}|null>(null);
@@ -115,7 +118,10 @@ export function MusicProvider({ children }:{ children:React.ReactNode }) {
     try {
       // The SDK queues play during entity loading. Do not duplicate that queue
       // with timers, or mark playback active before the iframe reports it.
-      controller.loadEntity(pending.uri);
+      if (loadedUriRef.current !== pending.uri) {
+        controller.loadEntity(pending.uri);
+        loadedUriRef.current = pending.uri;
+      }
       controller.play();
       requestedRef.current = pending;
       pendingRef.current = null;
@@ -187,6 +193,7 @@ export function MusicProvider({ children }:{ children:React.ReactNode }) {
           controller.addListener("ready", () => {
             if (disposed) return;
             readyRef.current = true;
+            setControllerReady(true);
             executePending();
           });
           controller.addListener("playback_started", onStarted);
@@ -203,6 +210,7 @@ export function MusicProvider({ children }:{ children:React.ReactNode }) {
       disposed = true;
       initializeRef.current = () => {};
       readyRef.current = false;
+      loadedUriRef.current = "";
       controllerRef.current = null;
       ownedController?.destroy();
       host.replaceChildren();
@@ -214,7 +222,11 @@ export function MusicProvider({ children }:{ children:React.ReactNode }) {
     if (!playlist) return;
     setSelectedIndexState(playlistIndex);
 
-    if (!playlist.tracks.length) return;
+    if (!playlist.tracks.length) {
+      earlyPlayRef.current = { playlistIndex, trackIndex };
+      return;
+    }
+    earlyPlayRef.current = null;
 
     const safe = ((trackIndex % playlist.tracks.length) + playlist.tracks.length) % playlist.tracks.length;
     const track = playlist.tracks[safe];
@@ -224,6 +236,29 @@ export function MusicProvider({ children }:{ children:React.ReactNode }) {
     initializeRef.current();
     executePending();
   };
+
+  useEffect(() => {
+    const early = earlyPlayRef.current;
+    const playlistIndex = early?.playlistIndex ?? selectedIndex;
+    const trackIndex = early?.trackIndex ?? selectedTrackIndex;
+    const tracks = playlists[playlistIndex]?.tracks;
+    if (!tracks?.length) return;
+    const safe = ((trackIndex % tracks.length) + tracks.length) % tracks.length;
+    const track = tracks[safe];
+    if (early) {
+      earlyPlayRef.current = null;
+      pendingRef.current = { playlistIndex, trackIndex:safe, uri:track.uri };
+      executePending();
+    }
+    // Prepare the initial selection without playing. Loading an entity on the
+    // first tap queues Play behind iframe navigation and can lose mobile activation.
+    // Once a session has been requested, browsing must not interrupt that session.
+    const controller = controllerRef.current;
+    if (controllerReady && controller && !requestedRef.current && !pendingRef.current && loadedUriRef.current !== track.uri) {
+      controller.loadEntity(track.uri);
+      loadedUriRef.current = track.uri;
+    }
+  }, [playlists, selectedIndex, selectedTrackIndex, controllerReady, executePending]);
 
   const toggle = () => {
     const controller = controllerRef.current;

@@ -160,3 +160,17 @@ test('a track shared by two playlists keeps next/previous in the requested playl
     assert.deepEqual(c.calls.at(-2), ['load','spotify:track:1-2']);
   } finally { await h.cleanup(); }
 });
+
+test('first tap plays the prepared track without navigating the iframe', async () => {
+  const h = await setup();
+  try {
+    const c = h.controllers[0];
+    await h.action(() => c.emit('ready', {}));
+    assert.deepEqual(c.calls, [['load','spotify:track:0-0']]);
+    assert.equal(h.music.isPaused, true, 'Preparation must never autoplay');
+    c.calls.length = 0;
+    await h.action(() => h.music.toggle());
+    assert.deepEqual(c.calls, [['play']], 'First gesture must not reload the entity');
+    assert.equal(h.music.isPaused, true, 'Still wait for Spotify confirmation');
+  } finally { await h.cleanup(); }
+});
