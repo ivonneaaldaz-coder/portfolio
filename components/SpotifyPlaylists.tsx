@@ -1,54 +1,58 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useMusic } from "@/components/MusicProvider";
 
-const playlistUrls = [
-  "https://open.spotify.com/playlist/3MJORK5D5v7d5cSG1Cte6a",
-  "https://open.spotify.com/playlist/3G8AYHiczaJoHhcVjzh9TR",
-  "https://open.spotify.com/playlist/4szZdGqhnAnsFBMqkYtug9",
-  "https://open.spotify.com/playlist/6srDkgcJIEo3QiOMvlRr1q",
-  "https://open.spotify.com/playlist/3J1lx2Ydr5NrGEB5Eq6NJe",
-];
-
-type SpotifyMeta = { title?: string; thumbnail_url?: string };
+function formatTime(ms:number) {
+  const total = Math.max(0,Math.floor((ms || 0)/1000));
+  return `${Math.floor(total/60)}:${String(total%60).padStart(2,"0")}`;
+}
 
 export default function SpotifyPlaylists() {
-  const [meta,setMeta] = useState<Record<string,SpotifyMeta>>({});
-
-  useEffect(() => {
-    let active = true;
-    Promise.all(
-      playlistUrls.map(async (url) => {
-        try {
-          const response = await fetch("https://open.spotify.com/oembed?url=" + encodeURIComponent(url));
-          if (!response.ok) return [url,{}] as const;
-          const data = await response.json();
-          return [url,data] as const;
-        } catch {
-          return [url,{}] as const;
-        }
-      })
-    ).then((items) => {
-      if (active) setMeta(Object.fromEntries(items));
-    });
-    return () => { active = false; };
-  }, []);
+  const music = useMusic();
+  const selected = music.playlists[music.selectedIndex];
+  const displayTrack = music.currentTrack;
+  const progress = music.duration ? Math.min(100,(music.position/music.duration)*100) : 0;
 
   return (
-    <div className="playlist-grid playlist-grid-live">
-      {playlistUrls.map((url,index) => {
-        const item = meta[url] || {};
-        const title = item.title?.replace(/\s*\|\s*Spotify.*$/i,"") || "Playlist " + String(index + 1).padStart(2,"0");
-        return (
-          <a className="playlist-card" href={url} target="_blank" rel="noreferrer" key={url}>
-            <div className="playlist-cover playlist-cover-live">
-              {item.thumbnail_url ? <img src={item.thumbnail_url} alt="" /> : <span className="playlist-loading" />}
+    <>
+      <div className="portfolio-music-player">
+        <div className="portfolio-music-cover">
+          {selected?.thumbnail_url ? <img src={selected.thumbnail_url} alt="" /> : null}
+        </div>
+        <div className="portfolio-music-copy">
+          <span>{displayTrack ? "NOW PLAYING" : "PLAYLIST"}</span>
+          <h3>{displayTrack?.title || selected?.title || "Choose a playlist"}</h3>
+          <p>{displayTrack?.artist || selected?.title || ""}</p>
+        </div>
+        <div className="portfolio-music-controls">
+          <button type="button" onClick={music.previous} aria-label="Previous song">←</button>
+          <button type="button" className="portfolio-music-play" onClick={music.toggle} aria-label={music.isPaused ? "Play" : "Pause"}>
+            {music.isPaused ? "▶" : "Ⅱ"}
+          </button>
+          <button type="button" onClick={music.next} aria-label="Next song">→</button>
+        </div>
+        <div className="portfolio-music-progress">
+          <div><span style={{width:`${progress}%`}} /></div>
+          <small>{formatTime(music.position)} / {music.duration ? formatTime(music.duration) : "--:--"}</small>
+        </div>
+      </div>
+
+      <div className="playlist-grid playlist-grid-live">
+        {music.playlists.map((item,index) => {
+          const active = index === music.selectedIndex;
+          return (
+            <div className={`playlist-card playlist-card-button${active ? " active" : ""}`} key={item.id}>
+              <button type="button" className="playlist-select" onClick={() => music.setSelectedIndex(index)} aria-pressed={active}>
+                <div className="playlist-cover playlist-cover-live">
+                  {item.thumbnail_url ? <img src={item.thumbnail_url} alt="" /> : <span className="playlist-loading" />}
+                </div>
+                <h3>{item.title || "Playlist " + String(index + 1).padStart(2,"0")}</h3>
+              </button>
+              <a href={item.url} target="_blank" rel="noreferrer">Open on Spotify ↗︎</a>
             </div>
-            <h3>{title}</h3>
-            <p>Open on Spotify ↗︎</p>
-          </a>
-        );
-      })}
-    </div>
+          );
+        })}
+      </div>
+    </>
   );
 }
