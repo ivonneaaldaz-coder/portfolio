@@ -8648,3 +8648,20 @@ html.intro-seen #site-intro{display:none}
     row-gap:88px!important;
   }
 }
+
+
+/* 2026-10-09 mobile overview title + angel crop correction */
+@media(max-width:560px){
+  .overview-page .section-title.small-title,
+  .overview-page .section-title{
+    font-size:34px!important;
+    line-height:.98!important;
+    letter-spacing:-.045em!important;
+  }
+
+  .overview-visual-world-item.item-1 img{
+    object-position:center bottom!important;
+    scale:1.22;
+    transform-origin:center bottom;
+  }
+}
