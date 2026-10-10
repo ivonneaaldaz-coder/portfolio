@@ -8547,3 +8547,9 @@ html.intro-seen #site-intro{display:none}
     font-weight:500!important;
   }
 }
+
+
+/* 2026-10-09 Visual World angel crop */
+.overview-visual-world-item.item-1 img{
+  object-position:50% 68%!important;
+}
