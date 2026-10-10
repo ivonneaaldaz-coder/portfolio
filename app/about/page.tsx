@@ -1,9 +1,10 @@
+import AboutEditorial from "@/components/AboutEditorial";
 import { pageMetadata } from "@/lib/metadata";
 
 export const metadata = pageMetadata("About", "Meet Ivonne Aldaz: strategist, artist, builder, and educator.", "/about");
 
 import Link from "next/link";
-import { driveImageUrl } from "@/lib/googleDrive";
+
 import { getGitHubContributions } from "@/lib/githubContributions";
 
 const experience = [
@@ -114,22 +115,7 @@ export default async function AboutPage() {
 
   return (
     <section id="about-top" className="page section-pad about-page">
-      <div className="about-hero">
-        <div className="about-portrait about-portrait-hover">
-          <img className="about-portrait-bw" src={driveImageUrl("1UJ7HG3gZU2zD5Y_kdHwCXLGjm1llx_Xc")} alt="Ivonne Aldaz" />
-          <img className="about-portrait-color" src={driveImageUrl("1AlOciizm_YrgZmFTGCeUZ4ZORuFGjaZA")} alt="" aria-hidden="true" />
-        </div>
-        <div className="about-copy">
-          <p className="editorial-kicker">About Ivonne</p><h1>The World Is<br/><em>My Studio.</em></h1><p className="editorial-roles">Strategist, artist, builder, educator.</p>
-          <p>My work moves between brand strategy, technology, systems, and visual art — from building digital tools and brand worlds to teaching, making, and independent experiments.</p>
-          <div className="about-links">
-            <Link href="/work">Selected work →</Link>
-            <Link href="/art">Art practice →</Link>
-            <a href="https://lab.ivonnealdaz.com" target="_blank" rel="noreferrer">The Lab ↗︎</a>
-            <Link href="/press">Press + speaking →</Link>
-          </div>
-        </div>
-      </div>
+      <AboutEditorial />
 
       <section className="about-section about-resume-section">
         <div className="about-resume-row">
@@ -320,22 +306,7 @@ export default async function AboutPage() {
         <div className="education-languages"><span>Languages</span><p>English · Spanish · Some French</p></div>
       </section>
 
-      <section className="about-section">
-        <details className="long-story about-disclosure">
-          <summary><span>Read the longer story</span><span aria-hidden="true">＋</span></summary>
-          <div className="long-story-copy">
-            <p className="long-story-lede">Life is about saying yes to the things that will make a better story.</p>
-            <p>For over a decade, I’ve been building brands and shaping how companies think, look, and communicate — from startups navigating pivots and acquisitions to work supporting global enterprises. All of it has been driven by the same obsession: what makes something resonate, what gives it a world, and what makes people feel something before they can explain why.</p>
-            <p>In marketing, everything moves quickly. I needed to make something that could outlive the next campaign, so I paint and work in ceramics — something I can’t undo with a keystroke.</p>
-            <p>Art residencies in France and Italy cracked something open in me. Every time I committed, the next thing revealed itself.</p>
-            <p>These days, I follow that curiosity wherever it goes. Sometimes that’s a painting. Sometimes it’s a ceramics workshop, a yoga practice, a brand, or a weird little thing I build on the internet.</p>
-            <p><strong>Whitespace</strong> is my strategy and creative studio. <strong>Make Space</strong> brings people together to make things with their hands. <strong>Good World Living</strong> is an ongoing exploration of remarkable places, thoughtfully made things, and what it means to live well.</p>
-            <p>Different expressions of the same curiosity.</p>
-            <p>I grew up on the border. Two languages, two worlds. A constant pull toward the other side.</p>
-            <p>Some of that shows up in the work.<br />All of it shows up here.</p>
-          </div>
-        </details>
-      </section>
+
     </section>
   );
 }

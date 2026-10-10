@@ -3,7 +3,7 @@ import { pageMetadata } from "@/lib/metadata";
 export const metadata = pageMetadata("Books + Quotes", "Books, passages, and ideas curated by Ivonne Aldaz.", "/books");
 
 import Link from "next/link";
-import LibraryWorld from "@/components/LibraryWorld";
+import Bookshelf from "@/components/Bookshelf";
 import { listDriveFolder } from "@/lib/googleDrive";
 
 const BOOKS_FOLDER = "1mp7-HM3jdj_Q0rp4ltW49dUhSIoLbySt";
@@ -18,11 +18,11 @@ export default async function BooksPage() {
       <header className="collection-intro">
         <div>
           <p className="editorial-kicker">The personal collection / 01</p><h1>Books <em>+ Quotes.</em></h1>
-          <p>Books, passages, and ideas I return to.</p>
+          <p>A small library of books and words I keep close.</p>
         </div>
         <Link href="/#library">← Back to Library</Link>
       </header>
-      <LibraryWorld driveBooks={files} />
+      <Bookshelf books={files} />
       <nav className="related-paths" aria-label="Explore next">
         <Link href="/visual-references">Visual References →</Link>
         <Link href="/music">Music →</Link>
