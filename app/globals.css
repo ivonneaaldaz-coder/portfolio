@@ -8700,20 +8700,7 @@ html.intro-seen #site-intro{display:none}
 }
 
 
-/* 2026-10-09 hard override: overview section titles + angel */
-.overview-visual-world-item.item-1{
-  background:transparent!important;
-}
-.overview-visual-world-item.item-1 img{
-  object-fit:cover!important;
-  object-position:center bottom!important;
-  transform:scale(1.38)!important;
-  transform-origin:center bottom!important;
-  mix-blend-mode:screen!important;
-}
-.overview-visual-world-item.item-1:hover img{
-  transform:scale(1.40)!important;
-}
+/* 2026-10-09 hard override: overview section titles */
 
 @media(min-width:901px){
   .overview-page .section-title,
