@@ -9770,3 +9770,41 @@ html.intro-seen #site-intro{display:none}
   pointer-events:none!important;
   z-index:-1!important;
 }
+
+/* Mobile-only: force text presentation for play/pause glyphs, not emoji. */
+@media(max-width:900px){
+  .global-music-play>span,
+  .portfolio-music-play>span{
+    font-family:Arial,Helvetica,sans-serif!important;
+    font-variant-emoji:text!important;
+    font-size:15px!important;
+    line-height:1!important;
+    -webkit-text-stroke:0!important;
+  }
+}
+/* Keep Spotify's audio-producing SDK iframe fully rendered but outside the
+   viewport. Target only the SDK-owned container, never the custom controls. */
+#portfolio-spotify-controller,
+#portfolio-spotify-controller > div,
+#portfolio-spotify-controller iframe{
+  position:fixed!important;
+  left:-10000px!important;
+  top:0!important;
+  right:auto!important;
+  bottom:auto!important;
+  width:320px!important;
+  height:80px!important;
+  min-width:320px!important;
+  min-height:80px!important;
+  max-width:320px!important;
+  max-height:80px!important;
+  display:block!important;
+  visibility:visible!important;
+  opacity:1!important;
+  overflow:visible!important;
+  clip-path:none!important;
+  contain:none!important;
+  transform:none!important;
+  pointer-events:none!important;
+  z-index:-1!important;
+}
