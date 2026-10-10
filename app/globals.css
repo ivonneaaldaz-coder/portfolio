@@ -9793,25 +9793,36 @@ html.intro-seen #site-intro{display:none}
 }
 
 
-/* Spotify iframe is an audio controller, never a visible site player.
-   The compact global controls remain the only persistent music UI. */
-#portfolio-spotify-controller,
-.portfolio-spotify-controller,
-#portfolio-spotify-controller iframe,
-.portfolio-spotify-controller iframe {
-  position:fixed !important;
-  left:-10000px !important;
-  top:-10000px !important;
-  right:auto !important;
-  bottom:auto !important;
-  width:320px !important;
-  height:80px !important;
-  max-width:320px !important;
-  max-height:80px !important;
-  opacity:0 !important;
-  visibility:hidden !important;
-  pointer-events:none !important;
-  overflow:hidden !important;
-  z-index:-9999 !important;
+
+/* The Spotify SDK playback iframe must never occupy footer/sidebar space.
+   Keep the SDK iframe mounted so the custom controls can still play audio. */
+#portfolio-spotify-controller {
+  position:fixed!important;
+  left:-10000px!important;
+  top:-10000px!important;
+  right:auto!important;
+  bottom:auto!important;
+  width:320px!important;
+  height:80px!important;
+  overflow:hidden!important;
+  opacity:0!important;
+  pointer-events:none!important;
+  z-index:-9999!important;
+  visibility:hidden!important;
 }
-.global-music-play,.portfolio-music-play {font-size:11px !important;letter-spacing:0 !important;white-space:nowrap}
+#portfolio-spotify-controller iframe,
+iframe[src*="open.spotify.com/embed/"] {
+  position:fixed!important;
+  left:-10000px!important;
+  top:-10000px!important;
+  right:auto!important;
+  bottom:auto!important;
+  width:320px!important;
+  height:80px!important;
+  max-width:320px!important;
+  max-height:80px!important;
+  opacity:0!important;
+  visibility:hidden!important;
+  pointer-events:none!important;
+  z-index:-9999!important;
+}
