@@ -8655,3 +8655,46 @@ html.intro-seen #site-intro{display:none}
   object-fit:contain!important;
   object-position:center bottom!important;
 }
+
+
+/* 2026-10-09 production polish: Visual World + title system */
+.overview-visual-world-item.item-1{
+  background:transparent!important;
+}
+.overview-visual-world-item.item-1 img{
+  object-fit:cover!important;
+  object-position:center bottom!important;
+  transform:scale(1.38)!important;
+  transform-origin:center bottom!important;
+}
+.overview-visual-world-item.item-1:hover img{
+  transform:scale(1.40)!important;
+}
+
+@media(min-width:901px){
+  .hero-row h1,
+  .overview-page .section-title,
+  .collection-intro h1,
+  .speaking-hero h1,
+  .case-study-template .case-hero h1,
+  .project-detail-hero h1,
+  .experiment-detail-hero h1,
+  .about-hero h1,
+  .about-copy h1,
+  .art-intro h1,
+  .travel-intro h1,
+  .page-intro h1,
+  .moodboard-app-intro h1{
+    font-weight:400!important;
+    letter-spacing:-.045em!important;
+  }
+}
+
+@media(max-width:900px){
+  .overview-page .section-title{
+    font-size:34px!important;
+    line-height:.98!important;
+    letter-spacing:-.045em!important;
+    font-weight:400!important;
+  }
+}
