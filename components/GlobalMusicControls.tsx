@@ -22,7 +22,7 @@ export default function GlobalMusicControls() {
         aria-label={music.isPaused ? "Play music" : "Pause music"}
         className="global-music-play"
       >
-        <span aria-hidden="true">{music.isPaused ? "▶" : "Ⅱ"}</span>
+        <span aria-hidden="true">{music.isPaused ? "Play" : "Pause"}</span>
       </button>
       <button type="button" onClick={music.next} aria-label="Next song" className="global-music-step">→</button>
       <Link href="/music" className="global-music-track" title={label}>{label}</Link>
