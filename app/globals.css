@@ -9696,3 +9696,63 @@ html.intro-seen #site-intro{display:none}
     font-size:16px!important;
   }
 }
+
+
+/* 2026-10-10 music console compact tracklist + embed containment */
+.music-tracklist-body{
+  max-height:160px!important;
+  overflow-y:auto!important;
+  overflow-x:hidden!important;
+}
+@media(max-width:900px){
+  .music-tracklist-body{
+    max-height:160px!important;
+  }
+}
+
+/* Keep Spotify's iframe controller functional but completely out of layout/paint. */
+.portfolio-spotify-controller{
+  position:fixed!important;
+  left:0!important;
+  top:0!important;
+  right:auto!important;
+  bottom:auto!important;
+  width:0!important;
+  height:0!important;
+  min-width:0!important;
+  min-height:0!important;
+  max-width:0!important;
+  max-height:0!important;
+  overflow:hidden!important;
+  opacity:0!important;
+  pointer-events:none!important;
+  clip-path:inset(100%)!important;
+  contain:strict!important;
+  transform:scale(0)!important;
+  transform-origin:top left!important;
+  z-index:-9999!important;
+}
+.portfolio-spotify-controller iframe{
+  display:block!important;
+  width:320px!important;
+  height:80px!important;
+  border:0!important;
+  opacity:0!important;
+}
+
+/* Text controls: match the site's simple arrow language. */
+.portfolio-music-play,
+.global-music-play{
+  font-size:13px!important;
+  line-height:1!important;
+}
+.portfolio-music-play>span,
+.global-music-play>span{
+  display:block!important;
+  width:auto!important;
+  height:auto!important;
+  margin:0!important;
+  border:0!important;
+  background:none!important;
+  position:static!important;
+}
