@@ -8655,3 +8655,10 @@ html.intro-seen #site-intro{display:none}
   object-fit:contain!important;
   object-position:center bottom!important;
 }
+
+
+/* 2026-10-09 Visual World angel final framing */
+.overview-visual-world-item.item-1 img{
+  object-fit:cover!important;
+  object-position:center bottom!important;
+}
