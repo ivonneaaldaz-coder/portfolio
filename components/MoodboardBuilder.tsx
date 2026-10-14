@@ -167,6 +167,18 @@ export default function MoodboardBuilder({ demoPins }: { demoPins: PinterestPin[
   const [captionVariant, setCaptionVariant] = useState(0);
   const [copiedCaption, setCopiedCaption] = useState(false);
   const [loadingPinterest, setLoadingPinterest] = useState(true);
+  const [connectProgress, setConnectProgress] = useState(0);
+
+  useEffect(() => {
+    if (stage !== "connecting") return;
+    setConnectProgress(0);
+    const started = Date.now();
+    const interval = window.setInterval(() => {
+      const elapsed = Date.now() - started;
+      setConnectProgress(Math.min(90, Math.floor(90 * (1 - Math.exp(-elapsed / 2600)))));
+    }, 80);
+    return () => window.clearInterval(interval);
+  }, [stage]);
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
@@ -184,7 +196,8 @@ export default function MoodboardBuilder({ demoPins }: { demoPins: PinterestPin[
             const data = await response.json();
             setPins(data.pins || []);
             setIsDemo(false);
-            setStage("source");
+            setConnectProgress(100);
+            window.setTimeout(() => setStage("source"), 240);
           } else {
             setStage("onboarding");
           }
@@ -377,10 +390,9 @@ export default function MoodboardBuilder({ demoPins }: { demoPins: PinterestPin[
 
       {stage === "connecting" ? (
         <div className="moodboard-connecting" aria-live="polite">
-          <div className="moodboard-connecting-orbit" aria-hidden="true">
-            <span />
-            <span />
-            <span />
+          <div className="moodboard-progress" role="progressbar" aria-label="Loading Pinterest boards" aria-valuemin={0} aria-valuemax={100} aria-valuenow={connectProgress}>
+            <div className="moodboard-progress-label"><span>LOADING<span className="moodboard-progress-ellipsis">...</span></span><span>{connectProgress}%</span></div>
+            <div className="moodboard-progress-track"><span style={{ width: `${connectProgress}%` }} /></div>
           </div>
           <p className="eyebrow">PINTEREST CONNECTED</p>
           <h2>Loading your boards.</h2>

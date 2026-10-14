@@ -9657,3 +9657,12 @@ html.intro-seen #site-intro{display:none}
     max-height:120px!important;
   }
 }
+
+/* Pinterest connection progress: a restrained editorial loading indicator. */
+.moodboard-progress{width:min(404px,80%);margin:0 auto 30px;color:var(--ink)}
+.moodboard-progress-label{display:flex;align-items:baseline;justify-content:space-between;gap:12px;margin-bottom:8px;font-size:22px;font-weight:650;letter-spacing:-.035em;line-height:1.2}
+.moodboard-progress-ellipsis{font-weight:400;letter-spacing:0}
+.moodboard-progress-track{height:16px;border-radius:999px;background:color-mix(in srgb,var(--ink) 22%,transparent);overflow:hidden;border:1px solid color-mix(in srgb,var(--ink) 12%,transparent)}
+.moodboard-progress-track>span{display:block;height:100%;border-radius:inherit;background:var(--ink);transition:width .16s ease-out}
+@media(max-width:600px){.moodboard-progress{width:min(320px,86%)}.moodboard-progress-label{font-size:18px}.moodboard-progress-track{height:13px}}
+@media(prefers-reduced-motion:reduce){.moodboard-progress-track>span{transition:none}}
