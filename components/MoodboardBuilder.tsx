@@ -377,10 +377,12 @@ export default function MoodboardBuilder({ demoPins }: { demoPins: PinterestPin[
 
       {stage === "connecting" ? (
         <div className="moodboard-connecting" aria-live="polite">
-          <div className="moodboard-connecting-orbit" aria-hidden="true">
-            <span />
-            <span />
-            <span />
+          <div className="moodboard-loading-tiles" aria-hidden="true">
+            <span className="moodboard-loading-tile" />
+            <span className="moodboard-loading-tile" />
+            <span className="moodboard-loading-tile" />
+            <span className="moodboard-loading-tile" />
+            <span className="moodboard-loading-tile" />
           </div>
           <p className="eyebrow">PINTEREST CONNECTED</p>
           <h2>Loading your boards.</h2>
