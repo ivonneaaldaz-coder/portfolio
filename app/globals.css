@@ -9658,43 +9658,11 @@ html.intro-seen #site-intro{display:none}
   }
 }
 
-/* Moodboard: understated animated pin arrangement while Pinterest connects. */
-.moodboard-loading-tiles{
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  gap:7px;
-  height:86px;
-  margin:0 auto 18px;
-}
-.moodboard-loading-tile{
-  display:block;
-  width:32px;
-  height:48px;
-  border:1px solid currentColor;
-  border-radius:3px;
-  opacity:.18;
-  background:currentColor;
-  transform:translateY(8px) scale(.94);
-  animation:moodboard-tile-arrange 2.8s ease-in-out infinite;
-}
-.moodboard-loading-tile:nth-child(2){height:62px;animation-delay:.15s}
-.moodboard-loading-tile:nth-child(3){height:40px;animation-delay:.3s}
-.moodboard-loading-tile:nth-child(4){height:56px;animation-delay:.45s}
-.moodboard-loading-tile:nth-child(5){height:45px;animation-delay:.6s}
-@keyframes moodboard-tile-arrange{
-  0%,12%,100%{opacity:.12;transform:translateY(8px) scale(.94)}
-  30%,68%{opacity:.3;transform:translateY(0) scale(1)}
-  85%{opacity:.17;transform:translateY(-3px) scale(.98)}
-}
-@media(max-width:600px){
-  .moodboard-loading-tiles{height:70px;gap:6px}
-  .moodboard-loading-tile{width:26px;height:39px}
-  .moodboard-loading-tile:nth-child(2){height:51px}
-  .moodboard-loading-tile:nth-child(3){height:33px}
-  .moodboard-loading-tile:nth-child(4){height:46px}
-  .moodboard-loading-tile:nth-child(5){height:37px}
-}
-@media(prefers-reduced-motion:reduce){
-  .moodboard-loading-tile{animation:none;opacity:.24;transform:none}
-}
+/* Pinterest connection progress: a restrained editorial loading indicator. */
+.moodboard-progress{width:min(404px,80%);margin:0 auto 30px;color:var(--ink)}
+.moodboard-progress-label{display:flex;align-items:baseline;justify-content:space-between;gap:12px;margin-bottom:8px;font-size:22px;font-weight:650;letter-spacing:-.035em;line-height:1.2}
+.moodboard-progress-ellipsis{font-weight:400;letter-spacing:0}
+.moodboard-progress-track{height:16px;border-radius:999px;background:color-mix(in srgb,var(--ink) 22%,transparent);overflow:hidden;border:1px solid color-mix(in srgb,var(--ink) 12%,transparent)}
+.moodboard-progress-track>span{display:block;height:100%;border-radius:inherit;background:var(--ink);transition:width .16s ease-out}
+@media(max-width:600px){.moodboard-progress{width:min(320px,86%)}.moodboard-progress-label{font-size:18px}.moodboard-progress-track{height:13px}}
+@media(prefers-reduced-motion:reduce){.moodboard-progress-track>span{transition:none}}
