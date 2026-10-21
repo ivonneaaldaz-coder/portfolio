@@ -1,27 +1,15 @@
 import Link from "next/link";
-
-export default function SiteFooter() {
-  return (
-    <section className="footer-grid section-pad site-footer">
-      <div className="footer-about">
-        <p className="eyebrow">ABOUT</p>
-        <h2>The world is my studio.</h2>
-        <Link href="/about#about-top">More about me →</Link>
-      </div>
-      <div>
-        <p className="eyebrow">CURRENTLY</p>
-        <ul>
-          <li>Building digital systems</li>
-          <li>Teaching marketing + entrepreneurship</li>
-          <li>Making and exhibiting art</li>
-          <li>Developing Good World Living</li>
-        </ul>
-      </div>
-      <div>
-        <p className="eyebrow">LET’S CONNECT</p>
-        <p className="muted">For work, exhibitions, collaborations, or conversation.</p>
-        <a className="pill-link" href="mailto:hello@ivonnealdaz.com">Get in touch →</a>
-      </div>
-    </section>
-  );
+const socials=[
+  {label:"Instagram",href:"https://www.instagram.com/ivonnealdaz/"},
+  {label:"Pinterest",href:"https://www.pinterest.com/ivonnealdaz/"},
+  {label:"LinkedIn",href:"https://www.linkedin.com/in/ivonnealdaz/"},
+  {label:"GitHub",href:"https://github.com/ivonneaaldaz-coder"},
+  {label:"X",href:"https://x.com/ivonnealdazz"}
+];
+export default function SiteFooter(){
+  return <footer className="footer-grid section-pad site-footer editorial-footer">
+    <div className="footer-about"><h2>The world is my studio.</h2><a href="mailto:hello@ivonnealdaz.com">Get in touch →</a></div>
+    <div className="footer-social"><p className="eyebrow">FOLLOW ALONG</p><nav aria-label="Social profiles">{socials.map(s=><a key={s.label} href={s.href} target="_blank" rel="noreferrer">{s.label} ↗</a>)}</nav></div>
+    <div className="footer-notes"><p className="eyebrow">OCCASIONAL NOTES</p><p className="muted">Writing, projects, places, and whatever else I feel like sharing.</p><a className="footer-subscribe-link" href="https://substack.com/@ivonnealdaz" target="_blank" rel="noreferrer">Subscribe on Substack →</a></div>
+  </footer>;
 }
