@@ -9666,3 +9666,25 @@ html.intro-seen #site-intro{display:none}
 .moodboard-progress-track>span{display:block;height:100%;border-radius:inherit;background:var(--ink);transition:width .16s ease-out}
 @media(max-width:600px){.moodboard-progress{width:min(320px,86%)}.moodboard-progress-label{font-size:18px}.moodboard-progress-track{height:13px}}
 @media(prefers-reduced-motion:reduce){.moodboard-progress-track>span{transition:none}}
+
+
+/* Redesign staging: editorial spacing, library hierarchy, Pinterest gallery. */
+.sidebar-library{display:grid;gap:4px;margin:18px 10px 0;padding:18px 0 0;border-top:1px solid var(--line)}
+.sidebar-library-label{font-size:10px;text-transform:uppercase;letter-spacing:.13em;color:var(--muted);margin-bottom:6px}
+.sidebar-library a{display:block;padding:8px 12px;font-size:12px;border-radius:20px;transition:background .2s ease}
+.sidebar-library a:hover{background:rgba(100,100,100,.08)}
+.mobile-library-group{display:grid;gap:12px;padding:14px 0 14px 16px;border-left:1px solid var(--line)}
+.mobile-library-group>span{font-size:11px;text-transform:uppercase;letter-spacing:.15em;color:var(--muted)}
+.mobile-library-group>a{font-size:inherit}
+.visual-index-page.pinterest-reference-page{max-width:1600px;margin:0 auto;padding:clamp(52px,7vw,110px) clamp(28px,6vw,110px) 150px}
+.pinterest-reference-page .collection-intro{margin-bottom:clamp(32px,5vw,70px)}
+.pinterest-reference-page .collection-intro h1{font-family:Georgia,'Times New Roman',serif;font-size:clamp(54px,7vw,108px);font-weight:400;letter-spacing:-.065em;line-height:1.05}
+.pinterest-reference-page .collection-intro p{font-size:clamp(14px,1.25vw,17px);line-height:1.7;max-width:510px}
+.pinterest-reference-page .pinterest-reference-header{margin-bottom:34px}
+.pinterest-reference-page .pinterest-filters{margin-bottom:32px}
+.pinterest-reference-page .pinterest-native-grid{gap:clamp(10px,1.8vw,24px)}
+.pinterest-reference-page .pinterest-native-column{gap:clamp(10px,1.8vw,24px)}
+.pinterest-reference-page .pinterest-native-card{display:block;overflow:hidden}
+.pinterest-reference-page .pinterest-native-card img{display:block;width:100%;height:auto;transition:transform .45s ease}
+.pinterest-reference-page .pinterest-native-card:hover img{transform:scale(1.025)}
+@media(max-width:700px){.visual-index-page.pinterest-reference-page{padding:42px 7% 100px}.pinterest-reference-page .collection-intro h1{font-size:clamp(46px,11vw,68px)}}
