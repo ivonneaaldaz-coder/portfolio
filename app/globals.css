@@ -10016,3 +10016,13 @@ html.intro-seen #site-intro{display:none}
 .about-editorial-building .about-github-months{gap:3px}
 @media(max-width:900px){.about-editorial-building .about-github-panel{padding:48px 18px}}
 @media(max-width:570px){.about-editorial-hero h1{font-size:clamp(52px,10vw,82px)}.about-editorial-row h2,.about-editorial-feature>h2,.about-editorial-building-head h2{font-size:35px}}
+
+/* Staging page reorganization: maintain original section components and interactions. */
+.work-hybrid-page>.overview-press,.work-hybrid-page>.overview-writing-section{padding-left:0;padding-right:0;margin-top:clamp(72px,8vw,125px)}
+.work-hybrid-page>.about-editorial-building{margin-top:clamp(72px,8vw,125px);border-top:1px solid var(--line);padding-top:clamp(65px,7vw,95px);padding-bottom:clamp(70px,8vw,110px)}
+.work-hybrid-page .about-editorial-building-head h2{font-family:Georgia,"Times New Roman",serif;font-weight:400;font-size:clamp(35px,3.4vw,45px);letter-spacing:-.055em}
+.work-hybrid-page .about-github-panel{width:100%;max-width:100%;margin-left:0;padding:70px 28px;box-sizing:border-box;overflow-x:auto}
+.work-hybrid-page .about-github-calendar{width:100%}
+.work-hybrid-page .about-github-grid,.work-hybrid-page .about-github-months{gap:3px}
+.about-editorial-kind+.about-editorial-feature{border-top:1px solid var(--line)}
+@media(max-width:900px){.work-hybrid-page .about-github-panel{padding:48px 18px}}
