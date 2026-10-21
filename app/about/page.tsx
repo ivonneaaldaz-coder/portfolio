@@ -4,7 +4,6 @@ export const metadata = pageMetadata("About", "Meet Ivonne Aldaz: strategist, ar
 
 import Link from "next/link";
 import { driveImageUrl } from "@/lib/googleDrive";
-import { getGitHubContributions } from "@/lib/githubContributions";
 
 const experience = [
   { role: "Founder", company: "Whitespace", dates: "2018 — Present" },
@@ -53,52 +52,6 @@ const exhibitions = [
 const visibleExhibitions = exhibitions.slice(0,3);
 const moreExhibitions = exhibitions.slice(3);
 
-function buildGitHubCalendar(days: { date:string; level:number; count:number }[]) {
-  const sorted = [...days].sort((a,b) => a.date.localeCompare(b.date));
-  if (!sorted.length) {
-    return {
-      weeks: [] as { date:string; level:number; count:number }[][],
-      months: [] as { label:string; start:number }[],
-    };
-  }
-
-  const start = new Date(`${sorted[0].date}T12:00:00Z`);
-  const startDay = start.getUTCDay();
-  start.setUTCDate(start.getUTCDate() - startDay);
-
-  const end = new Date(`${sorted[sorted.length - 1].date}T12:00:00Z`);
-  const endDay = end.getUTCDay();
-  end.setUTCDate(end.getUTCDate() + (6 - endDay));
-
-  const byDate = new Map(sorted.map(day => [day.date, day]));
-  const weeks: { date:string; level:number; count:number }[][] = [];
-
-  for (let cursor = new Date(start), weekIndex = 0; cursor <= end; weekIndex++) {
-    const week: { date:string; level:number; count:number }[] = [];
-    for (let dayIndex = 0; dayIndex < 7; dayIndex++) {
-      const date = cursor.toISOString().slice(0,10);
-      week.push(byDate.get(date) || { date, level:0, count:0 });
-      cursor.setUTCDate(cursor.getUTCDate() + 1);
-    }
-    weeks.push(week);
-  }
-
-  const months: { label:string; start:number }[] = [];
-  let lastMonth = -1;
-  weeks.forEach((week, index) => {
-    const anchor = new Date(`${week[0].date}T12:00:00Z`);
-    const month = anchor.getUTCMonth();
-    if (month !== lastMonth) {
-      months.push({
-        label: anchor.toLocaleString("en-US", { month:"short", timeZone:"UTC" }),
-        start:index,
-      });
-      lastMonth = month;
-    }
-  });
-
-  return { weeks, months };
-}
 
 const brands = [
   "Hero Cosmetics","Nestlé","CVS Health","Batiste","Purina","ARM & HAMMER","Gerber","Nescafe","Stouffer's","Sir Kensington's (Unilever)",
@@ -109,8 +62,6 @@ const brands = [
 const visibleBrands = brands.slice(0,10);
 
 export default async function AboutPage() {
-  const github = await getGitHubContributions();
-  const githubCalendar = buildGitHubCalendar(github?.days || []);
 
   return (
     <section id="about-top" className="page about-editorial">
@@ -125,7 +76,6 @@ export default async function AboutPage() {
       <div className="about-editorial-row"><h2>Education.</h2><div className="about-editorial-list"><div className="about-editorial-item"><div><h3>Master of Business Administration</h3><small>St. Mary's University</small></div></div><div className="about-editorial-item"><div><h3>International Business & Economics</h3><small>Hochschule Schmalkalden · In progress</small></div></div></div></div>
       <div className="about-editorial-row"><h2>Beyond work.</h2><div><p>I volunteer with local arts and cultural organizations, teach yoga, and spend as much time as I can making things with my hands.</p><Link className="about-editorial-text-link" href="/art">See the art ↗</Link></div></div>
       <section className="about-editorial-feature about-editorial-kind"><h2>Kind words.</h2><div className="about-editorial-quotes"><figure><blockquote>“A rare find. Deeply data-driven, deeply human.”</blockquote><figcaption>— CEO, TrueLoyal</figcaption></figure><figure><blockquote>“Everyone keeps saying what a great job you're doing and how happy the clients are.”</blockquote><figcaption>— CMO, TrueLoyal</figcaption></figure><figure><blockquote>“Why are we even talking about it? Just hire her.”</blockquote><figcaption>— VP of Sales, TINT</figcaption></figure></div></section>
-      <section className="about-editorial-feature about-editorial-building"><div className="about-editorial-building-head"><div><h2>Always making something.</h2><p>A running record of the tools, products, and experiments I'm building.</p></div><div>{github?.total ? <strong>{github.total.toLocaleString()} contributions</strong> : null}<a href="https://github.com/ivonneaaldaz-coder" target="_blank" rel="noreferrer">View GitHub ↗</a></div></div><div className="about-github-panel"><div className="about-github-calendar" aria-label="GitHub contribution activity"><div className="about-github-months" aria-hidden="true">{githubCalendar.months.map((m,i)=><span key={m.label+i} style={{gridColumn:`${m.start+1} / span 4`}}>{m.label}</span>)}</div><div className="about-github-body"><div className="about-github-days" aria-hidden="true"><span>Mon</span><span>Wed</span><span>Fri</span></div><div className="about-github-grid">{githubCalendar.weeks.flatMap((week,i)=>week.map((day,j)=><span className={`level-${day.level}`} key={day.date} title={`${day.count} contributions on ${day.date}`} style={{gridColumn:i+1,gridRow:j+1}} />))}</div></div><div className="about-github-legend"><span>Less</span>{[0,1,2,3,4].map(n=><i className={`level-${n}`} key={n}/>)}<span>More</span></div></div></div></section>
       <section className="about-editorial-feature"><details className="long-story about-disclosure"><summary><span>Read the longer story</span><span aria-hidden="true">＋</span></summary><div className="long-story-copy"><p className="long-story-lede">Life is about saying yes to the things that will make a better story.</p><p>For over a decade, I've been building brands and shaping how companies think, look, and communicate — from startups navigating pivots and acquisitions to work supporting global enterprises.</p><p>In marketing, everything moves quickly. I needed to make something that could outlive the next campaign, so I paint and work in ceramics — something I can't undo with a keystroke.</p><p>Art residencies in France and Italy cracked something open in me. Every time I committed, the next thing revealed itself.</p><p>These days, I follow that curiosity wherever it goes. Sometimes that's a painting. Sometimes it's a ceramics workshop, a yoga practice, a brand, or a weird little thing I build on the internet.</p><p><strong>Whitespace</strong> is my strategy and creative studio. <strong>Make Space</strong> brings people together to make things with their hands. <strong>Good World Living</strong> is an ongoing exploration of remarkable places and thoughtfully made things.</p><p>I grew up on the border. Two languages, two worlds. A constant pull toward the other side.</p></div></details></section>
     </section>
   );
