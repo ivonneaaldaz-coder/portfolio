@@ -1,6 +1,5 @@
 import { pageMetadata } from "@/lib/metadata";
 import SelectedWorkExplorer from "@/components/SelectedWorkExplorer";
-import { getGitHubContributions } from "@/lib/githubContributions";
 export const metadata=pageMetadata("Work","Projects, experiments, research, and case studies.","/work");
 const writing = [
   { title:"When the Universe Hands You a Yes", source:"Good World Living · 2025", href:"https://www.goodworldliving.com/articles/when-the-universe-hands-you-a-yes" },
@@ -50,56 +49,7 @@ function PressRow({item}:{item:{org:string;title:string;year:string;href?:string
 }
 
 
-function buildGitHubCalendar(days: { date:string; level:number; count:number }[]) {
-  const sorted = [...days].sort((a,b) => a.date.localeCompare(b.date));
-  if (!sorted.length) {
-    return {
-      weeks: [] as { date:string; level:number; count:number }[][],
-      months: [] as { label:string; start:number }[],
-    };
-  }
-
-  const start = new Date(`${sorted[0].date}T12:00:00Z`);
-  const startDay = start.getUTCDay();
-  start.setUTCDate(start.getUTCDate() - startDay);
-
-  const end = new Date(`${sorted[sorted.length - 1].date}T12:00:00Z`);
-  const endDay = end.getUTCDay();
-  end.setUTCDate(end.getUTCDate() + (6 - endDay));
-
-  const byDate = new Map(sorted.map(day => [day.date, day]));
-  const weeks: { date:string; level:number; count:number }[][] = [];
-
-  for (let cursor = new Date(start), weekIndex = 0; cursor <= end; weekIndex++) {
-    const week: { date:string; level:number; count:number }[] = [];
-    for (let dayIndex = 0; dayIndex < 7; dayIndex++) {
-      const date = cursor.toISOString().slice(0,10);
-      week.push(byDate.get(date) || { date, level:0, count:0 });
-      cursor.setUTCDate(cursor.getUTCDate() + 1);
-    }
-    weeks.push(week);
-  }
-
-  const months: { label:string; start:number }[] = [];
-  let lastMonth = -1;
-  weeks.forEach((week, index) => {
-    const anchor = new Date(`${week[0].date}T12:00:00Z`);
-    const month = anchor.getUTCMonth();
-    if (month !== lastMonth) {
-      months.push({
-        label: anchor.toLocaleString("en-US", { month:"short", timeZone:"UTC" }),
-        start:index,
-      });
-      lastMonth = month;
-    }
-  });
-
-  return { weeks, months };
-}
-
 export default async function WorkPage(){
- const github=await getGitHubContributions();
- const githubCalendar=buildGitHubCalendar(github?.days||[]);
  return <main className="page section-pad work-hybrid-page"><header className="work-hybrid-intro"><h1>A little of everything.</h1><p>Selected projects, curious experiments, and ideas brought to life.</p></header><SelectedWorkExplorer />
       <section className="overview-press section-pad overview-anchor" id="press">
         <div className="section-heading"><h2 className="section-title small-title">Press + Speaking</h2></div>
@@ -132,7 +82,7 @@ export default async function WorkPage(){
           </details>
         </div>
       </section>
-      <section className="about-editorial-feature about-editorial-building"><div className="about-editorial-building-head"><div><h2>Always making something.</h2><p>A running record of the tools, products, and experiments I'm building.</p></div><div>{github?.total ? <strong>{github.total.toLocaleString()} contributions</strong> : null}<a href="https://github.com/ivonneaaldaz-coder" target="_blank" rel="noreferrer">View GitHub ↗</a></div></div><div className="about-github-panel"><div className="about-github-calendar" aria-label="GitHub contribution activity"><div className="about-github-months" aria-hidden="true">{githubCalendar.months.map((m,i)=><span key={m.label+i} style={{gridColumn:`${m.start+1} / span 4`}}>{m.label}</span>)}</div><div className="about-github-body"><div className="about-github-days" aria-hidden="true"><span>Mon</span><span>Wed</span><span>Fri</span></div><div className="about-github-grid">{githubCalendar.weeks.flatMap((week,i)=>week.map((day,j)=><span className={`level-${day.level}`} key={day.date} title={`${day.count} contributions on ${day.date}`} style={{gridColumn:i+1,gridRow:j+1}} />))}</div></div><div className="about-github-legend"><span>Less</span>{[0,1,2,3,4].map(n=><i className={`level-${n}`} key={n}/>)}<span>More</span></div></div></div></section>
+
 
  </main>;
 }
