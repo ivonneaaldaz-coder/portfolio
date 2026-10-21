@@ -184,7 +184,7 @@ export default async function OverviewPage() {
         </div>
       </section>
 
-      <section className="overview-writing-section section-pad">
+      <section className="overview-writing-section section-pad" id="writing">
         <div className="overview-writing">
           <div className="overview-writing-head"><h2 className="section-title small-title">Writing</h2></div>
           {writing.map(item => <WritingRow item={item} key={item.title} />)}
