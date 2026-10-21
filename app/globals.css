@@ -9997,5 +9997,8 @@ html.intro-seen #site-intro{display:none}
 .watercolor-toolbox>button[data-tooltip]:hover:after,.watercolor-toolbox>button[data-tooltip]:focus-visible:after{content:attr(data-tooltip);position:absolute;left:calc(100% + 13px);top:50%;transform:translateY(-50%);background:#252525;border:1px solid #555;color:#f5f3ee;white-space:nowrap;padding:8px 11px;font-size:11px;font-weight:400;z-index:30;pointer-events:none}
 .about-editorial-building{border-bottom:0!important;padding-bottom:clamp(35px,4vw,55px)!important}
 .about-editorial-building+.about-editorial-feature{border-top:0!important;padding-top:clamp(35px,4vw,55px)!important}
-.about-editorial-building .about-github-panel{min-height:275px;display:flex;align-items:center;padding-top:42px!important;padding-bottom:42px!important}
-@media(max-width:900px){.about-editorial-building .about-github-panel{min-height:205px}}
+
+
+/* About: let the GitHub heatmap breathe horizontally without changing section typography. */
+@media(min-width:1100px){.about-editorial-building .about-github-panel{width:calc(100% + 180px);max-width:none;margin-left:-90px;padding:28px 34px;overflow-x:visible}.about-editorial-building .about-github-calendar{width:100%}.about-editorial-building .about-github-grid{gap:5px}.about-editorial-building .about-github-months{gap:5px}}
+@media(min-width:901px) and (max-width:1099px){.about-editorial-building .about-github-panel{width:100%;max-width:100%;padding:24px}.about-editorial-building .about-github-grid{gap:3px}}
