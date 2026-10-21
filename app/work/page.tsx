@@ -50,7 +50,7 @@ function PressRow({item}:{item:{org:string;title:string;year:string;href?:string
 
 
 export default async function WorkPage(){
- return <main className="page section-pad work-hybrid-page"><header className="work-hybrid-intro"><h1>A little of everything.</h1><p>Selected projects, curious experiments, and ideas brought to life.</p></header><SelectedWorkExplorer />
+ return <main className="page section-pad work-hybrid-page"><header className="work-hybrid-intro"><h1>Selected Work</h1></header><SelectedWorkExplorer />
       <section className="overview-press section-pad overview-anchor" id="press">
         <div className="section-heading"><h2 className="section-title small-title">Press + Speaking</h2></div>
         <div className="overview-press-grid">
