@@ -114,35 +114,35 @@ export default async function AboutPage() {
   return (
     <section className="page editorial-about" id="about-top">
       <style>{`
-        .editorial-about{--editorial-blue:#3348ec;--editorial-line:rgba(110,117,155,.22);max-width:930px;margin:0 auto;padding:0 70px 170px;color:var(--ink)}
-        .editorial-about .editorial-hero{display:grid;grid-template-columns:minmax(0,1fr) 180px;gap:70px;align-items:start;padding:135px 0 128px}
+        .editorial-about{--editorial-blue:#3348ec;--editorial-line:rgba(110,117,155,.22);max-width:1100px;margin:0 auto;padding:0 58px 170px;color:var(--ink)}
+        .editorial-about .editorial-hero{display:grid;grid-template-columns:minmax(0,1fr) 245px;gap:38px;align-items:start;padding:125px 0 160px}
         .editorial-about .editorial-hero h1{font-family:Georgia,"Times New Roman",serif;font-weight:400;letter-spacing:-.065em;font-size:clamp(54px,5.4vw,78px);line-height:.99;margin:0 0 32px}
-        .editorial-about .editorial-hero p{font-size:15px;line-height:1.75;max-width:395px;margin:0 0 17px}
-        .editorial-about .editorial-hero small{font-size:10px;opacity:.55}
-        .editorial-about .editorial-portrait{width:180px;aspect-ratio:3/4;object-fit:cover;margin-top:20px;filter:grayscale(1)}
-        .editorial-about .editorial-row{display:grid;grid-template-columns:36% 1fr;gap:28px;border-top:1px solid var(--editorial-line);padding:70px 0 115px}
+        .editorial-about .editorial-hero p{font-size:18px;line-height:1.65;max-width:490px;margin:0 0 17px}
+        .editorial-about .editorial-hero small{font-size:12px;opacity:.55}
+        .editorial-about .editorial-portrait{width:245px;aspect-ratio:3/4;object-fit:cover;margin-top:12px;filter:grayscale(1)}
+        .editorial-about .editorial-row{display:grid;grid-template-columns:36% 1fr;gap:45px;border-top:1px solid var(--editorial-line);padding:90px 0 155px}
         .editorial-about .editorial-row h2,.editorial-about .editorial-full h2{font:400 clamp(30px,3vw,38px)/1.06 Georgia,"Times New Roman",serif;letter-spacing:-.055em;margin:0}
-        .editorial-about .editorial-row p{font-size:14px;line-height:1.72;margin:0 0 19px}
+        .editorial-about .editorial-row p{font-size:17px;line-height:1.7;margin:0 0 19px}
         .editorial-about .editorial-entry{padding:0 0 17px;margin:0 0 16px;border-bottom:1px solid var(--editorial-line);display:flex;justify-content:space-between;gap:16px}
-        .editorial-about .editorial-entry h3{font:400 19px/1.2 Georgia,"Times New Roman",serif;letter-spacing:-.03em;margin:0 0 6px}
-        .editorial-about .editorial-entry p{font-size:11px;opacity:.55;margin:0}
-        .editorial-about .editorial-entry time{font-size:10px;opacity:.55;white-space:nowrap}
+        .editorial-about .editorial-entry h3{font:400 22px/1.2 Georgia,"Times New Roman",serif;letter-spacing:-.03em;margin:0 0 6px}
+        .editorial-about .editorial-entry p{font-size:13px;opacity:.55;margin:0}
+        .editorial-about .editorial-entry time{font-size:12px;opacity:.55;white-space:nowrap}
         .editorial-about .editorial-tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:18px}
         .editorial-about .editorial-tags span{border:1px solid var(--editorial-line);border-radius:30px;padding:7px 11px;font-size:10px}
-        .editorial-about .editorial-full{border-top:1px solid var(--editorial-line);padding:70px 0 115px}
+        .editorial-about .editorial-full{border-top:1px solid var(--editorial-line);padding:90px 0 155px}
         .editorial-about .editorial-cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:15px;margin-top:28px}
         .editorial-about .editorial-card{border:1px solid var(--editorial-line);padding:25px;min-height:200px;display:flex;flex-direction:column;justify-content:space-between}
         .editorial-about .editorial-card h3{font:400 25px Georgia,"Times New Roman",serif;margin:0}
-        .editorial-about .editorial-card p{font-size:12px;line-height:1.65;opacity:.65;margin:0}
-        .editorial-about .about-section{border-top:1px solid var(--editorial-line);padding:70px 0 115px;margin:0}
+        .editorial-about .editorial-card p{font-size:15px;line-height:1.65;opacity:.65;margin:0}
+        .editorial-about .about-section{border-top:1px solid var(--editorial-line);padding:90px 0 155px;margin:0}
         .editorial-about .section-title{font:400 34px Georgia,"Times New Roman",serif;letter-spacing:-.05em}
         .editorial-about .quote-grid{margin-top:32px}
         .editorial-about .about-github-panel{max-width:100%;overflow-x:auto}
         .editorial-about .long-story{max-width:100%}
         html[data-theme="light"] .editorial-about{color:#3348ec}
         html[data-theme="dark"] .editorial-about{color:#f2f0eb;--editorial-line:rgba(255,255,255,.19)}
-        @media(max-width:900px){.editorial-about{padding:0 8% 120px}.editorial-about .editorial-hero{padding:90px 0 100px}}
-        @media(max-width:620px){.editorial-about .editorial-hero{grid-template-columns:1fr;gap:30px;padding:70px 0 90px}.editorial-about .editorial-portrait{margin:0;width:160px}.editorial-about .editorial-row{grid-template-columns:1fr;gap:32px;padding:55px 0 85px}.editorial-about .editorial-full,.editorial-about .about-section{padding:55px 0 85px}.editorial-about .editorial-cards{grid-template-columns:1fr}.editorial-about .editorial-card{min-height:150px}}
+        @media(max-width:900px){.editorial-about{padding:0 7% 120px}.editorial-about .editorial-hero{padding:90px 0 100px}}
+        @media(max-width:620px){.editorial-about .editorial-hero{grid-template-columns:1fr;gap:30px;padding:70px 0 90px}.editorial-about .editorial-portrait{margin:0;width:min(75%,245px)}.editorial-about .editorial-row{grid-template-columns:1fr;gap:32px;padding:55px 0 85px}.editorial-about .editorial-full,.editorial-about .about-section{padding:55px 0 85px}.editorial-about .editorial-cards{grid-template-columns:1fr}.editorial-about .editorial-card{min-height:150px}}
       `}</style>
       <header className="editorial-hero">
         <div><h1>A little<br/>about me.</h1><p>I'm a strategist, artist, and builder. I work across brands, technology, and the arts — drawn to ideas that make people think, feel, or see things differently.</p><small>Based in San Antonio, Texas. Often elsewhere.</small></div>
