@@ -4,9 +4,9 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 const library = [
-  { label:"Books + Quotes", href:"/books" },
-  { label:"Music", href:"/music" },
   { label:"Visual References", href:"/visual-references" },
+  { label:"Music", href:"/music" },
+  { label:"Books + Quotes", href:"/books" },
 ];
 export default function Sidebar(){
   const pathname=usePathname();
