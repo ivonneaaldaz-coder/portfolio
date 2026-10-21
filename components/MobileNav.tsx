@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { MouseEvent, useRef, useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
-import SidebarSubscribe from "@/components/SidebarSubscribe";
+
 
 export default function MobileNav() {
   const detailsRef = useRef<HTMLDetailsElement>(null);
@@ -43,11 +43,11 @@ export default function MobileNav() {
         <div className="mobile-menu">
           <nav className="mobile-menu-links">
             <Link href="/" onClick={(event) => go(event, "/")}>Home</Link>
-            <Link href="/work" onClick={(event) => go(event, "/work")}>Work</Link>
+            <Link href="/#selected-work" onClick={(event) => go(event, "/#selected-work")}>Work</Link>
             <a href="https://lab.ivonnealdaz.com" target="_blank" rel="noreferrer" onClick={closeExternal}>
               Lab <span className="text-arrow" aria-hidden="true" />
             </a>
-            <Link href="/about" onClick={(event) => go(event, "/about")}>About</Link>
+
             <div className="mobile-library-group"><span>Library</span>
               <Link href="/art" onClick={(event) => go(event, "/art")}>Art</Link>
               <Link href="/travel" onClick={(event) => go(event, "/travel")}>Travel</Link>
@@ -55,10 +55,11 @@ export default function MobileNav() {
               <Link href="/music" onClick={(event) => go(event, "/music")}>Music</Link>
               <Link href="/visual-references" onClick={(event) => go(event, "/visual-references")}>Visual References</Link>
             </div>
+            <Link href="/about" onClick={(event) => go(event, "/about")}>About</Link>
           </nav>
 
           <div className="mobile-menu-footer">
-            <SidebarSubscribe />
+            <a href="mailto:hello@ivonnealdaz.com">hello@ivonnealdaz.com ↗</a>
             <div className="mobile-socials">
               <a href="https://www.linkedin.com/in/ivonnealdaz/" target="_blank" rel="noreferrer" onClick={closeExternal}>LinkedIn <span className="text-arrow" aria-hidden="true" /></a>
               <a href="https://www.pinterest.com/ivonnealdaz/" target="_blank" rel="noreferrer" onClick={closeExternal}>Pinterest <span className="text-arrow" aria-hidden="true" /></a>
