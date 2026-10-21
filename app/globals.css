@@ -10036,3 +10036,15 @@ html.intro-seen #site-intro{display:none}
 .pinterest-reference-page .visual-back-link{display:inline-block;margin-top:clamp(40px,5vw,75px);font-size:var(--type-meta,12px);text-transform:uppercase;letter-spacing:.09em}
 .pinterest-reference-page .collection-intro{padding-top:clamp(18px,2.5vw,38px);margin-bottom:clamp(35px,5vw,65px)}
 .pinterest-reference-page .collection-intro>a{white-space:nowrap}
+
+/* Work hierarchy refinement — retain all existing interactions */
+.work-hybrid-page .work-hybrid-intro{padding-bottom:clamp(55px,7vw,110px)}
+.work-hybrid-page .selected-work-explorer{margin-top:0!important}
+.work-hybrid-page .selected-work-company-section>h3,
+.work-hybrid-page .overview-press .section-title,
+.work-hybrid-page .overview-writing-section .section-title{font-size:clamp(25px,2.6vw,36px)!important;font-weight:600!important;line-height:1.15!important;letter-spacing:-.045em!important;font-family:inherit!important}
+.work-hybrid-page .overview-press-row h3{font-size:inherit!important}
+.work-hybrid-page .overview-press-row h3,
+.work-hybrid-page .overview-writing-row h4{font-size:clamp(13px,1.1vw,16px)!important;line-height:1.4!important;font-weight:600!important;letter-spacing:-.015em!important}
+.work-hybrid-page>.overview-writing-section{border-bottom:0!important;padding-bottom:0!important}
+.work-hybrid-page>.overview-writing-section .overview-writing{border-bottom:0!important}
