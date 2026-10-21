@@ -8,7 +8,8 @@ const links = [
   { label: "Overview", href: "/" },
   { label: "Work", href: "/#case-studies" },
   { label: "Lab ↗︎", href: "https://lab.ivonnealdaz.com", external: true },
-  { label: "Library", href: "/#library" },
+  { label: "Art", href: "/art" },
+  { label: "Travel", href: "/travel" },
   { label: "Press", href: "/#press" },
   { label: "About", href: "/about" },
 ];
@@ -46,6 +47,12 @@ export default function Sidebar() {
               </Link>
             );
           })}
+          <div className="sidebar-library">
+            <span className="sidebar-library-label">Library</span>
+            <Link href="/books">Books + Quotes</Link>
+            <Link href="/music">Music</Link>
+            <Link href="/visual-references">Visual References</Link>
+          </div>
         </nav>
       </div>
 
