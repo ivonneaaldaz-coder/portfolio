@@ -8,6 +8,7 @@ export const metadata = {
 import Link from "next/link";
 import ExperimentLoop from "@/components/ExperimentLoop";
 import WatercolorStudio from "@/components/WatercolorStudio";
+import SelectedWorkExplorer from "@/components/SelectedWorkExplorer";
 import { getPinterestPins } from "@/lib/pinterest";
 import { driveImageUrl, listDriveFolder, normalizeDriveName } from "@/lib/googleDrive";
 
@@ -152,32 +153,7 @@ export default async function OverviewPage() {
         </section>
       ) : null}
 
-      <section className="home-cases section-pad overview-anchor" id="case-studies">
-        <div className="section-heading"><h2 className="section-title small-title">Selected Case Studies</h2></div>
-        <div className="home-case-list">{studies.map(study => <CaseRow study={study} key={study.title} />)}</div>
-        <details className="overview-inline-expand more-case-studies">
-          <summary><span>More case studies</span><span aria-hidden="true">＋</span></summary>
-          <div className="home-case-list overview-expanded-list">{moreStudies.map(study => <CaseRow study={study} key={study.title} />)}</div>
-        </details>
-      </section>
-
-      <section className="selected section-pad overview-anchor" id="work">
-        <div className="section-heading">
-          <h2 className="section-title small-title">Current Work</h2>
-        </div>
-        <div className="feature-grid">
-          {features.map((item) => {
-            const image = item.driveKey ? projectImages.get(item.driveKey) : null;
-            const content = <>
-              <div className="feature-media">{image ? <img className="project-photo" src={image} alt="" /> : null}</div>
-              <div className="feature-copy"><div><h3>{item.title}</h3><p>{item.meta}</p></div><span className="circle-arrow">→</span></div>
-            </>;
-            return item.external
-              ? <a className={item.className} key={item.title} href={item.href} target="_blank" rel="noreferrer">{content}</a>
-              : <Link className={item.className} key={item.title} href={item.href}>{content}</Link>;
-          })}
-        </div>
-      </section>
+      <div className="section-pad overview-anchor" id="work"><SelectedWorkExplorer compact /></div>
 
       <section className="overview-press section-pad overview-anchor" id="press">
         <div className="section-heading"><h2 className="section-title small-title">Press + Speaking</h2></div>
@@ -199,52 +175,6 @@ export default async function OverviewPage() {
           </div>
         </details>
       </section>
-      <section className="experiments section-pad overview-anchor" id="experiments">
-        <div className="section-heading"><h2 className="section-title small-title">Experiments</h2></div>
-        <div className="experiment-grid experiment-grid-four overview-experiment-grid">
-          {experiments.map(item => (
-            <Link href={item.href} className="lab-experiment-card overview-lab-experiment-card" key={item.title}>
-              <div className="lab-experiment-visual experiment-loop-visual">
-                <ExperimentLoop name={item.loop} label={`${item.title} preview`} />
-              </div>
-              <div className="lab-experiment-copy overview-lab-experiment-copy">
-                <span>{item.meta}</span>
-                <h3>{item.title} <span aria-hidden="true">→</span></h3>
-              </div>
-            </Link>
-          ))}
-        </div>
-
-        <details className="overview-inline-expand overview-experiments-expand">
-          <summary><span>Show all experiments</span><span aria-hidden="true">＋</span></summary>
-          <div className="experiment-grid experiment-grid-four overview-experiment-grid overview-expanded-list">
-            {moreExperiments.map(item => (
-              <Link href={item.href} className="lab-experiment-card overview-lab-experiment-card" key={item.title}>
-                <div className="lab-experiment-visual moodboard-card-visual" aria-label="Moodboard preview">
-                  <div className="moodboard-card-chrome">
-                    <span>moodboard.</span>
-                    <span>visual editor</span>
-                  </div>
-                  <div className="moodboard-card-stage">
-                    <div className="moodboard-card-copy">
-                      <small>VISUAL EDITOR / 01</small>
-                      <strong>Saved inspiration,<br/>ready to post.</strong>
-                    </div>
-                    <div className="moodboard-card-carousel">
-                      <span/><span/><span/>
-                    </div>
-                  </div>
-                </div>
-                <div className="lab-experiment-copy overview-lab-experiment-copy">
-                  <span>{item.meta}</span>
-                  <h3>{item.title} <span aria-hidden="true">→</span></h3>
-                </div>
-              </Link>
-            ))}
-          </div>
-        </details>
-      </section>
-
       <section className="overview-library section-pad overview-anchor" id="library">
         <div className="section-heading"><h2 className="section-title small-title">Library</h2></div>
         <div className="overview-library-grid">
