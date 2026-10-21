@@ -10026,3 +10026,13 @@ html.intro-seen #site-intro{display:none}
 .work-hybrid-page .about-github-grid,.work-hybrid-page .about-github-months{gap:3px}
 .about-editorial-kind+.about-editorial-feature{border-top:1px solid var(--line)}
 @media(max-width:900px){.work-hybrid-page .about-github-panel{padding:48px 18px}}
+
+/* Staging-only refinements, October 21: preserve existing component layouts. */
+@media(min-width:1100px){.work-hybrid-page{padding-left:clamp(80px,9vw,170px)!important;padding-right:clamp(80px,9vw,170px)!important;max-width:1580px;margin-inline:auto;box-sizing:border-box}}
+.work-hybrid-page>.selected-work-explorer{margin-top:clamp(90px,10vw,155px)}
+.work-hybrid-page>.overview-press,.work-hybrid-page>.overview-writing-section{margin-top:clamp(110px,12vw,185px)}
+.work-hybrid-page .selected-work-company-section{margin-top:clamp(110px,12vw,180px)}
+.about-editorial .about-editorial-building .about-github-panel{padding-top:clamp(65px,7vw,95px);padding-bottom:clamp(65px,7vw,95px);width:100%;max-width:100%;box-sizing:border-box}
+.pinterest-reference-page .visual-back-link{display:inline-block;margin-top:clamp(40px,5vw,75px);font-size:var(--type-meta,12px);text-transform:uppercase;letter-spacing:.09em}
+.pinterest-reference-page .collection-intro{padding-top:clamp(18px,2.5vw,38px);margin-bottom:clamp(35px,5vw,65px)}
+.pinterest-reference-page .collection-intro>a{white-space:nowrap}
