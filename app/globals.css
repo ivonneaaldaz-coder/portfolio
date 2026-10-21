@@ -9741,3 +9741,20 @@ html.intro-seen #site-intro{display:none}
 .work-v9-feature-copy p{font-size:16px;line-height:1.7}.work-v9-feature-copy a{margin-top:auto;border-bottom:1px solid currentColor;padding:15px 0}
 .work-v9-ending{border-top:1px solid currentColor;padding:55px 0}.work-v9-ending h2{font:400 clamp(40px,6vw,88px) Georgia,serif;letter-spacing:-.05em}.work-v9-ending a{font-size:clamp(17px,2vw,28px);border-bottom:1px solid currentColor}
 @media(max-width:800px){.work-v9-explorer,.work-v9-feature{grid-template-columns:1fr}.work-v9-intro{padding-bottom:65px}.work-v9-explorer,.work-v9-companies{margin-bottom:85px}}
+
+
+/* Hybrid editorial shell — original palette and generous content spacing. */
+.sidebar-nav .sidebar-library-toggle{width:100%;display:flex;justify-content:space-between;align-items:center;background:transparent;border:0;color:inherit;font:inherit;text-align:left;cursor:pointer;padding:10px 12px;border-radius:22px}
+.sidebar-nav .sidebar-library-toggle:hover{background:rgba(140,140,140,.09)}
+.sidebar-nav .sidebar-library{display:grid;gap:2px;margin:4px 0 8px 13px;padding:0 0 0 13px;border-left:1px solid var(--line);border-top:0}
+.sidebar-nav .sidebar-library a{padding:9px 12px;font-size:12px;border-radius:18px}
+.sidebar-nav .sidebar-library a.active{background:rgba(140,140,140,.13)}
+.editorial-footer{grid-template-columns:minmax(0,1.5fr) minmax(0,.9fr) minmax(0,1.1fr);gap:clamp(28px,4vw,70px);padding-top:clamp(65px,8vw,135px);padding-bottom:clamp(75px,8vw,140px);align-items:start}
+.editorial-footer .footer-about .eyebrow{display:none}
+.editorial-footer .footer-about h2{margin:0 0 28px}
+.editorial-footer .footer-social nav{display:grid;gap:15px;margin-top:24px}
+.editorial-footer .footer-social nav a{display:block;width:fit-content}
+.editorial-footer .footer-notes .muted{margin:24px 0 27px;line-height:1.7}
+.editorial-footer .footer-subscribe-link{display:inline-flex;align-items:center;justify-content:space-between;border:1px solid var(--line);padding:17px 20px;min-width:min(100%,240px);transition:opacity .2s}
+.editorial-footer .footer-subscribe-link:hover{opacity:.65}
+@media(max-width:800px){.editorial-footer{grid-template-columns:1fr;gap:35px}.editorial-footer>div{border:0!important;padding:0!important}.editorial-footer .footer-social nav{grid-template-columns:repeat(2,minmax(0,1fr))}}
