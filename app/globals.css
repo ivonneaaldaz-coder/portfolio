@@ -9983,3 +9983,19 @@ html.intro-seen #site-intro{display:none}
 .watercolor-mix-preview{height:36px;border:1px solid #777;margin:12px 0}
 .watercolor-panel-action{display:block;width:100%;padding:10px 8px;border:1px solid #777;background:transparent;color:inherit;text-align:center;cursor:pointer}
 @media(max-width:650px){.watercolor-tool-panel{width:170px;left:calc(100% + 4px);padding:10px}.watercolor-size-panel{width:85px}}
+
+/* Staging refinement: readable margins, discoverable controls, calm separators */
+@media(min-width:1100px){.overview-page>.section-pad{padding-left:clamp(76px,6.2vw,126px)!important;padding-right:clamp(76px,6.2vw,126px)!important}.music-page.section-pad{padding-left:clamp(76px,7vw,145px)!important;padding-right:clamp(76px,7vw,145px)!important}}
+.selected-work-more-brands{border:0!important;width:auto!important;display:inline-flex!important;padding:12px 0!important;margin:7px 0 28px!important;font-size:12px!important;letter-spacing:.01em!important;background:none!important}
+.selected-work-more-brands:hover{text-decoration:underline}
+.selected-work-scroll-cue{display:flex;align-items:center;justify-content:space-between;padding:12px 13px;color:var(--muted);font-size:11px;letter-spacing:.015em;border-top:1px solid var(--line)}
+.selected-work-scroll-cue span{font-size:19px;animation:scroll-cue-bob 1.8s ease-in-out infinite}
+@keyframes scroll-cue-bob{0%,100%{transform:translateY(-2px)}50%{transform:translateY(3px)}}
+.watercolor-active-color{position:relative;display:block;cursor:pointer;overflow:visible}
+.watercolor-active-color input[type=color]{position:absolute;inset:-5px;width:calc(100% + 10px);height:calc(100% + 10px);opacity:0;cursor:pointer;padding:0;border:0}
+.watercolor-toolbox>button{position:relative}
+.watercolor-toolbox>button[data-tooltip]:hover:after,.watercolor-toolbox>button[data-tooltip]:focus-visible:after{content:attr(data-tooltip);position:absolute;left:calc(100% + 13px);top:50%;transform:translateY(-50%);background:#252525;border:1px solid #555;color:#f5f3ee;white-space:nowrap;padding:8px 11px;font-size:11px;font-weight:400;z-index:30;pointer-events:none}
+.about-editorial-building{border-bottom:0!important;padding-bottom:clamp(35px,4vw,55px)!important}
+.about-editorial-building+.about-editorial-feature{border-top:0!important;padding-top:clamp(35px,4vw,55px)!important}
+.about-editorial-building .about-github-panel{min-height:275px;display:flex;align-items:center;padding-top:42px!important;padding-bottom:42px!important}
+@media(max-width:900px){.about-editorial-building .about-github-panel{min-height:205px}}
