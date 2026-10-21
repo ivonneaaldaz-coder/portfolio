@@ -1,47 +1,9 @@
 "use client";
-
 import { useEffect, useState } from "react";
-
 type Theme = "light" | "dark";
-
-function getInitialTheme(): Theme {
-  if (typeof window === "undefined") return "light";
-  const saved = window.localStorage.getItem("portfolio-theme");
-  if (saved === "light" || saved === "dark") return saved;
-  return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
-}
-
-export default function ThemeToggle({ compact = false }: { compact?: boolean }) {
-  const [theme, setTheme] = useState<Theme>("light");
-  const [ready, setReady] = useState(false);
-
-  useEffect(() => {
-    const initial = getInitialTheme();
-    setTheme(initial);
-    document.documentElement.dataset.theme = initial;
-    setReady(true);
-  }, []);
-
-  const toggle = () => {
-    const next: Theme = theme === "dark" ? "light" : "dark";
-    setTheme(next);
-    document.documentElement.dataset.theme = next;
-    window.localStorage.setItem("portfolio-theme", next);
-  };
-
-  return (
-    <button
-      type="button"
-      className={compact ? "theme-toggle theme-toggle-compact" : "theme-toggle"}
-      onClick={toggle}
-      aria-label={"Switch to " + (theme === "dark" ? "light" : "dark") + " mode"}
-      title={"Switch to " + (theme === "dark" ? "light" : "dark") + " mode"}
-      aria-pressed={theme === "dark"}
-    >
-      <span className="theme-switch" aria-hidden="true">
-        <span className="theme-switch-thumb" />
-      </span>
-      <span className="theme-label">{ready ? (theme === "dark" ? "Dark" : "Light") : "Theme"}</span>
-    </button>
-  );
+export default function ThemeToggle() {
+  const [theme,setTheme]=useState<Theme>("light");
+  useEffect(()=>{const saved=localStorage.getItem("portfolio-theme");const t:Theme=saved==="dark"||saved==="light"?saved:(matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light");setTheme(t);document.documentElement.dataset.theme=t;},[]);
+  const toggle=()=>{const t:Theme=theme==="light"?"dark":"light";setTheme(t);document.documentElement.dataset.theme=t;localStorage.setItem("portfolio-theme",t);};
+  return <button type="button" onClick={toggle} aria-label={theme==="dark"?"Switch to light mode":"Switch to dark mode"} title={theme==="dark"?"Light mode":"Dark mode"} style={{border:0,background:"transparent",padding:10,cursor:"pointer",fontSize:25,lineHeight:1,color:"inherit",transition:"transform .35s ease"}} className="celestial-theme-toggle"><span aria-hidden="true" style={{display:"inline-block",transition:"transform .4s ease",transform:theme==="dark"?"rotate(25deg)":"rotate(0deg)"}}>{theme==="dark"?"☾":"✳"}</span></button>;
 }
