@@ -7,6 +7,7 @@ export const metadata = {
 
 import Link from "next/link";
 import ExperimentLoop from "@/components/ExperimentLoop";
+import WatercolorStudio from "@/components/WatercolorStudio";
 import { getPinterestPins } from "@/lib/pinterest";
 import { driveImageUrl, listDriveFolder, normalizeDriveName } from "@/lib/googleDrive";
 
@@ -122,6 +123,8 @@ export default async function OverviewPage() {
           <div className="hero-introduction"><p>I’ve built brands and audiences and led insights and strategy for companies including Nestlé, Hero Cosmetics, and ARM &amp; HAMMER. Now I run Whitespace, teach across marketing and entrepreneurship, and make art.</p><a className="hero-contact" href="mailto:hello@ivonnealdaz.com">Get in touch →<span>hello@ivonnealdaz.com</span></a></div>
         </div>
       </section>
+
+      <section className="hybrid-watercolor-section section-pad"><div className="hybrid-watercolor-heading"><span>AN INTERACTIVE LITTLE EXPERIMENT</span><h2>Make something.</h2><p>Paint a little. Stay awhile.</p></div><WatercolorStudio /></section>
 
       {visualWorldPins.length ? (
         <section className="overview-visual-world section-pad overview-anchor" id="visual-world">
