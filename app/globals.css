@@ -9709,3 +9709,35 @@ html.intro-seen #site-intro{display:none}
 .redesign-work-card h3{font:400 clamp(27px,3vw,45px)/1.07 Georgia,serif;letter-spacing:-.035em;margin:0 0 15px;max-width:600px}
 .redesign-work-card small{font-size:12px}
 @media(max-width:700px){.redesign-work{padding:48px 7% 90px}.redesign-work-grid{grid-template-columns:1fr}.redesign-work-card{min-height:235px}.redesign-section-head span{display:none}.redesign-work-intro{padding-bottom:70px}}
+
+
+/* Work V9 interactive explorer */
+.work-v9{color:var(--work-blue);font-family:Arial,Helvetica,sans-serif}
+.work-v9-intro{padding:15px 0 95px}
+.work-v9-intro h1{font:400 clamp(64px,8vw,140px)/1 Georgia,serif;letter-spacing:-.07em;max-width:1100px;margin:0 0 20px}
+.work-v9-intro p{font-size:clamp(16px,1.6vw,23px);line-height:1.6;max-width:610px}
+.work-v9-explorer{display:grid;grid-template-columns:minmax(220px,.4fr) minmax(0,.6fr);gap:clamp(20px,4vw,70px);margin-bottom:150px}
+.work-v9-explorer h2,.work-v9-company-head h2{font:400 clamp(38px,4vw,62px) Georgia,serif;letter-spacing:-.05em;margin:0 0 25px}
+.work-v9-project-list{border-top:1px solid currentColor}
+.work-v9-project-list button{width:100%;display:grid;grid-template-columns:30px 1fr 20px;align-items:center;gap:12px;text-align:left;padding:22px 5px;background:none;border:0;border-bottom:1px solid currentColor;cursor:pointer}
+.work-v9-project-list button strong{font:400 clamp(22px,2.1vw,33px) Georgia,serif}
+.work-v9-project-list button.active{background:rgba(42,76,202,.09)}
+.work-v9-browser{border:1px solid currentColor}
+.work-v9-browser-bar{height:40px;border-bottom:1px solid currentColor;display:flex;align-items:center;justify-content:space-between;padding:0 15px;font-size:11px}
+.work-v9-preview{height:clamp(260px,35vw,460px);background:#d8d9e2;display:grid;place-items:center;padding:30px}
+.work-v9-lab{background:#295c9d}.work-v9-eve{background:#dbd3cc}.work-v9-chat{background:#bac9c6}.work-v9-snake{background:#202b33}.work-v9-mood{background:#d4c8b4}
+.work-v9-preview-window{width:min(85%,400px);min-height:190px;padding:24px;display:flex;flex-direction:column;justify-content:space-between;background:#f6f3ed;border:2px solid #2d2d2d;box-shadow:8px 8px 0 #333;color:#1c1c1c}
+.work-v9-preview-window strong{font:400 clamp(32px,4vw,56px) Georgia,serif}.work-v9-preview-window span{font-size:10px;letter-spacing:.15em}
+.work-v9-project-detail{padding:24px 0}.work-v9-project-detail h3{font:400 36px Georgia,serif;margin:0 0 12px}.work-v9-project-detail p{max-width:550px;line-height:1.7}
+.work-v9-project-detail a{display:inline-block;margin:18px 25px 0 0;border-bottom:1px solid currentColor;padding-bottom:6px}
+.work-v9-companies{margin-bottom:145px}.work-v9-logos{display:flex;flex-wrap:wrap;gap:8px;margin:30px 0}
+.work-v9-logos button{background:transparent;border:1px solid currentColor;padding:13px 19px;cursor:pointer}.work-v9-logos button.active{background:var(--work-blue);color:#fff}
+.work-v9-feature{display:grid;grid-template-columns:1fr 1fr;border:1px solid currentColor;min-height:370px}
+.work-v9-feature-art{background:#254dc6;color:#fff;padding:30px;display:flex;flex-direction:column;justify-content:space-between}
+.work-v9-feature-art strong{font:400 clamp(35px,4vw,65px)/1.08 Georgia,serif;letter-spacing:-.05em}
+.work-v9-feature-copy{padding:clamp(28px,4vw,60px);display:flex;flex-direction:column;align-items:flex-start}
+.work-v9-feature-copy>span{font-size:11px;text-transform:uppercase;letter-spacing:.15em}
+.work-v9-feature-copy h3{font:400 clamp(34px,3.5vw,55px) Georgia,serif;margin:25px 0}
+.work-v9-feature-copy p{font-size:16px;line-height:1.7}.work-v9-feature-copy a{margin-top:auto;border-bottom:1px solid currentColor;padding:15px 0}
+.work-v9-ending{border-top:1px solid currentColor;padding:55px 0}.work-v9-ending h2{font:400 clamp(40px,6vw,88px) Georgia,serif;letter-spacing:-.05em}.work-v9-ending a{font-size:clamp(17px,2vw,28px);border-bottom:1px solid currentColor}
+@media(max-width:800px){.work-v9-explorer,.work-v9-feature{grid-template-columns:1fr}.work-v9-intro{padding-bottom:65px}.work-v9-explorer,.work-v9-companies{margin-bottom:85px}}
