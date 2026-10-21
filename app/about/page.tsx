@@ -130,6 +130,8 @@ export default async function AboutPage() {
         </div>
       </div>
 
+      <section className="about-section about-short-version"><h2>The short version.</h2><p>I run a creative studio, build independent ventures, and teach marketing at university. Outside of work, you'll usually find me painting, making ceramics, traveling, or experimenting with something on the internet.</p><p>I've always been curious about people, places, and what makes us see things differently.</p><div className="about-venture-grid"><a href="https://www.bywhitespace.com/"><strong>Whitespace</strong><span>Strategy + creative studio ↗</span></a><a href="https://www.instagram.com/makespacesa/"><strong>Make Space</strong><span>Creative gatherings ↗</span></a><Link href="/work"><strong>More projects</strong><span>Experiments + independent work →</span></Link></div></section>
+
       <section className="about-section about-resume-section">
         <div className="about-resume-row">
           <div className="about-resume-content">
@@ -162,12 +164,6 @@ export default async function AboutPage() {
           </div>
         </div>
 
-      <section className="about-section">
-        <div className="section-heading"><h2 className="section-title small-title">Selected brands</h2></div>
-        <div className="brand-wall">
-          {visibleBrands.map((brand)=><div className="brand-name" key={brand}><strong>{brand}</strong></div>)}
-        </div>
-      </section>
 
         <div className="about-resume-row">
           <div className="about-resume-content">
@@ -315,7 +311,7 @@ export default async function AboutPage() {
         <div className="section-heading"><h2 className="section-title small-title">Education</h2></div>
         <div className="education-list">
           <div><h3>MBA</h3><p>St. Mary’s University</p></div>
-          <div><h3>MA, International Business + Economics</h3><p>FH Schmalkalden University of Applied Sciences</p></div>
+          <div><h3>MA, International Business + Economics</h3><p>Hochschule Schmalkalden · In progress</p></div>
           <div><h3>Bachelor of Arts</h3><p>St. Mary’s University</p></div>
         </div>
         <div className="education-languages"><span>Languages</span><p>English · Spanish · Some French</p></div>
