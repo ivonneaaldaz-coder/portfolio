@@ -9929,3 +9929,18 @@ html.intro-seen #site-intro{display:none}
 @media(prefers-reduced-motion:reduce){:root[data-theme="dark"] body:before{animation:none}}
 @media(max-width:800px){.about-editorial{width:calc(100% - 56px)}.about-editorial-row{grid-template-columns:1fr;gap:30px}.about-editorial-hero{grid-template-columns:1fr 160px;gap:25px}.about-editorial-hero h1{font-size:clamp(52px,10vw,82px)}}
 @media(max-width:570px){.about-editorial{width:calc(100% - 36px);padding-top:85px}.about-editorial-hero{grid-template-columns:1fr}.about-editorial-hero img{width:55%;margin:0}.about-editorial-cards,.about-editorial-quotes{grid-template-columns:1fr}.about-editorial-cards>a{min-height:165px}.about-editorial-building-head{display:block}.about-editorial-item{flex-wrap:wrap}}
+
+/* Staging-only navigation, brand disclosure and footer refinements */
+.sidebar .brand-sub{display:none}
+.sidebar-nav .sidebar-library-toggle,.sidebar-nav .sidebar-work-expand{font-family:inherit;font-size:inherit;font-weight:inherit;letter-spacing:inherit;color:inherit}
+.sidebar-nav .sidebar-library-toggle{width:100%;text-align:left;display:flex;justify-content:space-between;align-items:center;padding:9px 10px;border:0;border-radius:999px;background:transparent;cursor:pointer}
+.sidebar-nav .sidebar-library-toggle:hover{background:rgba(127,127,127,.12)}
+.sidebar-work-group{display:flex;align-items:center;position:relative}
+.sidebar-work-group>a{flex:1;min-width:0}
+.sidebar-work-expand{position:absolute;right:6px;top:50%;transform:translateY(-50%);border:0;background:transparent;cursor:pointer;padding:7px 9px}
+.sidebar-work-links{display:grid}
+.sidebar-email{display:block;margin-top:11px;font-size:11px;text-decoration:underline;text-underline-offset:3px}
+.footer-social-columns{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr));column-gap:18px}
+.footer-social-columns>div{display:flex;flex-direction:column}
+.selected-work-more-brands{margin-top:18px;border:1px solid var(--line);padding:10px 15px;background:transparent;cursor:pointer;font-size:12px}
+#selected-work,#case-studies,#press,#writing{scroll-margin-top:48px}
