@@ -125,7 +125,7 @@ export default async function OverviewPage() {
         </div>
       </section>
 
-      <section className="hybrid-watercolor-section section-pad"><div className="hybrid-watercolor-heading"><h2>Make something.</h2></div><WatercolorStudio /></section>
+      <section className="hybrid-watercolor-section section-pad"><WatercolorStudio /></section>
 
       {visualWorldPins.length ? (
         <section className="overview-visual-world section-pad overview-anchor" id="visual-world">
