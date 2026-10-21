@@ -9944,3 +9944,18 @@ html.intro-seen #site-intro{display:none}
 .footer-social-columns>div{display:flex;flex-direction:column}
 .selected-work-more-brands{margin-top:18px;border:1px solid var(--line);padding:10px 15px;background:transparent;cursor:pointer;font-size:12px}
 #selected-work,#case-studies,#press,#writing{scroll-margin-top:48px}
+
+/* Staging refinements: consistent sidebar, stable brand reveal, quieter painting */
+.sidebar-nav{margin-top:clamp(38px,5vh,58px)}
+.sidebar-nav>a,.sidebar-nav>.sidebar-library-toggle,.sidebar-nav>.sidebar-work-toggle{font-size:12px!important;font-weight:500!important;line-height:1.4!important;letter-spacing:0!important;min-height:35px;box-sizing:border-box}
+.sidebar-nav>.sidebar-library-toggle span,.sidebar-nav>.sidebar-work-toggle span{font-size:12px!important;letter-spacing:0!important}
+.sidebar-nav>.sidebar-library-toggle{padding:9px 10px!important}
+.sidebar-nav .sidebar-library a{font-size:11px}
+.sidebar-email{font-size:13px!important;line-height:1.5;margin-top:12px}
+.footer-social-columns>div{gap:11px}
+.footer-social-columns a{display:block;line-height:1.5}
+.selected-work-brand-grid{margin-bottom:0}
+.selected-work-more-brands{display:block;margin:0 0 28px;width:100%;text-align:left;border:1px solid var(--line);border-top:0;padding:15px 18px;background:transparent}
+.selected-work-more-brands:hover{background:rgba(140,140,140,.12)}
+.hybrid-watercolor-heading>h2{margin-bottom:28px}
+@media(max-width:900px){.sidebar-nav{margin-top:0}}
