@@ -4,19 +4,12 @@ const colors=["#536f8e","#b66c79","#c6a476","#648b7c","#8a7b9b","#c27f55"];
 export default function WatercolorStudio(){
  const ref=useRef<HTMLCanvasElement>(null),drawing=useRef(false),last=useRef<{x:number,y:number}|null>(null),history=useRef<ImageData[]>([]);
  const [color,setColor]=useState(colors[0]),[tool,setTool]=useState<"brush"|"water"|"eraser">("brush"),[size,setSize]=useState(22),[revision,setRevision]=useState(0);
- const [panel,setPanel]=useState<"size"|"palette"|"mixer"|null>(null);
- const [customColors,setCustomColors]=useState<string[]>([]);
- const [mixA,setMixA]=useState(colors[0]),[mixB,setMixB]=useState(colors[1]),[mixRatio,setMixRatio]=useState(50);
- const mix=(a:string,b:string,p:number)=>{const v=(n:number)=>Math.round(parseInt(a.slice(n,n+2),16)*(1-p/100)+parseInt(b.slice(n,n+2),16)*p/100).toString(16).padStart(2,"0");return "#"+v(1)+v(3)+v(5)};
- const mixed=mix(mixA,mixB,mixRatio);
- const addColor=(c:string)=>{setCustomColors(v=>v.includes(c)?v:[...v,c]);setColor(c);setTool("brush")};
- const icon=(name:"brush"|"water"|"eraser"|"palette"|"mixer")=>{
+ const icon=(name:"brush"|"water"|"eraser")=>{
  const common={width:19,height:19,viewBox:"0 0 24 24",fill:"none",stroke:"currentColor",strokeWidth:1.6,strokeLinecap:"round" as const,strokeLinejoin:"round" as const};
  if(name==="brush")return <svg {...common}><path d="m14 6 4-4 4 4-4 4M14 6 4 16l4 4 10-10M4 16c-2 1-2 4-2 6 2 0 5 0 6-2"/></svg>;
  if(name==="water")return <svg {...common}><path d="M12 2C9 7 5 11 5 15a7 7 0 0 0 14 0c0-4-4-8-7-13Z"/><path d="M9 17a3 3 0 0 0 3 3"/></svg>;
  if(name==="eraser")return <svg {...common}><path d="m20 14-7 7H6l-4-4a2 2 0 0 1 0-3L13 3a2 2 0 0 1 3 0l6 6a2 2 0 0 1 0 3l-2 2ZM9 9l9 9M13 21h9"/></svg>;
- if(name==="palette")return <svg {...common}><path d="M12 3a9 9 0 1 0 0 18h1a2 2 0 0 0 1-4 2 2 0 0 1 1-4h2a4 4 0 0 0 4-4c0-3-4-6-9-6Z"/><circle cx="7.5" cy="11" r="1"/><circle cx="10" cy="7" r="1"/><circle cx="15" cy="7" r="1"/></svg>;
- return <svg {...common}><path d="m4 3 4 4m-2-2 12 12M16 3l5 5-4 4-5-5zM3 16l5 5 4-4-5-5z"/><path d="M11 11l2 2"/></svg>;
+
  };
  useEffect(()=>{const canvas=ref.current;if(!canvas)return;const ctx=canvas.getContext("2d");if(!ctx)return;const resize=()=>{const old=document.createElement("canvas");old.width=canvas.width;old.height=canvas.height;old.getContext("2d")?.drawImage(canvas,0,0);const box=canvas.getBoundingClientRect();const dpr=Math.min(window.devicePixelRatio||1,2);canvas.width=Math.max(1,Math.round(box.width*dpr));canvas.height=Math.max(1,Math.round(box.height*dpr));ctx.setTransform(dpr,0,0,dpr,0,0);ctx.fillStyle="#fbf9f5";ctx.fillRect(0,0,box.width,box.height);if(old.width&&old.height)ctx.drawImage(old,0,0,old.width,old.height,0,0,box.width,box.height)};resize();window.addEventListener("resize",resize);return()=>window.removeEventListener("resize",resize)},[]);
  const point=(e:React.PointerEvent<HTMLCanvasElement>)=>{const r=e.currentTarget.getBoundingClientRect();return{x:e.clientX-r.left,y:e.clientY-r.top}};
@@ -32,12 +25,7 @@ export default function WatercolorStudio(){
  <button title="Brush" aria-label="Brush" aria-pressed={tool==="brush"} onClick={()=>{setTool("brush");setPanel(null)}}>{icon("brush")}</button>
  <button title="Water" aria-label="Water" aria-pressed={tool==="water"} onClick={()=>{setTool("water");setPanel(null)}}>{icon("water")}</button>
  <button title="Eraser" aria-label="Eraser" aria-pressed={tool==="eraser"} onClick={()=>{setTool("eraser");setPanel(null)}}>{icon("eraser")}</button>
- <button title="Brush size" aria-label="Adjust brush size" aria-expanded={panel==="size"} onClick={()=>setPanel(v=>v==="size"?null:"size")}><span className="watercolor-size-dot" style={{width:Math.max(6,size/3),height:Math.max(6,size/3)}}/></button>
- <button title="Color palette" aria-label="Open color palette" aria-expanded={panel==="palette"} onClick={()=>setPanel(v=>v==="palette"?null:"palette")}>{icon("palette")}</button>
- <button title="Color mixer" aria-label="Open color mixer" aria-expanded={panel==="mixer"} onClick={()=>setPanel(v=>v==="mixer"?null:"mixer")}>{icon("mixer")}</button>
- <div className="watercolor-active-color" title="Current color" style={{background:color}}/>
- {panel==="size"&&<div className="watercolor-tool-panel watercolor-size-panel"><label htmlFor="watercolor-brush-size">Brush size · {size}</label><input id="watercolor-brush-size" aria-label="Brush size" type="range" min="5" max="65" value={size} onChange={e=>setSize(Number(e.target.value))}/></div>}
- {panel==="palette"&&<div className="watercolor-tool-panel watercolor-palette-panel"><strong>Palette</strong><div className="watercolor-swatch-grid">{[...colors,...customColors].map(c=><button key={c} aria-label={"Paint color "+c} aria-pressed={color===c} onClick={()=>{setColor(c);setTool("brush")}} style={{background:c}}/>)}</div><label>Custom color <input type="color" value={color} onChange={e=>setColor(e.target.value)}/></label><button className="watercolor-panel-action" onClick={()=>addColor(color)}>Add to palette +</button></div>}
- {panel==="mixer"&&<div className="watercolor-tool-panel watercolor-mixer-panel"><strong>Mix colors</strong><div className="watercolor-mix-inputs"><label>Color 1<input aria-label="First mixing color" type="color" value={mixA} onChange={e=>setMixA(e.target.value)}/></label><label>Color 2<input aria-label="Second mixing color" type="color" value={mixB} onChange={e=>setMixB(e.target.value)}/></label></div><label>Mix ratio · {mixRatio}%<input type="range" min="0" max="100" value={mixRatio} onChange={e=>setMixRatio(Number(e.target.value))}/></label><div className="watercolor-mix-preview" style={{background:mixed}}/><button className="watercolor-panel-action" onClick={()=>{addColor(mixed);setPanel("palette")}}>Use + save color</button></div>}
+ <div className="watercolor-size-control"><label htmlFor="watercolor-brush-size">Size</label><input id="watercolor-brush-size" aria-label="Brush size" type="range" min="5" max="65" value={size} onChange={e=>setSize(Number(e.target.value))}/></div>
+ <label className="watercolor-color-control" title="Selected color — click to customize"><span className="sr-only">Selected paint color</span><input type="color" aria-label="Selected paint color" value={color} onChange={e=>{setColor(e.target.value);setTool("brush")}}/></label>
  </div><div className="hybrid-watercolor-paper"><canvas ref={ref} onPointerDown={start} onPointerMove={move} onPointerUp={stop} onPointerCancel={stop} aria-label="Watercolor painting canvas"/></div></div><div className="hybrid-watercolor-actions"><span>Watercolor.exe</span><div><button disabled={revision===0} onClick={undo}>undo ↶</button><button onClick={surprise}>surprise me ✳</button><button onClick={clear}>clear canvas ×</button><button onClick={save}>save painting ↓</button></div></div></section>
 }
