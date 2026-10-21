@@ -119,8 +119,8 @@ export default async function AboutPage() {
           <img src={driveImageUrl("1UJ7HG3gZU2zD5Y_kdHwCXLGjm1llx_Xc")} alt="Ivonne Aldaz" />
         </div>
         <div className="about-copy">
-          <h1>Strategist, artist, builder, educator.</h1>
-          <p>I build brands, ventures, systems, and ideas with scale in mind — across reach, impact, and revenue.</p>
+          <h1>A little about me.</h1>
+          <p>I’m drawn to the intersection of human behavior, creativity, and business. For more than a decade, I’ve worked across industries—from growing tech companies to global household brands—turning ideas and insights into brands, strategies, and experiences that connect with people and drive growth.</p>
           <div className="about-links">
             <Link href="/work">Selected work →</Link>
             <Link href="/art">Art practice →</Link>
