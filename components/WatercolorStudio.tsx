@@ -19,24 +19,53 @@ export default function WatercolorStudio(){
  return <svg {...common}><path d="m4 3 4 4m-2-2 12 12M16 3l5 5-4 4-5-5zM3 16l5 5 4-4-5-5z"/><path d="M11 11l2 2"/></svg>;
  };
  useEffect(()=>{const canvas=ref.current;if(!canvas)return;const ctx=canvas.getContext("2d");if(!ctx)return;const resize=()=>{const old=document.createElement("canvas");old.width=canvas.width;old.height=canvas.height;old.getContext("2d")?.drawImage(canvas,0,0);const box=canvas.getBoundingClientRect();const dpr=Math.min(window.devicePixelRatio||1,2);canvas.width=Math.max(1,Math.round(box.width*dpr));canvas.height=Math.max(1,Math.round(box.height*dpr));ctx.setTransform(dpr,0,0,dpr,0,0);ctx.fillStyle="#fbf9f5";ctx.fillRect(0,0,box.width,box.height);if(old.width&&old.height)ctx.drawImage(old,0,0,old.width,old.height,0,0,box.width,box.height)};resize();window.addEventListener("resize",resize);return()=>window.removeEventListener("resize",resize)},[]);
- const point=(e:React.PointerEvent<HTMLCanvasElement>)=>{const r=e.currentTarget.getBoundingClientRect();return{x:e.clientX-r.left,y:e.clientY-r.top}};
- const stamp=(x:number,y:number)=>{const ctx=ref.current?.getContext("2d");if(!ctx)return;
-  if(tool==="eraser"){ctx.save();ctx.globalCompositeOperation="destination-out";const g=ctx.createRadialGradient(x,y,0,x,y,size*.7);g.addColorStop(0,"rgba(0,0,0,.85)");g.addColorStop(1,"rgba(0,0,0,0)");ctx.fillStyle=g;ctx.beginPath();ctx.arc(x,y,size*.7,0,Math.PI*2);ctx.fill();ctx.restore();return}
-  ctx.save();ctx.globalCompositeOperation="multiply";
-  const water=tool==="water",spread=water?1.9:1.15,opacity=water?.022:.048;
-  for(let i=0;i<(water?5:7);i++){const dx=(Math.random()-.5)*size*.65,dy=(Math.random()-.5)*size*.65,r=size*spread*(.38+Math.random()*.6);
-   const g=ctx.createRadialGradient(x+dx,y+dy,r*.07,x+dx,y+dy,r);
-   g.addColorStop(0,color+Math.round(opacity*255).toString(16).padStart(2,"0"));
-   g.addColorStop(.48,color+"09");g.addColorStop(.86,color+"04");g.addColorStop(1,color+"00");
-   ctx.fillStyle=g;ctx.beginPath();ctx.ellipse(x+dx,y+dy,r,r*(.7+Math.random()*.55),Math.random()*Math.PI,0,Math.PI*2);ctx.fill();
-  }ctx.restore();
+
+ // Restored from the approved V8 watercolor study: pigment and water are
+ // separate fields. Water deposits no color; it re-wets and transports pigment.
+ const fluid=useRef<{w:number;h:number;scale:number;W:number;H:number;wet:Float32Array;vx:Float32Array;vy:Float32Array;pigment:Float32Array[];paper:Float32Array;grain:Float32Array;colors:string[];base:HTMLCanvasElement;raf:number;active:number;frame:number}|null>(null);
+ const settings=useRef({tool,color,size});settings.current={tool,color,size};
+ const fluidInit=()=>{const canvas=ref.current;if(!canvas)return;const box=canvas.getBoundingClientRect(),w=box.width,h=box.height,scale=Math.min(1,400/Math.max(w,1)),W=Math.max(4,Math.round(w*scale)),H=Math.max(4,Math.round(h*scale)),N=W*H;
+ const paper=new Float32Array(N),grain=new Float32Array(N);for(let y=0;y<H;y++)for(let x=0;x<W;x++){const i=y*W+x;paper[i]=.7+.3*Math.random();grain[i]=(Math.random()-.5)*12}
+ const base=document.createElement("canvas");base.width=canvas.width;base.height=canvas.height;base.getContext("2d")?.drawImage(canvas,0,0);
+ fluid.current={w,h,scale,W,H,wet:new Float32Array(N),vx:new Float32Array(N),vy:new Float32Array(N),pigment:[new Float32Array(N)],paper,grain,colors:[settings.current.color],base,raf:0,active:0,frame:0};
  };
- const move=(e:React.PointerEvent<HTMLCanvasElement>)=>{if(!drawing.current)return;const p=point(e),prev=last.current||p;const steps=Math.max(1,Math.ceil(Math.hypot(p.x-prev.x,p.y-prev.y)/4));for(let i=0;i<=steps;i++)stamp(prev.x+(p.x-prev.x)*i/steps,prev.y+(p.y-prev.y)*i/steps);last.current=p};
- const start=(e:React.PointerEvent<HTMLCanvasElement>)=>{const canvas=ref.current,ctx=canvas?.getContext("2d");if(!canvas||!ctx)return;history.current.push(ctx.getImageData(0,0,canvas.width,canvas.height));if(history.current.length>12)history.current.shift();setRevision(v=>v+1);drawing.current=true;last.current=null;canvas.setPointerCapture(e.pointerId);move(e)};
+ const fluidRender=()=>{const f=fluid.current,canvas=ref.current,ctx=canvas?.getContext("2d");if(!f||!canvas||!ctx)return;
+ const off=document.createElement("canvas");off.width=f.W;off.height=f.H;const oc=off.getContext("2d");if(!oc)return;const img=oc.createImageData(f.W,f.H);
+ for(let i=0;i<f.W*f.H;i++){let r=251+f.grain[i]*.3,g=249+f.grain[i]*.3,b=245+f.grain[i]*.3;
+ for(let k=0;k<f.pigment.length;k++){const mass=f.pigment[k][i];if(mass<.00005)continue;const c=f.colors[k],a=1-Math.exp(-mass*1.55),cr=parseInt(c.slice(1,3),16),cg=parseInt(c.slice(3,5),16),cb=parseInt(c.slice(5,7),16);r*=1-a*(1-cr/255);g*=1-a*(1-cg/255);b*=1-a*(1-cb/255)}
+ const j=i*4;img.data[j]=r;img.data[j+1]=g;img.data[j+2]=b;img.data[j+3]=255;
+ }oc.putImageData(img,0,0);ctx.save();ctx.setTransform(1,0,0,1,0,0);ctx.drawImage(f.base,0,0,canvas.width,canvas.height);ctx.globalCompositeOperation="multiply";ctx.drawImage(off,0,0,canvas.width,canvas.height);ctx.restore();
+ };
+ const fluidTick=()=>{const f=fluid.current;if(!f)return;f.raf=0;const {W,H}=f,N=W*H;const nw=new Float32Array(N),nx=new Float32Array(N),ny=new Float32Array(N),np=f.pigment.map(()=>new Float32Array(N));
+ for(let y=2;y<H-2;y++)for(let x=2;x<W-2;x++){const i=y*W+x,wi=f.wet[i];if(wi<.00002)continue;
+ const l=i-1,r=i+1,u=i-W,d=i+W,gx=f.wet[l]-f.wet[r],gy=f.wet[u]-f.wet[d];
+ const vx=Math.max(-3.5,Math.min(3.5,f.vx[i]*.94+gx*.24+(f.paper[r]-f.paper[l])*wi*.13));
+ const vy=Math.max(-3.5,Math.min(3.5,f.vy[i]*.94+gy*.24+(f.paper[d]-f.paper[u])*wi*.13));nx[i]=vx;ny[i]=vy;
+ let remain=wi*.992;for(let z=0;z<4;z++){const j=[l,r,u,d][z],diff=Math.max(0,wi-f.wet[j]),drift=[-vx,vx,-vy,vy][z],flow=Math.min(remain*.21,Math.max(0,diff*.09+drift*.037*wi)*(.5+f.paper[j]*.65));nw[j]+=flow;remain-=flow}nw[i]+=remain;
+ for(let k=0;k<f.pigment.length;k++){const mass=f.pigment[k][i];if(mass<.00001)continue;if(wi<.015){np[k][i]+=mass;continue}let left=mass;
+ for(let z=0;z<4;z++){const j=[l,r,u,d][z],wd=Math.max(0,f.wet[j]-wi*.22),drift=[-f.vx[i],f.vx[i],-f.vy[i],f.vy[i]][z],flow=Math.max(0,wd*.027+drift*.018)*Math.min(1,wi)*(.65+f.paper[j]*.4),transfer=Math.min(left*.19,mass*flow);np[k][j]+=transfer;left-=transfer}np[k][i]+=left}
+ }
+ // Preserve pigment and moisture at the edge instead of clipping it.
+ for(let y=0;y<H;y++)for(let x=0;x<W;x++){if(x>=2&&x<W-2&&y>=2&&y<H-2)continue;const i=y*W+x;nw[i]+=f.wet[i]*.99;for(let k=0;k<np.length;k++)np[k][i]+=f.pigment[k][i]}
+ f.wet=nw;f.vx=nx;f.vy=ny;f.pigment=np;f.active--;fluidRender();if(f.active>0)f.raf=requestAnimationFrame(fluidTick);
+ };
+ const requestFluid=()=>{const f=fluid.current;if(f&&!f.raf)f.raf=requestAnimationFrame(fluidTick)};
+ const deposit=(px:number,py:number,dx=0,dy=0,force=1)=>{const f=fluid.current;if(!f)return;const {tool,color,size}=settings.current,x=px*f.scale,y=py*f.scale,R=(tool==="water"?size*1.35:tool==="eraser"?size:size*.65)*f.scale;
+ let ci=f.colors.indexOf(color);if(ci<0){ci=f.colors.push(color)-1;f.pigment.push(new Float32Array(f.W*f.H))}
+ for(let yy=Math.max(2,Math.floor(y-R*2));yy<=Math.min(f.H-3,Math.ceil(y+R*2));yy++)for(let xx=Math.max(2,Math.floor(x-R*2));xx<=Math.min(f.W-3,Math.ceil(x+R*2));xx++){
+ const i=yy*f.W+xx,ax=(xx-x)/Math.max(R,1),ay=(yy-y)/Math.max(R,1),d=Math.hypot(ax,ay);if(d>1.5)continue;const v=Math.exp(-d*d*2.5)*force;
+ if(tool==="eraser"){for(const p of f.pigment)p[i]*=(1-.20*v);f.wet[i]*=(1-.2*v)}
+ else{f.wet[i]=Math.min(3,f.wet[i]+(tool==="water"?1.6:.95)*v);const out=(tool==="water"?2.6:1.8)*v;f.vx[i]=Math.max(-4,Math.min(4,f.vx[i]+ax*out+dx*.12*v));f.vy[i]=Math.max(-4,Math.min(4,f.vy[i]+ay*out+dy*.12*v));if(tool==="brush")f.pigment[ci][i]=Math.min(3,f.pigment[ci][i]+.19*v*f.paper[i])}
+ }f.active=210;requestFluid();
+ };
+ const point=(e:React.PointerEvent<HTMLCanvasElement>)=>{const r=e.currentTarget.getBoundingClientRect();return{x:e.clientX-r.left,y:e.clientY-r.top}};
+ const move=(e:React.PointerEvent<HTMLCanvasElement>)=>{if(!drawing.current)return;const p=point(e),prev=last.current||p,dx=p.x-prev.x,dy=p.y-prev.y,steps=Math.max(1,Math.ceil(Math.hypot(dx,dy)/9));for(let j=1;j<=steps;j++){const t=j/steps;deposit(prev.x+dx*t,prev.y+dy*t,dx/steps,dy/steps,.75)}last.current=p};
+ const start=(e:React.PointerEvent<HTMLCanvasElement>)=>{const canvas=ref.current,ctx=canvas?.getContext("2d");if(!canvas||!ctx)return;if(!fluid.current)fluidInit();history.current.push(ctx.getImageData(0,0,canvas.width,canvas.height));if(history.current.length>12)history.current.shift();setRevision(v=>v+1);drawing.current=true;last.current=point(e);canvas.setPointerCapture(e.pointerId);deposit(last.current.x,last.current.y,0,0,1.5)};
  const stop=()=>{drawing.current=false;last.current=null};
- const clear=()=>{const canvas=ref.current,ctx=canvas?.getContext("2d");if(!canvas||!ctx)return;history.current.push(ctx.getImageData(0,0,canvas.width,canvas.height));ctx.fillStyle="#fbf9f5";ctx.fillRect(0,0,canvas.width,canvas.height);setRevision(v=>v+1)};
- const undo=()=>{const canvas=ref.current,ctx=canvas?.getContext("2d"),prev=history.current.pop();if(canvas&&ctx&&prev){ctx.putImageData(prev,0,0);setRevision(v=>v+1)}};
- const surprise=()=>{const canvas=ref.current,ctx=canvas?.getContext("2d");if(!canvas||!ctx)return;
+ const clear=()=>{const canvas=ref.current,ctx=canvas?.getContext("2d");if(!canvas||!ctx)return;history.current.push(ctx.getImageData(0,0,canvas.width,canvas.height));const f=fluid.current;if(f){if(f.raf)cancelAnimationFrame(f.raf);fluid.current=null}ctx.save();ctx.setTransform(1,0,0,1,0,0);ctx.fillStyle="#fbf9f5";ctx.fillRect(0,0,canvas.width,canvas.height);ctx.restore();setRevision(v=>v+1)};
+ const undo=()=>{const canvas=ref.current,ctx=canvas?.getContext("2d"),prev=history.current.pop();if(canvas&&ctx&&prev){const f=fluid.current;if(f?.raf)cancelAnimationFrame(f.raf);fluid.current=null;ctx.putImageData(prev,0,0);setRevision(v=>v+1)}};
+
+ const surprise=()=>{const canvas=ref.current,ctx=canvas?.getContext("2d");if(!canvas||!ctx)return;const f=fluid.current;if(f?.raf)cancelAnimationFrame(f.raf);fluid.current=null;
  history.current.push(ctx.getImageData(0,0,canvas.width,canvas.height));if(history.current.length>12)history.current.shift();
  const w=canvas.width,h=canvas.height,choice=Math.floor(Math.random()*20),rand=(a:number,b:number)=>a+Math.random()*(b-a);
  const wash=(x:number,y:number,r:number,c:string,alpha=.12)=>{ctx.save();ctx.globalCompositeOperation="multiply";for(let k=0;k<5;k++){const xx=x+rand(-r*.12,r*.12),yy=y+rand(-r*.12,r*.12),rr=r*rand(.7,1.1);const g=ctx.createRadialGradient(xx,yy,0,xx,yy,rr);g.addColorStop(0,c+Math.round(alpha*255).toString(16).padStart(2,"0"));g.addColorStop(.65,c+"0b");g.addColorStop(1,c+"00");ctx.fillStyle=g;ctx.beginPath();ctx.arc(xx,yy,rr,0,Math.PI*2);ctx.fill()}ctx.restore()};
