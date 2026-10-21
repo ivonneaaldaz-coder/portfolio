@@ -9688,3 +9688,24 @@ html.intro-seen #site-intro{display:none}
 .pinterest-reference-page .pinterest-native-card img{display:block;width:100%;height:auto;transition:transform .45s ease}
 .pinterest-reference-page .pinterest-native-card:hover img{transform:scale(1.025)}
 @media(max-width:700px){.visual-index-page.pinterest-reference-page{padding:42px 7% 100px}.pinterest-reference-page .collection-intro h1{font-size:clamp(46px,11vw,68px)}}
+
+
+/* Redesign Work index — scoped to avoid changing existing case-study routes */
+.redesign-work{--work-blue:#214bd0;max-width:1650px;margin:auto;padding:clamp(45px,7vw,110px) clamp(28px,7vw,116px) 150px;color:var(--work-blue)}
+.redesign-work-intro{padding-bottom:clamp(60px,9vw,140px)}
+.redesign-eyebrow{font-size:11px;text-transform:uppercase;letter-spacing:.17em}
+.redesign-work-intro h1{font:400 clamp(85px,13vw,210px)/.95 Georgia,'Times New Roman',serif;letter-spacing:-.075em;margin:35px 0}
+.redesign-work-intro>p:last-child{font-size:clamp(16px,1.65vw,23px);line-height:1.55;max-width:580px}
+.redesign-work-section{margin:0 0 110px}
+.redesign-section-head{display:flex;align-items:baseline;justify-content:space-between;border-bottom:1px solid currentColor;padding:0 0 18px;margin:0 0 24px;gap:20px}
+.redesign-section-head h2{font:400 clamp(34px,4vw,60px)/1 Georgia,serif;letter-spacing:-.04em;margin:0}
+.redesign-section-head span{font-size:11px;text-transform:uppercase;letter-spacing:.1em}
+.redesign-work-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
+.redesign-work-card{border:1px solid currentColor;min-height:290px;padding:24px;display:flex;flex-direction:column;justify-content:space-between;transition:background .25s,color .25s}
+.redesign-work-card:hover{background:var(--work-blue);color:#f8f7f3}
+.redesign-card-top{display:flex;justify-content:space-between;font-size:13px}
+.redesign-card-top span:last-child{font-size:24px}
+.redesign-work-card p{text-transform:uppercase;letter-spacing:.13em;font-size:10px;margin:0 0 12px}
+.redesign-work-card h3{font:400 clamp(27px,3vw,45px)/1.07 Georgia,serif;letter-spacing:-.035em;margin:0 0 15px;max-width:600px}
+.redesign-work-card small{font-size:12px}
+@media(max-width:700px){.redesign-work{padding:48px 7% 90px}.redesign-work-grid{grid-template-columns:1fr}.redesign-work-card{min-height:235px}.redesign-section-head span{display:none}.redesign-work-intro{padding-bottom:70px}}
