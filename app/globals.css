@@ -9859,3 +9859,22 @@ html.intro-seen #site-intro{display:none}
 .selected-work-brand-strip button[data-has-case="true"]:hover,
 .selected-work-brand-strip button[data-has-case="true"]:focus-visible{background:rgba(140,140,140,.22)}
 @media(max-width:780px){.selected-work-preview-stage{height:300px}}
+
+
+/* Approved About-style brand wall, with case-study hover behavior. */
+.selected-work-brand-grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));border-top:1px solid var(--line);border-left:1px solid var(--line);margin:0 0 28px}
+.selected-work-brand-grid button{display:grid;place-items:center;text-align:center;min-height:78px;padding:15px 12px;border:0;border-right:1px solid var(--line);border-bottom:1px solid var(--line);background:transparent;color:inherit;font-size:clamp(11px,.95vw,14px);font-weight:600;line-height:1.35;transition:background-color .18s ease,color .18s ease;cursor:default}
+.selected-work-brand-grid button[data-has-case="true"]{cursor:pointer}
+.selected-work-brand-grid button.active,.selected-work-brand-grid button[data-has-case="true"]:hover,.selected-work-brand-grid button:focus-visible{background:rgba(140,140,140,.18)}
+.selected-work-brand-grid button:focus-visible{outline:2px solid currentColor;outline-offset:-3px}
+.selected-work-case{transition:opacity .16s ease}
+.about-short-version{padding:clamp(65px,8vw,125px) 0}
+.about-short-version h2{font-size:clamp(32px,3.8vw,54px);font-weight:500;letter-spacing:-.055em;margin:0 0 24px}
+.about-short-version>p{max-width:770px;color:var(--muted);font-size:clamp(16px,1.4vw,19px);line-height:1.75;margin:0 0 22px}
+.about-venture-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin-top:clamp(45px,6vw,85px)}
+.about-venture-grid>a{min-height:165px;border:1px solid var(--line);padding:25px;display:flex;flex-direction:column;justify-content:space-between;transition:background .2s ease}
+.about-venture-grid>a:hover{background:rgba(140,140,140,.1)}
+.about-venture-grid strong{font-size:clamp(22px,2vw,30px);font-weight:500;letter-spacing:-.04em}
+.about-venture-grid span{font-size:12px;color:var(--muted)}
+@media(max-width:850px){.selected-work-brand-grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media(max-width:560px){.selected-work-brand-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.about-venture-grid{grid-template-columns:1fr}.about-venture-grid>a{min-height:115px}}
