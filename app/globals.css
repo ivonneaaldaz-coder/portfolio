@@ -9812,7 +9812,7 @@ html.intro-seen #site-intro{display:none}
 .selected-work-title h2{font-size:clamp(34px,3.3vw,52px);font-weight:500;line-height:1.08;letter-spacing:-.055em;margin:0}
 .selected-work-title>a{font-size:12px;border-bottom:1px solid var(--line);padding-bottom:8px}
 .selected-work-projects{display:grid;grid-template-columns:minmax(230px,.39fr) minmax(0,.61fr);gap:clamp(30px,5vw,85px)}
-.selected-work-index h3,.selected-work-company-section h3{font-size:clamp(27px,2.8vw,40px);font-weight:500;line-height:1.15;letter-spacing:-.045em;margin:0 0 25px}
+.selected-work-index h3,.selected-work-company-section h3{font-size:clamp(27px,2.8vw,40px);font-weight:400;line-height:1.15;letter-spacing:-.045em;margin:0 0 25px}
 .selected-work-scroll{max-height:460px;overflow-y:auto;overscroll-behavior:contain;border-top:1px solid var(--line);scrollbar-width:thin}
 .selected-work-scroll button{display:grid;grid-template-columns:30px 1fr 20px;align-items:center;gap:12px;width:100%;border:0;border-bottom:1px solid var(--line);background:transparent;color:inherit;text-align:left;padding:18px 12px;cursor:pointer}
 .selected-work-scroll button.active,.selected-work-scroll button:hover{background:rgba(140,140,140,.12)}
@@ -9844,7 +9844,7 @@ html.intro-seen #site-intro{display:none}
 .selected-work-case-copy h4{font-size:clamp(25px,2.8vw,42px);font-weight:500;letter-spacing:-.05em;margin:25px 0 16px}
 .selected-work-case-copy p{font-size:14px;line-height:1.7;color:var(--muted);margin:0 0 30px}
 .selected-work-case-copy>a{margin-top:auto}
-.work-hybrid-intro{padding:clamp(45px,5vw,80px) 0 0}.work-hybrid-intro h1{font-size:clamp(46px,6vw,84px);font-weight:500;letter-spacing:-.065em;line-height:1.06;margin:0 0 25px}
+.work-hybrid-intro{padding:clamp(45px,5vw,80px) 0 0}.work-hybrid-intro h1{font-size:clamp(46px,6vw,84px);font-weight:400;letter-spacing:-.065em;line-height:1.06;margin:0 0 25px}
 .work-hybrid-intro p{font-size:16px;color:var(--muted);max-width:620px;line-height:1.65}
 @media(max-width:780px){.selected-work-projects,.selected-work-case{grid-template-columns:1fr}.selected-work-scroll{display:flex;overflow-x:auto;overflow-y:hidden;max-height:none;border-bottom:1px solid var(--line)}.selected-work-scroll button{flex:0 0 190px;border-bottom:0;border-right:1px solid var(--line);grid-template-columns:1fr 16px}.selected-work-index-number{display:none}.selected-work-preview-stage{min-height:300px}.selected-work-company-section{margin-top:85px}.selected-work-title{margin-bottom:50px}.selected-work-brand-strip button{padding:16px 20px;min-height:60px}}
 
