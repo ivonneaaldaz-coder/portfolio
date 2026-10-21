@@ -1,0 +1,25 @@
+/* Art v11 prototype geometry, scoped to avoid modifying the rest of the portfolio. Colors inherit the site theme. */
+.art-v11{color:var(--ink);background:transparent;--art-sub:var(--muted);--art-line:var(--line)}
+.art-v11 .art-v11-content{max-width:1540px;margin:auto;padding:30px 4.2% 100px}
+.art-v11 .art-lede{max-width:800px;margin:36px 0 105px}
+.art-v11 .art-lede h1{font:normal clamp(33px,3.7vw,54px)/1.19 Georgia,serif;letter-spacing:-.045em;margin:0;color:var(--ink)}
+.art-v11 .gallery{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:80px 4.1%;align-items:start}
+.art-v11 .work{display:block;border:0;background:none;color:inherit;text-align:center;padding:0;cursor:pointer;width:100%;min-width:0}
+.art-v11 .artwork{display:flex;align-items:center;justify-content:center;width:100%;min-height:180px;transition:transform .25s}
+.art-v11 .artwork img{display:block;max-width:100%;width:100%;height:auto;object-fit:contain;transition:transform .35s;filter:drop-shadow(0 8px 10px rgba(0,0,0,.025))}
+.art-v11 .work:hover .artwork img{transform:translateY(-5px)}
+.art-v11 .work-title{display:block;font:normal clamp(23px,2.15vw,33px)/1.12 Georgia,serif;letter-spacing:-.045em;margin:22px 0 12px;color:var(--ink)}
+.art-v11 .meta-row{display:block}.art-v11 .work-meta{display:block;color:var(--art-sub);font-size:11px;line-height:1.7;letter-spacing:.09em;text-transform:uppercase}
+.art-v11 .art-editorial{margin-top:160px;border-top:1px solid var(--art-line)}
+.art-v11 .editorial-row{display:grid;grid-template-columns:34% 1fr;gap:7%;padding:58px 0 72px;border-bottom:1px solid var(--art-line)}
+.art-v11 .editorial-row h2{font:normal clamp(30px,3.3vw,49px)/1.13 Georgia,serif;letter-spacing:-.05em;margin:0;color:var(--ink)}
+.art-v11 .editorial-copy{max-width:680px}.art-v11 .editorial-copy p{font-size:clamp(17px,1.5vw,21px);line-height:1.65;letter-spacing:-.01em;margin:0 0 21px}
+.art-v11 .history-list{width:100%}.art-v11 .history-item{display:grid;grid-template-columns:65px 1fr;gap:20px;border-top:1px solid var(--art-line);padding:19px 0}
+.art-v11 .history-item:first-child{border-top:0;padding-top:0}.art-v11 .history-year{color:var(--art-sub);font-size:12px;padding-top:4px}
+.art-v11 .history-item strong{display:block;font:normal 24px Georgia,serif;letter-spacing:-.03em}.art-v11 .history-item div span{display:block;color:var(--art-sub);font-size:12px;letter-spacing:.05em;margin-top:6px}
+.art-v11 .viewer{position:fixed;inset:0;background:var(--bg);z-index:90;display:flex;flex-direction:column;padding:20px 3%;color:var(--ink)}
+.art-v11 .viewer-top{display:flex;justify-content:space-between;align-items:center;gap:20px;font-size:12px}.art-v11 .viewer-top button,.art-v11 .viewer-controls button{border:0;background:none;color:inherit;cursor:pointer;font-size:16px;padding:10px}
+.art-v11 .viewer-body{flex:1;display:flex;justify-content:center;align-items:center;min-height:0;padding:12px}.art-v11 .viewer-body img{max-width:100%;max-height:100%;object-fit:contain}
+.art-v11 .viewer-bottom{display:flex;justify-content:space-between;align-items:center;gap:20px;padding:10px 0}.art-v11 .viewer-bottom strong{font:normal 27px Georgia,serif}.art-v11 .viewer-bottom p{white-space:pre-line;font-size:11px;letter-spacing:.07em;color:var(--art-sub);text-transform:uppercase}.art-v11 .viewer-controls{display:flex;gap:10px;white-space:nowrap}
+@media(max-width:850px){.art-v11 .gallery{grid-template-columns:repeat(2,minmax(0,1fr));gap:56px 5%}.art-v11 .art-lede{margin-bottom:75px}.art-v11 .art-editorial{margin-top:110px}.art-v11 .editorial-row{grid-template-columns:1fr;gap:25px}}
+@media(max-width:550px){.art-v11 .art-v11-content{padding:15px 5% 65px}.art-v11 .gallery{grid-template-columns:1fr;gap:49px}.art-v11 .art-lede{margin:25px 0 65px}.art-v11 .art-lede h1{font-size:clamp(30px,8vw,42px)}.art-v11 .work-title{font-size:28px}.art-v11 .artwork{min-height:0}.art-v11 .art-editorial{margin-top:90px}.art-v11 .editorial-row{padding:37px 0 49px}.art-v11 .history-item strong{font-size:21px}.art-v11 .viewer-bottom strong{font-size:20px}.art-v11 .viewer-bottom{align-items:flex-start}.art-v11 .viewer-controls{gap:0}}
