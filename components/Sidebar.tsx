@@ -2,7 +2,6 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import SidebarSubscribe from "@/components/SidebarSubscribe";
 
 const links = [
   { label: "Overview", href: "/" },
@@ -53,8 +52,6 @@ export default function Sidebar() {
         <div className="sidebar-status">
           <p><span className="status-dot" /> Available for select projects</p>
         </div>
-
-        <div className="sidebar-footer"><SidebarSubscribe /></div>
       </div>
     </aside>
   );
