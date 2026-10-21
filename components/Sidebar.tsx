@@ -1,79 +1,32 @@
 "use client";
-
+import { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import SidebarSubscribe from "@/components/SidebarSubscribe";
 
 const links = [
-  { label: "Overview", href: "/" },
-  { label: "Work", href: "/work" },
-  { label: "Lab ↗︎", href: "https://lab.ivonnealdaz.com", external: true },
-  { label: "Art", href: "/art" },
-  { label: "Travel", href: "/travel" },
-  { label: "Press", href: "/#press" },
-  { label: "About", href: "/about" },
+  { label:"Home", href:"/" },
+  { label:"Work", href:"/work" },
+  { label:"Lab ↗", href:"https://lab.ivonnealdaz.com", external:true },
+  { label:"About", href:"/about" },
 ];
-
-export default function Sidebar() {
-  const pathname = usePathname();
-
-  const handleInternalClick = (href: string) => {
-    if (href === "/about" && pathname === "/about") {
-      window.scrollTo({ top: 0, behavior: "smooth" });
-    }
-  };
-
-  return (
-    <aside className="sidebar">
-      <div>
-        <Link className="brand" href="/">IVONNE ALDAZ</Link>
-        <p className="brand-sub">Strategist / Artist / Builder</p>
-
-        <nav className="sidebar-nav" aria-label="Primary">
-          {links.map((link) => {
-            const active = !link.external && link.href === "/" && pathname === "/";
-            return link.external ? (
-              <a key={link.label} href={link.href} target="_blank" rel="noreferrer">
-                {link.label}
-              </a>
-            ) : (
-              <Link
-                key={link.label}
-                href={link.href}
-                className={active ? "active" : ""}
-                onClick={() => handleInternalClick(link.href)}
-              >
-                {link.label}
-              </Link>
-            );
-          })}
-          <div className="sidebar-library">
-            <span className="sidebar-library-label">Library</span>
-            <Link href="/books">Books + Quotes</Link>
-            <Link href="/music">Music</Link>
-            <Link href="/visual-references">Visual References</Link>
-          </div>
-        </nav>
-      </div>
-
-      <div className="sidebar-bottom">
-        <div className="sidebar-status">
-          <p><span className="status-dot" /> Available for select projects</p>
-        </div>
-
-        <div className="sidebar-footer">
-          <SidebarSubscribe />
-          <div className="sidebar-socials" aria-label="Social links">
-            <a href="https://www.pinterest.com/ivonnealdaz/" target="_blank" rel="noreferrer">Pinterest ↗︎</a>
-            <a href="https://github.com/ivonneaaldaz-coder" target="_blank" rel="noreferrer">GitHub ↗︎</a>
-            <a href="https://www.linkedin.com/in/ivonnealdaz/" target="_blank" rel="noreferrer">LinkedIn ↗︎</a>
-            <a href="https://x.com/ivonnealdazz" target="_blank" rel="noreferrer">X ↗︎</a>
-          </div>
-          <a className="listen-link" href="https://open.spotify.com/user/ivonnealdaz" target="_blank" rel="noreferrer">
-            Listen on Spotify ↗︎
-          </a>
-        </div>
-      </div>
-    </aside>
-  );
+const library = [
+  { label:"Art", href:"/art" },
+  { label:"Travel", href:"/travel" },
+  { label:"Books + Quotes", href:"/books" },
+  { label:"Music", href:"/music" },
+  { label:"Visual References", href:"/visual-references" },
+];
+export default function Sidebar(){
+  const pathname=usePathname();
+  const [libraryOpen,setLibraryOpen]=useState(()=>library.some(x=>x.href===pathname));
+  return <aside className="sidebar">
+    <div><Link className="brand" href="/">IVONNE ALDAZ</Link><p className="brand-sub">Strategist / Artist / Builder</p>
+      <nav className="sidebar-nav" aria-label="Primary">
+        {links.map(link=>link.external?<a key={link.href} href={link.href} target="_blank" rel="noreferrer">{link.label}</a>:<Link key={link.href} href={link.href} className={pathname===link.href?"active":""}>{link.label}</Link>)}
+        <button type="button" className="sidebar-library-toggle" aria-expanded={libraryOpen} aria-controls="sidebar-library-links" onClick={()=>setLibraryOpen(v=>!v)}>Library <span aria-hidden="true">{libraryOpen?"−":"+"}</span></button>
+        {libraryOpen&&<div id="sidebar-library-links" className="sidebar-library">{library.map(link=><Link key={link.href} className={pathname===link.href?"active":""} href={link.href}>{link.label}</Link>)}</div>}
+      </nav>
+    </div>
+    <div className="sidebar-bottom"><div className="sidebar-status"><p><span className="status-dot"/> Available for select projects</p></div></div>
+  </aside>;
 }
