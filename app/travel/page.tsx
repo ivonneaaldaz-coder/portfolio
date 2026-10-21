@@ -24,12 +24,11 @@ const photographs = [
 export default function TravelPage() {
   return (
     <section className="travel-page page">
-      <header className="travel-intro section-pad travel-intro-with-back">
+      <header className="travel-intro section-pad">
         <div>
           <h1>Travel</h1>
           <p>Photos from places I’ve been.</p>
         </div>
-        <Link href="/#library">← Back to Library</Link>
       </header>
 
       <TravelGallery photographs={photographs} />

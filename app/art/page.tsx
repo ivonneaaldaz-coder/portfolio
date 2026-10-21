@@ -43,7 +43,7 @@ export default function ArtPage() {
       <section className="art-prototype-statement section-pad"><h2>Artist statement</h2><div><p>My work explores the spaces between memory and place — how color, light, and silence can hold emotion.</p><p>I work across acrylic painting, watercolor, and ceramics. Moving between abstraction and observation, I return to the places I've been, the moments I remember, and the feelings that linger long after an experience ends.</p><p>Residencies in France and Italy have shaped the way I see and make work. Painting offers a slower way to notice, to remember, and to give something fleeting a physical form.</p></div></section>
       <section className="art-history section-pad">
         <div className="art-history-column">
-          <div className="section-heading"><h2 className="section-title small-title">Exhibitions & residencies</h2></div>
+          <div className="section-heading"><h2 className="section-title small-title">Exhibitions</h2></div>
           {exhibitions.map(([year,place,title]) => (
             <div className="art-history-row" key={year+place}><span>{year}</span><div><h3>{place}</h3><p>{title}</p></div></div>
           ))}

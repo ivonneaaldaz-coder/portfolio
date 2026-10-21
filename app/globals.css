@@ -10042,9 +10042,9 @@ html.intro-seen #site-intro{display:none}
 .work-hybrid-page .selected-work-explorer{margin-top:0!important}
 .work-hybrid-page .selected-work-company-section>h3,
 .work-hybrid-page .overview-press .section-title,
-.work-hybrid-page .overview-writing-section .section-title{font-size:clamp(25px,2.6vw,36px)!important;font-weight:600!important;line-height:1.15!important;letter-spacing:-.045em!important;font-family:inherit!important}
+.work-hybrid-page .overview-writing-section .section-title{font-size:clamp(25px,2.6vw,36px)!important;font-weight:400!important;line-height:1.15!important;letter-spacing:-.045em!important;font-family:inherit!important}
 .work-hybrid-page .overview-press-row h3{font-size:inherit!important}
 .work-hybrid-page .overview-press-row h3,
-.work-hybrid-page .overview-writing-row h4{font-size:clamp(13px,1.1vw,16px)!important;line-height:1.4!important;font-weight:600!important;letter-spacing:-.015em!important}
+.work-hybrid-page .overview-writing-row h4{font-size:clamp(13px,1.1vw,16px)!important;line-height:1.4!important;font-weight:400!important;letter-spacing:-.015em!important}
 .work-hybrid-page>.overview-writing-section{border-bottom:0!important;padding-bottom:0!important}
 .work-hybrid-page>.overview-writing-section .overview-writing{border-bottom:0!important}

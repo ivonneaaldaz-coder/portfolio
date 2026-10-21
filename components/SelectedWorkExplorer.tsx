@@ -9,6 +9,7 @@ const projects=[
 {title:"Chatroom",meta:"Community experiment",description:"An old-internet-inspired public chatroom.",href:"/experiments/chatroom",loop:"chat"},
 {title:"Snake",meta:"Game",description:"A playable experiment with a leaderboard.",href:"/experiments/snake",loop:"snake"},
 {title:"Moodboard Agent",meta:"Creative technology",description:"A visual inspiration and carousel-building experiment.",href:"/experiments/moodboard-agent",loop:null},
+{title:"Art Practice",meta:"Painting / Watercolor / Ceramics",description:"Selected artworks, exhibitions, and an evolving art practice.",href:"/art",loop:null},
 {title:"Whitespace",meta:"Creative studio",description:"Brand, marketing, and operating systems.",href:"https://www.bywhitespace.com/",loop:null},
 {title:"Good World Living",meta:"Creative platform",description:"A collection of art, travel, experiences, and intentional living.",href:"https://www.goodworldliving.com/",loop:null}
 ];
