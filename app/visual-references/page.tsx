@@ -10,19 +10,14 @@ export default async function VisualReferencesPage() {
 
   return (
     <section className="page section-pad visual-index-page pinterest-reference-page">
+      <Link className="visual-back-link" href="/#library">← Back to Library</Link>
       <header className="collection-intro">
         <div>
           <h1>Visual References</h1>
           <p>Images, spaces, colors, and details that have inspired me.</p>
         </div>
-        <Link href="/#library">← Back to Library</Link>
+        <a href="https://www.pinterest.com/ivonnealdaz/_pins/" target="_blank" rel="noreferrer">View on Pinterest ↗</a>
       </header>
-
-      <div className="pinterest-reference-header">
-        <a href="https://www.pinterest.com/ivonnealdaz/_pins/" target="_blank" rel="noreferrer">
-          View on Pinterest ↗︎
-        </a>
-      </div>
 
       {pins.length ? <PinterestGallery pins={pins} /> : <PinterestProfileFallback />}
 
