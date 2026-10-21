@@ -21,10 +21,11 @@ export default function ExperimentLoop({ name, label }: { name: string; label: s
     }, { rootMargin: "200px" });
     io.observe(video);
     return () => io.disconnect();
-  }, []);
+  }, [name]);
 
   return (
     <video
+      key={name}
       ref={ref}
       className="experiment-loop"
       poster={`/experiments/${name}.webp`}
