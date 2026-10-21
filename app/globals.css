@@ -9959,3 +9959,27 @@ html.intro-seen #site-intro{display:none}
 .selected-work-more-brands:hover{background:rgba(140,140,140,.12)}
 .hybrid-watercolor-heading>h2{margin-bottom:28px}
 @media(max-width:900px){.sidebar-nav{margin-top:0}}
+
+/* Watercolor: compact icon-only tools with popover controls */
+.watercolor-toolbox{position:relative;overflow:visible!important;gap:8px!important}
+.watercolor-toolbox>button{display:grid;place-items:center;min-height:36px;min-width:36px;padding:7px!important}
+.watercolor-toolbox>button svg{display:block}
+.watercolor-size-dot{display:block;border:1.5px solid currentColor;border-radius:50%;max-width:22px;max-height:22px}
+.watercolor-active-color{width:26px;height:26px;border:1px solid #999;outline:1px solid #333;outline-offset:2px;margin:12px auto}
+.watercolor-tool-panel{position:absolute;left:calc(100% + 10px);top:15%;z-index:12;width:210px;padding:16px;background:#191919;border:1px solid #555;color:#f5f3ee;box-shadow:0 12px 30px #0008;font-size:12px}
+.watercolor-tool-panel strong{display:block;font-size:13px;margin-bottom:16px;font-weight:500}
+.watercolor-tool-panel label{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:10px 0;font-size:11px}
+.watercolor-tool-panel input[type="range"]{accent-color:#c6a476;width:100%}
+.watercolor-tool-panel input[type="color"]{width:38px;height:32px;border:0;background:transparent;cursor:pointer}
+.watercolor-size-panel{width:105px;min-height:190px;display:flex;align-items:center;flex-direction:column}
+.watercolor-size-panel label{white-space:nowrap}
+.watercolor-size-panel input[type="range"]{writing-mode:vertical-lr;direction:rtl;appearance:slider-vertical;width:22px;height:125px}
+.watercolor-swatch-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:16px}
+.watercolor-swatch-grid button{width:30px;height:30px;min-width:0;min-height:0;border:1px solid #999;border-radius:50%;padding:0}
+.watercolor-swatch-grid button[aria-pressed="true"]{outline:2px solid #f5f3ee;outline-offset:3px}
+.watercolor-mix-inputs{display:flex;gap:15px}
+.watercolor-mix-inputs label{flex-direction:column}
+.watercolor-mixer-panel>label{display:block}
+.watercolor-mix-preview{height:36px;border:1px solid #777;margin:12px 0}
+.watercolor-panel-action{display:block;width:100%;padding:10px 8px;border:1px solid #777;background:transparent;color:inherit;text-align:center;cursor:pointer}
+@media(max-width:650px){.watercolor-tool-panel{width:170px;left:calc(100% + 4px);padding:10px}.watercolor-size-panel{width:85px}}
