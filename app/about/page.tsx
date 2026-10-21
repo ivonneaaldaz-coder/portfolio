@@ -111,97 +111,72 @@ const visibleBrands = brands.slice(0,10);
 export default async function AboutPage() {
   const github = await getGitHubContributions();
   const githubCalendar = buildGitHubCalendar(github?.days || []);
-
   return (
-    <section id="about-top" className="page section-pad about-page">
-      <div className="about-hero">
-        <div className="about-portrait about-portrait-single">
-          <img src={driveImageUrl("1UJ7HG3gZU2zD5Y_kdHwCXLGjm1llx_Xc")} alt="Ivonne Aldaz" />
-        </div>
-        <div className="about-copy">
-          <h1>Strategist, artist, builder, educator.</h1>
-          <p>I build brands, ventures, systems, and ideas with scale in mind — across reach, impact, and revenue.</p>
-          <div className="about-links">
-            <Link href="/work">Selected work →</Link>
-            <Link href="/art">Art practice →</Link>
-            <a href="https://lab.ivonnealdaz.com" target="_blank" rel="noreferrer">The Lab ↗︎</a>
-            <Link href="/press">Press + speaking →</Link>
-          </div>
-        </div>
-      </div>
-
-      <section className="about-section about-resume-section">
-        <div className="about-resume-row">
-          <div className="about-resume-content">
-            <p className="about-resume-label">Experience</p>
-            <div className="about-experience-list">
-              {experience.map(item => (
-                <div className="about-experience-item" key={item.role + item.company}>
-                  <div>
-                    <h3>{item.role}</h3>
-                    <p>{item.company}</p>
-                  </div>
-                  <span>{item.dates}</span>
-                </div>
-              ))}
-              <details className="about-earlier-experience about-disclosure">
-                <summary><span>Earlier experience</span><span aria-hidden="true">＋</span></summary>
-                <div>
-                  {earlierExperience.map(item => (
-                    <div className="about-experience-item" key={item.role + item.company}>
-                      <div>
-                        <h3>{item.role}</h3>
-                        <p>{item.company}</p>
-                      </div>
-                      <span>{item.dates}</span>
-                    </div>
-                  ))}
-                </div>
-              </details>
-            </div>
-          </div>
-        </div>
-
-      <section className="about-section">
-        <div className="section-heading"><h2 className="section-title small-title">Selected brands</h2></div>
-        <div className="brand-wall">
-          {visibleBrands.map((brand)=><div className="brand-name" key={brand}><strong>{brand}</strong></div>)}
-        </div>
-      </section>
-
-        <div className="about-resume-row">
-          <div className="about-resume-content">
-            <p className="about-resume-label">Capabilities</p>
-            <div className="about-capabilities-grid">
-              {capabilities.map(item => <span key={item}>{item}</span>)}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section className="about-section about-teaching-section">
-        <div className="section-heading"><h2 className="section-title small-title">Teaching</h2></div>
-        <div className="about-exhibitions-list about-teaching-list">
-          <div className="about-exhibition-row">
-            <div>
-              <h3>Adjunct Professor of Marketing</h3>
-              <p className="teaching-school">St. Mary’s University</p>
-              <p className="teaching-course">Principles of Marketing</p>
-            </div>
-            <span>Spring 2027</span>
-          </div>
-          <div className="about-exhibition-row">
-            <div>
-              <h3>Lecturer in Marketing</h3>
-              <p className="teaching-school">University of the Incarnate Word</p>
-              <p className="teaching-course">Consumer Behavior · International Entrepreneurship</p>
-            </div>
-            <span>Spring 2027</span>
-          </div>
-        </div>
-      </section>
-
-      <section className="about-section">
+    <section className="page editorial-about" id="about-top">
+      <style>{`
+        .editorial-about{--editorial-blue:#3348ec;--editorial-line:rgba(110,117,155,.22);max-width:930px;margin:0 auto;padding:0 70px 170px;color:var(--ink)}
+        .editorial-about .editorial-hero{display:grid;grid-template-columns:minmax(0,1fr) 180px;gap:70px;align-items:start;padding:135px 0 128px}
+        .editorial-about .editorial-hero h1{font-family:Georgia,"Times New Roman",serif;font-weight:400;letter-spacing:-.065em;font-size:clamp(54px,5.4vw,78px);line-height:.99;margin:0 0 32px}
+        .editorial-about .editorial-hero p{font-size:15px;line-height:1.75;max-width:395px;margin:0 0 17px}
+        .editorial-about .editorial-hero small{font-size:10px;opacity:.55}
+        .editorial-about .editorial-portrait{width:180px;aspect-ratio:3/4;object-fit:cover;margin-top:20px;filter:grayscale(1)}
+        .editorial-about .editorial-row{display:grid;grid-template-columns:36% 1fr;gap:28px;border-top:1px solid var(--editorial-line);padding:70px 0 115px}
+        .editorial-about .editorial-row h2,.editorial-about .editorial-full h2{font:400 clamp(30px,3vw,38px)/1.06 Georgia,"Times New Roman",serif;letter-spacing:-.055em;margin:0}
+        .editorial-about .editorial-row p{font-size:14px;line-height:1.72;margin:0 0 19px}
+        .editorial-about .editorial-entry{padding:0 0 17px;margin:0 0 16px;border-bottom:1px solid var(--editorial-line);display:flex;justify-content:space-between;gap:16px}
+        .editorial-about .editorial-entry h3{font:400 19px/1.2 Georgia,"Times New Roman",serif;letter-spacing:-.03em;margin:0 0 6px}
+        .editorial-about .editorial-entry p{font-size:11px;opacity:.55;margin:0}
+        .editorial-about .editorial-entry time{font-size:10px;opacity:.55;white-space:nowrap}
+        .editorial-about .editorial-tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:18px}
+        .editorial-about .editorial-tags span{border:1px solid var(--editorial-line);border-radius:30px;padding:7px 11px;font-size:10px}
+        .editorial-about .editorial-full{border-top:1px solid var(--editorial-line);padding:70px 0 115px}
+        .editorial-about .editorial-cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:15px;margin-top:28px}
+        .editorial-about .editorial-card{border:1px solid var(--editorial-line);padding:25px;min-height:200px;display:flex;flex-direction:column;justify-content:space-between}
+        .editorial-about .editorial-card h3{font:400 25px Georgia,"Times New Roman",serif;margin:0}
+        .editorial-about .editorial-card p{font-size:12px;line-height:1.65;opacity:.65;margin:0}
+        .editorial-about .about-section{border-top:1px solid var(--editorial-line);padding:70px 0 115px;margin:0}
+        .editorial-about .section-title{font:400 34px Georgia,"Times New Roman",serif;letter-spacing:-.05em}
+        .editorial-about .quote-grid{margin-top:32px}
+        .editorial-about .about-github-panel{max-width:100%;overflow-x:auto}
+        .editorial-about .long-story{max-width:100%}
+        html[data-theme="light"] .editorial-about{color:#3348ec}
+        html[data-theme="dark"] .editorial-about{color:#f2f0eb;--editorial-line:rgba(255,255,255,.19)}
+        @media(max-width:900px){.editorial-about{padding:0 8% 120px}.editorial-about .editorial-hero{padding:90px 0 100px}}
+        @media(max-width:620px){.editorial-about .editorial-hero{grid-template-columns:1fr;gap:30px;padding:70px 0 90px}.editorial-about .editorial-portrait{margin:0;width:160px}.editorial-about .editorial-row{grid-template-columns:1fr;gap:32px;padding:55px 0 85px}.editorial-about .editorial-full,.editorial-about .about-section{padding:55px 0 85px}.editorial-about .editorial-cards{grid-template-columns:1fr}.editorial-about .editorial-card{min-height:150px}}
+      `}</style>
+      <header className="editorial-hero">
+        <div><h1>A little<br/>about me.</h1><p>I'm a strategist, artist, and builder. I work across brands, technology, and the arts — drawn to ideas that make people think, feel, or see things differently.</p><small>Based in San Antonio, Texas. Often elsewhere.</small></div>
+        <img className="editorial-portrait" src={driveImageUrl("1UJ7HG3gZU2zD5Y_kdHwCXLGjm1llx_Xc")} alt="Ivonne Aldaz portrait"/>
+      </header>
+      <section className="editorial-row"><h2>The short<br/>version.</h2><div>
+        <p>I'm drawn to the intersection of human behavior, creativity, and business. For more than a decade, I've worked across industries—from growing tech companies to global household brands—turning ideas and insights into brands, strategies, and experiences that connect with people and drive growth.</p>
+        <p>I run a creative studio, build independent ventures, and teach marketing at university. Outside of work, you'll usually find me painting, making ceramics, traveling, or experimenting with something on the internet.</p>
+        <p>I grew up on the Texas–Mexico border. I've always been curious about people, places, and what makes us see things differently.</p>
+      </div></section>
+      <section className="editorial-row"><h2>Selected<br/>experience.</h2><div>
+        {[
+          ["Founder · Whitespace","Independent strategy and creative studio","2018 — Present"],
+          ["Director, Brand Insights · TrueLoyal","Formerly TINT","2023 — 2025"],
+          ["Marketing leadership · TINT","Strategy, research, content, and growth","2020 — 2023"],
+          ["VP of Marketing · Patel Gaines","Brand and marketing leadership","2015 — 2018"]
+        ].map(([title,sub,dates])=><div className="editorial-entry" key={title}><div><h3>{title}</h3><p>{sub}</p></div><time>{dates}</time></div>)}
+        <div className="editorial-tags">{capabilities.slice(0,5).map(x=><span key={x}>{x}</span>)}</div>
+      </div></section>
+      <section className="editorial-full"><h2>Things I'm building.</h2><div className="editorial-cards">
+        <a href="https://bywhitespace.com" className="editorial-card"><h3>Whitespace</h3><p>Strategy, creative direction, and systems for ambitious businesses.</p></a>
+        <div className="editorial-card"><h3>Make Space</h3><p>Creative gatherings and hands-on experiences, made with friends.</p></div>
+        <a href="/work" className="editorial-card"><h3>More projects ↗</h3><p>A selection of brands, experiments, and other things I've made.</p></a>
+      </div></section>
+      <section className="editorial-row"><h2>In the<br/>classroom.</h2><div>
+        <div className="editorial-entry"><div><h3>St. Mary's University</h3><p>Adjunct Professor · Principles of Marketing</p></div><time>Spring 2027</time></div>
+        <div className="editorial-entry"><div><h3>University of the Incarnate Word</h3><p>Lecturer · Consumer Behavior + International Entrepreneurship</p></div><time>Spring 2027</time></div>
+      </div></section>
+      <section className="editorial-row"><h2>Education.</h2><div>
+        <div className="editorial-entry"><div><h3>Master of Business Administration</h3><p>St. Mary's University</p></div></div>
+        <div className="editorial-entry"><div><h3>International Business & Economics</h3><p>Hochschule Schmalkalden · In progress</p></div></div>
+      </div></section>
+      <section className="editorial-row"><h2>Beyond work.</h2><div><p>I volunteer with local arts and cultural organizations, teach yoga, and spend as much time as I can making things with my hands.</p><a href="/art">See the art ↗</a></div></section>
+            <section className="about-section">
         <div className="section-heading"><h2 className="section-title small-title">Kind words</h2></div>
         <div className="quote-grid">
           <figure className="quote-card"><blockquote>“A rare find. Deeply data-driven, deeply human.”</blockquote><figcaption>— CEO, TrueLoyal</figcaption></figure>
@@ -209,37 +184,7 @@ export default async function AboutPage() {
           <figure className="quote-card"><blockquote>“Why are we even talking about it? Just hire her.”</blockquote><figcaption>— VP of Sales, TINT</figcaption></figure>
         </div>
       </section>
-
-      <section className="about-section about-exhibitions-section">
-        <div className="section-heading"><h2 className="section-title small-title">Exhibitions + Residencies</h2></div>
-        <div className="about-exhibitions-list">
-          {visibleExhibitions.map(item => (
-            <div className="about-exhibition-row" key={item.title + item.year}>
-              <div>
-                <h3>{item.title}</h3>
-                <p>{item.meta}</p>
-              </div>
-              <span>{item.year}</span>
-            </div>
-          ))}
-        </div>
-        <details className="about-side-quests-more about-exhibitions-more about-disclosure">
-          <summary><span>More exhibitions + residencies</span><span aria-hidden="true">＋</span></summary>
-          <div className="about-exhibitions-list about-exhibitions-list-more">
-            {moreExhibitions.map(item => (
-              <div className="about-exhibition-row" key={item.title + item.year}>
-                <div>
-                  <h3>{item.title}</h3>
-                  <p>{item.meta}</p>
-                </div>
-                <span>{item.year}</span>
-              </div>
-            ))}
-          </div>
-        </details>
-      </section>
-
-      <section className="about-section about-github-section">
+            <section className="about-section about-github-section">
         <div className="section-heading about-github-heading">
           <div>
             <h2 className="section-title small-title">Building</h2>
@@ -293,35 +238,7 @@ export default async function AboutPage() {
           </div>
         </div>
       </section>
-
-      <section className="about-section about-community-section">
-        <div className="about-resume-row">
-          <div className="about-resume-content">
-            <p className="about-resume-label">Side Quests</p>
-            <div className="about-community-list">
-              {visibleSideQuests.map(item => <p key={item}>{item}</p>)}
-            </div>
-            <details className="about-side-quests-more about-disclosure">
-              <summary><span>More side quests</span><span aria-hidden="true">＋</span></summary>
-              <div className="about-community-list about-community-list-more">
-                {moreSideQuests.map(item => <p key={item}>{item}</p>)}
-              </div>
-            </details>
-          </div>
-        </div>
-      </section>
-
-      <section className="about-section education-section">
-        <div className="section-heading"><h2 className="section-title small-title">Education</h2></div>
-        <div className="education-list">
-          <div><h3>MBA</h3><p>St. Mary’s University</p></div>
-          <div><h3>MA, International Business + Economics</h3><p>FH Schmalkalden University of Applied Sciences</p></div>
-          <div><h3>Bachelor of Arts</h3><p>St. Mary’s University</p></div>
-        </div>
-        <div className="education-languages"><span>Languages</span><p>English · Spanish · Some French</p></div>
-      </section>
-
-      <section className="about-section">
+            <section className="about-section">
         <details className="long-story about-disclosure">
           <summary><span>Read the longer story</span><span aria-hidden="true">＋</span></summary>
           <div className="long-story-copy">
