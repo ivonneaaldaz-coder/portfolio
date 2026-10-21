@@ -9758,3 +9758,12 @@ html.intro-seen #site-intro{display:none}
 .editorial-footer .footer-subscribe-link{display:inline-flex;align-items:center;justify-content:space-between;border:1px solid var(--line);padding:17px 20px;min-width:min(100%,240px);transition:opacity .2s}
 .editorial-footer .footer-subscribe-link:hover{opacity:.65}
 @media(max-width:800px){.editorial-footer{grid-template-columns:1fr;gap:35px}.editorial-footer>div{border:0!important;padding:0!important}.editorial-footer .footer-social nav{grid-template-columns:repeat(2,minmax(0,1fr))}}
+
+
+/* Keep the Work experiment aligned with the original site's monochrome theme. */
+.redesign-work{--work-blue:var(--text, #f3f1ed);color:var(--text, #f3f1ed)}
+.work-v9-lab,.work-v9-eve,.work-v9-chat,.work-v9-snake,.work-v9-mood{background:#292927}
+.work-v9-preview-window{background:#e8e4dc;color:#1b1b19}
+.work-v9-logos button.active{background:var(--text,#f3f1ed);color:var(--bg,#111110)}
+.work-v9-feature-art{background:#193d35;color:#f8f7f3}
+.work-v9-project-list button.active{background:rgba(140,140,140,.12)}
