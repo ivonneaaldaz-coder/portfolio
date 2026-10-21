@@ -6,7 +6,7 @@ import SidebarSubscribe from "@/components/SidebarSubscribe";
 
 const links = [
   { label: "Overview", href: "/" },
-  { label: "Work", href: "/#case-studies" },
+  { label: "Work", href: "/work" },
   { label: "Lab ↗︎", href: "https://lab.ivonnealdaz.com", external: true },
   { label: "Art", href: "/art" },
   { label: "Travel", href: "/travel" },
