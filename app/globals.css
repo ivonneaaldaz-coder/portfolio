@@ -9847,3 +9847,15 @@ html.intro-seen #site-intro{display:none}
 .work-hybrid-intro{padding:clamp(45px,5vw,80px) 0 0}.work-hybrid-intro h1{font-size:clamp(46px,6vw,84px);font-weight:500;letter-spacing:-.065em;line-height:1.06;margin:0 0 25px}
 .work-hybrid-intro p{font-size:16px;color:var(--muted);max-width:620px;line-height:1.65}
 @media(max-width:780px){.selected-work-projects,.selected-work-case{grid-template-columns:1fr}.selected-work-scroll{display:flex;overflow-x:auto;overflow-y:hidden;max-height:none;border-bottom:1px solid var(--line)}.selected-work-scroll button{flex:0 0 190px;border-bottom:0;border-right:1px solid var(--line);grid-template-columns:1fr 16px}.selected-work-index-number{display:none}.selected-work-preview-stage{min-height:300px}.selected-work-company-section{margin-top:85px}.selected-work-title{margin-bottom:50px}.selected-work-brand-strip button{padding:16px 20px;min-height:60px}}
+
+
+/* Critical containment: ExperimentLoop uses absolute positioning site-wide.
+   Scope its positioning to the selected Work preview to prevent full-page overlay. */
+.selected-work-project-preview,.selected-work-browser,.selected-work-preview-stage{min-width:0;max-width:100%}
+.selected-work-preview-stage{position:relative;height:clamp(260px,31vw,430px);min-height:0;isolation:isolate;overflow:hidden}
+.selected-work-preview-stage>.experiment-loop{position:absolute!important;inset:0!important;width:100%!important;height:100%!important;max-width:100%!important;max-height:100%!important;object-fit:contain!important;display:block}
+.selected-work-brand-strip button:not([data-has-case="true"]){opacity:.65}
+.selected-work-brand-strip button[data-has-case="true"]{cursor:pointer}
+.selected-work-brand-strip button[data-has-case="true"]:hover,
+.selected-work-brand-strip button[data-has-case="true"]:focus-visible{background:rgba(140,140,140,.22)}
+@media(max-width:780px){.selected-work-preview-stage{height:300px}}
