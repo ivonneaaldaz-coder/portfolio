@@ -122,7 +122,7 @@ export default async function AboutPage() {
         .editorial-about .editorial-portrait{width:275px;aspect-ratio:3/4;object-fit:cover;margin-top:15px;filter:grayscale(1)}
         .editorial-about .editorial-row{display:grid;grid-template-columns:38% minmax(0,1fr);gap:45px;border-top:1px solid var(--editorial-line);padding:90px 0 155px}
         .editorial-about .editorial-row h2,.editorial-about .editorial-full h2{font:400 clamp(35px,3.4vw,45px)/1.06 Georgia,"Times New Roman",serif;letter-spacing:-.055em;margin:0}
-        .editorial-about .editorial-row p{font-size:17px;line-height:1.7;max-width:43ch;margin:0 0 19px}
+        .editorial-about .editorial-row p{font-size:17px;line-height:1.7;max-width:52ch;margin:0 0 19px}
         .editorial-about .editorial-entry{padding:0 0 17px;margin:0 0 16px;border-bottom:1px solid var(--editorial-line);display:flex;justify-content:space-between;gap:16px}
         .editorial-about .editorial-entry h3{font:400 22px/1.2 Georgia,"Times New Roman",serif;letter-spacing:-.03em;margin:0 0 6px}
         .editorial-about .editorial-entry p{font-size:13px;opacity:.55;margin:0}
@@ -145,13 +145,13 @@ export default async function AboutPage() {
         @media(max-width:620px){.editorial-about .editorial-hero{grid-template-columns:1fr;gap:30px;padding:70px 0 90px}.editorial-about .editorial-portrait{margin:0;width:min(75%,245px)}.editorial-about .editorial-row{grid-template-columns:1fr;gap:32px;padding:55px 0 85px}.editorial-about .editorial-full,.editorial-about .about-section{padding:55px 0 85px}.editorial-about .editorial-cards{grid-template-columns:1fr}.editorial-about .editorial-card{min-height:150px}}
       `}</style>
       <header className="editorial-hero">
-        <div><h1>A little<br/>about me.</h1><p>I'm a strategist, artist, and builder. I work across brands, technology, and the arts — drawn to ideas that make people think, feel, or see things differently.</p><small>Based in San Antonio, Texas. Often elsewhere.</small></div>
+        <div><h1>A little<br/>about me.</h1><p>I'm a strategist, artist, and builder. I work across brands, technology, and the arts — interested in how ideas become something people connect with.</p><small>Based in San Antonio, Texas. Often elsewhere.</small></div>
         <img className="editorial-portrait" src={driveImageUrl("1UJ7HG3gZU2zD5Y_kdHwCXLGjm1llx_Xc")} alt="Ivonne Aldaz portrait"/>
       </header>
       <section className="editorial-row"><h2>The short<br/>version.</h2><div>
         <p>I'm drawn to the intersection of human behavior, creativity, and business. For more than a decade, I've worked across industries—from growing tech companies to global household brands—turning ideas and insights into brands, strategies, and experiences that connect with people and drive growth.</p>
         <p>I run a creative studio, build independent ventures, and teach marketing at university. Outside of work, you'll usually find me painting, making ceramics, traveling, or experimenting with something on the internet.</p>
-        <p>I grew up on the Texas–Mexico border. I've always been curious about people, places, and what makes us see things differently.</p>
+        <p>I grew up on the Texas–Mexico border. I've always been curious about people, places, and the experiences that shape us.</p>
       </div></section>
       <section className="editorial-row"><h2>Selected<br/>experience.</h2><div>
         {[
