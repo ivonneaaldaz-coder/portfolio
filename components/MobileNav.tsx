@@ -42,20 +42,19 @@ export default function MobileNav() {
         <summary>Menu</summary>
         <div className="mobile-menu">
           <nav className="mobile-menu-links">
-            <Link href="/" onClick={(event) => go(event, "/")}>Overview</Link>
+            <Link href="/" onClick={(event) => go(event, "/")}>Home</Link>
             <Link href="/work" onClick={(event) => go(event, "/work")}>Work</Link>
             <a href="https://lab.ivonnealdaz.com" target="_blank" rel="noreferrer" onClick={closeExternal}>
               Lab <span className="text-arrow" aria-hidden="true" />
             </a>
-            <Link href="/art" onClick={(event) => go(event, "/art")}>Art</Link>
-            <Link href="/travel" onClick={(event) => go(event, "/travel")}>Travel</Link>
+            <Link href="/about" onClick={(event) => go(event, "/about")}>About</Link>
             <div className="mobile-library-group"><span>Library</span>
+              <Link href="/art" onClick={(event) => go(event, "/art")}>Art</Link>
+              <Link href="/travel" onClick={(event) => go(event, "/travel")}>Travel</Link>
               <Link href="/books" onClick={(event) => go(event, "/books")}>Books + Quotes</Link>
               <Link href="/music" onClick={(event) => go(event, "/music")}>Music</Link>
               <Link href="/visual-references" onClick={(event) => go(event, "/visual-references")}>Visual References</Link>
             </div>
-            <Link href="/#press" onClick={(event) => go(event, "/#press")}>Press</Link>
-            <Link href="/about" onClick={(event) => go(event, "/about")}>About</Link>
           </nav>
 
           <div className="mobile-menu-footer">
