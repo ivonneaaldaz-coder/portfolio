@@ -9666,3 +9666,12 @@ html.intro-seen #site-intro{display:none}
 .moodboard-progress-track>span{display:block;height:100%;border-radius:inherit;background:var(--ink);transition:width .16s ease-out}
 @media(max-width:600px){.moodboard-progress{width:min(320px,86%)}.moodboard-progress-label{font-size:18px}.moodboard-progress-track{height:13px}}
 @media(prefers-reduced-motion:reduce){.moodboard-progress-track>span{transition:none}}
+
+/* Unified editorial text palette */
+html[data-theme="light"]{--ink:#252522;--muted:#555550}
+html[data-theme="light"] .editorial-about,html[data-theme="light"] .editorial-about *{color:var(--ink)}
+html[data-theme="light"] .editorial-about small,html[data-theme="light"] .editorial-about time,html[data-theme="light"] .editorial-about .editorial-entry p{color:var(--muted)}
+html[data-theme="light"] .site-main,html[data-theme="light"] .site-footer,html[data-theme="light"] .sidebar{color:var(--ink)}
+.sidebar .brand{display:block;margin-bottom:60px}
+.sidebar .brand-sub{display:none}
+@media(max-width:620px){.editorial-about .editorial-hero{grid-template-columns:1fr;gap:26px}.editorial-about .editorial-portrait{width:min(75%,275px)}.editorial-about .editorial-row p{max-width:100%}}
