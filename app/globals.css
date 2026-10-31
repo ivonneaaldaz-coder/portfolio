@@ -10601,3 +10601,6 @@ html body::before, html body::after { content:none!important;display:none!import
 .work-hybrid-page .overview-press-row .press-article-title{font-size:clamp(16px,1.35vw,20px)!important;font-weight:500!important;line-height:1.4!important;letter-spacing:-.02em!important;margin:0!important}
 .work-hybrid-page .overview-press-row .press-publication{font-size:13px!important;font-weight:400!important;line-height:1.5!important;color:var(--muted)!important;margin:6px 0 0!important}
 @media(max-width:780px){.work-hybrid-page .overview-press-row .press-article-title,.work-hybrid-page .overview-writing-row h4{font-size:16px!important;font-weight:500!important;line-height:1.4!important;letter-spacing:-.02em!important}.work-hybrid-page .overview-press-row .press-publication,.work-hybrid-page .overview-writing-row p{font-size:13px!important;line-height:1.5!important}}
+
+/* Desktop homepage: optically center the hero group without shifting the footer. */
+@media(min-width:901px){.home-minimal .home-minimal-content{transform:translateY(clamp(24px,4.5vh,48px))!important}}
