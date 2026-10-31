@@ -60,6 +60,7 @@ export default function MobileNav() {
           <div className="mobile-menu-footer">
             <a href="mailto:hello@ivonnealdaz.com">hello@ivonnealdaz.com <span className="external-arrow" aria-hidden="true">↗</span></a>
             <div className="mobile-socials">
+              <a href="https://www.instagram.com/ivonnealdaz/" target="_blank" rel="noreferrer" onClick={closeExternal}>Instagram <span className="external-arrow" aria-hidden="true">↗</span></a>
               <a href="https://www.linkedin.com/in/ivonnealdaz/" target="_blank" rel="noreferrer" onClick={closeExternal}>LinkedIn <span className="external-arrow" aria-hidden="true">↗</span></a>
               <a href="https://www.pinterest.com/ivonnealdaz/" target="_blank" rel="noreferrer" onClick={closeExternal}>Pinterest <span className="external-arrow" aria-hidden="true">↗</span></a>
               <a href="https://github.com/ivonneaaldaz-coder" target="_blank" rel="noreferrer" onClick={closeExternal}>GitHub <span className="external-arrow" aria-hidden="true">↗</span></a>
