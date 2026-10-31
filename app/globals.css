@@ -10377,3 +10377,38 @@ html body::before, html body::after { content:none!important;display:none!import
   .about-editorial .about-story-inline{margin:-35px 0 65px!important}
   .about-editorial .about-editorial-cards>a{min-height:185px!important}
 }
+
+/* Oct 30: work section boundaries and playlist usability */
+@media(min-width:901px){
+ .selected-work-projects .selected-work-project-preview{padding-top:clamp(26px,2.6vw,48px)!important}
+}
+.selected-work-index .selected-work-scroll-cue{border-top:0!important}
+.work-hybrid-page .selected-work-company-section{
+  margin-top:clamp(68px,7vw,105px)!important;
+  border-top:1px solid var(--line)!important;
+  padding-top:clamp(68px,7vw,105px)!important;
+}
+.work-hybrid-page>.overview-press{
+  border-top:1px solid var(--line)!important;
+  margin-top:clamp(68px,7vw,105px)!important;
+  padding-top:clamp(68px,7vw,105px)!important;
+}
+.work-hybrid-page>.overview-writing-section{
+  border-top:1px solid var(--line)!important;
+  margin-top:0!important;
+  padding-top:clamp(68px,7vw,105px)!important;
+  padding-bottom:clamp(68px,7vw,105px)!important;
+}
+.music-page .music-console{border-top:0!important;padding-top:0!important}
+.music-page .playlist-picker-heading{
+  margin:0 0 22px;font-size:clamp(16px,1.5vw,20px);
+  font-weight:400;letter-spacing:-.025em;color:var(--ink);
+}
+.music-page .vinyl-card p span{font-family:Arial,Helvetica,sans-serif!important;font-variant-emoji:text!important}
+@media(max-width:900px){
+ .work-hybrid-page .selected-work-company-section,
+ .work-hybrid-page>.overview-press,
+ .work-hybrid-page>.overview-writing-section{padding-top:48px!important;margin-top:48px!important}
+ .work-hybrid-page>.overview-writing-section{margin-top:0!important}
+ .music-page .playlist-picker-heading{margin-bottom:16px}
+}
