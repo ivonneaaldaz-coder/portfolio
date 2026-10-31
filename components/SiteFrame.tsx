@@ -4,6 +4,7 @@ import { usePathname } from "next/navigation";
 import Sidebar from "@/components/Sidebar";
 import MobileNav from "@/components/MobileNav";
 import ThemeToggle from "@/components/ThemeToggle";
+import PlainTextArrows from "@/components/PlainTextArrows";
 import SiteFooter from "@/components/SiteFooter";
 import { MusicProvider } from "@/components/MusicProvider";
 import GlobalMusicControls from "@/components/GlobalMusicControls";
@@ -14,6 +15,7 @@ export default function SiteFrame({ children }: { children: React.ReactNode }) {
 
   return (
     <MusicProvider>
+      <PlainTextArrows />
       {isStandaloneApp ? (
         <main className="standalone-app-main">{children}</main>
       ) : (
