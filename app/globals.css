@@ -10304,3 +10304,18 @@ html body::before, html body::after { content:none!important;display:none!import
  .mobile-menu-links>a:last-child{border-bottom:0!important}
  .mobile-menu-footer{border-top:1px solid var(--line)!important;margin-top:0!important;padding-top:28px!important}
 }
+
+/* Oct 30: shared editorial headings, desktop alignment and consistent spacing */
+@media(min-width:901px){
+ .about-editorial .about-editorial-hero h1{font-size:clamp(44px,4.2vw,66px)!important;letter-spacing:-.055em!important;white-space:nowrap}
+ .about-editorial .about-editorial-row{grid-template-columns:minmax(300px,42%) minmax(0,1fr);gap:clamp(28px,3vw,52px)}
+ .about-editorial .about-editorial-row h2{font-size:clamp(25px,2.35vw,34px)!important;letter-spacing:-.05em!important;white-space:nowrap}
+ .about-editorial .about-editorial-feature>h2,.about-editorial .about-editorial-building-head h2{font-size:clamp(25px,2.35vw,34px)!important;letter-spacing:-.05em!important}
+}
+.art-v11 .art-lede h1,.travel-page .travel-intro h1{
+ font-family:var(--display)!important;font-size:clamp(42px,5vw,66px)!important;
+ font-weight:400!important;letter-spacing:-.055em!important;line-height:1.03!important;
+}
+@media(max-width:570px){
+ .art-v11 .art-lede h1,.travel-page .travel-intro h1{font-size:clamp(36px,9vw,48px)!important}
+}
