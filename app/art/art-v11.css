@@ -33,3 +33,6 @@
 .art-v11 .history-item strong,.art-v11 .viewer-bottom strong{font-family:var(--display)!important;font-size:clamp(18px,1.6vw,23px)!important}
 .art-v11 .editorial-copy p{color:var(--muted);font-size:clamp(15px,1.2vw,17px)}
 @media(max-width:550px){.art-v11 .art-lede{margin-bottom:36px;padding-bottom:36px}}
+
+/* Gallery begins immediately without a redundant hero */
+.art-v11 .art-v11-content{padding-top:clamp(48px,6vw,84px)}
