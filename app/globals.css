@@ -10450,3 +10450,38 @@ html body::before, html body::after { content:none!important;display:none!import
 .home-play-disclosure nav a{display:block;padding:9px 0;border:0;text-decoration:none;white-space:nowrap;font-size:15px}
 .home-play-disclosure nav a:hover{text-decoration:underline}
 @media(max-width:780px){.home-minimal-content h1{font-size:clamp(42px,9vw,66px)}.home-minimal-content h1 span{font-size:clamp(23px,5.3vw,32px)}.home-play-disclosure nav{left:auto;right:0}}
+
+/* Desktop sidebar: consistent alignment, type and hover motion */
+@media(min-width:901px){
+ .sidebar .sidebar-nav{display:flex;flex-direction:column;gap:4px}
+ .sidebar .sidebar-nav>a,
+ .sidebar .sidebar-nav>.sidebar-library-toggle{
+   display:flex!important;align-items:center!important;justify-content:space-between;
+   width:100%;min-height:40px;box-sizing:border-box;
+   margin:0!important;padding:10px 14px!important;
+   font-family:inherit!important;font-size:13px!important;font-weight:500!important;
+   line-height:20px!important;letter-spacing:0!important;
+   border:0;border-radius:999px;text-align:left;
+   transition:background-color .22s ease,transform .22s ease,padding-left .22s ease;
+ }
+ .sidebar .sidebar-nav>a:hover,
+ .sidebar .sidebar-nav>.sidebar-library-toggle:hover{
+   background:rgba(127,127,127,.15)!important;
+   transform:none!important;padding-left:21px!important;
+ }
+ .sidebar .sidebar-nav>a.active{background:rgba(127,127,127,.15)}
+ .sidebar .sidebar-nav>.sidebar-library-toggle span{margin-left:auto;font-size:13px!important}
+ .sidebar .sidebar-nav .sidebar-library{padding:3px 0 6px 12px}
+ .sidebar .sidebar-nav .sidebar-library a{
+   display:flex!important;align-items:center;min-height:34px;
+   padding:7px 14px!important;font-size:12px!important;
+   font-weight:400!important;line-height:20px!important;
+   border-radius:999px;transform:none!important;
+   transition:background-color .22s ease,padding-left .22s ease;
+ }
+ .sidebar .sidebar-nav .sidebar-library a:hover{padding-left:21px!important;background:rgba(127,127,127,.12)!important}
+}
+@media(prefers-reduced-motion:reduce){
+ .sidebar .sidebar-nav>a,.sidebar .sidebar-nav>.sidebar-library-toggle,
+ .sidebar .sidebar-nav .sidebar-library a{transition:none!important}
+}
