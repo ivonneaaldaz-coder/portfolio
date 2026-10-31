@@ -11,16 +11,11 @@ export default function OverviewPage() {
     <main className="overview-page home-minimal">
       <section className="home-minimal-hero" aria-labelledby="home-title">
         <div className="home-minimal-content">
-          <h1 id="home-title">Ivonne Aldaz</h1>
-          <p>Strategist, artist, builder.</p>
+          <h1 id="home-title">I make things.</h1>
           <div className="home-minimal-links">
             <Link href="/work">Explore work <span aria-hidden="true">↗</span></Link>
             <Link href="/art">Explore play <span aria-hidden="true">↗</span></Link>
           </div>
-        </div>
-        <div className="home-minimal-bottom">
-          <span>San Antonio, TX · Often elsewhere</span>
-          <span>© 2026</span>
         </div>
       </section>
     </main>
