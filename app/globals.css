@@ -10551,3 +10551,13 @@ html body::before, html body::after { content:none!important;display:none!import
  .home-minimal .home-minimal-links>.home-play-disclosure>summary{display:flex!important;align-items:center!important;gap:8px!important}
  .site-main:has(>.home-minimal)>.site-footer{margin-top:0!important;padding-top:18px!important;padding-bottom:18px!important;flex-shrink:0!important}
 }
+
+/* Watercolor follows the viewport, including the footer, without a hard section edge. */
+.home-minimal .home-watercolor-trace{
+ position:fixed!important;inset:0!important;width:100vw!important;height:100dvh!important;
+ z-index:0!important;pointer-events:none!important;
+}
+.home-minimal .home-minimal-hero{isolation:auto!important}
+.home-minimal .home-minimal-content{position:relative;z-index:1}
+.site-main:has(.home-minimal){isolation:isolate}
+.site-main:has(.home-minimal)>.site-footer{position:relative;z-index:1;background:transparent!important}
