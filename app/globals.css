@@ -10646,3 +10646,13 @@ html body::before, html body::after { content:none!important;display:none!import
  .site-main:has(>.home-minimal)>.site-footer .footer-social{padding-top:30px!important;border-top:1px solid var(--line)!important}
  .site-main:has(>.home-minimal)>.site-footer .footer-notes{margin-top:36px!important;padding-top:30px!important;border-top:1px solid var(--line)!important}
 }
+
+/* Mobile header: theme switch immediately left of Menu, with one consistent control row. */
+@media(max-width:900px){
+ .global-theme-control{display:none!important}
+ .mobile-nav .mobile-header-actions{display:flex;align-items:center;justify-content:flex-end;gap:12px;margin-left:auto;height:100%}
+ .mobile-nav .mobile-header-actions>.editorial-theme-toggle{display:grid!important;position:static!important;width:34px!important;height:34px!important;padding:6px!important;flex:none}
+ .mobile-nav .mobile-header-actions>.editorial-theme-toggle .editorial-theme-icon{width:22px!important;height:22px!important}
+ .mobile-nav .mobile-header-actions>details{position:static;flex:none}
+ .mobile-nav .mobile-header-actions>details>summary{display:flex;align-items:center;min-height:34px;margin:0!important}
+}
