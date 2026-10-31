@@ -16,7 +16,7 @@ export default function OverviewPage() {
           <h1 id="home-title">I make things <span>— brands, art, experiences.</span></h1>
           <div className="home-minimal-links">
             <Link href="/work">Explore work <span aria-hidden="true">↗</span></Link>
-            <details className="home-play-disclosure"><summary>Explore play <span aria-hidden="true">+</span></summary><nav aria-label="Explore play"><Link href="/art">Art ↗</Link><Link href="/travel">Travel ↗</Link><Link href="/music">Music ↗</Link><Link href="/books">Books + Quotes ↗</Link><Link href="/visual-references">Visual References ↗</Link></nav></details>
+            <details className="home-play-disclosure"><summary>Explore play <span aria-hidden="true">+</span></summary><nav aria-label="Explore play"><Link href="/art">Art</Link><Link href="/travel">Travel</Link><Link href="/music">Music</Link><Link href="/books">Books + Quotes</Link><Link href="/visual-references">Visual References</Link></nav></details>
           </div>
         </div>
       </section>
