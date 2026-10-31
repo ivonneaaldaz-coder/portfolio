@@ -16,6 +16,7 @@ export default function HomeWatercolorTrace() {
     let width = 0;
     let height = 0;
     let last: { x: number; y: number } | null = null;
+    let touchPainting = false;
     const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     if (reducedMotion) return;
     const resize = () => {
@@ -31,7 +32,7 @@ export default function HomeWatercolorTrace() {
     const observer = new ResizeObserver(resize);
     observer.observe(canvas);
     const move = (event: PointerEvent) => {
-      if (event.pointerType === "touch" && event.type === "pointermove") return;
+      if (event.pointerType === "touch" && event.type === "pointermove" && !touchPainting) return;
       const rect = canvas.getBoundingClientRect();
       const x = event.clientX - rect.left;
       const y = event.clientY - rect.top;
@@ -41,7 +42,9 @@ export default function HomeWatercolorTrace() {
       strokes.push({ x, y, radius: 28 + Math.random() * 32, born: performance.now() });
       if (strokes.length > 90) strokes.shift();
     };
-    const leave = () => { last = null; };
+    const leave = () => { last = null; touchPainting = false; };
+    const touchStart = (event: PointerEvent) => { if(event.pointerType === "touch") { touchPainting = true; move(event); } };
+    const touchEnd = () => { touchPainting = false; last = null; };
     const draw = (now: number) => {
       ctx.clearRect(0, 0, width, height);
       for (let i = strokes.length - 1; i >= 0; i--) {
@@ -63,12 +66,16 @@ export default function HomeWatercolorTrace() {
     };
     frame = requestAnimationFrame(draw);
     window.addEventListener("pointermove", move);
+    canvas.addEventListener("pointerdown", touchStart);
+    window.addEventListener("pointerup", touchEnd);
     window.addEventListener("pointerdown", move);
     window.addEventListener("pointerleave", leave);
     return () => {
       cancelAnimationFrame(frame);
       observer.disconnect();
       window.removeEventListener("pointermove", move);
+      canvas.removeEventListener("pointerdown", touchStart);
+      window.removeEventListener("pointerup", touchEnd);
       window.removeEventListener("pointerdown", move);
       window.removeEventListener("pointerleave", leave);
     };
