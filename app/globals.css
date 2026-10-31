@@ -10620,3 +10620,9 @@ html body::before, html body::after { content:none!important;display:none!import
    white-space:nowrap!important;
  }
 }
+
+/* Opaque homepage play menu and subtle accessible disclosure focus */
+.home-minimal .home-play-disclosure nav{background:var(--paper)!important;opacity:1!important;backdrop-filter:none!important;-webkit-backdrop-filter:none!important;isolation:isolate;z-index:50!important}
+.home-minimal .home-play-disclosure>summary{border-radius:999px!important;outline:none!important;transition:background-color .2s ease,padding .2s ease!important}
+.home-minimal .home-play-disclosure>summary:hover,.home-minimal .home-play-disclosure[open]>summary{background:var(--hover)!important;padding-left:14px!important;padding-right:14px!important}
+.home-minimal .home-play-disclosure>summary:focus-visible{outline:1px solid var(--muted)!important;outline-offset:3px!important}
