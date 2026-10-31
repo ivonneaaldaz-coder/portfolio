@@ -24,14 +24,7 @@ const photographs = [
 export default function TravelPage() {
   return (
     <section className="travel-page page">
-      <header className="travel-intro section-pad">
-        <div>
-          <h1>Travel</h1>
-          <p>Photos from places I’ve been.</p>
-        </div>
-      </header>
-
-      <TravelGallery photographs={photographs} />
+<TravelGallery photographs={photographs} />
       <nav className="related-paths section-pad" aria-label="Explore next"><Link href="/visual-references">Visual References →</Link><Link href="/art">Art Practice →</Link></nav>
     </section>
   );
