@@ -10111,3 +10111,22 @@ html.intro-seen #site-intro{display:none}
   .work-hybrid-page .work-hybrid-intro { padding-bottom: clamp(22px, 3vw, 42px); }
   .work-hybrid-page > .selected-work-explorer { padding-top: clamp(24px, 3vw, 44px); }
 }
+
+/* Preview: unify top-level page headlines with the existing homepage hero scale.
+   Applies to every page's primary h1, not section headings or card titles. */
+main h1 {
+  font-family: var(--display) !important;
+  font-size: clamp(42px, 5vw, 76px) !important;
+  font-weight: 400 !important;
+  letter-spacing: -.045em !important;
+  line-height: .95 !important;
+}
+@media (min-width: 1100px) {
+  main h1 { font-size: clamp(52px, 4vw, 66px) !important; }
+}
+@media (max-width: 900px) {
+  main h1 { font-size: clamp(42px, 11vw, 68px) !important; }
+}
+@media (max-width: 560px) {
+  main h1 { font-size: 42px !important; }
+}
