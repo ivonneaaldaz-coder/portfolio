@@ -10167,8 +10167,8 @@ main h1 {
   overflow: visible !important;
 }
 .work-hybrid-page .selected-work-preview-unframed > .experiment-loop {
-  mix-blend-mode: multiply;
-  filter: contrast(1.2) brightness(1.08);
+  mix-blend-mode: normal;
+  filter: contrast(1.45) brightness(1.06);
   transform: scale(1.16);
   transform-origin: center center;
 }
