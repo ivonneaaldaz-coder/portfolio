@@ -9,15 +9,19 @@ import { usePathname, useRouter } from "next/navigation";
 export default function MobileNav() {
   const detailsRef = useRef<HTMLDetailsElement>(null);
   const [closing, setClosing] = useState(false);
+  const closingRef = useRef(false);
   const router = useRouter();
   const pathname = usePathname();
 
   const animateClose = (after?: () => void) => {
     const details = detailsRef.current;
     if (!details?.open) { after?.(); return; }
+    if (closingRef.current) return;
+    closingRef.current = true;
     setClosing(true);
     window.setTimeout(() => {
       details.open = false;
+      closingRef.current = false;
       setClosing(false);
       after?.();
     }, 300);
@@ -36,12 +40,21 @@ export default function MobileNav() {
 
   const closeExternal = () => animateClose();
 
+  const toggleMenu = (event: MouseEvent<HTMLElement>) => {
+    event.preventDefault();
+    if (closingRef.current) return;
+    const details = detailsRef.current;
+    if (!details) return;
+    if (details.open) animateClose();
+    else details.open = true;
+  };
+
   return (
     <header className="mobile-nav">
       <Link className="brand" href="/" onClick={(event) => go(event, "/")}>IVONNE ALDAZ</Link>
       <div className="mobile-header-actions">
         <details ref={detailsRef} className={closing ? "is-closing" : ""}>
-        <summary>Menu</summary>
+        <summary onClick={toggleMenu}>Menu</summary>
         <div className="mobile-menu">
           <nav className="mobile-menu-links">
             <Link href="/" onClick={(event) => go(event, "/")}>Home</Link>
