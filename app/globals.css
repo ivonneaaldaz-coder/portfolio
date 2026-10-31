@@ -10412,3 +10412,5 @@ html body::before, html body::after { content:none!important;display:none!import
  .work-hybrid-page>.overview-writing-section{margin-top:0!important}
  .music-page .playlist-picker-heading{margin-bottom:16px}
 }
+
+@media(min-width:901px){.selected-work-projects .selected-work-project-preview{padding-top:0!important;margin-top:clamp(66px,5.7vw,100px)!important}}
