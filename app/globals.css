@@ -10536,3 +10536,18 @@ html body::before, html body::after { content:none!important;display:none!import
 @media(min-width:901px){
  .home-minimal-content h1{font-size:clamp(40px,4vw,62px)!important;line-height:1.2!important;letter-spacing:-.05em!important;max-width:960px!important}
 }
+
+/* Homepage mobile: equal type scale, matching links, visible footer */
+@media(max-width:900px){
+ .site-main:has(>.home-minimal){display:flex!important;flex-direction:column!important;min-height:calc(100svh - 76px)!important}
+ .site-main:has(>.home-minimal)>.home-minimal{flex:1 0 auto!important;min-height:0!important}
+ .home-minimal .home-minimal-hero{min-height:0!important;height:auto!important;padding:0 24px!important;display:flex!important;justify-content:center!important}
+ .home-minimal .home-minimal-content{padding:clamp(54px,9svh,110px) 0 clamp(32px,5svh,56px)!important;align-items:center!important}
+ .home-minimal .home-minimal-content h1{font-size:clamp(33px,7.8vw,58px)!important;line-height:1.16!important;letter-spacing:-.055em!important;font-weight:400!important;margin:0!important;max-width:100%!important}
+ .home-minimal .home-minimal-content h1 span{display:block!important;font-family:inherit!important;font-size:1em!important;font-weight:inherit!important;line-height:inherit!important;letter-spacing:inherit!important;color:inherit!important;margin:0!important}
+ .home-minimal .home-minimal-links{display:flex!important;justify-content:center!important;align-items:flex-start!important;gap:clamp(20px,5vw,36px)!important;margin-top:clamp(30px,5svh,48px)!important}
+ .home-minimal .home-minimal-links>a,.home-minimal .home-minimal-links>.home-play-disclosure>summary{font-family:inherit!important;font-size:clamp(14px,3.7vw,17px)!important;line-height:24px!important;font-weight:400!important;letter-spacing:0!important;padding:0 0 9px!important;min-height:34px!important;white-space:nowrap!important}
+ .home-minimal .home-minimal-links>a{display:inline-flex!important;align-items:center!important;gap:8px!important}
+ .home-minimal .home-minimal-links>.home-play-disclosure>summary{display:flex!important;align-items:center!important;gap:8px!important}
+ .site-main:has(>.home-minimal)>.site-footer{margin-top:0!important;padding-top:18px!important;padding-bottom:18px!important;flex-shrink:0!important}
+}
