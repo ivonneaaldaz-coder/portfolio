@@ -10319,3 +10319,7 @@ html body::before, html body::after { content:none!important;display:none!import
 @media(max-width:570px){
  .art-v11 .art-lede h1,.travel-page .travel-intro h1{font-size:clamp(36px,9vw,48px)!important}
 }
+
+/* Let Play pages open directly onto their content. */
+.travel-page>.travel-gallery,.travel-page>.travel-gallery-wrapper{margin-top:clamp(36px,5vw,72px)}
+.music-page>.music-section:first-child{padding-top:clamp(36px,5vw,72px)}
