@@ -10604,3 +10604,8 @@ html body::before, html body::after { content:none!important;display:none!import
 
 /* Desktop homepage: optically center the hero group without shifting the footer. */
 @media(min-width:901px){.home-minimal .home-minimal-content{transform:translateY(clamp(24px,4.5vh,48px))!important}}
+
+/* Homepage: optical centering and clean Explore play destinations */
+@media(min-width:901px){.home-minimal .home-minimal-content{transform:translateY(clamp(44px,6.5vh,72px))!important}}
+.home-minimal .home-play-disclosure nav a::before,.home-minimal .home-play-disclosure nav a::after{content:none!important;display:none!important}
+.home-minimal .home-play-disclosure nav a{background-image:none!important;padding-right:0!important}
