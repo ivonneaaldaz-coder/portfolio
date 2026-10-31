@@ -10082,3 +10082,26 @@ html.intro-seen #site-intro{display:none}
 
 /* Library-to-footer transition: remove the redundant separator above the shared footer. */
 .site-main:has(.overview-page) .site-footer{border-top:0!important}
+
+/* Work press/talks: shared grid tracks keep every horizontal rule aligned,
+   even when article titles wrap to different numbers of lines. */
+@media(min-width:761px){
+  .work-hybrid-page .overview-press:not(.overview-expanded-list)>.overview-press-grid:not(.overview-expanded-list){
+    grid-template-rows:auto repeat(3,minmax(min-content,auto))!important;
+    align-items:stretch;
+    column-gap:clamp(28px,4vw,72px)!important;
+    row-gap:0!important;
+  }
+  .work-hybrid-page .overview-press>.overview-press-grid:not(.overview-expanded-list)>div{
+    display:grid!important;
+    grid-template-rows:subgrid!important;
+    grid-row:1 / span 4;
+    row-gap:0!important;
+    min-width:0;
+  }
+  .work-hybrid-page .overview-press>.overview-press-grid:not(.overview-expanded-list)>div:first-child{grid-column:1}
+  .work-hybrid-page .overview-press>.overview-press-grid:not(.overview-expanded-list)>div:nth-child(2){grid-column:2}
+  .work-hybrid-page .overview-press>.overview-press-grid:not(.overview-expanded-list) .overview-press-row{
+    height:100%;box-sizing:border-box;align-content:start;
+  }
+}
