@@ -1,14 +1,11 @@
-import HomeWatercolorTrace from "@/components/HomeWatercolorTrace";
+import WatercolorStudio from "@/components/WatercolorStudio";
 
-export const metadata = { title: "Watercolor — Ivonne Aldaz", description: "An interactive watercolor study." };
+export const metadata = { title: "Watercolor — Ivonne Aldaz", description: "An interactive watercolor playground." };
 
 export default function WatercolorPage() {
-  return <main className="watercolor-project-page" style={{ position: "relative", minHeight: "100dvh", overflow: "hidden", display: "grid", placeItems: "center", padding: "5rem 2rem" }}>
-    <HomeWatercolorTrace />
-    <div style={{ position: "relative", zIndex: 1, textAlign: "center", pointerEvents: "none" }}>
-      <p style={{ fontSize: 13, letterSpacing: ".16em", textTransform: "uppercase", opacity: .55, marginBottom: 24 }}>Interactive study</p>
-      <h1 style={{ fontSize: "clamp(42px, 6vw, 76px)", fontWeight: 400, letterSpacing: "-.055em", margin: 0 }}>Watercolor</h1>
-      <p style={{ opacity: .6, marginTop: 20 }}>Move your cursor to paint. Let it fade.</p>
+  return <main className="page watercolor-project-page" style={{ minHeight: "100dvh", padding: "clamp(24px, 5vw, 72px)" }}>
+    <div style={{ maxWidth: 1200, margin: "0 auto" }}>
+      <WatercolorStudio />
     </div>
   </main>;
 }
