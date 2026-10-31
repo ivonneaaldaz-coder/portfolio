@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useRef, useState } from "react";
 import Modal from "./Modal";
 
 export type TravelPhoto = {
@@ -10,6 +10,9 @@ export type TravelPhoto = {
 
 export default function TravelGallery({ photographs }: { photographs: TravelPhoto[] }) {
   const [active, setActive] = useState<number | null>(null);
+  const touchStart = useRef<{x:number;y:number}|null>(null);
+  const onTouchStart = (event: React.TouchEvent) => { const t=event.touches[0]; touchStart.current={x:t.clientX,y:t.clientY}; };
+  const onTouchEnd = (event: React.TouchEvent) => { const start=touchStart.current; touchStart.current=null; if(!start)return; const t=event.changedTouches[0]; const dx=t.clientX-start.x,dy=t.clientY-start.y; if(Math.abs(dx)<45||Math.abs(dx)<Math.abs(dy)*1.25)return; if(dx<0)next(); else previous(); };
 
   const previous = () => {
     if (active === null) return;
@@ -42,7 +45,7 @@ export default function TravelGallery({ photographs }: { photographs: TravelPhot
           <button className="art-lightbox-close" type="button" onClick={() => setActive(null)} aria-label="Close photo viewer">×</button>
           <button className="art-lightbox-prev" type="button" onClick={previous} aria-label="Previous photo">←</button>
 
-          <div className="art-lightbox-stage">
+          <div className="art-lightbox-stage" onTouchStart={onTouchStart} onTouchEnd={onTouchEnd}>
             <img src={photographs[active].image} alt={photographs[active].place} />
             <div className="art-lightbox-meta">
               <div>
