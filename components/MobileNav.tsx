@@ -40,7 +40,6 @@ export default function MobileNav() {
     <header className="mobile-nav">
       <Link className="brand" href="/" onClick={(event) => go(event, "/")}>IVONNE ALDAZ</Link>
       <div className="mobile-header-actions">
-        <ThemeToggle />
         <details ref={detailsRef} className={closing ? "is-closing" : ""}>
         <summary>Menu</summary>
         <div className="mobile-menu">
@@ -69,6 +68,7 @@ export default function MobileNav() {
           </div>
         </div>
         </details>
+        <ThemeToggle />
       </div>
     </header>
   );
