@@ -10332,3 +10332,48 @@ html body::before, html body::after { content:none!important;display:none!import
 .about-editorial .about-editorial-building-head h2{margin:0!important}
 .pinterest-reference-page>.collection-intro{display:none!important}
 @media(max-width:780px){.about-editorial .about-editorial-cards>a{min-height:0!important;gap:14px!important}.about-editorial .about-editorial-hero h1{font-size:clamp(39px,8.5vw,56px)!important}}
+
+/* Oct 30: visual alignment and consistent section rhythm */
+.about-editorial .about-editorial-cards>a{
+  display:flex!important;flex-direction:column!important;justify-content:center!important;
+  gap:clamp(18px,2.2vw,28px)!important;min-height:245px!important;
+}
+.about-editorial .about-editorial-cards>a h3,
+.about-editorial .about-editorial-cards>a p{margin:0!important}
+.about-editorial .about-story-inline{
+  border:0!important;padding:0!important;margin:-85px 0 clamp(70px,7vw,105px)!important;
+}
+.about-editorial .about-story-inline .long-story.about-disclosure{
+  margin:0!important;border-top:0!important;
+}
+.about-editorial .about-story-inline .about-disclosure summary{
+  border-top:0!important;
+}
+.art-v11 .gallery .artwork{
+  height:auto!important;aspect-ratio:4 / 5!important;min-height:0!important;
+  display:flex!important;align-items:center!important;justify-content:center!important;
+}
+.art-v11 .gallery .artwork img{
+  width:100%!important;height:100%!important;object-fit:contain!important;
+}
+.art-v11 .gallery .work-title{margin-top:24px!important}
+.music-page>.music-section:first-child{padding-top:clamp(24px,3vw,48px)!important}
+.selected-work-projects .selected-work-project-preview{
+  padding-top:clamp(64px,5.7vw,100px)!important;
+}
+.selected-work-brand-grid .selected-work-more-brands{
+  box-sizing:border-box!important;border:1px solid var(--ink)!important;
+  margin:7px!important;width:calc(100% - 14px)!important;
+  min-height:calc(100% - 14px)!important;
+  background:transparent!important;
+}
+.work-hybrid-page .overview-press{
+  border-top:0!important;
+  padding-top:clamp(65px,6vw,95px)!important;
+  padding-bottom:clamp(65px,6vw,95px)!important;
+}
+@media(max-width:900px){
+  .selected-work-projects .selected-work-project-preview{padding-top:0!important}
+  .about-editorial .about-story-inline{margin:-35px 0 65px!important}
+  .about-editorial .about-editorial-cards>a{min-height:185px!important}
+}
