@@ -10276,3 +10276,24 @@ html body::before, html body::after { content:none!important;display:none!import
 .overview-press-row .press-publication{text-transform:none!important;letter-spacing:0!important;color:var(--muted)!important;font-size:13px!important}
 .overview-press-row .press-article-title{font-size:clamp(16px,1.35vw,20px)!important;font-weight:500!important}
 .about-editorial-item small{display:block;color:var(--muted);margin-top:6px}
+
+/* Mobile navigation: symmetrical accordion rows and consistent separators */
+@media(max-width:780px){
+ .mobile-menu-links{display:flex!important;flex-direction:column!important;gap:0!important}
+ .mobile-menu-links>a,.mobile-work-group>summary,.mobile-library-group>summary{
+  box-sizing:border-box!important;min-height:72px!important;padding:20px 0!important;margin:0!important;
+  display:flex!important;align-items:center!important;justify-content:space-between!important;
+  border:0!important;border-bottom:1px solid var(--line)!important;
+  font-size:inherit!important;line-height:1.35!important;text-transform:none!important;
+ }
+ .mobile-menu-links>a:last-child{border-bottom:1px solid var(--line)!important}
+ .mobile-work-group,.mobile-library-group{padding:0!important;margin:0!important;border:0!important;border-left:0!important;display:block!important}
+ .mobile-work-group>summary,.mobile-library-group>summary{list-style:none!important;cursor:pointer}
+ .mobile-work-group>summary::-webkit-details-marker,.mobile-library-group>summary::-webkit-details-marker{display:none}
+ .mobile-disclosure-arrow{font-size:26px!important;font-weight:300!important;line-height:1!important;color:var(--muted)!important;transition:transform .25s ease!important}
+ .mobile-work-group[open] .mobile-disclosure-arrow,.mobile-library-group[open] .mobile-disclosure-arrow{transform:rotate(45deg)!important}
+ .mobile-work-links,.mobile-library-links{display:flex!important;flex-direction:column!important;gap:0!important;margin:0!important;padding:4px 0 10px 22px!important;border-left:1px solid var(--line)!important}
+ .mobile-work-links>a,.mobile-library-links>a{box-sizing:border-box!important;display:flex!important;align-items:center!important;min-height:49px!important;padding:12px 0!important;margin:0!important;border:0!important;border-bottom:1px solid var(--line)!important;font-size:15px!important;line-height:1.4!important;color:var(--muted)!important}
+ .mobile-work-links>a:last-child,.mobile-library-links>a:last-child{border-bottom:0!important}
+ .mobile-menu-footer{margin-top:32px!important}
+}
