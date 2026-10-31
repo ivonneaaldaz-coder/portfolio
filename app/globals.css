@@ -10427,3 +10427,9 @@ html body::before, html body::after { content:none!important;display:none!import
 .home-minimal-bottom{display:flex;justify-content:space-between;gap:20px;padding-top:20px;border-top:1px solid var(--line);font-size:11px;color:var(--muted);letter-spacing:.035em;text-transform:uppercase}
 @media(max-width:780px){.home-minimal-hero{min-height:100svh;padding:28px 24px 32px}.home-minimal-content{padding:90px 0 50px}.home-minimal-content h1{font-size:clamp(54px,13vw,92px);letter-spacing:-.065em}.home-minimal-links{margin-top:54px;gap:24px}.home-minimal-bottom{font-size:9px;flex-wrap:wrap}}
 @media(prefers-reduced-motion:reduce){.home-minimal-links a{transition:none}}
+
+/* Single-statement homepage refinement */
+.home-minimal-content{align-items:center;text-align:center}
+.home-minimal-content h1{font-size:clamp(64px,8vw,132px);margin-bottom:0}
+.home-minimal-links{justify-content:center;margin-top:clamp(38px,4.5vw,68px)}
+@media(max-width:780px){.home-minimal-content h1{font-size:clamp(48px,11.5vw,80px)}.home-minimal-links{margin-top:42px}}
