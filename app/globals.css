@@ -10585,3 +10585,13 @@ html body::before, html body::after { content:none!important;display:none!import
    white-space:nowrap!important;
  }
 }
+
+/* Mobile homepage headline: modest increase, equal size on both lines */
+@media(max-width:900px){
+ .home-minimal .home-minimal-content h1,
+ .home-minimal .home-minimal-content h1 span{
+   font-size:clamp(21px,6.15vw,38px)!important;
+   line-height:1.35!important;
+   letter-spacing:-.05em!important;
+ }
+}
