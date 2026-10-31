@@ -10531,3 +10531,8 @@ html body::before, html body::after { content:none!important;display:none!import
   }
   .site-main:has(>.home-minimal)>.site-footer{padding-top:28px!important;padding-bottom:48px!important}
 }
+
+/* Oct 30: restrained desktop homepage typography */
+@media(min-width:901px){
+ .home-minimal-content h1{font-size:clamp(40px,4vw,62px)!important;line-height:1.2!important;letter-spacing:-.05em!important;max-width:960px!important}
+}
