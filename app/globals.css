@@ -10192,3 +10192,14 @@ main h1 {
 .about-editorial .about-editorial-row p,.about-editorial .about-editorial-feature p,.about-editorial .long-story-copy p{font-size:clamp(14px,1.1vw,16px)!important;color:var(--muted)!important;line-height:1.7!important}
 .about-editorial .about-editorial-row h2,.about-editorial .about-editorial-feature>h2,.about-editorial .about-editorial-building-head h2{font-size:clamp(27px,2.65vw,38px)!important;line-height:1.14!important}
 @media(max-width:780px){.work-hybrid-page .selected-work-preview-unframed{height:clamp(250px,68vw,370px)!important}.library-page .library-topline{flex-wrap:wrap;gap:16px}}
+
+/* Clean background and seamless dark video previews (preview branch only).
+   Screen blending lets black video pixels inherit the actual page background,
+   without applying color-shifting contrast/brightness filters to the UI. */
+:root[data-theme="dark"] body::before { content:none!important;display:none!important;animation:none!important;background-image:none!important; }
+:root[data-theme="dark"] .work-hybrid-page .selected-work-preview-unframed { background:transparent!important;isolation:auto!important; }
+:root[data-theme="dark"] .work-hybrid-page .selected-work-preview-unframed>.experiment-loop {
+  mix-blend-mode:screen!important;
+  filter:none!important;
+  transform:none!important;
+}
