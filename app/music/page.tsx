@@ -21,11 +21,7 @@ export default function MusicPage() {
   return (
     <section className="page section-pad music-page">
 <section className="music-section">
-        <div className="section-heading">
-          <h2 className="section-title small-title">Playlists</h2>
-          <a href="https://open.spotify.com/user/ivonnealdaz" target="_blank" rel="noreferrer">Spotify profile ↗︎</a>
-        </div>
-        <SpotifyPlaylists />
+<SpotifyPlaylists />
       </section>
 
       <section className="music-section record-section">
