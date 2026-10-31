@@ -43,7 +43,7 @@ export default function MobileNav() {
         <div className="mobile-menu">
           <nav className="mobile-menu-links">
             <Link href="/" onClick={(event) => go(event, "/")}>Home</Link>
-            <Link href="/work" onClick={(event) => go(event, "/work")}>Work</Link>
+            <details className="mobile-work-group"><summary>Work <span aria-hidden="true" className="mobile-disclosure-arrow">⌄</span></summary><div className="mobile-work-links"><Link href="/work" onClick={(event) => go(event, "/work")}>Projects</Link><Link href="/work#case-studies" onClick={(event) => go(event, "/work#case-studies")}>Case Studies</Link><Link href="/work#press" onClick={(event) => go(event, "/work#press")}>Press + Speaking</Link><Link href="/work#writing" onClick={(event) => go(event, "/work#writing")}>Writing</Link></div></details>
             <a href="https://lab.ivonnealdaz.com" target="_blank" rel="noreferrer" onClick={closeExternal}>
               Lab <span className="text-arrow" aria-hidden="true" />
             </a>
@@ -59,7 +59,7 @@ export default function MobileNav() {
           </nav>
 
           <div className="mobile-menu-footer">
-            <a href="mailto:hello@ivonnealdaz.com">hello@ivonnealdaz.com →</a>
+            <a href="mailto:hello@ivonnealdaz.com">hello@ivonnealdaz.com <span className="text-arrow" aria-hidden="true" /></a>
             <div className="mobile-socials">
               <a href="https://www.linkedin.com/in/ivonnealdaz/" target="_blank" rel="noreferrer" onClick={closeExternal}>LinkedIn <span className="text-arrow" aria-hidden="true" /></a>
               <a href="https://www.pinterest.com/ivonnealdaz/" target="_blank" rel="noreferrer" onClick={closeExternal}>Pinterest <span className="text-arrow" aria-hidden="true" /></a>
