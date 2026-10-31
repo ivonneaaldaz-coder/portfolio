@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Modal from "./Modal";
+import Link from "next/link";
 
 const knownBooks: Record<string,{ title:string; author:string; href:string|null }> = {
   "1.png": { title:"The Alchemist", author:"Paulo Coelho", href:"https://amzn.to/4sULp9V" },
@@ -96,10 +97,10 @@ export default function LibraryWorld({ driveBooks = [] }: { driveBooks?: {name:s
 
   return (
     <div className="library-experience">
-      <div className="library-tabs" role="group" aria-label="Books and quotes">
+      <div className="library-topline"><div className="library-tabs" role="group" aria-label="Books and quotes">
         <button type="button" aria-pressed={view==="books"} className={view==="books" ? "active" : ""} onClick={()=>setView("books")}>Books</button>
         <button type="button" aria-pressed={view==="quotes"} className={view==="quotes" ? "active" : ""} onClick={()=>setView("quotes")}>Quotes</button>
-      </div>
+      </div><Link className="library-back-link" href="/#library">← Back to Library</Link></div>
 
       {view === "books" ? (
         <div className="book-browser">
