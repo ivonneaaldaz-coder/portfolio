@@ -10203,3 +10203,22 @@ main h1 {
   filter:none!important;
   transform:none!important;
 }
+
+/* Site-wide clean canvas: remove decorative star overlays in every theme/page. */
+html body::before, html body::after { content:none!important;display:none!important;animation:none!important; }
+.landing-grain {display:none!important;}
+.landing-page {background:#111!important;}
+/* Books detail: restrained, readable title consistent with other secondary headings. */
+.library-page .book-browser .book-detail h2,
+.library-page .library-experience .book-detail h2,
+.book-browser .book-detail h2 {
+  font-family:var(--display)!important;
+  font-size:clamp(24px,2.2vw,34px)!important;
+  line-height:1.14!important;
+  letter-spacing:-.04em!important;
+  font-weight:500!important;
+  margin:16px 0 22px!important;
+  overflow-wrap:normal!important;
+}
+.book-browser .book-detail>span {font-size:12px!important;letter-spacing:.03em!important;text-transform:none!important;}
+@media(max-width:780px){.book-browser .book-detail h2{font-size:26px!important}}
