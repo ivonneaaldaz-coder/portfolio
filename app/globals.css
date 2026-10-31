@@ -10595,3 +10595,9 @@ html body::before, html body::after { content:none!important;display:none!import
    letter-spacing:-.05em!important;
  }
 }
+
+/* Work refinements: align preview frame with active project row, consistent press hierarchy */
+@media(min-width:901px){.work-hybrid-page .selected-work-projects .selected-work-project-preview{margin-top:0!important;padding-top:0!important}}
+.work-hybrid-page .overview-press-row .press-article-title{font-size:clamp(16px,1.35vw,20px)!important;font-weight:500!important;line-height:1.4!important;letter-spacing:-.02em!important;margin:0!important}
+.work-hybrid-page .overview-press-row .press-publication{font-size:13px!important;font-weight:400!important;line-height:1.5!important;color:var(--muted)!important;margin:6px 0 0!important}
+@media(max-width:780px){.work-hybrid-page .overview-press-row .press-article-title,.work-hybrid-page .overview-writing-row h4{font-size:16px!important;font-weight:500!important;line-height:1.4!important;letter-spacing:-.02em!important}.work-hybrid-page .overview-press-row .press-publication,.work-hybrid-page .overview-writing-row p{font-size:13px!important;line-height:1.5!important}}
