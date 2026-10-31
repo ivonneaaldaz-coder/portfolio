@@ -66,7 +66,7 @@ export default function HomeWatercolorTrace() {
     };
     frame = requestAnimationFrame(draw);
     window.addEventListener("pointermove", move);
-    canvas.addEventListener("pointerdown", touchStart);
+    window.addEventListener("pointerdown", touchStart);
     window.addEventListener("pointerup", touchEnd);
     window.addEventListener("pointerdown", move);
     window.addEventListener("pointerleave", leave);
@@ -74,7 +74,7 @@ export default function HomeWatercolorTrace() {
       cancelAnimationFrame(frame);
       observer.disconnect();
       window.removeEventListener("pointermove", move);
-      canvas.removeEventListener("pointerdown", touchStart);
+      window.removeEventListener("pointerdown", touchStart);
       window.removeEventListener("pointerup", touchEnd);
       window.removeEventListener("pointerdown", move);
       window.removeEventListener("pointerleave", leave);
