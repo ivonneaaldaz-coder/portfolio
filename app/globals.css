@@ -10130,3 +10130,31 @@ main h1 {
 @media (max-width: 560px) {
   main h1 { font-size: 42px !important; }
 }
+
+/* Unframed project previews: let the project itself occupy the visual column. */
+.work-hybrid-page .selected-work-preview-unframed {
+  border: 0 !important;
+  background: transparent !important;
+  height: clamp(360px, 38vw, 560px);
+  min-height: 0;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+}
+.work-hybrid-page .selected-work-preview-unframed > .experiment-loop {
+  position: relative !important;
+  inset: auto !important;
+  display: block;
+  width: 100% !important;
+  height: 100% !important;
+  max-width: 100% !important;
+  max-height: 100% !important;
+  object-fit: contain !important;
+}
+.work-hybrid-page .selected-work-preview-unframed .selected-work-text-preview {
+  width: 100%;
+  max-width: none;
+}
+@media (max-width: 780px) {
+  .work-hybrid-page .selected-work-preview-unframed { height: clamp(270px, 75vw, 440px); }
+}
