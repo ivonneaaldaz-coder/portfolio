@@ -10079,3 +10079,6 @@ html.intro-seen #site-intro{display:none}
 .about-editorial .about-editorial-row p,.about-editorial .about-editorial-cards p{color:var(--muted);font-size:clamp(14px,1.15vw,17px);line-height:1.7}
 .about-editorial .about-editorial-item h3,.about-editorial .about-editorial-cards h3{font-size:clamp(17px,1.55vw,23px);font-weight:400!important}
 @media(max-width:570px){.about-editorial .about-editorial-hero h1{font-size:clamp(46px,10vw,65px)}}
+
+/* Library-to-footer transition: remove the redundant separator above the shared footer. */
+.site-main:has(.overview-page) .site-footer{border-top:0!important}
