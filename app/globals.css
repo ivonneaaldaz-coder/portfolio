@@ -10297,3 +10297,10 @@ html body::before, html body::after { content:none!important;display:none!import
  .mobile-work-links>a:last-child,.mobile-library-links>a:last-child{border-bottom:0!important}
  .mobile-menu-footer{margin-top:32px!important}
 }
+
+/* Mobile nav polish: no submenu rail; one separator before contact */
+@media(max-width:780px){
+ .mobile-work-links,.mobile-library-links{border-left:0!important;padding-left:22px!important}
+ .mobile-menu-links>a:last-child{border-bottom:0!important}
+ .mobile-menu-footer{border-top:1px solid var(--line)!important;margin-top:0!important;padding-top:28px!important}
+}
