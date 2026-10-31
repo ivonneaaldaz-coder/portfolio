@@ -10158,3 +10158,20 @@ main h1 {
 @media (max-width: 780px) {
   .work-hybrid-page .selected-work-preview-unframed { height: clamp(270px, 75vw, 440px); }
 }
+
+/* Preview refinement: dark video backdrop is embedded in the source media.
+   Blend its dark pixels into the page and enlarge the interface without cropping. */
+.work-hybrid-page .selected-work-preview-unframed {
+  background: transparent !important;
+  isolation: auto !important;
+  overflow: visible !important;
+}
+.work-hybrid-page .selected-work-preview-unframed > .experiment-loop {
+  mix-blend-mode: multiply;
+  filter: contrast(1.2) brightness(1.08);
+  transform: scale(1.16);
+  transform-origin: center center;
+}
+@media (max-width: 780px) {
+  .work-hybrid-page .selected-work-preview-unframed > .experiment-loop { transform: scale(1.07); }
+}
