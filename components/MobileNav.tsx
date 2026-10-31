@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import ThemeToggle from "@/components/ThemeToggle";
 import { MouseEvent, useRef, useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
 
@@ -38,7 +39,9 @@ export default function MobileNav() {
   return (
     <header className="mobile-nav">
       <Link className="brand" href="/" onClick={(event) => go(event, "/")}>IVONNE ALDAZ</Link>
-      <details ref={detailsRef} className={closing ? "is-closing" : ""}>
+      <div className="mobile-header-actions">
+        <ThemeToggle />
+        <details ref={detailsRef} className={closing ? "is-closing" : ""}>
         <summary>Menu</summary>
         <div className="mobile-menu">
           <nav className="mobile-menu-links">
@@ -65,7 +68,8 @@ export default function MobileNav() {
             </div>
           </div>
         </div>
-      </details>
+        </details>
+      </div>
     </header>
   );
 }
