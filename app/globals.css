@@ -10222,3 +10222,31 @@ html body::before, html body::after { content:none!important;display:none!import
 }
 .book-browser .book-detail>span {font-size:12px!important;letter-spacing:.03em!important;text-transform:none!important;}
 @media(max-width:780px){.book-browser .book-detail h2{font-size:26px!important}}
+
+/* Oct 30 mobile polish: simpler navigation, aligned controls and editorial hierarchy. */
+@media(max-width:900px){
+  .global-theme-control{top:calc(env(safe-area-inset-top, 0px) + 12px);right:76px;z-index:75}
+  .global-theme-control .editorial-theme-toggle{width:38px;height:38px;padding:7px}
+  .global-theme-control .editorial-theme-icon{width:23px;height:23px}
+  .mobile-menu-links{gap:0}
+  .mobile-menu-links>a{border-bottom:1px solid var(--line)!important}
+  .mobile-menu-links>a:last-child{border-bottom:0!important}
+  .mobile-library-group{border-left:0!important;padding:12px 0!important;gap:0!important}
+  .mobile-library-group>span{padding:4px 0 10px!important}
+  .mobile-library-group>a{border-bottom:1px solid var(--line)!important;padding:13px 0!important}
+  .mobile-library-group>a:last-child{border-bottom:0!important}
+  .mobile-menu{overflow-x:hidden}
+  .about-editorial .about-editorial-row h2{font-size:clamp(25px,7vw,32px)!important;white-space:nowrap;letter-spacing:-.05em!important}
+  .about-editorial .about-editorial-feature>h2,.about-editorial .about-editorial-building-head h2{font-size:clamp(27px,7vw,34px)!important}
+  .about-editorial-item{display:grid!important;grid-template-columns:minmax(0,1fr) auto!important;align-items:start!important;gap:8px!important}
+  .about-editorial-item>div{min-width:0}
+  .about-editorial-item h3{font-size:clamp(15px,4.2vw,19px)!important;overflow-wrap:normal}
+  .about-editorial-item>span{font-size:11px!important;white-space:nowrap!important;text-align:right}
+  .about-editorial-building-head{display:block!important}
+  .about-editorial-building-head .about-github-stats{display:flex!important;flex-direction:row!important;align-items:center!important;justify-content:space-between!important;gap:12px!important;margin-top:20px;white-space:normal!important}
+  .about-editorial-building-head .about-github-stats>*{font-size:12px!important}
+  .pinterest-reference-page .collection-intro{padding:24px 0 28px!important;margin-bottom:28px!important;display:flex!important;flex-direction:row!important;align-items:center!important;justify-content:space-between!important;gap:14px!important}
+  .pinterest-reference-page .collection-intro h1{font-family:var(--display)!important;font-size:clamp(27px,7vw,36px)!important;letter-spacing:-.045em!important}
+  .pinterest-reference-page .collection-intro>a{font-size:10px!important;letter-spacing:0!important;white-space:nowrap!important}
+}
+.hybrid-watercolor-actions{justify-content:flex-end!important}
