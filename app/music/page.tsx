@@ -2,7 +2,6 @@ import { pageMetadata } from "@/lib/metadata";
 
 export const metadata = pageMetadata("Music", "Playlists, records, and current listening from Ivonne Aldaz.", "/music");
 
-import Link from "next/link";
 import SpotifyPlaylists from "@/components/SpotifyPlaylists";
 
 const vinyl = [
@@ -31,13 +30,13 @@ export default function MusicPage() {
             <a className="vinyl-card" href={item.href} target="_blank" rel="noreferrer" key={item.title}>
               <div className="vinyl-cover"><img src={item.image} alt="" /></div>
               <h3>{item.title}</h3>
-              <p>{item.artist} <span>↗︎</span></p>
+              <p>{item.artist} <span aria-hidden="true">↗</span></p>
             </a>
           ))}
         </div>
       </section>
 
-      <nav className="related-paths" aria-label="Explore next"><Link href="/books">Books + Quotes →</Link><Link href="/art">Art →</Link></nav>
+
     </section>
   );
 }
