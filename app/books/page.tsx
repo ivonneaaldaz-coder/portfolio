@@ -15,13 +15,7 @@ export default async function BooksPage() {
 
   return (
     <section className="page section-pad library-page">
-      <header className="collection-intro">
-        <div>
-          <h1>Books + Quotes</h1>
-          <p>Books, passages, and ideas.</p>
-        </div>
-        <Link href="/#library">← Back to Library</Link>
-      </header>
+      
       <LibraryWorld driveBooks={files} />
       <nav className="related-paths" aria-label="Explore next">
         <Link href="/visual-references">Visual References →</Link>
