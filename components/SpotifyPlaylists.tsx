@@ -71,6 +71,7 @@ export default function SpotifyPlaylists() {
         </div>
       </div>
 
+      <div className="playlist-picker-heading">Choose a playlist</div>
       <div className="playlist-grid playlist-grid-live playlist-selector-grid">
         {music.playlists.map((item,index) => {
           const active = index === music.selectedIndex;
