@@ -23,3 +23,13 @@
 .art-v11 .viewer-bottom{display:flex;justify-content:space-between;align-items:center;gap:20px;padding:10px 0}.art-v11 .viewer-bottom strong{font:normal 27px Georgia,serif}.art-v11 .viewer-bottom p{white-space:pre-line;font-size:11px;letter-spacing:.07em;color:var(--art-sub);text-transform:uppercase}.art-v11 .viewer-controls{display:flex;gap:10px;white-space:nowrap}
 @media(max-width:850px){.art-v11 .gallery{grid-template-columns:repeat(2,minmax(0,1fr));gap:56px 5%}.art-v11 .art-lede{margin-bottom:75px}.art-v11 .art-editorial{margin-top:110px}.art-v11 .editorial-row{grid-template-columns:1fr;gap:25px}}
 @media(max-width:550px){.art-v11 .art-v11-content{padding:15px 5% 65px}.art-v11 .gallery{grid-template-columns:1fr;gap:49px}.art-v11 .art-lede{margin:25px 0 65px}.art-v11 .art-lede h1{font-size:clamp(30px,8vw,42px)}.art-v11 .work-title{font-size:28px}.art-v11 .artwork{min-height:0}.art-v11 .art-editorial{margin-top:90px}.art-v11 .editorial-row{padding:37px 0 49px}.art-v11 .history-item strong{font-size:21px}.art-v11 .viewer-bottom strong{font-size:20px}.art-v11 .viewer-bottom{align-items:flex-start}.art-v11 .viewer-controls{gap:0}}
+
+/* Unified art typography and restrained gallery labels */
+.art-v11 .art-lede{max-width:none;margin:24px 0 54px;padding-bottom:54px;border-bottom:1px solid var(--art-line)}
+.art-v11 .art-lede h1{font-family:var(--display)!important;font-size:clamp(42px,5vw,66px)!important;line-height:1!important;font-weight:400!important}
+.art-v11 .work-title{font-family:var(--display)!important;font-size:clamp(19px,1.7vw,25px)!important;font-weight:400!important;line-height:1.2!important;letter-spacing:-.035em}
+.art-v11 .work-meta,.art-v11 .viewer-bottom p{text-transform:none!important;letter-spacing:0!important;font-size:13px!important;line-height:1.55!important}
+.art-v11 .editorial-row h2{font-family:var(--display)!important;font-size:clamp(28px,2.7vw,39px)!important}
+.art-v11 .history-item strong,.art-v11 .viewer-bottom strong{font-family:var(--display)!important;font-size:clamp(18px,1.6vw,23px)!important}
+.art-v11 .editorial-copy p{color:var(--muted);font-size:clamp(15px,1.2vw,17px)}
+@media(max-width:550px){.art-v11 .art-lede{margin-bottom:36px;padding-bottom:36px}}
