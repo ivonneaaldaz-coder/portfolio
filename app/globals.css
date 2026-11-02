@@ -10714,3 +10714,7 @@ html body::before, html body::after { content:none!important;display:none!import
  .site-main:has(>.home-minimal)>.home-minimal>.home-minimal-hero{flex:1 0 auto}
  .site-main:has(>.home-minimal)>.site-footer{flex-shrink:0}
 }
+
+/* 2026-11-02 transparent project previews: no grey tile behind the loops */
+.experiment-loop-visual,.selected-work-preview-stage{background:transparent!important}
+.experiment-loop{object-fit:contain!important;background:transparent!important}
