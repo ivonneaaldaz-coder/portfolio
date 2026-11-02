@@ -3,46 +3,73 @@
 import { useEffect, useRef } from "react";
 
 /*
-  Homepage watercolor — quiet version.
-  - One pigment (ultramarine; matches the "Available" dot), tuned for light and dark themes.
-  - The brush eases lazily after the cursor (it never snaps to it), leaving a soft, thick trail
-    that spreads slightly while wet and tapers from its tail as it dries, like a brushstroke.
-  - Each continuous gesture is one stroke: its marks merge into a single wash and fade together,
-    so overlaps never stack into circles. Only the outer edge darkens (tide line), plus paper grain.
-  - The page loads clean: paint only appears where the visitor moves. Nothing stays.
-  - Touch: drag to paint. Reduced motion: no painting at all.
+  Homepage watercolor — pigment blooms.
+  - Moving paints nothing. When the cursor rests for a moment, a drop of pigment blooms
+    on the paper around it: it spreads softly while you stay, stops when you move on,
+    then dries away. The page stays quiet while people read and responds when they linger.
+  - Touch: touching the page drops pigment where your finger lands; holding lets it spread
+    further. Scrolling and tapping links work as normal (listeners are passive, canvas has
+    no pointer events).
+  - One ultramarine pigment (matches the "Available" dot), tuned for light and dark themes.
+    Each bloom is drawn as one shape, so it fades evenly; only its outer edge darkens
+    (the drying ring), plus paper grain.
+  - Reduced motion: no painting.
 */
 
-type Dab = { x: number; y: number; r: number; born: number; pts: number[]; rot: number; shift: boolean };
-type Stroke = { dabs: Dab[]; last: number };
+type Blob = { dx: number; dy: number; dist: number; scale: number; pts: number[]; rot: number; shift: boolean };
+type Bloom = {
+  x: number;
+  y: number;
+  maxR: number;
+  start: number;
+  stop: number | null; // when it stopped spreading (cursor moved on / finger lifted)
+  blobs: Blob[];
+};
 
 const VERTS = 28;
-const WET_MS = 900; // a mark spreads slightly after it lands
-const HOLD_MS = 500; // segment stays fully visible after it ends
-const DRY_MS = 2200; // then dries away
-const GAP_MS = 280; // a pause longer than this starts a new stroke
-const MAX_STROKES = 10;
-const MAX_DABS_PER_STROKE = 36; // long gestures split into segments that dry behind the brush
-const SPACING = 11; // px between marks along the brush path
-const FOLLOW = 0.04; // how quickly the brush catches up to the cursor (per 60fps frame) — lower is lazier
-const TAPER_DELAY_MS = 450; // each mark starts thinning this long after it lands…
-const TAPER_MS = 2200; // …and is gone this long after that, so the tail tapers like a brushstroke
+const DWELL_MS = 380; // how long the cursor rests before pigment drops
+const SPREAD_MS = 3200; // time to reach full size if you keep resting
+const TOUCH_SPREAD_MS = 900; // after a finger lifts, the drop keeps spreading this long
+const HOLD_MS = 700; // stays at full strength after it stops spreading
+const DRY_MS = 3400; // then dries away
+const MOVE_TOLERANCE = 14; // px the cursor can drift and still count as resting
+const MAX_BLOOMS = 4;
 
 const PIGMENT = {
-  dark: { base: [96, 118, 255], shift: [124, 102, 230], alpha: 0.13, edge: 0.38 },
-  light: { base: [30, 52, 168], shift: [66, 46, 146], alpha: 0.11, edge: 0.32 },
+  dark: { base: [96, 118, 255], shift: [124, 102, 230], alpha: 0.15, edge: 0.42 },
+  light: { base: [30, 52, 168], shift: [66, 46, 146], alpha: 0.12, edge: 0.36 },
 } as const;
 
-function makeDab(x: number, y: number, r: number, born: number): Dab {
-  // Smoothed noise around the circle: organic, not spiky.
+function shape(): { pts: number[]; rot: number } {
+  // Smoothed noise around a circle: organic, not spiky.
   const raw: number[] = [];
   for (let i = 0; i < VERTS; i++) raw.push(Math.random());
   const pts = raw.map((_, i) => {
     const avg =
       (raw[(i - 2 + VERTS) % VERTS] + raw[(i - 1 + VERTS) % VERTS] * 2 + raw[i] * 3 + raw[(i + 1) % VERTS] * 2 + raw[(i + 2) % VERTS]) / 9;
-    return 0.84 + avg * 0.26;
+    return 0.8 + avg * 0.34;
   });
-  return { x, y, r, born, pts, rot: Math.random() * Math.PI * 2, shift: Math.random() < 0.25 };
+  return { pts, rot: Math.random() * Math.PI * 2 };
+}
+
+function makeBloom(x: number, y: number, maxR: number, start: number): Bloom {
+  // A centre pool plus a few lobes that push outward as it spreads: the soft, cauliflower edge of a real bloom.
+  // Lopsided on purpose: a few uneven lobes, mostly to one side, so it never reads as a cloud or flower.
+  const blobs: Blob[] = [{ dx: 0, dy: 0, dist: 0, scale: 0.84, ...shape(), shift: false }];
+  const lobes = 3 + Math.floor(Math.random() * 2);
+  const lean = Math.random() * Math.PI * 2;
+  for (let i = 0; i < lobes; i++) {
+    const ang = lean + (Math.random() - 0.5) * Math.PI * 1.5;
+    blobs.push({
+      dx: Math.cos(ang),
+      dy: Math.sin(ang),
+      dist: 0.18 + Math.random() * 0.26,
+      scale: 0.36 + Math.random() * 0.3,
+      ...shape(),
+      shift: Math.random() < 0.3,
+    });
+  }
+  return { x, y, maxR, start, stop: null, blobs };
 }
 
 function makeGrain(): HTMLCanvasElement {
@@ -69,30 +96,29 @@ export default function HomeWatercolorTrace() {
     if (!ctx) return;
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
-    const strokes: Stroke[] = [];
+    const blooms: Bloom[] = [];
     let width = 0;
     let height = 0;
     let frame = 0;
     let running = false;
-    let target: { x: number; y: number } | null = null; // where the cursor is
-    let brush: { x: number; y: number } | null = null; // where the brush is (lags behind)
-    let lastMark: { x: number; y: number } | null = null;
-    let lastTick = 0;
-    let touchPainting = false;
+    let dwellTimer = 0;
+    let pointer: { x: number; y: number } | null = null;
+    let active: Bloom | null = null; // the bloom currently spreading
     const grain = makeGrain();
     let grainPattern: CanvasPattern | null = null;
 
     // Half-resolution layers: watercolor is soft, so this keeps it cheap.
     const SCALE = 0.5;
-    const scratch = document.createElement("canvas"); // one stroke, opaque
-    const wash = document.createElement("canvas"); // all strokes, each at its own fade
-    const rim = document.createElement("canvas"); // tide line
+    const scratch = document.createElement("canvas"); // one bloom, opaque
+    const wash = document.createElement("canvas"); // all blooms, each at its own strength
+    const rim = document.createElement("canvas"); // drying ring
     const sctx = scratch.getContext("2d");
     const wctx = wash.getContext("2d");
     const rctx = rim.getContext("2d");
     const canFilter = typeof ctx.filter === "string";
 
     const theme = () => (document.documentElement.dataset.theme === "dark" ? PIGMENT.dark : PIGMENT.light);
+    const isSmall = () => width < 700;
 
     const resize = () => {
       const bounds = canvas.getBoundingClientRect();
@@ -110,36 +136,36 @@ export default function HomeWatercolorTrace() {
       if (!running) render(performance.now());
     };
 
-    const strokeAlpha = (s: Stroke, now: number) => {
-      const since = now - s.last;
-      if (since < HOLD_MS) return 1;
+    const ease = (t: number) => 1 - (1 - t) ** 3;
+    const radiusOf = (b: Bloom, now: number) => {
+      const spreadEnd = b.stop === null ? now : Math.min(now, b.stop);
+      const t = Math.min(1, Math.max(0, spreadEnd - b.start) / SPREAD_MS);
+      return b.maxR * (0.18 + 0.82 * ease(t));
+    };
+    const strength = (b: Bloom, now: number) => {
+      const fadeIn = Math.min(1, (now - b.start) / 500);
+      if (b.stop === null || now < b.stop) return fadeIn;
+      const since = now - b.stop;
+      if (since < HOLD_MS) return fadeIn;
       const t = Math.min(1, (since - HOLD_MS) / DRY_MS);
-      return 1 - t * t * (3 - 2 * t);
+      return fadeIn * (1 - t * t * (3 - 2 * t));
     };
-    const taper = (age: number) => {
-      if (age < TAPER_DELAY_MS) return 1;
-      const t = Math.min(1, (age - TAPER_DELAY_MS) / TAPER_MS);
-      return 1 - t * t * (3 - 2 * t);
-    };
-    const spread = (age: number) => {
-      const t = Math.min(1, age / WET_MS);
-      return 0.6 + 0.4 * (1 - (1 - t) * (1 - t));
-    };
+    const finished = (b: Bloom, now: number) => b.stop !== null && now - b.stop > HOLD_MS + DRY_MS;
 
-    const blobPath = (c: CanvasRenderingContext2D, d: Dab, rad: number) => {
+    const blobPath = (c: CanvasRenderingContext2D, cx: number, cy: number, rad: number, pts: number[], rot: number) => {
       c.beginPath();
       for (let i = 0; i <= VERTS; i++) {
         const k = i % VERTS;
-        const ang = d.rot + (k / VERTS) * Math.PI * 2;
-        const rr = rad * d.pts[k];
-        const px = (d.x + Math.cos(ang) * rr) * SCALE;
-        const py = (d.y + Math.sin(ang) * rr) * SCALE;
+        const ang = rot + (k / VERTS) * Math.PI * 2;
+        const rr = rad * pts[k];
+        const px = (cx + Math.cos(ang) * rr) * SCALE;
+        const py = (cy + Math.sin(ang) * rr) * SCALE;
         if (i === 0) c.moveTo(px, py);
         else {
           const prev = (k - 1 + VERTS) % VERTS;
-          const pang = d.rot + ((k - 0.5) / VERTS) * Math.PI * 2;
-          const pr = rad * (d.pts[prev] + d.pts[k]) * 0.5;
-          c.quadraticCurveTo((d.x + Math.cos(pang) * pr) * SCALE, (d.y + Math.sin(pang) * pr) * SCALE, px, py);
+          const pang = rot + ((k - 0.5) / VERTS) * Math.PI * 2;
+          const pr = rad * (pts[prev] + pts[k]) * 0.5;
+          c.quadraticCurveTo((cx + Math.cos(pang) * pr) * SCALE, (cy + Math.sin(pang) * pr) * SCALE, px, py);
         }
       }
       c.closePath();
@@ -147,29 +173,23 @@ export default function HomeWatercolorTrace() {
 
     const render = (now: number) => {
       ctx.clearRect(0, 0, width, height);
-      if (!strokes.length || !sctx || !wctx || !rctx) return;
+      if (!blooms.length || !sctx || !wctx || !rctx) return;
       const p = theme();
 
-      // 1. Each stroke is drawn opaque, then laid into the wash at its own fade.
+      // 1. Each bloom is drawn opaque as one shape, then laid into the wash at its own strength.
       wctx.clearRect(0, 0, wash.width, wash.height);
       let painted = false;
-      for (const s of strokes) {
-        const a = strokeAlpha(s, now);
+      for (const b of blooms) {
+        const a = strength(b, now);
         if (a <= 0.01) continue;
+        const r = radiusOf(b, now);
         sctx.clearRect(0, 0, scratch.width, scratch.height);
-        let any = false;
-        for (const d of s.dabs) {
-          const age = now - d.born;
-          if (age < 0) continue;
-          const tp = taper(age);
-          if (tp < 0.3) continue; // end the tail before it breaks into dots
-          const [r, g, b] = d.shift ? p.shift : p.base;
-          sctx.fillStyle = `rgb(${r},${g},${b})`;
-          blobPath(sctx, d, d.r * spread(age) * tp);
+        for (const blob of b.blobs) {
+          const [cr, cg, cb] = blob.shift ? p.shift : p.base;
+          sctx.fillStyle = `rgb(${cr},${cg},${cb})`;
+          blobPath(sctx, b.x + blob.dx * blob.dist * r, b.y + blob.dy * blob.dist * r, r * blob.scale, blob.pts, blob.rot);
           sctx.fill();
-          any = true;
         }
-        if (!any) continue;
         wctx.globalAlpha = a;
         wctx.drawImage(scratch, 0, 0);
         painted = true;
@@ -180,18 +200,18 @@ export default function HomeWatercolorTrace() {
       // 2. Body: translucent and soft.
       ctx.save();
       ctx.globalAlpha = p.alpha;
-      if (canFilter) ctx.filter = "blur(2.5px)";
+      if (canFilter) ctx.filter = "blur(3px)";
       ctx.drawImage(wash, 0, 0, width, height);
       ctx.restore();
 
-      // 3. Tide line on the outer contour only.
+      // 3. Drying ring on the outer edge only.
       if (canFilter) {
         rctx.clearRect(0, 0, rim.width, rim.height);
         rctx.globalCompositeOperation = "source-over";
         rctx.filter = "none";
         rctx.drawImage(wash, 0, 0);
         rctx.globalCompositeOperation = "destination-out";
-        rctx.filter = "blur(3px)";
+        rctx.filter = "blur(4px)";
         rctx.drawImage(wash, 0, 0);
         rctx.globalCompositeOperation = "source-over";
         rctx.filter = "none";
@@ -214,20 +234,12 @@ export default function HomeWatercolorTrace() {
     };
 
     const tick = (now: number) => {
-      const dt = lastTick ? Math.min(64, now - lastTick) : 16.7;
-      lastTick = now;
-      moveBrush(dt);
-      for (let i = strokes.length - 1; i >= 0; i--) {
-        const st = strokes[i];
-        while (st.dabs.length && now - st.dabs[0].born > TAPER_DELAY_MS + TAPER_MS) st.dabs.shift();
-        if (!st.dabs.length || now - st.last > HOLD_MS + DRY_MS) strokes.splice(i, 1);
+      for (let i = blooms.length - 1; i >= 0; i--) {
+        if (finished(blooms[i], now)) blooms.splice(i, 1);
       }
       render(now);
-      if (strokes.length || brushMoving()) frame = requestAnimationFrame(tick);
-      else {
-        running = false;
-        lastTick = 0;
-      }
+      if (blooms.length) frame = requestAnimationFrame(tick);
+      else running = false;
     };
     const ensureLoop = () => {
       if (running) return;
@@ -235,17 +247,78 @@ export default function HomeWatercolorTrace() {
       frame = requestAnimationFrame(tick);
     };
 
-    const addDab = (x: number, y: number) => {
+    const startBloom = (x: number, y: number) => {
       const now = performance.now();
-      let s = strokes[strokes.length - 1];
-      if (!s || now - s.last > GAP_MS || s.dabs.length >= MAX_DABS_PER_STROKE) {
-        s = { dabs: [], last: now };
-        strokes.push(s);
-        while (strokes.length > MAX_STROKES) strokes.shift();
+      const base = isSmall() ? 70 : 105;
+      const b = makeBloom(x, y, base + Math.random() * base * 0.35, now);
+      blooms.push(b);
+      while (blooms.length > MAX_BLOOMS) {
+        const old = blooms.shift();
+        if (old && old.stop === null) old.stop = now;
       }
-      s.dabs.push(makeDab(x, y, 22 + Math.random() * 12, now));
-      s.last = now;
+      active = b;
       ensureLoop();
+    };
+    const stopActive = (extra = 0) => {
+      if (active && active.stop === null) active.stop = performance.now() + extra;
+      active = null;
+    };
+
+    const local = (event: PointerEvent) => {
+      const rect = canvas.getBoundingClientRect();
+      return { x: event.clientX - rect.left, y: event.clientY - rect.top };
+    };
+    const inside = (pt: { x: number; y: number }) => pt.x >= 0 && pt.y >= 0 && pt.x <= width && pt.y <= height;
+
+    // Mouse / pen: rest to bloom.
+    const move = (event: PointerEvent) => {
+      if (event.pointerType === "touch") return;
+      const pt = local(event);
+      if (!inside(pt)) {
+        window.clearTimeout(dwellTimer);
+        stopActive();
+        pointer = null;
+        return;
+      }
+      if (active && Math.hypot(pt.x - active.x, pt.y - active.y) > MOVE_TOLERANCE) stopActive();
+      if (pointer && Math.hypot(pt.x - pointer.x, pt.y - pointer.y) < 2) return; // ignore jitter
+      pointer = pt;
+      window.clearTimeout(dwellTimer);
+      dwellTimer = window.setTimeout(() => {
+        if (pointer && !active) startBloom(pointer.x, pointer.y);
+      }, DWELL_MS);
+    };
+    const leave = () => {
+      window.clearTimeout(dwellTimer);
+      stopActive();
+      pointer = null;
+    };
+
+    // Touch: a drop lands where the finger touches; holding lets it spread further.
+    let touchStart: { x: number; y: number } | null = null;
+    const down = (event: PointerEvent) => {
+      if (event.pointerType !== "touch") return;
+      const pt = local(event);
+      if (!inside(pt)) return;
+      touchStart = pt;
+      startBloom(pt.x, pt.y);
+    };
+    const touchMove = (event: PointerEvent) => {
+      if (event.pointerType !== "touch" || !touchStart) return;
+      const pt = local(event);
+      if (Math.hypot(pt.x - touchStart.x, pt.y - touchStart.y) > 12) {
+        stopActive(); // the finger is scrolling: let this drop settle where it is
+        touchStart = null;
+      }
+    };
+    const up = (event: PointerEvent) => {
+      if (event.pointerType !== "touch") return;
+      stopActive(TOUCH_SPREAD_MS); // a drop keeps spreading a little after the finger lifts
+      touchStart = null;
+    };
+    const cancel = () => {
+      stopActive();
+      touchStart = null;
     };
 
     resize();
@@ -256,68 +329,26 @@ export default function HomeWatercolorTrace() {
     });
     themeWatch.observe(document.documentElement, { attributes: true, attributeFilter: ["data-theme"] });
 
-    // The brush eases toward the cursor and lays marks along its own (smoothed) path.
-    const moveBrush = (dt: number) => {
-      if (!target || !brush) return;
-      const k = 1 - Math.pow(1 - FOLLOW, dt / 16.7);
-      const nx = brush.x + (target.x - brush.x) * k;
-      const ny = brush.y + (target.y - brush.y) * k;
-      brush = { x: nx, y: ny };
-      if (!lastMark) {
-        lastMark = { x: nx, y: ny };
-        addDab(nx, ny);
-        return;
-      }
-      const dist = Math.hypot(nx - lastMark.x, ny - lastMark.y);
-      if (dist < SPACING) return;
-      const steps = Math.floor(dist / SPACING);
-      for (let i = 1; i <= steps; i++) {
-        addDab(lastMark.x + ((nx - lastMark.x) * i) / steps, lastMark.y + ((ny - lastMark.y) * i) / steps);
-      }
-      lastMark = { x: nx, y: ny };
-    };
-    const brushMoving = () => !!(target && brush && Math.hypot(target.x - brush.x, target.y - brush.y) > 0.6);
-
-    const paint = (event: PointerEvent) => {
-      if (event.pointerType === "touch" && !touchPainting) return;
-      const rect = canvas.getBoundingClientRect();
-      const x = event.clientX - rect.left;
-      const y = event.clientY - rect.top;
-      if (x < 0 || y < 0 || x > width || y > height) return;
-      target = { x, y };
-      if (!brush) brush = { x, y };
-      ensureLoop();
-    };
-    const down = (event: PointerEvent) => {
-      if (event.pointerType === "touch") {
-        touchPainting = true;
-        brush = null;
-        lastMark = null;
-      }
-      paint(event);
-    };
-    const up = () => {
-      touchPainting = false;
-      target = null;
-      brush = null;
-      lastMark = null;
-    };
-
-    window.addEventListener("pointermove", paint, { passive: true });
+    window.addEventListener("pointermove", move, { passive: true });
+    window.addEventListener("pointermove", touchMove, { passive: true });
     window.addEventListener("pointerdown", down, { passive: true });
-    window.addEventListener("pointerup", up);
-    window.addEventListener("pointercancel", up);
-    document.documentElement.addEventListener("pointerleave", up);
+    window.addEventListener("pointerup", up, { passive: true });
+    window.addEventListener("pointercancel", cancel);
+    document.documentElement.addEventListener("pointerleave", leave);
+    window.addEventListener("blur", leave);
 
     return () => {
       cancelAnimationFrame(frame);
+      window.clearTimeout(dwellTimer);
       observer.disconnect();
       themeWatch.disconnect();
-      window.removeEventListener("pointermove", paint);
+      window.removeEventListener("pointermove", move);
+      window.removeEventListener("pointermove", touchMove);
       window.removeEventListener("pointerdown", down);
       window.removeEventListener("pointerup", up);
-      window.removeEventListener("pointercancel", up);
-      document.documentElement.removeEventListener("pointerleave", up);
+      window.removeEventListener("pointercancel", cancel);
+      document.documentElement.removeEventListener("pointerleave", leave);
+      window.removeEventListener("blur", leave);
     };
   }, []);
 

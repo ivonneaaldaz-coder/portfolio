@@ -20,7 +20,7 @@ export default function OverviewPage() {
           </div>
           <p className="home-proof">
             <span className="home-proof-label">Selected work</span>
-            <span>ARM &amp; HAMMER · Hero Cosmetics · Nestlé · Adweek · Digiday</span>
+            <span>ARM &amp; HAMMER · Hero Cosmetics · Nestlé · Adweek · Digiday</span>
           </p>
         </div>
       </section>
