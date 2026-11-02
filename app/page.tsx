@@ -19,8 +19,8 @@ export default function OverviewPage() {
             <details className="home-play-disclosure"><summary>Explore play <span aria-hidden="true">+</span></summary><nav aria-label="Explore play"><Link href="/art">Art</Link><Link href="/travel">Travel</Link><Link href="/music">Music</Link><Link href="/books">Books + Quotes</Link><Link href="/visual-references">Visual References</Link></nav></details>
           </div>
           <p className="home-proof">
-            <span>Worked with ARM &amp; HAMMER, Hero Cosmetics, Nestlé</span>
-            <span>Press: Adweek, Digiday</span>
+            <span className="home-proof-label">Selected work</span>
+            <span>ARM &amp; HAMMER · Hero Cosmetics · Nestlé · Adweek · Digiday</span>
           </p>
         </div>
       </section>

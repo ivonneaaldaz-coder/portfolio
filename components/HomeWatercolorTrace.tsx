@@ -5,7 +5,8 @@ import { useEffect, useRef } from "react";
 /*
   Homepage watercolor — quiet version.
   - One pigment (ultramarine; matches the "Available" dot), tuned for light and dark themes.
-  - The cursor leaves a thin brush trail that spreads slightly while wet, then dries away within a few seconds.
+  - The brush eases after the cursor (it never snaps to it), leaving a soft, thick trail
+    that spreads slightly while wet, then dries away slowly.
   - Each continuous gesture is one stroke: its marks merge into a single wash and fade together,
     so overlaps never stack into circles. Only the outer edge darkens (tide line), plus paper grain.
   - A short gesture paints itself under the headline on load, then dries like any other stroke.
@@ -17,13 +18,14 @@ type Dab = { x: number; y: number; r: number; born: number; pts: number[]; rot: 
 type Stroke = { dabs: Dab[]; last: number };
 
 const VERTS = 28;
-const WET_MS = 600; // a mark spreads slightly after it lands
-const HOLD_MS = 450; // segment stays fully visible after it ends
-const DRY_MS = 2200; // then dries away
+const WET_MS = 900; // a mark spreads slightly after it lands
+const HOLD_MS = 900; // segment stays fully visible after it ends
+const DRY_MS = 3800; // then dries away, slowly
 const GAP_MS = 280; // a pause longer than this starts a new stroke
 const MAX_STROKES = 10;
-const MAX_DABS_PER_STROKE = 40; // long gestures split into segments that dry behind the cursor
-const SPACING = 7; // px between marks, filled in along fast moves
+const MAX_DABS_PER_STROKE = 36; // long gestures split into segments that dry behind the brush
+const SPACING = 11; // px between marks along the brush path
+const FOLLOW = 0.075; // how quickly the brush catches up to the cursor (per 60fps frame)
 
 const PIGMENT = {
   dark: { base: [96, 118, 255], shift: [124, 102, 230], alpha: 0.13, edge: 0.38 },
@@ -71,7 +73,10 @@ export default function HomeWatercolorTrace() {
     let height = 0;
     let frame = 0;
     let running = false;
-    let last: { x: number; y: number } | null = null;
+    let target: { x: number; y: number } | null = null; // where the cursor is
+    let brush: { x: number; y: number } | null = null; // where the brush is (lags behind)
+    let lastMark: { x: number; y: number } | null = null;
+    let lastTick = 0;
     let touchPainting = false;
     const grain = makeGrain();
     let grainPattern: CanvasPattern | null = null;
@@ -201,12 +206,18 @@ export default function HomeWatercolorTrace() {
     };
 
     const tick = (now: number) => {
+      const dt = lastTick ? Math.min(64, now - lastTick) : 16.7;
+      lastTick = now;
+      moveBrush(dt);
       for (let i = strokes.length - 1; i >= 0; i--) {
         if (now - strokes[i].last > HOLD_MS + DRY_MS) strokes.splice(i, 1);
       }
       render(now);
-      if (strokes.length) frame = requestAnimationFrame(tick);
-      else running = false;
+      if (strokes.length || brushMoving()) frame = requestAnimationFrame(tick);
+      else {
+        running = false;
+        lastTick = 0;
+      }
     };
     const ensureLoop = () => {
       if (running) return;
@@ -222,7 +233,7 @@ export default function HomeWatercolorTrace() {
         strokes.push(s);
         while (strokes.length > MAX_STROKES) strokes.shift();
       }
-      s.dabs.push(makeDab(x, y, 8 + Math.random() * 6, now));
+      s.dabs.push(makeDab(x, y, 22 + Math.random() * 12, now));
       s.last = now;
       ensureLoop();
     };
@@ -240,9 +251,9 @@ export default function HomeWatercolorTrace() {
         const t = i / (steps - 1);
         const x = cx - span / 2 + span * t;
         const y = cy + Math.sin(t * Math.PI * 1.1 + 0.3) * 8;
-        dabs.push(makeDab(x, y, 6 + Math.sin(t * Math.PI) * 7, start + t * 900));
+        dabs.push(makeDab(x, y, 12 + Math.sin(t * Math.PI) * 14, start + t * 1500));
       }
-      return { dabs, last: start + 1600 };
+      return { dabs, last: start + 2200 };
     };
 
     resize();
@@ -256,32 +267,51 @@ export default function HomeWatercolorTrace() {
     strokes.push(loadGesture(performance.now() + 500));
     ensureLoop();
 
+    // The brush eases toward the cursor and lays marks along its own (smoothed) path.
+    const moveBrush = (dt: number) => {
+      if (!target || !brush) return;
+      const k = 1 - Math.pow(1 - FOLLOW, dt / 16.7);
+      const nx = brush.x + (target.x - brush.x) * k;
+      const ny = brush.y + (target.y - brush.y) * k;
+      brush = { x: nx, y: ny };
+      if (!lastMark) {
+        lastMark = { x: nx, y: ny };
+        addDab(nx, ny);
+        return;
+      }
+      const dist = Math.hypot(nx - lastMark.x, ny - lastMark.y);
+      if (dist < SPACING) return;
+      const steps = Math.floor(dist / SPACING);
+      for (let i = 1; i <= steps; i++) {
+        addDab(lastMark.x + ((nx - lastMark.x) * i) / steps, lastMark.y + ((ny - lastMark.y) * i) / steps);
+      }
+      lastMark = { x: nx, y: ny };
+    };
+    const brushMoving = () => !!(target && brush && Math.hypot(target.x - brush.x, target.y - brush.y) > 0.6);
+
     const paint = (event: PointerEvent) => {
       if (event.pointerType === "touch" && !touchPainting) return;
       const rect = canvas.getBoundingClientRect();
       const x = event.clientX - rect.left;
       const y = event.clientY - rect.top;
       if (x < 0 || y < 0 || x > width || y > height) return;
-      if (!last) {
-        last = { x, y };
-        addDab(x, y);
-        return;
-      }
-      const dist = Math.hypot(x - last.x, y - last.y);
-      if (dist < SPACING) return;
-      // Fill in along fast moves so the trail reads as one line, not beads.
-      const steps = Math.min(40, Math.floor(dist / SPACING));
-      for (let i = 1; i <= steps; i++) addDab(last.x + ((x - last.x) * i) / steps, last.y + ((y - last.y) * i) / steps);
-      last = { x, y };
+      target = { x, y };
+      if (!brush) brush = { x, y };
+      ensureLoop();
     };
     const down = (event: PointerEvent) => {
-      if (event.pointerType === "touch") touchPainting = true;
-      last = null;
+      if (event.pointerType === "touch") {
+        touchPainting = true;
+        brush = null;
+        lastMark = null;
+      }
       paint(event);
     };
     const up = () => {
       touchPainting = false;
-      last = null;
+      target = null;
+      brush = null;
+      lastMark = null;
     };
 
     window.addEventListener("pointermove", paint, { passive: true });
