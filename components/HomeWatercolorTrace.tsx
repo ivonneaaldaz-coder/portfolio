@@ -9,8 +9,7 @@ import { useEffect, useRef } from "react";
     that spreads slightly while wet, then dries away slowly.
   - Each continuous gesture is one stroke: its marks merge into a single wash and fade together,
     so overlaps never stack into circles. Only the outer edge darkens (tide line), plus paper grain.
-  - A short gesture paints itself under the headline on load, then dries like any other stroke.
-    Nothing stays on the page.
+  - The page loads clean: paint only appears where the visitor moves. Nothing stays.
   - Touch: drag to paint. Reduced motion: no painting at all.
 */
 
@@ -238,24 +237,6 @@ export default function HomeWatercolorTrace() {
       ensureLoop();
     };
 
-    // A short gesture under the headline on load, so visitors know the page responds. It dries like any other.
-    const loadGesture = (start: number) => {
-      const rect = canvas.getBoundingClientRect();
-      const h1 = canvas.parentElement?.querySelector("h1")?.getBoundingClientRect();
-      const cx = h1 ? h1.left - rect.left + h1.width / 2 : width / 2;
-      const cy = h1 ? h1.bottom - rect.top + 14 : height * 0.5;
-      const span = Math.min((h1?.width ?? width * 0.5) * 0.42, 320);
-      const steps = 40;
-      const dabs: Dab[] = [];
-      for (let i = 0; i < steps; i++) {
-        const t = i / (steps - 1);
-        const x = cx - span / 2 + span * t;
-        const y = cy + Math.sin(t * Math.PI * 1.1 + 0.3) * 8;
-        dabs.push(makeDab(x, y, 12 + Math.sin(t * Math.PI) * 14, start + t * 1500));
-      }
-      return { dabs, last: start + 2200 };
-    };
-
     resize();
     const observer = new ResizeObserver(resize);
     observer.observe(canvas);
@@ -263,9 +244,6 @@ export default function HomeWatercolorTrace() {
       if (!running) render(performance.now());
     });
     themeWatch.observe(document.documentElement, { attributes: true, attributeFilter: ["data-theme"] });
-
-    strokes.push(loadGesture(performance.now() + 500));
-    ensureLoop();
 
     // The brush eases toward the cursor and lays marks along its own (smoothed) path.
     const moveBrush = (dt: number) => {
