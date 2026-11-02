@@ -27,9 +27,10 @@ type Bloom = {
 };
 
 const VERTS = 28;
-const DWELL_MS = 380; // how long the cursor rests before pigment drops
+const DWELL_MS = 650; // how long the cursor rests before pigment drops
 const SPREAD_MS = 3200; // time to reach full size if you keep resting
-const TOUCH_SPREAD_MS = 900; // after a finger lifts, the drop keeps spreading this long
+const TOUCH_SPREAD_MS = 900;
+const MOUSE_RELEASE_SPREAD_MS = 700; // after a finger lifts, the drop keeps spreading this long
 const HOLD_MS = 700; // stays at full strength after it stops spreading
 const DRY_MS = 3400; // then dries away
 const MOVE_TOLERANCE = 14; // px the cursor can drift and still count as resting
@@ -38,7 +39,7 @@ const TRAIL_MS = 1100; // the hairline behind a moving cursor fades within this 
 const TRAIL_WIDTH = 3; // px at its freshest point; it thins toward the tail
 
 const PIGMENT = {
-  dark: { base: [96, 118, 255], shift: [124, 102, 230], alpha: 0.15, edge: 0.42, trail: 0.22 },
+  dark: { base: [96, 118, 255], shift: [124, 102, 230], alpha: 0.15, edge: 0.27, trail: 0.22 },
   light: { base: [30, 52, 168], shift: [66, 46, 146], alpha: 0.12, edge: 0.36, trail: 0.16 },
 } as const;
 
@@ -307,11 +308,11 @@ export default function HomeWatercolorTrace() {
       const pt = local(event);
       if (!inside(pt)) {
         window.clearTimeout(dwellTimer);
-        stopActive();
+        stopActive(MOUSE_RELEASE_SPREAD_MS);
         pointer = null;
         return;
       }
-      if (active && Math.hypot(pt.x - active.x, pt.y - active.y) > MOVE_TOLERANCE) stopActive();
+      if (active && Math.hypot(pt.x - active.x, pt.y - active.y) > MOVE_TOLERANCE) stopActive(MOUSE_RELEASE_SPREAD_MS);
       if (pointer && Math.hypot(pt.x - pointer.x, pt.y - pointer.y) < 2) return; // ignore jitter
       pointer = pt;
       const now = performance.now();
@@ -327,7 +328,7 @@ export default function HomeWatercolorTrace() {
     };
     const leave = () => {
       window.clearTimeout(dwellTimer);
-      stopActive();
+      stopActive(MOUSE_RELEASE_SPREAD_MS);
       pointer = null;
     };
 
