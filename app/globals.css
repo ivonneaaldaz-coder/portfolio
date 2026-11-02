@@ -10726,3 +10726,6 @@ html body::before, html body::after { content:none!important;display:none!import
 .work-hybrid-page .overview-press-row .press-publication,.work-hybrid-page .overview-writing-row p{font-size:13px!important;font-weight:400!important;line-height:1.5!important;color:var(--muted)!important;margin-top:6px!important}
 .music-page .music-section+.music-section{margin-top:clamp(72px,9vw,136px)!important;padding-top:clamp(36px,5vw,64px)!important}
 .site-footer .footer-social-columns a .external-arrow,.mobile-nav .mobile-socials a .external-arrow{display:none!important}
+/* 2026-11-02 transparent project previews: no grey tile behind the loops */
+.experiment-loop-visual,.selected-work-preview-stage{background:transparent!important}
+.experiment-loop{object-fit:contain!important;background:transparent!important}
