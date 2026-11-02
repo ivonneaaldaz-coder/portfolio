@@ -10697,3 +10697,10 @@ html body::before, html body::after { content:none!important;display:none!import
 @media(prefers-reduced-motion:reduce){.about-editorial .about-hero-portrait img{animation:none}}
 @media(min-width:901px){.about-editorial .about-editorial-hero{grid-template-columns:minmax(0,1fr) minmax(290px,37%)!important;gap:clamp(42px,5vw,84px)!important}.about-editorial .about-hero-portrait{max-width:500px}.about-editorial .about-hero-intro h1{white-space:normal!important}}
 @media(max-width:900px){.about-editorial .about-editorial-hero{display:flex!important;flex-direction:column!important;align-items:stretch!important;gap:clamp(28px,5vw,42px)!important;padding-bottom:clamp(38px,7vw,58px)!important}.about-editorial .about-hero-index{margin-bottom:26px}.about-editorial .about-hero-intro h1{white-space:nowrap!important;font-size:clamp(24px,5.15vw,38px)!important;letter-spacing:-.055em!important}.about-editorial .about-hero-portrait{width:min(100%,480px)!important}.about-editorial .about-hero-portrait figcaption{font-size:9px;letter-spacing:.06em}}
+
+/* Pigment accent — shared with the homepage watercolor */
+:root{--pigment:#2236a8}
+[data-theme="dark"]{--pigment:#6f86ff}
+.status-dot{background:var(--pigment)!important;box-shadow:0 0 0 3px color-mix(in srgb,var(--pigment) 18%,transparent)}
+.home-minimal-links a:hover,.home-play-disclosure summary:hover{border-color:var(--pigment)}
+.home-play-disclosure[open] summary{border-color:var(--pigment)}
