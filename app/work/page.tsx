@@ -42,7 +42,7 @@ function WritingRow({item}:{item:typeof writing[number] | typeof moreWriting[num
 }
 
 function PressRow({item}:{item:{org:string;title:string;year:string;href?:string}}) {
-  const body = <><span>{item.year}</span><div><h3 className="press-article-title">{item.title}</h3><p className="press-publication">{item.org}</p></div></>;
+  const body = <><div><h3 className="press-article-title">{item.title}</h3><p className="press-publication">{item.org} · {item.year}</p></div></>;
   return item.href
     ? <a className="overview-press-row" href={item.href} target="_blank" rel="noreferrer">{body}</a>
     : <div className="overview-press-row">{body}</div>;
