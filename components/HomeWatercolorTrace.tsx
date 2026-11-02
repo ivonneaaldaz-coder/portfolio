@@ -5,8 +5,8 @@ import { useEffect, useRef } from "react";
 /*
   Homepage watercolor — quiet version.
   - One pigment (ultramarine; matches the "Available" dot), tuned for light and dark themes.
-  - The brush eases after the cursor (it never snaps to it), leaving a soft, thick trail
-    that spreads slightly while wet, then dries away slowly.
+  - The brush eases lazily after the cursor (it never snaps to it), leaving a soft, thick trail
+    that spreads slightly while wet and tapers from its tail as it dries, like a brushstroke.
   - Each continuous gesture is one stroke: its marks merge into a single wash and fade together,
     so overlaps never stack into circles. Only the outer edge darkens (tide line), plus paper grain.
   - The page loads clean: paint only appears where the visitor moves. Nothing stays.
@@ -18,13 +18,15 @@ type Stroke = { dabs: Dab[]; last: number };
 
 const VERTS = 28;
 const WET_MS = 900; // a mark spreads slightly after it lands
-const HOLD_MS = 900; // segment stays fully visible after it ends
-const DRY_MS = 3800; // then dries away, slowly
+const HOLD_MS = 500; // segment stays fully visible after it ends
+const DRY_MS = 2200; // then dries away
 const GAP_MS = 280; // a pause longer than this starts a new stroke
 const MAX_STROKES = 10;
 const MAX_DABS_PER_STROKE = 36; // long gestures split into segments that dry behind the brush
 const SPACING = 11; // px between marks along the brush path
-const FOLLOW = 0.075; // how quickly the brush catches up to the cursor (per 60fps frame)
+const FOLLOW = 0.04; // how quickly the brush catches up to the cursor (per 60fps frame) — lower is lazier
+const TAPER_DELAY_MS = 450; // each mark starts thinning this long after it lands…
+const TAPER_MS = 2200; // …and is gone this long after that, so the tail tapers like a brushstroke
 
 const PIGMENT = {
   dark: { base: [96, 118, 255], shift: [124, 102, 230], alpha: 0.13, edge: 0.38 },
@@ -114,6 +116,11 @@ export default function HomeWatercolorTrace() {
       const t = Math.min(1, (since - HOLD_MS) / DRY_MS);
       return 1 - t * t * (3 - 2 * t);
     };
+    const taper = (age: number) => {
+      if (age < TAPER_DELAY_MS) return 1;
+      const t = Math.min(1, (age - TAPER_DELAY_MS) / TAPER_MS);
+      return 1 - t * t * (3 - 2 * t);
+    };
     const spread = (age: number) => {
       const t = Math.min(1, age / WET_MS);
       return 0.6 + 0.4 * (1 - (1 - t) * (1 - t));
@@ -154,9 +161,11 @@ export default function HomeWatercolorTrace() {
         for (const d of s.dabs) {
           const age = now - d.born;
           if (age < 0) continue;
+          const tp = taper(age);
+          if (tp < 0.3) continue; // end the tail before it breaks into dots
           const [r, g, b] = d.shift ? p.shift : p.base;
           sctx.fillStyle = `rgb(${r},${g},${b})`;
-          blobPath(sctx, d, d.r * spread(age));
+          blobPath(sctx, d, d.r * spread(age) * tp);
           sctx.fill();
           any = true;
         }
@@ -209,7 +218,9 @@ export default function HomeWatercolorTrace() {
       lastTick = now;
       moveBrush(dt);
       for (let i = strokes.length - 1; i >= 0; i--) {
-        if (now - strokes[i].last > HOLD_MS + DRY_MS) strokes.splice(i, 1);
+        const st = strokes[i];
+        while (st.dabs.length && now - st.dabs[0].born > TAPER_DELAY_MS + TAPER_MS) st.dabs.shift();
+        if (!st.dabs.length || now - st.last > HOLD_MS + DRY_MS) strokes.splice(i, 1);
       }
       render(now);
       if (strokes.length || brushMoving()) frame = requestAnimationFrame(tick);
