@@ -10729,3 +10729,9 @@ html body::before, html body::after { content:none!important;display:none!import
 /* 2026-11-02 transparent project previews: no grey tile behind the loops */
 .experiment-loop-visual,.selected-work-preview-stage{background:transparent!important}
 .experiment-loop{object-fit:contain!important;background:transparent!important}
+
+/* Brand disclosure: a separate editorial control beneath the complete grid. */
+.work-hybrid-page .selected-work-brand-toggle{display:flex;justify-content:center;align-items:center;padding:22px 0 30px}
+.work-hybrid-page .selected-work-brand-toggle>.selected-work-more-brands{appearance:none;display:inline-flex!important;align-items:center;justify-content:center;width:auto!important;min-height:0!important;margin:0!important;padding:7px 4px!important;border:0!important;outline-offset:5px;background:transparent!important;box-shadow:none!important;color:var(--ink);font:inherit;font-size:13px!important;font-weight:500;cursor:pointer}
+.work-hybrid-page .selected-work-brand-toggle>.selected-work-more-brands:hover{background:transparent!important;text-decoration:underline;text-underline-offset:4px}
+.work-hybrid-page .selected-work-brand-grid{margin-bottom:0!important}
