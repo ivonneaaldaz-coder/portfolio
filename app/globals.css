@@ -10735,3 +10735,19 @@ html body::before, html body::after { content:none!important;display:none!import
 .work-hybrid-page .selected-work-brand-toggle>.selected-work-more-brands{appearance:none;display:inline-flex!important;align-items:center;justify-content:center;width:auto!important;min-height:0!important;margin:0!important;padding:7px 4px!important;border:0!important;outline-offset:5px;background:transparent!important;box-shadow:none!important;color:var(--ink);font:inherit;font-size:13px!important;font-weight:500;cursor:pointer}
 .work-hybrid-page .selected-work-brand-toggle>.selected-work-more-brands:hover{background:transparent!important;text-decoration:underline;text-underline-offset:4px}
 .work-hybrid-page .selected-work-brand-grid{margin-bottom:0!important}
+
+/* Work visual hierarchy: lighter project list, generous previews, quiet brand header. */
+.work-hybrid-page .selected-work-brand-heading{display:flex;justify-content:space-between;align-items:baseline;gap:24px;margin-bottom:28px}
+.work-hybrid-page .selected-work-brand-heading h3{margin:0!important}
+.work-hybrid-page .selected-work-brand-heading>span{font-size:12px;color:var(--muted);white-space:nowrap}
+.work-hybrid-page .selected-work-brand-toggle{padding:24px 0 38px!important}
+.work-hybrid-page .selected-work-case{margin-top:clamp(20px,3.5vw,48px)!important}
+@media(min-width:901px){
+ .work-hybrid-page .selected-work-projects{grid-template-columns:minmax(185px,30%) minmax(0,1fr)!important;gap:clamp(42px,5vw,90px)!important}
+ .work-hybrid-page .selected-work-scroll button{grid-template-columns:30px minmax(0,1fr)!important;column-gap:12px!important}
+ .work-hybrid-page .selected-work-project-preview{min-width:0!important}
+ .work-hybrid-page .selected-work-preview-stage{height:auto!important;aspect-ratio:1.65!important;min-height:340px!important}
+ .work-hybrid-page .selected-work-preview-stage>.experiment-loop{object-fit:cover!important}
+ .work-hybrid-page .selected-work-project-description{margin-top:12px!important;padding-top:0!important}
+}
+@media(max-width:900px){.work-hybrid-page .selected-work-brand-heading{align-items:flex-start;gap:12px}.work-hybrid-page .selected-work-brand-heading>span{white-space:normal;text-align:right;font-size:11px}.work-hybrid-page .selected-work-case{margin-top:18px!important}.work-hybrid-page .selected-work-project-description{margin-top:12px!important}}
