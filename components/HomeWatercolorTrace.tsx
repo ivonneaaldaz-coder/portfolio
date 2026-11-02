@@ -4,7 +4,7 @@ import { useEffect, useRef } from "react";
 
 /*
   Homepage watercolor — pigment blooms.
-  - Moving paints nothing. When the cursor rests for a moment, a drop of pigment blooms
+  - Moving leaves only a hairline of pigment that fades within a second. When the cursor rests for a moment, a drop of pigment blooms
     on the paper around it: it spreads softly while you stay, stops when you move on,
     then dries away. The page stays quiet while people read and responds when they linger.
   - Touch: touching the page drops pigment where your finger lands; holding lets it spread
@@ -34,10 +34,12 @@ const HOLD_MS = 700; // stays at full strength after it stops spreading
 const DRY_MS = 3400; // then dries away
 const MOVE_TOLERANCE = 14; // px the cursor can drift and still count as resting
 const MAX_BLOOMS = 4;
+const TRAIL_MS = 1100; // the hairline behind a moving cursor fades within this long
+const TRAIL_WIDTH = 3; // px at its freshest point; it thins toward the tail
 
 const PIGMENT = {
-  dark: { base: [96, 118, 255], shift: [124, 102, 230], alpha: 0.15, edge: 0.42 },
-  light: { base: [30, 52, 168], shift: [66, 46, 146], alpha: 0.12, edge: 0.36 },
+  dark: { base: [96, 118, 255], shift: [124, 102, 230], alpha: 0.15, edge: 0.42, trail: 0.22 },
+  light: { base: [30, 52, 168], shift: [66, 46, 146], alpha: 0.12, edge: 0.36, trail: 0.16 },
 } as const;
 
 function shape(): { pts: number[]; rot: number } {
@@ -97,6 +99,7 @@ export default function HomeWatercolorTrace() {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
     const blooms: Bloom[] = [];
+    const trail: { x: number; y: number; t: number; brk?: boolean }[] = []; // brk: start of a new line (no joining segment)
     let width = 0;
     let height = 0;
     let frame = 0;
@@ -171,8 +174,35 @@ export default function HomeWatercolorTrace() {
       c.closePath();
     };
 
+    // The hairline: a thin, faint line straight behind the cursor that thins and fades as it ages.
+    const drawTrail = (now: number) => {
+      if (trail.length < 2) return;
+      const p = theme();
+      const [r, g, b] = p.base;
+      ctx.save();
+      ctx.lineCap = "round";
+      ctx.lineJoin = "round";
+      for (let i = 1; i < trail.length; i++) {
+        const a = trail[i - 1];
+        const c = trail[i];
+        if (c.brk) continue;
+        const f = Math.max(0, 1 - (now - c.t) / TRAIL_MS);
+        if (f <= 0) continue;
+        const prev = i > 1 && !a.brk ? trail[i - 2] : a;
+        const next = c;
+        ctx.strokeStyle = `rgba(${r},${g},${b},${p.trail * f * f})`;
+        ctx.lineWidth = TRAIL_WIDTH * (0.35 + 0.65 * f);
+        ctx.beginPath();
+        ctx.moveTo((prev.x + a.x) / 2, (prev.y + a.y) / 2);
+        ctx.quadraticCurveTo(a.x, a.y, (a.x + next.x) / 2, (a.y + next.y) / 2);
+        ctx.stroke();
+      }
+      ctx.restore();
+    };
+
     const render = (now: number) => {
       ctx.clearRect(0, 0, width, height);
+      drawTrail(now);
       if (!blooms.length || !sctx || !wctx || !rctx) return;
       const p = theme();
 
@@ -237,8 +267,9 @@ export default function HomeWatercolorTrace() {
       for (let i = blooms.length - 1; i >= 0; i--) {
         if (finished(blooms[i], now)) blooms.splice(i, 1);
       }
+      while (trail.length && now - trail[0].t > TRAIL_MS) trail.shift();
       render(now);
-      if (blooms.length) frame = requestAnimationFrame(tick);
+      if (blooms.length || trail.length) frame = requestAnimationFrame(tick);
       else running = false;
     };
     const ensureLoop = () => {
@@ -283,6 +314,12 @@ export default function HomeWatercolorTrace() {
       if (active && Math.hypot(pt.x - active.x, pt.y - active.y) > MOVE_TOLERANCE) stopActive();
       if (pointer && Math.hypot(pt.x - pointer.x, pt.y - pointer.y) < 2) return; // ignore jitter
       pointer = pt;
+      const now = performance.now();
+      const last = trail[trail.length - 1];
+      const brk = !last || now - last.t > 150 || Math.hypot(pt.x - last.x, pt.y - last.y) > 160;
+      trail.push({ x: pt.x, y: pt.y, t: now, brk });
+      if (trail.length > 160) trail.shift();
+      ensureLoop();
       window.clearTimeout(dwellTimer);
       dwellTimer = window.setTimeout(() => {
         if (pointer && !active) startBloom(pointer.x, pointer.y);
