@@ -41,7 +41,7 @@ const works=[
     "title": "The Time Beneath",
     "meta": [
       "Watercolor on paper",
-      "12 × 9 in",
+      "9 × 12 in",
       "Málaga, Spain"
     ],
     "image": "/art-v11/work-5.webp"
@@ -50,7 +50,7 @@ const works=[
     "title": "The Last Light",
     "meta": [
       "Watercolor on paper",
-      "12 × 9 in",
+      "9 × 12 in",
       "St. Antonin-Noble-Val, France"
     ],
     "image": "/art-v11/work-6.webp"
@@ -73,7 +73,7 @@ const works=[
     "title": "The Verdon Reflections",
     "meta": [
       "Acrylic on paper",
-      "12 × 9 in"
+      "9 × 12 in"
     ],
     "image": "/art-v11/work-9.webp"
   },
