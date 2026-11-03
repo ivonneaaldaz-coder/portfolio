@@ -32,19 +32,16 @@ export default function MobileNav() {
   };
 
   const go = (event: MouseEvent<HTMLAnchorElement>, href: string) => {
+    // Navigate on the first tap; never defer routing until the menu animation ends.
     event.preventDefault();
-    animateClose(() => {
-      if (href === "/" && pathname === "/") { window.scrollTo({ top: 0, behavior: "smooth" }); return; }
-      if (href === "/about" && pathname === "/about") {
-        window.scrollTo({ top: 0, behavior: "smooth" });
-        return;
-      }
-      router.push(href);
-    });
+    const current = pathname;
+    const destination = href.split("#")[0];
+    if (current === destination && !href.includes("#")) window.scrollTo({top:0,behavior:"smooth"});
+    else router.push(href);
+    animateClose();
   };
 
   const closeExternal = () => animateClose();
-  const toggleGroup = (event: MouseEvent<HTMLElement>, group: "work" | "play") => { event.preventDefault(); event.stopPropagation(); const target = group === "work" ? workGroupRef.current : playGroupRef.current; const other = group === "work" ? playGroupRef.current : workGroupRef.current; if (!target) return; const next = !target.open; if (other) other.open = false; target.open = next; };
 
   const toggleMenu = (event: MouseEvent<HTMLElement>) => {
     event.preventDefault();
@@ -64,9 +61,9 @@ export default function MobileNav() {
         <div className="mobile-menu">
           <nav className="mobile-menu-links">
             <Link href="/" onClick={(event) => go(event, "/")}>Home</Link>
-            <details ref={workGroupRef} className="mobile-work-group"><summary onClick={(event) => toggleGroup(event, "work")}>Work <span aria-hidden="true" className="mobile-disclosure-arrow">+</span></summary><div className="mobile-work-links"><Link href="/work" onClick={(event) => go(event, "/work")}>Projects</Link><Link href="/work#case-studies" onClick={(event) => go(event, "/work#case-studies")}>Case Studies</Link><Link href="/work#press" onClick={(event) => go(event, "/work#press")}>Press + Speaking</Link><Link href="/work#writing" onClick={(event) => go(event, "/work#writing")}>Writing</Link></div></details>
+            <details ref={workGroupRef} className="mobile-work-group"><summary>Work <span aria-hidden="true" className="mobile-disclosure-arrow">+</span></summary><div className="mobile-work-links"><Link href="/work" onClick={(event) => go(event, "/work")}>Projects</Link><Link href="/work#case-studies" onClick={(event) => go(event, "/work#case-studies")}>Case Studies</Link><Link href="/work#press" onClick={(event) => go(event, "/work#press")}>Press + Speaking</Link><Link href="/work#writing" onClick={(event) => go(event, "/work#writing")}>Writing</Link></div></details>
 
-            <details ref={playGroupRef} className="mobile-library-group"><summary onClick={(event) => toggleGroup(event, "play")}>Play <span aria-hidden="true" className="mobile-disclosure-arrow">+</span></summary><div className="mobile-library-links">
+            <details ref={playGroupRef} className="mobile-library-group"><summary>Play <span aria-hidden="true" className="mobile-disclosure-arrow">+</span></summary><div className="mobile-library-links">
               <Link href="/art" onClick={(event) => go(event, "/art")}>Art</Link>
               <Link href="/travel" onClick={(event) => go(event, "/travel")}>Travel</Link>
               <Link href="/music" onClick={(event) => go(event, "/music")}>Music</Link>
