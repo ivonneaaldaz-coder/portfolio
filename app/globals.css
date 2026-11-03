@@ -10876,3 +10876,12 @@ html body::before, html body::after { content:none!important;display:none!import
 }
 .about-editorial .about-editorial-row:has(>h2:first-child) .about-editorial-item:last-child{border-bottom:0!important}
 .site-main:has(>.home-minimal)>.home-minimal{scroll-margin-top:0!important}
+
+/* Compact mobile navigation: visible section separation without a full-screen gap. */
+@media(max-width:900px){
+ .mobile-nav .mobile-menu{height:auto!important;max-height:calc(100dvh - 58px)!important;overflow-y:auto!important;padding-bottom:clamp(24px,4vh,40px)!important}
+ .mobile-nav .mobile-menu-links>a,.mobile-nav .mobile-work-group>summary,.mobile-nav .mobile-library-group>summary{min-height:58px!important;padding:15px 0!important}
+ .mobile-nav .mobile-menu-footer{margin-top:22px!important;padding-top:22px!important;border-top:1px solid var(--line)!important}
+ .mobile-nav .mobile-menu-footer>a{margin-bottom:18px!important}
+ .mobile-nav .mobile-socials{margin-top:8px!important}
+}
