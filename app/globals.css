@@ -10787,3 +10787,23 @@ html body::before, html body::after { content:none!important;display:none!import
 .about-editorial-building .about-github-months,.about-editorial-building .about-github-days{font-size:11px!important}
 .about-editorial-building .about-github-months{margin-left:40px!important}
 .about-editorial-building .about-github-body{grid-template-columns:32px minmax(0,1fr)!important}
+
+/* Library quotes: centered, editorial, restrained. Keep the Books / Quotes tabs above. */
+.library-page .quotes-world{display:block!important;width:min(100%,760px)!important;margin:0 auto!important;padding-top:clamp(36px,5vw,64px)!important}
+.library-page .quote-list{width:100%;margin-inline:auto}
+.library-page .quote-entry{padding:clamp(32px,4vw,52px) clamp(0px,2vw,16px)}
+.library-page .quote-entry blockquote{max-width:100%!important;font-size:clamp(19px,2vw,27px)!important;line-height:1.42!important;letter-spacing:-.025em!important;font-weight:400!important;text-wrap:pretty}
+.library-page .quote-attribution{margin-top:18px;font-size:10px;letter-spacing:.055em}
+.library-page .quote-expand{margin-top:18px}
+@media(max-width:600px){.library-page .quotes-world{width:100%!important;padding-top:34px!important}.library-page .quote-entry{padding:30px 0}.library-page .quote-entry blockquote{font-size:clamp(18px,4.7vw,22px)!important;line-height:1.43!important}.library-page .quote-attribution{flex-wrap:wrap;gap:5px 10px}}
+/* Mobile Work: enforce real horizontal swipe navigation, even with earlier desktop overrides. */
+@media(max-width:900px){
+ .selected-work-explorer .selected-work-projects{display:flex!important;flex-direction:column!important;gap:24px!important;min-width:0!important}
+ .selected-work-explorer .selected-work-index{min-width:0!important;width:100%!important;overflow:visible!important}
+ .selected-work-explorer .selected-work-scroll{display:flex!important;flex-direction:row!important;flex-wrap:nowrap!important;width:100%!important;max-width:100%!important;max-height:none!important;overflow-x:auto!important;overflow-y:hidden!important;overscroll-behavior-x:contain!important;scroll-snap-type:x proximity!important;-webkit-overflow-scrolling:touch!important;touch-action:pan-x pan-y!important;gap:0!important;scrollbar-width:thin}
+ .selected-work-explorer .selected-work-scroll>button{display:flex!important;flex:0 0 clamp(148px,42vw,205px)!important;width:clamp(148px,42vw,205px)!important;min-width:0!important;align-items:center!important;scroll-snap-align:start!important;padding:14px 16px!important;border-right:1px solid var(--line)!important;border-bottom:0!important}
+ .selected-work-explorer .selected-work-scroll>button .selected-work-index-number{display:none!important}
+ .selected-work-explorer .selected-work-project-preview{width:100%!important;min-width:0!important}
+ .selected-work-explorer .selected-work-scroll-cue{display:none!important}
+ .selected-work-explorer .case-media-label{display:none!important}
+}
