@@ -45,7 +45,7 @@ function PressRow({item}:{item:{org:string;title:string;year:string;href?:string
   const body = <><div><h3 className="press-article-title">{item.title}</h3><p className="press-publication">{item.org} · {item.year}</p></div></>;
   return item.href
     ? <a className="overview-press-row" href={item.href} target="_blank" rel="noreferrer">{body}</a>
-    : <div className="overview-press-row">{body}</div>;
+    : <div className="overview-press-row overview-press-unlinked">{body}<span className="press-unlinked-note">Link unavailable</span></div>;
 }
 
 
