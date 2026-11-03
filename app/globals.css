@@ -11016,3 +11016,57 @@ html body::before, html body::after { content:none!important;display:none!import
     padding-top:16px!important;
   }
 }
+
+/* Final mobile case-study rhythm: remove the old 220px visual slot.
+   Use natural image height and allocate space beneath the copy instead. */
+@media(max-width:900px){
+  .work-hybrid-page .selected-work-explorer .selected-work-case{
+    display:flex!important;
+    flex-direction:column!important;
+    gap:0!important;
+    min-height:0!important;
+    height:auto!important;
+  }
+  .work-hybrid-page .selected-work-explorer .selected-work-case-visual.has-media{
+    display:flex!important;
+    flex-direction:column!important;
+    align-items:center!important;
+    justify-content:flex-start!important;
+    height:auto!important;
+    min-height:0!important;
+    max-height:none!important;
+    aspect-ratio:auto!important;
+    padding:18px 22px 0!important;
+    margin:0!important;
+    overflow:visible!important;
+  }
+  .work-hybrid-page .selected-work-explorer .selected-work-case-visual.has-media .selected-work-case-mobile-meta{
+    align-self:stretch!important;
+    width:100%!important;
+  }
+  .work-hybrid-page .selected-work-explorer .selected-work-case-visual.has-media img.case-still{
+    position:static!important;
+    display:block!important;
+    width:100%!important;
+    height:auto!important;
+    max-width:360px!important;
+    max-height:220px!important;
+    object-fit:contain!important;
+    margin:0 auto!important;
+    flex:0 0 auto!important;
+  }
+  .work-hybrid-page .selected-work-explorer .selected-work-case-copy{
+    display:flex!important;
+    flex-direction:column!important;
+    min-height:0!important;
+    justify-content:flex-start!important;
+    margin:0!important;
+    padding:12px 22px 42px!important;
+  }
+  .work-hybrid-page .selected-work-explorer .selected-work-case:has(.selected-work-podcast-link) .selected-work-case-visual.has-media img.case-still{
+    max-height:240px!important;
+  }
+}
+@media(prefers-reduced-motion:reduce){
+  .page-enter,.reveal-target{transition:none!important;opacity:1!important;transform:none!important}
+}
