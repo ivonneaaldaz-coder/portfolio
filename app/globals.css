@@ -10780,4 +10780,4 @@ html body::before, html body::after { content:none!important;display:none!import
 .selected-work-case-visual.has-media,.selected-work-case-visual.has-media img.case-still{background:transparent!important}
 .selected-work-project-image{width:100%;height:100%;object-fit:cover;display:block}
 @media(min-width:781px){.work-hybrid-page .overview-press-row .press-article-title{max-width:none!important;text-wrap:pretty}}
-.selected-work-case-copy h4,.work-hybrid-page .selected-work-case-copy h4{font-size:clamp(24px,2.3vw,34px)!important;line-height:1.12!important;margin:12px 0 18px!important;text-wrap:balance}
+.selected-work-case-copy h4,.work-hybrid-page .selected-work-case-copy h4{font-size:clamp(22px,2.1vw,30px)!important;line-height:1.15!important;margin:12px 0 18px!important;letter-spacing:-.04em!important}
