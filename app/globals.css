@@ -10807,3 +10807,15 @@ html body::before, html body::after { content:none!important;display:none!import
  .selected-work-explorer .selected-work-scroll-cue{display:none!important}
  .selected-work-explorer .case-media-label{display:none!important}
 }
+
+/* Mobile GitHub activity: keep the entire contribution calendar reachable instead of clipping its left edge. */
+@media(max-width:900px){
+ .about-editorial .about-github-section{min-width:0!important;max-width:100%!important;overflow:visible!important}
+ .about-editorial .about-github-panel{min-width:0!important;max-width:100%!important;box-sizing:border-box!important;overflow:hidden!important}
+ .about-editorial .about-github-calendar{display:block!important;width:100%!important;min-width:0!important;max-width:100%!important;overflow-x:auto!important;overflow-y:hidden!important;-webkit-overflow-scrolling:touch;overscroll-behavior-x:contain}
+ .about-editorial .about-github-months,.about-editorial .about-github-body{min-width:560px!important}
+ .about-editorial .about-github-months{margin-left:40px!important;width:calc(100% - 40px)!important}
+ .about-editorial .about-github-body{grid-template-columns:32px minmax(0,1fr)!important}
+}
+/* A little more space beneath the homepage Selected Work / brand proof line. */
+.home-minimal .home-minimal-content>.home-proof{padding-bottom:clamp(22px,4vw,44px)!important}
