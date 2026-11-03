@@ -87,6 +87,7 @@ export function MusicProvider({ children }:{ children:React.ReactNode }) {
   const pendingRef = useRef<{playlistIndex:number;trackIndex:number;uri:string}|null>(null);
   const shouldContinueRef = useRef(false);
   const retriedUriRef = useRef("");
+  const mobileStepRetryRef = useRef("");
 
   useEffect(() => {
     playlistsRef.current = playlists;
@@ -153,6 +154,7 @@ export function MusicProvider({ children }:{ children:React.ReactNode }) {
       if (disposed) return;
       syncTrack(event.data?.playingURI || "");
       retriedUriRef.current = "";
+      mobileStepRetryRef.current = "";
       setIsPaused(false);
       setIsBuffering(false);
     };
@@ -166,6 +168,12 @@ export function MusicProvider({ children }:{ children:React.ReactNode }) {
       const requested = requestedRef.current;
       if (shouldContinueRef.current && requested && data.playingURI === requested.uri && data.isPaused === true && !data.isBuffering && retriedUriRef.current !== requested.uri) {
         retriedUriRef.current = requested.uri;
+        try { controllerRef.current?.play(); } catch {}
+      }
+      // On mobile, a track step can leave the new Spotify entity paused even
+      // after the initial play request. Retry once when its ready state arrives.
+      if (mobileStepRetryRef.current && requested && data.playingURI === mobileStepRetryRef.current && data.isPaused === true && !data.isBuffering) {
+        mobileStepRetryRef.current = "";
         try { controllerRef.current?.play(); } catch {}
       }
       if (typeof data.isBuffering === "boolean") setIsBuffering(data.isBuffering);
@@ -296,7 +304,11 @@ export function MusicProvider({ children }:{ children:React.ReactNode }) {
     const playlist = playlistsRef.current[playlistIndex];
     if (!playlist?.tracks.length) return;
     const base = unconfirmed?.trackIndex ?? (playingTrack >= 0 ? playingTrack : selectedTrackIndex);
-    playTrack(playlistIndex,base + delta);
+    const nextIndex = ((base + delta) % playlist.tracks.length + playlist.tracks.length) % playlist.tracks.length;
+    if (typeof window !== "undefined" && window.matchMedia("(max-width: 900px)").matches) {
+      mobileStepRetryRef.current = playlist.tracks[nextIndex].uri;
+    }
+    playTrack(playlistIndex,nextIndex);
   };
 
   const setSelectedIndex = (index:number) => {
