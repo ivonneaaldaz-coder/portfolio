@@ -10776,4 +10776,4 @@ html body::before, html body::after { content:none!important;display:none!import
 @keyframes caseFade{from{opacity:0}to{opacity:1}}
 @media (prefers-reduced-motion:reduce){.selected-work-case-visual.has-media video,.selected-work-case-visual.has-media img{animation:none}}
 .selected-work-brand-grid button.pinned{text-decoration:underline;text-underline-offset:4px}
-.selected-work-case-visual.has-media img.case-still{object-fit:contain;padding:6%;background:#efece5}
+.selected-work-case-visual.has-media img.case-still{object-fit:contain;padding:0;background:#efece5}
