@@ -100,7 +100,7 @@ export default function LibraryWorld({ driveBooks = [] }: { driveBooks?: {name:s
       <div className="library-topline"><div className="library-tabs" role="group" aria-label="Books and quotes">
         <button type="button" aria-pressed={view==="books"} className={view==="books" ? "active" : ""} onClick={()=>setView("books")}>Books</button>
         <button type="button" aria-pressed={view==="quotes"} className={view==="quotes" ? "active" : ""} onClick={()=>setView("quotes")}>Quotes</button>
-      </div><Link className="library-back-link" href="/#library">← Back to Library</Link></div>
+      </div><Link className="library-back-link" href="/">← Back to Home</Link></div>
 
       {view === "books" ? (
         <div className="book-browser">
