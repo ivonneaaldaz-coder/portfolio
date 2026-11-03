@@ -9,7 +9,7 @@ export const metadata = {
 
 export default function OverviewPage() {
   return (
-    <main className="overview-page home-minimal">
+    <main className="overview-page home-minimal"><style>{`@media(max-width:900px){.home-minimal .home-minimal-hero{min-height:clamp(560px,75svh,720px)!important}.home-minimal .home-minimal-content{padding-top:clamp(70px,11svh,110px)!important;padding-bottom:clamp(64px,10svh,100px)!important;transform:none!important}.home-minimal .home-minimal-links{margin-top:clamp(32px,5svh,48px)!important}.home-minimal .home-proof{margin-top:clamp(48px,8svh,72px)!important;gap:12px!important;line-height:1.85!important;letter-spacing:.035em!important;font-size:10px!important;max-width:100%!important}.home-minimal .home-proof-brands{text-align:center!important;max-width:340px!important;margin:auto!important;line-height:1.85!important}.home-minimal .home-proof-label{letter-spacing:.14em!important}.home-minimal .home-proof-mobile-break{display:block!important}}@media(min-width:901px){.home-minimal .home-proof-mobile-break{display:none!important}.home-minimal .home-proof{margin-top:clamp(44px,5vw,64px)!important}}`}</style>
       <section className="home-minimal-hero" aria-labelledby="home-title">
         <HomeWatercolorTrace />
         <div className="home-minimal-content">
@@ -20,7 +20,7 @@ export default function OverviewPage() {
           </div>
           <p className="home-proof">
             <span className="home-proof-label">Selected work</span>
-            <span>ARM &amp; HAMMER · Hero Cosmetics · Nestlé · Adweek · Digiday</span>
+            <span className="home-proof-brands">Purina · ARM &amp; HAMMER · Hero Cosmetics<br className="home-proof-mobile-break"/>Nestlé · Adweek · Digiday</span>
           </p>
         </div>
       </section>
