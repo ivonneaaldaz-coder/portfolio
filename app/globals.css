@@ -10868,3 +10868,11 @@ html body::before, html body::after { content:none!important;display:none!import
  .music-page .playlist-swipe-hint{display:inline!important;font-size:11px!important;letter-spacing:0!important;font-weight:400!important;color:var(--muted)!important;white-space:nowrap!important}
 }
 @media(min-width:901px){.music-page .playlist-swipe-hint{display:none!important}}
+
+/* November 3 polish: consistent home/footer rhythm and About section rules. */
+@media(max-width:900px){
+ .site-main:has(>.home-minimal)>.site-footer.editorial-footer .footer-notes{margin-top:0!important;padding-top:0!important;border-top:0!important}
+ .site-main:has(>.home-minimal)>.site-footer.editorial-footer .footer-social{padding-top:0!important;border-top:0!important}
+}
+.about-editorial .about-editorial-row:has(>h2:first-child) .about-editorial-item:last-child{border-bottom:0!important}
+.site-main:has(>.home-minimal)>.home-minimal{scroll-margin-top:0!important}
