@@ -72,3 +72,10 @@
 
 @media(min-width:601px){.art-v11 .art-history-second-line{display:block}}
 @media(max-width:600px){.art-v11 .editorial-row.history-row h2{font-size:clamp(22px,5.5vw,30px)!important;white-space:nowrap!important;letter-spacing:-.055em!important}.art-v11 .art-history-second-line{display:inline!important}}
+
+/* Mobile small-format artworks: reserve only their actual visual height. */
+@media(max-width:550px){
+ .art-v11 .gallery>.work:nth-child(n+4):nth-child(-n+9) .artwork{height:clamp(190px,58vw,270px)!important;min-height:0!important;overflow:hidden!important}
+ .art-v11 .gallery>.work:nth-child(n+4):nth-child(-n+9) .artwork img{height:100%!important;width:100%!important;object-fit:contain!important}
+ .art-v11 .gallery>.work:nth-child(n+4):nth-child(-n+9) .work-title{margin-top:12px!important}
+}
