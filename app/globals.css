@@ -10787,3 +10787,5 @@ html body::before, html body::after { content:none!important;display:none!import
 .about-editorial-building .about-github-months,.about-editorial-building .about-github-days{font-size:11px!important}
 .about-editorial-building .about-github-months{margin-left:40px!important}
 .about-editorial-building .about-github-body{grid-template-columns:32px minmax(0,1fr)!important}
+.art-v11 .gallery .artwork{position:relative!important;width:100%!important;aspect-ratio:4 / 5!important;height:auto!important}
+.art-v11 .gallery .artwork img{position:absolute!important;inset:0!important;width:100%!important;height:100%!important;max-height:none!important;object-fit:contain!important}
