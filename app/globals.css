@@ -10916,3 +10916,27 @@ html body::before, html body::after { content:none!important;display:none!import
 
 /* Restrained case-study eyebrow tracking. */
 .work-hybrid-page .selected-work-case-copy>span{letter-spacing:.045em!important}
+
+/* Align all three About building-card titles and descriptions on shared rows.
+   Center the two-row content block vertically in each card. */
+@media(min-width:781px){
+  .about-editorial-feature .about-editorial-cards>a,
+  .about-editorial-feature .about-editorial-cards>.building-card{
+    display:grid!important;
+    grid-template-rows:34px minmax(90px,auto)!important;
+    align-content:center!important;
+    justify-content:stretch!important;
+    row-gap:16px!important;
+    padding-top:25px!important;
+    padding-bottom:25px!important;
+  }
+  .about-editorial-feature .about-editorial-cards h3{
+    align-self:start!important;
+    line-height:1.2!important;
+  }
+  .about-editorial-feature .about-editorial-cards p{
+    align-self:start!important;
+    font-size:13px!important;
+    line-height:1.55!important;
+  }
+}
