@@ -96,7 +96,7 @@ export default function LibraryWorld({ driveBooks = [] }: { driveBooks?: {name:s
   const activeBook = books[safeSelected];
 
   return (
-    <div className="library-experience">
+    <div className="library-experience"><style>{`.library-page .quote-entry{padding-top:clamp(42px,5vw,76px)!important;padding-bottom:clamp(46px,5vw,76px)!important}.library-page .quote-attribution{display:flex!important;flex-direction:column!important;align-items:flex-start!important;gap:5px!important;margin-top:clamp(28px,3vw,42px)!important}.library-page .quote-attribution strong{font-weight:500!important}.library-page .quote-attribution span{opacity:.7!important}.library-page .quote-expand{margin-top:clamp(28px,3vw,40px)!important}@media(max-width:600px){.library-page .quote-entry{padding:44px 0 48px!important}.library-page .quote-attribution{margin-top:28px!important;gap:6px!important}.library-page .quote-expand{margin-top:30px!important}}`}</style>
       <div className="library-topline"><div className="library-tabs" role="group" aria-label="Books and quotes">
         <button type="button" aria-pressed={view==="books"} className={view==="books" ? "active" : ""} onClick={()=>setView("books")}>Books</button>
         <button type="button" aria-pressed={view==="quotes"} className={view==="quotes" ? "active" : ""} onClick={()=>setView("quotes")}>Quotes</button>
