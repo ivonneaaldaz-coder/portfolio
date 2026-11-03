@@ -10,8 +10,8 @@ const projects=[
 {title:"Snake",meta:"Game",description:"A playable experiment with a leaderboard.",href:"/experiments/snake",loop:"snake"},
 {title:"Watercolor",meta:"Interactive study",description:"An interactive watercolor trace that responds to movement and slowly fades away.",href:"/experiments/watercolor",loop:"watercolor"},
 {title:"Art Practice",meta:"Painting / Watercolor / Ceramics",description:"Selected artworks, exhibitions, and an evolving art practice.",href:"/art",loop:null},
-{title:"Whitespace",meta:"Creative studio",description:"Brand, marketing, and operating systems.",href:"https://www.bywhitespace.com/",loop:null},
-{title:"Good World Living",meta:"Creative platform",description:"A collection of art, travel, experiences, and intentional living.",href:"https://www.goodworldliving.com/",loop:null}
+{title:"Whitespace",meta:"Creative studio",description:"Brand, marketing, and operating systems.",href:"https://www.bywhitespace.com/",loop:"whitespace"},
+{title:"Good World Living",meta:"Creative platform",description:"A collection of art, travel, experiences, and intentional living.",href:"https://www.goodworldliving.com/",loop:"gwl"}
 ];
 const brands=["Hero Cosmetics","Nestlé","CVS Health","Batiste","Purina","ARM & HAMMER","Gerber","Nescafe","Stouffer's","Sir Kensington's (Unilever)","Kellanova","Clio Snacks","First Response","Gaia Herbs","H-E-B","Maggi Noodles","Maison Perrier","Pacific Coast Producers","TrueLoyal (formerly TINT)","Veggies Made Great","Flexitol","Fur Buddies","viemaa","Propel Real Estate Capital","Potluck"];
 const featuredBrands=["Future of Marketing","TINT","TrueLoyal","Purina","ARM & HAMMER","Gaia Herbs","Veggies Made Great"];
