@@ -15,6 +15,7 @@ export default function SpotifyPlaylists() {
 
   return (
     <>
+      <style>{`@media(max-width:900px){.music-page .portfolio-music-controls{display:flex;align-items:center;justify-content:center;gap:8px}.music-page .portfolio-music-controls button{min-width:44px!important;min-height:44px!important;display:inline-flex!important;align-items:center;justify-content:center;touch-action:manipulation}.music-page .portfolio-music-controls .portfolio-music-play{min-width:48px!important;min-height:48px!important}}`}</style>
       <div className="music-console">
         <div className="portfolio-music-player">
           <div className="portfolio-music-cover">
