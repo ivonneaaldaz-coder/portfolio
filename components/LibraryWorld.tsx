@@ -131,11 +131,6 @@ export default function LibraryWorld({ driveBooks = [] }: { driveBooks?: {name:s
         </div>
       ) : (
         <div className="quotes-world">
-          <div className="quotes-intro">
-            <span>QUOTES</span>
-            <h2>Words I’ve kept.</h2>
-            <p>Passages, fragments, and sentences from books, poems, and elsewhere.</p>
-          </div>
           <div className="quote-list">
             {quotes.map((item,index)=>(
               <article className="quote-entry" key={item.author + index}>
