@@ -10769,3 +10769,9 @@ html body::before, html body::after { content:none!important;display:none!import
  letter-spacing:-.012em!important;
  overflow-wrap:normal;
 }
+
+.selected-work-case-visual.has-media{position:relative;padding:0;overflow:hidden;background:#ece9e2;min-height:320px}
+.selected-work-case-visual.has-media video,.selected-work-case-visual.has-media img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;animation:caseFade .35s ease}
+.selected-work-case-visual .case-media-label{position:absolute;left:16px;bottom:14px;padding:5px 9px;background:rgba(20,20,18,.72);color:#f4f2ed;font-size:11px;letter-spacing:.1em;border-radius:3px}
+@keyframes caseFade{from{opacity:0}to{opacity:1}}
+@media (prefers-reduced-motion:reduce){.selected-work-case-visual.has-media video,.selected-work-case-visual.has-media img{animation:none}}
