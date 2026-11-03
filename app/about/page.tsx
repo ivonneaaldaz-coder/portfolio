@@ -1,6 +1,7 @@
 import { pageMetadata } from "@/lib/metadata";
 
 export const metadata = pageMetadata("About", "Meet Ivonne Aldaz: strategist, artist, builder, and educator.", "/about");
+export const revalidate = 3600;
 
 import Link from "next/link";
 import { getGitHubContributions } from "@/lib/githubContributions";
@@ -63,7 +64,8 @@ const brands = [
 const visibleBrands = brands.slice(0,10);
 
 function buildGitHubCalendar(days: { date:string; level:number; count:number }[]) {
-  const sorted = [...days].sort((a,b) => a.date.localeCompare(b.date));
+  const cutoff = new Date(Date.now() - 182*864e5).toISOString().slice(0,10);
+  const sorted = [...days].filter(d => d.date >= cutoff).sort((a,b) => a.date.localeCompare(b.date));
   if (!sorted.length) {
     return {
       weeks: [] as { date:string; level:number; count:number }[][],
@@ -127,7 +129,7 @@ export default async function AboutPage() {
       <div className="about-editorial-row"><h2>Education</h2><div className="about-editorial-list"><div className="about-editorial-item"><div><h3>Master of Business Administration</h3><small>St. Mary's University</small></div></div><div className="about-editorial-item"><div><h3>Master of International Business &amp; Economics</h3><small>Hochschule Schmalkalden · In progress</small></div></div></div></div>
       <div className="about-editorial-row"><h2>Beyond work</h2><div><p>I volunteer with local arts and cultural organizations, teach yoga, and spend as much time as I can making things with my hands.</p><Link className="about-editorial-text-link" href="/art">See the art →</Link></div></div>
       <section className="about-editorial-feature about-editorial-kind"><h2>Kind words</h2><div className="about-editorial-quotes"><figure><blockquote>“A rare find. Deeply data-driven, deeply human.”</blockquote><figcaption>— CEO, TrueLoyal</figcaption></figure><figure><blockquote>“Everyone keeps saying what a great job you're doing and how happy the clients are.”</blockquote><figcaption>— CMO, TrueLoyal</figcaption></figure><figure><blockquote>“Why are we even talking about it? Just hire her.”</blockquote><figcaption>— VP of Sales, TINT</figcaption></figure></div></section>
-      <section className="about-editorial-feature about-editorial-building"><div className="about-editorial-building-head"><div><h2>Always making something</h2></div><div className="about-github-stats">{github?.total ? <strong>{github.total.toLocaleString()} contributions</strong> : null}<a href="https://github.com/ivonneaaldaz-coder" target="_blank" rel="noreferrer">View GitHub ↗</a></div></div><div className="about-github-panel"><div className="about-github-calendar" aria-label="GitHub contribution activity"><div className="about-github-months" aria-hidden="true">{githubCalendar.months.map((m,i)=><span key={m.label+i} style={{gridColumn:`${m.start+1} / span 4`}}>{m.label}</span>)}</div><div className="about-github-body"><div className="about-github-days" aria-hidden="true"><span>Mon</span><span>Wed</span><span>Fri</span></div><div className="about-github-grid">{githubCalendar.weeks.flatMap((week,i)=>week.map((day,j)=><span className={`level-${day.level}`} key={day.date} title={`${day.count} contributions on ${day.date}`} style={{gridColumn:i+1,gridRow:j+1}} />))}</div></div><div className="about-github-legend"><span>Less</span>{[0,1,2,3,4].map(n=><i className={`level-${n}`} key={n}/>)}<span>More</span></div></div></div></section>
+      <section className="about-editorial-feature about-editorial-building"><div className="about-editorial-building-head"><div><h2>Always making something</h2></div><div className="about-github-stats">{github?.total ? <strong>{github.total.toLocaleString()} contributions</strong> : null}<a href="https://github.com/ivonneaaldaz-coder" target="_blank" rel="noreferrer">View GitHub ↗</a></div></div><div className="about-github-panel"><div className="about-github-calendar" aria-label="GitHub contribution activity"><div className="about-github-months" aria-hidden="true" style={{gridTemplateColumns:`repeat(${githubCalendar.weeks.length},minmax(0,1fr))`}}>{githubCalendar.months.map((m,i)=><span key={m.label+i} style={{gridColumn:`${m.start+1} / span 4`}}>{m.label}</span>)}</div><div className="about-github-body"><div className="about-github-days" aria-hidden="true"><span>Mon</span><span>Wed</span><span>Fri</span></div><div className="about-github-grid" style={{gridTemplateColumns:`repeat(${githubCalendar.weeks.length},minmax(0,1fr))`}}>{githubCalendar.weeks.flatMap((week,i)=>week.map((day,j)=><span className={`level-${day.level}`} key={day.date} title={`${day.count} contributions on ${day.date}`} style={{gridColumn:i+1,gridRow:j+1}} />))}</div></div><div className="about-github-legend"><span>Less</span>{[0,1,2,3,4].map(n=><i className={`level-${n}`} key={n}/>)}<span>More</span></div></div></div></section>
 
     </section>
   );
