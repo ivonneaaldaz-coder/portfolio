@@ -44,13 +44,13 @@ function WritingRow({item}:{item:typeof writing[number] | typeof moreWriting[num
 function PressRow({item}:{item:{org:string;title:string;year:string;href?:string}}) {
   const body = <><div><h3 className="press-article-title">{item.title}</h3><p className="press-publication">{item.org} · {item.year}</p></div></>;
   return item.href
-    ? <a className="overview-press-row" href={item.href} target="_blank" rel="noreferrer">{body}</a>
-    : <div className="overview-press-row overview-press-unlinked">{body}<span className="press-unlinked-note" style={{display:"block",fontSize:"11px",fontStyle:"italic",fontWeight:400,lineHeight:1.4,opacity:0.6,marginTop:"5px"}}>Link unavailable</span></div>;
+    ? <a className="overview-press-row" href={item.href} target="_blank" rel="noreferrer">{body}<span className="press-link-arrow" aria-hidden="true">↗</span></a>
+    : <div className="overview-press-row overview-press-unlinked">{body}</div>;
 }
 
 
 export default async function WorkPage(){
- return <main className="page section-pad work-hybrid-page"><SelectedWorkExplorer />
+ return <main className="page section-pad work-hybrid-page"><style>{`.work-hybrid-page .overview-press-row{display:flex!important;justify-content:space-between;align-items:flex-start;gap:20px}.work-hybrid-page .press-link-arrow{flex-shrink:0;font-size:15px;opacity:.65;transition:transform .2s ease,opacity .2s ease}.work-hybrid-page a.overview-press-row:hover .press-link-arrow{transform:translate(2px,-2px);opacity:1}`}</style><SelectedWorkExplorer />
       <section className="overview-press section-pad overview-anchor" id="press">
         <div className="section-heading"><h2 className="section-title small-title">Press + Speaking</h2></div>
         <div className="overview-press-grid">
