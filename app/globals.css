@@ -10777,3 +10777,6 @@ html body::before, html body::after { content:none!important;display:none!import
 @media (prefers-reduced-motion:reduce){.selected-work-case-visual.has-media video,.selected-work-case-visual.has-media img{animation:none}}
 .selected-work-brand-grid button.pinned{text-decoration:underline;text-underline-offset:4px}
 .selected-work-case-visual.has-media img.case-still{object-fit:contain;padding:0;background:#efece5}
+.selected-work-case-visual.has-media,.selected-work-case-visual.has-media img.case-still{background:transparent!important}
+.selected-work-project-image{width:100%;height:100%;object-fit:cover;display:block}
+@media(min-width:781px){.work-hybrid-page .overview-press-row .press-article-title{max-width:none!important;text-wrap:pretty}}
