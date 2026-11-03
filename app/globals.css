@@ -10913,3 +10913,6 @@ html body::before, html body::after { content:none!important;display:none!import
 @media(max-width:900px){.about-editorial .about-editorial-row:has(>h2:first-child) .about-editorial-item{padding-top:26px!important;padding-bottom:32px!important}}
 /* Align the desktop project preview with the vertical center of the list. */
 @media(min-width:901px){.work-hybrid-page .selected-work-project-preview{transform:translateY(38px)!important}}
+
+/* Restrained case-study eyebrow tracking. */
+.work-hybrid-page .selected-work-case-copy>span{letter-spacing:.045em!important}
