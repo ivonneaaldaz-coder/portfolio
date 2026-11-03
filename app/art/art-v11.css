@@ -62,3 +62,6 @@
  .art-v11 .viewer-bottom strong{display:block!important;margin:0 0 10px!important}
  .art-v11 .viewer-bottom p{margin:0!important}
 }
+
+/* Mobile: landscape pieces should sit close to their captions without shrinking the taller works. */
+@media(max-width:550px){.art-v11 .gallery>.work:nth-child(7) .artwork,.art-v11 .gallery>.work:nth-child(8) .artwork{height:auto!important;min-height:0!important;max-height:none!important}.art-v11 .gallery>.work:nth-child(7) .work-title,.art-v11 .gallery>.work:nth-child(8) .work-title{margin-top:10px!important}}
