@@ -10,8 +10,19 @@ export const metadata = {
 export default function OverviewPage() {
   return (
     <main className="overview-page home-minimal"><style>{`@media(max-width:900px){.home-minimal .home-minimal-hero{min-height:clamp(560px,75svh,720px)!important}.home-minimal .home-minimal-content{padding-top:clamp(70px,11svh,110px)!important;padding-bottom:clamp(64px,10svh,100px)!important;transform:none!important}.home-minimal .home-minimal-links{margin-top:clamp(32px,5svh,48px)!important}.home-minimal .home-proof{margin-top:clamp(48px,8svh,72px)!important;gap:12px!important;line-height:1.85!important;letter-spacing:.035em!important;font-size:10px!important;max-width:100%!important}.home-minimal .home-proof-brands{text-align:center!important;max-width:340px!important;margin:auto!important;line-height:1.85!important}.home-minimal .home-proof-label{letter-spacing:.14em!important}.home-minimal .home-proof-mobile-break{display:block!important}}@media(min-width:901px){.home-minimal .home-proof-mobile-break{display:none!important}.home-minimal .home-proof{margin-top:clamp(44px,5vw,64px)!important}}@media(max-width:900px){.home-minimal .home-minimal-content h1{font-size:clamp(35px,8.7vw,56px)!important;letter-spacing:-.065em!important;white-space:nowrap!important}.home-minimal .home-minimal-content h1 span{font-size:1em!important;letter-spacing:-.065em!important;white-space:nowrap!important;line-height:1.18!important}.home-minimal .home-proof{margin-top:clamp(82px,11svh,112px)!important}.site-main:has(>.home-minimal)>.site-footer .footer-about h2{font-size:clamp(28px,7vw,38px)!important;line-height:1.15!important;letter-spacing:-.045em!important}}
-/* Restore original entrance pacing; maintain original layout. */
-@media(max-width:900px){.home-minimal .home-minimal-content{transform:translateY(clamp(12px,2svh,22px))!important}}
+/* Home: measured reveal after the intro, without changing the composition. */
+@keyframes home-soft-appear{from{opacity:0;filter:blur(5px)}to{opacity:1;filter:blur(0)}}
+.home-minimal .home-minimal-content h1,.home-minimal .home-minimal-links,.home-minimal .home-proof{animation:home-soft-appear 1.35s cubic-bezier(.22,1,.36,1) both}
+.home-minimal .home-minimal-content h1{animation-delay:.18s}
+.home-minimal .home-minimal-links{animation-delay:.55s}
+.home-minimal .home-proof{animation-delay:.9s}
+html:not(.intro-seen) .home-minimal .home-minimal-content h1{animation-delay:1.7s}
+html:not(.intro-seen) .home-minimal .home-minimal-links{animation-delay:2.05s}
+html:not(.intro-seen) .home-minimal .home-proof{animation-delay:2.4s}
+@media(min-width:901px){.home-minimal .home-minimal-content{transform:translateY(clamp(65px,8.5vh,95px))!important}}
+@media(max-width:900px){.home-minimal .home-minimal-content{transform:translateY(clamp(34px,5svh,54px))!important}}
+.home-minimal .home-proof-brands{word-spacing:.18em!important;line-height:2!important}
+@media(prefers-reduced-motion:reduce){.home-minimal .home-minimal-content h1,.home-minimal .home-minimal-links,.home-minimal .home-proof{animation:none!important;filter:none!important}}
 
 `}</style>
       <section className="home-minimal-hero" aria-labelledby="home-title">
@@ -24,7 +35,7 @@ export default function OverviewPage() {
           </div>
           <p className="home-proof">
             <span className="home-proof-label">Selected work</span>
-            <span className="home-proof-brands">Purina · ARM &amp; HAMMER · Hero Cosmetics<br className="home-proof-mobile-break"/>Nestlé · Adweek · Digiday</span>
+            <span className="home-proof-brands">Purina · ARM &amp; HAMMER · Hero Cosmetics<br className="home-proof-mobile-break"/> Nestlé · Adweek · Digiday</span>
           </p>
         </div>
       </section>
