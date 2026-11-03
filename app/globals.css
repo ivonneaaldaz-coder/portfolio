@@ -10885,3 +10885,10 @@ html body::before, html body::after { content:none!important;display:none!import
  .mobile-nav .mobile-menu-footer>a{margin-bottom:18px!important}
  .mobile-nav .mobile-socials{margin-top:8px!important}
 }
+
+/* Desktop project descriptions: a subtle inset beneath the visual preview. */
+@media(min-width:901px){
+ .work-hybrid-page .selected-work-project-description{padding-left:20px!important;box-sizing:border-box!important}
+ .work-hybrid-page .selected-work-case-visual.has-media{padding:22px!important}
+ .work-hybrid-page .selected-work-case-visual.has-media img.case-still{max-width:100%!important;max-height:100%!important;object-fit:contain!important}
+}
