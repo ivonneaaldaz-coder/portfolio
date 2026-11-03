@@ -88,6 +88,7 @@ export function MusicProvider({ children }:{ children:React.ReactNode }) {
   const shouldContinueRef = useRef(false);
   const retriedUriRef = useRef("");
   const mobileStepRetryRef = useRef("");
+  const mobileStepRetryCountRef = useRef(0);
 
   useEffect(() => {
     playlistsRef.current = playlists;
@@ -154,7 +155,11 @@ export function MusicProvider({ children }:{ children:React.ReactNode }) {
       if (disposed) return;
       syncTrack(event.data?.playingURI || "");
       retriedUriRef.current = "";
-      mobileStepRetryRef.current = "";
+      // Ignore playback_started from the previous track while navigating.
+      if (event.data?.playingURI === mobileStepRetryRef.current) {
+        mobileStepRetryRef.current = "";
+        mobileStepRetryCountRef.current = 0;
+      }
       setIsPaused(false);
       setIsBuffering(false);
     };
@@ -162,7 +167,9 @@ export function MusicProvider({ children }:{ children:React.ReactNode }) {
       if (disposed) return;
       const data = event.data;
       if (!data) return;
-      if (typeof data.isPaused === "boolean") setIsPaused(data.isPaused);
+      // Ignore late state events for the previous track while a new one loads.
+      const awaitingUri = mobileStepRetryRef.current;
+      if (typeof data.isPaused === "boolean" && (!awaitingUri || data.playingURI === awaitingUri)) setIsPaused(data.isPaused);
       // Retry once when Spotify finishes loading a newly requested track
       // but dropped the play command during iframe navigation.
       const requested = requestedRef.current;
@@ -172,8 +179,8 @@ export function MusicProvider({ children }:{ children:React.ReactNode }) {
       }
       // On mobile, a track step can leave the new Spotify entity paused even
       // after the initial play request. Retry once when its ready state arrives.
-      if (mobileStepRetryRef.current && requested && data.playingURI === mobileStepRetryRef.current && data.isPaused === true && !data.isBuffering) {
-        mobileStepRetryRef.current = "";
+      if (mobileStepRetryRef.current && requested?.uri === mobileStepRetryRef.current && data.playingURI === mobileStepRetryRef.current && data.isPaused === true && !data.isBuffering && mobileStepRetryCountRef.current < 1) {
+        mobileStepRetryCountRef.current += 1;
         try { controllerRef.current?.play(); } catch {}
       }
       if (typeof data.isBuffering === "boolean") setIsBuffering(data.isBuffering);
@@ -307,6 +314,7 @@ export function MusicProvider({ children }:{ children:React.ReactNode }) {
     const nextIndex = ((base + delta) % playlist.tracks.length + playlist.tracks.length) % playlist.tracks.length;
     if (typeof window !== "undefined" && window.matchMedia("(max-width: 900px)").matches) {
       mobileStepRetryRef.current = playlist.tracks[nextIndex].uri;
+      mobileStepRetryCountRef.current = 0;
     }
     playTrack(playlistIndex,nextIndex);
   };
