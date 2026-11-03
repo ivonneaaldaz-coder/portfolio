@@ -24,6 +24,7 @@ const photographs = [
 export default function TravelPage() {
   return (
     <section className="travel-page page">
+<h1 className="travel-page-opening" style={{fontSize:"clamp(25px,2.5vw,38px)",fontWeight:400,letterSpacing:"-.045em",lineHeight:1.2,margin:"clamp(45px,6vw,84px) 4.2% clamp(32px,4vw,62px)"}}>Places I’ve been.</h1>
 <TravelGallery photographs={photographs} />
       <nav className="related-paths section-pad" aria-label="Explore next"><Link href="/visual-references">Visual References →</Link><Link href="/art">Art Practice →</Link></nav>
     </section>
