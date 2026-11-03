@@ -1,15 +1,15 @@
 import Link from "next/link";
-import SidebarSubscribe from "@/components/SidebarSubscribe";
-export default function SiteFooter() {
- return <footer className="footer-grid section-pad site-footer" style={{paddingTop:"clamp(65px,8vw,120px)",paddingBottom:"clamp(75px,9vw,140px)"}}>
-   <div className="footer-about"><h2>The world is my studio.</h2><a href="mailto:hello@ivonnealdaz.com">Get in touch →</a></div>
-   <div><p className="eyebrow">FIND ME ELSEWHERE</p><ul className="footer-social-grid">
-     <li><a href="https://www.pinterest.com/ivonnealdaz/" target="_blank" rel="noreferrer">Pinterest ↗</a></li>
-     <li><a href="https://github.com/ivonneaaldaz-coder" target="_blank" rel="noreferrer">GitHub ↗</a></li>
-     <li><a href="https://www.linkedin.com/in/ivonnealdaz/" target="_blank" rel="noreferrer">LinkedIn ↗</a></li>
-     <li><a href="https://x.com/ivonnealdazz" target="_blank" rel="noreferrer">X ↗</a></li>
-     
-   </ul></div>
-   <div className="footer-newsletter"><p className="eyebrow">STAY IN THE LOOP</p><SidebarSubscribe /></div>
- <style>{`.footer-social-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));column-gap:28px;row-gap:6px;max-width:300px}.footer-newsletter .eyebrow{margin-bottom:24px!important}.footer-newsletter .sidebar-subscribe,.footer-newsletter a{margin-top:0}@media(max-width:700px){.footer-social-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}`}</style></footer>;
+const socials=[
+  {label:"Instagram",href:"https://www.instagram.com/ivonnealdaz/"},
+  {label:"Pinterest",href:"https://www.pinterest.com/ivonnealdaz/"},
+  {label:"LinkedIn",href:"https://www.linkedin.com/in/ivonnealdaz/"},
+  {label:"GitHub",href:"https://github.com/ivonneaaldaz-coder"},
+  {label:"X",href:"https://x.com/ivonnealdazz"}
+];
+export default function SiteFooter(){
+  return <><style>{`.site-main>.site-footer.editorial-footer{border-top:1px solid var(--line)!important;position:relative!important}.site-main>.site-footer.editorial-footer::before{content:"";display:block!important;position:absolute;top:0;left:0;right:0;height:1px;background:var(--line);pointer-events:none}`}</style><footer className="footer-grid section-pad site-footer editorial-footer">
+    <div className="footer-about"><h2>The world is my studio.</h2><a href="mailto:hello@ivonnealdaz.com">Get in touch →</a></div>
+    <div className="footer-social"><p className="eyebrow">SOCIAL MEDIA</p><nav aria-label="Social profiles" className="footer-social-columns"><div>{socials.slice(0,2).map(s=><a key={s.label} href={s.href} target="_blank" rel="noreferrer">{s.label} <span className="external-arrow" aria-hidden="true">↗</span></a>)}</div><div>{socials.slice(2).map(s=><a key={s.label} href={s.href} target="_blank" rel="noreferrer">{s.label} <span className="external-arrow" aria-hidden="true">↗</span></a>)}</div></nav></div>
+    <div className="footer-notes"><p className="eyebrow">OCCASIONAL NOTES</p><p className="muted">A little creativity in your inbox.</p><a className="footer-subscribe-link" href="https://ivonnealdaz.substack.com/" target="_blank" rel="noreferrer">Subscribe</a></div>
+  </footer></>;
 }

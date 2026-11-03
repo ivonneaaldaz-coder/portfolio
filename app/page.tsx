@@ -1,268 +1,45 @@
 import { pageMetadata } from "@/lib/metadata";
+import Link from "next/link";
+import HomeWatercolorTrace from "@/components/HomeWatercolorTrace";
+import HomeScrollPosition from "@/components/HomeScrollPosition";
 
 export const metadata = {
-  ...pageMetadata("I make things — art, brands, experiences", "I make things — art, brands, experiences. Explore Ivonne Aldaz’s work, case studies, writing, and experiments.", "/"),
-  title: { absolute: "Ivonne Aldaz — I make things: art, brands, experiences" },
+  ...pageMetadata("Ivonne Aldaz — Strategist, artist, builder", "Ivonne Aldaz. Strategist, artist, builder. Explore work and play.", "/"),
+  title: { absolute: "Ivonne Aldaz — Strategist, artist, builder" },
 };
 
-import Link from "next/link";
-import ExperimentLoop from "@/components/ExperimentLoop";
-import { getPinterestPins } from "@/lib/pinterest";
-import { driveImageUrl, listDriveFolder, normalizeDriveName } from "@/lib/googleDrive";
-
-const PROJECT_FOLDER = "1hpdPGeKX8nISrESD0EAzdCeAoVCnnnl7";
-
-const features = [
-  { title: "Whitespace", meta: "Strategy / Brand / AI", className: "feature", href: "https://www.bywhitespace.com/", external: true, driveKey:"whitespace" },
-  { title: "Art Practice", meta: "Painting / Ceramics / Design", className: "feature", href: "/art", driveKey:"art practice" },
-  { title: "Good World Living", meta: "Experiences / Places / Objects", className: "feature", href: "https://www.goodworldliving.com/", external: true, driveKey:"good world living" },
-];
-
-const studies = [
-  { title:"Future of Marketing", tag:"7K → 50K+ subscribers", desc:"Built and grew TINT’s owned-media platform across newsletters, webinars, podcasts, events, and industry programming.", href:"/work/future-of-marketing" },
-  { title:"Purina — The Role of Video Reviews", tag:"Findings → an executive’s pitch to leadership", desc:"Explored how video reviews influence pet-care purchase decisions, comparing general market consumers with Purina brand fans.", href:"/work/purina-video-reviews" },
-  { title:"Partner CRM for a Hospitality Network", tag:"Scattered contacts → active pipeline", desc:"Turned fragmented contacts and follow-ups into an actionable relationship pipeline for a small team.", href:"/work/relationship-operating-system" },
-];
-
-const moreStudies = [
-  { title:"Gaia Herbs — Concept Validation", tag:"Research → stopped spending on what wasn’t selling", desc:"Evaluated multivitamin concepts before further development to help prioritize opportunities and refine messaging, claims, and positioning.", href:"/work/gaia-herbs-concept-validation" },
-  { title:"Veggies Made Great — Omelette Rounds", tag:"Research → relaunched as Omelette Rounds", desc:"Consumer research helped support a breakfast product’s transition from Egg Patties to Omelette Rounds, aligning its name with how people understood it.", href:"/work/veggies-made-great" },
-  { title:"ARM & HAMMER — Placement + Pricing", tag:"Research → launched at Walmart", desc:"Consumer research clarified where shoppers expected to find a new product and what they were willing to pay for it.", href:"/work/arm-hammer-retail-strategy" },
-  { title:"Research-Led Content Engine", tag:"One report → a year of campaigns", desc:"Turned original research and expert interviews into a report, press, blogs, social, newsletters, nurture, and demand-generation campaigns.", href:"/work/research-led-content-engine" },
-  { title:"Brand + Digital Repositioning", tag:"Dead list → inbound calls", desc:"Connected positioning, message, website, sales materials, and campaigns into one clearer customer journey.", href:"/work/brand-digital-repositioning" },
-];
-
-const experiments = [
-  { title:"The Lab", meta:"Retro Portfolio", loop:"lab", href:"/experiments/the-lab" },
-  { title:"Ask Eve", meta:"Conversational CV", loop:"eve", href:"/experiments/ask-eve" },
-  { title:"Chatroom", meta:"Public chat", loop:"chat", href:"/experiments/chatroom" },
-  { title:"Snake", meta:"Global leaderboard", loop:"snake", href:"/experiments/snake" },
-];
-
-const moreExperiments = [
-  { title:"Moodboard", meta:"Pinterest → carousel", loop:null, href:"/experiments/moodboard-agent" },
-];
-
-const library = [
-  { title:"Books + Quotes", meta:"Books, passages, and ideas.", href:"/books" },
-  { title:"Music", meta:"Playlists, records, and whatever I’m listening to lately.", href:"/music" },
-  { title:"Visual References", meta:"Images, type, color, and things worth saving.", href:"/visual-references" },
-  { title:"Travel", meta:"Photos from places I’ve been.", href:"/travel" },
-];
-
-const writing = [
-  { title:"When the Universe Hands You a Yes", source:"Good World Living · 2025", href:"https://www.goodworldliving.com/articles/when-the-universe-hands-you-a-yes" },
-  { title:"From Brand to Atmosphere: Designing Experiences That Feel Like Worlds", source:"Whitespace · 2026", href:"https://www.bywhitespace.com/blog/designing-experiences-that-feel-like-worlds" },
-  { title:"How an Art Residency in Provence Transformed My Creative Path", source:"Good World Living · 2024", href:"https://www.goodworldliving.com/articles/how-an-art-residency-in-provence-transformed-my-creative-path" },
-];
-
-const moreWriting = [
-  { title:"The Shift Toward Intentional Branding: Designing with Meaning in a Noisy World", source:"Whitespace · 2025", href:"https://www.bywhitespace.com/blog/intentional-branding-designing-with-meaning-in-a-noisy-world" },
-  { title:"Art Retreat in France: Unveiling Creative Wonders in St. Antonin-Noble Val", source:"Good World Living · 2023", href:"https://www.goodworldliving.com/articles/france-art-retreat" },
-  { title:"Strategy Without Execution Is Just Expensive Advice", source:"Whitespace · 2026", href:"https://www.bywhitespace.com/blog/strategy-without-execution-expensive-advice" },
-];
-
-const pressPreview = [
-  { org:"Forbes", title:"Why Retailers Should Utilize TikTok to Grow Their Business", year:"2021" },
-  { org:"Adweek", title:"How Micro and Nano Influencers Drive Big Change", year:"2021", href:"https://www.adweek.com/brand-marketing/how-micro-and-nano-influencers-drive-big-change/" },
-  { org:"Digiday", title:"In the Metaverse, Brands’ FOMO Is Competing With Consumers’ Burnout", year:"2024", href:"https://digiday.com/marketing/in-the-metaverse-brands-fomo-is-competing-with-consumers-burnout/" },
-];
-
-const morePress = [
-  { org:"Social Pros Podcast", title:"How to Capture UGC’s Untapped Potential", year:"2022", href:"https://socialpros.libsyn.com/how-to-capture-ugcs-untapped-potential-with-tint" },
-  { org:"B2B Better", title:"Writing a Newsletter Worth Reading", year:"2021", href:"https://b2bbite.substack.com/p/writing-a-newsletter-worth-reading" },
-];
-
-const talksPreview = [
-  { org:"Adweek Social Media Week", title:"The Power of Community-Created Content", year:"2022", href:"https://www.linkedin.com/posts/ivonnealdaz_smw-tintlove-activity-6930008317020819456-GIqE" },
-  { org:"San Antonio Startup Week", title:"Future of Marketing Live Podcast — Spurs Director of Content Strategy", year:"2023", href:"https://vimeo.com/876034599" },
-  { org:"Hootsuite", title:"State of UGC — Virtual Panel", year:"2023" },
-];
-
-const moreTalks = [
-  { org:"St. Mary’s University", title:"How to Make the Most of Your MBA", year:"2025" },
-];
-
-function CaseRow({study}:{study:typeof studies[number] | typeof moreStudies[number]}) {
-  const body = <>
-    <div><h3>{study.title}</h3><span className="home-case-tag">{study.tag}</span></div>
-    <span>{study.href ? "→" : "—"}</span>
-  </>;
-  return study.href
-    ? <Link className="home-case" href={study.href} key={study.title}>{body}</Link>
-    : <div className="home-case" key={study.title}>{body}</div>;
-}
-
-function WritingRow({item}:{item:typeof writing[number] | typeof moreWriting[number]}) {
-  return <a href={item.href} target="_blank" rel="noreferrer" className="overview-writing-row">
-    <h4>{item.title}</h4><p>{item.source}</p><span>↗︎</span>
-  </a>;
-}
-
-function PressRow({item}:{item:{org:string;title:string;year:string;href?:string}}) {
-  const body = <><span>{item.year}</span><div><p>{item.org}</p><h3>{item.title}</h3></div></>;
-  return item.href
-    ? <a className="overview-press-row" href={item.href} target="_blank" rel="noreferrer">{body}</a>
-    : <div className="overview-press-row">{body}</div>;
-}
-
-export default async function OverviewPage() {
-  const [projectFiles, pinterestPins] = await Promise.all([
-    listDriveFolder(PROJECT_FOLDER),
-    getPinterestPins(8),
-  ]);
-  const projectImages = new Map(projectFiles.map(file => [normalizeDriveName(file.name), driveImageUrl(file.id)]));
-  const visualWorldPins = pinterestPins.slice(0,6);
-
+export default function OverviewPage() {
   return (
-    <div className="overview-page">
-      <section className="hero-compact section-pad" id="overview">
-        <div className="hero-row">
-          <h1><span style={{display:"block"}}>I make things —</span><span style={{display:"block"}}>art, brands, experiences.</span></h1>
-          <div className="hero-introduction"><p>I’ve built brands and audiences and led insights and strategy for companies including Nestlé, Hero Cosmetics, and ARM &amp; HAMMER. Now I run Whitespace, teach across marketing and entrepreneurship, and make art.</p><a className="hero-contact" href="mailto:hello@ivonnealdaz.com">Get in touch →<span>hello@ivonnealdaz.com</span></a></div>
+    <main className="overview-page home-minimal"><HomeScrollPosition /><style>{`@media(max-width:900px){.home-minimal .home-minimal-hero{min-height:clamp(560px,75svh,720px)!important}.home-minimal .home-minimal-content{padding-top:clamp(70px,11svh,110px)!important;padding-bottom:clamp(64px,10svh,100px)!important;transform:none!important}.home-minimal .home-minimal-links{margin-top:clamp(32px,5svh,48px)!important}.home-minimal .home-proof{margin-top:clamp(48px,8svh,72px)!important;gap:12px!important;line-height:1.85!important;letter-spacing:.035em!important;font-size:10px!important;max-width:100%!important}.home-minimal .home-proof-brands{text-align:center!important;max-width:340px!important;margin:auto!important;line-height:1.85!important}.home-minimal .home-proof-label{letter-spacing:.14em!important}.home-minimal .home-proof-mobile-break{display:block!important}}@media(min-width:901px){.home-minimal .home-proof-mobile-break{display:none!important}.home-minimal .home-proof{margin-top:clamp(44px,5vw,64px)!important}}@media(max-width:900px){.home-minimal .home-minimal-content h1{font-size:clamp(35px,8.7vw,56px)!important;letter-spacing:-.065em!important;white-space:nowrap!important}.home-minimal .home-minimal-content h1 span{font-size:1em!important;letter-spacing:-.065em!important;white-space:nowrap!important;line-height:1.18!important}.home-minimal .home-proof{margin-top:clamp(82px,11svh,112px)!important}.site-main:has(>.home-minimal)>.site-footer .footer-about h2{font-size:clamp(28px,7vw,38px)!important;line-height:1.15!important;letter-spacing:-.045em!important}}
+/* Home: measured reveal after the intro, without changing the composition. */
+@keyframes home-soft-appear{from{opacity:0;filter:blur(5px)}to{opacity:1;filter:blur(0)}}
+.home-minimal .home-minimal-content h1,.home-minimal .home-minimal-links,.home-minimal .home-proof{animation:home-soft-appear 1.35s cubic-bezier(.22,1,.36,1) both}
+.home-minimal .home-minimal-content h1{animation-delay:.18s}
+.home-minimal .home-minimal-links{animation-delay:.55s}
+.home-minimal .home-proof{animation-delay:.9s}
+html:not(.intro-seen) .home-minimal .home-minimal-content h1{animation-delay:1.7s}
+html:not(.intro-seen) .home-minimal .home-minimal-links{animation-delay:2.05s}
+html:not(.intro-seen) .home-minimal .home-proof{animation-delay:2.4s}
+@media(min-width:901px){.home-minimal .home-minimal-content{transform:translateY(clamp(65px,8.5vh,95px))!important}}
+@media(max-width:900px){.home-minimal .home-minimal-content{transform:translateY(clamp(34px,5svh,54px))!important}}
+.home-minimal .home-proof-brands{word-spacing:.18em!important;line-height:2!important}
+@media(prefers-reduced-motion:reduce){.home-minimal .home-minimal-content h1,.home-minimal .home-minimal-links,.home-minimal .home-proof{animation:none!important;filter:none!important}}
+
+`}</style>
+      <section className="home-minimal-hero" aria-labelledby="home-title">
+        <HomeWatercolorTrace />
+        <div className="home-minimal-content">
+          <h1 id="home-title">I make things — <span>brands, art, experiences.</span></h1>
+          <div className="home-minimal-links">
+            <Link href="/work">Explore work <span aria-hidden="true">↗</span></Link>
+            <details className="home-play-disclosure"><summary>Explore play <span aria-hidden="true">+</span></summary><nav aria-label="Explore play"><Link href="/art">Art</Link><Link href="/travel">Travel</Link><Link href="/music">Music</Link><Link href="/books">Books + Quotes</Link><Link href="/visual-references">Visual References</Link></nav></details>
+          </div>
+          <p className="home-proof">
+            <span className="home-proof-label">Selected work</span>
+            <span className="home-proof-brands">Purina · ARM &amp; HAMMER · Hero Cosmetics<br className="home-proof-mobile-break"/> Nestlé · Adweek · Digiday</span>
+          </p>
         </div>
       </section>
-
-      {visualWorldPins.length ? (
-        <section className="overview-visual-world section-pad overview-anchor" id="visual-world">
-          <div className="overview-visual-world-head">
-            <h2 className="section-title small-title">Visual References</h2>
-          </div>
-
-          <div className="overview-visual-world-grid">
-            {visualWorldPins.map((pin, index) => (
-              <Link
-                className={`overview-visual-world-item item-${index + 1}`}
-                href="/visual-references"
-                key={pin.id}
-                aria-label="Explore visual references"
-              >
-                <img src={pin.imageUrl} alt={pin.altText} loading="lazy" decoding="async" />
-              </Link>
-            ))}
-          </div>
-
-          <div className="overview-visual-world-links">
-            <Link href="/visual-references">Visual references →</Link>
-            <Link href="/travel">Travel →</Link>
-          </div>
-        </section>
-      ) : null}
-
-      <section className="home-cases section-pad overview-anchor" id="case-studies">
-        <div className="section-heading"><h2 className="section-title small-title">Selected Case Studies</h2></div>
-        <div className="home-case-list">{studies.map(study => <CaseRow study={study} key={study.title} />)}</div>
-        <details className="overview-inline-expand more-case-studies">
-          <summary><span>More case studies</span><span aria-hidden="true">＋</span></summary>
-          <div className="home-case-list overview-expanded-list">{moreStudies.map(study => <CaseRow study={study} key={study.title} />)}</div>
-        </details>
-      </section>
-
-      <section className="selected section-pad overview-anchor" id="work">
-        <div className="section-heading">
-          <h2 className="section-title small-title">Current Work</h2>
-        </div>
-        <div className="feature-grid">
-          {features.map((item) => {
-            const image = item.driveKey ? projectImages.get(item.driveKey) : null;
-            const content = <>
-              <div className="feature-media">{image ? <img className="project-photo" src={image} alt="" /> : null}</div>
-              <div className="feature-copy"><div><h3>{item.title}</h3><p>{item.meta}</p></div><span className="circle-arrow">→</span></div>
-            </>;
-            return item.external
-              ? <a className={item.className} key={item.title} href={item.href} target="_blank" rel="noreferrer">{content}</a>
-              : <Link className={item.className} key={item.title} href={item.href}>{content}</Link>;
-          })}
-        </div>
-      </section>
-
-      <section className="overview-press section-pad overview-anchor" id="press">
-        <div className="section-heading"><h2 className="section-title small-title">Press + Speaking</h2></div>
-        <div className="overview-press-grid">
-          <div>
-            <p className="eyebrow">SELECTED PRESS</p>
-            {pressPreview.map(item => <PressRow item={item} key={item.org+item.title} />)}
-          </div>
-          <div>
-            <p className="eyebrow">SELECTED TALKS</p>
-            {talksPreview.map(item => <PressRow item={item} key={item.org+item.title} />)}
-          </div>
-        </div>
-        <details className="overview-inline-expand overview-press-expand">
-          <summary><span>More press + speaking</span><span aria-hidden="true">＋</span></summary>
-          <div className="overview-press-grid overview-expanded-list">
-            <div>{morePress.map(item => <PressRow item={item} key={item.org+item.title} />)}</div>
-            <div>{moreTalks.map(item => <PressRow item={item} key={item.org+item.title} />)}</div>
-          </div>
-        </details>
-      </section>
-      <section className="experiments section-pad overview-anchor" id="experiments">
-        <div className="section-heading"><h2 className="section-title small-title">Experiments</h2></div>
-        <div className="experiment-grid experiment-grid-four overview-experiment-grid">
-          {experiments.map(item => (
-            <Link href={item.href} className="lab-experiment-card overview-lab-experiment-card" key={item.title}>
-              <div className="lab-experiment-visual experiment-loop-visual">
-                <ExperimentLoop name={item.loop} label={`${item.title} preview`} />
-              </div>
-              <div className="lab-experiment-copy overview-lab-experiment-copy">
-                <span>{item.meta}</span>
-                <h3>{item.title} <span aria-hidden="true">→</span></h3>
-              </div>
-            </Link>
-          ))}
-        </div>
-
-        <details className="overview-inline-expand overview-experiments-expand">
-          <summary><span>Show all experiments</span><span aria-hidden="true">＋</span></summary>
-          <div className="experiment-grid experiment-grid-four overview-experiment-grid overview-expanded-list">
-            {moreExperiments.map(item => (
-              <Link href={item.href} className="lab-experiment-card overview-lab-experiment-card" key={item.title}>
-                <div className="lab-experiment-visual moodboard-card-visual" aria-label="Moodboard preview">
-                  <div className="moodboard-card-chrome">
-                    <span>moodboard.</span>
-                    <span>visual editor</span>
-                  </div>
-                  <div className="moodboard-card-stage">
-                    <div className="moodboard-card-copy">
-                      <small>VISUAL EDITOR / 01</small>
-                      <strong>Saved inspiration,<br/>ready to post.</strong>
-                    </div>
-                    <div className="moodboard-card-carousel">
-                      <span/><span/><span/>
-                    </div>
-                  </div>
-                </div>
-                <div className="lab-experiment-copy overview-lab-experiment-copy">
-                  <span>{item.meta}</span>
-                  <h3>{item.title} <span aria-hidden="true">→</span></h3>
-                </div>
-              </Link>
-            ))}
-          </div>
-        </details>
-      </section>
-
-      <section className="overview-library section-pad overview-anchor" id="library">
-        <div className="section-heading"><h2 className="section-title small-title">Library</h2></div>
-        <div className="overview-library-grid">
-          {library.map(item => <Link href={item.href} className="overview-library-item" key={item.title}>
-            <div><h3>{item.title}</h3></div><span>→</span>
-          </Link>)}
-        </div>
-      </section>
-
-      <section className="overview-writing-section section-pad">
-        <div className="overview-writing">
-          <div className="overview-writing-head"><h2 className="section-title small-title">Writing</h2></div>
-          {writing.map(item => <WritingRow item={item} key={item.title} />)}
-          <details className="overview-inline-expand">
-            <summary><span>More writing</span><span aria-hidden="true">＋</span></summary>
-            <div className="overview-expanded-list">{moreWriting.map(item => <WritingRow item={item} key={item.title} />)}</div>
-          </details>
-        </div>
-      </section>
-
-
-    </div>
+    </main>
   );
 }

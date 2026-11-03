@@ -17,6 +17,8 @@ export default function Modal({ label, className, onClose, onKeyDown, children }
     const opener = document.activeElement instanceof HTMLElement ? document.activeElement : null;
     const overflow = document.body.style.overflow;
     element?.showModal();
+    const initialFocus = element?.querySelector<HTMLElement>('[autofocus], button:not([disabled]), a[href], [tabindex]:not([tabindex="-1"])');
+    (initialFocus ?? element)?.focus({ preventScroll: true });
     document.body.style.overflow = "hidden";
     return () => {
       element?.close();
@@ -25,7 +27,7 @@ export default function Modal({ label, className, onClose, onKeyDown, children }
     };
   }, []);
 
-  return <dialog ref={dialog} className={className} aria-label={label}
+  return <dialog ref={dialog} tabIndex={-1} className={className} aria-label={label}
     onCancel={(event) => { event.preventDefault(); onClose(); }}
     onKeyDown={(event) => {
       if (event.key === "Tab") {

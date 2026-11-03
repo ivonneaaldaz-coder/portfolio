@@ -1,15 +1,17 @@
 import { ImageResponse } from "next/og";
 
-export const alt = "Ivonne Aldaz — Strategy, technology, art.";
+export const alt = "Ivonne Aldaz — circular identity mark on a dark background";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
 export default function Image() {
   return new ImageResponse(
-    <div style={{ display: "flex", flexDirection: "column", justifyContent: "space-between", width: "100%", height: "100%", padding: "72px", background: "#11110f", color: "#f2f0ea", fontFamily: "sans-serif" }}>
-      <div style={{ fontSize: 24, letterSpacing: 5 }}>IVONNE ALDAZ</div>
-      <div style={{ fontSize: 88, letterSpacing: -5, lineHeight: 1.05, maxWidth: 950 }}>Strategy, technology, art.</div>
-      <div style={{ fontSize: 24, color: "#b7b7ad" }}>hello@ivonnealdaz.com</div>
-    </div>, size
+    <div style={{display:"flex",alignItems:"center",justifyContent:"center",width:"100%",height:"100%",background:"#11110f"}}>
+      <svg width="410" height="410" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="32" cy="32" r="24.5" fill="none" stroke="#f2f0ea" strokeOpacity="0.8" strokeWidth="2.5"/>
+        <circle cx="32" cy="32" r="8" fill="#f2f0ea"/>
+      </svg>
+    </div>,
+    size
   );
 }

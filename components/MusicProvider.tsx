@@ -85,6 +85,8 @@ export function MusicProvider({ children }:{ children:React.ReactNode }) {
   const initializeRef = useRef<() => void>(() => {});
   const requestedRef = useRef<{playlistIndex:number;trackIndex:number;uri:string} | null>(null);
   const pendingRef = useRef<{playlistIndex:number;trackIndex:number;uri:string}|null>(null);
+  const shouldContinueRef = useRef(false);
+  const retriedUriRef = useRef("");
 
   useEffect(() => {
     playlistsRef.current = playlists;
@@ -123,6 +125,7 @@ export function MusicProvider({ children }:{ children:React.ReactNode }) {
         loadedUriRef.current = pending.uri;
       }
       controller.play();
+      retriedUriRef.current = "";
       requestedRef.current = pending;
       pendingRef.current = null;
     } catch (error) {
@@ -149,6 +152,7 @@ export function MusicProvider({ children }:{ children:React.ReactNode }) {
     const onStarted = (event:SpotifyEvent) => {
       if (disposed) return;
       syncTrack(event.data?.playingURI || "");
+      retriedUriRef.current = "";
       setIsPaused(false);
       setIsBuffering(false);
     };
@@ -157,6 +161,13 @@ export function MusicProvider({ children }:{ children:React.ReactNode }) {
       const data = event.data;
       if (!data) return;
       if (typeof data.isPaused === "boolean") setIsPaused(data.isPaused);
+      // Retry once when Spotify finishes loading a newly requested track
+      // but dropped the play command during iframe navigation.
+      const requested = requestedRef.current;
+      if (shouldContinueRef.current && requested && data.playingURI === requested.uri && data.isPaused === true && !data.isBuffering && retriedUriRef.current !== requested.uri) {
+        retriedUriRef.current = requested.uri;
+        try { controllerRef.current?.play(); } catch {}
+      }
       if (typeof data.isBuffering === "boolean") setIsBuffering(data.isBuffering);
       if (typeof data.position === "number") setPosition(data.position);
       if (typeof data.duration === "number") setDuration(data.duration);
@@ -195,6 +206,9 @@ export function MusicProvider({ children }:{ children:React.ReactNode }) {
             readyRef.current = true;
             setControllerReady(true);
             executePending();
+            if (shouldContinueRef.current && requestedRef.current && !pendingRef.current) {
+              try { controller.play(); } catch {}
+            }
           });
           controller.addListener("playback_started", onStarted);
           controller.addListener("playback_update", onUpdate);
@@ -231,6 +245,8 @@ export function MusicProvider({ children }:{ children:React.ReactNode }) {
     const safe = ((trackIndex % playlist.tracks.length) + playlist.tracks.length) % playlist.tracks.length;
     const track = playlist.tracks[safe];
     setSelectedTrackIndex(safe);
+    shouldContinueRef.current = true;
+    retriedUriRef.current = "";
     pendingRef.current = { playlistIndex,trackIndex:safe,uri:track.uri };
 
     initializeRef.current();
@@ -247,6 +263,7 @@ export function MusicProvider({ children }:{ children:React.ReactNode }) {
     const track = tracks[safe];
     if (early) {
       earlyPlayRef.current = null;
+      shouldContinueRef.current = true;
       pendingRef.current = { playlistIndex, trackIndex:safe, uri:track.uri };
       executePending();
     }
@@ -264,6 +281,7 @@ export function MusicProvider({ children }:{ children:React.ReactNode }) {
     const controller = controllerRef.current;
     if (controller && readyRef.current && requestedRef.current) {
       try {
+        shouldContinueRef.current = isPaused;
         controller.togglePlay();
         return;
       } catch {}

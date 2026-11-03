@@ -66,7 +66,7 @@ export default function PinterestGallery({ pins }: { pins: PinterestPin[] }) {
   return (
     <>
       {boards.length > 2 ? (
-        <div className="pinterest-filters" aria-label="Filter visual references">
+        <div className="pinterest-filters" aria-label="Filter visual references" style={{overflowX:"auto",overscrollBehaviorX:"contain",WebkitOverflowScrolling:"touch",flexWrap:"nowrap"}}>
           {boards.map((board) => {
             const count = board === "All"
               ? pins.length
@@ -85,6 +85,7 @@ export default function PinterestGallery({ pins }: { pins: PinterestPin[] }) {
           })}
         </div>
       ) : null}
+      {boards.length > 2 ? <p className="pinterest-filter-hint" style={{fontSize:11,opacity:0.65,marginTop:10,marginBottom:32}}>Swipe to explore categories →</p> : null}
 
       <div className="pinterest-native-grid" style={{ gridTemplateColumns: `repeat(${columnCount}, minmax(0, 1fr))` }}>
         {columns.map((column, columnIndex) => (

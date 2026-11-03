@@ -1,0 +1,81 @@
+/* Art v11 prototype geometry, scoped to avoid modifying the rest of the portfolio. Colors inherit the site theme. */
+.art-v11{color:var(--ink);background:transparent;--art-sub:var(--muted);--art-line:var(--line)}
+.art-v11 .art-v11-content{max-width:1540px;margin:auto;padding:30px 4.2% 100px}
+.art-v11 .art-lede{max-width:800px;margin:36px 0 105px}
+.art-v11 .art-lede h1{font:normal clamp(33px,3.7vw,54px)/1.19 Georgia,serif;letter-spacing:-.045em;margin:0;color:var(--ink)}
+.art-v11 .gallery{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:80px 4.1%;align-items:start}
+.art-v11 .work{display:block;border:0;background:none;color:inherit;text-align:center;padding:0;cursor:pointer;width:100%;min-width:0}
+.art-v11 .artwork{display:flex;align-items:center;justify-content:center;width:100%;min-height:180px;transition:transform .25s}
+.art-v11 .artwork img{display:block;max-width:100%;width:100%;height:auto;object-fit:contain;transition:transform .35s;filter:drop-shadow(0 8px 10px rgba(0,0,0,.025))}
+.art-v11 .work:hover .artwork img{transform:translateY(-5px)}
+.art-v11 .work-title{display:block;font:normal clamp(23px,2.15vw,33px)/1.12 Georgia,serif;letter-spacing:-.045em;margin:22px 0 12px;color:var(--ink)}
+.art-v11 .meta-row{display:block}.art-v11 .work-meta{display:block;color:var(--art-sub);font-size:11px;line-height:1.7;letter-spacing:.09em;text-transform:uppercase}
+.art-v11 .art-editorial{margin-top:160px;border-top:1px solid var(--art-line)}
+.art-v11 .editorial-row{display:grid;grid-template-columns:34% 1fr;gap:7%;padding:58px 0 72px;border-bottom:1px solid var(--art-line)}
+.art-v11 .editorial-row h2{font:normal clamp(30px,3.3vw,49px)/1.13 Georgia,serif;letter-spacing:-.05em;margin:0;color:var(--ink)}
+.art-v11 .editorial-copy{max-width:680px}.art-v11 .editorial-copy p{font-size:clamp(17px,1.5vw,21px);line-height:1.65;letter-spacing:-.01em;margin:0 0 21px}
+.art-v11 .history-list{width:100%}.art-v11 .history-item{display:grid;grid-template-columns:65px 1fr;gap:20px;border-top:1px solid var(--art-line);padding:19px 0}
+.art-v11 .history-item:first-child{border-top:0;padding-top:0}.art-v11 .history-year{color:var(--art-sub);font-size:12px;padding-top:4px}
+.art-v11 .history-item strong{display:block;font:normal 24px Georgia,serif;letter-spacing:-.03em}.art-v11 .history-item div span{display:block;color:var(--art-sub);font-size:12px;letter-spacing:.05em;margin-top:6px}
+.art-v11 .viewer{position:fixed;inset:0;background:var(--bg);z-index:90;display:flex;flex-direction:column;padding:20px 3%;color:var(--ink)}
+.art-v11 .viewer-top{display:flex;justify-content:space-between;align-items:center;gap:20px;font-size:12px}.art-v11 .viewer-top button,.art-v11 .viewer-controls button{border:0;background:none;color:inherit;cursor:pointer;font-size:16px;padding:10px}
+.art-v11 .viewer-body{flex:1;display:flex;justify-content:center;align-items:center;min-height:0;padding:12px}.art-v11 .viewer-body img{max-width:100%;max-height:100%;object-fit:contain}
+.art-v11 .viewer-bottom{display:flex;justify-content:space-between;align-items:center;gap:20px;padding:10px 0}.art-v11 .viewer-bottom strong{font:normal 27px Georgia,serif}.art-v11 .viewer-bottom p{white-space:pre-line;font-size:11px;letter-spacing:.07em;color:var(--art-sub);text-transform:uppercase}.art-v11 .viewer-controls{display:flex;gap:10px;white-space:nowrap}
+@media(max-width:850px){.art-v11 .gallery{grid-template-columns:repeat(2,minmax(0,1fr));gap:56px 5%}.art-v11 .art-lede{margin-bottom:75px}.art-v11 .art-editorial{margin-top:110px}.art-v11 .editorial-row{grid-template-columns:1fr;gap:25px}}
+@media(max-width:550px){.art-v11 .art-v11-content{padding:15px 5% 65px}.art-v11 .gallery{grid-template-columns:1fr;gap:49px}.art-v11 .art-lede{margin:25px 0 65px}.art-v11 .art-lede h1{font-size:clamp(30px,8vw,42px)}.art-v11 .work-title{font-size:28px}.art-v11 .artwork{min-height:0}.art-v11 .art-editorial{margin-top:90px}.art-v11 .editorial-row{padding:37px 0 49px}.art-v11 .history-item strong{font-size:21px}.art-v11 .viewer-bottom strong{font-size:20px}.art-v11 .viewer-bottom{align-items:flex-start}.art-v11 .viewer-controls{gap:0}}
+
+/* Unified art typography and restrained gallery labels */
+.art-v11 .art-lede{max-width:none;margin:24px 0 54px;padding-bottom:54px;border-bottom:1px solid var(--art-line)}
+.art-v11 .art-lede h1{font-family:var(--display)!important;font-size:clamp(42px,5vw,66px)!important;line-height:1!important;font-weight:400!important}
+.art-v11 .work-title{font-family:var(--display)!important;font-size:clamp(19px,1.7vw,25px)!important;font-weight:400!important;line-height:1.2!important;letter-spacing:-.035em}
+.art-v11 .work-meta,.art-v11 .viewer-bottom p{text-transform:none!important;letter-spacing:0!important;font-size:13px!important;line-height:1.55!important}
+.art-v11 .editorial-row h2{font-family:var(--display)!important;font-size:clamp(28px,2.7vw,39px)!important}
+.art-v11 .history-item strong,.art-v11 .viewer-bottom strong{font-family:var(--display)!important;font-size:clamp(18px,1.6vw,23px)!important}
+.art-v11 .editorial-copy p{color:var(--muted);font-size:clamp(15px,1.2vw,17px)}
+@media(max-width:550px){.art-v11 .art-lede{margin-bottom:36px;padding-bottom:36px}}
+
+/* Gallery begins immediately without a redundant hero */
+.art-v11 .art-v11-content{padding-top:clamp(48px,6vw,84px)}
+
+/* Watercolor thumbnails: reduce transparent-image breathing room before captions. */
+@media(min-width:851px){
+ .art-v11 .gallery>.work:nth-child(n+4):nth-child(-n+9) .artwork{height:clamp(205px,19vw,270px)!important;min-height:0!important;overflow:hidden}
+ .art-v11 .gallery>.work:nth-child(n+4):nth-child(-n+9) .artwork img{height:100%!important;width:100%!important;object-fit:contain!important}
+ .art-v11 .gallery>.work:nth-child(n+4):nth-child(-n+9) .work-title{margin-top:12px!important}
+}
+
+/* Artwork viewer: navigation beside the painting, centered metadata on phones. */
+.art-v11 .viewer-stage{display:flex;align-items:center;justify-content:center;flex:1;min-height:0;gap:clamp(8px,2vw,28px)}
+.art-v11 .viewer-stage .viewer-body{flex:1;min-width:0;height:100%}
+.art-v11 .viewer-side-arrow{flex:0 0 44px;width:44px;height:48px;display:flex;align-items:center;justify-content:center;background:transparent;border:0;color:var(--ink);font-size:22px;cursor:pointer}
+@media(max-width:600px){.art-v11 .viewer{padding:18px 12px max(28px,env(safe-area-inset-bottom))}.art-v11 .viewer-stage{gap:0}.art-v11 .viewer-side-arrow{flex-basis:40px;width:40px;min-height:48px}.art-v11 .viewer-stage .viewer-body{padding:6px}.art-v11 .viewer-bottom{justify-content:center!important;text-align:center!important;padding:18px 12px 4px!important}.art-v11 .viewer-bottom>div:first-child{width:100%;text-align:center}.art-v11 .viewer-bottom p{text-align:center}.art-v11 .viewer-bottom .viewer-controls{display:none!important}}
+@media(min-width:601px){.art-v11 .viewer-side-arrow{display:none}.art-v11 .viewer-stage{gap:0}}
+
+/* Mobile art viewer: image and caption form one centered unit regardless of aspect ratio. */
+@media(max-width:600px){
+ .art-v11 .viewer{justify-content:center!important;gap:0!important;padding:calc(56px + env(safe-area-inset-top,0px)) 12px calc(88px + env(safe-area-inset-bottom,0px))!important}
+ .art-v11 .viewer-top{position:absolute!important;top:calc(18px + env(safe-area-inset-top,0px));left:18px;right:18px;z-index:2}
+ .art-v11 .viewer-stage{flex:0 1 auto!important;height:auto!important;min-height:0!important;max-height:60svh!important;align-items:center!important}
+ .art-v11 .viewer-stage .viewer-body{flex:1 1 auto!important;height:auto!important;min-height:0!important;max-height:60svh!important;display:flex!important;align-items:center!important;justify-content:center!important;padding:0 4px!important}
+ .art-v11 .viewer-body img{display:block!important;width:auto!important;height:auto!important;max-width:100%!important;max-height:58svh!important;object-fit:contain!important}
+ .art-v11 .viewer-bottom{flex:0 0 auto!important;padding:22px 12px 0!important;margin:0!important;gap:0!important}
+ .art-v11 .viewer-bottom strong{display:block!important;margin:0 0 10px!important}
+ .art-v11 .viewer-bottom p{margin:0!important}
+}
+
+/* Mobile: landscape pieces should sit close to their captions without shrinking the taller works. */
+@media(max-width:550px){.art-v11 .gallery>.work:nth-child(7) .artwork,.art-v11 .gallery>.work:nth-child(8) .artwork{height:auto!important;min-height:0!important;max-height:none!important}.art-v11 .gallery>.work:nth-child(7) .work-title,.art-v11 .gallery>.work:nth-child(8) .work-title{margin-top:10px!important}}
+
+/* Minimal exhibition opening: give the art the spotlight. */
+.art-v11 .art-v11-opening{font-family:var(--display);font-size:clamp(24px,2.5vw,38px);font-weight:400;letter-spacing:-.045em;line-height:1.2;margin:0 0 clamp(40px,5vw,75px);color:var(--ink)}
+@media(max-width:550px){.art-v11 .art-v11-opening{font-size:clamp(25px,6vw,32px);margin-bottom:42px}}
+
+@media(min-width:601px){.art-v11 .art-history-second-line{display:block}}
+@media(max-width:600px){.art-v11 .editorial-row.history-row h2{font-size:clamp(22px,5.5vw,30px)!important;white-space:nowrap!important;letter-spacing:-.055em!important}.art-v11 .art-history-second-line{display:inline!important}}
+
+/* Mobile small-format artworks: reserve only their actual visual height. */
+@media(max-width:550px){
+ .art-v11 .gallery>.work:nth-child(n+4):nth-child(-n+9) .artwork{height:clamp(190px,58vw,270px)!important;min-height:0!important;overflow:hidden!important}
+ .art-v11 .gallery>.work:nth-child(n+4):nth-child(-n+9) .artwork img{height:100%!important;width:100%!important;object-fit:contain!important}
+ .art-v11 .gallery>.work:nth-child(n+4):nth-child(-n+9) .work-title{margin-top:12px!important}
+}
