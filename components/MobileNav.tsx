@@ -37,7 +37,10 @@ export default function MobileNav() {
     const destination = href.split("#")[0];
     if (current === destination && !href.includes("#")) window.scrollTo({top:0,behavior:"smooth"});
     else router.push(href);
-    animateClose();
+    setMenuOpen(false);
+    resetGroups();
+    setClosing(false);
+    closingRef.current = false;
   };
 
   const closeExternal = () => animateClose();
