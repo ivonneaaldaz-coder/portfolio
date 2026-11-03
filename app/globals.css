@@ -10819,3 +10819,30 @@ html body::before, html body::after { content:none!important;display:none!import
 }
 /* A little more space beneath the homepage Selected Work / brand proof line. */
 .home-minimal .home-minimal-content>.home-proof{padding-bottom:clamp(22px,4vw,44px)!important}
+
+/* November 3: consistent editorial footer and quieter quotes. */
+.site-main>.site-footer.editorial-footer{border-top:0!important}
+.site-main>.site-footer.editorial-footer>.footer-about,
+.site-main>.site-footer.editorial-footer>.footer-social,
+.site-main>.site-footer.editorial-footer>.footer-notes{border:0!important}
+.library-experience .quote-attribution strong,
+.library-experience .quote-attribution span{font-weight:400!important;text-transform:none!important;letter-spacing:normal!important}
+.library-experience .quote-attribution strong{color:var(--ink)!important}
+.library-experience .quote-attribution span{color:var(--muted)!important}
+@media(max-width:900px){
+ /* Footer is the same component on every route; do not add mobile section rules. */
+ .site-main>.site-footer.editorial-footer{display:flex!important;flex-direction:column!important;gap:32px!important;padding-top:48px!important;padding-bottom:80px!important}
+ .site-main>.site-footer.editorial-footer>div{padding:0!important;margin:0!important;border:0!important;width:100%!important}
+ .site-main>.site-footer.editorial-footer .footer-about{margin-bottom:8px!important}
+ .site-main>.site-footer.editorial-footer .footer-social-columns{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:16px!important}
+ .site-main>.site-footer.editorial-footer .footer-social-columns>div{display:flex!important;flex-direction:column!important;gap:14px!important}
+ .site-main>.site-footer.editorial-footer .footer-notes .footer-subscribe-link{display:inline-flex!important;align-items:center!important;justify-content:flex-start!important;width:auto!important;min-width:0!important;max-width:100%!important;padding:13px 20px!important}
+ /* Keep the playlist selection in view as one horizontally scrollable row. */
+ .music-page .playlist-selector-grid{display:flex!important;flex-wrap:nowrap!important;grid-template-columns:none!important;overflow-x:auto!important;overflow-y:hidden!important;scroll-snap-type:x mandatory!important;overscroll-behavior-x:contain!important;-webkit-overflow-scrolling:touch!important;gap:14px!important;padding-bottom:16px!important}
+ .music-page .playlist-selector-grid>.playlist-card{flex:0 0 min(46vw,220px)!important;width:min(46vw,220px)!important;min-width:0!important;scroll-snap-align:start!important}
+ .music-page .playlist-selector-grid .playlist-cover{width:100%!important}
+ .pinterest-reference-page .pinterest-filters{margin-bottom:0!important}
+ .pinterest-reference-page .pinterest-filter-hint{margin-top:6px!important;margin-bottom:12px!important}
+ .pinterest-reference-page .pinterest-native-grid{gap:8px!important}
+ .pinterest-reference-page .pinterest-native-column{gap:8px!important}
+}
