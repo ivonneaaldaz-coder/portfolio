@@ -10855,3 +10855,16 @@ html body::before, html body::after { content:none!important;display:none!import
  .work-hybrid-page .selected-work-explorer .selected-work-project-preview{margin-top:0!important;padding-top:0!important}
  .work-hybrid-page .selected-work-explorer .selected-work-preview-stage{margin-top:0!important}
 }
+
+/* Nov 3: restore the editorial footer rhythm and simplify mobile music. */
+@media(max-width:900px){
+ .site-main>.site-footer.editorial-footer{gap:0!important;padding-top:42px!important}
+ .site-main>.site-footer.editorial-footer>.footer-about{border-bottom:1px solid var(--line)!important;padding-bottom:42px!important;margin-bottom:36px!important}
+ .site-main>.site-footer.editorial-footer>.footer-social{border-bottom:1px solid var(--line)!important;padding-bottom:52px!important;margin-bottom:36px!important}
+ .site-main>.site-footer.editorial-footer>.footer-notes{border:0!important;padding-bottom:0!important}
+ .music-page .music-tracklist{border-bottom:0!important;padding-bottom:0!important;margin-bottom:0!important}
+ .music-page .music-console{border-bottom:0!important;margin-bottom:14px!important;padding-bottom:0!important}
+ .music-page .playlist-picker-heading{display:flex!important;align-items:baseline!important;justify-content:space-between!important;gap:10px!important;margin-top:0!important;margin-bottom:14px!important}
+ .music-page .playlist-swipe-hint{display:inline!important;font-size:11px!important;letter-spacing:0!important;font-weight:400!important;color:var(--muted)!important;white-space:nowrap!important}
+}
+@media(min-width:901px){.music-page .playlist-swipe-hint{display:none!important}}
