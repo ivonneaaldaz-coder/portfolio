@@ -10775,3 +10775,5 @@ html body::before, html body::after { content:none!important;display:none!import
 .selected-work-case-visual .case-media-label{position:absolute;left:16px;bottom:14px;padding:5px 9px;background:rgba(20,20,18,.72);color:#f4f2ed;font-size:11px;letter-spacing:.1em;border-radius:3px}
 @keyframes caseFade{from{opacity:0}to{opacity:1}}
 @media (prefers-reduced-motion:reduce){.selected-work-case-visual.has-media video,.selected-work-case-visual.has-media img{animation:none}}
+.selected-work-brand-grid button.pinned{text-decoration:underline;text-underline-offset:4px}
+.selected-work-case-visual.has-media img.case-still{object-fit:contain;padding:6%;background:#efece5}
