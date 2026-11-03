@@ -23,7 +23,11 @@ const SELECTORS = [
   ".writing-row",
   ".reference-card",
   ".archive-row",
-  ".about-grid > div"
+  ".about-grid > div",
+  ".art-v11 .gallery .work",
+  ".travel-page .travel-photo",
+  ".selected-work-company-section",
+  ".selected-work-projects"
 ].join(",");
 
 export default function MotionSystem() {
@@ -40,7 +44,8 @@ export default function MotionSystem() {
 
     const heroBits = document.querySelectorAll<HTMLElement>(
       ".hero-row h1,.hero-row p,.page-intro h1,.page-intro p,.art-intro h1,.art-intro>div,.travel-intro h1,.travel-intro p,.case-hero>*," +
-      ".project-detail-hero>*,.experiment-detail-hero>*,.native-note header>*"
+      ".project-detail-hero>*,.experiment-detail-hero>*,.native-note header>*," +
+      ".art-v11-opening,.travel-page-opening,.work-hybrid-page .selected-work-index h3,.about-editorial-hero h1,.about-editorial-hero p"
     );
 
     heroBits.forEach((el, index) => {
