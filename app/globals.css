@@ -10892,3 +10892,24 @@ html body::before, html body::after { content:none!important;display:none!import
  .work-hybrid-page .selected-work-case-visual.has-media{padding:22px!important}
  .work-hybrid-page .selected-work-case-visual.has-media img.case-still{max-width:100%!important;max-height:100%!important;object-fit:contain!important}
 }
+
+/* Single-tap mobile navigation: explicit buttons replace nested native details. */
+@media(max-width:900px){
+ .mobile-nav .mobile-menu-root{display:block;position:relative}
+ .mobile-nav .mobile-menu-trigger{appearance:none;border:0;background:transparent;color:var(--ink);font:inherit;font-size:12px;cursor:pointer;padding:8px 4px}
+ .mobile-nav .mobile-menu-root.is-open>.mobile-menu{animation:mobileMenuInSoft .32s cubic-bezier(.22,.61,.36,1) both}
+ .mobile-nav .mobile-menu-root.is-closing>.mobile-menu{animation:mobileMenuOut .18s ease both;pointer-events:none}
+ .mobile-nav .mobile-work-group,.mobile-nav .mobile-library-group{display:block!important}
+ .mobile-nav .mobile-group-trigger{display:flex;justify-content:space-between;align-items:center;width:100%;min-height:58px;padding:15px 0;border:0;border-bottom:1px solid var(--line);background:transparent;color:var(--ink);font:inherit;font-size:14px;text-align:left;cursor:pointer}
+ .mobile-nav .mobile-group-trigger .mobile-disclosure-arrow{font-size:14px;line-height:1;transition:transform .2s ease}
+ .mobile-nav .is-open>.mobile-group-trigger .mobile-disclosure-arrow{transform:rotate(45deg)}
+ .mobile-nav .mobile-work-links,.mobile-nav .mobile-library-links{display:flex!important;flex-direction:column!important;padding-left:16px!important}
+}
+/* Optical vertical centering of the complete About card copy, not individual elements. */
+.about-editorial-feature .about-editorial-cards>a,.about-editorial-feature .about-editorial-cards>.building-card{justify-content:center!important;padding-top:clamp(38px,4.2vw,48px)!important;padding-bottom:clamp(22px,2.5vw,30px)!important}
+/* Give Teaching and Education entries breathing room around their dividers. */
+.about-editorial .about-editorial-row:has(>h2:first-child) .about-editorial-item{padding-top:24px!important;padding-bottom:30px!important}
+.about-editorial .about-editorial-row:has(>h2:first-child) .about-editorial-item:first-child{padding-top:12px!important}
+@media(max-width:900px){.about-editorial .about-editorial-row:has(>h2:first-child) .about-editorial-item{padding-top:26px!important;padding-bottom:32px!important}}
+/* Align the desktop project preview with the vertical center of the list. */
+@media(min-width:901px){.work-hybrid-page .selected-work-project-preview{transform:translateY(38px)!important}}
