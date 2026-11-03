@@ -9,21 +9,24 @@ import { usePathname, useRouter } from "next/navigation";
 export default function MobileNav() {
   const detailsRef = useRef<HTMLDetailsElement>(null);
   const [closing, setClosing] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [workOpen, setWorkOpen] = useState(false);
+  const [playOpen, setPlayOpen] = useState(false);
   const closingRef = useRef(false);
   const workGroupRef = useRef<HTMLDetailsElement>(null);
   const playGroupRef = useRef<HTMLDetailsElement>(null);
-  const resetGroups = () => { if (workGroupRef.current) workGroupRef.current.open = false; if (playGroupRef.current) playGroupRef.current.open = false; };
+  const resetGroups = () => { setWorkOpen(false); setPlayOpen(false); };
   const router = useRouter();
   const pathname = usePathname();
 
   const animateClose = (after?: () => void) => {
     const details = detailsRef.current;
-    if (!details?.open) { after?.(); return; }
+    if (!menuOpen) { after?.(); return; }
     if (closingRef.current) return;
     closingRef.current = true;
     setClosing(true);
     window.setTimeout(() => {
-      details.open = false;
+      setMenuOpen(false);
       resetGroups();
       closingRef.current = false;
       setClosing(false);
@@ -48,22 +51,22 @@ export default function MobileNav() {
     if (closingRef.current) return;
     const details = detailsRef.current;
     if (!details) return;
-    if (details.open) animateClose();
-    else { resetGroups(); details.open = true; }
+    if (menuOpen) animateClose();
+    else { resetGroups(); setMenuOpen(true); }
   };
 
   return (
     <header className="mobile-nav">
       <Link className="brand" href="/" onClick={(event) => go(event, "/")}>IVONNE ALDAZ</Link>
       <div className="mobile-header-actions">
-        <details ref={detailsRef} className={closing ? "is-closing" : ""}>
-        <summary onClick={toggleMenu}>Menu</summary>
+        <details ref={detailsRef} open={menuOpen} className={closing ? "is-closing" : ""}>
+        <summary onClick={toggleMenu}>{menuOpen ? "Close" : "Menu"}</summary>
         <div className="mobile-menu">
           <nav className="mobile-menu-links">
             <Link href="/" onClick={(event) => go(event, "/")}>Home</Link>
-            <details ref={workGroupRef} className="mobile-work-group"><summary>Work <span aria-hidden="true" className="mobile-disclosure-arrow">+</span></summary><div className="mobile-work-links"><Link href="/work" onClick={(event) => go(event, "/work")}>Projects</Link><Link href="/work#case-studies" onClick={(event) => go(event, "/work#case-studies")}>Case Studies</Link><Link href="/work#press" onClick={(event) => go(event, "/work#press")}>Press + Speaking</Link><Link href="/work#writing" onClick={(event) => go(event, "/work#writing")}>Writing</Link></div></details>
+            <details ref={workGroupRef} open={workOpen} className="mobile-work-group"><summary onClick={(event) => { event.preventDefault(); setWorkOpen(!workOpen); setPlayOpen(false); }}>Work <span aria-hidden="true" className="mobile-disclosure-arrow">+</span></summary><div className="mobile-work-links"><Link href="/work" onClick={(event) => go(event, "/work")}>Projects</Link><Link href="/work#case-studies" onClick={(event) => go(event, "/work#case-studies")}>Case Studies</Link><Link href="/work#press" onClick={(event) => go(event, "/work#press")}>Press + Speaking</Link><Link href="/work#writing" onClick={(event) => go(event, "/work#writing")}>Writing</Link></div></details>
 
-            <details ref={playGroupRef} className="mobile-library-group"><summary>Play <span aria-hidden="true" className="mobile-disclosure-arrow">+</span></summary><div className="mobile-library-links">
+            <details ref={playGroupRef} open={playOpen} className="mobile-library-group"><summary onClick={(event) => { event.preventDefault(); setPlayOpen(!playOpen); setWorkOpen(false); }}>Play <span aria-hidden="true" className="mobile-disclosure-arrow">+</span></summary><div className="mobile-library-links">
               <Link href="/art" onClick={(event) => go(event, "/art")}>Art</Link>
               <Link href="/travel" onClick={(event) => go(event, "/travel")}>Travel</Link>
               <Link href="/music" onClick={(event) => go(event, "/music")}>Music</Link>
