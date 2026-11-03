@@ -50,3 +50,15 @@
 .art-v11 .viewer-side-arrow{flex:0 0 44px;width:44px;height:48px;display:flex;align-items:center;justify-content:center;background:transparent;border:0;color:var(--ink);font-size:22px;cursor:pointer}
 @media(max-width:600px){.art-v11 .viewer{padding:18px 12px max(28px,env(safe-area-inset-bottom))}.art-v11 .viewer-stage{gap:0}.art-v11 .viewer-side-arrow{flex-basis:40px;width:40px;min-height:48px}.art-v11 .viewer-stage .viewer-body{padding:6px}.art-v11 .viewer-bottom{justify-content:center!important;text-align:center!important;padding:18px 12px 4px!important}.art-v11 .viewer-bottom>div:first-child{width:100%;text-align:center}.art-v11 .viewer-bottom p{text-align:center}.art-v11 .viewer-bottom .viewer-controls{display:none!important}}
 @media(min-width:601px){.art-v11 .viewer-side-arrow{display:none}.art-v11 .viewer-stage{gap:0}}
+
+/* Mobile art viewer: image and caption form one centered unit regardless of aspect ratio. */
+@media(max-width:600px){
+ .art-v11 .viewer{justify-content:center!important;gap:0!important;padding:calc(56px + env(safe-area-inset-top,0px)) 12px calc(88px + env(safe-area-inset-bottom,0px))!important}
+ .art-v11 .viewer-top{position:absolute!important;top:calc(18px + env(safe-area-inset-top,0px));left:18px;right:18px;z-index:2}
+ .art-v11 .viewer-stage{flex:0 1 auto!important;height:auto!important;min-height:0!important;max-height:60svh!important;align-items:center!important}
+ .art-v11 .viewer-stage .viewer-body{flex:1 1 auto!important;height:auto!important;min-height:0!important;max-height:60svh!important;display:flex!important;align-items:center!important;justify-content:center!important;padding:0 4px!important}
+ .art-v11 .viewer-body img{display:block!important;width:auto!important;height:auto!important;max-width:100%!important;max-height:58svh!important;object-fit:contain!important}
+ .art-v11 .viewer-bottom{flex:0 0 auto!important;padding:22px 12px 0!important;margin:0!important;gap:0!important}
+ .art-v11 .viewer-bottom strong{display:block!important;margin:0 0 10px!important}
+ .art-v11 .viewer-bottom p{margin:0!important}
+}
