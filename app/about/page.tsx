@@ -116,7 +116,7 @@ export default async function AboutPage() {
   const githubCalendar=buildGitHubCalendar(github?.days||[]);
 
   return (
-    <section id="about-top" className="page about-editorial">
+    <section id="about-top" className="page about-editorial"><style>{`@media(min-width:601px) and (max-width:900px){.about-editorial .about-editorial-hero{display:grid!important;grid-template-columns:minmax(0,1fr) minmax(0,36%)!important;align-items:center!important;gap:28px!important}.about-editorial .about-hero-portrait{max-width:100%!important;width:100%!important}.about-editorial .about-hero-portrait img{max-height:360px!important;object-fit:cover!important}.about-editorial .about-hero-intro h1{white-space:normal!important}}`}</style>
       <div className="about-editorial-hero">
         <div className="about-hero-intro"><span className="about-hero-index">01 / ABOUT</span><h1>Strategist, artist, builder</h1><p className="about-editorial-lede">I work across brands, technology, and the arts — drawn to ideas that make people think, feel, or see things differently.</p></div>
         <figure className="about-hero-portrait"><img src={driveImageUrl("1UJ7HG3gZU2zD5Y_kdHwCXLGjm1llx_Xc")} alt="Portrait of Ivonne Aldaz" /><figcaption><span>San Antonio, Texas</span><span>Often elsewhere</span></figcaption></figure>
