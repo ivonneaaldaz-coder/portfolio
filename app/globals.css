@@ -10846,3 +10846,12 @@ html body::before, html body::after { content:none!important;display:none!import
  .pinterest-reference-page .pinterest-native-grid{gap:8px!important}
  .pinterest-reference-page .pinterest-native-column{gap:8px!important}
 }
+
+/* Nov 3: tighten the mobile Projects index-to-preview handoff. */
+@media(max-width:600px){
+ .work-hybrid-page .selected-work-explorer .selected-work-projects{gap:0!important;row-gap:0!important}
+ .work-hybrid-page .selected-work-explorer .selected-work-index{margin-bottom:0!important;padding-bottom:0!important}
+ .work-hybrid-page .selected-work-explorer .selected-work-mobile-controls{margin:8px 0 0!important;padding:0!important;min-height:0!important}
+ .work-hybrid-page .selected-work-explorer .selected-work-project-preview{margin-top:0!important;padding-top:0!important}
+ .work-hybrid-page .selected-work-explorer .selected-work-preview-stage{margin-top:0!important}
+}
