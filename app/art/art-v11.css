@@ -36,3 +36,10 @@
 
 /* Gallery begins immediately without a redundant hero */
 .art-v11 .art-v11-content{padding-top:clamp(48px,6vw,84px)}
+
+/* Watercolor thumbnails: reduce transparent-image breathing room before captions. */
+@media(min-width:851px){
+ .art-v11 .gallery>.work:nth-child(n+4):nth-child(-n+7) .artwork{height:clamp(205px,19vw,270px)!important;min-height:0!important;overflow:hidden}
+ .art-v11 .gallery>.work:nth-child(n+4):nth-child(-n+7) .artwork img{height:100%!important;width:100%!important;object-fit:contain!important}
+ .art-v11 .gallery>.work:nth-child(n+4):nth-child(-n+7) .work-title{margin-top:12px!important}
+}
