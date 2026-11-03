@@ -43,3 +43,10 @@
  .art-v11 .gallery>.work:nth-child(n+4):nth-child(-n+9) .artwork img{height:100%!important;width:100%!important;object-fit:contain!important}
  .art-v11 .gallery>.work:nth-child(n+4):nth-child(-n+9) .work-title{margin-top:12px!important}
 }
+
+/* Artwork viewer: navigation beside the painting, centered metadata on phones. */
+.art-v11 .viewer-stage{display:flex;align-items:center;justify-content:center;flex:1;min-height:0;gap:clamp(8px,2vw,28px)}
+.art-v11 .viewer-stage .viewer-body{flex:1;min-width:0;height:100%}
+.art-v11 .viewer-side-arrow{flex:0 0 44px;width:44px;height:48px;display:flex;align-items:center;justify-content:center;background:transparent;border:0;color:var(--ink);font-size:22px;cursor:pointer}
+@media(max-width:600px){.art-v11 .viewer{padding:18px 12px max(28px,env(safe-area-inset-bottom))}.art-v11 .viewer-stage{gap:0}.art-v11 .viewer-side-arrow{flex-basis:40px;width:40px;min-height:48px}.art-v11 .viewer-stage .viewer-body{padding:6px}.art-v11 .viewer-bottom{justify-content:center!important;text-align:center!important;padding:18px 12px 4px!important}.art-v11 .viewer-bottom>div:first-child{width:100%;text-align:center}.art-v11 .viewer-bottom p{text-align:center}.art-v11 .viewer-bottom .viewer-controls{display:none!important}}
+@media(min-width:601px){.art-v11 .viewer-side-arrow{display:none}.art-v11 .viewer-stage{gap:0}}
