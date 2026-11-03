@@ -10757,3 +10757,15 @@ html body::before, html body::after { content:none!important;display:none!import
 .work-hybrid-page .selected-work-brand-grid>.selected-work-brand-toggle>.selected-work-more-brands{display:flex!important;align-items:center!important;justify-content:center!important;min-width:0!important;width:100%!important;height:100%!important;min-height:78px!important;margin:0!important;padding:12px!important;border:0!important;border-radius:0!important;box-shadow:none!important;background:transparent!important;font-size:13px!important;cursor:pointer}
 .work-hybrid-page .selected-work-brand-grid>.selected-work-brand-toggle>.selected-work-more-brands:hover{background:transparent!important;text-decoration:underline;text-underline-offset:4px}
 .work-hybrid-page .selected-work-case{margin-top:clamp(45px,5.5vw,78px)!important}
+
+/* Compact, consistent editorial item titles across Press, Speaking, and Writing. */
+.work-hybrid-page .overview-press-row .press-article-title,
+.work-hybrid-page .overview-writing-row h4,
+.work-hybrid-page .overview-writing-row a h4,
+.work-hybrid-page .overview-press-row h3{
+ font-size:clamp(14px,1.05vw,16px)!important;
+ line-height:1.45!important;
+ font-weight:500!important;
+ letter-spacing:-.012em!important;
+ overflow-wrap:normal;
+}
