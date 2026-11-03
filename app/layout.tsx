@@ -36,7 +36,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
           <div className="intro-inner">
             <span className="intro-name">Ivonne Aldaz</span>
             <span className="intro-line" />
-            <span className="intro-sub">Strategy, technology, art.</span>
+            <span className="intro-sub">Strategy, technology, art</span>
           </div>
         </div>
         <MotionSystem />
