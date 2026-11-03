@@ -1,31 +1,52 @@
-# Portfolio
+# Ivonne Aldaz — Personal Website
 
-Personal portfolio and digital home for Ivonne Aldaz.
+The source code for [ivonnealdaz.com](https://ivonnealdaz.com), my personal website and portfolio.
 
-Built as a more intentional way to explore my work across strategy, systems, creative technology, art, teaching, and experiments.
+A digital home for my work across brand strategy, consumer insights, creative direction, art, teaching, and experiments. The site is intentionally minimal and interactive, with space to explore both professional projects and personal interests.
 
-## Structure
+## Explore
 
-- Overview
-- Work
-- Lab
-- Notes
-- Archive
-- About
+- **Home** — An introduction and selected work.
+- **Work** — Projects, case studies, press, speaking, and writing.
+- **Play** — Art, travel, music, books and quotes, and visual references.
+- **About** — Background, experience, teaching, and the things I'm building.
 
-The Lab lives separately at `lab.ivonnealdaz.com`.
+My interactive desktop experiment, **The Lab**, lives separately at [lab.ivonnealdaz.com](https://lab.ivonnealdaz.com).
 
-## Stack
+## Built with
 
-- Next.js
-- TypeScript
-- Vercel
-- GitHub
+- Next.js (App Router)
+- React and TypeScript
+- CSS
+- Vercel for hosting and deployments
+- GitHub for version control
 
-## Status
+## Local development
 
-Currently in development.
+```bash
+npm install
+npm run dev
+```
 
-The portfolio will eventually live at:
+Open [http://localhost:3000](http://localhost:3000).
 
-`portfolio.ivonnealdaz.com`
+To check the application before a release:
+
+```bash
+npm run typecheck
+npm run build
+```
+
+Some integrations or dynamic content may require environment variables configured separately in the deployment environment. Do not commit secrets.
+
+## Deployment
+
+**Production website:** [ivonnealdaz.com](https://ivonnealdaz.com)
+
+This repository is connected to Vercel. Deployments have also been created from a working branch during redesign and refinement. The default branch is `main`; ongoing branch reconciliation is tracked in [PR #44](https://github.com/ivonneaaldaz-coder/portfolio/pull/44).
+
+The previous address `portfolio.ivonnealdaz.com` is no longer the primary portfolio URL.
+
+---
+
+© Ivonne Aldaz.
