@@ -10963,3 +10963,56 @@ html body::before, html body::after { content:none!important;display:none!import
 }
 .sidebar-subscribe input{border-radius:999px 0 0 999px!important}
 .sidebar-subscribe button{border-radius:0 999px 999px 0!important}
+
+/* Editorial page entrance: one quiet reveal, without animating the persistent nav/player. */
+@keyframes editorial-page-enter{from{opacity:0;translate:0 12px}to{opacity:1;translate:0 0}}
+.site-main > .page:not(.home-minimal),
+.site-main > main.page:not(.home-minimal),
+.site-main > section.page:not(.home-minimal){
+  animation:editorial-page-enter .8s cubic-bezier(.22,1,.36,1) both;
+}
+@media(prefers-reduced-motion:reduce){
+  .site-main > .page:not(.home-minimal),
+  .site-main > main.page:not(.home-minimal),
+  .site-main > section.page:not(.home-minimal){animation:none!important}
+}
+/* Keep hero links above the selected-work line; their existing intro animation
+   creates separate stacking contexts even when the menu background is opaque. */
+.home-minimal .home-minimal-links{position:relative!important;z-index:20!important}
+.home-minimal .home-proof{position:relative!important;z-index:1!important}
+.home-minimal .home-play-disclosure[open]{z-index:25!important}
+.home-minimal .home-play-disclosure nav{
+  background:#f2f0ea!important;
+  background-color:#f2f0ea!important;
+  opacity:1!important;
+  border-radius:22px!important;
+  z-index:50!important;
+}
+:root[data-theme="dark"] .home-minimal .home-play-disclosure nav{
+  background:#11110f!important;
+  background-color:#11110f!important;
+}
+/* Case cards: visual height should follow each asset, not reserve a tall frame. */
+@media(max-width:600px){
+  .work-hybrid-page .selected-work-explorer .selected-work-case-visual.has-media{
+    padding:10px 18px 0!important;
+    margin-bottom:0!important;
+  }
+  .work-hybrid-page .selected-work-explorer .selected-work-case-visual.has-media img.case-still{
+    max-height:190px!important;
+    margin:0 auto!important;
+  }
+  .work-hybrid-page .selected-work-explorer .selected-work-case-copy{
+    padding-top:10px!important;
+  }
+  /* The Future of Marketing composition already has the right spacing. */
+  .work-hybrid-page .selected-work-explorer .selected-work-case:has(.selected-work-podcast-link) .selected-work-case-visual.has-media{
+    padding-top:18px!important;
+  }
+  .work-hybrid-page .selected-work-explorer .selected-work-case:has(.selected-work-podcast-link) .selected-work-case-visual.has-media img.case-still{
+    max-height:240px!important;
+  }
+  .work-hybrid-page .selected-work-explorer .selected-work-case:has(.selected-work-podcast-link) .selected-work-case-copy{
+    padding-top:16px!important;
+  }
+}
