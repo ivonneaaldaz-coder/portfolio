@@ -50,3 +50,5 @@ The previous address `portfolio.ivonnealdaz.com` is no longer the primary portfo
 ---
 
 © Ivonne Aldaz.
+
+<!-- Deployment safeguard verification: 2026-11-03. Documentation-only change. -->
