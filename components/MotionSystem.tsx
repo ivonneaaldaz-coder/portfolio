@@ -28,6 +28,16 @@ const SELECTORS = [
   ".travel-page .travel-photo",
   ".selected-work-company-section",
   ".selected-work-projects",
+  ".selected-work-project-preview",
+  ".selected-work-project-description",
+  ".selected-work-brand-heading",
+  ".selected-work-brand-grid > button",
+  ".selected-work-case-visual",
+  ".selected-work-case-copy",
+  ".overview-press-row",
+  ".overview-writing-row",
+  ".overview-writing-head",
+  ".overview-inline-expand",
   ".site-main > :not(.home-minimal) .gallery > .work",
   ".site-main > :not(.home-minimal) .travel-gallery > *",
   ".site-main > :not(.home-minimal) .books-grid > *",
@@ -91,7 +101,27 @@ export default function MotionSystem() {
 
     targets.forEach((el) => observer.observe(el));
 
-    return () => observer.disconnect();
+    // Brand and project previews change after initial render.
+    const dynamicSelectors = ".selected-work-case-visual,.selected-work-case-copy,.selected-work-project-preview,.selected-work-project-description,.overview-press-row,.overview-writing-row";
+    const observed = new WeakSet<HTMLElement>(targets);
+    const mutations = new MutationObserver(records => {
+      for (const record of records) for (const node of Array.from(record.addedNodes)) {
+        if (!(node instanceof HTMLElement)) continue;
+        const additions = [
+          ...(node.matches(dynamicSelectors) ? [node] : []),
+          ...Array.from(node.querySelectorAll<HTMLElement>(dynamicSelectors))
+        ];
+        additions.forEach((el, index) => {
+          if (observed.has(el) || el.closest(".home-minimal")) return;
+          observed.add(el);
+          el.classList.add("reveal-target");
+          el.style.setProperty("--reveal-delay", String(Math.min(index * 55, 165)) + "ms");
+          observer.observe(el);
+        });
+      }
+    });
+    pageRoots.forEach(root => mutations.observe(root, {childList:true,subtree:true}));
+    return () => { observer.disconnect(); mutations.disconnect(); };
   }, [pathname]);
 
   return null;
