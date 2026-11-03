@@ -42,13 +42,14 @@ export default function MotionSystem() {
         if (seen.has(el)) continue;
         seen.add(el);
         const delay = Number(el.dataset.motionDelay || "0");
-        el.animate(
+        const animation = el.animate(
           [{ opacity: 0, transform: "translate3d(0, 14px, 0)" },
            { opacity: 1, transform: "translate3d(0, 0, 0)" }],
           { duration: 740, delay, easing: "cubic-bezier(.22,1,.36,1)", fill: "both" }
-        ).finished.catch(() => {}).finally(() => {
-          // Clear fill to preserve hover transforms and existing interactions.
-          el.getAnimations().filter(a => a.playState === "finished").forEach(a => a.cancel());
+        );
+        animation.finished.catch(() => {}).finally(() => {
+          // Clear only this reveal animation, preserving hover and other effects.
+          animation.cancel();
         });
       }
     }, { threshold: 0.08, rootMargin: "0px 0px -5% 0px" });
