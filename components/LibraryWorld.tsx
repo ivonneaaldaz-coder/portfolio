@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useRef, useState } from "react";
 import Modal from "./Modal";
 import Link from "next/link";
 
@@ -89,6 +89,8 @@ export default function LibraryWorld({ driveBooks = [] }: { driveBooks?: {name:s
     index,
   }));
 
+  const touchStart = useRef<{x:number;y:number}|null>(null);
+  const moveBook = (direction:number) => setSelected(current => (current + direction + books.length) % books.length);
   const [view,setView] = useState<"books"|"quotes">("books");
   const [bookOpen, setBookOpen] = useState(false);
   const [selected,setSelected] = useState(0);
@@ -151,14 +153,16 @@ export default function LibraryWorld({ driveBooks = [] }: { driveBooks?: {name:s
         </div>
       )}
       {bookOpen && activeBook ? (
-        <Modal className="book-dialog" label={activeBook.title} onClose={() => setBookOpen(false)}>
+        <Modal className="book-dialog" label={activeBook.title} onClose={() => setBookOpen(false)} onKeyDown={event => { if(event.key === "ArrowLeft") moveBook(-1); if(event.key === "ArrowRight") moveBook(1); }}>
           <button type="button" className="book-dialog-close" onClick={() => setBookOpen(false)} aria-label="Close book details">×</button>
-          <img src={activeBook.image} alt="" />
+          <div className="book-dialog-swipe" style={{touchAction:"pan-y"}} onTouchStart={e=>{const t=e.touches[0];touchStart.current={x:t.clientX,y:t.clientY}}} onTouchEnd={e=>{const a=touchStart.current;touchStart.current=null;if(!a)return;const t=e.changedTouches[0];const dx=t.clientX-a.x,dy=t.clientY-a.y;if(Math.abs(dx)>45&&Math.abs(dx)>Math.abs(dy)*1.2)moveBook(dx<0?1:-1)}}><img src={activeBook.image} alt="" /></div>
           <div className="book-detail">
             <p className="book-author">{activeBook.author}</p>
             <h2>{activeBook.title}</h2>
+            <p className="book-why-label">Why I picked this</p><p className="book-why-note">Personal note coming soon.</p>
             {activeBook.href ? <a href={activeBook.href} target="_blank" rel="noreferrer">View book ↗︎</a> : null}
           </div>
+          <nav className="book-dialog-navigation" aria-label="Browse books"><button type="button" onClick={()=>moveBook(-1)} aria-label="Previous book">←</button><span>{safeSelected+1} / {books.length} · Swipe to explore</span><button type="button" onClick={()=>moveBook(1)} aria-label="Next book">→</button></nav>
         </Modal>
       ) : null}
     </div>
