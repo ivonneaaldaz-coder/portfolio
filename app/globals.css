@@ -11337,3 +11337,18 @@ html body::before, html body::after { content:none!important;display:none!import
     pointer-events:none;
   }
 }
+
+/* Nov 4: align the About divider with the other top-level mobile nav rows.
+   Keep the contact section's position unchanged; add breathing room below socials. */
+@media(max-width:900px){
+  .mobile-nav .mobile-menu .mobile-menu-links>a:last-child{
+    border-bottom:1px solid var(--line)!important;
+  }
+  .mobile-nav .mobile-menu .mobile-menu-footer::before{
+    content:none!important;
+    display:none!important;
+  }
+  .mobile-nav .mobile-menu{
+    padding-bottom:64px!important;
+  }
+}
