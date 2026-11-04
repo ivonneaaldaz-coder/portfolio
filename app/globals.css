@@ -11364,3 +11364,21 @@ html body::before, html body::after { content:none!important;display:none!import
 }
 .music-tracklist-hint span{display:inline-block;margin-left:4px;}
 @media(max-width:900px){.music-tracklist-body{max-height:142px!important;}}
+
+/* Single Spotify profile destination; keep playlist navigation on-site. */
+.music-page .playlist-picker-heading>a{
+  margin-left:auto;
+  color:var(--muted);
+  font-size:10px;
+  font-weight:400;
+  letter-spacing:.06em;
+  text-transform:uppercase;
+  white-space:nowrap;
+  text-decoration:none;
+}
+.music-page .playlist-picker-heading>a:hover{text-decoration:underline;text-underline-offset:3px;}
+@media(max-width:900px){
+  .music-page .playlist-picker-heading{flex-wrap:wrap!important;}
+  .music-page .playlist-picker-heading>a{order:2;}
+  .music-page .playlist-swipe-hint{order:3;flex-basis:100%;text-align:left;}
+}
