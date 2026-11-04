@@ -123,15 +123,16 @@ export function MusicProvider({ children }:{ children:React.ReactNode }) {
     if (!controller || !readyRef.current || !pending) return;
     try {
       requestedRef.current = pending;
-      // Issue the Play command in the same user gesture as Next/Previous.
-      // Spotify's iframe API queues it during loadEntity; deferring Play until
-      // the new iframe emits ready loses the gesture on mobile Safari.
-      // The pending request is consumed first so ready never duplicates Play.
-      pendingRef.current = null;
       if (loadedUriRef.current !== pending.uri) {
+        // loadEntity replaces the iframe document. Do not enqueue Play in the
+        // SDK's timer-based loading queue: retain one cancellable intent here.
+        readyRef.current = false;
         loadedUriRef.current = pending.uri;
         controller.loadEntity(pending.uri);
+        return;
       }
+      // Consume before calling the SDK, so repeated ready events cannot replay.
+      pendingRef.current = null;
       if (shouldContinueRef.current) controller.play();
     } catch (error) {
       console.warn("Spotify playback request failed", error);
