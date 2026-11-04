@@ -16,6 +16,18 @@ const knownBooks: Record<string,{ title:string; author:string; href:string|null 
   "9.png": { title:"Stillness Is the Key", author:"Ryan Holiday", href:null },
 };
 
+const bookNotes: Record<string,{summary:string;why:string}> = {
+ "1.png":{summary:"A fable about a shepherd following a dream and learning to recognize what matters along the way.",why:"A reminder to trust curiosity and keep moving toward the life you want."},
+ "2.png":{summary:"Four practical principles for questioning assumptions, communicating clearly, and taking things less personally.",why:"A useful reset for how we speak to ourselves and to others."},
+ "3.png":{summary:"A creative recovery guide built around daily writing, attention, and small acts of making.",why:"Permission to create before everything feels figured out."},
+ "4.png":{summary:"An examination of power, influence, and the patterns behind strategic behavior.",why:"An interesting lens on human motives and social dynamics."},
+ "5.png":{summary:"Rick Rubin explores creativity as a way of noticing and engaging with the world, not just producing work.",why:"A reminder that creative practice starts with paying attention."},
+ "6.png":{summary:"A practical framework for building habits through small, repeatable changes to your environment and routines.",why:"The idea that consistency can matter more than intensity."},
+ "7.png":{summary:"A reflection on ego, awareness, and the possibility of living with more presence.",why:"An invitation to notice the stories we tell ourselves."},
+ "8.png":{summary:"Daily reflections inspired by Stoic philosophy, focused on judgment, resilience, and intentional action.",why:"A small dose of perspective for ordinary days."},
+ "9.png":{summary:"An exploration of stillness as a source of clarity, discipline, and better decisions.",why:"A counterweight to the pressure to always be doing more."},
+};
+
 const quotes = [
   {
     quote:"Two roads diverged in a wood, and I—\nI took the one less traveled by,\nAnd that has made all the difference.",
@@ -86,6 +98,8 @@ export default function LibraryWorld({ driveBooks = [] }: { driveBooks?: {name:s
     title:knownBooks[file.name]?.title ?? file.name.replace(/\.[^.]+$/, "").replace(/[-_]+/g," "),
     author:knownBooks[file.name]?.author ?? "From the shelf",
     href:knownBooks[file.name]?.href ?? null,
+    summary:bookNotes[file.name]?.summary ?? "",
+    why:bookNotes[file.name]?.why ?? "",
     index,
   }));
 
@@ -127,6 +141,8 @@ export default function LibraryWorld({ driveBooks = [] }: { driveBooks?: {name:s
             <aside className="book-detail">
               <p className="book-author">{activeBook.author}</p>
               <h2>{activeBook.title}</h2>
+              {activeBook.summary ? <p className="book-summary">{activeBook.summary}</p> : null}
+              {activeBook.why ? <><p className="book-why-label">Why it’s on the shelf</p><p className="book-why-note">{activeBook.why}</p></> : null}
               {activeBook.href ? <a href={activeBook.href} target="_blank" rel="noreferrer">View book ↗︎</a> : null}
             </aside>
           ) : null}
@@ -159,7 +175,8 @@ export default function LibraryWorld({ driveBooks = [] }: { driveBooks?: {name:s
           <div className="book-detail">
             <p className="book-author">{activeBook.author}</p>
             <h2>{activeBook.title}</h2>
-            <p className="book-why-label">Why I picked this</p><p className="book-why-note">Personal note coming soon.</p>
+            {activeBook.summary ? <p className="book-summary">{activeBook.summary}</p> : null}
+            {activeBook.why ? <><p className="book-why-label">Why it’s on the shelf</p><p className="book-why-note">{activeBook.why}</p></> : null}
             {activeBook.href ? <a href={activeBook.href} target="_blank" rel="noreferrer">View book ↗︎</a> : null}
           </div>
           <nav className="book-dialog-navigation" aria-label="Browse books"><button type="button" onClick={()=>moveBook(-1)} aria-label="Previous book">←</button><span>{safeSelected+1} / {books.length} · Swipe to explore</span><button type="button" onClick={()=>moveBook(1)} aria-label="Next book">→</button></nav>
