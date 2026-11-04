@@ -11070,3 +11070,98 @@ html body::before, html body::after { content:none!important;display:none!import
 @media(prefers-reduced-motion:reduce){
   .page-enter,.reveal-target{transition:none!important;opacity:1!important;transform:none!important}
 }
+
+/* Nov 3 mobile polish: a continuous, single-cell grid border system.
+   Grid gap draws every divider consistently, including the outside edges. */
+.work-hybrid-page .selected-work-explorer .selected-work-brand-grid{
+  display:grid!important;
+  grid-template-columns:repeat(5,minmax(0,1fr))!important;
+  gap:1px!important;
+  padding:1px!important;
+  border:0!important;
+  background:var(--line)!important;
+  overflow:hidden!important;
+}
+.work-hybrid-page .selected-work-explorer .selected-work-brand-grid>button,
+.work-hybrid-page .selected-work-explorer .selected-work-brand-grid>.selected-work-brand-toggle{
+  order:0!important;
+  border:0!important;
+  box-shadow:none!important;
+  background:var(--bg)!important;
+  min-width:0!important;
+}
+.work-hybrid-page .selected-work-explorer .selected-work-brand-grid>.selected-work-brand-toggle{
+  order:999!important;
+  padding:0!important;
+  min-height:78px!important;
+}
+.work-hybrid-page .selected-work-explorer .selected-work-brand-grid>button.active{
+  background:rgba(140,140,140,.18)!important;
+}
+.work-hybrid-page .selected-work-explorer .selected-work-brand-grid>.selected-work-brand-toggle>.selected-work-more-brands{
+  min-height:78px!important;
+  width:100%!important;
+}
+@media(max-width:900px){
+ .work-hybrid-page .selected-work-explorer .selected-work-brand-grid{
+   grid-template-columns:repeat(2,minmax(0,1fr))!important;
+ }
+ .work-hybrid-page .selected-work-explorer .selected-work-brand-grid>button{
+   border:0!important;
+   order:0!important;
+ }
+ .work-hybrid-page .selected-work-explorer .selected-work-brand-grid>.selected-work-brand-toggle{
+   order:999!important;
+   border:0!important;
+ }
+}
+/* A real capsule, not a square CTA, on both breakpoints. */
+.site-main>.site-footer .footer-subscribe-link,
+.editorial-footer .footer-subscribe-link{
+  border-radius:999px!important;
+  padding:13px 25px!important;
+  justify-content:center!important;
+}
+.pinterest-reference-page .pinterest-filter-hint{
+  margin-bottom:clamp(26px,4vw,44px)!important;
+}
+/* Center the entire two-line copy block, rather than using unequal optical padding. */
+.about-editorial-feature .about-editorial-cards>a,
+.about-editorial-feature .about-editorial-cards>.building-card{
+  display:flex!important;
+  flex-direction:column!important;
+  align-items:stretch!important;
+  justify-content:center!important;
+  gap:clamp(20px,3vw,28px)!important;
+  padding-top:30px!important;
+  padding-bottom:30px!important;
+}
+@media(min-width:781px){
+ .about-editorial-feature .about-editorial-cards>a,
+ .about-editorial-feature .about-editorial-cards>.building-card{
+   display:flex!important;
+   grid-template-rows:none!important;
+ }
+}
+.mobile-nav .mobile-group-trigger{
+  display:flex!important;
+  align-items:center!important;
+  justify-content:space-between!important;
+  min-height:58px!important;
+  line-height:1.2!important;
+}
+.mobile-nav .mobile-group-trigger .mobile-disclosure-arrow{
+  display:inline-flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  width:24px!important;
+  height:24px!important;
+  line-height:1!important;
+  flex:0 0 24px!important;
+}
+.book-dialog .book-dialog-swipe{width:100%;display:flex;justify-content:center}
+.book-dialog .book-dialog-swipe img{max-width:100%;height:auto;max-height:42vh;object-fit:contain}
+.book-dialog .book-why-label{font-size:11px;letter-spacing:.11em;text-transform:uppercase;color:var(--muted);margin:22px 0 7px}
+.book-dialog .book-why-note{font-size:13px;color:var(--muted);line-height:1.5;margin:0 0 16px}
+.book-dialog .book-dialog-navigation{display:flex;justify-content:space-between;align-items:center;gap:12px;padding-top:18px;color:var(--muted);font-size:11px}
+.book-dialog .book-dialog-navigation button{border:1px solid var(--line);border-radius:50%;background:transparent;color:var(--ink);height:40px;width:40px;flex:0 0 40px;font-size:19px}
