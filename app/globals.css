@@ -11332,3 +11332,22 @@ html body::before, html body::after { content:none!important;display:none!import
   text-transform:uppercase!important;
   color:var(--muted)!important;
 }
+
+/* Mobile expanded books: quieter image-to-copy transition and room below controls. */
+@media(max-width:900px){
+  .library-page .book-dialog{
+    padding-bottom:clamp(46px,7vh,64px)!important;
+  }
+  .library-page .book-dialog .book-detail{
+    border-top:0!important;
+  }
+  .library-page .book-dialog .book-dialog-swipe-area{
+    border-bottom:0!important;
+  }
+  .library-page .book-dialog .book-dialog-swipe{
+    border-bottom:0!important;
+  }
+  .library-page .book-dialog .book-dialog-navigation{
+    margin-bottom:4px!important;
+  }
+}
