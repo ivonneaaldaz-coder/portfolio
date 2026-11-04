@@ -86,7 +86,7 @@ export default function GlobalMusicControls() {
         /* The two-bar pause glyph renders much heavier than the play triangle
            in mobile Safari. Scale only the glyph, never its tap target. */
         @media(max-width:900px) {
-          .global-music.global-music-restored button.global-music-play .music-mobile-symbol {
+          .global-music.global-music-restored button.global-music-play[data-playing="true"] .music-mobile-symbol {
             font-size:12px!important;
             letter-spacing:-3px!important;
             line-height:1;
@@ -115,7 +115,7 @@ export default function GlobalMusicControls() {
           {music.artworkUrl ? <img src={music.artworkUrl} alt="" /> : <span />}
         </Link>
         <button type="button" onClick={music.previous} aria-label="Previous song" className="global-music-step">←</button>
-        <button type="button" onClick={music.toggle} aria-label={music.isPaused ? "Play music" : "Pause music"} className="global-music-play">
+        <button type="button" onClick={music.toggle} aria-label={music.isPaused ? "Play music" : "Pause music"} className="global-music-play" data-playing={!music.isPaused}>
           <span aria-hidden="true"><span className="music-desktop-symbol">{music.isPaused ? "▸" : "▌▌"}</span><span className="music-mobile-symbol">{music.isPaused ? "▸" : "▌▌"}</span></span>
         </button>
         <button type="button" onClick={music.next} aria-label="Next song" className="global-music-step">→</button>
