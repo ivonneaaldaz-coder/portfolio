@@ -83,6 +83,14 @@ export default function GlobalMusicControls() {
           touch-action:manipulation;
         }
         .global-music.global-music-restored button.global-music-play {font-size:17px!important}
+        /* The two-bar pause glyph renders much heavier than the play triangle
+           in mobile Safari. Scale only the glyph, never its tap target. */
+        .global-music.global-music-restored button.global-music-play .music-mobile-symbol {
+          font-size:12px!important;
+          letter-spacing:-3px!important;
+          display:inline-block;
+          line-height:1;
+        }
         .global-music.global-music-restored button:focus:not(:focus-visible) {
           outline:none;
         }
