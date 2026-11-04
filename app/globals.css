@@ -11442,3 +11442,70 @@ html body::before, html body::after { content:none!important;display:none!import
     white-space:nowrap;
   }
 }
+
+/* Nov 4: compact editorial music list, clear section rhythm, and Spotify link. */
+.music-page .music-tracklist-hint{
+  text-transform:none!important;
+  letter-spacing:.02em!important;
+  font-size:11px!important;
+}
+.music-page .music-console{margin-bottom:34px!important;}
+.music-page .playlist-picker-heading{margin-bottom:18px!important;}
+.music-page .playlist-picker-heading .playlist-swipe-hint{
+  display:inline!important;
+  flex:0 0 auto!important;
+  order:0!important;
+  margin-left:auto!important;
+  text-align:right!important;
+  white-space:nowrap!important;
+}
+.music-page .music-spotify-follow{
+  display:flex;
+  justify-content:flex-end;
+  padding-top:22px;
+}
+.music-page .music-spotify-follow>a{
+  color:var(--muted);
+  font-size:11px;
+  font-weight:400;
+  letter-spacing:.04em;
+  text-transform:none;
+  text-decoration:none;
+}
+.music-page .music-spotify-follow>a:hover{text-decoration:underline;text-underline-offset:3px;}
+@media(max-width:900px){
+  .music-page .music-console{margin-bottom:36px!important;}
+  .music-page .music-tracklist-body{max-height:144px!important;}
+  .music-page .music-tracklist-head,
+  .music-page .music-track-row{
+    grid-template-columns:28px minmax(0,1fr) minmax(0,38%)!important;
+    column-gap:12px!important;
+  }
+  .music-page .music-tracklist-head span:last-child{display:block!important;}
+  .music-page .music-track-row{
+    grid-template-rows:auto!important;
+    min-height:48px!important;
+    padding:10px!important;
+    align-items:center!important;
+  }
+  .music-page .music-track-row>span{grid-column:1!important;grid-row:1!important;}
+  .music-page .music-track-row>strong{
+    grid-column:2!important;grid-row:1!important;
+    overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
+  }
+  .music-page .music-track-row>em{
+    display:block!important;
+    grid-column:3!important;grid-row:1!important;
+    overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
+    font-size:11px!important;
+    color:var(--muted)!important;
+    font-style:normal;
+  }
+  .music-page .playlist-picker-heading{flex-wrap:nowrap!important;align-items:baseline!important;}
+  .music-page .playlist-picker-heading>.playlist-swipe-hint{
+    flex:0 0 auto!important;
+    order:0!important;
+    margin-left:auto!important;
+    text-align:right!important;
+  }
+}
