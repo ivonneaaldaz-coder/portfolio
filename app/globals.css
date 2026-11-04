@@ -11318,3 +11318,17 @@ html body::before, html body::after { content:none!important;display:none!import
     padding-bottom:max(64px,env(safe-area-inset-bottom) + 48px)!important;
   }
 }
+
+/* Books: one editorial metadata treatment for author and shelf rationale. */
+.library-page .book-detail .book-author,
+.library-page .book-detail .book-why-label,
+.library-page .book-dialog .book-detail .book-author,
+.library-page .book-dialog .book-detail .book-why-label{
+  font-family:inherit!important;
+  font-size:11px!important;
+  font-weight:400!important;
+  line-height:1.5!important;
+  letter-spacing:.1em!important;
+  text-transform:uppercase!important;
+  color:var(--muted)!important;
+}
