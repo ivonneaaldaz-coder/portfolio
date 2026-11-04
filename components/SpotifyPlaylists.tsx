@@ -69,6 +69,9 @@ export default function SpotifyPlaylists() {
               <div className="music-tracklist-empty">Tracks are loading…</div>
             )}
           </div>
+          {(selected?.tracks?.length ?? 0) > 3 && (
+            <p className="music-tracklist-hint">Scroll to explore tracks <span aria-hidden="true">↓</span></p>
+          )}
         </div>
       </div>
 
