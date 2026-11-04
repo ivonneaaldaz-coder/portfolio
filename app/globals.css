@@ -11351,3 +11351,16 @@ html body::before, html body::after { content:none!important;display:none!import
     margin-bottom:4px!important;
   }
 }
+
+/* Books metadata: author in natural title case; shelf label uppercase with the
+   author's restrained tracking, on desktop and mobile alike. */
+.library-page .book-detail .book-author,
+.library-page .book-dialog .book-detail .book-author{
+  text-transform:none!important;
+  letter-spacing:.1em!important;
+}
+.library-page .book-detail .book-why-label,
+.library-page .book-dialog .book-detail .book-why-label{
+  text-transform:uppercase!important;
+  letter-spacing:.1em!important;
+}
