@@ -11181,3 +11181,41 @@ html body::before, html body::after { content:none!important;display:none!import
     margin-top:-20px!important;
   }
 }
+
+/* Optical alignment: draw a restrained cross centered in the same
+   20px box as the text row, instead of relying on the font's + glyph. */
+@media(max-width:900px){
+ .mobile-nav .mobile-menu-links .mobile-group-trigger{
+   display:flex!important;
+   align-items:center!important;
+   justify-content:space-between!important;
+   line-height:1.25!important;
+ }
+ .mobile-nav .mobile-menu-links .mobile-disclosure-arrow{
+   position:relative!important;
+   display:block!important;
+   width:20px!important;
+   height:20px!important;
+   flex:0 0 20px!important;
+   font-size:0!important;
+   line-height:0!important;
+   transform:none!important;
+ }
+ .mobile-nav .mobile-menu-links .mobile-disclosure-arrow::before,
+ .mobile-nav .mobile-menu-links .mobile-disclosure-arrow::after{
+   content:""!important;
+   position:absolute!important;
+   display:block!important;
+   background:currentColor!important;
+   border-radius:1px!important;
+   top:50%!important;
+   left:50%!important;
+   transform:translate(-50%,-50%)!important;
+ }
+ .mobile-nav .mobile-menu-links .mobile-disclosure-arrow::before{
+   width:15px!important;height:1.5px!important;
+ }
+ .mobile-nav .mobile-menu-links .mobile-disclosure-arrow::after{
+   width:1.5px!important;height:15px!important;
+ }
+}
