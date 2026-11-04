@@ -6,7 +6,7 @@ import { getPinterestPins } from "@/lib/pinterest";
 export const revalidate = 900;
 
 export default async function VisualReferencesPage() {
-  const pins = await getPinterestPins(144);
+  const pins = await getPinterestPins(500);
 
   return (
     <section className="page section-pad visual-index-page pinterest-reference-page">
