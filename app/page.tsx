@@ -4,8 +4,8 @@ import HomeWatercolorTrace from "@/components/HomeWatercolorTrace";
 import HomeScrollPosition from "@/components/HomeScrollPosition";
 
 export const metadata = {
-  ...pageMetadata("Ivonne Aldaz — Strategist, artist, builder", "Ivonne Aldaz. Strategist, artist, builder. Explore work and play.", "/"),
-  title: { absolute: "Ivonne Aldaz — Strategist, artist, builder" },
+  ...pageMetadata("Ivonne Aldaz | Marketing Strategist & Creative Leader", "Ivonne Aldaz is a marketing strategist, creative leader, and artist. Explore brand strategy, marketing campaigns, creative projects, and selected work.", "/"),
+  title: { absolute: "Ivonne Aldaz | Marketing Strategist & Creative Leader" },
 };
 
 export default function OverviewPage() {
