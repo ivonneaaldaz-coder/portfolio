@@ -11304,3 +11304,36 @@ html body::before, html body::after { content:none!important;display:none!import
    text-align:left!important;
  }
 }
+
+
+/* Nov 4: book-card hierarchy and mobile navigation separator refinements. */
+.book-detail .book-author,
+.book-dialog .book-detail .book-author{
+  text-transform:none!important;
+  letter-spacing:.1em!important;
+}
+.book-detail .book-why-label,
+.book-dialog .book-detail .book-why-label{
+  text-transform:uppercase!important;
+  letter-spacing:.1em!important;
+}
+@media(max-width:900px){
+  /* The image-to-copy divider comes from the shared .book-detail border. */
+  .book-dialog .book-detail{
+    border-top:0!important;
+  }
+  /* Move only the divider nearer About; preserve the email's current position. */
+  .mobile-nav .mobile-menu .mobile-menu-footer{
+    position:relative!important;
+    border-top:0!important;
+  }
+  .mobile-nav .mobile-menu .mobile-menu-footer::before{
+    content:"";
+    position:absolute;
+    top:-14px;
+    left:0;
+    right:0;
+    border-top:1px solid var(--line);
+    pointer-events:none;
+  }
+}
