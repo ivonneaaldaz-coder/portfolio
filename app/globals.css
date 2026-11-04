@@ -11280,3 +11280,27 @@ html body::before, html body::after { content:none!important;display:none!import
    line-height:1.4!important;
  }
 }
+
+/* Interior page openings: reserve clear space beneath the fixed navigation. */
+.travel-page .travel-page-opening,
+.art-v11 .art-v11-opening{
+  scroll-margin-top:clamp(100px,12vh,150px)!important;
+}
+@media(min-width:901px){
+ .home-minimal .home-proof{
+   display:flex!important;
+   flex-direction:row!important;
+   flex-wrap:nowrap!important;
+   justify-content:center!important;
+   align-items:baseline!important;
+   gap:14px!important;
+ }
+ .home-minimal .home-proof .home-proof-label,
+ .home-minimal .home-proof .home-proof-brands{
+   display:inline-block!important;
+   margin:0!important;
+   line-height:1.6!important;
+   vertical-align:baseline!important;
+   text-align:left!important;
+ }
+}
