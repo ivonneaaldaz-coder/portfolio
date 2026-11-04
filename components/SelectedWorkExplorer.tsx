@@ -35,7 +35,7 @@ export default function SelectedWorkExplorer({compact=false}:Props){
  const caseTouchRef=useRef<{x:number;y:number}|null>(null);
  const caseBrands=featuredBrands.filter(b=>Boolean(cases[b]));
  const changeBrandBySwipe=(direction:number)=>{const index=caseBrands.indexOf(brand||"");const next=caseBrands[(Math.max(0,index)+direction+caseBrands.length)%caseBrands.length];setBrand(next);setPinned(next)};
- const changeProject=(next:number)=>{const index=(next+projects.length)%projects.length;setProject(index);const buttons=projectScrollRef.current?.querySelectorAll("button");buttons?.[index]?.scrollIntoView({behavior:"smooth",block:"nearest",inline:"nearest"})};
+ const changeProject=(next:number)=>{const index=(next+projects.length)%projects.length;setProject(index);const buttons=projectScrollRef.current?.querySelectorAll("button");buttons?.[index]?.scrollIntoView({behavior:window.matchMedia("(prefers-reduced-motion: reduce)").matches?"instant":"smooth",block:"nearest",inline:"nearest"})};
  const projectScrollFrameRef=useRef<number|null>(null);
  const syncProjectFromScroll=()=>{
    if(projectScrollFrameRef.current!==null)cancelAnimationFrame(projectScrollFrameRef.current);

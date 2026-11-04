@@ -100,7 +100,7 @@ export default function GlobalMusicControls() {
         </Link>
         <button type="button" onClick={music.previous} aria-label="Previous song" className="global-music-step">←</button>
         <button type="button" onClick={music.toggle} aria-label={music.isPaused ? "Play music" : "Pause music"} className="global-music-play">
-          <span aria-hidden="true"><span className="music-desktop-symbol">{music.isPaused ? "▶" : "Ⅱ"}</span><span className="music-mobile-symbol">{music.isPaused ? "▶︎" : "Ⅱ"}</span></span>
+          <span aria-hidden="true"><span className="music-desktop-symbol">{music.isPaused ? "▸" : "▌▌"}</span><span className="music-mobile-symbol">{music.isPaused ? "▸" : "▌▌"}</span></span>
         </button>
         <button type="button" onClick={music.next} aria-label="Next song" className="global-music-step">→</button>
         <Link href="/music" className="global-music-track" title={label}>{label}</Link>

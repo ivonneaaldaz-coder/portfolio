@@ -12,6 +12,7 @@ export default function MobileNav() {
   const [workOpen, setWorkOpen] = useState(false);
   const [playOpen, setPlayOpen] = useState(false);
   const closingRef = useRef(false);
+  const menuTriggerRef = useRef<HTMLButtonElement>(null);
   const resetGroups = () => { setWorkOpen(false); setPlayOpen(false); };
   const router = useRouter();
   const pathname = usePathname();
@@ -35,7 +36,7 @@ export default function MobileNav() {
     event.preventDefault();
     const current = pathname;
     const destination = href.split("#")[0];
-    if (current === destination && !href.includes("#")) window.scrollTo({top:0,behavior:"smooth"});
+    if (current === destination && !href.includes("#")) window.scrollTo({top:0,behavior:window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "instant" : "smooth"});
     else router.push(href);
     setMenuOpen(false);
     resetGroups();
@@ -53,11 +54,16 @@ export default function MobileNav() {
   };
 
   return (
-    <header className="mobile-nav">
+    <header className="mobile-nav" onKeyDown={(event) => {
+      if (event.key === "Escape" && menuOpen) {
+        event.preventDefault();
+        animateClose(() => menuTriggerRef.current?.focus());
+      }
+    }}>
       <Link className="brand" href="/" onClick={(event) => go(event, "/")}>IVONNE ALDAZ</Link>
       <div className="mobile-header-actions">
         <div className={`mobile-menu-root${closing ? " is-closing" : ""}${menuOpen ? " is-open" : ""}`}>
-        <button type="button" className="mobile-menu-trigger" aria-expanded={menuOpen} onClick={toggleMenu}>{menuOpen ? "Close" : "Menu"}</button>
+        <button ref={menuTriggerRef} type="button" className="mobile-menu-trigger" aria-expanded={menuOpen} onClick={toggleMenu}>{menuOpen ? "Close" : "Menu"}</button>
         {menuOpen && <div className="mobile-menu">
           <nav className="mobile-menu-links">
             <Link href="/" onClick={(event) => go(event, "/")}>Home</Link>

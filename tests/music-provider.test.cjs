@@ -32,7 +32,8 @@ async function setup({ readyAPI = true, delayedController = false, sharedTrack =
       iframe, calls:[], destroyed:false,
       loadEntity(uri) { this.calls.push(['load', uri]); },
       play() { this.calls.push(['play']); },
-      togglePlay() { this.calls.push(['toggle']); },
+      pause() { this.calls.push(['pause']); },
+      resume() { this.calls.push(['resume']); },
       addListener(name, handler) {
         assert.equal(listeners.has(name), false, 'No duplicate listener registrations');
         listeners.set(name, handler);
@@ -93,7 +94,7 @@ test('early requests wait for ready; only Spotify events can claim playing', asy
     assert.equal(h.globalMusic, h.music);
     await h.action(() => h.globalMusic.toggle());
     assert.equal(h.music.isPaused, false, 'Pause also waits for an actual event');
-    assert.deepEqual(c.calls.at(-1), ['toggle']);
+    assert.deepEqual(c.calls.at(-1), ['pause']);
     await h.action(() => c.emit('playback_update', { isPaused:true, position:5000, duration:30000 }));
     assert.equal(h.music.isPaused, true);
     assert.equal(h.music.position, 5000);
@@ -172,5 +173,104 @@ test('first tap plays the prepared track without navigating the iframe', async (
     await h.action(() => h.music.toggle());
     assert.deepEqual(c.calls, [['play']], 'First gesture must not reload the entity');
     assert.equal(h.music.isPaused, true, 'Still wait for Spotify confirmation');
+  } finally { await h.cleanup(); }
+});
+
+test('paused and repeated ready events never retry Play or restart an interrupted session', async () => {
+  const h = await setup();
+  try {
+    const c = h.controllers[0];
+    await h.action(() => c.emit('ready', {}));
+    await h.action(() => h.music.toggle());
+    c.calls.length = 0;
+    await h.action(() => c.emit('ready', {}));
+    await h.action(() => c.emit('playback_update', {playingURI:'spotify:track:0-0',isPaused:true,isBuffering:false,position:0,duration:30000}));
+    assert.deepEqual(c.calls, [], 'Autoplay denial must not trigger retries');
+    assert.equal(h.music.isPaused, true);
+    await h.action(() => h.music.toggle());
+    assert.deepEqual(c.calls, [['resume']], 'The next user gesture explicitly resumes');
+    await h.action(() => c.emit('playback_update', {playingURI:'spotify:track:0-0',isPaused:false,position:5000,duration:30000}));
+    c.calls.length = 0;
+    await h.action(() => c.emit('playback_update', {playingURI:'spotify:track:0-0',isPaused:true,isBuffering:false,position:5000,duration:30000}));
+    assert.deepEqual(c.calls, [], 'An external pause must remain paused');
+  } finally { await h.cleanup(); }
+});
+
+test('rapid track changes ignore stale starts, progress, paused and completion events', async () => {
+  const h = await setup();
+  try {
+    const c = h.controllers[0];
+    await h.action(() => c.emit('ready', {}));
+    await h.action(() => h.music.playTrack(0,0));
+    await h.action(() => c.emit('playback_update', {playingURI:'spotify:track:0-0',isPaused:false,position:5000,duration:30000}));
+    await h.action(() => { h.music.next(); h.music.next(); });
+    await h.action(() => c.emit('playback_update', {playingURI:'spotify:track:0-2',isPaused:false,position:2000,duration:30000}));
+    c.calls.length = 0;
+    await h.action(() => c.emit('playback_started', {playingURI:'spotify:track:0-1'}));
+    await h.action(() => c.emit('playback_update', {playingURI:'spotify:track:0-0',isPaused:true,isBuffering:false,position:30000,duration:30000}));
+    assert.equal(h.music.currentTrack.uri, 'spotify:track:0-2');
+    assert.equal(h.music.position, 2000);
+    assert.equal(h.music.isPaused, false);
+    assert.deepEqual(c.calls, []);
+  } finally { await h.cleanup(); }
+});
+
+test('completion advances once without replaying the ended track; explicit pause prevents advance', async () => {
+  const h = await setup();
+  try {
+    const c = h.controllers[0];
+    await h.action(() => c.emit('ready', {}));
+    await h.action(() => h.music.playTrack(0,0));
+    const end = {playingURI:'spotify:track:0-0',isPaused:true,isBuffering:false,position:30000,duration:30000};
+    c.calls.length = 0;
+    await h.action(() => c.emit('playback_update', end));
+    assert.deepEqual(c.calls, [], 'An unplayed entity at its endpoint must not skip');
+    await h.action(() => c.emit('playback_update', {...end,isPaused:false,position:29000}));
+    await h.action(() => c.emit('playback_update', {...end,position:29500}));
+    assert.deepEqual(c.calls, [], 'Pausing near the end is not completion');
+    await h.action(() => c.emit('playback_update', end));
+    await h.action(() => c.emit('playback_update', end));
+    assert.deepEqual(c.calls, [['load','spotify:track:0-1'],['play']]);
+    await h.action(() => c.emit('playback_update', {...end,playingURI:'spotify:track:0-1',isPaused:false,position:29000}));
+    await h.action(() => h.music.toggle());
+    c.calls.length = 0;
+    await h.action(() => c.emit('playback_update', {...end,playingURI:'spotify:track:0-1'}));
+    assert.deepEqual(c.calls, []);
+  } finally { await h.cleanup(); }
+});
+
+test('navigation preserves iframe, progress and playback without additional commands', async () => {
+  const h = await setup();
+  try {
+    const c = h.controllers[0];
+    await h.action(() => c.emit('ready', {}));
+    await h.action(() => h.music.toggle());
+    await h.action(() => c.emit('playback_update', {playingURI:'spotify:track:0-0',isPaused:false,position:9000,duration:30000}));
+    c.calls.length = 0;
+    for (const page of ['about','books','work','music']) await h.navigate(page);
+    assert.equal(h.controllers.length, 1);
+    assert.equal(document.querySelector('iframe'), c.iframe);
+    assert.equal(h.music.position, 9000);
+    assert.equal(h.music.isPaused, false);
+    assert.deepEqual(c.calls, []);
+  } finally { await h.cleanup(); }
+});
+
+
+test('Spotify preview endpoint advances even when its final event reports isPaused:false', async () => {
+  const h = await setup();
+  try {
+    const c = h.controllers[0];
+    await h.action(() => c.emit('ready', {}));
+    await h.action(() => h.music.toggle());
+    const progress = {playingURI:'spotify:track:0-0',isPaused:false,isBuffering:false,position:23218,duration:23706};
+    await h.action(() => c.emit('playback_update', progress));
+    c.calls.length = 0;
+    await h.action(() => c.emit('playback_update', {...progress,position:23706}));
+    await h.action(() => c.emit('playback_update', {...progress,position:23706}));
+    assert.deepEqual(c.calls, [['load','spotify:track:0-1'],['play']]);
+    assert.equal(h.music.isPaused, true, 'Next track remains paused until Spotify confirms it');
+    await h.action(() => c.emit('playback_started', {playingURI:'spotify:track:0-1'}));
+    assert.equal(h.music.isPaused, false);
   } finally { await h.cleanup(); }
 });

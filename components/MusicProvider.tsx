@@ -86,9 +86,9 @@ export function MusicProvider({ children }:{ children:React.ReactNode }) {
   const requestedRef = useRef<{playlistIndex:number;trackIndex:number;uri:string} | null>(null);
   const pendingRef = useRef<{playlistIndex:number;trackIndex:number;uri:string}|null>(null);
   const shouldContinueRef = useRef(false);
-  const retriedUriRef = useRef("");
-  const mobileStepRetryRef = useRef("");
-  const mobileStepRetryCountRef = useRef(0);
+  const confirmedUriRef = useRef("");
+  const hasProgressRef = useRef(false);
+  const playbackPausedRef = useRef(true);
   const advanceRef = useRef<() => void>(() => {});
   const lastCompletedUriRef = useRef("");
 
@@ -129,7 +129,6 @@ export function MusicProvider({ children }:{ children:React.ReactNode }) {
         loadedUriRef.current = pending.uri;
       }
       controller.play();
-      retriedUriRef.current = "";
       requestedRef.current = pending;
       pendingRef.current = null;
     } catch (error) {
@@ -153,46 +152,48 @@ export function MusicProvider({ children }:{ children:React.ReactNode }) {
         setPlayingTrack(found.trackIndex);
       }
     };
+    // loadEntity navigates the iframe. Events already queued by the old entity
+    // must never replace the selected track, progress, or transport state.
+    const acceptsEvent = (data: NonNullable<SpotifyEvent["data"]>) => {
+      const expected = requestedRef.current?.uri || loadedUriRef.current;
+      if (data.playingURI) return !expected || data.playingURI === expected;
+      return !!expected && confirmedUriRef.current === expected;
+    };
     const onStarted = (event:SpotifyEvent) => {
-      if (disposed) return;
-      syncTrack(event.data?.playingURI || "");
-      retriedUriRef.current = "";
-      // Ignore playback_started from the previous track while navigating.
-      if (event.data?.playingURI === mobileStepRetryRef.current) {
-        mobileStepRetryRef.current = "";
-        mobileStepRetryCountRef.current = 0;
-      }
+      if (disposed || !event.data || !acceptsEvent(event.data)) return;
+      const uri = event.data.playingURI || loadedUriRef.current;
+      confirmedUriRef.current = uri;
+      syncTrack(uri);
+      playbackPausedRef.current = false;
       setIsPaused(false);
       setIsBuffering(false);
     };
     const onUpdate = (event:SpotifyEvent) => {
       if (disposed) return;
       const data = event.data;
-      if (!data) return;
-      // Ignore late state events for the previous track while a new one loads.
-      const awaitingUri = mobileStepRetryRef.current;
-      if (typeof data.isPaused === "boolean" && (!awaitingUri || data.playingURI === awaitingUri)) setIsPaused(data.isPaused);
-      // Retry once when Spotify finishes loading a newly requested track
-      // but dropped the play command during iframe navigation.
-      const requested = requestedRef.current;
-      if (shouldContinueRef.current && requested && data.playingURI === requested.uri && data.isPaused === true && !data.isBuffering && retriedUriRef.current !== requested.uri) {
-        retriedUriRef.current = requested.uri;
-        try { controllerRef.current?.play(); } catch {}
+      if (!data || !acceptsEvent(data)) return;
+      const uri = data.playingURI || confirmedUriRef.current;
+      if (data.isPaused === false) {
+        confirmedUriRef.current = uri;
+        if (typeof data.position === "number" && data.position > 0) hasProgressRef.current = true;
       }
-      // On mobile, a track step can leave the new Spotify entity paused even
-      // after the initial play request. Retry once when its ready state arrives.
-      if (mobileStepRetryRef.current && requested?.uri === mobileStepRetryRef.current && data.playingURI === mobileStepRetryRef.current && data.isPaused === true && !data.isBuffering && mobileStepRetryCountRef.current < 1) {
-        mobileStepRetryCountRef.current += 1;
-        try { controllerRef.current?.play(); } catch {}
+      // Spotify previews can finish with isPaused:false. The exact reported
+      // endpoint, after confirmed progress, is authoritative for completion.
+      const completed = hasProgressRef.current && confirmedUriRef.current === uri &&
+        data.isBuffering === false && typeof data.duration === "number" && data.duration > 0 &&
+        typeof data.position === "number" && data.position >= data.duration;
+      if (typeof data.isPaused === "boolean") {
+        playbackPausedRef.current = completed || data.isPaused;
+        setIsPaused(completed || data.isPaused);
       }
       if (typeof data.isBuffering === "boolean") setIsBuffering(data.isBuffering);
       if (typeof data.position === "number") setPosition(data.position);
       if (typeof data.duration === "number") setDuration(data.duration);
       syncTrack(data.playingURI || "");
-      // Advance when Spotify reports that the current entity has ended.
-      // This does not circumvent Spotify preview-duration restrictions.
-      if (shouldContinueRef.current && data.playingURI && data.isPaused === true && !data.isBuffering && typeof data.duration === "number" && data.duration > 0 && typeof data.position === "number" && data.position >= data.duration - 750 && lastCompletedUriRef.current !== data.playingURI) {
-        lastCompletedUriRef.current = data.playingURI;
+      // A paused/loading/autoplay-denied event is not an instruction to Play.
+      // Only advance a confirmed session that actually progressed to its end.
+      if (shouldContinueRef.current && completed && uri && lastCompletedUriRef.current !== uri) {
+        lastCompletedUriRef.current = uri;
         advanceRef.current();
       }
     };
@@ -229,9 +230,6 @@ export function MusicProvider({ children }:{ children:React.ReactNode }) {
             readyRef.current = true;
             setControllerReady(true);
             executePending();
-            if (shouldContinueRef.current && requestedRef.current && !pendingRef.current) {
-              try { controller.play(); } catch {}
-            }
           });
           controller.addListener("playback_started", onStarted);
           controller.addListener("playback_update", onUpdate);
@@ -269,7 +267,9 @@ export function MusicProvider({ children }:{ children:React.ReactNode }) {
     const track = playlist.tracks[safe];
     setSelectedTrackIndex(safe);
     shouldContinueRef.current = true;
-    retriedUriRef.current = "";
+    confirmedUriRef.current = "";
+    hasProgressRef.current = false;
+    lastCompletedUriRef.current = "";
     pendingRef.current = { playlistIndex,trackIndex:safe,uri:track.uri };
 
     initializeRef.current();
@@ -304,8 +304,16 @@ export function MusicProvider({ children }:{ children:React.ReactNode }) {
     const controller = controllerRef.current;
     if (controller && readyRef.current && requestedRef.current) {
       try {
-        shouldContinueRef.current = isPaused;
-        controller.togglePlay();
+        // Explicit commands remain deterministic before React receives the next
+        // state event; toggling an unknown iframe state can invert user intent.
+        const resume = playbackPausedRef.current;
+        shouldContinueRef.current = resume;
+        if (resume) controller.resume();
+        else {
+          pendingRef.current = null;
+          earlyPlayRef.current = null;
+          controller.pause();
+        }
         return;
       } catch {}
     }
@@ -320,10 +328,6 @@ export function MusicProvider({ children }:{ children:React.ReactNode }) {
     if (!playlist?.tracks.length) return;
     const base = unconfirmed?.trackIndex ?? (playingTrack >= 0 ? playingTrack : selectedTrackIndex);
     const nextIndex = ((base + delta) % playlist.tracks.length + playlist.tracks.length) % playlist.tracks.length;
-    if (typeof window !== "undefined" && window.matchMedia("(max-width: 900px)").matches) {
-      mobileStepRetryRef.current = playlist.tracks[nextIndex].uri;
-      mobileStepRetryCountRef.current = 0;
-    }
     playTrack(playlistIndex,nextIndex);
   };
 
