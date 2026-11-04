@@ -11165,3 +11165,19 @@ html body::before, html body::after { content:none!important;display:none!import
 .book-dialog .book-why-note{font-size:13px;color:var(--muted);line-height:1.5;margin:0 0 16px}
 .book-dialog .book-dialog-navigation{display:flex;justify-content:space-between;align-items:center;gap:12px;padding-top:18px;color:var(--muted);font-size:11px}
 .book-dialog .book-dialog-navigation button{border:1px solid var(--line);border-radius:50%;background:transparent;color:var(--ink);height:40px;width:40px;flex:0 0 40px;font-size:19px}
+
+/* Mobile case-study artwork includes transparent margins in the source assets.
+   Pull the copy into that empty optical space without cropping the images. */
+@media(max-width:900px){
+  .work-hybrid-page .selected-work-explorer .selected-work-case-visual.has-media{
+    padding-bottom:0!important;
+  }
+  .work-hybrid-page .selected-work-explorer .selected-work-case-copy{
+    position:relative!important;
+    margin-top:-42px!important;
+    padding-top:12px!important;
+  }
+  .work-hybrid-page .selected-work-explorer .selected-work-case:has(.selected-work-podcast-link) .selected-work-case-copy{
+    margin-top:-20px!important;
+  }
+}
