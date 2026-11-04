@@ -75,7 +75,7 @@ export default function SpotifyPlaylists() {
         </div>
       </div>
 
-      <div className="playlist-picker-heading"><span>Choose a playlist</span><a href="https://open.spotify.com/user/ivonnealdaz" target="_blank" rel="noopener noreferrer">Follow on Spotify ↗</a><small className="playlist-swipe-hint">Swipe to explore →</small></div>
+      <div className="playlist-picker-heading"><span>Choose a playlist</span><small className="playlist-swipe-hint">Swipe to explore →</small></div>
       <div className="playlist-grid playlist-grid-live playlist-selector-grid">
         {music.playlists.map((item,index) => {
           const active = index === music.selectedIndex;
@@ -94,6 +94,7 @@ export default function SpotifyPlaylists() {
           );
         })}
       </div>
+      <div className="music-spotify-follow"><a href="https://open.spotify.com/user/ivonnealdaz" target="_blank" rel="noopener noreferrer">Follow on Spotify ↗</a></div>
     </>
   );
 }
