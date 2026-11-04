@@ -11249,3 +11249,34 @@ html body::before, html body::after { content:none!important;display:none!import
    text-size-adjust:100%;
  }
 }
+
+/* Mobile navigation hierarchy: primary destinations lead, contact stays secondary. */
+@media(max-width:900px){
+ .mobile-nav .mobile-menu .mobile-menu-footer{
+   margin-top:30px!important;
+   padding-top:34px!important;
+   border-top:1px solid var(--line)!important;
+   gap:0!important;
+ }
+ .mobile-nav .mobile-menu .mobile-menu-footer>a{
+   font-size:14px!important;
+   font-weight:400!important;
+   line-height:1.45!important;
+   letter-spacing:0!important;
+   color:var(--muted)!important;
+   margin:0 0 20px!important;
+ }
+ .mobile-nav .mobile-menu .mobile-socials{
+   display:grid!important;
+   grid-template-columns:repeat(2,minmax(0,1fr))!important;
+   gap:10px 16px!important;
+   margin:0!important;
+   padding:0!important;
+ }
+ .mobile-nav .mobile-menu .mobile-socials a{
+   min-height:0!important;
+   padding:2px 0!important;
+   font-size:13px!important;
+   line-height:1.4!important;
+ }
+}
