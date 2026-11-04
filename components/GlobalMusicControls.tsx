@@ -83,6 +83,13 @@ export default function GlobalMusicControls() {
           touch-action:manipulation;
         }
         .global-music.global-music-restored button.global-music-play {font-size:17px!important}
+        .global-music.global-music-restored button:focus:not(:focus-visible) {
+          outline:none;
+        }
+        .global-music.global-music-restored button:focus-visible {
+          outline:2px solid var(--ink);
+          outline-offset:2px;
+        }
         .global-music.global-music-restored .global-music-track {display:none!important}
         @media(max-width:900px) {
           .global-music.global-music-restored {

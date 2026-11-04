@@ -6,7 +6,7 @@ const { createRoot } = require('react-dom/client');
 const { JSDOM } = require('jsdom');
 const { MusicProvider, useMusic } = require('../components/MusicProvider.tsx');
 
-async function setup({ readyAPI = true, delayedController = false, sharedTrack = false } = {}) {
+async function setup({ readyAPI = true, delayedController = false, sharedTrack = false, delayedEntity = false } = {}) {
   const dom = new JSDOM('<div id="root"></div>', { url:'http://localhost/' });
   global.window = dom.window;
   global.document = dom.window.document;
@@ -30,7 +30,7 @@ async function setup({ readyAPI = true, delayedController = false, sharedTrack =
     const listeners = new Map();
     const controller = {
       iframe, calls:[], destroyed:false,
-      loadEntity(uri) { this.calls.push(['load', uri]); },
+      loadEntity(uri) { this.calls.push(['load', uri]); if (!delayedEntity) this.emit('ready', {}); },
       play() { this.calls.push(['play']); },
       pause() { this.calls.push(['pause']); },
       resume() { this.calls.push(['resume']); },
@@ -273,4 +273,69 @@ test('Spotify preview endpoint advances even when its final event reports isPaus
     await h.action(() => c.emit('playback_started', {playingURI:'spotify:track:0-1'}));
     assert.equal(h.music.isPaused, false);
   } finally { await h.cleanup(); }
+});
+
+async function startDelayedTrack(h) {
+  const c = h.controllers[0];
+  await h.action(() => c.emit('ready', {}));
+  await h.action(() => c.emit('ready', {}));
+  await h.action(() => h.music.toggle());
+  await h.action(() => c.emit('playback_update', {playingURI:'spotify:track:0-0',isPaused:false,isBuffering:false,position:4000,duration:30000}));
+  c.calls.length = 0;
+  return c;
+}
+
+test('track loading sends exactly one Play at ready, never through the SDK loading queue', async () => {
+  const h = await setup({delayedEntity:true});
+  try {
+    const c = await startDelayedTrack(h);
+    await h.action(() => h.music.next());
+    assert.deepEqual(c.calls, [['load','spotify:track:0-1']]);
+    await h.action(() => c.emit('playback_update', {playingURI:'spotify:track:0-0',isPaused:true,position:4000}));
+    assert.equal(h.music.isPaused,false,'Old entity cannot overwrite the transport');
+    await h.action(() => c.emit('ready', {}));
+    await h.action(() => c.emit('ready', {}));
+    assert.deepEqual(c.calls, [['load','spotify:track:0-1'],['play']]);
+    await h.action(() => c.emit('playback_update', {playingURI:'spotify:track:0-1',isPaused:true,isBuffering:false,position:0,duration:30000}));
+    assert.equal(c.calls.length,2,'Denied playback must not trigger retries');
+    assert.equal(h.music.isPaused,true);
+  } finally {await h.cleanup();}
+});
+
+test('explicit pause cancels the pending track Play before readiness', async () => {
+  const h = await setup({delayedEntity:true});
+  try {
+    const c = await startDelayedTrack(h);
+    await h.action(() => h.music.next());
+    await h.action(() => h.music.toggle());
+    await h.action(() => c.emit('ready', {}));
+    await h.action(() => c.emit('ready', {}));
+    assert.deepEqual(c.calls,[['load','spotify:track:0-1'],['pause']]);
+  } finally {await h.cleanup();}
+});
+
+test('rapid next/previous replaces pending intent without playing an obsolete track', async () => {
+  const h = await setup({delayedEntity:true});
+  try {
+    const c = await startDelayedTrack(h);
+    await h.action(() => {h.music.next();h.music.next();});
+    await h.action(() => c.emit('ready', {}));
+    assert.deepEqual(c.calls,[['load','spotify:track:0-1'],['load','spotify:track:0-2']]);
+    await h.action(() => c.emit('ready', {}));
+    assert.deepEqual(c.calls.at(-1),['play']);
+    assert.equal(c.calls.filter(x=>x[0]==='play').length,1);
+  } finally {await h.cleanup();}
+});
+
+
+test('multiple pending steps use the latest selection in both directions', async () => {
+  const h = await setup({delayedEntity:true});
+  try {
+    const c = await startDelayedTrack(h);
+    await h.action(() => {h.music.next();h.music.next();h.music.next();h.music.previous();});
+    await h.action(() => c.emit('ready', {}));
+    assert.deepEqual(c.calls,[['load','spotify:track:0-1'],['load','spotify:track:0-2']]);
+    await h.action(() => c.emit('ready', {}));
+    assert.equal(c.calls.filter(x=>x[0]==='play').length,1);
+  } finally {await h.cleanup();}
 });

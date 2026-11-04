@@ -122,15 +122,18 @@ export function MusicProvider({ children }:{ children:React.ReactNode }) {
     const pending = pendingRef.current;
     if (!controller || !readyRef.current || !pending) return;
     try {
-      // The SDK queues play during entity loading. Do not duplicate that queue
-      // with timers, or mark playback active before the iframe reports it.
-      if (loadedUriRef.current !== pending.uri) {
-        controller.loadEntity(pending.uri);
-        loadedUriRef.current = pending.uri;
-      }
-      controller.play();
       requestedRef.current = pending;
+      if (loadedUriRef.current !== pending.uri) {
+        // loadEntity replaces the iframe document. Do not enqueue Play in the
+        // SDK's timer-based loading queue: retain one cancellable intent here.
+        readyRef.current = false;
+        loadedUriRef.current = pending.uri;
+        controller.loadEntity(pending.uri);
+        return;
+      }
+      // Consume before calling the SDK, so repeated ready events cannot replay.
       pendingRef.current = null;
+      if (shouldContinueRef.current) controller.play();
     } catch (error) {
       console.warn("Spotify playback request failed", error);
     }
@@ -155,7 +158,7 @@ export function MusicProvider({ children }:{ children:React.ReactNode }) {
     // loadEntity navigates the iframe. Events already queued by the old entity
     // must never replace the selected track, progress, or transport state.
     const acceptsEvent = (data: NonNullable<SpotifyEvent["data"]>) => {
-      const expected = requestedRef.current?.uri || loadedUriRef.current;
+      const expected = pendingRef.current?.uri || requestedRef.current?.uri || loadedUriRef.current;
       if (data.playingURI) return !expected || data.playingURI === expected;
       return !!expected && confirmedUriRef.current === expected;
     };
@@ -295,13 +298,22 @@ export function MusicProvider({ children }:{ children:React.ReactNode }) {
     // Once a session has been requested, browsing must not interrupt that session.
     const controller = controllerRef.current;
     if (controllerReady && controller && !requestedRef.current && !pendingRef.current && loadedUriRef.current !== track.uri) {
-      controller.loadEntity(track.uri);
+      readyRef.current = false;
       loadedUriRef.current = track.uri;
+      controller.loadEntity(track.uri);
     }
   }, [playlists, selectedIndex, selectedTrackIndex, controllerReady, executePending]);
 
   const toggle = () => {
     const controller = controllerRef.current;
+    if (pendingRef.current && shouldContinueRef.current) {
+      // Pause must cancel a track change even before the new embed is ready.
+      shouldContinueRef.current = false;
+      pendingRef.current = null;
+      earlyPlayRef.current = null;
+      controller?.pause();
+      return;
+    }
     if (controller && readyRef.current && requestedRef.current) {
       try {
         // Explicit commands remain deterministic before React receives the next
@@ -322,7 +334,7 @@ export function MusicProvider({ children }:{ children:React.ReactNode }) {
   };
 
   const step = (delta:number) => {
-    const unconfirmed = requestedRef.current?.uri !== playingUri ? requestedRef.current : null;
+    const unconfirmed = pendingRef.current ?? (requestedRef.current?.uri !== playingUri ? requestedRef.current : null);
     const playlistIndex = unconfirmed?.playlistIndex ?? (playingPlaylist >= 0 ? playingPlaylist : selectedIndex);
     const playlist = playlistsRef.current[playlistIndex];
     if (!playlist?.tracks.length) return;
