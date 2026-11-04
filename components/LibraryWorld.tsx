@@ -171,13 +171,15 @@ export default function LibraryWorld({ driveBooks = [] }: { driveBooks?: {name:s
       {bookOpen && activeBook ? (
         <Modal className="book-dialog" label={activeBook.title} onClose={() => setBookOpen(false)} onKeyDown={event => { if(event.key === "ArrowLeft") moveBook(-1); if(event.key === "ArrowRight") moveBook(1); }}>
           <button type="button" className="book-dialog-close" onClick={() => setBookOpen(false)} aria-label="Close book details">×</button>
-          <div className="book-dialog-swipe" style={{touchAction:"pan-y"}} onTouchStart={e=>{const t=e.touches[0];touchStart.current={x:t.clientX,y:t.clientY}}} onTouchEnd={e=>{const a=touchStart.current;touchStart.current=null;if(!a)return;const t=e.changedTouches[0];const dx=t.clientX-a.x,dy=t.clientY-a.y;if(Math.abs(dx)>45&&Math.abs(dx)>Math.abs(dy)*1.2)moveBook(dx<0?1:-1)}}><img src={activeBook.image} alt="" /></div>
+          <div className="book-dialog-swipe-content" style={{touchAction:"pan-y"}} onTouchStart={e=>{const t=e.touches[0];touchStart.current={x:t.clientX,y:t.clientY}}} onTouchCancel={()=>{touchStart.current=null}} onTouchEnd={e=>{const a=touchStart.current;touchStart.current=null;if(!a)return;const t=e.changedTouches[0];const dx=t.clientX-a.x,dy=t.clientY-a.y;if(Math.abs(dx)>=45&&Math.abs(dx)>Math.abs(dy)*1.2)moveBook(dx<0?1:-1)}}>
+          <div className="book-dialog-swipe" style={{touchAction:"pan-y"}}><img src={activeBook.image} alt="" draggable={false} /></div>
           <div className="book-detail">
             <p className="book-author">{activeBook.author}</p>
             <h2>{activeBook.title}</h2>
             {activeBook.summary ? <p className="book-summary">{activeBook.summary}</p> : null}
             {activeBook.why ? <><p className="book-why-label">Why it’s on the shelf</p><p className="book-why-note">{activeBook.why}</p></> : null}
             {activeBook.href ? <a href={activeBook.href} target="_blank" rel="noreferrer">View book ↗︎</a> : null}
+          </div>
           </div>
           <nav className="book-dialog-navigation" aria-label="Browse books"><button type="button" onClick={()=>moveBook(-1)} aria-label="Previous book">←</button><span>{safeSelected+1} / {books.length} · Swipe to explore</span><button type="button" onClick={()=>moveBook(1)} aria-label="Next book">→</button></nav>
         </Modal>
