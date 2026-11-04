@@ -43,10 +43,4 @@ Some integrations or dynamic content may require environment variables configure
 
 **Production website:** [ivonnealdaz.com](https://ivonnealdaz.com)
 
-This repository is connected to Vercel. Deployments have also been created from a working branch during redesign and refinement. The default branch is `main`; ongoing branch reconciliation is tracked in [PR #44](https://github.com/ivonneaaldaz-coder/portfolio/pull/44).
-
-The previous address `portfolio.ivonnealdaz.com` is no longer the primary portfolio URL.
-
----
-
 © Ivonne Aldaz.
