@@ -285,12 +285,12 @@ async function startDelayedTrack(h) {
   return c;
 }
 
-test('track loading sends exactly one Play at ready, never through the SDK loading queue', async () => {
+test('track switching queues one Play in the user gesture, not at a later ready event', async () => {
   const h = await setup({delayedEntity:true});
   try {
     const c = await startDelayedTrack(h);
     await h.action(() => h.music.next());
-    assert.deepEqual(c.calls, [['load','spotify:track:0-1']]);
+    assert.deepEqual(c.calls, [['load','spotify:track:0-1'],['play']]);
     await h.action(() => c.emit('playback_update', {playingURI:'spotify:track:0-0',isPaused:true,position:4000}));
     assert.equal(h.music.isPaused,false,'Old entity cannot overwrite the transport');
     await h.action(() => c.emit('ready', {}));
@@ -310,7 +310,7 @@ test('explicit pause cancels the pending track Play before readiness', async () 
     await h.action(() => h.music.toggle());
     await h.action(() => c.emit('ready', {}));
     await h.action(() => c.emit('ready', {}));
-    assert.deepEqual(c.calls,[['load','spotify:track:0-1'],['pause']]);
+    assert.deepEqual(c.calls,[['load','spotify:track:0-1'],['play'],['pause']]);
   } finally {await h.cleanup();}
 });
 
@@ -320,10 +320,10 @@ test('rapid next/previous replaces pending intent without playing an obsolete tr
     const c = await startDelayedTrack(h);
     await h.action(() => {h.music.next();h.music.next();});
     await h.action(() => c.emit('ready', {}));
-    assert.deepEqual(c.calls,[['load','spotify:track:0-1'],['load','spotify:track:0-2']]);
+    assert.deepEqual(c.calls,[['load','spotify:track:0-1'],['play'],['load','spotify:track:0-2'],['play']]);
     await h.action(() => c.emit('ready', {}));
     assert.deepEqual(c.calls.at(-1),['play']);
-    assert.equal(c.calls.filter(x=>x[0]==='play').length,1);
+    assert.equal(c.calls.filter(x=>x[0]==='play').length,2);
   } finally {await h.cleanup();}
 });
 
@@ -334,8 +334,8 @@ test('multiple pending steps use the latest selection in both directions', async
     const c = await startDelayedTrack(h);
     await h.action(() => {h.music.next();h.music.next();h.music.next();h.music.previous();});
     await h.action(() => c.emit('ready', {}));
-    assert.deepEqual(c.calls,[['load','spotify:track:0-1'],['load','spotify:track:0-2']]);
+    assert.deepEqual(c.calls,[['load','spotify:track:0-1'],['play'],['load','spotify:track:0-2'],['play']]);
     await h.action(() => c.emit('ready', {}));
-    assert.equal(c.calls.filter(x=>x[0]==='play').length,1);
+    assert.equal(c.calls.filter(x=>x[0]==='play').length,2);
   } finally {await h.cleanup();}
 });
