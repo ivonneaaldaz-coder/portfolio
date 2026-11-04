@@ -11304,3 +11304,17 @@ html body::before, html body::after { content:none!important;display:none!import
    text-align:left!important;
  }
 }
+
+/* Mobile menu: keep About's divider in the same row rhythm as Home/Work/Play.
+   Preserve the contact block's existing position and add breathing room below socials. */
+@media(max-width:900px){
+  .mobile-nav .mobile-menu .mobile-menu-links>a:last-child{
+    border-bottom:1px solid var(--line)!important;
+  }
+  .mobile-nav .mobile-menu .mobile-menu-footer{
+    border-top:0!important;
+  }
+  .mobile-nav .mobile-menu{
+    padding-bottom:max(64px,env(safe-area-inset-bottom) + 48px)!important;
+  }
+}
