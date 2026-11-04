@@ -89,6 +89,8 @@ export function MusicProvider({ children }:{ children:React.ReactNode }) {
   const retriedUriRef = useRef("");
   const mobileStepRetryRef = useRef("");
   const mobileStepRetryCountRef = useRef(0);
+  const advanceRef = useRef<() => void>(() => {});
+  const lastCompletedUriRef = useRef("");
 
   useEffect(() => {
     playlistsRef.current = playlists;
@@ -187,6 +189,12 @@ export function MusicProvider({ children }:{ children:React.ReactNode }) {
       if (typeof data.position === "number") setPosition(data.position);
       if (typeof data.duration === "number") setDuration(data.duration);
       syncTrack(data.playingURI || "");
+      // Advance when Spotify reports that the current entity has ended.
+      // This does not circumvent Spotify preview-duration restrictions.
+      if (shouldContinueRef.current && data.playingURI && data.isPaused === true && !data.isBuffering && typeof data.duration === "number" && data.duration > 0 && typeof data.position === "number" && data.position >= data.duration - 750 && lastCompletedUriRef.current !== data.playingURI) {
+        lastCompletedUriRef.current = data.playingURI;
+        advanceRef.current();
+      }
     };
     const initialize = () => {
       if (disposed || creating || controllerRef.current) return;
@@ -318,6 +326,8 @@ export function MusicProvider({ children }:{ children:React.ReactNode }) {
     }
     playTrack(playlistIndex,nextIndex);
   };
+
+  advanceRef.current = () => step(1);
 
   const setSelectedIndex = (index:number) => {
     const safe = ((index % playlistsRef.current.length) + playlistsRef.current.length) % playlistsRef.current.length;
