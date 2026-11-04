@@ -11233,3 +11233,19 @@ html body::before, html body::after { content:none!important;display:none!import
    text-transform:none!important;
  }
 }
+
+/* Single type scale for all four mobile top-level navigation labels. */
+@media(max-width:900px){
+ .mobile-nav .mobile-menu .mobile-menu-links>a,
+ .mobile-nav .mobile-menu .mobile-menu-links>.mobile-work-group>.mobile-group-trigger,
+ .mobile-nav .mobile-menu .mobile-menu-links>.mobile-library-group>.mobile-group-trigger{
+   font-family:inherit!important;
+   font-size:16px!important;
+   font-weight:400!important;
+   line-height:1.25!important;
+   letter-spacing:0!important;
+   text-transform:none!important;
+   -webkit-text-size-adjust:100%;
+   text-size-adjust:100%;
+ }
+}
