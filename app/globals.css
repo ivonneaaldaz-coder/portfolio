@@ -11352,3 +11352,15 @@ html body::before, html body::after { content:none!important;display:none!import
     padding-bottom:64px!important;
   }
 }
+
+/* Music track discovery: show a partial next row without altering the console layout. */
+.music-tracklist-body{max-height:142px!important;}
+.music-tracklist-hint{
+  margin:10px 10px 0;
+  color:var(--muted);
+  font-size:9px;
+  letter-spacing:.1em;
+  text-transform:uppercase;
+}
+.music-tracklist-hint span{display:inline-block;margin-left:4px;}
+@media(max-width:900px){.music-tracklist-body{max-height:142px!important;}}
