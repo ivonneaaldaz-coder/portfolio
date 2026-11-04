@@ -1,12 +1,14 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import type { PinterestPin } from "@/lib/pinterest";
 
 const PAGE_SIZE = 48;
 
 export default function PinterestGallery({ pins }: { pins: PinterestPin[] }) {
   const [active, setActive] = useState("All");
+  const filterRef = useRef<HTMLDivElement>(null);
+  const categoryTouchRef = useRef<{x:number;y:number;name:string}|null>(null);
   const [shown, setShown] = useState(PAGE_SIZE);
   const [columnCount, setColumnCount] = useState(4);
 
@@ -32,6 +34,12 @@ export default function PinterestGallery({ pins }: { pins: PinterestPin[] }) {
   );
 
   const visible = filtered.slice(0, shown);
+  const selectCategory = (name:string) => {
+    setActive(name);
+    const buttons=filterRef.current?.querySelectorAll("button");
+    const index=boards.indexOf(name);
+    if(index>=0)buttons?.[index]?.scrollIntoView({behavior:"smooth",block:"nearest",inline:"center"});
+  };
 
   const columns = useMemo(() => {
     const next = Array.from({ length: columnCount }, () => [] as PinterestPin[]);
@@ -66,7 +74,7 @@ export default function PinterestGallery({ pins }: { pins: PinterestPin[] }) {
   return (
     <>
       {boards.length > 2 ? (
-        <div className="pinterest-filters" aria-label="Filter visual references" style={{overflowX:"auto",overscrollBehaviorX:"contain",WebkitOverflowScrolling:"touch",flexWrap:"nowrap"}}>
+        <div className="pinterest-filters" ref={filterRef} aria-label="Filter visual references" onTouchStart={e=>{const t=e.touches[0];categoryTouchRef.current={x:t.clientX,y:t.clientY,name:active}}} onTouchEnd={e=>{const start=categoryTouchRef.current;categoryTouchRef.current=null;if(!start)return;const t=e.changedTouches[0];const dx=t.clientX-start.x,dy=t.clientY-start.y;if(Math.abs(dx)>32&&Math.abs(dx)>Math.abs(dy)*1.2){const index=boards.indexOf(start.name);selectCategory(boards[Math.max(0,Math.min(boards.length-1,index+(dx<0?1:-1)))])}}} style={{overflowX:"auto",overscrollBehaviorX:"contain",WebkitOverflowScrolling:"touch",flexWrap:"nowrap",touchAction:"pan-y"}}>
           {boards.map((board) => {
             const count = board === "All"
               ? pins.length
@@ -77,7 +85,7 @@ export default function PinterestGallery({ pins }: { pins: PinterestPin[] }) {
                 key={board}
                 type="button"
                 className={active === board ? "active" : ""}
-                onClick={() => setActive(board)}
+                onClick={() => selectCategory(board)}
               >
                 {board} <span>{count}</span>
               </button>
@@ -85,7 +93,7 @@ export default function PinterestGallery({ pins }: { pins: PinterestPin[] }) {
           })}
         </div>
       ) : null}
-      {boards.length > 2 ? <p className="pinterest-filter-hint" style={{fontSize:11,opacity:0.65,marginTop:10,marginBottom:32}}>Swipe to explore categories →</p> : null}
+      {boards.length > 2 ? <p className="pinterest-filter-hint" style={{fontSize:11,opacity:0.65,marginTop:10,marginBottom:32}}>Swipe to switch categories →</p> : null}
 
       <div className="pinterest-native-grid" style={{ gridTemplateColumns: `repeat(${columnCount}, minmax(0, 1fr))` }}>
         {columns.map((column, columnIndex) => (
