@@ -11382,3 +11382,35 @@ html body::before, html body::after { content:none!important;display:none!import
   .music-page .playlist-picker-heading>a{order:2;}
   .music-page .playlist-swipe-hint{order:3;flex-basis:100%;text-align:left;}
 }
+
+/* Restore the original clean three-row tracklist, retaining the scroll cue. */
+.music-page .music-tracklist-body{max-height:120px!important;overflow-y:auto!important;overflow-x:hidden!important;}
+/* Keep the heading and its single Spotify link in separate flex columns. */
+.music-page .playlist-picker-heading{
+  display:flex!important;
+  align-items:baseline!important;
+  justify-content:space-between!important;
+  column-gap:24px!important;
+  row-gap:8px!important;
+  flex-wrap:wrap!important;
+}
+.music-page .playlist-picker-heading>span{min-width:0;flex:0 1 auto;}
+.music-page .playlist-picker-heading>a{
+  display:inline-block;
+  flex:0 0 auto;
+  margin-left:auto!important;
+  line-height:1.4;
+  text-align:right;
+}
+@media(max-width:900px){
+  .music-page .music-tracklist-body{max-height:120px!important;}
+  .music-page .playlist-picker-heading{margin-bottom:18px!important;row-gap:10px!important;}
+  .music-page .playlist-picker-heading>a{order:0;}
+  .music-page .playlist-picker-heading>.playlist-swipe-hint{
+    order:3;
+    flex:0 0 100%;
+    margin:0!important;
+    text-align:left;
+  }
+  .music-page .music-tracklist-hint{margin-top:12px;margin-bottom:4px;}
+}
