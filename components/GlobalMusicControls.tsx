@@ -1,19 +1,23 @@
 "use client";
 
 import Link from "next/link";
+import { createPortal } from "react-dom";
+import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 import { useMusic } from "@/components/MusicProvider";
 
 export default function GlobalMusicControls() {
   const music = useMusic();
   const pathname = usePathname();
-  if (pathname === "/music") return null;
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => setMounted(true), []);
+  if (pathname === "/music" || !mounted) return null;
 
   const label = music.currentTrack
     ? [music.currentTrack.artist, music.currentTrack.title].filter(Boolean).join(" — ")
     : "Music";
 
-  return (
+  return createPortal(
     <>
       <style>{`
         /* Compact rounded player: restore cover and transport controls on mobile. */
@@ -36,7 +40,10 @@ export default function GlobalMusicControls() {
           background:color-mix(in srgb,var(--bg) 94%,transparent)!important;
           backdrop-filter:blur(14px)!important;
           box-shadow:none!important;
-          z-index:46!important;
+          z-index:2147483000!important;
+          visibility:visible!important;
+          opacity:1!important;
+          pointer-events:auto!important;
         }
         .global-music.global-music-restored .global-music-cover {
           display:block!important;
@@ -98,6 +105,7 @@ export default function GlobalMusicControls() {
         <button type="button" onClick={music.next} aria-label="Next song" className="global-music-step">→</button>
         <Link href="/music" className="global-music-track" title={label}>{label}</Link>
       </div>
-    </>
+    </>,
+    document.body
   );
 }
