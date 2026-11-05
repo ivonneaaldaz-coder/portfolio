@@ -20,6 +20,9 @@ async function mount(Component, props = {}) {
   global.requestAnimationFrame = callback => {frames.set(++frameId,callback);return frameId;};
   global.cancelAnimationFrame = id => frames.delete(id);
   const scrolls = [];
+  window.HTMLElement.prototype.setPointerCapture=function(id){this.captureId=id;};
+  window.HTMLElement.prototype.hasPointerCapture=function(id){return this.captureId===id;};
+  window.HTMLElement.prototype.releasePointerCapture=function(){this.captureId=null;};
   window.HTMLElement.prototype.scrollIntoView = function(options) {scrolls.push(options);};
   window.HTMLElement.prototype.scrollTo = function(options) {scrolls.push(options);};
   window.HTMLDialogElement.prototype.showModal = function() {this.setAttribute('open','');};
@@ -31,9 +34,24 @@ async function mount(Component, props = {}) {
     async event(selector,type) {await act(async()=>document.querySelector(selector).dispatchEvent(new window.Event(type,{bubbles:true})));},
     async frame() {await act(async()=>{const callbacks=[...frames.values()];frames.clear();callbacks.forEach(callback=>callback());});},
     async click(selector) {await act(async()=>document.querySelector(selector).click());},
+    async pointer(selector,type,x=200,y=100,extra={}) {
+      await act(async()=>{
+        const event=new window.Event(type,{bubbles:true});
+        Object.assign(event,{pointerId:1,pointerType:'touch',isPrimary:true,clientX:x,clientY:y,...extra});
+        document.querySelector(selector).dispatchEvent(event);
+      });
+    },
     async swipe(selector,dx,dy=0) {
       await act(async()=>{
         const el=document.querySelector(selector);
+        if(el.closest('.selected-work-preview-stage')) {
+          for(const [type,x,y] of [['pointerdown',200,100],['pointermove',200+dx,100+dy],['pointerup',200+dx,100+dy]]) {
+            const event=new window.Event(type,{bubbles:true});
+            Object.assign(event,{pointerId:1,pointerType:'touch',isPrimary:true,clientX:x,clientY:y});
+            el.dispatchEvent(event);
+          }
+          return;
+        }
         for (const [type,x,y] of [['touchstart',200,100],['touchend',200+dx,100+dy]]) {
           const event=new window.Event(type,{bubbles:true});
           Object.defineProperty(event,type==='touchstart'?'touches':'changedTouches',{value:[{clientX:x,clientY:y}]});
@@ -142,5 +160,28 @@ test('native strip gestures reclaim selection and can select the last card',asyn
     assert.equal(document.querySelector('.selected-work-project-description h4').textContent,'Good World Living');
     await h.swipe('.selected-work-preview-stage',100);
     assert.equal(document.querySelector('.selected-work-project-description h4').textContent,'Whitespace');
+  } finally {await h.cleanup();}
+});
+
+
+test('swipes starting on preview images advance once; cancellation and vertical scrolling do not',async()=>{
+  const h=await mount(SelectedWorkExplorer);
+  try {
+    mobileStrip();
+    await h.swipe('.selected-work-preview-stage img',-100);
+    assert.equal(document.querySelector('.selected-work-project-description h4').textContent,'Ask Eve');
+    await h.swipe('.selected-work-preview-stage img',-100);
+    assert.equal(document.querySelector('.selected-work-project-description h4').textContent,'Chatroom');
+    await h.pointer('.selected-work-preview-stage img','pointerdown');
+    assert.equal(document.querySelector('.selected-work-preview-stage').captureId,1);
+    await h.pointer('.selected-work-preview-stage','pointercancel');
+    await h.pointer('.selected-work-preview-stage','pointerup',80);
+    assert.equal(document.querySelector('.selected-work-project-description h4').textContent,'Chatroom');
+    await h.pointer('.selected-work-preview-stage img','pointerdown');
+    await h.pointer('.selected-work-preview-stage','pointermove',198,140);
+    await h.pointer('.selected-work-preview-stage','pointerup',80,140);
+    assert.equal(document.querySelector('.selected-work-project-description h4').textContent,'Chatroom');
+    await h.swipe('.selected-work-preview-stage img',100);
+    assert.equal(document.querySelector('.selected-work-project-description h4').textContent,'Ask Eve');
   } finally {await h.cleanup();}
 });
