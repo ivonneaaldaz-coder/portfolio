@@ -15,7 +15,7 @@ export default function SpotifyPlaylists() {
 
   return (
     <>
-      <style>{`@media(max-width:900px){.music-page .portfolio-music-controls{display:flex;align-items:center;justify-content:center;gap:8px}.music-page .portfolio-music-controls button{min-width:44px!important;min-height:44px!important;display:inline-flex!important;align-items:center;justify-content:center;touch-action:manipulation}.music-page .portfolio-music-controls .portfolio-music-play{min-width:48px!important;min-height:48px!important}}`}</style>
+      <style>{`@media(max-width:900px){.music-page .portfolio-music-controls{display:flex;align-items:center;justify-content:center;gap:8px}.music-page .portfolio-music-controls button{min-width:44px!important;min-height:44px!important;display:inline-flex!important;align-items:center;justify-content:center;touch-action:manipulation}.music-page .portfolio-music-controls .portfolio-music-play{min-width:48px!important;min-height:48px!important}.music-page .portfolio-music-play .music-mobile-symbol{display:inline-flex;align-items:center;justify-content:center;width:20px;height:22px}}`}</style>
       <div className="music-console">
         <div className="portfolio-music-player">
           <div className="portfolio-music-cover">
@@ -31,7 +31,7 @@ export default function SpotifyPlaylists() {
           <div className="portfolio-music-controls">
             <button type="button" onClick={music.previous} aria-label="Previous song">←</button>
             <button type="button" className="portfolio-music-play" onClick={music.toggle} aria-label={music.isPaused ? "Play music" : "Pause music"}>
-              <span aria-hidden="true"><span className="music-desktop-symbol">{music.isPaused ? "▸" : "▌▌"}</span><span className="music-mobile-symbol">{music.isPaused ? "▸" : "▌▌"}</span></span>
+              <span aria-hidden="true"><span className="music-desktop-symbol">{music.isPaused ? "▸" : "▌▌"}</span><span className="music-mobile-symbol">{music.isPaused ? "▸" : <svg width="20" height="22" viewBox="0 0 20 22" fill="currentColor" aria-hidden="true" style={{display:"block",margin:"auto"}}><rect x="3" y="2" width="5" height="18" rx="0.5" /><rect x="12" y="2" width="5" height="18" rx="0.5" /></svg>}</span></span>
             </button>
             <button type="button" onClick={music.next} aria-label="Next song">→</button>
           </div>
