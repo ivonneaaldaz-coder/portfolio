@@ -16,14 +16,20 @@ async function mount(Component, props = {}) {
   global.HTMLElement = dom.window.HTMLElement;
   global.IS_REACT_ACT_ENVIRONMENT = true;
   window.matchMedia = () => ({matches:true,addEventListener(){},removeEventListener(){}});
+  const frames = new Map(); let frameId = 0;
+  global.requestAnimationFrame = callback => {frames.set(++frameId,callback);return frameId;};
+  global.cancelAnimationFrame = id => frames.delete(id);
   const scrolls = [];
   window.HTMLElement.prototype.scrollIntoView = function(options) {scrolls.push(options);};
+  window.HTMLElement.prototype.scrollTo = function(options) {scrolls.push(options);};
   window.HTMLDialogElement.prototype.showModal = function() {this.setAttribute('open','');};
   window.HTMLDialogElement.prototype.close = function() {this.removeAttribute('open');};
   const root = createRoot(document.getElementById('root'));
   await act(async()=>root.render(React.createElement(Component,props)));
   return {
     scrolls,
+    async event(selector,type) {await act(async()=>document.querySelector(selector).dispatchEvent(new window.Event(type,{bubbles:true})));},
+    async frame() {await act(async()=>{const callbacks=[...frames.values()];frames.clear();callbacks.forEach(callback=>callback());});},
     async click(selector) {await act(async()=>document.querySelector(selector).click());},
     async swipe(selector,dx,dy=0) {
       await act(async()=>{
@@ -88,5 +94,53 @@ test('project swipes update selection and visual, respecting reduced motion',asy
     assert.equal(h.scrolls.at(-1).behavior,'instant');
     await h.swipe('.selected-work-preview-stage',100);
     assert.match(document.querySelector('.selected-work-preview-stage img').getAttribute('src'),/lab-poster/);
+  } finally {await h.cleanup();}
+});
+
+
+function mobileStrip() {
+  Object.defineProperty(window,'innerWidth',{value:390,configurable:true});
+  const strip=document.querySelector('.selected-work-scroll');
+  Object.defineProperty(strip,'scrollWidth',{value:1600,configurable:true});
+  Object.defineProperty(strip,'clientWidth',{value:346,configurable:true});
+  strip.getBoundingClientRect=()=>({left:22});
+  [...strip.querySelectorAll('button')].forEach((button,index)=>{
+    button.getBoundingClientRect=()=>({left:22+index*200-strip.scrollLeft});
+  });
+  return strip;
+}
+
+test('animated strip scroll cannot undo a preview swipe; each consecutive swipe advances once',async()=>{
+  const h=await mount(SelectedWorkExplorer);
+  try {
+    const strip=mobileStrip();
+    window.matchMedia=()=>({matches:false});
+    await h.swipe('.selected-work-preview-stage',-100);
+    assert.equal(h.scrolls.at(-1).left,200);
+    assert.equal(h.scrolls.at(-1).behavior,'smooth');
+    strip.scrollLeft=30; // first animation frame still nearest the OLD project
+    await h.event('.selected-work-scroll','scroll');await h.frame();
+    assert.match(document.querySelector('.selected-work-project-description h4').textContent,/Ask Eve/);
+    await h.swipe('.selected-work-preview-stage',-100);
+    strip.scrollLeft=210; // next animation crosses the previous project
+    await h.event('.selected-work-scroll','scroll');await h.frame();
+    assert.equal(document.querySelector('.selected-work-project-description h4').textContent,'Chatroom');
+  } finally {await h.cleanup();}
+});
+
+test('native strip gestures reclaim selection and can select the last card',async()=>{
+  const h=await mount(SelectedWorkExplorer);
+  try {
+    const strip=mobileStrip();
+    await h.swipe('.selected-work-preview-stage',-100);
+    await h.event('.selected-work-scroll','pointerdown');
+    strip.scrollLeft=400;
+    await h.event('.selected-work-scroll','scroll');await h.frame();
+    assert.equal(document.querySelector('.selected-work-project-description h4').textContent,'Chatroom');
+    strip.scrollLeft=1254;
+    await h.event('.selected-work-scroll','scroll');await h.frame();
+    assert.equal(document.querySelector('.selected-work-project-description h4').textContent,'Good World Living');
+    await h.swipe('.selected-work-preview-stage',100);
+    assert.equal(document.querySelector('.selected-work-project-description h4').textContent,'Whitespace');
   } finally {await h.cleanup();}
 });
