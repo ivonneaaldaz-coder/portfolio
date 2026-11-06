@@ -11524,3 +11524,6 @@ html body::before, html body::after { content:none!important;display:none!import
 .interface-sound-toggle:focus-visible{outline:2px solid var(--ink);outline-offset:3px}
 .interface-sound-toggle>span:first-child{font-size:16px;min-width:21px;text-align:center}
 @media(max-width:900px){.interface-sound-toggle{left:12px;bottom:calc(12px + env(safe-area-inset-bottom,0px));min-height:48px;padding:10px 13px}}
+
+/* Keep interface sound control desktop-only; mobile audio remains disabled. */
+@media(max-width:900px){.interface-sound-toggle{display:none!important}}
