@@ -39,7 +39,15 @@ export default function MotionSystem() {
     const roots = Array.from(document.querySelectorAll<HTMLElement>(INTERIOR));
     if (!roots.length) return;
 
-    // Reveal each interior route as a whole, including sections that do not match\n    // individual item selectors (case-study copy, tabs and editorial layouts).\n    const rootAnimations = roots.map(root => root.animate(\n      [{ opacity: 0, transform: "translate3d(0, 10px, 0)" },\n       { opacity: 1, transform: "translate3d(0, 0, 0)" }],\n      { duration: 780, easing: "cubic-bezier(.22,1,.36,1)", fill: "both" }\n    ));\n    rootAnimations.forEach(animation => { animation.finished.catch(() => {}).finally(() => animation.cancel()); });\n    const seen = new WeakSet<HTMLElement>();
+    // Reveal each interior route as a whole, including sections that do not match
+    // individual item selectors (case-study copy, tabs and editorial layouts).
+    const rootAnimations = roots.map(root => root.animate(
+      [{ opacity: 0, transform: "translate3d(0, 10px, 0)" },
+       { opacity: 1, transform: "translate3d(0, 0, 0)" }],
+      { duration: 780, easing: "cubic-bezier(.22,1,.36,1)", fill: "both" }
+    ));
+    rootAnimations.forEach(animation => { animation.finished.catch(() => {}).finally(() => animation.cancel()); });
+    const seen = new WeakSet<HTMLElement>();
     const pending = new WeakSet<HTMLElement>();
     const observer = new IntersectionObserver(entries => {
       for (const entry of entries) {
