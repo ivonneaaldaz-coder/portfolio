@@ -1,6 +1,7 @@
 "use client";
 
 import { useMusic } from "@/components/MusicProvider";
+import MusicTransportIcon from "@/components/MusicTransportIcon";
 
 function formatTime(ms:number) {
   const total = Math.max(0,Math.floor((ms || 0)/1000));
@@ -15,7 +16,7 @@ export default function SpotifyPlaylists() {
 
   return (
     <>
-      <style>{`@media(max-width:900px){.music-page .portfolio-music-controls{display:flex;align-items:center;justify-content:center;gap:8px}.music-page .portfolio-music-controls button{min-width:44px!important;min-height:44px!important;display:inline-flex!important;align-items:center;justify-content:center;touch-action:manipulation}.music-page .portfolio-music-controls .portfolio-music-play{min-width:48px!important;min-height:48px!important}.music-page .portfolio-music-play .music-mobile-play-symbol{font-size:22px!important;line-height:1!important;display:inline-block;transform:translateX(1px)}`}</style>
+      <style>{`@media(max-width:900px){.music-page .portfolio-music-controls{display:flex;align-items:center;justify-content:center;gap:8px}.music-page .portfolio-music-controls button{min-width:44px!important;min-height:44px!important;display:inline-flex!important;align-items:center;justify-content:center;touch-action:manipulation}.music-page .portfolio-music-controls .portfolio-music-play{min-width:48px!important;min-height:48px!important}.music-page .portfolio-music-play svg{display:block;flex-shrink:0}`}</style>
       <div className="music-console">
         <div className="portfolio-music-player">
           <div className="portfolio-music-cover">
@@ -31,7 +32,7 @@ export default function SpotifyPlaylists() {
           <div className="portfolio-music-controls">
             <button type="button" onClick={music.previous} aria-label="Previous song">←</button>
             <button type="button" className="portfolio-music-play" onClick={music.toggle} aria-label={music.isPaused ? "Play music" : "Pause music"}>
-              <span aria-hidden="true"><span className="music-desktop-symbol">{music.isPaused ? "▸" : "▌▌"}</span><span className={`music-mobile-symbol${music.isPaused ? " music-mobile-play-symbol" : ""}`}>{music.isPaused ? "▸" : "▌▌"}</span></span>
+              <MusicTransportIcon paused={music.isPaused} />
             </button>
             <button type="button" onClick={music.next} aria-label="Next song">→</button>
           </div>
