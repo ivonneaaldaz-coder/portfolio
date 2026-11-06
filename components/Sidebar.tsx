@@ -1,7 +1,6 @@
 "use client";
 import { useState } from "react";
 import Link from "next/link";
-import InterfaceSound from "@/components/InterfaceSound";
 import { usePathname } from "next/navigation";
 
 const play = [
@@ -25,6 +24,6 @@ export default function Sidebar(){
         <Link href="/about" className={pathname==="/about"?"active":""}>About</Link>
       </nav>
     </div>
-    <div className="sidebar-bottom"><InterfaceSound /><div className="sidebar-status"><p><span className="status-dot"/> Available for select projects</p><a className="sidebar-email" href="mailto:hello@ivonnealdaz.com">hello@ivonnealdaz.com ↗</a></div></div>
+    <div className="sidebar-bottom"><div className="sidebar-status"><p><span className="status-dot"/> Available for select projects</p><a className="sidebar-email" href="mailto:hello@ivonnealdaz.com">hello@ivonnealdaz.com ↗</a></div></div>
   </aside>;
 }
