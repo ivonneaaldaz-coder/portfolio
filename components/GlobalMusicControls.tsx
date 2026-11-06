@@ -5,6 +5,7 @@ import { createPortal } from "react-dom";
 import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 import { useMusic } from "@/components/MusicProvider";
+import MusicTransportIcon from "@/components/MusicTransportIcon";
 
 export default function GlobalMusicControls() {
   const music = useMusic();
@@ -116,7 +117,7 @@ export default function GlobalMusicControls() {
         </Link>
         <button type="button" onClick={music.previous} aria-label="Previous song" className="global-music-step">←</button>
         <button type="button" onClick={music.toggle} aria-label={music.isPaused ? "Play music" : "Pause music"} className="global-music-play" data-playing={!music.isPaused}>
-          <span aria-hidden="true"><span className="music-desktop-symbol">{music.isPaused ? "▸" : "▌▌"}</span><span className="music-mobile-symbol">{music.isPaused ? "▸" : "▌▌"}</span></span>
+          <MusicTransportIcon paused={music.isPaused} />
         </button>
         <button type="button" onClick={music.next} aria-label="Next song" className="global-music-step">→</button>
         <Link href="/music" className="global-music-track" title={label}>{label}</Link>
