@@ -11517,4 +11517,10 @@ html body::before, html body::after { content:none!important;display:none!import
   .site-main>.site-footer .footer-about h2,
   .site-main:has(>.home-minimal)>.site-footer .footer-about h2{font-size:clamp(24px,6.2vw,29px)!important;line-height:1.2!important;}
 }
-\n/* Opt-in interface audio: a quiet utility opposite the music player. */\n.interface-sound-toggle{position:fixed;left:18px;bottom:18px;z-index:2147483000;display:flex;align-items:center;gap:8px;min-height:42px;padding:9px 12px;border:1px solid var(--line);border-radius:999px;background:var(--bg);color:var(--ink);font:inherit;font-size:11px;letter-spacing:.02em;cursor:pointer;opacity:.85}\n.interface-sound-toggle:hover{opacity:1;border-color:var(--ink)}\n.interface-sound-toggle:focus-visible{outline:2px solid var(--ink);outline-offset:3px}\n.interface-sound-toggle>span:first-child{font-size:16px;min-width:21px;text-align:center}\n@media(max-width:900px){.interface-sound-toggle{left:12px;bottom:calc(12px + env(safe-area-inset-bottom,0px));min-height:48px;padding:10px 13px}}\n
+
+/* Opt-in interface audio: a quiet utility opposite the music player. */
+.interface-sound-toggle{position:fixed;left:18px;bottom:18px;z-index:2147483000;display:flex;align-items:center;gap:8px;min-height:42px;padding:9px 12px;border:1px solid var(--line);border-radius:999px;background:var(--bg);color:var(--ink);font:inherit;font-size:11px;letter-spacing:.02em;cursor:pointer;opacity:.85}
+.interface-sound-toggle:hover{opacity:1;border-color:var(--ink)}
+.interface-sound-toggle:focus-visible{outline:2px solid var(--ink);outline-offset:3px}
+.interface-sound-toggle>span:first-child{font-size:16px;min-width:21px;text-align:center}
+@media(max-width:900px){.interface-sound-toggle{left:12px;bottom:calc(12px + env(safe-area-inset-bottom,0px));min-height:48px;padding:10px 13px}}
