@@ -47,6 +47,35 @@ export default function MotionSystem() {
       { duration: 780, easing: "cubic-bezier(.22,1,.36,1)", fill: "both" }
     ));
     rootAnimations.forEach(animation => { animation.finished.catch(() => {}).finally(() => animation.cancel()); });
+    // Work uses hash-based section navigation. Animate only the selected section,
+    // not the next section entering the viewport during scrolling.
+    const workSections = ["selected-work", "case-studies", "press", "writing"];
+    const workPage = pathname === "/work";
+    const revealWorkSection = () => {
+      if (!workPage) return;
+      const id = decodeURIComponent(window.location.hash.slice(1));
+      if (!workSections.includes(id)) return;
+      const section = document.getElementById(id);
+      if (!section) return;
+      const targets = id === "selected-work"
+        ? [section.querySelector(".selected-work-projects")]
+        : id === "case-studies"
+        ? [section.querySelector(".selected-work-case"), section.querySelector(".selected-work-brand-grid")]
+        : id === "press"
+        ? [section.querySelector(".section-heading"), section.querySelector(".overview-press-grid"), section.querySelector(".overview-press-expand")]
+        : [section.querySelector(".overview-writing-head"), ...section.querySelectorAll(".overview-writing-row, .overview-inline-expand")];
+      targets.filter((el): el is Element => el instanceof Element).forEach((el, index) => {
+        el.getAnimations().filter(a => a instanceof Animation).forEach(a => a.cancel());
+        const animation = el.animate(
+          [{ opacity: 0, transform: "translate3d(0, 9px, 0)" },
+           { opacity: 1, transform: "translate3d(0, 0, 0)" }],
+          { duration: 1350, delay: Math.min(index * 90, 180), easing: "cubic-bezier(.22,1,.36,1)", fill: "both" }
+        );
+        animation.finished.catch(() => {}).finally(() => animation.cancel());
+      });
+    };
+    window.addEventListener("hashchange", revealWorkSection);
+    if (workPage && window.location.hash) requestAnimationFrame(revealWorkSection);
     const seen = new WeakSet<HTMLElement>();
     const pending = new WeakSet<HTMLElement>();
     const observer = new IntersectionObserver(entries => {
@@ -70,7 +99,7 @@ export default function MotionSystem() {
     }, { threshold: 0.08, rootMargin: "0px 0px -5% 0px" });
 
     const register = (el: HTMLElement, index: number) => {
-      if (pending.has(el) || el.closest(".home-minimal, .viewer, [role=dialog]")) return;
+      if (pending.has(el) || el.closest(".home-minimal, .viewer, [role=dialog]")) return;\n      if (workPage && el.closest("#selected-work, #case-studies, #press, #writing")) return;
       // Avoid nested animation layers competing for the same transform.
       if (el.closest("[data-motion-item]")) return;
       pending.add(el);
@@ -98,7 +127,7 @@ export default function MotionSystem() {
         node instanceof HTMLElement && !node.hasAttribute("data-motion-item")))) scan();
     });
     roots.forEach(root => mutations.observe(root, { childList: true, subtree: true }));
-    return () => { observer.disconnect(); mutations.disconnect(); rootAnimations.forEach(animation => animation.cancel()); };
+    return () => { window.removeEventListener("hashchange", revealWorkSection); observer.disconnect(); mutations.disconnect(); rootAnimations.forEach(animation => animation.cancel()); };
   }, [pathname]);
 
   return null;
