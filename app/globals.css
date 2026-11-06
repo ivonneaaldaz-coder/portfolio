@@ -11547,3 +11547,20 @@ html body::before, html body::after { content:none!important;display:none!import
   animation:editorial-content-enter 750ms cubic-bezier(.22,1,.36,1) both;
  }
 }
+
+/* Work interactions: animate the actual content on section navigation and selection. */
+@media (prefers-reduced-motion:no-preference){
+ .selected-work-explorer .selected-work-case{
+   animation:editorial-content-enter 850ms cubic-bezier(.22,1,.36,1) both;
+ }
+ .work-hybrid-page #press:target .overview-press-grid,
+ .work-hybrid-page #press:target .section-heading,
+ .work-hybrid-page #writing:target .overview-writing-head,
+ .work-hybrid-page #writing:target .overview-writing-row,
+ .work-hybrid-page #selected-work:target .selected-work-projects{
+   animation:editorial-content-enter 850ms cubic-bezier(.22,1,.36,1) both;
+ }
+ .work-hybrid-page #press:target .overview-press-grid{animation-delay:90ms}
+ .work-hybrid-page #writing:target .overview-writing-row:nth-of-type(2){animation-delay:70ms}
+ .work-hybrid-page #writing:target .overview-writing-row:nth-of-type(3){animation-delay:130ms}
+}
