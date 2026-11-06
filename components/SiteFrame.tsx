@@ -3,6 +3,7 @@
 import { usePathname } from "next/navigation";
 import { useLayoutEffect, useRef } from "react";
 import Sidebar from "@/components/Sidebar";
+import InterfaceSound from "@/components/InterfaceSound";
 import MobileNav from "@/components/MobileNav";
 import ThemeToggle from "@/components/ThemeToggle";
 import PlainTextArrows from "@/components/PlainTextArrows";
@@ -39,6 +40,7 @@ export default function SiteFrame({ children }: { children: React.ReactNode }) {
             <main className="site-main">{children}<SiteFooter /></main>
           </div>
           <GlobalMusicControls />
+          <InterfaceSound />
         </>
       )}
     </MusicProvider>
