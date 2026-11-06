@@ -5,14 +5,14 @@ import Modal from "./Modal";
 import Link from "next/link";
 
 const knownBooks: Record<string,{ title:string; author:string; href:string|null }> = {
-  "1.png": { title:"The Alchemist", author:"Paulo Coelho", href:"https://amzn.to/4sULp9V" },
-  "2.png": { title:"The Four Agreements", author:"Don Miguel Ruiz", href:"https://amzn.to/4s24lmx" },
+  "1.png": { title:"The Alchemist", author:"Paulo Coelho", href:"https://www.amazon.com/s?k=The+Alchemist+Paulo+Coelho&tag=ivonnealdaz0c-20" },
+  "2.png": { title:"The Four Agreements", author:"Don Miguel Ruiz", href:"https://www.amazon.com/s?k=The+Four+Agreements+Don+Miguel+Ruiz&tag=ivonnealdaz0c-20" },
   "3.png": { title:"The Artist’s Way", author:"Julia Cameron", href:"https://www.amazon.com/s?k=The+Artists+Way+Julia+Cameron&tag=ivonnealdaz0c-20" },
-  "4.png": { title:"The 48 Laws of Power", author:"Robert Greene", href:"https://amzn.to/4sRdlLS" },
+  "4.png": { title:"The 48 Laws of Power", author:"Robert Greene", href:"https://www.amazon.com/s?k=The+48+Laws+of+Power+Robert+Greene&tag=ivonnealdaz0c-20" },
   "5.png": { title:"The Creative Act: A Way of Being", author:"Rick Rubin", href:"https://www.amazon.com/s?k=The+Creative+Act+Rick+Rubin&tag=ivonnealdaz0c-20" },
-  "6.png": { title:"Atomic Habits", author:"James Clear", href:"https://amzn.to/4bmYovk" },
-  "7.png": { title:"A New Earth", author:"Eckhart Tolle", href:"https://amzn.to/4soqFHT" },
-  "8.png": { title:"The Daily Stoic", author:"Ryan Holiday", href:"https://amzn.to/4t1TolQ" },
+  "6.png": { title:"Atomic Habits", author:"James Clear", href:"https://www.amazon.com/s?k=Atomic+Habits+James+Clear&tag=ivonnealdaz0c-20" },
+  "7.png": { title:"A New Earth", author:"Eckhart Tolle", href:"https://www.amazon.com/s?k=A+New+Earth+Eckhart+Tolle&tag=ivonnealdaz0c-20" },
+  "8.png": { title:"The Daily Stoic", author:"Ryan Holiday", href:"https://www.amazon.com/s?k=The+Daily+Stoic+Ryan+Holiday&tag=ivonnealdaz0c-20" },
   "9.png": { title:"Stillness Is the Key", author:"Ryan Holiday", href:"https://www.amazon.com/s?k=Stillness+Is+the+Key+Ryan+Holiday&tag=ivonnealdaz0c-20" },
 };
 
@@ -168,6 +168,7 @@ export default function LibraryWorld({ driveBooks = [] }: { driveBooks?: {name:s
           </div>
         </div>
       )}
+      {view === "books" && books.length > 0 ? <p className="book-affiliate-disclosure">As an Amazon Associate, I earn from qualifying purchases.</p> : null}
       {bookOpen && activeBook ? (
         <Modal className="book-dialog" label={activeBook.title} onClose={() => setBookOpen(false)} onKeyDown={event => { if(event.key === "ArrowLeft") moveBook(-1); if(event.key === "ArrowRight") moveBook(1); }}>
           <button type="button" className="book-dialog-close" onClick={() => setBookOpen(false)} aria-label="Close book details">×</button>
