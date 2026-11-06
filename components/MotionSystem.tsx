@@ -99,7 +99,8 @@ export default function MotionSystem() {
     }, { threshold: 0.08, rootMargin: "0px 0px -5% 0px" });
 
     const register = (el: HTMLElement, index: number) => {
-      if (pending.has(el) || el.closest(".home-minimal, .viewer, [role=dialog]")) return;\n      if (workPage && el.closest("#selected-work, #case-studies, #press, #writing")) return;
+      if (pending.has(el) || el.closest(".home-minimal, .viewer, [role=dialog]")) return;
+      if (workPage && el.closest("#selected-work, #case-studies, #press, #writing")) return;
       // Avoid nested animation layers competing for the same transform.
       if (el.closest("[data-motion-item]")) return;
       pending.add(el);
