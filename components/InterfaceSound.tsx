@@ -15,7 +15,7 @@ export default function InterfaceSound() {
   }, []);
 
   useEffect(() => {
-    if (!enabled) return;
+    if (!enabled || window.matchMedia("(max-width: 900px)").matches) return;
     const onClick = (event: MouseEvent) => {
       if (!event.isTrusted || event.button !== 0) return;
       const el = event.target;
