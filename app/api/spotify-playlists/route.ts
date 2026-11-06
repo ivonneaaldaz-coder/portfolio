@@ -1,8 +1,12 @@
 const PLAYLISTS = [
   "https://open.spotify.com/playlist/3MJORK5D5v7d5cSG1Cte6a",
+  "https://open.spotify.com/playlist/1cOVvYNVaBVup0Yu6fz9J1",
   "https://open.spotify.com/playlist/3G8AYHiczaJoHhcVjzh9TR",
+  "https://open.spotify.com/playlist/3tnq9920I6cEP0fzLYTDU0",
   "https://open.spotify.com/playlist/4szZdGqhnAnsFBMqkYtug9",
+  "https://open.spotify.com/playlist/0k23fYvaVXxyfo8j5zl0cU",
   "https://open.spotify.com/playlist/6srDkgcJIEo3QiOMvlRr1q",
+  "https://open.spotify.com/playlist/5vCPnlOrnR2IoYwBO0Ecgh",
   "https://open.spotify.com/playlist/3J1lx2Ydr5NrGEB5Eq6NJe",
 ];
 
