@@ -39,14 +39,14 @@ type MusicContextValue = {
 
 const FALLBACK_PLAYLISTS: MusicPlaylist[] = [
   { id:"3MJORK5D5v7d5cSG1Cte6a", url:"https://open.spotify.com/playlist/3MJORK5D5v7d5cSG1Cte6a", title:"Playlist 01", thumbnail_url:"", tracks:[] },
-  { id:"1cOVvYNVaBVup0Yu6fz9J1", url:"https://open.spotify.com/playlist/1cOVvYNVaBVup0Yu6fz9J1", title:"Playlist 02", thumbnail_url:"", tracks:[] },
-  { id:"3G8AYHiczaJoHhcVjzh9TR", url:"https://open.spotify.com/playlist/3G8AYHiczaJoHhcVjzh9TR", title:"Playlist 03", thumbnail_url:"", tracks:[] },
-  { id:"3tnq9920I6cEP0fzLYTDU0", url:"https://open.spotify.com/playlist/3tnq9920I6cEP0fzLYTDU0", title:"Playlist 04", thumbnail_url:"", tracks:[] },
-  { id:"4szZdGqhnAnsFBMqkYtug9", url:"https://open.spotify.com/playlist/4szZdGqhnAnsFBMqkYtug9", title:"Playlist 05", thumbnail_url:"", tracks:[] },
-  { id:"0k23fYvaVXxyfo8j5zl0cU", url:"https://open.spotify.com/playlist/0k23fYvaVXxyfo8j5zl0cU", title:"Playlist 06", thumbnail_url:"", tracks:[] },
-  { id:"6srDkgcJIEo3QiOMvlRr1q", url:"https://open.spotify.com/playlist/6srDkgcJIEo3QiOMvlRr1q", title:"Playlist 07", thumbnail_url:"", tracks:[] },
-  { id:"5vCPnlOrnR2IoYwBO0Ecgh", url:"https://open.spotify.com/playlist/5vCPnlOrnR2IoYwBO0Ecgh", title:"Playlist 08", thumbnail_url:"", tracks:[] },
-  { id:"3J1lx2Ydr5NrGEB5Eq6NJe", url:"https://open.spotify.com/playlist/3J1lx2Ydr5NrGEB5Eq6NJe", title:"Playlist 09", thumbnail_url:"", tracks:[] },
+  { id:"3J1lx2Ydr5NrGEB5Eq6NJe", url:"https://open.spotify.com/playlist/3J1lx2Ydr5NrGEB5Eq6NJe", title:"Playlist 02", thumbnail_url:"", tracks:[] },
+  { id:"6srDkgcJIEo3QiOMvlRr1q", url:"https://open.spotify.com/playlist/6srDkgcJIEo3QiOMvlRr1q", title:"Playlist 03", thumbnail_url:"", tracks:[] },
+  { id:"3G8AYHiczaJoHhcVjzh9TR", url:"https://open.spotify.com/playlist/3G8AYHiczaJoHhcVjzh9TR", title:"Playlist 04", thumbnail_url:"", tracks:[] },
+  { id:"3tnq9920I6cEP0fzLYTDU0", url:"https://open.spotify.com/playlist/3tnq9920I6cEP0fzLYTDU0", title:"Playlist 05", thumbnail_url:"", tracks:[] },
+  { id:"4szZdGqhnAnsFBMqkYtug9", url:"https://open.spotify.com/playlist/4szZdGqhnAnsFBMqkYtug9", title:"Playlist 06", thumbnail_url:"", tracks:[] },
+  { id:"6Wo5g4gmH9iaXxiNsMyApa", url:"https://open.spotify.com/playlist/6Wo5g4gmH9iaXxiNsMyApa", title:"Playlist 07", thumbnail_url:"", tracks:[] },
+  { id:"0k23fYvaVXxyfo8j5zl0cU", url:"https://open.spotify.com/playlist/0k23fYvaVXxyfo8j5zl0cU", title:"Playlist 08", thumbnail_url:"", tracks:[] },
+  { id:"5vCPnlOrnR2IoYwBO0Ecgh", url:"https://open.spotify.com/playlist/5vCPnlOrnR2IoYwBO0Ecgh", title:"Playlist 09", thumbnail_url:"", tracks:[] },
 ];
 
 const MusicContext = createContext<MusicContextValue | null>(null);
