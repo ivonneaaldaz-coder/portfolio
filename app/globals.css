@@ -11531,3 +11531,19 @@ html body::before, html body::after { content:none!important;display:none!import
 /* Quiet but readable affiliate notice beneath the book shelf. */
 .book-affiliate-disclosure{margin:28px 0 0;font-size:11px;line-height:1.6;letter-spacing:.01em;color:var(--muted, #858585);opacity:.8}
 @media(max-width:900px){.book-affiliate-disclosure{margin-top:22px;font-size:11px}}
+
+/* Deliberate, restrained entrances for in-page tab and disclosure changes. */
+@keyframes editorial-content-enter{
+ from{opacity:0;transform:translate3d(0,12px,0)}
+ to{opacity:1;transform:translate3d(0,0,0)}
+}
+@media(prefers-reduced-motion:no-preference){
+ .library-page .quotes-world .quote-entry{
+  animation:editorial-content-enter 900ms cubic-bezier(.22,1,.36,1) both;
+  animation-delay:calc(min(var(--quote-index,0),5) * 65ms);
+ }
+ .work-hybrid-page details[open] > .overview-expanded-list,
+ .work-hybrid-page details[open] > .overview-press-grid{
+  animation:editorial-content-enter 750ms cubic-bezier(.22,1,.36,1) both;
+ }
+}
