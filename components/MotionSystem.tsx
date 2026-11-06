@@ -10,6 +10,8 @@ const ITEMS = [
   ".art-v11-opening", ".art-v11 .gallery .work",
   ".art-v11 .editorial-row", ".art-v11 .history-item",
   ".travel-page-opening", ".travel-photo",
+  ".quotes-world .quote-entry", ".book-cover-grid > *", ".book-detail",
+  ".overview-expanded-list > *", ".overview-press-grid > div", ".overview-writing-head",
   ".selected-work-projects", ".selected-work-case",
   ".selected-work-brand-grid > *",
   ".selected-work-company-section", ".overview-press-row",
@@ -37,7 +39,7 @@ export default function MotionSystem() {
     const roots = Array.from(document.querySelectorAll<HTMLElement>(INTERIOR));
     if (!roots.length) return;
 
-    const seen = new WeakSet<HTMLElement>();
+    // Reveal each interior route as a whole, including sections that do not match\n    // individual item selectors (case-study copy, tabs and editorial layouts).\n    const rootAnimations = roots.map(root => root.animate(\n      [{ opacity: 0, transform: "translate3d(0, 10px, 0)" },\n       { opacity: 1, transform: "translate3d(0, 0, 0)" }],\n      { duration: 780, easing: "cubic-bezier(.22,1,.36,1)", fill: "both" }\n    ));\n    rootAnimations.forEach(animation => { animation.finished.catch(() => {}).finally(() => animation.cancel()); });\n    const seen = new WeakSet<HTMLElement>();
     const pending = new WeakSet<HTMLElement>();
     const observer = new IntersectionObserver(entries => {
       for (const entry of entries) {
@@ -88,7 +90,7 @@ export default function MotionSystem() {
         node instanceof HTMLElement && !node.hasAttribute("data-motion-item")))) scan();
     });
     roots.forEach(root => mutations.observe(root, { childList: true, subtree: true }));
-    return () => { observer.disconnect(); mutations.disconnect(); };
+    return () => { observer.disconnect(); mutations.disconnect(); rootAnimations.forEach(animation => animation.cancel()); };
   }, [pathname]);
 
   return null;
