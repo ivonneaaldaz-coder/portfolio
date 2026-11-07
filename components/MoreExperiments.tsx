@@ -5,7 +5,7 @@ type ExperimentKey = "the-lab" | "ask-eve" | "chatroom" | "snake" | "moodboard-a
 
 const experiments = [
   { key:"the-lab" as ExperimentKey, title:"The Lab", meta:"RETRO WINDOWS", href:"/experiments/the-lab", loop:"lab" },
-  { key:"ask-eve" as ExperimentKey, title:"Ask Eve", meta:"CONVERSATIONAL CV", href:"/experiments/ask-eve", loop:"eve" },
+  { key:"ask-eve" as ExperimentKey, title:"Ask Eve", meta:"CONVERSATIONAL CV", href:"https://ask.ivonnealdaz.com", loop:"eve" },
   { key:"chatroom" as ExperimentKey, title:"Chatroom", meta:"PUBLIC CHAT", href:"/experiments/chatroom", loop:"chat" },
   { key:"snake" as ExperimentKey, title:"Snake", meta:"GLOBAL LEADERBOARD", href:"/experiments/snake", loop:"snake" },
   { key:"moodboard-agent" as ExperimentKey, title:"Moodboard", meta:"PINTEREST → CAROUSEL", href:"/experiments/moodboard-agent", loop:null },
