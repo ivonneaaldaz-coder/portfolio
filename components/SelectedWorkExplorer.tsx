@@ -5,9 +5,9 @@ import ExperimentLoop from "@/components/ExperimentLoop";
 import { driveImageUrl } from "@/lib/googleDrive";
 
 const projects=[
-{title:"The Lab",meta:"Interactive portfolio",description:"A nostalgic desktop of projects, music, art, and playful experiments.",href:"/experiments/the-lab",loop:"lab"},
+{title:"The Lab",meta:"Interactive portfolio",description:"A nostalgic desktop of projects, music, art, and playful experiments.",href:"https://lab.ivonnealdaz.com",loop:"lab"},
 {title:"Ask Eve",meta:"Conversational CV",description:"Explore my work and experience through an interactive AI conversation.",href:"https://ask.ivonnealdaz.com",loop:"eve"},
-{title:"Chatroom",meta:"Community experiment",description:"An old-internet-inspired public chatroom.",href:"/experiments/chatroom",loop:"chat"},
+{title:"Chatroom",meta:"Community experiment",description:"An old-internet-inspired public chatroom.",href:"https://chat.ivonnealdaz.com",loop:"chat"},
 {title:"Snake",meta:"Game",description:"A playable experiment with a leaderboard.",href:"/experiments/snake",loop:"snake"},
 {title:"Watercolor",meta:"Interactive study",description:"An interactive watercolor trace that responds to movement and slowly fades away.",href:"https://paint.ivonnealdaz.com",loop:"watercolor"},
 {title:"Art Practice",meta:"Painting / Watercolor / Ceramics",description:"Selected artworks, exhibitions, and an evolving art practice.",href:"/art",loop:null,image:"/art-practice-card.jpg"},
