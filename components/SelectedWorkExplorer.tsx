@@ -7,7 +7,7 @@ import { driveImageUrl } from "@/lib/googleDrive";
 const projects=[
 {title:"The Lab",meta:"Interactive portfolio",description:"A nostalgic desktop of projects, music, art, and playful experiments.",href:"https://lab.ivonnealdaz.com/",loop:"lab"},
 {title:"Whitespace",meta:"Creative studio",description:"Brand, marketing, and operating systems.",href:"https://www.bywhitespace.com/",loop:"whitespace"},
-{title:"Ask Eve",meta:"Conversational CV",description:"Explore my work and experience through an interactive AI conversation.",href:"/experiments/ask-eve",loop:"eve"},
+{title:"Ask Eve",meta:"Conversational CV",description:"Explore my work and experience through an interactive AI conversation.",href:"https://ask.ivonnealdaz.com",loop:"eve"},
 {title:"Art Practice",meta:"Painting / Watercolor / Ceramics",description:"Selected artworks, exhibitions, and an evolving art practice.",href:"/art",loop:null,image:"/art-practice-card.jpg"},
 {title:"Good World Living",meta:"Creative platform",description:"A collection of art, travel, experiences, and intentional living.",href:"https://www.goodworldliving.com/",loop:"gwl"},
 {title:"Watercolor",meta:"Interactive study",description:"An interactive watercolor trace that responds to movement and slowly fades away.",href:"https://paint.ivonnealdaz.com/",loop:"watercolor"},
