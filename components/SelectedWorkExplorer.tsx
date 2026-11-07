@@ -6,7 +6,7 @@ import { driveImageUrl } from "@/lib/googleDrive";
 
 const projects=[
 {title:"The Lab",meta:"Interactive portfolio",description:"A nostalgic desktop of projects, music, art, and playful experiments.",href:"/experiments/the-lab",loop:"lab"},
-{title:"Ask Eve",meta:"Conversational CV",description:"Explore my work and experience through an interactive AI conversation.",href:"/experiments/ask-eve",loop:"eve"},
+{title:"Ask Eve",meta:"Conversational CV",description:"Explore my work and experience through an interactive AI conversation.",href:"https://ask.ivonnealdaz.com",loop:"eve"},
 {title:"Chatroom",meta:"Community experiment",description:"An old-internet-inspired public chatroom.",href:"/experiments/chatroom",loop:"chat"},
 {title:"Snake",meta:"Game",description:"A playable experiment with a leaderboard.",href:"/experiments/snake",loop:"snake"},
 {title:"Watercolor",meta:"Interactive study",description:"An interactive watercolor trace that responds to movement and slowly fades away.",href:"https://paint.ivonnealdaz.com",loop:"watercolor"},
