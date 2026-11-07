@@ -16,7 +16,7 @@ export default function AskEveExperiment() {
           Instead of scrolling through a résumé, visitors can ask questions about my work,
           projects, background, art, and what I’m building.
         </p>
-        <a className="experiment-launch" href="https://lab.ivonnealdaz.com/#ask-eve" target="_blank" rel="noreferrer">
+        <a className="experiment-launch" href="https://ask.ivonnealdaz.com" target="_blank" rel="noreferrer">
           Launch Ask Eve ↗︎
         </a>
       </header>
