@@ -1,7 +1,9 @@
 "use client";
 
 import { usePathname } from "next/navigation";
+import { useLayoutEffect, useRef } from "react";
 import Sidebar from "@/components/Sidebar";
+import InterfaceSound from "@/components/InterfaceSound";
 import MobileNav from "@/components/MobileNav";
 import ThemeToggle from "@/components/ThemeToggle";
 import PlainTextArrows from "@/components/PlainTextArrows";
@@ -11,6 +13,15 @@ import GlobalMusicControls from "@/components/GlobalMusicControls";
 
 export default function SiteFrame({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
+  const previousPath = useRef(pathname);
+  useLayoutEffect(() => {
+    if (previousPath.current === pathname) return;
+    previousPath.current = pathname;
+    if (window.location.hash) return;
+    window.scrollTo({top:0,left:0,behavior:"instant"});
+    const frame = requestAnimationFrame(() => window.scrollTo({top:0,left:0,behavior:"instant"}));
+    return () => cancelAnimationFrame(frame);
+  }, [pathname]);
   const isStandaloneApp = pathname.startsWith("/experiments/moodboard-agent");
 
   return (
@@ -29,6 +40,7 @@ export default function SiteFrame({ children }: { children: React.ReactNode }) {
             <main className="site-main">{children}<SiteFooter /></main>
           </div>
           <GlobalMusicControls />
+          <InterfaceSound />
         </>
       )}
     </MusicProvider>

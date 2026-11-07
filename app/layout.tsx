@@ -21,7 +21,7 @@ const themeScript = `
     var saved = localStorage.getItem('portfolio-theme');
     var theme = saved === 'dark' || saved === 'light'
       ? saved
-      : (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+      : 'dark';
     document.documentElement.dataset.theme = theme;
   } catch (e) {}
 })();

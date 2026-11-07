@@ -39,10 +39,14 @@ type MusicContextValue = {
 
 const FALLBACK_PLAYLISTS: MusicPlaylist[] = [
   { id:"3MJORK5D5v7d5cSG1Cte6a", url:"https://open.spotify.com/playlist/3MJORK5D5v7d5cSG1Cte6a", title:"Playlist 01", thumbnail_url:"", tracks:[] },
-  { id:"3G8AYHiczaJoHhcVjzh9TR", url:"https://open.spotify.com/playlist/3G8AYHiczaJoHhcVjzh9TR", title:"Playlist 02", thumbnail_url:"", tracks:[] },
-  { id:"4szZdGqhnAnsFBMqkYtug9", url:"https://open.spotify.com/playlist/4szZdGqhnAnsFBMqkYtug9", title:"Playlist 03", thumbnail_url:"", tracks:[] },
-  { id:"6srDkgcJIEo3QiOMvlRr1q", url:"https://open.spotify.com/playlist/6srDkgcJIEo3QiOMvlRr1q", title:"Playlist 04", thumbnail_url:"", tracks:[] },
-  { id:"3J1lx2Ydr5NrGEB5Eq6NJe", url:"https://open.spotify.com/playlist/3J1lx2Ydr5NrGEB5Eq6NJe", title:"Playlist 05", thumbnail_url:"", tracks:[] },
+  { id:"3J1lx2Ydr5NrGEB5Eq6NJe", url:"https://open.spotify.com/playlist/3J1lx2Ydr5NrGEB5Eq6NJe", title:"Playlist 02", thumbnail_url:"", tracks:[] },
+  { id:"6srDkgcJIEo3QiOMvlRr1q", url:"https://open.spotify.com/playlist/6srDkgcJIEo3QiOMvlRr1q", title:"Playlist 03", thumbnail_url:"", tracks:[] },
+  { id:"3G8AYHiczaJoHhcVjzh9TR", url:"https://open.spotify.com/playlist/3G8AYHiczaJoHhcVjzh9TR", title:"Playlist 04", thumbnail_url:"", tracks:[] },
+  { id:"3tnq9920I6cEP0fzLYTDU0", url:"https://open.spotify.com/playlist/3tnq9920I6cEP0fzLYTDU0", title:"Playlist 05", thumbnail_url:"", tracks:[] },
+  { id:"4szZdGqhnAnsFBMqkYtug9", url:"https://open.spotify.com/playlist/4szZdGqhnAnsFBMqkYtug9", title:"Playlist 06", thumbnail_url:"", tracks:[] },
+  { id:"6Wo5g4gmH9iaXxiNsMyApa", url:"https://open.spotify.com/playlist/6Wo5g4gmH9iaXxiNsMyApa", title:"Playlist 07", thumbnail_url:"", tracks:[] },
+  { id:"0k23fYvaVXxyfo8j5zl0cU", url:"https://open.spotify.com/playlist/0k23fYvaVXxyfo8j5zl0cU", title:"Playlist 08", thumbnail_url:"", tracks:[] },
+  { id:"5vCPnlOrnR2IoYwBO0Ecgh", url:"https://open.spotify.com/playlist/5vCPnlOrnR2IoYwBO0Ecgh", title:"Playlist 09", thumbnail_url:"", tracks:[] },
 ];
 
 const MusicContext = createContext<MusicContextValue | null>(null);
@@ -86,7 +90,11 @@ export function MusicProvider({ children }:{ children:React.ReactNode }) {
   const requestedRef = useRef<{playlistIndex:number;trackIndex:number;uri:string} | null>(null);
   const pendingRef = useRef<{playlistIndex:number;trackIndex:number;uri:string}|null>(null);
   const shouldContinueRef = useRef(false);
-  const retriedUriRef = useRef("");
+  const confirmedUriRef = useRef("");
+  const hasProgressRef = useRef(false);
+  const playbackPausedRef = useRef(true);
+  const advanceRef = useRef<() => void>(() => {});
+  const lastCompletedUriRef = useRef("");
 
   useEffect(() => {
     playlistsRef.current = playlists;
@@ -118,16 +126,18 @@ export function MusicProvider({ children }:{ children:React.ReactNode }) {
     const pending = pendingRef.current;
     if (!controller || !readyRef.current || !pending) return;
     try {
-      // The SDK queues play during entity loading. Do not duplicate that queue
-      // with timers, or mark playback active before the iframe reports it.
-      if (loadedUriRef.current !== pending.uri) {
-        controller.loadEntity(pending.uri);
-        loadedUriRef.current = pending.uri;
-      }
-      controller.play();
-      retriedUriRef.current = "";
       requestedRef.current = pending;
+      if (loadedUriRef.current !== pending.uri) {
+        // loadEntity replaces the iframe document. Do not enqueue Play in the
+        // SDK's timer-based loading queue: retain one cancellable intent here.
+        readyRef.current = false;
+        loadedUriRef.current = pending.uri;
+        controller.loadEntity(pending.uri);
+        return;
+      }
+      // Consume before calling the SDK, so repeated ready events cannot replay.
       pendingRef.current = null;
+      if (shouldContinueRef.current) controller.play();
     } catch (error) {
       console.warn("Spotify playback request failed", error);
     }
@@ -149,29 +159,50 @@ export function MusicProvider({ children }:{ children:React.ReactNode }) {
         setPlayingTrack(found.trackIndex);
       }
     };
+    // loadEntity navigates the iframe. Events already queued by the old entity
+    // must never replace the selected track, progress, or transport state.
+    const acceptsEvent = (data: NonNullable<SpotifyEvent["data"]>) => {
+      const expected = pendingRef.current?.uri || requestedRef.current?.uri || loadedUriRef.current;
+      if (data.playingURI) return !expected || data.playingURI === expected;
+      return !!expected && confirmedUriRef.current === expected;
+    };
     const onStarted = (event:SpotifyEvent) => {
-      if (disposed) return;
-      syncTrack(event.data?.playingURI || "");
-      retriedUriRef.current = "";
+      if (disposed || !event.data || !acceptsEvent(event.data)) return;
+      const uri = event.data.playingURI || loadedUriRef.current;
+      confirmedUriRef.current = uri;
+      syncTrack(uri);
+      playbackPausedRef.current = false;
       setIsPaused(false);
       setIsBuffering(false);
     };
     const onUpdate = (event:SpotifyEvent) => {
       if (disposed) return;
       const data = event.data;
-      if (!data) return;
-      if (typeof data.isPaused === "boolean") setIsPaused(data.isPaused);
-      // Retry once when Spotify finishes loading a newly requested track
-      // but dropped the play command during iframe navigation.
-      const requested = requestedRef.current;
-      if (shouldContinueRef.current && requested && data.playingURI === requested.uri && data.isPaused === true && !data.isBuffering && retriedUriRef.current !== requested.uri) {
-        retriedUriRef.current = requested.uri;
-        try { controllerRef.current?.play(); } catch {}
+      if (!data || !acceptsEvent(data)) return;
+      const uri = data.playingURI || confirmedUriRef.current;
+      if (data.isPaused === false) {
+        confirmedUriRef.current = uri;
+        if (typeof data.position === "number" && data.position > 0) hasProgressRef.current = true;
+      }
+      // Spotify previews can finish with isPaused:false. The exact reported
+      // endpoint, after confirmed progress, is authoritative for completion.
+      const completed = hasProgressRef.current && confirmedUriRef.current === uri &&
+        data.isBuffering === false && typeof data.duration === "number" && data.duration > 0 &&
+        typeof data.position === "number" && data.position >= data.duration;
+      if (typeof data.isPaused === "boolean") {
+        playbackPausedRef.current = completed || data.isPaused;
+        setIsPaused(completed || data.isPaused);
       }
       if (typeof data.isBuffering === "boolean") setIsBuffering(data.isBuffering);
       if (typeof data.position === "number") setPosition(data.position);
       if (typeof data.duration === "number") setDuration(data.duration);
       syncTrack(data.playingURI || "");
+      // A paused/loading/autoplay-denied event is not an instruction to Play.
+      // Only advance a confirmed session that actually progressed to its end.
+      if (shouldContinueRef.current && completed && uri && lastCompletedUriRef.current !== uri) {
+        lastCompletedUriRef.current = uri;
+        advanceRef.current();
+      }
     };
     const initialize = () => {
       if (disposed || creating || controllerRef.current) return;
@@ -206,9 +237,6 @@ export function MusicProvider({ children }:{ children:React.ReactNode }) {
             readyRef.current = true;
             setControllerReady(true);
             executePending();
-            if (shouldContinueRef.current && requestedRef.current && !pendingRef.current) {
-              try { controller.play(); } catch {}
-            }
           });
           controller.addListener("playback_started", onStarted);
           controller.addListener("playback_update", onUpdate);
@@ -246,7 +274,9 @@ export function MusicProvider({ children }:{ children:React.ReactNode }) {
     const track = playlist.tracks[safe];
     setSelectedTrackIndex(safe);
     shouldContinueRef.current = true;
-    retriedUriRef.current = "";
+    confirmedUriRef.current = "";
+    hasProgressRef.current = false;
+    lastCompletedUriRef.current = "";
     pendingRef.current = { playlistIndex,trackIndex:safe,uri:track.uri };
 
     initializeRef.current();
@@ -272,17 +302,34 @@ export function MusicProvider({ children }:{ children:React.ReactNode }) {
     // Once a session has been requested, browsing must not interrupt that session.
     const controller = controllerRef.current;
     if (controllerReady && controller && !requestedRef.current && !pendingRef.current && loadedUriRef.current !== track.uri) {
-      controller.loadEntity(track.uri);
+      readyRef.current = false;
       loadedUriRef.current = track.uri;
+      controller.loadEntity(track.uri);
     }
   }, [playlists, selectedIndex, selectedTrackIndex, controllerReady, executePending]);
 
   const toggle = () => {
     const controller = controllerRef.current;
+    if (pendingRef.current && shouldContinueRef.current) {
+      // Pause must cancel a track change even before the new embed is ready.
+      shouldContinueRef.current = false;
+      pendingRef.current = null;
+      earlyPlayRef.current = null;
+      controller?.pause();
+      return;
+    }
     if (controller && readyRef.current && requestedRef.current) {
       try {
-        shouldContinueRef.current = isPaused;
-        controller.togglePlay();
+        // Explicit commands remain deterministic before React receives the next
+        // state event; toggling an unknown iframe state can invert user intent.
+        const resume = playbackPausedRef.current;
+        shouldContinueRef.current = resume;
+        if (resume) controller.resume();
+        else {
+          pendingRef.current = null;
+          earlyPlayRef.current = null;
+          controller.pause();
+        }
         return;
       } catch {}
     }
@@ -291,13 +338,16 @@ export function MusicProvider({ children }:{ children:React.ReactNode }) {
   };
 
   const step = (delta:number) => {
-    const unconfirmed = requestedRef.current?.uri !== playingUri ? requestedRef.current : null;
+    const unconfirmed = pendingRef.current ?? (requestedRef.current?.uri !== playingUri ? requestedRef.current : null);
     const playlistIndex = unconfirmed?.playlistIndex ?? (playingPlaylist >= 0 ? playingPlaylist : selectedIndex);
     const playlist = playlistsRef.current[playlistIndex];
     if (!playlist?.tracks.length) return;
     const base = unconfirmed?.trackIndex ?? (playingTrack >= 0 ? playingTrack : selectedTrackIndex);
-    playTrack(playlistIndex,base + delta);
+    const nextIndex = ((base + delta) % playlist.tracks.length + playlist.tracks.length) % playlist.tracks.length;
+    playTrack(playlistIndex,nextIndex);
   };
+
+  advanceRef.current = () => step(1);
 
   const setSelectedIndex = (index:number) => {
     const safe = ((index % playlistsRef.current.length) + playlistsRef.current.length) % playlistsRef.current.length;

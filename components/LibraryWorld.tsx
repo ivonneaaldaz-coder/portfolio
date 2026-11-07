@@ -1,19 +1,31 @@
 "use client";
 
-import { useState } from "react";
+import { useRef, useState } from "react";
 import Modal from "./Modal";
 import Link from "next/link";
 
 const knownBooks: Record<string,{ title:string; author:string; href:string|null }> = {
-  "1.png": { title:"The Alchemist", author:"Paulo Coelho", href:"https://amzn.to/4sULp9V" },
-  "2.png": { title:"The Four Agreements", author:"Don Miguel Ruiz", href:"https://amzn.to/4s24lmx" },
-  "3.png": { title:"The Artist’s Way", author:"Julia Cameron", href:null },
-  "4.png": { title:"The 48 Laws of Power", author:"Robert Greene", href:"https://amzn.to/4sRdlLS" },
-  "5.png": { title:"The Creative Act: A Way of Being", author:"Rick Rubin", href:null },
-  "6.png": { title:"Atomic Habits", author:"James Clear", href:"https://amzn.to/4bmYovk" },
-  "7.png": { title:"A New Earth", author:"Eckhart Tolle", href:"https://amzn.to/4soqFHT" },
-  "8.png": { title:"The Daily Stoic", author:"Ryan Holiday", href:"https://amzn.to/4t1TolQ" },
-  "9.png": { title:"Stillness Is the Key", author:"Ryan Holiday", href:null },
+  "1.png": { title:"The Alchemist", author:"Paulo Coelho", href:"https://www.amazon.com/s?k=The+Alchemist+Paulo+Coelho&tag=ivonnealdaz0c-20" },
+  "2.png": { title:"The Four Agreements", author:"Don Miguel Ruiz", href:"https://www.amazon.com/s?k=The+Four+Agreements+Don+Miguel+Ruiz&tag=ivonnealdaz0c-20" },
+  "3.png": { title:"The Artist’s Way", author:"Julia Cameron", href:"https://www.amazon.com/s?k=The+Artists+Way+Julia+Cameron&tag=ivonnealdaz0c-20" },
+  "4.png": { title:"The 48 Laws of Power", author:"Robert Greene", href:"https://www.amazon.com/s?k=The+48+Laws+of+Power+Robert+Greene&tag=ivonnealdaz0c-20" },
+  "5.png": { title:"The Creative Act: A Way of Being", author:"Rick Rubin", href:"https://www.amazon.com/s?k=The+Creative+Act+Rick+Rubin&tag=ivonnealdaz0c-20" },
+  "6.png": { title:"Atomic Habits", author:"James Clear", href:"https://www.amazon.com/s?k=Atomic+Habits+James+Clear&tag=ivonnealdaz0c-20" },
+  "7.png": { title:"A New Earth", author:"Eckhart Tolle", href:"https://www.amazon.com/s?k=A+New+Earth+Eckhart+Tolle&tag=ivonnealdaz0c-20" },
+  "8.png": { title:"The Daily Stoic", author:"Ryan Holiday", href:"https://www.amazon.com/s?k=The+Daily+Stoic+Ryan+Holiday&tag=ivonnealdaz0c-20" },
+  "9.png": { title:"Stillness Is the Key", author:"Ryan Holiday", href:"https://www.amazon.com/s?k=Stillness+Is+the+Key+Ryan+Holiday&tag=ivonnealdaz0c-20" },
+};
+
+const bookNotes: Record<string,{summary:string;why:string}> = {
+ "1.png":{summary:"A fable about a shepherd following a dream and learning to recognize what matters along the way.",why:"A reminder to trust curiosity and keep moving toward the life you want."},
+ "2.png":{summary:"Four practical principles for questioning assumptions, communicating clearly, and taking things less personally.",why:"A useful reset for how we speak to ourselves and to others."},
+ "3.png":{summary:"A creative recovery guide built around daily writing, attention, and small acts of making.",why:"Permission to create before everything feels figured out."},
+ "4.png":{summary:"An examination of power, influence, and the patterns behind strategic behavior.",why:"An interesting lens on human motives and social dynamics."},
+ "5.png":{summary:"Rick Rubin explores creativity as a way of noticing and engaging with the world, not just producing work.",why:"A reminder that creative practice starts with paying attention."},
+ "6.png":{summary:"A practical framework for building habits through small, repeatable changes to your environment and routines.",why:"The idea that consistency can matter more than intensity."},
+ "7.png":{summary:"A reflection on ego, awareness, and the possibility of living with more presence.",why:"An invitation to notice the stories we tell ourselves."},
+ "8.png":{summary:"Daily reflections inspired by Stoic philosophy, focused on judgment, resilience, and intentional action.",why:"A small dose of perspective for ordinary days."},
+ "9.png":{summary:"An exploration of stillness as a source of clarity, discipline, and better decisions.",why:"A counterweight to the pressure to always be doing more."},
 };
 
 const quotes = [
@@ -86,9 +98,13 @@ export default function LibraryWorld({ driveBooks = [] }: { driveBooks?: {name:s
     title:knownBooks[file.name]?.title ?? file.name.replace(/\.[^.]+$/, "").replace(/[-_]+/g," "),
     author:knownBooks[file.name]?.author ?? "From the shelf",
     href:knownBooks[file.name]?.href ?? null,
+    summary:bookNotes[file.name]?.summary ?? "",
+    why:bookNotes[file.name]?.why ?? "",
     index,
   }));
 
+  const touchStart = useRef<{x:number;y:number}|null>(null);
+  const moveBook = (direction:number) => setSelected(current => (current + direction + books.length) % books.length);
   const [view,setView] = useState<"books"|"quotes">("books");
   const [bookOpen, setBookOpen] = useState(false);
   const [selected,setSelected] = useState(0);
@@ -125,6 +141,8 @@ export default function LibraryWorld({ driveBooks = [] }: { driveBooks?: {name:s
             <aside className="book-detail">
               <p className="book-author">{activeBook.author}</p>
               <h2>{activeBook.title}</h2>
+              {activeBook.summary ? <p className="book-summary">{activeBook.summary}</p> : null}
+              {activeBook.why ? <><p className="book-why-label">Why it’s on the shelf</p><p className="book-why-note">{activeBook.why}</p></> : null}
               {activeBook.href ? <a href={activeBook.href} target="_blank" rel="noreferrer">View book ↗︎</a> : null}
             </aside>
           ) : null}
@@ -150,15 +168,21 @@ export default function LibraryWorld({ driveBooks = [] }: { driveBooks?: {name:s
           </div>
         </div>
       )}
+      {view === "books" && books.length > 0 ? <p className="book-affiliate-disclosure">As an Amazon Associate, I earn from qualifying purchases.</p> : null}
       {bookOpen && activeBook ? (
-        <Modal className="book-dialog" label={activeBook.title} onClose={() => setBookOpen(false)}>
+        <Modal className="book-dialog" label={activeBook.title} onClose={() => setBookOpen(false)} onKeyDown={event => { if(event.key === "ArrowLeft") moveBook(-1); if(event.key === "ArrowRight") moveBook(1); }}>
           <button type="button" className="book-dialog-close" onClick={() => setBookOpen(false)} aria-label="Close book details">×</button>
-          <img src={activeBook.image} alt="" />
+          <div className="book-dialog-swipe-content" style={{touchAction:"pan-y"}} onTouchStart={e=>{const t=e.touches[0];touchStart.current={x:t.clientX,y:t.clientY}}} onTouchCancel={()=>{touchStart.current=null}} onTouchEnd={e=>{const a=touchStart.current;touchStart.current=null;if(!a)return;const t=e.changedTouches[0];const dx=t.clientX-a.x,dy=t.clientY-a.y;if(Math.abs(dx)>=45&&Math.abs(dx)>Math.abs(dy)*1.2)moveBook(dx<0?1:-1)}}>
+          <div className="book-dialog-swipe" style={{touchAction:"pan-y"}}><img src={activeBook.image} alt="" draggable={false} /></div>
           <div className="book-detail">
             <p className="book-author">{activeBook.author}</p>
             <h2>{activeBook.title}</h2>
+            {activeBook.summary ? <p className="book-summary">{activeBook.summary}</p> : null}
+            {activeBook.why ? <><p className="book-why-label">Why it’s on the shelf</p><p className="book-why-note">{activeBook.why}</p></> : null}
             {activeBook.href ? <a href={activeBook.href} target="_blank" rel="noreferrer">View book ↗︎</a> : null}
           </div>
+          </div>
+          <nav className="book-dialog-navigation" aria-label="Browse books"><button type="button" onClick={()=>moveBook(-1)} aria-label="Previous book">←</button><span>{safeSelected+1} / {books.length} · Swipe to explore</span><button type="button" onClick={()=>moveBook(1)} aria-label="Next book">→</button></nav>
         </Modal>
       ) : null}
     </div>

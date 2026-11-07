@@ -1,6 +1,7 @@
 "use client";
 
 import { useMusic } from "@/components/MusicProvider";
+import MusicTransportIcon from "@/components/MusicTransportIcon";
 
 function formatTime(ms:number) {
   const total = Math.max(0,Math.floor((ms || 0)/1000));
@@ -15,7 +16,7 @@ export default function SpotifyPlaylists() {
 
   return (
     <>
-      <style>{`@media(max-width:900px){.music-page .portfolio-music-controls{display:flex;align-items:center;justify-content:center;gap:8px}.music-page .portfolio-music-controls button{min-width:44px!important;min-height:44px!important;display:inline-flex!important;align-items:center;justify-content:center;touch-action:manipulation}.music-page .portfolio-music-controls .portfolio-music-play{min-width:48px!important;min-height:48px!important}}`}</style>
+      <style>{`@media(max-width:900px){.music-page .portfolio-music-controls{display:flex;align-items:center;justify-content:center;gap:8px}.music-page .portfolio-music-controls button{min-width:44px!important;min-height:44px!important;display:inline-flex!important;align-items:center;justify-content:center;touch-action:manipulation}.music-page .portfolio-music-controls .portfolio-music-play{min-width:48px!important;min-height:48px!important}.music-page .portfolio-music-play svg{display:block;flex-shrink:0}`}</style>
       <div className="music-console">
         <div className="portfolio-music-player">
           <div className="portfolio-music-cover">
@@ -31,7 +32,7 @@ export default function SpotifyPlaylists() {
           <div className="portfolio-music-controls">
             <button type="button" onClick={music.previous} aria-label="Previous song">←</button>
             <button type="button" className="portfolio-music-play" onClick={music.toggle} aria-label={music.isPaused ? "Play music" : "Pause music"}>
-              <span aria-hidden="true"><span className="music-desktop-symbol">{music.isPaused ? "▶" : "Ⅱ"}</span><span className="music-mobile-symbol">{music.isPaused ? "\u25B6\uFE0E" : "Ⅱ"}</span></span>
+              <MusicTransportIcon paused={music.isPaused} />
             </button>
             <button type="button" onClick={music.next} aria-label="Next song">→</button>
           </div>
@@ -69,6 +70,9 @@ export default function SpotifyPlaylists() {
               <div className="music-tracklist-empty">Tracks are loading…</div>
             )}
           </div>
+          {(selected?.tracks?.length ?? 0) > 3 && (
+            <p className="music-tracklist-hint">Scroll to explore tracks <span aria-hidden="true">↓</span></p>
+          )}
         </div>
       </div>
 
@@ -86,11 +90,12 @@ export default function SpotifyPlaylists() {
                   <h3>{item.title || "Playlist " + String(index + 1).padStart(2,"0")}</h3>
                 </div>
               </button>
-              <a href={item.url} target="_blank" rel="noreferrer">Open playlist on Spotify ↗︎</a>
+
             </div>
           );
         })}
       </div>
+      <div className="music-spotify-follow"><a href="https://open.spotify.com/user/ivonnealdaz" target="_blank" rel="noopener noreferrer">Follow on Spotify ↗</a></div>
     </>
   );
 }

@@ -10940,3 +10940,618 @@ html body::before, html body::after { content:none!important;display:none!import
     line-height:1.55!important;
   }
 }
+
+/* Home Play menu: opaque, elevated and softly pill-rounded in both themes. */
+.home-minimal .home-play-disclosure[open]{z-index:30!important}
+.home-minimal .home-play-disclosure nav{
+  background:var(--bg)!important;
+  background-color:var(--bg)!important;
+  opacity:1!important;
+  backdrop-filter:none!important;
+  -webkit-backdrop-filter:none!important;
+  border:1px solid var(--line)!important;
+  border-radius:22px!important;
+  padding:12px 18px!important;
+  box-shadow:0 16px 36px rgba(0,0,0,.18)!important;
+  z-index:100!important;
+  isolation:isolate;
+}
+/* Subscribe form is a single outlined pill, with a rounded submit end. */
+.sidebar-subscribe form{
+  border-radius:999px!important;
+  overflow:hidden!important;
+}
+.sidebar-subscribe input{border-radius:999px 0 0 999px!important}
+.sidebar-subscribe button{border-radius:0 999px 999px 0!important}
+
+/* Editorial page entrance: one quiet reveal, without animating the persistent nav/player. */
+@keyframes editorial-page-enter{from{opacity:0;translate:0 12px}to{opacity:1;translate:0 0}}
+.site-main > .page:not(.home-minimal),
+.site-main > main.page:not(.home-minimal),
+.site-main > section.page:not(.home-minimal){
+  animation:editorial-page-enter .8s cubic-bezier(.22,1,.36,1) both;
+}
+@media(prefers-reduced-motion:reduce){
+  .site-main > .page:not(.home-minimal),
+  .site-main > main.page:not(.home-minimal),
+  .site-main > section.page:not(.home-minimal){animation:none!important}
+}
+/* Keep hero links above the selected-work line; their existing intro animation
+   creates separate stacking contexts even when the menu background is opaque. */
+.home-minimal .home-minimal-links{position:relative!important;z-index:20!important}
+.home-minimal .home-proof{position:relative!important;z-index:1!important}
+.home-minimal .home-play-disclosure[open]{z-index:25!important}
+.home-minimal .home-play-disclosure nav{
+  background:#f2f0ea!important;
+  background-color:#f2f0ea!important;
+  opacity:1!important;
+  border-radius:22px!important;
+  z-index:50!important;
+}
+:root[data-theme="dark"] .home-minimal .home-play-disclosure nav{
+  background:#11110f!important;
+  background-color:#11110f!important;
+}
+/* Case cards: visual height should follow each asset, not reserve a tall frame. */
+@media(max-width:600px){
+  .work-hybrid-page .selected-work-explorer .selected-work-case-visual.has-media{
+    padding:10px 18px 0!important;
+    margin-bottom:0!important;
+  }
+  .work-hybrid-page .selected-work-explorer .selected-work-case-visual.has-media img.case-still{
+    max-height:190px!important;
+    margin:0 auto!important;
+  }
+  .work-hybrid-page .selected-work-explorer .selected-work-case-copy{
+    padding-top:10px!important;
+  }
+  /* The Future of Marketing composition already has the right spacing. */
+  .work-hybrid-page .selected-work-explorer .selected-work-case:has(.selected-work-podcast-link) .selected-work-case-visual.has-media{
+    padding-top:18px!important;
+  }
+  .work-hybrid-page .selected-work-explorer .selected-work-case:has(.selected-work-podcast-link) .selected-work-case-visual.has-media img.case-still{
+    max-height:240px!important;
+  }
+  .work-hybrid-page .selected-work-explorer .selected-work-case:has(.selected-work-podcast-link) .selected-work-case-copy{
+    padding-top:16px!important;
+  }
+}
+
+/* Final mobile case-study rhythm: remove the old 220px visual slot.
+   Use natural image height and allocate space beneath the copy instead. */
+@media(max-width:900px){
+  .work-hybrid-page .selected-work-explorer .selected-work-case{
+    display:flex!important;
+    flex-direction:column!important;
+    gap:0!important;
+    min-height:0!important;
+    height:auto!important;
+  }
+  .work-hybrid-page .selected-work-explorer .selected-work-case-visual.has-media{
+    display:flex!important;
+    flex-direction:column!important;
+    align-items:center!important;
+    justify-content:flex-start!important;
+    height:auto!important;
+    min-height:0!important;
+    max-height:none!important;
+    aspect-ratio:auto!important;
+    padding:18px 22px 0!important;
+    margin:0!important;
+    overflow:visible!important;
+  }
+  .work-hybrid-page .selected-work-explorer .selected-work-case-visual.has-media .selected-work-case-mobile-meta{
+    align-self:stretch!important;
+    width:100%!important;
+  }
+  .work-hybrid-page .selected-work-explorer .selected-work-case-visual.has-media img.case-still{
+    position:static!important;
+    display:block!important;
+    width:100%!important;
+    height:auto!important;
+    max-width:360px!important;
+    max-height:220px!important;
+    object-fit:contain!important;
+    margin:0 auto!important;
+    flex:0 0 auto!important;
+  }
+  .work-hybrid-page .selected-work-explorer .selected-work-case-copy{
+    display:flex!important;
+    flex-direction:column!important;
+    min-height:0!important;
+    justify-content:flex-start!important;
+    margin:0!important;
+    padding:12px 22px 42px!important;
+  }
+  .work-hybrid-page .selected-work-explorer .selected-work-case:has(.selected-work-podcast-link) .selected-work-case-visual.has-media img.case-still{
+    max-height:240px!important;
+  }
+}
+@media(prefers-reduced-motion:reduce){
+  .page-enter,.reveal-target{transition:none!important;opacity:1!important;transform:none!important}
+}
+
+/* Nov 3 mobile polish: a continuous, single-cell grid border system.
+   Grid gap draws every divider consistently, including the outside edges. */
+.work-hybrid-page .selected-work-explorer .selected-work-brand-grid{
+  display:grid!important;
+  grid-template-columns:repeat(5,minmax(0,1fr))!important;
+  gap:1px!important;
+  padding:1px!important;
+  border:0!important;
+  background:var(--line)!important;
+  overflow:hidden!important;
+}
+.work-hybrid-page .selected-work-explorer .selected-work-brand-grid>button,
+.work-hybrid-page .selected-work-explorer .selected-work-brand-grid>.selected-work-brand-toggle{
+  order:0!important;
+  border:0!important;
+  box-shadow:none!important;
+  background:var(--bg)!important;
+  min-width:0!important;
+}
+.work-hybrid-page .selected-work-explorer .selected-work-brand-grid>.selected-work-brand-toggle{
+  order:999!important;
+  padding:0!important;
+  min-height:78px!important;
+}
+.work-hybrid-page .selected-work-explorer .selected-work-brand-grid>button.active{
+  background:rgba(140,140,140,.18)!important;
+}
+.work-hybrid-page .selected-work-explorer .selected-work-brand-grid>.selected-work-brand-toggle>.selected-work-more-brands{
+  min-height:78px!important;
+  width:100%!important;
+}
+@media(max-width:900px){
+ .work-hybrid-page .selected-work-explorer .selected-work-brand-grid{
+   grid-template-columns:repeat(2,minmax(0,1fr))!important;
+ }
+ .work-hybrid-page .selected-work-explorer .selected-work-brand-grid>button{
+   border:0!important;
+   order:0!important;
+ }
+ .work-hybrid-page .selected-work-explorer .selected-work-brand-grid>.selected-work-brand-toggle{
+   order:999!important;
+   border:0!important;
+ }
+}
+/* A real capsule, not a square CTA, on both breakpoints. */
+.site-main>.site-footer .footer-subscribe-link,
+.editorial-footer .footer-subscribe-link{
+  border-radius:999px!important;
+  padding:13px 25px!important;
+  justify-content:center!important;
+}
+.pinterest-reference-page .pinterest-filter-hint{
+  margin-bottom:clamp(26px,4vw,44px)!important;
+}
+/* Center the entire two-line copy block, rather than using unequal optical padding. */
+.about-editorial-feature .about-editorial-cards>a,
+.about-editorial-feature .about-editorial-cards>.building-card{
+  display:flex!important;
+  flex-direction:column!important;
+  align-items:stretch!important;
+  justify-content:center!important;
+  gap:clamp(20px,3vw,28px)!important;
+  padding-top:30px!important;
+  padding-bottom:30px!important;
+}
+@media(min-width:781px){
+ .about-editorial-feature .about-editorial-cards>a,
+ .about-editorial-feature .about-editorial-cards>.building-card{
+   display:flex!important;
+   grid-template-rows:none!important;
+ }
+}
+.mobile-nav .mobile-group-trigger{
+  display:flex!important;
+  align-items:center!important;
+  justify-content:space-between!important;
+  min-height:58px!important;
+  line-height:1.2!important;
+}
+.mobile-nav .mobile-group-trigger .mobile-disclosure-arrow{
+  display:inline-flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  width:24px!important;
+  height:24px!important;
+  line-height:1!important;
+  flex:0 0 24px!important;
+}
+.book-dialog .book-dialog-swipe{width:100%;display:flex;justify-content:center}
+.book-dialog .book-dialog-swipe img{max-width:100%;height:auto;max-height:42vh;object-fit:contain}
+.book-dialog .book-why-label{font-size:11px;letter-spacing:.11em;text-transform:uppercase;color:var(--muted);margin:22px 0 7px}
+.book-dialog .book-why-note{font-size:13px;color:var(--muted);line-height:1.5;margin:0 0 16px}
+.book-dialog .book-dialog-navigation{display:flex;justify-content:space-between;align-items:center;gap:12px;padding-top:18px;color:var(--muted);font-size:11px}
+.book-dialog .book-dialog-navigation button{border:1px solid var(--line);border-radius:50%;background:transparent;color:var(--ink);height:40px;width:40px;flex:0 0 40px;font-size:19px}
+
+/* Mobile case-study artwork includes transparent margins in the source assets.
+   Pull the copy into that empty optical space without cropping the images. */
+@media(max-width:900px){
+  .work-hybrid-page .selected-work-explorer .selected-work-case-visual.has-media{
+    padding-bottom:0!important;
+  }
+  .work-hybrid-page .selected-work-explorer .selected-work-case-copy{
+    position:relative!important;
+    margin-top:-42px!important;
+    padding-top:12px!important;
+  }
+  .work-hybrid-page .selected-work-explorer .selected-work-case:has(.selected-work-podcast-link) .selected-work-case-copy{
+    margin-top:-20px!important;
+  }
+}
+
+/* Optical alignment: draw a restrained cross centered in the same
+   20px box as the text row, instead of relying on the font's + glyph. */
+@media(max-width:900px){
+ .mobile-nav .mobile-menu-links .mobile-group-trigger{
+   display:flex!important;
+   align-items:center!important;
+   justify-content:space-between!important;
+   line-height:1.25!important;
+ }
+ .mobile-nav .mobile-menu-links .mobile-disclosure-arrow{
+   position:relative!important;
+   display:block!important;
+   width:20px!important;
+   height:20px!important;
+   flex:0 0 20px!important;
+   font-size:0!important;
+   line-height:0!important;
+   transform:none!important;
+ }
+ .mobile-nav .mobile-menu-links .mobile-disclosure-arrow::before,
+ .mobile-nav .mobile-menu-links .mobile-disclosure-arrow::after{
+   content:""!important;
+   position:absolute!important;
+   display:block!important;
+   background:currentColor!important;
+   border-radius:1px!important;
+   top:50%!important;
+   left:50%!important;
+   transform:translate(-50%,-50%)!important;
+ }
+ .mobile-nav .mobile-menu-links .mobile-disclosure-arrow::before{
+   width:15px!important;height:1.5px!important;
+ }
+ .mobile-nav .mobile-menu-links .mobile-disclosure-arrow::after{
+   width:1.5px!important;height:15px!important;
+ }
+}
+
+/* Match every top-level mobile navigation label, regardless of link/button defaults. */
+@media(max-width:900px){
+ .mobile-nav .mobile-menu-links>a,
+ .mobile-nav .mobile-menu-links>.mobile-work-group>.mobile-group-trigger,
+ .mobile-nav .mobile-menu-links>.mobile-library-group>.mobile-group-trigger{
+   font-family:inherit!important;
+   font-size:16px!important;
+   font-weight:400!important;
+   letter-spacing:normal!important;
+   line-height:1.25!important;
+   text-transform:none!important;
+ }
+}
+
+/* Single type scale for all four mobile top-level navigation labels. */
+@media(max-width:900px){
+ .mobile-nav .mobile-menu .mobile-menu-links>a,
+ .mobile-nav .mobile-menu .mobile-menu-links>.mobile-work-group>.mobile-group-trigger,
+ .mobile-nav .mobile-menu .mobile-menu-links>.mobile-library-group>.mobile-group-trigger{
+   font-family:inherit!important;
+   font-size:16px!important;
+   font-weight:400!important;
+   line-height:1.25!important;
+   letter-spacing:0!important;
+   text-transform:none!important;
+   -webkit-text-size-adjust:100%;
+   text-size-adjust:100%;
+ }
+}
+
+/* Mobile navigation hierarchy: primary destinations lead, contact stays secondary. */
+@media(max-width:900px){
+ .mobile-nav .mobile-menu .mobile-menu-footer{
+   margin-top:30px!important;
+   padding-top:34px!important;
+   border-top:1px solid var(--line)!important;
+   gap:0!important;
+ }
+ .mobile-nav .mobile-menu .mobile-menu-footer>a{
+   font-size:14px!important;
+   font-weight:400!important;
+   line-height:1.45!important;
+   letter-spacing:0!important;
+   color:var(--muted)!important;
+   margin:0 0 20px!important;
+ }
+ .mobile-nav .mobile-menu .mobile-socials{
+   display:grid!important;
+   grid-template-columns:repeat(2,minmax(0,1fr))!important;
+   gap:10px 16px!important;
+   margin:0!important;
+   padding:0!important;
+ }
+ .mobile-nav .mobile-menu .mobile-socials a{
+   min-height:0!important;
+   padding:2px 0!important;
+   font-size:13px!important;
+   line-height:1.4!important;
+ }
+}
+
+/* Interior page openings: reserve clear space beneath the fixed navigation. */
+.travel-page .travel-page-opening,
+.art-v11 .art-v11-opening{
+  scroll-margin-top:clamp(100px,12vh,150px)!important;
+}
+@media(min-width:901px){
+ .home-minimal .home-proof{
+   display:flex!important;
+   flex-direction:row!important;
+   flex-wrap:nowrap!important;
+   justify-content:center!important;
+   align-items:baseline!important;
+   gap:14px!important;
+ }
+ .home-minimal .home-proof .home-proof-label,
+ .home-minimal .home-proof .home-proof-brands{
+   display:inline-block!important;
+   margin:0!important;
+   line-height:1.6!important;
+   vertical-align:baseline!important;
+   text-align:left!important;
+ }
+}
+
+
+/* Nov 4: book-card hierarchy and mobile navigation separator refinements. */
+.book-detail .book-author,
+.book-dialog .book-detail .book-author{
+  text-transform:none!important;
+  letter-spacing:.1em!important;
+}
+.book-detail .book-why-label,
+.book-dialog .book-detail .book-why-label{
+  text-transform:uppercase!important;
+  letter-spacing:.1em!important;
+}
+@media(max-width:900px){
+  /* The image-to-copy divider comes from the shared .book-detail border. */
+  .book-dialog .book-detail{
+    border-top:0!important;
+  }
+  /* Move only the divider nearer About; preserve the email's current position. */
+  .mobile-nav .mobile-menu .mobile-menu-footer{
+    position:relative!important;
+    border-top:0!important;
+  }
+  .mobile-nav .mobile-menu .mobile-menu-footer::before{
+    content:"";
+    position:absolute;
+    top:-14px;
+    left:0;
+    right:0;
+    border-top:1px solid var(--line);
+    pointer-events:none;
+  }
+}
+
+/* Nov 4: align the About divider with the other top-level mobile nav rows.
+   Keep the contact section's position unchanged; add breathing room below socials. */
+@media(max-width:900px){
+  .mobile-nav .mobile-menu .mobile-menu-links>a:last-child{
+    border-bottom:1px solid var(--line)!important;
+  }
+  .mobile-nav .mobile-menu .mobile-menu-footer::before{
+    content:none!important;
+    display:none!important;
+  }
+  .mobile-nav .mobile-menu{
+    padding-bottom:64px!important;
+  }
+}
+
+/* Music track discovery: show a partial next row without altering the console layout. */
+.music-tracklist-body{max-height:142px!important;}
+.music-tracklist-hint{
+  margin:10px 10px 0;
+  color:var(--muted);
+  font-size:9px;
+  letter-spacing:.1em;
+  text-transform:uppercase;
+}
+.music-tracklist-hint span{display:inline-block;margin-left:4px;}
+@media(max-width:900px){.music-tracklist-body{max-height:142px!important;}}
+
+/* Single Spotify profile destination; keep playlist navigation on-site. */
+.music-page .playlist-picker-heading>a{
+  margin-left:auto;
+  color:var(--muted);
+  font-size:10px;
+  font-weight:400;
+  letter-spacing:.06em;
+  text-transform:uppercase;
+  white-space:nowrap;
+  text-decoration:none;
+}
+.music-page .playlist-picker-heading>a:hover{text-decoration:underline;text-underline-offset:3px;}
+@media(max-width:900px){
+  .music-page .playlist-picker-heading{flex-wrap:wrap!important;}
+  .music-page .playlist-picker-heading>a{order:2;}
+  .music-page .playlist-swipe-hint{order:3;flex-basis:100%;text-align:left;}
+}
+
+/* Restore the original clean three-row tracklist, retaining the scroll cue. */
+.music-page .music-tracklist-body{max-height:120px!important;overflow-y:auto!important;overflow-x:hidden!important;}
+/* Keep the heading and its single Spotify link in separate flex columns. */
+.music-page .playlist-picker-heading{
+  display:flex!important;
+  align-items:baseline!important;
+  justify-content:space-between!important;
+  column-gap:24px!important;
+  row-gap:8px!important;
+  flex-wrap:wrap!important;
+}
+.music-page .playlist-picker-heading>span{min-width:0;flex:0 1 auto;}
+.music-page .playlist-picker-heading>a{
+  display:inline-block;
+  flex:0 0 auto;
+  margin-left:auto!important;
+  line-height:1.4;
+  text-align:right;
+}
+@media(max-width:900px){
+  .music-page .music-tracklist-body{max-height:120px!important;}
+  .music-page .playlist-picker-heading{margin-bottom:18px!important;row-gap:10px!important;}
+  .music-page .playlist-picker-heading>a{order:0;}
+  .music-page .playlist-picker-heading>.playlist-swipe-hint{
+    order:3;
+    flex:0 0 100%;
+    margin:0!important;
+    text-align:left;
+  }
+  .music-page .music-tracklist-hint{margin-top:12px;margin-bottom:4px;}
+}
+
+/* Mobile music track rows: show artist beneath the title, retaining three rows. */
+@media(max-width:900px){
+  .music-page .music-tracklist-body{max-height:168px!important;}
+  .music-page .music-track-row{
+    grid-template-columns:28px minmax(0,1fr)!important;
+    grid-template-rows:auto auto;
+    column-gap:12px;
+    row-gap:2px;
+    min-height:56px;
+    padding:7px 10px;
+    align-content:center;
+  }
+  .music-page .music-track-row>span{grid-column:1;grid-row:1 / 3;align-self:center;}
+  .music-page .music-track-row>strong{grid-column:2;grid-row:1;min-width:0;}
+  .music-page .music-track-row>em{
+    display:block!important;
+    grid-column:2;
+    grid-row:2;
+    font-size:10px;
+    line-height:1.25;
+    font-weight:400;
+    color:var(--muted);
+    overflow:hidden;
+    text-overflow:ellipsis;
+    white-space:nowrap;
+  }
+}
+
+/* Nov 4: compact editorial music list, clear section rhythm, and Spotify link. */
+.music-page .music-tracklist-hint{
+  text-transform:none!important;
+  letter-spacing:.02em!important;
+  font-size:11px!important;
+}
+.music-page .music-console{margin-bottom:34px!important;}
+.music-page .playlist-picker-heading{margin-bottom:18px!important;}
+.music-page .playlist-picker-heading .playlist-swipe-hint{
+  display:inline!important;
+  flex:0 0 auto!important;
+  order:0!important;
+  margin-left:auto!important;
+  text-align:right!important;
+  white-space:nowrap!important;
+}
+.music-page .music-spotify-follow{
+  display:flex;
+  justify-content:flex-end;
+  padding-top:22px;
+}
+.music-page .music-spotify-follow>a{
+  color:var(--muted);
+  font-size:11px;
+  font-weight:400;
+  letter-spacing:.04em;
+  text-transform:none;
+  text-decoration:none;
+}
+.music-page .music-spotify-follow>a:hover{text-decoration:underline;text-underline-offset:3px;}
+@media(max-width:900px){
+  .music-page .music-console{margin-bottom:36px!important;}
+  .music-page .music-tracklist-body{max-height:144px!important;}
+  .music-page .music-tracklist-head,
+  .music-page .music-track-row{
+    grid-template-columns:28px minmax(0,1fr) minmax(0,38%)!important;
+    column-gap:12px!important;
+  }
+  .music-page .music-tracklist-head span:last-child{display:block!important;}
+  .music-page .music-track-row{
+    grid-template-rows:auto!important;
+    min-height:48px!important;
+    padding:10px!important;
+    align-items:center!important;
+  }
+  .music-page .music-track-row>span{grid-column:1!important;grid-row:1!important;}
+  .music-page .music-track-row>strong{
+    grid-column:2!important;grid-row:1!important;
+    overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
+  }
+  .music-page .music-track-row>em{
+    display:block!important;
+    grid-column:3!important;grid-row:1!important;
+    overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
+    font-size:11px!important;
+    color:var(--muted)!important;
+    font-style:normal;
+  }
+  .music-page .playlist-picker-heading{flex-wrap:nowrap!important;align-items:baseline!important;}
+  .music-page .playlist-picker-heading>.playlist-swipe-hint{
+    flex:0 0 auto!important;
+    order:0!important;
+    margin-left:auto!important;
+    text-align:right!important;
+  }
+}
+
+/* Nov 5: quiet secondary-page headings and footer statement on mobile only. */
+@media(max-width:600px){
+  .art-v11 .art-v11-opening{font-size:clamp(22px,5.5vw,26px)!important;line-height:1.25!important;}
+  .travel-page .travel-page-opening{font-size:clamp(22px,5.5vw,26px)!important;line-height:1.25!important;}
+  .site-main>.site-footer .footer-about h2,
+  .site-main:has(>.home-minimal)>.site-footer .footer-about h2{font-size:clamp(24px,6.2vw,29px)!important;line-height:1.2!important;}
+}
+
+/* Opt-in interface audio: a quiet utility opposite the music player. */
+.interface-sound-toggle{position:fixed;left:18px;bottom:18px;z-index:2147483000;display:flex;align-items:center;gap:8px;min-height:42px;padding:9px 12px;border:1px solid var(--line);border-radius:999px;background:var(--bg);color:var(--ink);font:inherit;font-size:11px;letter-spacing:.02em;cursor:pointer;opacity:.85}
+.interface-sound-toggle:hover{opacity:1;border-color:var(--ink)}
+.interface-sound-toggle:focus-visible{outline:2px solid var(--ink);outline-offset:3px}
+.interface-sound-toggle>span:first-child{font-size:16px;min-width:21px;text-align:center}
+@media(max-width:900px){.interface-sound-toggle{left:12px;bottom:calc(12px + env(safe-area-inset-bottom,0px));min-height:48px;padding:10px 13px}}
+
+/* Keep interface sound control desktop-only; mobile audio remains disabled. */
+@media(max-width:900px){.interface-sound-toggle{display:none!important}}
+
+/* Quiet but readable affiliate notice beneath the book shelf. */
+.book-affiliate-disclosure{margin:28px 0 0;font-size:11px;line-height:1.6;letter-spacing:.01em;color:var(--muted, #858585);opacity:.8}
+@media(max-width:900px){.book-affiliate-disclosure{margin-top:22px;font-size:11px}}
+
+/* Deliberate, restrained entrances for in-page tab and disclosure changes. */
+@keyframes editorial-content-enter{
+ from{opacity:0;transform:translate3d(0,12px,0)}
+ to{opacity:1;transform:translate3d(0,0,0)}
+}
+@media(prefers-reduced-motion:no-preference){
+ .library-page .quotes-world .quote-entry{
+  animation:editorial-content-enter 900ms cubic-bezier(.22,1,.36,1) both;
+  animation-delay:calc(min(var(--quote-index,0),5) * 65ms);
+ }
+ .work-hybrid-page details[open] > .overview-expanded-list,
+ .work-hybrid-page details[open] > .overview-press-grid{
+  animation:editorial-content-enter 750ms cubic-bezier(.22,1,.36,1) both;
+ }
+}
+
+/* Work section navigation is handled by MotionSystem, keyed to the selected hash.
+   Avoid :target animations that can reveal adjacent sections during scrolling. */
+@media(prefers-reduced-motion:no-preference){
+ .selected-work-explorer .selected-work-case{
+   animation:editorial-content-enter 1250ms cubic-bezier(.22,1,.36,1) both;
+ }
+}

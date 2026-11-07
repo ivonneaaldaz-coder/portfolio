@@ -1,19 +1,24 @@
 "use client";
 
 import Link from "next/link";
+import { createPortal } from "react-dom";
+import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 import { useMusic } from "@/components/MusicProvider";
+import MusicTransportIcon from "@/components/MusicTransportIcon";
 
 export default function GlobalMusicControls() {
   const music = useMusic();
   const pathname = usePathname();
-  if (pathname === "/music") return null;
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => setMounted(true), []);
+  if (pathname === "/music" || !mounted) return null;
 
   const label = music.currentTrack
     ? [music.currentTrack.artist, music.currentTrack.title].filter(Boolean).join(" — ")
     : "Music";
 
-  return (
+  return createPortal(
     <>
       <style>{`
         /* Compact rounded player: restore cover and transport controls on mobile. */
@@ -36,7 +41,10 @@ export default function GlobalMusicControls() {
           background:color-mix(in srgb,var(--bg) 94%,transparent)!important;
           backdrop-filter:blur(14px)!important;
           box-shadow:none!important;
-          z-index:46!important;
+          z-index:2147483000!important;
+          visibility:visible!important;
+          opacity:1!important;
+          pointer-events:auto!important;
         }
         .global-music.global-music-restored .global-music-cover {
           display:block!important;
@@ -76,6 +84,22 @@ export default function GlobalMusicControls() {
           touch-action:manipulation;
         }
         .global-music.global-music-restored button.global-music-play {font-size:17px!important}
+        /* The two-bar pause glyph renders much heavier than the play triangle
+           in mobile Safari. Scale only the glyph, never its tap target. */
+        @media(max-width:900px) {
+          .global-music.global-music-restored button.global-music-play[data-playing="true"] .music-mobile-symbol {
+            font-size:12px!important;
+            letter-spacing:-3px!important;
+            line-height:1;
+          }
+        }
+        .global-music.global-music-restored button:focus:not(:focus-visible) {
+          outline:none;
+        }
+        .global-music.global-music-restored button:focus-visible {
+          outline:2px solid var(--ink);
+          outline-offset:2px;
+        }
         .global-music.global-music-restored .global-music-track {display:none!important}
         @media(max-width:900px) {
           .global-music.global-music-restored {
@@ -92,12 +116,13 @@ export default function GlobalMusicControls() {
           {music.artworkUrl ? <img src={music.artworkUrl} alt="" /> : <span />}
         </Link>
         <button type="button" onClick={music.previous} aria-label="Previous song" className="global-music-step">←</button>
-        <button type="button" onClick={music.toggle} aria-label={music.isPaused ? "Play music" : "Pause music"} className="global-music-play">
-          <span aria-hidden="true"><span className="music-desktop-symbol">{music.isPaused ? "▶" : "Ⅱ"}</span><span className="music-mobile-symbol">{music.isPaused ? "▶︎" : "Ⅱ"}</span></span>
+        <button type="button" onClick={music.toggle} aria-label={music.isPaused ? "Play music" : "Pause music"} className="global-music-play" data-playing={!music.isPaused}>
+          <MusicTransportIcon paused={music.isPaused} />
         </button>
         <button type="button" onClick={music.next} aria-label="Next song" className="global-music-step">→</button>
         <Link href="/music" className="global-music-track" title={label}>{label}</Link>
       </div>
-    </>
+    </>,
+    document.body
   );
 }

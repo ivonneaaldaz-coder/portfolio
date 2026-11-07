@@ -11,7 +11,8 @@ export type SpotifyEvent = {
 export type SpotifyController = {
   loadEntity: (uri: string) => void;
   play: () => void;
-  togglePlay: () => void;
+  pause: () => void;
+  resume: () => void;
   destroy: () => void;
   addListener: (name: string, listener: (event: SpotifyEvent) => void) => void;
 };
