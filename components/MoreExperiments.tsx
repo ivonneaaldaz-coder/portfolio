@@ -7,7 +7,7 @@ const experiments = [
   { key:"the-lab" as ExperimentKey, title:"The Lab", meta:"RETRO WINDOWS", href:"https://lab.ivonnealdaz.com", loop:"lab" },
   { key:"ask-eve" as ExperimentKey, title:"Ask Eve", meta:"CONVERSATIONAL CV", href:"https://ask.ivonnealdaz.com", loop:"eve" },
   { key:"chatroom" as ExperimentKey, title:"Chatroom", meta:"PUBLIC CHAT", href:"https://chat.ivonnealdaz.com", loop:"chat" },
-  { key:"snake" as ExperimentKey, title:"Snake", meta:"GLOBAL LEADERBOARD", href:"/experiments/snake", loop:"snake" },
+  { key:"snake" as ExperimentKey, title:"Snake", meta:"GLOBAL LEADERBOARD", href:"https://lab.ivonnealdaz.com/#snake", loop:"snake" },
   { key:"moodboard-agent" as ExperimentKey, title:"Moodboard", meta:"PINTEREST → CAROUSEL", href:"/experiments/moodboard-agent", loop:null },
 ];
 
@@ -22,7 +22,7 @@ export default function MoreExperiments({ current }: { current: ExperimentKey })
 
       <div className="experiment-more-grid">
         {items.map(item => (
-          <Link href={item.href} className="experiment-more-card" key={item.key}>
+          <Link href={item.href} target={item.href.startsWith("http")?"_blank":undefined} rel={item.href.startsWith("http")?"noopener noreferrer":undefined} className="experiment-more-card" key={item.key}>
             <div className="experiment-more-visual">
               {item.loop ? (
                 <ExperimentLoop name={item.loop} label={`${item.title} preview`} />
