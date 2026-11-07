@@ -11555,3 +11555,11 @@ html body::before, html body::after { content:none!important;display:none!import
    animation:editorial-content-enter 1250ms cubic-bezier(.22,1,.36,1) both;
  }
 }
+
+/* Playlist discovery cue is useful on mobile, not on the fully visible desktop grid. */
+@media (min-width: 901px) {
+  .music-page .playlist-picker-heading .playlist-swipe-hint { display: none !important; }
+}
+@media (max-width: 900px) {
+  .music-page .playlist-picker-heading .playlist-swipe-hint { display: inline !important; }
+}
