@@ -95,7 +95,7 @@ export default function SpotifyPlaylists() {
           );
         })}
       </div>
-      <div className="music-spotify-follow"><a href="https://open.spotify.com/user/ivonnealdaz" target="_blank" rel="noopener noreferrer">Follow on Spotify ↗</a></div>
+      <div className="music-spotify-follow"><a href="https://open.spotify.com/user/1244680102" target="_blank" rel="noopener noreferrer">Follow on Spotify ↗</a></div>
     </>
   );
 }
