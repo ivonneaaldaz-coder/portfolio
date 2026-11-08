@@ -2,12 +2,13 @@ import { pageMetadata } from "@/lib/metadata";
 import SelectedWorkExplorer from "@/components/SelectedWorkExplorer";
 export const metadata=pageMetadata("Work","Projects, experiments, research, and case studies.","/work");
 const writing = [
-  { title:"When the Universe Hands You a Yes", source:"Good World Living · 2025", href:"https://www.goodworldliving.com/articles/when-the-universe-hands-you-a-yes" },
+  { title:"The First Time I Felt Free", source:"Good World Living · 2026", href:"https://www.goodworldliving.com/articles/the-first-time-i-felt-free" },
   { title:"From Brand to Atmosphere: Designing Experiences That Feel Like Worlds", source:"Whitespace · 2026", href:"https://www.bywhitespace.com/blog/designing-experiences-that-feel-like-worlds" },
   { title:"How an Art Residency in Provence Transformed My Creative Path", source:"Good World Living · 2024", href:"https://www.goodworldliving.com/articles/how-an-art-residency-in-provence-transformed-my-creative-path" },
 ];
 
 const moreWriting = [
+  { title:"When the Universe Hands You a Yes", source:"Good World Living · 2025", href:"https://www.goodworldliving.com/articles/when-the-universe-hands-you-a-yes" },
   { title:"The Shift Toward Intentional Branding: Designing with Meaning in a Noisy World", source:"Whitespace · 2025", href:"https://www.bywhitespace.com/blog/intentional-branding-designing-with-meaning-in-a-noisy-world" },
   { title:"Art Retreat in France: Unveiling Creative Wonders in St. Antonin-Noble Val", source:"Good World Living · 2023", href:"https://www.goodworldliving.com/articles/france-art-retreat" },
   { title:"Strategy Without Execution Is Just Expensive Advice", source:"Whitespace · 2026", href:"https://www.bywhitespace.com/blog/strategy-without-execution-expensive-advice" },
@@ -80,8 +81,8 @@ export default async function WorkPage(){
           .work-hybrid-page .editorial-writing-head .section-title{margin:0}
           .work-hybrid-page .editorial-writing-descriptor{font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:#b6b3ad;text-align:right;line-height:1.7;margin:0}
           .work-hybrid-page .editorial-featured-essay{display:grid;grid-template-columns:minmax(0, .92fr) minmax(0, 1.4fr);gap:clamp(34px,5.5vw,82px);align-items:center;color:inherit;text-decoration:none;padding-bottom:44px;border-bottom:1px solid rgba(240,236,230,.28)}
-          .work-hybrid-page .editorial-featured-image{display:block;aspect-ratio:1.78;overflow:hidden;background:#c9b69e}
-          .work-hybrid-page .editorial-featured-image img{display:block;width:100%;height:100%;object-fit:cover;transition:transform .55s cubic-bezier(.2,.7,.2,1);filter:saturate(.74)}
+          .work-hybrid-page .editorial-featured-image{display:block;aspect-ratio:1.78;overflow:hidden;background:#b8c3cf}
+          .work-hybrid-page .editorial-featured-image img{display:block;width:100%;height:100%;object-fit:cover;transition:transform .55s cubic-bezier(.2,.7,.2,1);object-position:center 57%}
           .work-hybrid-page .editorial-featured-essay:hover .editorial-featured-image img{transform:scale(1.035)}
           .work-hybrid-page .editorial-featured-copy{min-width:0;display:flex;flex-direction:column;align-items:flex-start}
           .work-hybrid-page .editorial-featured-label{color:#d6d1c9;font-size:11px;font-weight:600;letter-spacing:.24em;margin:0 0 28px;text-transform:uppercase}
@@ -120,12 +121,12 @@ export default async function WorkPage(){
           </div>
           <a className="editorial-featured-essay" href={writing[0].href} target="_blank" rel="noreferrer" aria-label={`Read ${writing[0].title} (opens in new tab)`}>
             <div className="editorial-featured-image">
-              <img src="/writing/featured-essay-atmosphere.svg" alt="Sunlit plaster walls with soft botanical shadows" loading="lazy" />
+              <img src="https://cdn.prod.website-files.com/5fc29a3f3f9d357d704a8951/69e7a1fc0bb973edd788d631_Schmalkalden%20-%20Good%20World%20Living.png" alt="Golden grain field, tree-lined hills and expansive blue sky in Germany at sunset" loading="lazy" />
             </div>
             <div className="editorial-featured-copy">
               <p className="editorial-featured-label">Featured essay</p>
               <h3 className="editorial-featured-title">{writing[0].title}</h3>
-              <p className="editorial-featured-description">On timing, intuition, and what happens when you finally stop overthinking and let it unfold.</p>
+              <p className="editorial-featured-description">On finding yourself, losing your way, and building a life that feels like your own.</p>
               <div className="editorial-featured-bottom">
                 <p className="editorial-featured-source">{writing[0].source}</p>
                 <span className="editorial-featured-arrow" aria-hidden="true">↗</span>
