@@ -86,7 +86,7 @@ export default async function WorkPage(){
           .work-hybrid-page .editorial-featured-essay:hover .editorial-featured-image img{transform:scale(1.035)}
           .work-hybrid-page .editorial-featured-copy{min-width:0;display:flex;flex-direction:column;align-items:flex-start}
           .work-hybrid-page .editorial-featured-label{color:#d6d1c9;font-size:11px;font-weight:600;letter-spacing:.24em;margin:0 0 28px;text-transform:uppercase}
-          .work-hybrid-page .editorial-featured-title{font-size:clamp(23px,2.7vw,40px);line-height:1.16;font-weight:500;letter-spacing:-.035em;margin:0 0 18px;max-width:760px}
+          .work-hybrid-page .editorial-featured-title{font-size:clamp(22px,2.15vw,31px);line-height:1.26;font-weight:400;letter-spacing:-.012em;margin:0 0 18px;max-width:760px}
           .work-hybrid-page .editorial-featured-description{color:#b8b5af;font-size:clamp(15px,1.25vw,19px);line-height:1.6;max-width:570px;margin:0 0 34px}
           .work-hybrid-page .editorial-featured-bottom{width:100%;display:flex;align-items:center;justify-content:space-between;gap:20px}
           .work-hybrid-page .editorial-featured-source{margin:0;color:#aaa6a0;font-size:14px}
