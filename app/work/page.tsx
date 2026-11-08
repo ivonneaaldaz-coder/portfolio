@@ -72,10 +72,67 @@ export default async function WorkPage(){
         </details>
       </section>
 
-      <section className="overview-writing-section section-pad" id="writing">
+      <section className="overview-writing-section section-pad editorial-writing-section" id="writing">
+        <style>{`
+          .work-hybrid-page .editorial-writing-section{padding-top:clamp(72px,8vw,128px)}
+          .work-hybrid-page .editorial-writing-section .overview-writing{max-width:none}
+          .work-hybrid-page .editorial-writing-head{display:flex;align-items:center;justify-content:space-between;gap:32px;padding-bottom:30px;border-bottom:1px solid rgba(240,236,230,.28);margin-bottom:44px}
+          .work-hybrid-page .editorial-writing-head .section-title{margin:0}
+          .work-hybrid-page .editorial-writing-descriptor{font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:#b6b3ad;text-align:right;line-height:1.7;margin:0}
+          .work-hybrid-page .editorial-featured-essay{display:grid;grid-template-columns:minmax(0, .92fr) minmax(0, 1.4fr);gap:clamp(34px,5.5vw,82px);align-items:center;color:inherit;text-decoration:none;padding-bottom:44px;border-bottom:1px solid rgba(240,236,230,.28)}
+          .work-hybrid-page .editorial-featured-image{display:block;aspect-ratio:1.78;overflow:hidden;background:#c9b69e}
+          .work-hybrid-page .editorial-featured-image img{display:block;width:100%;height:100%;object-fit:cover;transition:transform .55s cubic-bezier(.2,.7,.2,1);filter:saturate(.74)}
+          .work-hybrid-page .editorial-featured-essay:hover .editorial-featured-image img{transform:scale(1.035)}
+          .work-hybrid-page .editorial-featured-copy{min-width:0;display:flex;flex-direction:column;align-items:flex-start}
+          .work-hybrid-page .editorial-featured-label{color:#d6d1c9;font-size:11px;font-weight:600;letter-spacing:.24em;margin:0 0 28px;text-transform:uppercase}
+          .work-hybrid-page .editorial-featured-title{font-size:clamp(23px,2.7vw,40px);line-height:1.16;font-weight:500;letter-spacing:-.035em;margin:0 0 18px;max-width:760px}
+          .work-hybrid-page .editorial-featured-description{color:#b8b5af;font-size:clamp(15px,1.25vw,19px);line-height:1.6;max-width:570px;margin:0 0 34px}
+          .work-hybrid-page .editorial-featured-bottom{width:100%;display:flex;align-items:center;justify-content:space-between;gap:20px}
+          .work-hybrid-page .editorial-featured-source{margin:0;color:#aaa6a0;font-size:14px}
+          .work-hybrid-page .editorial-featured-arrow{display:inline-block;font-size:22px;line-height:1;transition:transform .2s ease}
+          .work-hybrid-page .editorial-featured-essay:hover .editorial-featured-arrow{transform:translate(4px,-3px)}
+          .work-hybrid-page .editorial-writing-section .overview-writing-row{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(160px,.55fr) 24px;align-items:center;gap:28px;padding:28px 0;border-bottom:1px solid rgba(240,236,230,.24);transition:color .2s ease}
+          .work-hybrid-page .editorial-writing-section .overview-writing-row h4{font-size:clamp(14px,1.12vw,17px);font-weight:500;line-height:1.45}
+          .work-hybrid-page .editorial-writing-section .overview-writing-row p{color:#aaa6a0;font-size:13px}
+          .work-hybrid-page .editorial-writing-section .overview-writing-row span{justify-self:end}
+          .work-hybrid-page .editorial-writing-section .overview-inline-expand{margin-top:0}
+          .work-hybrid-page .editorial-writing-section .overview-inline-expand summary{padding-top:29px}
+          @media(max-width:760px){
+            .work-hybrid-page .editorial-writing-section{padding-top:76px}
+            .work-hybrid-page .editorial-writing-head{align-items:flex-start;flex-direction:column;gap:14px;padding-bottom:23px;margin-bottom:28px}
+            .work-hybrid-page .editorial-writing-descriptor{text-align:left;font-size:10px;letter-spacing:.16em}
+            .work-hybrid-page .editorial-featured-essay{grid-template-columns:1fr;gap:25px;padding-bottom:30px}
+            .work-hybrid-page .editorial-featured-image{aspect-ratio:1.6}
+            .work-hybrid-page .editorial-featured-label{margin-bottom:16px}
+            .work-hybrid-page .editorial-featured-description{margin-bottom:22px}
+            .work-hybrid-page .editorial-featured-source{font-size:12px}
+            .work-hybrid-page .editorial-writing-section .overview-writing-row{grid-template-columns:minmax(0,1fr) 22px;gap:7px 14px;padding:22px 0}
+            .work-hybrid-page .editorial-writing-section .overview-writing-row h4{grid-column:1;grid-row:1}
+            .work-hybrid-page .editorial-writing-section .overview-writing-row p{grid-column:1;grid-row:2}
+            .work-hybrid-page .editorial-writing-section .overview-writing-row span{grid-column:2;grid-row:1 / span 2}
+          }
+          @media(prefers-reduced-motion:reduce){.work-hybrid-page .editorial-featured-image img,.work-hybrid-page .editorial-featured-arrow{transition:none}}
+        `}</style>
         <div className="overview-writing">
-          <div className="overview-writing-head"><h2 className="section-title small-title">Writing</h2></div>
-          {writing.map(item => <WritingRow item={item} key={item.title} />)}
+          <div className="overview-writing-head editorial-writing-head">
+            <h2 className="section-title small-title">Writing</h2>
+            <p className="editorial-writing-descriptor">Notes on creativity, strategy, and everything in between.</p>
+          </div>
+          <a className="editorial-featured-essay" href={writing[0].href} target="_blank" rel="noreferrer" aria-label={`Read ${writing[0].title} (opens in new tab)`}>
+            <div className="editorial-featured-image">
+              <img src="/writing/featured-essay-atmosphere.svg" alt="Sunlit plaster walls with soft botanical shadows" loading="lazy" />
+            </div>
+            <div className="editorial-featured-copy">
+              <p className="editorial-featured-label">Featured essay</p>
+              <h3 className="editorial-featured-title">{writing[0].title}</h3>
+              <p className="editorial-featured-description">On timing, intuition, and what happens when you finally stop overthinking and let it unfold.</p>
+              <div className="editorial-featured-bottom">
+                <p className="editorial-featured-source">{writing[0].source}</p>
+                <span className="editorial-featured-arrow" aria-hidden="true">↗</span>
+              </div>
+            </div>
+          </a>
+          {writing.slice(1).map(item => <WritingRow item={item} key={item.title} />)}
           <details className="overview-inline-expand">
             <summary><span>More writing</span><span aria-hidden="true">＋</span></summary>
             <div className="overview-expanded-list">{moreWriting.map(item => <WritingRow item={item} key={item.title} />)}</div>
