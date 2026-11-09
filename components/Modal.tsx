@@ -3,12 +3,13 @@
 import { useLayoutEffect, useRef, type ReactNode, type KeyboardEventHandler } from "react";
 
 // The native modal dialog makes the rest of the document inert and contains focus.
-export default function Modal({ label, className, onClose, onKeyDown, closeOnBackdrop = false, children }: {
+export default function Modal({ label, className, onClose, onKeyDown, closeOnBackdrop = false, useSiteCursor = false, children }: {
   label: string;
   className: string;
   onClose: () => void;
   onKeyDown?: KeyboardEventHandler<HTMLDialogElement>;
   closeOnBackdrop?: boolean;
+  useSiteCursor?: boolean;
   children: ReactNode;
 }) {
   const dialog = useRef<HTMLDialogElement>(null);
@@ -18,15 +19,23 @@ export default function Modal({ label, className, onClose, onKeyDown, closeOnBac
     const opener = document.activeElement instanceof HTMLElement ? document.activeElement : null;
     const overflow = document.body.style.overflow;
     element?.showModal();
+    // Native dialogs enter the top layer, above the site's fixed cursor.
+    // Temporarily place the existing cursor inside this dialog.
+    const cursorNodes = useSiteCursor && element
+      ? Array.from(document.querySelectorAll<HTMLElement>("body > .cursor-ring, body > .cursor-dot"))
+      : [];
+    const cursorHomes = cursorNodes.map((node) => ({ node, parent: node.parentNode!, next: node.nextSibling }));
+    cursorNodes.forEach((node) => element?.appendChild(node));
     const initialFocus = element?.querySelector<HTMLElement>('[autofocus], button:not([disabled]), a[href], [tabindex]:not([tabindex="-1"])');
     (initialFocus ?? element)?.focus({ preventScroll: true });
     document.body.style.overflow = "hidden";
     return () => {
+      cursorHomes.forEach(({ node, parent, next }) => parent.insertBefore(node, next?.parentNode === parent ? next : null));
       element?.close();
       document.body.style.overflow = overflow;
       if (opener?.isConnected) opener.focus({ preventScroll: true });
     };
-  }, []);
+  }, [useSiteCursor]);
 
   return <dialog ref={dialog} tabIndex={-1} className={className} aria-label={label}
     onClick={(event) => { if (closeOnBackdrop && event.target === event.currentTarget) onClose(); }}
