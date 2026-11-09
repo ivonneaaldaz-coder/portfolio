@@ -174,7 +174,7 @@ async function getPublicPinterestPins(limit = 500): Promise<PinterestPin[]> {
   const collected = new Map<string, PinterestPublicPin>();
   let bookmark: string | null = null;
 
-  for (let page = 0; page < 24 && collected.size < limit; page += 1) {
+  for (let page = 0; page < 60 && collected.size < limit; page += 1) {
     const options: Record<string, unknown> = {
       add_vase: true,
       field_set_key: "mobile_grid_item",
@@ -249,54 +249,86 @@ async function getPublicPinterestPins(limit = 500): Promise<PinterestPin[]> {
     .slice(0, limit);
 }
 
+// Fetch by board instead of truncating the global recency feed. A global limit of
+// 144 strongly favored whichever boards had the most recent saves, leaving other
+// categories with only one or two images.
+async function getPinsByBoard(explicitToken?: string): Promise<PinterestPin[]> {
+  const boards = (await pinterestFetchAll<PinterestBoard>("/boards", 250, explicitToken))
+    .filter((board): board is PinterestBoard & { id: string } => Boolean(board.id && board.name));
+  if (!boards.length) return [];
+
+  const results = await Promise.allSettled(boards.map(async (board) => {
+    // One gallery page per board. Pinterest returns a bookmark when more exist.
+    const pins = await pinterestFetchAll<PinterestApiPin>(
+      `/boards/${encodeURIComponent(board.id)}/pins`, 45, explicitToken,
+    );
+    return pins.map((pin): PinterestPin => {
+      const id = pin.id || "";
+      return {
+        id,
+        title: pin.title || "",
+        description: pin.description || "",
+        altText: pin.alt_text || pin.title || "Pinterest visual reference",
+        imageUrl: bestImage(pin),
+        pinUrl: id ? `https://www.pinterest.com/pin/${id}/` : "https://www.pinterest.com/ivonnealdaz/",
+        boardName: board.name || "Saved",
+        createdAt: pin.created_at || "",
+      };
+    }).filter((pin) => pin.id && pin.imageUrl);
+  }));
+
+  const pins = results.flatMap((result) => result.status === "fulfilled" ? result.value : []);
+  // One card per pin per board; never fabricate images to reach a category quota.
+  const seen = new Set<string>();
+  return pins.filter((pin) => {
+    const key = `${pin.boardName}:${pin.id}`;
+    if (seen.has(key)) return false;
+    seen.add(key);
+    return true;
+  });
+}
+
 export async function getPinterestPins(limit = 500, explicitToken?: string): Promise<PinterestPin[]> {
-  if (!explicitToken) {
-    try {
-      const publicPins = await getPublicPinterestPins(limit);
-      if (publicPins.length) return publicPins;
-    } catch (error) {
-      console.error("Pinterest public feed unavailable:", error);
-    }
+  // Prefer the categorized API whenever credentials allow it.
+  try {
+    const byBoard = await getPinsByBoard(explicitToken);
+    if (byBoard.length) return byBoard;
+  } catch (error) {
+    console.error("Pinterest board feed unavailable:", error);
+  }
+
+  // Public profile fallback remains available if the API is not authorized.
+  // Scan beyond the first 144 recent pins to represent older saved boards.
+  try {
+    const publicPins = await getPublicPinterestPins(Math.max(limit, 1200));
+    if (publicPins.length) return publicPins;
+  } catch (error) {
+    console.error("Pinterest public feed unavailable:", error);
   }
 
   try {
     const [pins, boardsList] = await Promise.all([
-      pinterestFetchAll<PinterestApiPin>("/pins", limit, explicitToken),
+      pinterestFetchAll<PinterestApiPin>("/pins", Math.max(limit, 1200), explicitToken),
       pinterestFetchAll<PinterestBoard>("/boards", 250, explicitToken),
     ]);
-
     const boards = new Map(
-      boardsList
-        .filter((board) => board.id)
+      boardsList.filter((board) => board.id)
         .map((board) => [board.id as string, board.name || "Saved"]),
     );
-
-    return pins
-      .map((pin) => {
-        const id = pin.id || "";
-        const imageUrl = bestImage(pin);
-
-        return {
-          id,
-          title: pin.title || "",
-          description: pin.description || "",
-          altText: pin.alt_text || pin.title || "Pinterest visual reference",
-          imageUrl,
-          pinUrl: id ? `https://www.pinterest.com/pin/${id}/` : "https://www.pinterest.com/ivonnealdaz/",
-          boardName: (pin.board_id && boards.get(pin.board_id)) || "Saved",
-          createdAt: pin.created_at || "",
-        };
-      })
-      .filter((pin) => pin.id && pin.imageUrl)
-      .sort((a, b) => b.createdAt.localeCompare(a.createdAt))
-      .slice(0, limit);
+    return pins.map((pin) => {
+      const id = pin.id || "";
+      return {
+        id, title: pin.title || "", description: pin.description || "",
+        altText: pin.alt_text || pin.title || "Pinterest visual reference",
+        imageUrl: bestImage(pin),
+        pinUrl: id ? `https://www.pinterest.com/pin/${id}/` : "https://www.pinterest.com/ivonnealdaz/",
+        boardName: (pin.board_id && boards.get(pin.board_id)) || "Saved",
+        createdAt: pin.created_at || "",
+      };
+    }).filter((pin) => pin.id && pin.imageUrl)
+      .sort((a, b) => b.createdAt.localeCompare(a.createdAt));
   } catch (error) {
     console.error("Pinterest feed unavailable:", error);
-    try {
-      return await getPublicPinterestPins(limit);
-    } catch (publicError) {
-      console.error("Pinterest public feed unavailable:", publicError);
-      return [];
-    }
+    return [];
   }
 }
