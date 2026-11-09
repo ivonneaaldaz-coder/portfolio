@@ -11645,12 +11645,20 @@ html body::before, html body::after { content:none!important;display:none!import
 }
 .library-page .library-experience .book-detail .book-why-label{
   font-size:13px!important;
-  font-weight:500!important;
+  font-weight:700!important;
+  color:var(--ink)!important;
   letter-spacing:-.015em!important;
   margin:24px 0 7px!important;
 }
 @media(max-width:900px){
   .library-page .library-experience .book-detail h2{
     font-size:26px!important;
+  }
+}
+
+/* Optically pull the desktop notes a little closer to the covers. */
+@media(min-width:901px){
+  .library-page .library-experience .book-browser>.book-detail{
+    margin-left:-12px;
   }
 }
