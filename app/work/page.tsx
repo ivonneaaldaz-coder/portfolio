@@ -81,7 +81,7 @@ export default async function WorkPage(){
 .work-hybrid-page .press-feature-heading{display:flex;align-items:center;justify-content:space-between;gap:14px;margin-top:18px;color:var(--muted);font-size:11px;letter-spacing:.055em}
 .work-hybrid-page .press-feature-heading span:last-child{font-size:19px;color:var(--ink);line-height:1}
 .work-hybrid-page .press-feature h3{font-size:clamp(18px,1.8vw,26px);letter-spacing:-.032em;line-height:1.3;font-weight:450;margin:10px 0 0}
-.work-hybrid-page .press-secondary-grid{border-top:1px solid var(--line);padding-top:clamp(24px,3vw,38px)}
+.work-hybrid-page .press-more-list{grid-template-columns:1fr!important}\n.work-hybrid-page .press-secondary-grid{border-top:1px solid var(--line);padding-top:clamp(24px,3vw,38px)}
 @media(max-width:760px){
  .work-hybrid-page .press-feature-grid{grid-template-columns:1fr;gap:36px;margin:26px 0 54px}
  .work-hybrid-page .press-feature-image{aspect-ratio:1.5}
@@ -112,9 +112,8 @@ export default async function WorkPage(){
         </div>
         <details className="overview-inline-expand overview-press-expand">
           <summary><span>More press</span><span aria-hidden="true">＋</span></summary>
-          <div className="overview-press-grid overview-expanded-list">
+          <div className="overview-press-grid overview-expanded-list press-more-list">
             <div>{morePress.map(item => <PressRow item={item} key={item.org+item.title} />)}</div>
-            <div></div>
           </div>
         </details>
       </section>
