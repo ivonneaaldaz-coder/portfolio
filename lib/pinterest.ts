@@ -86,8 +86,11 @@ async function pinterestFetch<T>(path: string, explicitToken?: string): Promise<
   if (explicitToken) tokens.push(explicitToken);
   if (process.env.PINTEREST_ACCESS_TOKEN) tokens.push(process.env.PINTEREST_ACCESS_TOKEN);
 
-  const appToken = await getAppAccessToken();
-  if (appToken) tokens.push(appToken);
+  // Board galleries make several requests; don't mint a new app token per board.
+  if (!explicitToken && !process.env.PINTEREST_ACCESS_TOKEN) {
+    const appToken = await getAppAccessToken();
+    if (appToken) tokens.push(appToken);
+  }
 
   if (!tokens.length) throw new Error("Missing Pinterest access token");
 
@@ -253,14 +256,16 @@ async function getPublicPinterestPins(limit = 500): Promise<PinterestPin[]> {
 // 144 strongly favored whichever boards had the most recent saves, leaving other
 // categories with only one or two images.
 async function getPinsByBoard(explicitToken?: string): Promise<PinterestPin[]> {
-  const boards = (await pinterestFetchAll<PinterestBoard>("/boards", 250, explicitToken))
+  const token = explicitToken || process.env.PINTEREST_ACCESS_TOKEN || await getAppAccessToken();
+  if (!token) throw new Error("Pinterest API is not configured");
+  const boards = (await pinterestFetchAll<PinterestBoard>("/boards", 250, token))
     .filter((board): board is PinterestBoard & { id: string } => Boolean(board.id && board.name));
   if (!boards.length) return [];
 
   const results = await Promise.allSettled(boards.map(async (board) => {
     // One gallery page per board. Pinterest returns a bookmark when more exist.
     const pins = await pinterestFetchAll<PinterestApiPin>(
-      `/boards/${encodeURIComponent(board.id)}/pins`, 45, explicitToken,
+      `/boards/${encodeURIComponent(board.id)}/pins`, 45, token,
     );
     return pins.map((pin): PinterestPin => {
       const id = pin.id || "";
