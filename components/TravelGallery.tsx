@@ -26,6 +26,18 @@ export default function TravelGallery({ photographs }: { photographs: TravelPhot
 
   return (
     <>
+      <style>{`
+        .travel-lightbox .art-lightbox-close {
+          font-size: 16px !important;
+          font-weight: 400;
+          line-height: 1.2;
+          color: var(--ink);
+          padding: 10px;
+          top: 18px;
+          right: 18px;
+          z-index: 2;
+        }
+      `}</style>
       <div className="travel-grid section-pad">
         {photographs.map((photo, index) => (
           <figure className="travel-photo" key={photo.place + index}>
@@ -42,7 +54,10 @@ export default function TravelGallery({ photographs }: { photographs: TravelPhot
           if (event.key === "ArrowRight") { event.preventDefault(); next(); }
           if (event.key === "ArrowLeft") { event.preventDefault(); previous(); }
         }}>
-          <button className="art-lightbox-close" type="button" onClick={() => setActive(null)} aria-label="Close photo viewer">×</button>
+          <button className="art-lightbox-close" type="button" aria-label="Close photo viewer"
+            onPointerDown={(event) => event.stopPropagation()}
+            onPointerUp={(event) => event.stopPropagation()}
+            onClick={(event) => { event.preventDefault(); event.stopPropagation(); setActive(null); }}>Close ×</button>
           <button className="art-lightbox-prev" type="button" onClick={previous} aria-label="Previous photo">←</button>
 
           <div className="art-lightbox-stage" onTouchStart={onTouchStart} onTouchEnd={onTouchEnd}>
