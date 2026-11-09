@@ -3,11 +3,12 @@
 import { useLayoutEffect, useRef, type ReactNode, type KeyboardEventHandler } from "react";
 
 // The native modal dialog makes the rest of the document inert and contains focus.
-export default function Modal({ label, className, onClose, onKeyDown, children }: {
+export default function Modal({ label, className, onClose, onKeyDown, closeOnBackdrop = false, children }: {
   label: string;
   className: string;
   onClose: () => void;
   onKeyDown?: KeyboardEventHandler<HTMLDialogElement>;
+  closeOnBackdrop?: boolean;
   children: ReactNode;
 }) {
   const dialog = useRef<HTMLDialogElement>(null);
@@ -28,6 +29,7 @@ export default function Modal({ label, className, onClose, onKeyDown, children }
   }, []);
 
   return <dialog ref={dialog} tabIndex={-1} className={className} aria-label={label}
+    onClick={(event) => { if (closeOnBackdrop && event.target === event.currentTarget) onClose(); }}
     onCancel={(event) => { event.preventDefault(); onClose(); }}
     onKeyDown={(event) => {
       if (event.key === "Tab") {
