@@ -18,16 +18,11 @@ const earlierExperience = [
   { role: "Vice President of Marketing", company: "Patel Gaines PLLC", dates: "2015 — 2018" },
 ];
 
-const capabilities = [
-  "Brand strategy",
-  "Positioning",
-  "Consumer insights",
-  "Growth strategy",
-  "AI + automation",
-  "Systems design",
-  "Creative direction",
-  "Thought leadership",
-  "Product strategy",
+const areasOfPractice = [
+  { title: "Strategy & Research", items: ["Brand strategy", "Positioning", "Consumer insights", "Behavioral research", "Concept development", "Market intelligence"] },
+  { title: "Design & Experience", items: ["Product design", "UI/UX design", "Graphic design", "Digital experiences", "Interaction design", "Information architecture"] },
+  { title: "Creative & Editorial", items: ["Creative direction", "Art direction", "Campaign development", "Visual storytelling", "Editorial & copywriting", "Content strategy"] },
+  { title: "Technology & Systems", items: ["Creative technology", "AI prototyping", "Digital product development", "Automation", "Systems design", "Experience prototyping"] },
 ];
 
 const sideQuests = [
@@ -123,7 +118,65 @@ export default async function AboutPage() {
       </div>
       <div className="about-editorial-row"><h2>The short version</h2><div><p>I'm drawn to the intersection of human behavior, creativity, and business. For more than a decade, I've worked across industries—from growing tech companies to global household brands—turning ideas and insights into brands, strategies, and experiences that connect with people and drive growth.</p><p>I run a creative studio, teach marketing at university, and make things of my own. Outside of work, you'll usually find me painting, making ceramics, traveling, or experimenting with something on the internet.</p></div></div>
       <section className="about-story-inline"><details className="long-story about-disclosure"><summary><span>Read the longer story</span><span aria-hidden="true">＋</span></summary><div className="long-story-copy"><p className="long-story-lede">Life is about saying yes to the things that will make a better story.</p><p>For over a decade, I've been building brands and shaping how companies think, look, and communicate — from startups navigating pivots and acquisitions to work supporting global enterprises.</p><p>In marketing, everything moves quickly. I needed to make something that could outlive the next campaign, so I paint and work in ceramics — something I can't undo with a keystroke.</p><p>Art residencies in France and Italy cracked something open in me. Every time I committed, the next thing revealed itself.</p><p>These days, I follow that curiosity wherever it goes. Sometimes that's a painting. Sometimes it's a ceramics workshop, a yoga practice, a brand, or a weird little thing I build on the internet.</p><p><strong>Whitespace</strong> is my strategy and creative studio. <strong>Make Space</strong> brings people together to make things with their hands. <strong>Good World Living</strong> is an ongoing exploration of remarkable places and thoughtfully made things.</p><p>I grew up on the border. Two languages, two worlds. A constant pull toward the other side.</p></div></details></section>
-      <div className="about-editorial-row"><h2>Selected experience</h2><div className="about-editorial-list">{[{title:"Founder",sub:"Whitespace",date:"2018 — Present"},{title:"Director, Brand Insights",sub:"TrueLoyal (formerly TINT)",date:"2023 — 2025"},{title:"Senior Marketing Manager",sub:"TINT (acquired)",date:"2020 — 2023"},{title:"VP of Marketing",sub:"Patel Gaines",date:"2015 — 2018"}].map(x=><div className="about-editorial-item" key={x.title}><div><h3>{x.title}</h3>{x.sub ? <small>{x.sub}</small> : null}</div><span>{x.date}</span></div>)}<div className="about-editorial-tags">{["Brand strategy","Consumer insights","Creative direction","AI + systems","Growth"].map(x=><span key={x}>{x}</span>)}</div></div></div>
+      <section className="about-practice" id="practice" aria-labelledby="about-practice-heading">
+        <style>{`
+          .about-editorial .about-practice{border-top:1px solid var(--line);padding:clamp(65px,7vw,95px) 0 clamp(78px,8vw,115px)}
+          .about-editorial .about-practice-heading{display:flex;justify-content:space-between;align-items:baseline;gap:24px;margin:0 0 42px}
+          .about-editorial .about-practice-heading h2{font-family:inherit;font-size:clamp(28px,3.1vw,38px);font-weight:400;letter-spacing:-.035em;line-height:1.15;margin:0}
+          .about-editorial .about-practice-kicker{font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);line-height:1.6;margin:0;text-align:right}
+          .about-editorial .about-practice-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));column-gap:clamp(20px,3vw,42px);row-gap:36px}
+          .about-editorial .about-practice-item{min-width:0;transition:opacity .25s ease}
+          .about-editorial .about-practice-number{font-size:11px;letter-spacing:.12em;color:var(--muted);display:block;margin-bottom:17px}
+          .about-editorial .about-practice-item h3{font-family:inherit;font-size:clamp(16px,1.65vw,19px);font-weight:400;letter-spacing:-.02em;line-height:1.3;min-height:2.6em;margin:0 0 24px}
+          .about-editorial .about-practice-item ul,.about-editorial .about-practice-mobile ul{list-style:none;margin:0;padding:0}
+          .about-editorial .about-practice-item li{font-size:13px;line-height:1.5;color:var(--muted);margin:0 0 11px}
+          @media(hover:hover) and (prefers-reduced-motion:no-preference){.about-editorial .about-practice-grid:hover .about-practice-item:not(:hover){opacity:.74}}
+          .about-editorial .about-practice-mobile{display:none}
+          @media(max-width:900px) and (min-width:681px){
+            .about-editorial .about-practice-grid{grid-template-columns:repeat(2,minmax(0,1fr));column-gap:45px;row-gap:48px}
+            .about-editorial .about-practice-item h3{min-height:0;margin-bottom:19px}
+          }
+          @media(max-width:680px){
+            .about-editorial .about-practice{padding:64px 0 82px}
+            .about-editorial .about-practice-heading{display:block;margin-bottom:24px}
+            .about-editorial .about-practice-heading h2{font-size:29px;margin-bottom:10px}
+            .about-editorial .about-practice-kicker{text-align:left;font-size:10px}
+            .about-editorial .about-practice-grid{display:none}
+            .about-editorial .about-practice-mobile{display:block;border-top:1px solid var(--line)}
+            .about-editorial .about-practice-mobile details{border-bottom:1px solid var(--line)}
+            .about-editorial .about-practice-mobile summary{display:flex;align-items:center;gap:14px;list-style:none;cursor:pointer;padding:21px 0;min-height:65px}
+            .about-editorial .about-practice-mobile summary::-webkit-details-marker{display:none}
+            .about-editorial .about-practice-mobile summary::marker{content:""}
+            .about-editorial .about-practice-mobile .practice-index{font-size:11px;letter-spacing:.12em;color:var(--muted);width:26px;flex-shrink:0}
+            .about-editorial .about-practice-mobile .practice-label{font-size:16px;font-weight:400;letter-spacing:-.015em;line-height:1.4;flex:1}
+            .about-editorial .about-practice-mobile .practice-toggle{font-size:20px;font-weight:300;line-height:1;color:var(--muted);transition:transform .22s ease;display:inline-block}
+            .about-editorial .about-practice-mobile details[open] .practice-toggle{transform:rotate(45deg)}
+            .about-editorial .about-practice-mobile ul{padding:0 0 24px 40px;display:grid;grid-template-columns:1fr 1fr;column-gap:16px;row-gap:13px}
+            .about-editorial .about-practice-mobile li{font-size:12px;line-height:1.5;color:var(--muted)}
+            .about-editorial .about-practice-mobile summary:focus-visible{outline:2px solid currentColor;outline-offset:3px}
+          }
+          @media(max-width:360px){.about-editorial .about-practice-mobile ul{grid-template-columns:1fr}}
+          @media(prefers-reduced-motion:reduce){.about-editorial .about-practice-item,.about-editorial .about-practice-mobile .practice-toggle{transition:none}}
+        `}</style>
+        <div className="about-practice-heading">
+          <h2 id="about-practice-heading">Areas of Practice</h2>
+          <p className="about-practice-kicker">A multidisciplinary approach</p>
+        </div>
+        <div className="about-practice-grid">
+          {areasOfPractice.map((area, index) => <div className="about-practice-item" key={area.title}>
+            <span className="about-practice-number">{String(index + 1).padStart(2, "0")} /</span>
+            <h3>{area.title}</h3>
+            <ul>{area.items.map(item => <li key={item}>{item}</li>)}</ul>
+          </div>)}
+        </div>
+        <div className="about-practice-mobile">
+          {areasOfPractice.map((area, index) => <details key={area.title} open={index === 0}>
+            <summary><span className="practice-index">{String(index + 1).padStart(2, "0")}</span><span className="practice-label">{area.title}</span><span className="practice-toggle" aria-hidden="true">+</span></summary>
+            <ul>{area.items.map(item => <li key={item}>{item}</li>)}</ul>
+          </details>)}
+        </div>
+      </section>
+      <div className="about-editorial-row"><h2>Selected experience</h2><div className="about-editorial-list">{[{title:"Founder",sub:"Whitespace",date:"2018 — Present"},{title:"Director, Brand Insights",sub:"TrueLoyal (formerly TINT)",date:"2023 — 2025"},{title:"Senior Marketing Manager",sub:"TINT (acquired)",date:"2020 — 2023"},{title:"VP of Marketing",sub:"Patel Gaines",date:"2015 — 2018"}].map(x=><div className="about-editorial-item" key={x.title}><div><h3>{x.title}</h3>{x.sub ? <small>{x.sub}</small> : null}</div><span>{x.date}</span></div>)}</div></div>
       <section className="about-editorial-feature"><style>{`.about-editorial-feature .about-editorial-cards>.building-card{min-height:245px;border:1px solid var(--line);padding:30px 25px;display:flex;flex-direction:column;justify-content:flex-start;gap:24px}.about-editorial-feature .about-editorial-cards>a,.about-editorial-feature .about-editorial-cards>.building-card{display:flex!important;flex-direction:column!important;justify-content:center!important;align-items:stretch!important;gap:22px!important}.about-editorial-feature .about-editorial-cards>a h3,.about-editorial-feature .about-editorial-cards>a p,.about-editorial-feature .about-editorial-cards>.building-card h3,.about-editorial-feature .about-editorial-cards>.building-card p{margin:0!important}.about-editorial-feature .about-editorial-cards>.building-card:nth-child(odd){background:rgba(128,128,128,.07)}.about-editorial-feature .about-editorial-more{display:flex;width:max-content;margin-left:auto;align-items:center;gap:8px;margin-top:28px;padding-bottom:7px;border-bottom:1px solid var(--line);font-size:13px;font-weight:500;text-decoration:none}.about-editorial-feature .about-editorial-more:hover{border-color:currentColor}@media(max-width:600px){.about-editorial-feature .about-editorial-cards>.building-card{min-height:200px}.about-editorial-feature .about-editorial-more{margin-top:24px}}`}</style><h2>Things I'm building</h2><div className="about-editorial-cards"><a href="https://bywhitespace.com"><h3>Whitespace</h3><p>Brand strategy, consumer insight, and creative direction for leading brands.</p></a><a href="https://www.instagram.com/makespace______/"><h3>Make Space</h3><p>Creative gatherings and hands-on experiences, made with friends.</p></a><div className="building-card"><h3>Good World Living</h3><p>Exploring art, travel, and intentional living through places, people, and thoughtfully made things.</p></div></div><Link className="about-editorial-more" href="/work#selected-work">Explore more projects ↗</Link></section>
       <div className="about-editorial-row"><h2>Teaching</h2><div className="about-editorial-list"><div className="about-editorial-item"><div><h3>St. Mary's University</h3><small>Adjunct Professor · Principles of Marketing</small></div><span>Spring 2027</span></div><div className="about-editorial-item"><div><h3>University of the Incarnate Word</h3><small>Lecturer · Consumer Behavior + International Entrepreneurship</small></div><span>Spring 2027</span></div></div></div>
       <div className="about-editorial-row"><h2>Education</h2><div className="about-editorial-list"><div className="about-editorial-item"><div><h3>Master of Business Administration</h3><small>St. Mary's University</small></div></div><div className="about-editorial-item"><div><h3>Master of International Business &amp; Economics</h3><small>Hochschule Schmalkalden · In progress</small></div></div></div></div>
