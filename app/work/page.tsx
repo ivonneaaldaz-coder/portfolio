@@ -35,6 +35,25 @@ const moreTalks = [
   { org:"St. Mary’s University", title:"How to Make the Most of Your MBA", year:"2025" },
 ];
 
+const featuredSpeaking = [
+  {
+    org: "San Antonio Startup Week",
+    kind: "Live conversation · 2023",
+    title: "Future of Marketing Live — San Antonio Spurs",
+    image: "https://d2ol7oe51mr4n9.cloudfront.net/user_34E7x1pZCpFDLBfl6swtuelaS3A/733d7af7-b347-4fd3-afd1-1bad0d142a55.png",
+    alt: "Live conversation with a San Antonio Spurs guest onstage at Startup Week",
+    href: "https://vimeo.com/876034599",
+  },
+  {
+    org: "Adweek Social Media Week",
+    kind: "Speaking · 2022",
+    title: "The Power of Community-Created Content",
+    image: "https://d2ol7oe51mr4n9.cloudfront.net/user_34E7x1pZCpFDLBfl6swtuelaS3A/e659e2ae-f10b-48ef-83d7-7c8f11d548a6.png",
+    alt: "Speaking onstage beneath the Adweek Social Media Week screen",
+    href: "https://www.linkedin.com/posts/ivonnealdaz_smw-tintlove-activity-6930008317020819456-GIqE",
+  },
+];
+
 
 function WritingRow({item}:{item:typeof writing[number] | typeof moreWriting[number]}) {
   return <a href={item.href} target="_blank" rel="noreferrer" className="overview-writing-row">
@@ -52,23 +71,50 @@ function PressRow({item}:{item:{org:string;title:string;year:string;href?:string
 
 export default async function WorkPage(){
  return <main className="page section-pad work-hybrid-page"><style>{`.work-hybrid-page .overview-press-row{display:flex!important;justify-content:space-between;align-items:flex-start;gap:20px}.work-hybrid-page .press-link-arrow{flex-shrink:0;font-size:15px;opacity:.65;transition:transform .2s ease,opacity .2s ease}.work-hybrid-page a.overview-press-row:hover .press-link-arrow{transform:translate(2px,-2px);opacity:1}`}</style><SelectedWorkExplorer />
-      <section className="overview-press section-pad overview-anchor" id="press">
+      <section className="overview-press section-pad overview-anchor" id="press"><style>{`
+/* Editorial selected speaking stories above the press archive. */
+.work-hybrid-page .press-feature-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(22px,3.5vw,50px);margin:clamp(28px,4vw,54px) 0 clamp(48px,6vw,88px)}
+.work-hybrid-page .press-feature{display:block;min-width:0;color:inherit;text-decoration:none}
+.work-hybrid-page .press-feature-image{aspect-ratio:1.55;overflow:hidden;background:#262626}
+.work-hybrid-page .press-feature-image img{display:block;width:100%;height:100%;object-fit:cover;transition:transform .6s cubic-bezier(.2,.7,.2,1)}
+.work-hybrid-page .press-feature:hover .press-feature-image img{transform:scale(1.025)}
+.work-hybrid-page .press-feature-heading{display:flex;align-items:center;justify-content:space-between;gap:14px;margin-top:18px;color:var(--muted);font-size:11px;letter-spacing:.055em}
+.work-hybrid-page .press-feature-heading span:last-child{font-size:19px;color:var(--ink);line-height:1}
+.work-hybrid-page .press-feature h3{font-size:clamp(18px,1.8vw,26px);letter-spacing:-.032em;line-height:1.3;font-weight:450;margin:10px 0 0}
+.work-hybrid-page .press-secondary-grid{border-top:1px solid var(--line);padding-top:clamp(24px,3vw,38px)}
+@media(max-width:760px){
+ .work-hybrid-page .press-feature-grid{grid-template-columns:1fr;gap:36px;margin:26px 0 54px}
+ .work-hybrid-page .press-feature-image{aspect-ratio:1.5}
+ .work-hybrid-page .press-feature-heading{font-size:10px;line-height:1.45}
+ .work-hybrid-page .press-feature h3{font-size:21px}
+}
+@media(prefers-reduced-motion:reduce){.work-hybrid-page .press-feature-image img{transition:none}}
+`}</style>
         <div className="section-heading"><h2 className="section-title small-title">Press + Speaking</h2></div>
-        <div className="overview-press-grid">
+        <div className="press-feature-grid">
+          {featuredSpeaking.map((item, index) => (
+            <a key={item.org} className="press-feature" href={item.href} target="_blank" rel="noreferrer" aria-label={`Explore ${item.title} (opens in new tab)`}>
+              <div className="press-feature-image"><img src={item.image} alt={item.alt} loading="lazy" style={{objectPosition: index === 1 ? "center 64%" : "center 40%"}} /></div>
+              <div className="press-feature-heading"><span>{item.org} · {item.kind}</span><span aria-hidden="true">↗</span></div>
+              <h3>{item.title}</h3>
+            </a>
+          ))}
+        </div>
+        <div className="overview-press-grid press-secondary-grid">
           <div>
-            <p className="eyebrow">SELECTED PRESS</p>
+            <p className="eyebrow">IN THE PRESS</p>
             {pressPreview.map(item => <PressRow item={item} key={item.org+item.title} />)}
           </div>
           <div>
-            <p className="eyebrow">SELECTED TALKS</p>
-            {talksPreview.map(item => <PressRow item={item} key={item.org+item.title} />)}
+            <p className="eyebrow">ADDITIONAL APPEARANCES</p>
+            {[...talksPreview.slice(2), ...moreTalks].map(item => <PressRow item={item} key={item.org+item.title} />)}
           </div>
         </div>
         <details className="overview-inline-expand overview-press-expand">
-          <summary><span>More press + speaking</span><span aria-hidden="true">＋</span></summary>
+          <summary><span>More press</span><span aria-hidden="true">＋</span></summary>
           <div className="overview-press-grid overview-expanded-list">
             <div>{morePress.map(item => <PressRow item={item} key={item.org+item.title} />)}</div>
-            <div>{moreTalks.map(item => <PressRow item={item} key={item.org+item.title} />)}</div>
+            <div></div>
           </div>
         </details>
       </section>
