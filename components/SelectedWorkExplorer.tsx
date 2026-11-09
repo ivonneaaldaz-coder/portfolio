@@ -5,14 +5,14 @@ import ExperimentLoop from "@/components/ExperimentLoop";
 import { driveImageUrl } from "@/lib/googleDrive";
 
 const projects=[
-{title:"The Lab",meta:"Interactive portfolio",description:"A nostalgic desktop of projects, music, art, and playful experiments.",href:"https://lab.ivonnealdaz.com/",loop:"lab"},
-{title:"Whitespace",meta:"Creative studio",description:"Brand, marketing, and operating systems.",href:"https://www.bywhitespace.com/",loop:"whitespace"},
-{title:"Ask Eve",meta:"Conversational CV",description:"Explore my work and experience through an interactive AI conversation.",href:"https://ask.ivonnealdaz.com",loop:"eve"},
-{title:"Art Practice",meta:"Painting / Watercolor / Ceramics",description:"Selected artworks, exhibitions, and an evolving art practice.",href:"/art",loop:null,image:"/art-practice-card.jpg"},
-{title:"Good World Living",meta:"Creative platform",description:"A collection of art, travel, experiences, and intentional living.",href:"https://www.goodworldliving.com/",loop:"gwl"},
-{title:"Watercolor",meta:"Interactive study",description:"An interactive watercolor trace that responds to movement and slowly fades away.",href:"https://paint.ivonnealdaz.com/",loop:"watercolor"},
-{title:"Chatroom",meta:"Community experiment",description:"An old-internet-inspired public chatroom.",href:"https://chat.ivonnealdaz.com/",loop:"chat"},
-{title:"Snake",meta:"Game",description:"A playable experiment with a leaderboard.",href:"https://lab.ivonnealdaz.com/#snake",loop:"snake"},
+{title:"The Lab",meta:"Interactive portfolio",description:"A collection of digital experiments inside a nostalgic desktop.",href:"https://lab.ivonnealdaz.com/",loop:"lab"},
+{title:"Whitespace",meta:"Creative studio",description:"An independent strategy and creative studio.",href:"https://www.bywhitespace.com/",loop:"whitespace"},
+{title:"Ask Eve",meta:"Conversational CV",description:"An AI-powered, conversational version of my résumé.",href:"https://ask.ivonnealdaz.com",loop:"eve"},
+{title:"Art Practice",meta:"Painting / Watercolor / Ceramics",description:"Selected paintings, ceramics, exhibitions, and residencies.",href:"/art",loop:null,image:"/art-practice-card.jpg"},
+{title:"Good World Living",meta:"Creative platform",description:"An ongoing exploration of art, travel, and thoughtful living.",href:"https://www.goodworldliving.com/",loop:"gwl"},
+{title:"Watercolor",meta:"Interactive study",description:"A digital watercolor playground built around movement and color.",href:"https://paint.ivonnealdaz.com/",loop:"watercolor"},
+{title:"Chatroom",meta:"Community experiment",description:"An open chatroom inspired by the early internet.",href:"https://chat.ivonnealdaz.com/",loop:"chat"},
+{title:"Snake",meta:"Game",description:"A familiar game with a competitive streak.",href:"https://lab.ivonnealdaz.com/#snake",loop:"snake"},
 ];
 const brands=["Hero Cosmetics","Nestlé","CVS Health","Batiste","Purina","ARM & HAMMER","Gerber","Nescafe","Stouffer's","Sir Kensington's (Unilever)","Kellanova","Clio Snacks","First Response","Gaia Herbs","H-E-B","Maggi Noodles","Maison Perrier","Pacific Coast Producers","TrueLoyal (formerly TINT)","Veggies Made Great","Flexitol","Fur Buddies","viemaa","Propel Real Estate Capital","Potluck"];
 const featuredBrands=["Hero Cosmetics","ARM & HAMMER","Future of Marketing","Purina","TINT","Gaia Herbs","Veggies Made Great"];
