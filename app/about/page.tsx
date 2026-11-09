@@ -122,7 +122,7 @@ export default async function AboutPage() {
         <style>{`
           .about-editorial .about-practice{border-top:1px solid var(--line);padding:clamp(65px,7vw,95px) 0 clamp(78px,8vw,115px)}
           .about-editorial .about-practice-heading{display:flex;justify-content:space-between;align-items:baseline;gap:24px;margin:0 0 40px}
-          .about-editorial .about-practice-heading h2{font-family:inherit;font-size:clamp(28px,3.1vw,38px);font-weight:400;letter-spacing:-.035em;line-height:1.15;margin:0}
+          .about-editorial .about-practice-heading h2{font-family:inherit;font-size:clamp(25px,2.35vw,34px);font-weight:400;letter-spacing:-.05em;line-height:1.14;margin:0}
           .about-editorial .about-practice-kicker{font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);line-height:1.6;margin:0;text-align:right}
           .about-editorial .about-practice-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:clamp(16px,2.6vw,32px);align-items:start}
           .about-editorial .about-practice-item{min-width:0;border-top:1px solid var(--line)}
@@ -137,10 +137,11 @@ export default async function AboutPage() {
           .about-editorial .about-practice-item summary:focus-visible{outline:2px solid currentColor;outline-offset:4px}
           @media(hover:hover){.about-editorial .about-practice-item summary:hover .practice-label{opacity:.72}}
           @media(min-width:681px) and (max-width:900px){.about-editorial .about-practice-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:24px 36px}}
+          @media(max-width:900px){.about-editorial .about-practice-heading h2{font-size:clamp(25px,7vw,32px)}}
           @media(max-width:680px){
             .about-editorial .about-practice{padding:64px 0 82px}
             .about-editorial .about-practice-heading{display:block;margin-bottom:24px}
-            .about-editorial .about-practice-heading h2{font-size:29px;margin-bottom:10px}
+            .about-editorial .about-practice-heading h2{margin-bottom:10px}
             .about-editorial .about-practice-kicker{text-align:left;font-size:10px}
             .about-editorial .about-practice-grid{display:block;border-top:1px solid var(--line)}
             .about-editorial .about-practice-item{border-top:0;border-bottom:1px solid var(--line)}
