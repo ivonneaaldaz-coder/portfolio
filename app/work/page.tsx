@@ -16,8 +16,8 @@ const moreWriting = [
 
 const pressPreview = [
   { org:"Forbes", title:"Why Retailers Should Utilize TikTok to Grow Their Business", year:"2021" },
-  { org:"Adweek", title:"How Micro and Nano Influencers Drive Big Change", year:"2021", href:"https://www.adweek.com/brand-marketing/how-micro-and-nano-influencers-drive-big-change/" },
   { org:"Digiday", title:"In the Metaverse, Brands’ FOMO Is Competing With Consumers’ Burnout", year:"2024", href:"https://digiday.com/marketing/in-the-metaverse-brands-fomo-is-competing-with-consumers-burnout/" },
+  { org:"Adweek", title:"How Micro and Nano Influencers Drive Big Change", year:"2021", href:"https://www.adweek.com/brand-marketing/how-micro-and-nano-influencers-drive-big-change/" },
 ];
 
 const morePress = [
@@ -81,7 +81,8 @@ export default async function WorkPage(){
 .work-hybrid-page .press-feature-heading{display:flex;align-items:center;justify-content:space-between;gap:14px;margin-top:18px;color:var(--muted);font-size:11px;letter-spacing:.055em}
 .work-hybrid-page .press-feature-heading span:last-child{font-size:19px;color:var(--ink);line-height:1}
 .work-hybrid-page .press-feature h3{font-size:clamp(18px,1.8vw,26px);letter-spacing:-.032em;line-height:1.3;font-weight:450;margin:10px 0 0}
-.work-hybrid-page .press-more-list{grid-template-columns:1fr!important}\n.work-hybrid-page .press-secondary-grid{border-top:1px solid var(--line);padding-top:clamp(24px,3vw,38px)}
+.work-hybrid-page .press-more-list,.work-hybrid-page .press-single-list{display:block;width:100%}
+.work-hybrid-page .press-secondary-grid{border-top:1px solid var(--line);padding-top:clamp(24px,3vw,38px)}
 @media(max-width:760px){
  .work-hybrid-page .press-feature-grid{grid-template-columns:1fr;gap:36px;margin:26px 0 54px}
  .work-hybrid-page .press-feature-image{aspect-ratio:1.5}
@@ -100,20 +101,14 @@ export default async function WorkPage(){
             </a>
           ))}
         </div>
-        <div className="overview-press-grid press-secondary-grid">
-          <div>
-            <p className="eyebrow">IN THE PRESS</p>
-            {pressPreview.map(item => <PressRow item={item} key={item.org+item.title} />)}
-          </div>
-          <div>
-            <p className="eyebrow">ADDITIONAL APPEARANCES</p>
-            {[...talksPreview.slice(2), ...moreTalks].map(item => <PressRow item={item} key={item.org+item.title} />)}
-          </div>
+        <div className="press-secondary-grid press-single-list">
+          <p className="eyebrow">IN THE PRESS</p>
+          {pressPreview.map(item => <PressRow item={item} key={item.org+item.title} />)}
         </div>
         <details className="overview-inline-expand overview-press-expand">
-          <summary><span>More press</span><span aria-hidden="true">＋</span></summary>
-          <div className="overview-press-grid overview-expanded-list press-more-list">
-            <div>{morePress.map(item => <PressRow item={item} key={item.org+item.title} />)}</div>
+          <summary><span>More press + speaking</span><span aria-hidden="true">＋</span></summary>
+          <div className="press-more-list">
+            {[...morePress, ...talksPreview.slice(2), ...moreTalks].map(item => <PressRow item={item} key={item.org+item.title} />)}
           </div>
         </details>
       </section>
