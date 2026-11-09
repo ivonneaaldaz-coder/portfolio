@@ -57,7 +57,7 @@ const featuredSpeaking = [
 
 function WritingRow({item}:{item:typeof writing[number] | typeof moreWriting[number]}) {
   return <a href={item.href} target="_blank" rel="noreferrer" className="overview-writing-row">
-    <h4>{item.title}</h4><p>{item.source}</p><span>↗︎</span>
+    <h4>{item.title}</h4><p>{item.source}</p><span className="press-link-arrow" aria-hidden="true">↗</span>
   </a>;
 }
 
@@ -73,18 +73,18 @@ export default async function WorkPage(){
  return <main className="page section-pad work-hybrid-page"><style>{`.work-hybrid-page .overview-press-row{display:flex!important;justify-content:space-between;align-items:flex-start;gap:20px}.work-hybrid-page .press-link-arrow{flex-shrink:0;font-size:15px;opacity:.65;transition:transform .2s ease,opacity .2s ease}.work-hybrid-page a.overview-press-row:hover .press-link-arrow{transform:translate(2px,-2px);opacity:1}`}</style><SelectedWorkExplorer />
       <section className="overview-press section-pad overview-anchor" id="press"><style>{`
 /* Editorial selected speaking stories above the press archive. */
-.work-hybrid-page .press-feature-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(22px,3.5vw,50px);margin:clamp(28px,4vw,54px) 0 clamp(48px,6vw,88px)}
+.work-hybrid-page .press-feature-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(22px,3.5vw,50px);margin:clamp(28px,4vw,54px) 0 clamp(30px,3.7vw,48px)}
 .work-hybrid-page .press-feature{display:block;min-width:0;color:inherit;text-decoration:none}
 .work-hybrid-page .press-feature-image{aspect-ratio:1.55;overflow:hidden;background:#262626}
 .work-hybrid-page .press-feature-image img{display:block;width:100%;height:100%;object-fit:cover;transition:transform .6s cubic-bezier(.2,.7,.2,1)}
 .work-hybrid-page .press-feature:hover .press-feature-image img{transform:scale(1.025)}
 .work-hybrid-page .press-feature-heading{display:flex;align-items:center;justify-content:space-between;gap:14px;margin-top:18px;color:var(--muted);font-size:11px;letter-spacing:.055em}
-.work-hybrid-page .press-feature-heading span:last-child{font-size:19px;color:var(--ink);line-height:1}
+.work-hybrid-page .press-feature-heading span:last-child{font-size:15px;color:var(--muted);opacity:.75;line-height:1}
 .work-hybrid-page .press-feature h3{font-size:clamp(16px,1.32vw,20px);letter-spacing:-.025em;line-height:1.4;font-weight:450;margin:10px 0 0}
 .work-hybrid-page .press-more-list,.work-hybrid-page .press-single-list{display:block;width:100%}
 .work-hybrid-page .press-secondary-grid{border-top:1px solid var(--line);padding-top:clamp(24px,3vw,38px)}
 @media(max-width:760px){
- .work-hybrid-page .press-feature-grid{grid-template-columns:1fr;gap:36px;margin:26px 0 54px}
+ .work-hybrid-page .press-feature-grid{grid-template-columns:1fr;gap:36px;margin:26px 0 34px}
  .work-hybrid-page .press-feature-image{aspect-ratio:1.5}
  .work-hybrid-page .press-feature-heading{font-size:10px;line-height:1.45}
  .work-hybrid-page .press-feature h3{font-size:17px}
@@ -120,25 +120,25 @@ export default async function WorkPage(){
           .work-hybrid-page .editorial-writing-head{display:flex;align-items:center;justify-content:space-between;gap:32px;padding-bottom:30px;border-bottom:1px solid rgba(240,236,230,.28);margin-bottom:44px}
           .work-hybrid-page .editorial-writing-head .section-title{margin:0}
           .work-hybrid-page .editorial-writing-descriptor{font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:#b6b3ad;text-align:right;line-height:1.7;margin:0}
-          .work-hybrid-page .editorial-featured-essay{display:grid;grid-template-columns:minmax(0, .92fr) minmax(0, 1.4fr);gap:clamp(34px,5.5vw,82px);align-items:center;color:inherit;text-decoration:none;padding-bottom:44px;border-bottom:1px solid rgba(240,236,230,.28)}
+          .work-hybrid-page .editorial-featured-essay{display:grid;grid-template-columns:minmax(0, .84fr) minmax(0, 1.56fr);gap:clamp(26px,3.2vw,48px);align-items:center;color:inherit;text-decoration:none;padding-bottom:26px;border-bottom:1px solid rgba(240,236,230,.28)}
           .work-hybrid-page .editorial-featured-image{display:block;aspect-ratio:1.78;overflow:hidden;background:#b8c3cf}
           .work-hybrid-page .editorial-featured-image img{display:block;width:100%;height:100%;object-fit:cover;transition:transform .55s cubic-bezier(.2,.7,.2,1);object-position:center 57%}
           .work-hybrid-page .editorial-featured-essay:hover .editorial-featured-image img{transform:scale(1.035)}
           .work-hybrid-page .editorial-featured-copy{min-width:0;display:flex;flex-direction:column;align-items:flex-start}
           .work-hybrid-page .editorial-featured-label{color:#d6d1c9;font-size:11px;font-weight:600;letter-spacing:.24em;margin:0 0 28px;text-transform:uppercase}
           .work-hybrid-page .editorial-featured-title{font-size:clamp(19px,1.65vw,24px);line-height:1.32;font-weight:400;letter-spacing:-.012em;margin:0 0 15px;max-width:760px}
-          .work-hybrid-page .editorial-featured-description{color:#b8b5af;font-size:clamp(13px,1.05vw,15px);line-height:1.55;max-width:100%;margin:0 0 30px}
+          .work-hybrid-page .editorial-featured-description{color:#b8b5af;font-size:clamp(13px,1.05vw,15px);line-height:1.55;max-width:100%;margin:0 0 24px}
           .work-hybrid-page .editorial-featured-bottom{width:100%;display:flex;align-items:center;justify-content:space-between;gap:20px}
           .work-hybrid-page .editorial-featured-source{margin:0;color:#aaa6a0;font-size:14px}
-          .work-hybrid-page .editorial-featured-arrow{display:inline-block;font-size:22px;line-height:1;transition:transform .2s ease}
+          .work-hybrid-page .editorial-featured-arrow{display:inline-block;font-size:15px;line-height:1;color:var(--muted);opacity:.8;transition:transform .2s ease}
           .work-hybrid-page .editorial-featured-essay:hover .editorial-featured-arrow{transform:translate(4px,-3px)}
           .work-hybrid-page .editorial-writing-section .overview-writing-row{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(160px,.55fr) 24px;align-items:center;gap:28px;padding:28px 0;border-bottom:1px solid rgba(240,236,230,.24);transition:color .2s ease}
           .work-hybrid-page .editorial-writing-section .overview-writing-row h4{font-size:clamp(14px,1.12vw,17px);font-weight:500;line-height:1.45}
           .work-hybrid-page .editorial-writing-section .overview-writing-row p{color:#aaa6a0;font-size:13px}
-          .work-hybrid-page .editorial-writing-section .overview-writing-row span{justify-self:end}
+          .work-hybrid-page .editorial-writing-section .overview-writing-row span{justify-self:end;font-size:15px;color:var(--muted);opacity:.8}
           .work-hybrid-page .editorial-writing-section .overview-inline-expand{margin-top:0}
           .work-hybrid-page .editorial-writing-section .overview-inline-expand summary{padding-top:29px}
-          @media(min-width:1200px){.work-hybrid-page .editorial-featured-description{white-space:nowrap}}
+          @media(min-width:1200px){.work-hybrid-page .editorial-featured-description{white-space:normal}}
           @media(max-width:760px){
             .work-hybrid-page .editorial-writing-section{padding-top:76px}
             .work-hybrid-page .editorial-writing-head{align-items:flex-start;flex-direction:column;gap:14px;padding-bottom:23px;margin-bottom:28px}
