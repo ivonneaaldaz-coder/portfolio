@@ -92,7 +92,17 @@ Precisely opposite.`
 ];
 
 export default function LibraryWorld({ driveBooks = [] }: { driveBooks?: {name:string; image:string}[] }) {
-  const books = driveBooks.map((file,index) => ({
+  // Preferred opening sequence; preserve the existing order of all other books.
+  const featuredOrder = ["7.png", "6.png", "3.png"];
+  const orderedDriveBooks = [...driveBooks].sort((a, b) => {
+    const rankA = featuredOrder.indexOf(a.name.toLowerCase());
+    const rankB = featuredOrder.indexOf(b.name.toLowerCase());
+    if (rankA === -1 && rankB === -1) return 0;
+    if (rankA === -1) return 1;
+    if (rankB === -1) return -1;
+    return rankA - rankB;
+  });
+  const books = orderedDriveBooks.map((file,index) => ({
     name:file.name,
     image:file.image,
     title:knownBooks[file.name]?.title ?? file.name.replace(/\.[^.]+$/, "").replace(/[-_]+/g," "),
