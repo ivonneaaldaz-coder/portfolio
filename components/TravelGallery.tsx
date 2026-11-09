@@ -26,6 +26,7 @@ export default function TravelGallery({ photographs }: { photographs: TravelPhot
 
   return (
     <>
+      <style>{`\n        /* Native <dialog> enters the browser top layer, above the site cursor overlay. */\n        html.has-custom-cursor dialog.travel-lightbox,\n        html.has-custom-cursor dialog.travel-lightbox * { cursor: default !important; }\n        html.has-custom-cursor dialog.travel-lightbox button { cursor: pointer !important; }\n      `}</style>
       <div className="travel-grid section-pad">
         {photographs.map((photo, index) => (
           <figure className="travel-photo" key={photo.place + index}>
@@ -38,7 +39,7 @@ export default function TravelGallery({ photographs }: { photographs: TravelPhot
       </div>
 
       {active !== null && (
-        <Modal className="art-lightbox travel-lightbox" label={photographs[active].place} onClose={() => setActive(null)} onKeyDown={(event) => {
+        <Modal className="art-lightbox travel-lightbox" label={photographs[active].place} closeOnBackdrop onClose={() => setActive(null)} onKeyDown={(event) => {
           if (event.key === "ArrowRight") { event.preventDefault(); next(); }
           if (event.key === "ArrowLeft") { event.preventDefault(); previous(); }
         }}>
