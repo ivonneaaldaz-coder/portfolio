@@ -11593,9 +11593,6 @@ html body::before, html body::after { content:none!important;display:none!import
 .work-hybrid-page .overview-press-expand{
   margin-top:clamp(20px,2.5vw,34px)!important;
 }
-.work-hybrid-page .overview-press-expand>summary{
-  border-top:1px solid var(--line);
-}
 .work-hybrid-page>.overview-writing-section{
   border-top:0!important;
   margin-top:clamp(100px,10vw,148px)!important;
