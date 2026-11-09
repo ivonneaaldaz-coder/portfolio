@@ -157,7 +157,7 @@ export default async function AboutPage() {
           <p className="about-practice-kicker">A multidisciplinary approach</p>
         </div>
         <div className="about-practice-grid">
-          {areasOfPractice.map((area, index) => <details className="about-practice-item" key={area.title} open={index === 0}>
+          {areasOfPractice.map((area) => <details className="about-practice-item" key={area.title}>
             <summary><span className="practice-label">{area.title}</span><span className="practice-toggle" aria-hidden="true">+</span></summary>
             <ul>{area.items.map(item => <li key={item}>{item}</li>)}</ul>
           </details>)}
