@@ -11563,3 +11563,14 @@ html body::before, html body::after { content:none!important;display:none!import
 @media (max-width: 900px) {
   .music-page .playlist-picker-heading .playlist-swipe-hint { display: inline !important; }
 }
+
+/* Book-card label: title case, compact tracking, and a quieter title-like weight. */
+.library-page .library-experience .book-detail .book-why-label,
+.library-page .library-experience .book-dialog .book-detail .book-why-label{
+  text-transform:none!important;
+  letter-spacing:-.025em!important;
+  font-family:var(--display)!important;
+  font-weight:700!important;
+  font-size:clamp(13px,1.05vw,15px)!important;
+  line-height:1.35!important;
+}
