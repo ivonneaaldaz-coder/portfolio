@@ -11574,3 +11574,47 @@ html body::before, html body::after { content:none!important;display:none!import
   font-size:clamp(13px,1.05vw,15px)!important;
   line-height:1.35!important;
 }
+
+/* Work-page editorial rhythm — Nov 9.
+   Section changes breathe through whitespace; rules divide list items only. */
+.work-hybrid-page .selected-work-company-section{
+  margin-top:clamp(76px,8vw,116px)!important;
+  padding-top:clamp(64px,6vw,88px)!important;
+}
+.work-hybrid-page>.overview-press{
+  border-top:0!important;
+  margin-top:clamp(96px,10vw,144px)!important;
+  padding-top:0!important;
+  padding-bottom:0!important;
+}
+.work-hybrid-page .press-single-list>.overview-press-row:last-child{
+  border-bottom:0!important;
+}
+.work-hybrid-page .overview-press-expand{
+  margin-top:clamp(20px,2.5vw,34px)!important;
+}
+.work-hybrid-page .overview-press-expand>summary{
+  border-top:1px solid var(--line);
+}
+.work-hybrid-page>.overview-writing-section{
+  border-top:0!important;
+  margin-top:clamp(100px,10vw,148px)!important;
+  padding-top:0!important;
+  padding-bottom:clamp(72px,8vw,112px)!important;
+}
+@media(max-width:900px){
+  .work-hybrid-page .selected-work-company-section{
+    margin-top:72px!important;
+    padding-top:52px!important;
+  }
+  .work-hybrid-page>.overview-press{
+    margin-top:84px!important;
+    padding-top:0!important;
+    padding-bottom:0!important;
+  }
+  .work-hybrid-page>.overview-writing-section{
+    margin-top:88px!important;
+    padding-top:0!important;
+    padding-bottom:78px!important;
+  }
+}
