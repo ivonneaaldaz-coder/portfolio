@@ -102,7 +102,6 @@ export default async function WorkPage(){
           ))}
         </div>
         <div className="press-secondary-grid press-single-list">
-          <p className="eyebrow">IN THE PRESS</p>
           {pressPreview.map(item => <PressRow item={item} key={item.org+item.title} />)}
         </div>
         <details className="overview-inline-expand overview-press-expand">
